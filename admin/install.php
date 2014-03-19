@@ -49,7 +49,7 @@
 \$LC->debug(false);
 ?>";
      if(!file_put_contents(L_ROOT."config.php", $config_file)){
-      ser("Failed Creating Config File.","Make sure the Permission of Lobby Directory ( L_ROOT ) is set to Read & Write (666).");
+      ser("Failed Creating Config File.","Make sure the Permission of Lobby Directory ( ".L_ROOT." ) is set to Read & Write (666).");
      }
      include("makeDatabase.php");
      /* Create Tables */
