@@ -27,7 +27,7 @@
       if($App->disableApp()){
        sss("Disabled", "App has been disabled.");
       }else{
-       ser("Error", "The App couldn't be disabled. Try again.");
+       ser("Error", "The App couldn't be disabled. Try again.", false);
       }
      }else if($action=="remove"){
       $App->removeApp();
@@ -35,7 +35,7 @@
       if($App->enableApp()){
        sss("Enabled", "App has been enabled.");
       }else{
-       ser("Error", "The App couldn't be enabled. Try again.");
+       ser("Error", "The App couldn't be enabled. Try again.", false);
       }
      }
     }
@@ -46,7 +46,7 @@
      $apps=getOption("active_apps");
      $apps=json_decode($apps, true);
      if(count($apps)==0){
-      ser("No Enabled Apps");
+      ser("No Enabled Apps", "", false);
      }
      ?>
      <tr>
@@ -82,7 +82,7 @@
      }
     }
     if(count($Disapps)==0){
-     die("No Disabled Apps. You haven't disabled any apps.");
+     ser("No Disabled Apps", "You haven't disabled any apps.", false);
     }
     ?>
     <table style="width: 100%;margin-top:5px"><tbody>

@@ -1,7 +1,7 @@
 <div class="apps">
  <?
- $apps=getOption("active_apps");
- $apps=json_decode($apps, true);
+ $App=new App();
+ $apps=$App->getEnabledApps();
  if(count($apps)==0){
   ser("No Apps.","You haven't enabled/installed any apps. <br/>Get Apps From <a href='".L_HOST."/admin/appCenter.php'>App Center</a>");
  }

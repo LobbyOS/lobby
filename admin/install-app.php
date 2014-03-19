@@ -36,7 +36,7 @@
    <p>Downloading & Installing <b><?echo $apps['name'];?></b>.... Do NOT close this window.</p>
    <?
    require("handleUpgrade.php");
-   if(pluginUpgrade($_GET['id'])){
+   if(appUpgrade($_GET['id'])){
     sss("Installed", "The app has been installed. All you have to do is <a href='".L_HOST."/admin/install-app.php?action=enable&id=".$_GET['id']."'>enable the app</a>.");
    }
    ?>

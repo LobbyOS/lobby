@@ -17,7 +17,7 @@ function curFile(){
  $parts=explode("/",$_SERVER['SCRIPT_FILENAME']);
  return $parts[count($parts)-1];
 }
-function ser($t="", $d=""){
+function ser($t="", $d="", $exit=true){
  if($t==''){
   header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found', true, 404);
   include(L_ROOT."includes/ps/error.php");
@@ -29,7 +29,8 @@ function ser($t="", $d=""){
   }
  }
  echo $er;
- exit;
+ if($exit)
+  exit;
 }
 function sss($t,$d){
  if($t==''){

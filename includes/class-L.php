@@ -4,8 +4,9 @@ class L {
  var $js = array();
  var $css = array();
  function __construct(){
-  $this->root = $_SERVER['DOCUMENT_ROOT']."/";
-  $this->host = "http://".$_SERVER['HTTP_HOST'];
+  $this->root = L_ROOT;
+  $host=str_replace($_SERVER['DOCUMENT_ROOT'], $_SERVER['HTTP_HOST'], substr_replace(L_ROOT,"",-1));
+  $this->host = "http://".$host;
  }
  function debug($v=false){
   $this->debug = $v;

@@ -13,6 +13,29 @@ class App extends L{
    }
   }
  }
+ function getEnabledApps(){
+  $apps=$GLOBALS['db']->getOption("active_apps");
+  $apps=json_decode($apps, true);
+  if(count($apps)==0){
+   return array();
+  }else{
+   return $apps;
+  }
+ }
+ function getDisabledApps(){
+  $Disapps=array();
+  $enabledApps=$this->getEnabledApps();
+  foreach($this->getApps() as $app){
+   if(array_search($app, $enabledApps)===false){
+    $Disapps[]=$app;
+   }
+  }
+  return $Disapps;
+ }
+ function isEnabled(){
+  $enabledApps=$this->getEnabledApps();
+  return array_search($this->app, $enabledApps)===false ? false:true;
+ }
  function getInfo(){
   $name=$this->app;
   $manifest=file_get_contents(APP_DIR."$name/manifest.json");

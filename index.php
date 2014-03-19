@@ -1,8 +1,9 @@
 <?
 include("includes/load.php");
 $req="";
-if(isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI']!="/"){
- $req=$_SERVER['REQUEST_URI'];
+$L_OPT=array("page"=>"");
+if(L_REQUEST_URI!="/"){
+ $req=L_REQUEST_URI;
  $manifest=false;
  $reqpath=parse_url($req);
  $reqpath=$reqpath['path'];
@@ -13,7 +14,7 @@ if(isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI']!="/"){
   $App=new App($reqParts[2]);
   $manifest=$App!=false ? $App->getInfo():false;
   $L_OPT['page']=!isset($reqParts[3]) || $reqParts[3]=="" ? "index":$reqParts[3];
-  if(!file_exists($manifest['location']."/run.php")){
+  if(!file_exists($manifest['location']."/run.php") || $App->isEnabled()===false){
    ser();
   }
   define("CUR_APP", $manifest['location']);

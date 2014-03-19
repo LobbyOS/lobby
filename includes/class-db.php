@@ -1,5 +1,7 @@
 <?
-include($LC->root."config.php");
+if(file_exists($LC->root."config.php")){
+ include($LC->root."config.php");
+}
 if(isset($LC_config) && count($LC_config)!=0){
  foreach ($LC_config as $engine=>$valie){
     if (!defined("L_DB_CONFIG_".strtoupper($engine))){
@@ -81,17 +83,18 @@ class db extends L{
   }
  }
  function saveOption($name, $value){
-  if($this->db){
+  if($this->db && $value!=null){
    $sql=$this->prepare("SELECT COUNT(`name`) FROM {$this->prefix}options WHERE `name`=?");
    $sql->execute(array($name));
    if($sql->fetchColumn()!=0){
     $sql=$this->prepare("UPDATE {$this->prefix}options SET val=? WHERE `name`=?");
-    $sql->execute(array($value, $name));
     return $sql->execute(array($value, $name));
    }else{
     $sql=$this->prepare("INSERT INTO {$this->prefix}options (name,val) VALUES (?, ?)");
     return $sql->execute(array($name, $value));
    }
+  }else{
+   return false;
   }
  }
  function getData($id, $name=""){

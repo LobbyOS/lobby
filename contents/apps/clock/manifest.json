@@ -1,0 +1,9 @@
+{
+ "name" : "Clock",
+ "short_description" : "A clock for Dashboard",
+ "author" : "Lobby",
+ "dashboard_widget" : {
+  "page" : "widget.php",
+  "rows" : "0.927"
+ }
+}

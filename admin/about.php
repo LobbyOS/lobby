@@ -1,4 +1,4 @@
-<?include("../includes/load.php");require L_ROOT."includes/class-app.php";?>
+<?include("../includes/load.php");?>
 <html>
  <head>
   <?$LC->head("Lobby Info");?>

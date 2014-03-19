@@ -1,18 +1,19 @@
 <?include("../includes/load.php");?>
 <!DOCTYPE html>
 <html><head>
- <?$LC->head("Upgrade");?>
+ <?$LC->head("Upgrade Apps & Lobby");?>
 </head><body>
  <div class="content">
+  <a class='button' href='checkReleases.php'>Check For New Releases</a>
   <?
   $AppUpdates=json_decode(getOption("app_updates"), true);
   if(isset($_POST['action']) && $_POST['action']=="upgradeApps"){
    foreach($AppUpdates as $k=>$v){
     if(isset($_POST[$k])){
      require "handleUpgrade.php";
-     if(pluginUpgrade($k)){
+     if(appUpgrade($k)){
       unset($AppUpdates[$k]);
-      sss("Updated", "The plugin $k was updated successfully.");
+      sss("Updated", "The app $k was updated successfully.");
      }
     }
    }
@@ -40,7 +41,7 @@
   <h1><center>Upgrade Lobby</center></h1>
   <?
   if(getOption("lobby_version")==getOption("lobby_latest_version")){
-   sss("Latest Version", "You are using the latest version of Lobby. There is no new releases yet.");
+   sss("Latest Version", "You are using the latest version of Lobby. There are no new releases yet.");
    exit;
   }
   if(isset($_GET['step']) && $_GET['step']!=""){
