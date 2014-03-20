@@ -12,6 +12,7 @@ function curPageURL(){
  return $pageURL;
 }
 define("L_HOST", $LC->host);
+define("L_SERVER", "http://lobby.subinsb.com");
 define("APP_URI", L_HOST."/contents/apps");
 define("APP_DIR", L_ROOT."contents/apps/");
 define("L_REQUEST_URI", str_replace(L_HOST, "", curPageURL()));

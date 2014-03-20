@@ -31,6 +31,7 @@
  top:27px;
  list-style: none;
  padding: 0px;
+ display:none;
 }
 .panel.top .left ul a, .panel.top .right ul a{
  display: block;

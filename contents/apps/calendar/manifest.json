@@ -1,0 +1,18 @@
+{
+ "name" : "lEdit",
+ "description" : "A calendar widget for your dashboard.",
+ "short_description" : "Don't you want to see the calendar",
+ "version" : "0.15",
+ "author" : "Lobby",
+ "authroURI" : "http://lobby.subinsb.com",
+ "pluginURI" : "http://lobby.subinsb.com/apps/calendar",
+ "image" : "",
+ "pages" : {
+  "index" : "lEdit Text Editor"
+ },
+ "dashboard_widget" : {
+  "page" : "widget.php",
+  "cols" : "2",
+  "rows" : "2"
+ }
+}

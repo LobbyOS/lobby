@@ -19,11 +19,20 @@
     sss("Enabled", "The App <b>{$_GET['id']}</b> is enabled. The author says thanks.");
     exit;
    }
+   if(isset($_GET['action']) && $_GET['action']=="remove"){
+    $App=new App($_GET['id']);
+    if(!$App->exists){
+     ser("Error", "App is not installed");
+    }
+    $App->removeApp();
+    sss("Removed", "The App <b>{$_GET['id']}</b> was successfully removed.");
+    exit;
+   }
    ?>
    <h2>Install</h2>
    <?
    if(isset($_GET['id']) && $_GET['id']!=""){
-    $appsURI=load("http://lobby.host/core/appCenter.php", array(
+    $appsURI=load(L_SERVER."/core/appCenter.php", array(
      "get" => "app",
      "id" => $_GET['id']
     ), "POST");

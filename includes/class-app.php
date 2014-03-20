@@ -38,7 +38,7 @@ class App extends L{
  }
  function getInfo(){
   $name=$this->app;
-  $manifest=file_get_contents(APP_DIR."$name/manifest.json");
+  $manifest=file_exists(APP_DIR."$name/manifest.json") ? file_get_contents(APP_DIR."$name/manifest.json"):false;
   if($manifest){
    $details=json_decode($manifest, true);
    $details['location']=APP_DIR."$name/";
@@ -91,6 +91,26 @@ class App extends L{
  }
  public function getURL(){
   return L_HOST."/app/".$this->app;
+ }
+ public function removeApp(){
+  if($this->app){
+   $apps=$this->getApps();
+   $key=array_search($this->app, $apps);
+   if($key!==false){
+    unset($apps[$key]);
+    $this->disableApp();
+    $dir=APP_DIR.$this->app;
+    $files = array_diff(scandir($dir), array('.','..')); 
+    foreach ($files as $file) { 
+      (is_dir("$dir/$file")) ? delTree("$dir/$file") : unlink("$dir/$file"); 
+    } 
+    return rmdir($dir);
+   }else{
+    return false;
+   }
+  }else{
+   return false;
+  }
  }
 }
 ?>

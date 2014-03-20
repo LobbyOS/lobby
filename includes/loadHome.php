@@ -2,7 +2,7 @@
 /* Check For New Versions (Apps & Lobby) */
 if(!isset($_SESSION['checkedForLatestVersion'])){
  $App=new App();
- $response=load("http://lobby.host/core/latestVersion.php", array(
+ $response=load(L_SERVER."/core/latestVersion.php", array(
   "apps" => implode(",", $App->getApps())
  ), "POST");
  if($response){
@@ -40,7 +40,7 @@ if(curFile()!="admin/install.php"){
  
  /* Design */
  /*Left Menu*/
-  $LD->addTopItem("<a href='".L_HOST."'>Home</a>", array(), "left");
+  $LD->addTopItem("Home", L_HOST, "left");
   $LD->addTopItem("Admin", array(
    "App Manager" => L_HOST."/admin/apps.php",
    "App Center" => L_HOST."/admin/appCenter.php",

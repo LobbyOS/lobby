@@ -12,7 +12,7 @@
    <div class="contents">
     <?
     if(isset($_GET['id']) && $_GET['id']!=""){
-     $appsURI=load("http://lobby.host/core/appCenter.php", array(
+     $appsURI=load(L_SERVER."/core/appCenter.php", array(
       "get" => "app",
       "id" => $_GET['id']
      ), "POST");
@@ -66,7 +66,7 @@
      <button>Search</button>
     </form>
     <?
-    $appsURI=load("http://lobby.host/core/appCenter.php", array(
+    $appsURI=load(L_SERVER."/core/appCenter.php", array(
      "get" => "newApps"
     ), "POST");
     echo $appsURI;

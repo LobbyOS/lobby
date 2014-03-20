@@ -12,15 +12,15 @@ if(preg_match("/\.js/",$f)){
  $js=1;
 }
 function css_minfiy($s){
- $plugins = array("Variables"=>true,"ConvertFontWeight"=>true,"ConvertHslColors"=>true,"ConvertRgbColors"=>true,"ConvertNamedColors"=>false,"CompressColorValues"=>false,"CompressUnitValues"=>true,"CompressExpressionValues"=>true);
+ $plugins = array("Variables"=>true,"ConvertFontWeight"=>true,"ConvertHslColors"=>true,"ConvertRgbColors"=>true,"ConvertNamedColors"=>true,"CompressColorValues"=>true,"CompressUnitValues"=>true,"CompressExpressionValues"=>true);
  $minifier = new CssMinifier($s,array(),$plugins);
  $result = $minifier->getMinified();
  return $result;
 }
-function js_minfiy($s){
- $j=new JSqueeze();
+$j=new JSqueeze();
+function js_minfiy($s, $j){
  $c=$j->squeeze($s,true,false);
- return $s;// $s for no minifciation & $c for minification
+ return $c;// $s for no minifciation & $c for minification
 }
 if(preg_match("/,/", $f)){
  $files=explode(",",$f);
@@ -48,7 +48,8 @@ if(isset($css)){
  $content=css_minfiy($content);
 }
 if(isset($js)){
- $content=js_minfiy($content);
+ $content="$(document).ready(function(){".$content."});";;
+ $content=js_minfiy($content, $j);
 }
 echo $extraContent.$content;
 ?>

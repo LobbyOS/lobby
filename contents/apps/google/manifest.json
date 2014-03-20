@@ -1,0 +1,9 @@
+{
+ "name" : "Google",
+ "short_description" : "Access Google Services Quickly From Dashboard",
+ "author" : "Lobby",
+ "dashboard_widget" : {
+  "page" : "widget.php",
+  "rows" : "2.1"
+ }
+}

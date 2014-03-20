@@ -1,13 +1,13 @@
 <?
 function doUpgrade(){
- $url="http://lobby.host/downloads/lobby_".str_replace(".", "-", getOption("lobby_latest_version"));
+ $url=L_SERVER."/downloads/lobby_".str_replace(".", "-", getOption("lobby_latest_version"));
  if(!is_writable(L_ROOT)){
   ser("Error", "<b>".L_ROOT."</b> is not writable. Make It Writable & <a href='upgrade.php'>Try again</a>");
  }
  if(!extension_loaded('zip')){
   ser("PHP Zip Extension", "I can't find the Zip PHP Extension. Please Install It & <a href='upgrade.php'>Try again</a>");
  }
- $userAgent = 'LobbyBot/0.1 (http://lobby.subinsb.com)';
+ $userAgent = 'LobbyBot/0.1 ('.L_SERVER.')';
  $zipFile=L_ROOT."contents/upgrade/".getOption("lobby_latest_version").".zip";
  // Get The Zip From Server
  $ch = curl_init();
@@ -78,7 +78,7 @@ function appUpgrade($id){
  if($id==""){
   ser("Error", "No App Mentioned to upgrade.");
  }
- $url="http://lobby.host/downloads/app_".$id;
+ $url=L_SERVER."/downloads/app_".$id;
  if(!is_writable(APP_DIR)){
   ser("Error", "<b>".APP_DIR."</b> is not writable. Make It Writable & Try again");
  }

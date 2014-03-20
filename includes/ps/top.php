@@ -5,8 +5,14 @@
  foreach($items['left'] as $k=>$v){
  ?>
   <li class="item prnt" id="<?echo strtolower($k);?>">
-   <?echo$k;?>
-   <?if(count($v)!=0){?>
+   <?
+   if(is_string($v)){
+    echo "<a href='$v'>$k</a>";
+   }else{
+    echo $k;
+   }
+   if(is_array($v) && count($v)!=0){
+   ?>
     <ul>
      <?
      foreach($v as $itemName=>$itemLink){

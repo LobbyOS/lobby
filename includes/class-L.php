@@ -5,7 +5,8 @@ class L {
  var $css = array();
  function __construct(){
   $this->root = L_ROOT;
-  $host=str_replace($_SERVER['DOCUMENT_ROOT'], $_SERVER['HTTP_HOST'], substr_replace(L_ROOT,"",-1));
+  $docroot=substr($_SERVER['DOCUMENT_ROOT'], -1)=="/" ? substr_replace($_SERVER['DOCUMENT_ROOT'],"",-1) : $_SERVER['DOCUMENT_ROOT'];
+  $host=str_replace($docroot, $_SERVER['HTTP_HOST'], substr_replace(L_ROOT,"",-1));
   $this->host = "http://".$host;
  }
  function debug($v=false){
