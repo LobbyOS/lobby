@@ -109,7 +109,7 @@ function appUpgrade($id){
  // Un Zip the file
  $zip = new ZipArchive;
  if($zip->open($zipFile) != "true"){
-  ser("Error", "Unable to open Downloaded Plugin File.");
+  ser("Error", "Unable to open Downloaded App File.");
  } 
  /* Extract App */
  $zip->extractTo(APP_DIR);

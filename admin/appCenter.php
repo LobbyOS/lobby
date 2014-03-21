@@ -69,11 +69,13 @@
     $appsURI=load(L_SERVER."/core/appCenter.php", array(
      "get" => "newApps"
     ), "POST");
-    echo $appsURI;
     if($appsURI=="false" || $appsURI==""){
      ser("Nothing Found", "Nothing was found that matches your criteria. Sorry");
     }
     $apps=json_decode($appsURI, true);
+    if(!is_array($apps)){
+     ser("Sorry", "The Lobby Server is experiencing some problems. Please Try again.");
+    }
     foreach($apps as $appId=>$appArray){
      $appImage=isset($appArray['image']) ? L_HOST."/includes/img/blank_app.png":$appArray['image'];
     ?>

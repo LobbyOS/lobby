@@ -36,19 +36,22 @@ foreach($files as $v){
  }else{
   $content.=file_get_contents(L_ROOT.$v);
  }
- $to_replace=array(
-  "<[host]>" => L_HOST,
-  "<[app_uri]>" => APP_URI
- );
- foreach($to_replace as $k=>$val){
-  $content=str_replace($k, $val, $content);
+ if(isset($css)){
+  $to_replace=array(
+   "<[host]>" => L_HOST,
+   "<[app_uri]>" => APP_URI
+  );
+  foreach($to_replace as $k=>$val){
+   $content=str_replace($k, $val, $content);
+  }
  }
 }
 if(isset($css)){
  $content=css_minfiy($content);
 }
 if(isset($js)){
- $content="$(document).ready(function(){".$content."});";;
+ $content="window.host='".L_HOST."';".$content;
+ $content="$(document).ready(function(){".$content."});";
  $content=js_minfiy($content, $j);
 }
 echo $extraContent.$content;

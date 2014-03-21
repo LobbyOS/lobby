@@ -1,5 +1,4 @@
-window.host="http://"+window.location.host;
-window.curLoc=host+window.location.pathname;
+window.curLoc=window.location.protocol+"//"+window.location.host+window.location.pathname;
 window.opC=function(c, d, f){
  console.log(c[0]);
  c.live("click", function(){

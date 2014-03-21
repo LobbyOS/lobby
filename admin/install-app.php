@@ -16,7 +16,7 @@
      ser("Error", "App is not installed");
     }
     $App->enableApp();
-    sss("Enabled", "The App <b>{$_GET['id']}</b> is enabled. The author says thanks.");
+    sss("Enabled", "The App <b>{$_GET['id']}</b> is enabled. The author says thanks.<br/><div clear></div><center><a href='".$App->getURL()."'>Open App</a></center>");
     exit;
    }
    if(isset($_GET['action']) && $_GET['action']=="remove"){
@@ -37,7 +37,7 @@
      "id" => $_GET['id']
     ), "POST");
     if($appsURI=="false"){
-     ser("Error", "App With the give Id does not exist. The authro may have deleted the app.");
+     ser("Error", "App With the give Id does not exist. The author may have deleted the app.");
     }
     $apps=json_decode($appsURI, true);
     $apps=$apps[$_GET['id']];
