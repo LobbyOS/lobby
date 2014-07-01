@@ -1,13 +1,13 @@
-<?include("../includes/load.php");?>
+<?include("../load.php");?>
 <html>
  <head>
   <?
-  $LC->addStyle("appC", L_HOST."/includes/css/appC.css");
+  $LC->addStyle("appC", L_HOST."/includes/source/css/appC.css");
   $LC->head("App Manager");
   ?>
  </head>
  <body>
-  <?include("../includes/ps/top.php");?>
+  <?include("../includes/source/top.php");?>
   <div class="workspace">
    <div class="contents">
     <?
@@ -21,7 +21,7 @@
      }
      $apps=json_decode($appsURI, true);
      $apps=$apps[$_GET['id']];
-     $appImage=isset($apps['image']) ? L_HOST."/includes/img/blank_app.png":$apps['image'];
+     $appImage=isset($apps['image']) ? L_HOST."/includes/source/img/blank_app.png":$apps['image'];
     ?>
     <h2><?echo$apps['name'];?></h2>
     <div style="width:500px;"></div>
@@ -77,7 +77,7 @@
      ser("Sorry", "The Lobby Server is experiencing some problems. Please Try again.");
     }
     foreach($apps as $appId=>$appArray){
-     $appImage=isset($appArray['image']) ? L_HOST."/includes/img/blank_app.png":$appArray['image'];
+     $appImage=isset($appArray['image']) ? L_HOST."/includes/source/img/blank_app.png":$appArray['image'];
     ?>
     <div class="app">
      <div class="left">

@@ -1,20 +1,28 @@
 <?
 session_start();
-ini_set("display_errors", "on");
-define("L_ROOT", realpath(dirname(str_replace("includes","",__FILE__)))."/");
-require L_ROOT."includes/class-L.php";
-require L_ROOT."includes/class-db.php";
-require L_ROOT."includes/class-app.php";
-require L_ROOT."includes/config.php";
-require L_ROOT."includes/functions.php";
-if(curFile()!="serve.php"){
- /* Extends */
- require L_ROOT."includes/class-home.php";
- /* Load Default Style For Home*/
- require L_ROOT."includes/loadHome.php";
- /* Is Lobby Installed ? */
- if(!$db->db && curFile()!="install.php"){
-  redirect("{$LC->host}/admin/install.php");
- }
+/* Define the Root */
+$docRoot = isset($docRoot) ? $docRoot : realpath( dirname( dirname(__FILE__) ) );
+define("L_ROOT", $docRoot);
+
+require_once L_ROOT . "/includes/classes/core.php"; /* the Core Class */
+require_once L_ROOT . "/includes/classes/db.php"; /* The Database Class */
+require_once L_ROOT . "/includes/extraDefinitions.php"; /* Define extra variables or constants */
+require_once L_ROOT . "/includes/classes/apps.php"; /* The App Class */
+require_once L_ROOT . "/includes/functions.php"; /* Functions that are a shortcut to class functions */
+
+/* Load System Installation configuration */
+require_once L_ROOT . "/includes/config.php";
+
+if(curFile() != "serve.php"){
+ 	/* Extends */
+ 	require L_ROOT . "/includes/classes/home.php";
+ 
+ 	/* Load Default Style For Home*/
+ 	require L_ROOT . "/includes/loadHome.php";
+ 
+ 	/* Is Lobby Installed ? */
+ 	if(!$db->db && curFile() != "install.php"){
+  		$LC->redirect("{$LC->host}/admin/install.php");
+ 	}
 }
 ?>

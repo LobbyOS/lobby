@@ -2,13 +2,13 @@
 function doUpgrade(){
  $url=L_SERVER."/downloads/lobby_".str_replace(".", "-", getOption("lobby_latest_version"));
  if(!is_writable(L_ROOT)){
-  ser("Error", "<b>".L_ROOT."</b> is not writable. Make It Writable & <a href='upgrade.php'>Try again</a>");
+  ser("Error", "<b>".L_ROOT."/</b> is not writable. Make It Writable & <a href='upgrade.php'>Try again</a>");
  }
  if(!extension_loaded('zip')){
   ser("PHP Zip Extension", "I can't find the Zip PHP Extension. Please Install It & <a href='upgrade.php'>Try again</a>");
  }
  $userAgent = 'LobbyBot/0.1 ('.L_SERVER.')';
- $zipFile=L_ROOT."contents/upgrade/".getOption("lobby_latest_version").".zip";
+ $zipFile=L_ROOT."/contents/upgrade/".getOption("lobby_latest_version").".zip";
  // Get The Zip From Server
  $ch = curl_init();
  $zipResource=fopen($zipFile, "w");
@@ -41,8 +41,8 @@ function doUpgrade(){
  chmod(L_ROOT, 0666);
  
  /* Remove Depreciated Files */
- if(file_exists(L_ROOT."contents/upgrade/removeFiles.php")){
-  $files = include(L_ROOT."contents/upgrade/removeFiles.php");
+ if(file_exists(L_ROOT."/contents/upgrade/removeFiles.php")){
+  $files = include(L_ROOT."/contents/upgrade/removeFiles.php");
   if(count($files)!=0){
    foreach($files as $file){ // iterate files
     $file=L_ROOT.$file;
@@ -55,18 +55,18 @@ function doUpgrade(){
      }
     }
    }
-   unlink(L_ROOT."contents/upgrade/removeFiles.php");
+   unlink(L_ROOT."/contents/upgrade/removeFiles.php");
   }
  }
  
  /* Database */
- if(file_exists(L_ROOT."upgrade/sqlExecute.sql")){
-  $sqlCode=file_get_contents(L_ROOT."upgrade/sqlExecute.sql");
+ if(file_exists(L_ROOT."/upgrade/sqlExecute.sql")){
+  $sqlCode=file_get_contents(L_ROOT."/upgrade/sqlExecute.sql");
   $sql=$db->prepare($sqlCode);
   if(!$sql->execute()){
    ser("Error", "Database Upgrade Couldn't be made. <a href='upgrade.php'>Try again</a>");
   }else{
-   unlink(L_ROOT."upgrade/sqlExecute.sql");
+   unlink(L_ROOT."/upgrade/sqlExecute.sql");
   }
  }
  $oldVer=getOption("lobby_version");
@@ -79,14 +79,14 @@ function appUpgrade($id){
   ser("Error", "No App Mentioned to upgrade.");
  }
  $url=L_SERVER."/downloads/app_".$id;
- if(!is_writable(APP_DIR)){
-  ser("Error", "<b>".APP_DIR."</b> is not writable. Make It Writable & Try again");
+ if(!is_writable(APPS_DIR)){
+  ser("Error", "<b>".APPS_DIR."</b> is not writable. Make It Writable & Try again");
  }
  if(!extension_loaded('zip')){
   ser("PHP Zip Extension", "I can't find the Zip PHP Extension. Please Install It & Try again");
  }
  $userAgent = 'LobbyBot/0.1 (http://lobby.subinsb.com)';
- $zipFile=L_ROOT."contents/upgrade/".$id.".zip";
+ $zipFile=L_ROOT."/contents/upgrade/".$id.".zip";
  // Get The Zip From Server
  $ch = curl_init();
  $zipResource=fopen($zipFile, "w");
@@ -112,7 +112,7 @@ function appUpgrade($id){
   ser("Error", "Unable to open Downloaded App File.");
  } 
  /* Extract App */
- $zip->extractTo(APP_DIR);
+ $zip->extractTo(APPS_DIR);
  $zip->close();
  unlink($zipFile);
  return true;

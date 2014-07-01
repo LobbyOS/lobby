@@ -1,9 +1,9 @@
-<?include("../includes/load.php");?>
+<?include("../load.php");?>
 <!DOCTYPE html>
 <html><head>
  <?$LC->head("Install App");?>
 </head><body>
- <?include("../includes/ps/top.php");?>
+ <?include("../includes/source/top.php");?>
  <div class="workspace">
   <div class="contents">
    <?
