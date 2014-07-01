@@ -1,4 +1,4 @@
-<?include("../includes/load.php");?>
+<?include("../load.php");?>
 <!DOCTYPE html>
 <html><head>
  <?$LC->head("Upgrade Apps & Lobby");?>
@@ -48,7 +48,7 @@
    $step=$_GET['step'];
    if($step==1){
     if(!is_writable(L_ROOT)){
-     ser("Error", "<b>".L_ROOT."</b> is not writable.");
+     ser("Error", "<b>".L_ROOT."/</b> is not writable.");
     }
   ?>
    <p>

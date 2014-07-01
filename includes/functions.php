@@ -20,7 +20,7 @@ function curFile(){
 function ser($t="", $d="", $exit=true){
  if($t==''){
   header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found', true, 404);
-  include(L_ROOT."includes/ps/error.php");
+  include(L_ROOT."/includes/source/error.php");
   exit;
  }else{
   $er="<h2 style='color:red;'>$t</h2>";
@@ -42,19 +42,6 @@ function sss($t,$d){
   $s.="<span style='color:green;'>$d</span>";
  }
  echo $s;
-}
-function uniqueStr($length){
- $str="";
- $chars='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
- $size=strlen($chars);
- for($i=0;$i<$length;$i++){
-  $str.=$chars[rand(0,$size-1)];
- }
- return$str;
-}
-function redirect($url){
- header("Location: $url");
- exit;
 }
 function load($url, $params=array(), $type="GET"){
  $ch = curl_init();

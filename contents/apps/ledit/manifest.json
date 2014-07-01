@@ -5,7 +5,7 @@
  "version" : "0.1",
  "author" : "Lobby",
  "authroURI" : "http://lobby.subinsb.com",
- "pluginURI" : "http://lobby.subinsb.com/apps/ledit",
+ "appURI" : "http://lobby.subinsb.com/apps/ledit",
  "image" : "logo.png",
  "pages" : {
   "index" : {

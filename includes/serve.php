@@ -1,58 +1,44 @@
 <?
-require "load.php";
-require "min-css.php";
-require "js-shrinker.php";
-$f=$_GET['file'];
-if(preg_match("/\.css/",$f)){
- header("Content-type: text/css");
- $css=1;
+require_once "../load.php";
+
+$f	= $_GET['file'];
+if(preg_match("/\.css/", $f)){
+ 	header("Content-type: text/css");
+ 	$css = 1;
 }
-if(preg_match("/\.js/",$f)){
- header("Content-type: application/x-javascript");
- $js=1;
-}
-function css_minfiy($s){
- $plugins = array("Variables"=>true,"ConvertFontWeight"=>true,"ConvertHslColors"=>true,"ConvertRgbColors"=>true,"ConvertNamedColors"=>true,"CompressColorValues"=>true,"CompressUnitValues"=>true,"CompressExpressionValues"=>true);
- $minifier = new CssMinifier($s,array(),$plugins);
- $result = $minifier->getMinified();
- return $result;
-}
-$j=new JSqueeze();
-function js_minfiy($s, $j){
- $c=$j->squeeze($s,true,false);
- return $c;// $s for no minifciation & $c for minification
+if(preg_match("/\.js/", $f)){
+ 	header("Content-type: application/x-javascript");
+ 	$js = 1;
 }
 if(preg_match("/,/", $f)){
- $files=explode(",",$f);
+ 	$files = explode(",",$f);
 }else{
- $files=array($f);
+ 	$files = array($f);
 }
-$content="";
-$extraContent="";
-foreach($files as $v){
- $v=str_replace(L_HOST."/", "", $v);
- if($v=="includes/js/jquery-ui.js" || $v=="includes/js/jquery.js"){
-  $extraContent.=file_get_contents(L_ROOT.$v);
- }else{
-  $content.=file_get_contents(L_ROOT.$v);
- }
- if(isset($css)){
-  $to_replace=array(
-   "<[host]>" => L_HOST,
-   "<[app_uri]>" => APP_URI
-  );
-  foreach($to_replace as $k=>$val){
-   $content=str_replace($k, $val, $content);
-  }
- }
-}
-if(isset($css)){
- $content=css_minfiy($content);
+$content		  = "";
+$extraContent = "";
+
+/* Loop through files and */
+foreach($files as $file){
+ 	$file = str_replace(L_HOST, "", $file);
+ 	if($file == "/includes/source/js/jquery-ui.js" || $file == "/includes/source/js/jquery.js"){
+  		$extraContent .= file_get_contents(L_ROOT . $file);
+ 	}else{
+  		$content .= file_get_contents(L_ROOT . $file);
+ 	}
+ 	if(isset($css)){
+  		$to_replace=array(
+   		"<[host]>" 	  => L_HOST
+  		);
+  		foreach($to_replace as $from => $to){
+   		$content = str_replace($from, $to, $content);
+  		}
+ 	}
 }
 if(isset($js)){
- $content="window.host='".L_HOST."';".$content;
- $content="$(document).ready(function(){".$content."});";
- $content=js_minfiy($content, $j);
+ 	$extra	 = "window.lobby={};";
+ 	$content  = $extra . "lobby.host='".L_HOST."';" . $content;
+ 	$content  = "$(document).ready(function(){".$content."});";
 }
 echo $extraContent.$content;
 ?>
