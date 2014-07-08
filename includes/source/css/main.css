@@ -1,3 +1,4 @@
+/* Some Basic Stuff */
 *{
  font-family:"Ubuntu", sans-serif;
 }
@@ -8,6 +9,11 @@ html, body{
  	line-height: 20px;
  	font-size:14px;
 }
+form{
+	margin-bottom:0.5em;
+}
+/* End Basic */
+
 body{
  	background:#EEE;
 }

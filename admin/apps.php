@@ -1,10 +1,10 @@
-<?include("../load.php");?>
+<?php include("../load.php");?>
 <html>
  <head>
-  <?$LC->head("App Manager");?>
+  <?php $LC->head("App Manager");?>
  </head>
  <body>
-  <?include("../includes/source/top.php");?>
+  <?php include("../includes/source/top.php");?>
   <div class="workspace">
    <div class="contents">
     <h2>App Manager</h2>
@@ -14,10 +14,10 @@
      $action = $_GET['action'];
      $app	 = $_GET['app'];
      $App	 = new App($app);
-     if(!$App->exists){
-      	ser("Error", "I checked all over, but App Does Not Exist");
+     if( !$App->exists ){
+      	ser("Error", "I checked all over, but App does not Exist");
      }
-     if($action=="disable"){
+     if($action == "disable"){
       	if($App->disableApp()){
        		sss("Disabled", "App has been disabled.");
       	}else{
@@ -38,7 +38,9 @@
       	}
      }
     }
-    $enabledApps = App::getEnabledApps();
+    $Apps = new App();
+    
+    $enabledApps = $Apps->getEnabledApps();
     if(count($enabledApps) == 0){
     	ser("No Enabled Apps", "", false);
     }
@@ -73,7 +75,7 @@
      </table>
     <?
     }
-    $disabledApps = App::getDisabledApps();
+    $disabledApps = $Apps->getDisabledApps();
     if(count($disabledApps) == 0){
      	ser("No Disabled Apps", "You haven't disabled any apps.", false);
     }

@@ -2,23 +2,25 @@
 /* Check For New Versions (Apps & Lobby) */
 if(!isset($_SESSION['checkedForLatestVersion'])){
  	$App		 = new App();
- 	$response = load(L_SERVER."/core/latestVersion.php", array(
+ 	$response = $LC->loadURL(L_SERVER . "/latestVersion.php", array(
   		"apps" => implode(",", $App->getApps())
  	), "POST");
+ 	
  	if($response){
   		$response = json_decode($response, true);
   		saveOption("lobby_latest_version", $response['version']);
   		saveOption("lobby_latest_version_release", $response['released']);
+  		
   		if(isset($response['apps']) && count($response['apps']) != 0){
-   		$AppUpdates=array();
-   		foreach($response['apps'] as $k=>$v){
+   		$AppUpdates = array();
+   		foreach($response['apps'] as $appID => $latestVersion){
     			$App = new App($k);
     			$AppInfo = $App->getInfo();
-    			if($AppInfo['version']!=$v){
-     				$AppUpdates[$k]=$v;
+    			if($AppInfo['version'] != $latestVersion){
+     				$AppUpdates[$appID] = $latestVersion;
     			}
    		}
-   		saveOption("app_updates",json_encode($AppUpdates));
+   		saveOption("app_updates", json_encode($AppUpdates));
   		}
  	}
  	$_SESSION['checkedForLatestVersion'] = 1;

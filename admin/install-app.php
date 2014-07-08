@@ -32,7 +32,7 @@
    <h2>Install</h2>
    <?
    if(isset($_GET['id']) && $_GET['id']!=""){
-    $appsURI=load(L_SERVER."/core/appCenter.php", array(
+    $appsURI=$LC->loadURL(L_SERVER."/appCenter.php", array(
      "get" => "app",
      "id" => $_GET['id']
     ), "POST");
