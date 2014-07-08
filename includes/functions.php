@@ -1,91 +1,97 @@
 <?
+/* A Functions file that are simple duplicates of long functions of classes
+ * Example :
+ * $LS->getOption() can be used with just getOption()
+ * ------
+ * Also contains functions that are not associated with class (not duplicates)
+ * ------
+*/
+
+/* Simple way to get value of an Option */
 function getOption($key){
- if(!$GLOBALS['db']->db){
-  return false;
- }else{
-  return $GLOBALS['db']->getOption($key);
- }
+ 	if(!$GLOBALS['db']->db){
+  		return false;
+ 	}else{
+  		return $GLOBALS['db']->getOption($key);
+ 	}
 }
+
+/* Simple way to save an Option */
 function saveOption($key, $value){
- if(!$GLOBALS['db']->db){
-  return false;
- }else{
-  return $GLOBALS['db']->saveOption($key, $value);
- }
+ 	if(!$GLOBALS['db']->db){
+  		return false;
+ 	}else{
+  		return $GLOBALS['db']->saveOption($key, $value);
+ 	}
 }
+
+/* The current File */
 function curFile(){
- $parts=explode("/",$_SERVER['SCRIPT_FILENAME']);
- return $parts[count($parts)-1];
+ 	$parts = explode("/", $_SERVER['SCRIPT_FILENAME']);
+ 	return $parts[ count($parts)-1 ];
 }
-function ser($t="", $d="", $exit=true){
- if($t==''){
-  header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found', true, 404);
-  include(L_ROOT."/includes/source/error.php");
-  exit;
- }else{
-  $er="<h2 style='color:red;'>$t</h2>";
-  if($d!=''){
-   $er.="<span style='color:red;'>$d</span>";
-  }
- }
- echo $er;
- if($exit)
-  exit;
+
+/* Show Error Messages */
+function ser($title="", $description="", $exit = true){
+ 	if($title == ''){
+  		/* If no Title, give a 404 Page */
+  		header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found', true, 404);
+  		include(L_ROOT . "/includes/source/error.php");
+  		exit;
+ 	}else{
+  		$html = "<h2 style='color:red;'>$title</h2>";
+  		if($description != ""){
+   		$html .= "<span style='color:red;'>$description</span>";
+  		}
+ 	}
+ 	echo $html;
+ 	if($exit){
+  		exit;
+  	}
 }
-function sss($t,$d){
- if($t==''){
-  $s="<h2 style='color:green;'>Success</h2>";
- }else{
-  $s="<h2 style='color:green;'>$t</h2>";
- }
- if($d!=''){
-  $s.="<span style='color:green;'>$d</span>";
- }
- echo $s;
+
+/* Show Success Messages */
+function sss($title, $description){
+ 	if($title == ""){
+  		$html = "<h2 style='color:green;'>Success</h2>";
+ 	}else{
+  		$html = "<h2 style='color:green;'>$title</h2>";
+ 	}
+ 	if($description != ""){
+  		$html .= "<span style='color:green;'>$description</span>";
+ 	}
+ 	echo $html;
 }
-function load($url, $params=array(), $type="GET"){
- $ch = curl_init();
- if(count($params)!=0){
-  $fields_string="";
-  foreach($params as $key=>$value){
-   $fields_string .= $key.'='.$value.'&';
-  }
-  rtrim($fields_string, '&');
- }
- if($type=="GET" && count($params)!=0){
-  $url.="?".$fields_string;
- }
- curl_setopt($ch, CURLOPT_URL, $url);
- curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
- if($type=="POST" && count($params)!=0){
-  curl_setopt($ch, CURLOPT_POST, count($params));
-  curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
- }
- $output = curl_exec($ch);
- return $output;
-}
+
+/* A map of $db->filt() that strips out HTML content */
 function filt($string){
- return htmlspecialchars(urldecode($string));
+ 	return $GLOBALS['db']->filt( urldecode($string) );
 }
-function getData($id, $key=""){
- if(!$GLOBALS['db']->db){
-  return false;
- }else{
-  return $GLOBALS['db']->getData($id, $key);
- }
+
+/* Simple function to get Data Value */
+function getData($appID, $key=""){
+ 	if( !$GLOBALS['db']->db ){
+  		return false;
+ 	}else{
+  		return $GLOBALS['db']->getData($appID, $key);
+ 	}
 }
-function saveData($id, $key="", $value=""){
- if(!$GLOBALS['db']->db){
-  return false;
- }else{
-  return $GLOBALS['db']->saveData($id, $key, $value);
- }
+
+/* Simple function to save Data */
+function saveData($appID, $key = "", $value = ""){
+ 	if(!$GLOBALS['db']->db){
+  		return false;
+ 	}else{
+  		return $GLOBALS['db']->saveData($appID, $key, $value);
+ 	}
 }
-function removeData($id, $key=""){
- if(!$GLOBALS['db']->db){
-  return false;
- }else{
-  return $GLOBALS['db']->removeData($id, $key);
- }
+
+/* Simple Function to Remove Data */
+function removeData($appID, $key = ""){
+ 	if( !$GLOBALS['db']->db ){
+  		return false;
+ 	}else{
+  		return $GLOBALS['db']->removeData($appID, $key);
+ 	}
 }
 ?>

@@ -1,6 +1,6 @@
 <?
 require "../load.php";
-//$data=load("http://demos.subinsb.com/cdn/dot.png");
+//$data=$LC->loadURL("http://demos.subinsb.com/cdn/dot.png");
 $data="a";
 if($data!=""){
  echo"true";

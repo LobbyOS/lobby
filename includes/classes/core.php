@@ -103,6 +103,36 @@ class L {
     		$this->logStatus($error);
   		}
  	}
+ 	
+ 	/* A HTTP Request Function */
+ 	public function loadURL($url, $params=array(), $type="GET"){
+ 		$ch = curl_init();
+ 		if(count($params) != 0){
+  			$fields_string = "";
+  			foreach($params as $key => $value){
+   			$fields_string .= "{$key}={$value}&";
+  			}
+  			/* Remove Last & char */
+  			rtrim($fields_string, '&');
+ 		}
+ 		
+ 		if($type == "GET" && count($params) != 0){
+  			/* Append Query String Parameters */
+  			$url .= "?{$fields_string}";
+ 		}
+ 		
+ 		/* Start Making cURL request */
+ 		curl_setopt($ch, CURLOPT_URL, $url);
+ 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+ 		
+ 		if($type == "POST" && count($params) != 0){
+  			curl_setopt($ch, CURLOPT_POST, count($params));
+  			curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+ 		}
+ 		/* Give back the response */
+ 		$output = curl_exec($ch);
+ 		return $output;
+	}
 }
 $LC = new L();
 ?>

@@ -90,7 +90,8 @@ class db extends L {
   		if($this->db){
    		$sql = $this->prepare("SELECT `val` FROM {$this->prefix}options WHERE name=?");
    		$sql->execute(array($name));
-   		$return = $this->filt($sql->fetchColumn());
+   		$column = $sql->fetchColumn();
+   		$return = $this->filt($column);
    		return $return;
   		}
  	}

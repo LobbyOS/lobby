@@ -4,7 +4,7 @@ if(isset($_POST['url'])){
  if($url==""){
   die("0");
  }else{
-  $videoId=load("http://www.youtube-mp3.org/a/pushItem/", array(
+  $videoId=$LC->loadURL("http://www.youtube-mp3.org/a/pushItem/", array(
    "item" => $url,
    "el" => "na",
    "bf" => "false",
@@ -13,7 +13,7 @@ if(isset($_POST['url'])){
   if(strlen($videoId)>20){
    die("0");
   }else{
-   $itemInfo=load("http://www.youtube-mp3.org/a/itemInfo/", array(
+   $itemInfo=$LC->loadURL("http://www.youtube-mp3.org/a/itemInfo/", array(
     "video_id" => $videoId,
     "ac" => "www",
     "t" => "grp",

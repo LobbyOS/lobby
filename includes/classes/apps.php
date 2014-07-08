@@ -12,7 +12,7 @@ class App extends L{
    	$this->app 	  = $name;
    	$this->appDir = $appDir;
    	
-   	if( file_exists("$appDir/manifest.json") && file_exists("$appDir/program.php") ){
+   	if( $this->checkAppExistCriteria() ){
     		/* Insert the App Manifest Info into the class object */
     		$this->getInfo();
     		$this->exists = true;
@@ -20,7 +20,7 @@ class App extends L{
    	}else{
     		$this->exists = false;
     		if( $this->disableApp() ){
-    			$this->logStatus("App $name was disabled ");
+    			$this->logStatus("App $name was disabled because it didn't have the requirements of an App.");
     		}
     		
     		return false;
@@ -41,14 +41,15 @@ class App extends L{
  
  /* Returns Disiabled Apps as an array */
  function getDisabledApps(){
-  	$DisApps		 = array();
-  	$enabledApps = self::getEnabledApps();
-  	foreach(self::getApps() as $app){
-   	if(array_search($app, $enabledApps)===false){
-    		$DisApps[]=$app;
+  	$disApps		 = array();
+  	$enabledApps = $this->getEnabledApps();
+
+  	foreach($this->getApps() as $app){
+   	if(array_search($app, $enabledApps) === false){
+    		$disApps[] = $app;
    	}
   	}
-  	return $DisApps;
+  	return $disApps;
  }
  
  /* Returns boolean of installation status */
@@ -84,9 +85,10 @@ class App extends L{
  /* Get the apps that are in the directory as array */
  function getApps(){
   	$appFolders = array_diff(scandir(APPS_DIR), array('..', '.'));
-  	$apps=array();
+  	$apps 		= array();
+  	
   	foreach($appFolders as $appFolder){
-   	if(is_dir(APPS_DIR . "/$appFolder") && file_exists(APPS_DIR . "/$appFolder/manifest.json")){
+   	if( $this->checkAppExistCriteria($appFolder) ){
     		$apps[] = $appFolder;
    	}
   	}
@@ -94,19 +96,19 @@ class App extends L{
  }
  
  /* Enable the app */
- function enableApp(){
-  	if($this->app){
-   	$apps=$GLOBALS['db']->getOption("active_apps");
-   	$apps=json_decode($apps, true);
-   	if($apps==null){
-   		$apps=array();
+ public function enableApp(){
+  	if( $this->app ){
+   	$apps = $GLOBALS['db']->getOption("active_apps");
+   	$apps = json_decode($apps, true);
+   	if($apps == null){
+   		$apps = array();
    	}
    	if(array_search($this->app, $apps) === false){
     		array_push($apps, $this->app);
     		$GLOBALS['db']->saveOption("active_apps", json_encode($apps));
     		return true;
    	}else{
-    		return true;// App Is Already Enabled. So we don't need give out the boolean false.
+    		return true; // App Is Already Enabled. So we don't need give out the boolean false.
    	}
   	}else{
    	return false;
@@ -114,8 +116,8 @@ class App extends L{
  }
  
  /* Disable the app */
- function disableApp(){
-  	if($this->app){
+ public function disableApp(){
+  	if($this->app && $this->isEnabled()){
    	$apps = $GLOBALS['db']->getOption("active_apps");
    	$apps = json_decode($apps, true);
    	$key  = array_search($this->app, $apps);
@@ -175,6 +177,13 @@ class App extends L{
  		/* Return the App Object */
 		return $class;
  	}
+ }
+ 
+ /* Since we check if App is valid in multiple places, we make it into a function */
+ public function checkAppExistCriteria($name = ""){
+ 	$appDir = $name == "" ? $this->appDir : APPS_DIR . "/$name";
+ 	
+ 	return is_dir($appDir) && file_exists("$appDir/manifest.json") && file_exists("$appDir/program.php") ? true : false;
  }
 }
 ?>
