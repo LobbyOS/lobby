@@ -1,4 +1,4 @@
-<?
+<?php
 session_start();
 /* Define the Root */
 $docRoot = isset($docRoot) ? $docRoot : realpath( dirname( dirname(__FILE__) ) );

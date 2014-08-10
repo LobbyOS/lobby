@@ -1,4 +1,4 @@
-<?
+<?php
 require "../../load.php";
 if( isset($_POST['s7c8csw91']) ){
  	/* We have this bizarre variables because we don't want duplicate variables that conflicts with each other */

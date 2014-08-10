@@ -1,4 +1,4 @@
-<?
+<?php
 class L {
  	public $debug, $root, $host, $title = "";
  	var $js = array();
@@ -14,8 +14,8 @@ class L {
  
  	public function debug($value = false){
   		if($value){
-   		ini_set("display_errors","on");
-   		$this->debug = $value;
+			ini_set("display_errors","on");
+			$this->debug = $value;
   		}
  	}
  
@@ -28,13 +28,13 @@ class L {
  	}
  
  	public function head($title=""){
-   	if($title!=""){
-   		$this->setTitle($title);
-   	}
+		if($title!=""){
+			$this->setTitle($title);
+		}
   	
   		/* JS */
   		if(count($this->js)!=0){
-   		echo "<script async='async' src='" . L_HOST . "/includes/serve.php?file=" . implode(",", $this->js) . "'></script>";
+			echo "<script async='async' src='" . L_HOST . "/includes/serve.php?file=" . implode(",", $this->js) . "'></script>";
   		}
   		/* CSS */
   		if(count($this->css)!=0){
@@ -71,16 +71,16 @@ class L {
   		$str="";
   		$chars='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   		$size=strlen($chars);
-  		for($i=0;$i<$length;$i++){
-   		$str.=$chars[rand(0, $size-1)];
+  		for($i=0;$i < $length;$i++){
+			$str.=$chars[rand(0, $size-1)];
   		}
   		return $str;
  	}
  	
- 	/* Logs Stuff */
- 	public function logStatus($msg = ""){
+ 	/* Add message to log files */
+ 	public function log($msg = "", $file = "lobby.log"){
  		if( $msg != "" && $this->debug === true ){
- 			$logFile = "{$this->root}/contents/extra/lobby.log";
+ 			$logFile = "{$this->root}/contents/extra/{$file}";
  			$message = "[" . date("Y-m-d H:i:s") . "] $msg";
  			
  			$fh = fopen($logFile, 'a');
@@ -100,7 +100,7 @@ class L {
     		$errStr  = $error["message"];
     		
     		$error = "$errType caused by $errFile on line $errLine : $errStr";
-    		$this->logStatus($error);
+    		self::log($error);
   		}
  	}
  	

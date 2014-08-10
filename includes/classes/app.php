@@ -1,4 +1,4 @@
-<?
+<?php
 class AppProgram {
 	private $LC;
 	public $dir, $url, $id;

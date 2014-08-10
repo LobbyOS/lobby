@@ -1,5 +1,5 @@
 <div class="apps">
-	<?
+	<?php
  	$App  = new App();
  	$apps = $App->getEnabledApps();
  	if(count($apps)==0){
@@ -12,16 +12,16 @@
  	?>
   		<div class="app" data-cols="1" data-rows="1">
    		<div class="overlay"></div>
-   		<a href="<?echo L_HOST . "/app/{$app}";?>">
+   		<a href="<?php echo L_HOST . "/app/{$app}";?>">
     			<div class="inner">
      				<div class="image">
-      				<img src="<?echo$appImage;?>" height="100%" width="100%"/>
+      				<img src="<?php echo$appImage;?>" height="100%" width="100%"/>
      				</div>
-     				<div class="title" <?if(!isset($data['image']) || $data['image']==""){echo 'style="color:black;"';}?>><?echo $data['name'];?></div>
+     				<div class="title" <?php if(!isset($data['image']) || $data['image']==""){echo 'style="color:black;"';}?>><?php echo $data['name'];?></div>
     			</div>
    		</a>
   		</div>
- 	<?
+ 	<?php
  	}
  	?>
 </div>

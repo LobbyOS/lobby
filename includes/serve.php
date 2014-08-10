@@ -1,4 +1,4 @@
-<?
+<?php
 require_once "../load.php";
 
 $f	= $_GET['file'];

@@ -1,4 +1,7 @@
-.workspace#ledit textarea{ /* You don't wanna mess with other elements, so accuracy in element specification is better to use. */
+.workspace#ledit{ /* You don't wanna mess with other elements, so accuracy in element specification is better to use. */
+	margin-top: 5px;
+}
+.workspace#ledit textarea{
  	width: 500px;
  	height: 480px;
 }
@@ -7,29 +10,30 @@
 }
 .workspace#ledit #saved, .workspace#ledit #error{
 	display: none;
-	margin-top:5px;
+	margin-top: 5px;
 }
 .workspace#ledit #saved{
- 	color:green;
+ 	color: green;
 }
 .workspace#ledit #error{
- 	color:red;
+ 	color: red;
 }
 .workspace#ledit #saves, .workspace#ledit #editor{
- 	display:inline-block;
- 	vertical-align:top;
+ 	display: inline-block;
+ 	vertical-align: top;
  	margin-right: 10px;
 }
 .workspace#ledit #saves{
  	width:140px;
 }
 .workspace#ledit #saves h2{
- 	margin-top:0px;
+ 	margin-top: 0px;
 }
 .workspace#ledit #saves li{
  	background:white;
  	width:100%;
  	display:block;
  	padding:2px 0px 2px 5px;
- 	border-bottom:1px solid black;
+ 	white-space: pre-wrap;
+	word-wrap: break-word;
 }
