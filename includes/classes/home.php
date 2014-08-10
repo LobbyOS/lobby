@@ -1,4 +1,4 @@
-<?
+<?php
 class Design extends L{
  	var $top_items = array();
  	public function addTopItem($name, $array){

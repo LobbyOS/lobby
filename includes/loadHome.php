@@ -1,8 +1,8 @@
-<?
+<?php
 /* Check For New Versions (Apps & Lobby) */
 if(!isset($_SESSION['checkedForLatestVersion'])){
  	$App		 = new App();
- 	$response = $LC->loadURL(L_SERVER . "/latestVersion.php", array(
+ 	$response = $LC->loadURL(L_SERVER . "/latestVersion", array(
   		"apps" => implode(",", $App->getApps())
  	), "POST");
  	
@@ -14,7 +14,7 @@ if(!isset($_SESSION['checkedForLatestVersion'])){
   		if(isset($response['apps']) && count($response['apps']) != 0){
    		$AppUpdates = array();
    		foreach($response['apps'] as $appID => $latestVersion){
-    			$App = new App($k);
+    			$App = new App($appID);
     			$AppInfo = $App->getInfo();
     			if($AppInfo['version'] != $latestVersion){
      				$AppUpdates[$appID] = $latestVersion;
@@ -79,8 +79,7 @@ if(curFile() != "admin/install.php"){
   	$latestVersion = getOption("lobby_latest_version");
   	if((isset($AppUpdates) && count($AppUpdates) != 0) || ($latestVersion && getOption("lobby_version") != $latestVersion)){
    	$LD->addTopItem("upgradeNotify", array(
-   		"html" 	  => "<span id='upgrade' title='An Update Is Available'></span>",
-   		"href"	  => L_HOST . "/admin/upgrade.php",
+   		"html" 	  => "<a href='" . L_HOST . "/admin/upgrade.php'><span id='upgrade' title='An Update Is Available'></span></a>",
    		"position" => "right"
    	));
   	}

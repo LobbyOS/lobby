@@ -1,12 +1,13 @@
 /* Workspace */
 .workspace{
- position: relative;
- top: 32px;
- bottom: 0px;
- left: 0px;
- right: 0px;
+	position: relative;
+	top: 32px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
 }
 .workspace .contents{
- display:table;
- margin:5px auto;
+	display: table;
+	margin: 0px auto;
+	min-width: 700px;
 }

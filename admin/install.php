@@ -1,4 +1,4 @@
-<?
+<?php
 include "../load.php";
 require L_ROOT . "/includes/classes/install.php";
 $Install = new Installation;
@@ -6,12 +6,12 @@ $Install = new Installation;
 <!DOCTYPE html>
 <html>
 	<head>
- 		<?$LC->head("Install");?>
+ 		<?php $LC->head("Install");?>
 	</head>
 	<body>
  		<div class="content">
   			<h1><center>Install Lobby</center></h1>
-  			<?
+  			<?php
   			if($db->db){
    			ser("Error", "Lobby Is Installed. If you want to reinstall, clear the database and remove <b>config.php</b> file.");
   			}elseif(!isset($_GET['step'])){
@@ -22,13 +22,13 @@ $Install = new Installation;
    		 	Make sure the <b>Lobby</b> directory's permission is set to Read & Write.
   				</p><cl/>
   				<a href="?step=1" class="button">Proceed To Installation</a>
-  			<?
+  			<?php
   			}
   			if(isset($_GET['step'])){
-   			if($_GET['step'] == 1){
+				if($_GET['step'] == 1){
     				$Install->step1();
-   			}
-   			if($_GET['step'] == 2 ){
+				}
+				if($_GET['step'] == 2 ){
     				/* We call it again, so that the user had already went through the First Step */
     				$Install->step1(true);
     				
@@ -67,27 +67,65 @@ $Install = new Installation;
 		     			}
     				}else{
   					?>
-    					<p>
-     					Fill up the Database Information fields.
-    					</p>
+    					<p>Fill up the Database Information fields.</p>
     					<h2>Database Configuration</h2>
     					<form action="install.php?step=2" method="POST">
      						<table>
-      						<tbody>
-       							<tr><td>Database Host</td><td><input type="text" name="host" value="localhost"></td><td>On Most Systems, It's localhost</td></tr>
-       							<tr><td>Database Port</td><td><input type="text" name="port" value="3306"></td><td>On Most Systems, It's 3306</td></tr>
-       							<tr><td>Database Name</td><td><input type="text" name="db"></td><td>The name of the database you want to run Lobby in.</td></tr>
-       							<tr><td>User Name</td><td><input type="text" name="dbuser"></td><td>Your MySQL Username</td></tr>
-       							<tr><td>Password</td><td><input type="text" name="pass"></td><td>Your MySQL Password</td></tr>
-       							<tr><td>Table Prefix</td><td><input type="text" name="prefix" value="l_"></td><td>If you want to run multiple Lobby installations in a single database, change this.</td></tr>
-       							<tr><td><input type="submit" name="submit" value="Install"></td></tr>
-       						</tbody>
-       					</table>
+								<tbody>
+									<tr>
+										<td>Database Host</td>
+										<td>
+											<input type="text" name="host" value="localhost"></td>
+										<td>On Most Systems, It's localhost</td>
+									</tr>
+									<tr>
+										<td>Database Port</td>
+										<td>
+											<input type="text" name="port" value="3306">
+										</td>
+										<td>On Most Systems, It's 3306</td>
+									</tr>
+									<tr>
+										<td>Database Name</td>
+										<td>
+											<input type="text" name="db" />
+										</td>
+										<td>The name of the database you want to run Lobby in</td>
+									</tr>
+									<tr>
+										<td>User Name</td>
+										<td>
+											<input type="text" name="dbuser" />
+										</td>
+										<td>Your MySQL Username</td>
+									</tr>
+									<tr>
+										<td>Password</td>
+										<td>
+											<input type="text" name="pass">
+										</td>
+											<td>Your MySQL Password</td>
+									</tr>
+									<tr>
+										<td>Table Prefix</td>
+										<td>
+											<input type="text" name="prefix" value="l_" />
+										</td>
+											<td>Lobby's Table name starts with this character</td>
+									</tr>
+									<tr>
+										<td></td>
+										<td>
+											<button name="submit" style="width:200px;font-size:15px;">Install Lobby</button>
+										</td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
     					</form>
-    					<style>td{padding-right:10px;padding-bottom:10px;}</style>
-  					<?
+  					<?php
     				}
-   			}
+				}
   			}
   			?>
  		</div>

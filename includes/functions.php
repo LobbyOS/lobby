@@ -1,4 +1,4 @@
-<?
+<?php
 /* A Functions file that are simple duplicates of long functions of classes
  * Example :
  * $LS->getOption() can be used with just getOption()
@@ -33,16 +33,19 @@ function curFile(){
 
 /* Show Error Messages */
 function ser($title="", $description="", $exit = true){
+ 	$html = "";
  	if($title == ''){
   		/* If no Title, give a 404 Page */
   		header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found', true, 404);
   		include(L_ROOT . "/includes/source/error.php");
   		exit;
  	}else{
-  		$html = "<h2 style='color:red;'>$title</h2>";
-  		if($description != ""){
-   		$html .= "<span style='color:red;'>$description</span>";
-  		}
+  		$html .= "<div class='message'>";
+			$html .= "<div style='color:red;' class='title'>$title</div>";
+			if($description != ""){
+				$html .= "<div style='color:red;'>$description</div>";
+			}
+		$html .= "</div>";
  	}
  	echo $html;
  	if($exit){
@@ -52,14 +55,16 @@ function ser($title="", $description="", $exit = true){
 
 /* Show Success Messages */
 function sss($title, $description){
- 	if($title == ""){
-  		$html = "<h2 style='color:green;'>Success</h2>";
- 	}else{
-  		$html = "<h2 style='color:green;'>$title</h2>";
- 	}
- 	if($description != ""){
-  		$html .= "<span style='color:green;'>$description</span>";
- 	}
+ 	$html = "<div class='message'>";
+		if($title == ""){
+			$html .= "<div style='color:green;' class='title'>Success</div>";
+		}else{
+			$html .= "<div style='color:green;' class='title'>$title</div>";
+		}
+		if($description != ""){
+			$html .= "<div style='color:green;'>$description</div>";
+		}
+	$html .= "</div>";
  	echo $html;
 }
 

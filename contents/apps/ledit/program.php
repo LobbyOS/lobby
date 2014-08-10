@@ -1,4 +1,4 @@
-<?
+<?php
 class ledit extends AppProgram{
 	
 	public function page($page){

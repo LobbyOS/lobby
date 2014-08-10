@@ -1,4 +1,4 @@
-<?
+<?php
 /* Define the HOST of installation */
 define("L_HOST", $LC->host);
 

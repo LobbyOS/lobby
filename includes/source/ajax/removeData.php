@@ -1,4 +1,4 @@
-<?
+<?php
 require "../../load.php";
 if( isset($_POST['appId']) && isset($_POST['key']) ){
  	$app = $_POST['appId'];

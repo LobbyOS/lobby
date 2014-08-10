@@ -1,5 +1,5 @@
 <h2 style="margin-top: -10px;">My Saves</h2>
-<?
+<?php
 $saves = getData("ledit");
 if( !$saves ){
  	echo "You haven't saved anything.";
