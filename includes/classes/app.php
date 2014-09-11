@@ -21,5 +21,16 @@ class AppProgram {
 	public function setTitle($title){
 		$this->LC->setTitle("$title | {$this->name}");
 	}
+	
+	public static function URL($path){
+		return Helpers::URL(APP_URL. $path);
+	}
+	
+	public function inc ($path){
+		ob_start();
+			include APP_DIR . $path;
+		$html = ob_get_clean();
+		return $html;
+	}
 }
 ?>

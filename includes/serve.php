@@ -27,11 +27,11 @@ foreach($files as $file){
   		$content .= file_get_contents(L_ROOT . $file);
  	}
  	if(isset($css)){
-  		$to_replace=array(
-   		"<[host]>" 	  => L_HOST
+  		$to_replace = array(
+			"<[host]>" => L_HOST
   		);
   		foreach($to_replace as $from => $to){
-   		$content = str_replace($from, $to, $content);
+			$content = str_replace($from, $to, $content);
   		}
  	}
 }

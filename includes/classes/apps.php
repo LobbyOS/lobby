@@ -6,7 +6,7 @@ class App extends L{
  public $exists = false;
  public $appInfo;
  
- function __construct($name=""){
+ public function __construct($name=""){
   	if($name != ""){
 		$appDir = APPS_DIR . "/$name";
 		$this->app 	  = $name;
@@ -29,7 +29,7 @@ class App extends L{
  }
  
  /* Returns Enabled Apps as an array */
- function getEnabledApps(){
+ public function getEnabledApps(){
   	$apps	= $GLOBALS['db']->getOption("active_apps");
   	$apps	= json_decode($apps, true);
   	if(count($apps) == 0){
@@ -40,7 +40,7 @@ class App extends L{
  }
  
  /* Returns Disiabled Apps as an array */
- function getDisabledApps(){
+ public function getDisabledApps(){
   	$disApps		 = array();
   	$enabledApps = $this->getEnabledApps();
 
@@ -53,13 +53,13 @@ class App extends L{
  }
  
  /* Returns boolean of installation status */
- function isEnabled(){
+ public function isEnabled(){
   	$enabledApps = $this->getEnabledApps();
   	return array_search($this->app, $enabledApps) === false ? false:true;
  }
  
  /* Get the manifest info of app as array */
- function getInfo(){
+ public function getInfo(){
   	if(!is_array($this->appInfo)){
   		$manifest = file_exists($this->appDir . "/manifest.json") ? file_get_contents($this->appDir . "/manifest.json"):false;
   		if($manifest){
@@ -83,7 +83,7 @@ class App extends L{
  }
  
  /* Get the apps that are in the directory as array */
- function getApps(){
+ public function getApps(){
   	$appFolders = array_diff(scandir(APPS_DIR), array('..', '.'));
   	$apps 		= array();
   	
@@ -170,13 +170,16 @@ class App extends L{
  		require_once L_ROOT . "/includes/classes/app.php";
  		require_once $this->appDir . "/program.php";
  		
+ 		$appInfo   = $this->getInfo();
+ 		$className = str_replace("-", "DASH", $this->app);
+ 		
  		/* Create the App Program Object */
- 		$program = new ReflectionClass($this->app);
+ 		$program = new ReflectionClass( $className );
  		
  		/* Make the class object */
  		$class = $program->newInstanceArgs();
  		/* Send app details and LC object to the AppProgram */
- 		$class->setTheVars($LC, $this->getInfo());
+ 		$class->setTheVars($LC, $appInfo);
  		
  		/* Return the App Object */
 		return $class;

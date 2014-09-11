@@ -1,0 +1,11 @@
+.sidebar{
+	width: 200px;
+	background: #CCC;
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	top: 32px;
+}
+.contents {
+	
+}
