@@ -45,7 +45,7 @@
      					?>
      					<style>#leftpane .button{width:100%;}</style>
     				</div>
-    				<div style="display:inline-block;">
+    				<div style="display:inline-block;width: 80%;">
      					<table>
      						<thead>
      							<tr>

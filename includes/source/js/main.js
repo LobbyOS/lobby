@@ -1,3 +1,8 @@
+/* A temporary array for adding stuff */
+window.tmp = {};
+/* Merge extra values to the main lobby object */
+window.lobby = jQuery.extend(window.lobbyExtra, window.lobby);
+
 /* Get the current page URL */
 lobby.curLoc = window.location.protocol + "//" + window.location.host + window.location.pathname;
 
@@ -57,8 +62,8 @@ lobby.ajaxRequest = function(fileName, options, callback, appID){
  
  	$.post(requestURL, options, function(data){
   		if(typeof callback == "function"){
-   		/* On success, do callback function with the response data */
-   		callback(data);
+			/* On success, do callback function with the response data */
+			callback(data);
   		}
  	});
 };
