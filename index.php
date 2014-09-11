@@ -11,10 +11,10 @@ $GLOBALS['workspaceHTML'] = "";
 
 /* Route App Pages (/app/{appname}/{page}) to according apps */
 $router->with('/app', function () use ($router, $LC, $LD) {
-	$router->respond("/[a:appID]/?[:page]?", function($request) use ($LC, $LD){
+	$router->respond("/[:appID]?/[:page]?", function($request) use ($LC, $LD){
 		$AppID 			  = $request->appID;
 		$GLOBALS['AppID'] = $AppID;
-		$page  			  = $request->page != "" ? $request->page : "/";
+		$page  			  = $request->page != "" ? "/{$request->page}" : "/";
 		/* Check if App exists */
 		$App = new App($AppID);
 		
@@ -31,8 +31,8 @@ $router->with('/app', function () use ($router, $LC, $LD) {
   			$LC->setTitle($AppInfo['name']);
   			/* Add the App item to the navbar */
   			$LD->addTopItem("lobbyApp{$AppID}", array(
-  				"text"	  => $AppInfo['name'],
-  				"href"	  => APP_URL,
+  				"text"	   => $AppInfo['name'],
+  				"href"	   => APP_URL,
   				"position" => "left"
   			));
   			

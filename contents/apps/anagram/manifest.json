@@ -1,0 +1,11 @@
+{
+ 	"name" 				: "Anagram Overkill",
+ 	"description" 		: "Find as many as words you can from a pile of scrambled letters",
+ 	"short_description" : "Find words from scrambled letters",
+ 	"category" 			: "games",
+ 	"version" 			: "0.1",
+ 	"author" 			: "Subin Siby",
+ 	"authorURL" 		: "http://lobby.subinsb.com",
+ 	"appURL" 			: "http://lobby.subinsb.com/apps/anagram",
+ 	"image" 			: ""
+}

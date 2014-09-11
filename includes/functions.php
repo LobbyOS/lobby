@@ -25,12 +25,6 @@ function saveOption($key, $value){
  	}
 }
 
-/* The current File */
-function curFile(){
- 	$parts = explode("/", $_SERVER['SCRIPT_FILENAME']);
- 	return $parts[ count($parts)-1 ];
-}
-
 /* Show Error Messages */
 function ser($title="", $description="", $exit = true){
  	$html = "";

@@ -1,6 +1,6 @@
 <?php
 class L {
- 	public $debug, $root, $host, $title = "";
+ 	public $debug, $root, $host, $cleanHost, $title = "";
  	var $js = array();
  	var $css = array();
  
@@ -8,7 +8,8 @@ class L {
   		register_shutdown_function( array($this, "fatalErrorHandler") );
   		$this->root = L_ROOT;
   		$docRoot 	= substr($_SERVER['DOCUMENT_ROOT'], -1)=="/" ? substr_replace($_SERVER['DOCUMENT_ROOT'],"",-1) : $_SERVER['DOCUMENT_ROOT'];
-  		$host	  	   = str_replace($docRoot, $_SERVER['HTTP_HOST'], L_ROOT);
+  		$host	  	= str_replace($docRoot, $_SERVER['HTTP_HOST'], L_ROOT);
+  		$this->cleanHost = $host;
   		$this->host = "http://$host";
  	}
  
