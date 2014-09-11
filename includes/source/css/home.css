@@ -8,6 +8,6 @@
 }
 .workspace .contents{
 	display: table;
-	margin: 0px auto;
+	margin: 0px auto 40px;
 	min-width: 700px;
 }

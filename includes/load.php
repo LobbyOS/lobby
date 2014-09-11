@@ -10,10 +10,12 @@ require_once L_ROOT . "/includes/extraDefinitions.php"; /* Define extra variable
 require_once L_ROOT . "/includes/classes/apps.php"; /* The App Class */
 require_once L_ROOT . "/includes/functions.php"; /* Functions that are a shortcut to class functions */
 
+require_once L_ROOT . "/includes/classes/Helpers.php"; /* Helping Functions that provides additional functionality */
+
 /* Load System Installation configuration */
 require_once L_ROOT . "/includes/config.php";
 
-if(curFile() != "serve.php"){
+if(Helpers::curPage() != "serve.php"){
  	/* Extends */
  	require L_ROOT . "/includes/classes/home.php";
  
@@ -21,7 +23,7 @@ if(curFile() != "serve.php"){
  	require L_ROOT . "/includes/loadHome.php";
  
  	/* Is Lobby Installed ? */
- 	if(!$db->db && curFile() != "install.php"){
+ 	if(!$db->db && Helpers::curPage() != "install.php"){
   		$LC->redirect("{$LC->host}/admin/install.php");
  	}
 }

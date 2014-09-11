@@ -14,15 +14,15 @@ $(document).ready(function(){
  	
  	$(app + " #save.button").live("click", function(){
   		if($(app + " #text").val() == ""){
-   		$(app + " #error").text("Please Enter Something :-(").fadeIn().delay(2000).fadeOut();
+			$(app + " #error").text("Please Enter Something :-(").fadeIn().delay(2000).fadeOut();
   		}else{
-   		key   = $(app + " #saveName").val(); // The key Name
+			key   = $(app + " #saveName").val(); // The key Name
  			value = $(app + " #text").val(); // The Content
  			if(key == ""){
  				key = curDate();
  			}
  			
-   		lobby.saveData(key, value, function(data){
+			lobby.saveData(key, value, function(data){
     			if(data == "bad"){
     				alert("Failed Saving Data");
     			}else{
@@ -31,17 +31,17 @@ $(document).ready(function(){
     				});
     				$(app + " #saved").fadeIn().delay(2000).fadeOut();
     			}
-   		});
+			});
   		}
  	});
  	$(app+" #remove.button").live("click", function(){
   		var currentFile = $(app+" #saveName").val();
   		if(currentFile == ""){
-   		$(app+" #error").text("This File is not saved.").fadeIn().delay(2000).fadeOut();
+			$(app+" #error").text("This File is not saved.").fadeIn().delay(2000).fadeOut();
   		}else{
-   		lobby.removeData(currentFile, function(data){
+			lobby.removeData(currentFile, function(data){
     			window.location = lobby.host + "/app/ledit";
-   		});
+			});
   		}
  	});
 });
