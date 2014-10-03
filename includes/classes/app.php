@@ -22,11 +22,19 @@ class AppProgram {
 		$this->LC->setTitle("$title | {$this->name}");
 	}
 	
-	public static function URL($path){
-		return Helpers::URL(APP_URL. $path);
+	public static function URL($path, $source = false){
+		return $source === false ? Helpers::URL(APP_URL. $path) : Helpers::URL(APP_SOURCE. $path) ;
 	}
 	
-	public function inc ($path){
+	/* Include a page from the app's source */
+	public function inc ($path, $vars = array()){
+		/* Define variables for the file */
+		$LC = $this->LC;
+		if(count($vars) != 0){
+			extract($vars);
+		}
+		
+		/* Get the content of the file in a variable */
 		ob_start();
 			include APP_DIR . $path;
 		$html = ob_get_clean();

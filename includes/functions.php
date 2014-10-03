@@ -27,39 +27,12 @@ function saveOption($key, $value){
 
 /* Show Error Messages */
 function ser($title="", $description="", $exit = true){
- 	$html = "";
- 	if($title == ''){
-  		/* If no Title, give a 404 Page */
-  		header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found', true, 404);
-  		include(L_ROOT . "/includes/source/error.php");
-  		exit;
- 	}else{
-  		$html .= "<div class='message'>";
-			$html .= "<div style='color:red;' class='title'>$title</div>";
-			if($description != ""){
-				$html .= "<div style='color:red;'>$description</div>";
-			}
-		$html .= "</div>";
- 	}
- 	echo $html;
- 	if($exit){
-  		exit;
-  	}
+ 	L::ser($title, $description, $exit);
 }
 
 /* Show Success Messages */
 function sss($title, $description){
- 	$html = "<div class='message'>";
-		if($title == ""){
-			$html .= "<div style='color:green;' class='title'>Success</div>";
-		}else{
-			$html .= "<div style='color:green;' class='title'>$title</div>";
-		}
-		if($description != ""){
-			$html .= "<div style='color:green;'>$description</div>";
-		}
-	$html .= "</div>";
- 	echo $html;
+ 	L::sss($title, $description);
 }
 
 /* A map of $db->filt() that strips out HTML content */

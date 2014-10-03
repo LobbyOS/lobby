@@ -7,7 +7,8 @@
   		?>
  	</head>
  	<body>
-  		<?php include("../includes/source/top.php");?>
+  		<?php include "$docRoot/includes/source/top.php";?>
+  		<?php include "$docRoot/admin/sidebar.php";?>
   		<div class="workspace">
 			<div class="contents">
     			<?php
@@ -22,7 +23,7 @@
      				
      				$app 	  = json_decode($appJSON, true);
      				$app 	  = $app[$_GET['id']];
-     				$appImage = isset($app['image']) ? $app['image'] : L_HOST . "/includes/source/img/blank_app.png";
+     				$appImage = $app['image'] != "" ? $app['image'] : L_HOST . "/includes/source/img/blank_app.png";
     			?>
     				<h1><?php echo $app['name'];?></h1>
     				<p style="margin-bottom:15px;margin-top:-5px;"><?php echo $app['shortDescription'];?></p>
@@ -62,7 +63,6 @@
      							</tr>
      						</tbody>
      					</table>
-     					<h2>Description</h2>
      					<p style="max-width: 500px;">
      						<?php echo $app['description'];?>
      					</p>
