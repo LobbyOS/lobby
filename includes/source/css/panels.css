@@ -8,6 +8,7 @@
  	background:#64c235;
  	color:white;
  	z-index:1000;
+ 	box-shadow: 0px 2px 4px rgba(0,0,0,.5);
 }
 .panel.top a{
  	color:white;
@@ -32,6 +33,7 @@
  	list-style: none;
  	padding: 0px;
  	display:none;
+ 	max-width: 150px;
 }
 .panel.top .left ul a, .panel.top .right ul a{
  	display: block;

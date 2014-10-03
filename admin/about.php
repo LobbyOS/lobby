@@ -1,12 +1,11 @@
-<?php include("../load.php");?>
+<?php include "../load.php";?>
 <html>
 	<head>
 		<?php $LC->head("Lobby Info");?>
 	</head>
 	<body>
-		<?php
-		include("../includes/source/top.php");
-		?>
+		<?php include "$docRoot/includes/source/top.php";?>
+		<?php include "$docRoot/admin/sidebar.php";?>
 		<div class="workspace">
 			<div class="contents">
 				<?php

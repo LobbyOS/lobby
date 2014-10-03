@@ -1,13 +1,14 @@
 /* Short For App Center */
 .app{
-	background: white;
-	width: 550px;
-	padding: 10px 15px;
-	min-height: 125px;
-	margin: 0px 0px 10px;
-	border-radius: 2px;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, .3);
 	position: relative;
+	margin: 0px 0px 10px;
+	min-width: 550px;
+	max-width: 800px;
+	min-height: 125px;
+	padding: 10px 15px;
+	border-radius: 2px;
+	background: white;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .3);
 }
 .app .left{
  	float: left;

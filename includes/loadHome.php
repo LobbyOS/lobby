@@ -29,7 +29,7 @@ if(!isset($_SESSION['checkedForLatestVersion'])){
 /* Default Styles */
 $LC->addStyle( "main", Helpers::URL("/includes/source/css/main.css") );
 
-if(Helpers::curPage() != "admin/install.php"){
+if(Helpers::curPage() != "/admin/install.php"){
  	/* Styles */
  	$LC->addStyle( "jqueryui", Helpers::URL("/includes/source/css/jquery-ui.css") ); // jQuery UI
  	$LC->addStyle( "home", Helpers::URL("/includes/source/css/home.css") );
@@ -85,7 +85,7 @@ if(Helpers::curPage() != "admin/install.php"){
   	}
 }
 
-if( Helpers::curPage() == "admin/" ){
-	
+if( substr(Helpers::curPage(), 0, 6) == "/admin" ){
+	$LC->addStyle("admin", Helpers::URL("/includes/source/css/admin.css"));
 }
 ?>

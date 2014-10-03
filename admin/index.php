@@ -14,6 +14,7 @@
 					<li><?php echo Helpers::link("admin/about.php", "About"); ?></li>
 					<li><?php echo Helpers::link("admin/appCenter.php", "App Center"); ?></li>
 				</ol>
+				<p>Have some problems or want to give a suggestion ? See our <a target="_blank" href="https://github.com/subins2000/lobby/issues">Issues Page</a></p>
 			</div>
 		</div>
 	</body>

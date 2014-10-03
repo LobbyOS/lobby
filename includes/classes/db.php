@@ -71,7 +71,7 @@ class db extends L {
  	/* A HTML Filter function */
  	function filt(&$value) {
   		if($value != strip_tags($value)){
-   		$value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+			$value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
   		}
   		return $value;
  	}
@@ -114,14 +114,15 @@ class db extends L {
  	}
  	
  	/* Get App Data */
- 	function getData($id, $name=""){
+ 	function getData($id, $name="", $safe = true){
   		if($this->db){
-   		if($id != "" && $name == ""){
-    			$sql = $this->prepare("SELECT `content`, `name`, `updated` FROM {$this->prefix}data WHERE app=?");
+			$return = array();
+			if($id != "" && $name == ""){
+    			$sql = $this->prepare("SELECT `content`, `name`, `updated` FROM `{$this->prefix}data` WHERE `app` = ?");
     			$sql->execute(array($id));
     			$return = $sql->fetchAll();
-   		}else{
-    			$sql = $this->prepare("SELECT `content`, `name`, `updated` FROM {$this->prefix}data WHERE name=? AND app=?");
+			}else{
+    			$sql = $this->prepare("SELECT `content`, `name`, `updated` FROM `{$this->prefix}data` WHERE `name` = ? AND `app` = ?");
     			$sql->execute(array($name, $id));
     			if($sql->rowCount() > 1){
     				/* Multiple Results; so give a multidimensional array of results */
@@ -130,9 +131,11 @@ class db extends L {
     				/* A single result is present, so give a single array */
     				$return = $sql->fetch(PDO::FETCH_ASSOC);
     			}
-   		}
-   		array_walk_recursive($return, array($this, "filt"));
-   		return count($return) == 0 ? false:$return;
+			}
+			if(is_array($return) && $safe){
+				array_walk_recursive($return, array($this, "filt"));
+			}
+			return count($return) == 0 ? false : $return;
   		}
  	}
  	
