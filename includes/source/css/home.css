@@ -9,5 +9,5 @@
 .workspace .contents{
 	display: table;
 	margin: 0px auto 40px;
-	min-width: 700px;
+	width: 700px;
 }

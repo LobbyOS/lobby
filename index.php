@@ -2,16 +2,12 @@
 require_once "load.php";
 require_once L_ROOT . "/includes/vendor/autoload.php";
 
-/* Make the request URL relative to the base URL of Lobby installation. http://localhost/lobby will be changed to "/" and http://lobby.local to "/" */
-$lobbyBase = str_replace($_SERVER['DOCUMENT_ROOT'], "", $docRoot);
-$_SERVER['REQUEST_URI'] = str_replace($lobbyBase, "", $_SERVER['REQUEST_URI']);
-
 $router = new \Klein\Klein();
 $GLOBALS['workspaceHTML'] = "";
 
 /* Route App Pages (/app/{appname}/{page}) to according apps */
 $router->with('/app', function () use ($router, $LC, $LD) {
-	$router->respond("/[:appID]?/[:page]?", function($request) use ($LC, $LD){
+	$router->respond("/[:appID]?/[**:page]?", function($request) use ($LC, $LD){
 		$AppID 			  = $request->appID;
 		$GLOBALS['AppID'] = $AppID;
 		$page  			  = $request->page != "" ? "/{$request->page}" : "/";
