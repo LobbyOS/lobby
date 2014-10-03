@@ -5,6 +5,7 @@
 	</head>
 	<body>
 		<?php include "$docRoot/includes/source/top.php";?>
+		<?php include "$docRoot/admin/sidebar.php";?>
 		<div class="workspace">
 			<div class="contents">
 				<h2>App Manager</h2>

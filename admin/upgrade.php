@@ -5,10 +5,11 @@ require "$docRoot/admin/handleUpgrade.php";
 <!DOCTYPE html>
 <html>
 	<head>
- 		<?php $LC->head("Upgrade Apps & Lobby");?>
+ 		<?php $LC->head("Upgrade");?>
 	</head>
 	<body>
  		<?php include "$docRoot/includes/source/top.php";?>
+		<?php include "$docRoot/admin/sidebar.php";?>
  		<div class="workspace">
  			<div class="content" style="width: 600px;">
 	  			<h1>

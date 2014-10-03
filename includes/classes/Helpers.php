@@ -2,12 +2,13 @@
 /* Contains functions that provides additional functionality. */
 
 class Helpers {
-	public static function link($url = "", $text = "") {
+	public static function link($url = "", $text = "", $extra = "") {
 		$url = self::URL($url);
-		return '<a href="'.$url.'">'.$text.'</a>';
+		return '<a href="'.$url.'" '. $extra .'>'.$text.'</a>';
 	}
 	
 	public static function URL($path = ""){
+		$orPath	= $path; // The original path
 		$path 	= substr($path, 0, 1) == "/" ? substr($path, 1) : $path;
 		$parts 	= parse_url($path);
 		$url	= $path;
@@ -25,14 +26,22 @@ class Helpers {
 			}
 			$url = $pageURL;
 		}elseif( !preg_match("/http/", $path) || $parts['host'] != $GLOBALS['LC']->cleanHost ){
-			$url = L_HOST . "/$path";
+			if(!defined("APP_DIR")){
+				$url = L_HOST . "/$path";
+			}else{
+				$url = AppProgram::URL($orPath);
+			}
 		}
 		return $url;
 	}
 	
-	public static function curPage(){
-		$parts = explode("/", $_SERVER['SCRIPT_FILENAME']);
-		return $parts[ count($parts)-1 ];
+	public static function curPage($page = false){
+		if($page){
+			$parts = explode("/", $_SERVER['REQUEST_URI']);
+			return $parts[ count($parts)-1 ];
+		}else{
+			return $_SERVER['REQUEST_URI'];
+		}
 	}
 }
 ?>
