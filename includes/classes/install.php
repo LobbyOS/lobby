@@ -61,7 +61,7 @@ class Installation extends L{
    			CREATE TABLE IF NOT EXISTS `{$prefix}options` (
     			`id` int(11) NOT NULL AUTO_INCREMENT,
     			`name` varchar(64) NOT NULL,
-    			`val` tinytext NOT NULL,
+    			`val` text NOT NULL,
     			PRIMARY KEY (`id`),
    				UNIQUE(`name`)
    			) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

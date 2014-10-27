@@ -2,15 +2,15 @@
 <html>
  	<head>
   		<?php
-  		$LC->addStyle("appC", L_HOST."/includes/source/css/appC.css");
+  		$LC->addStyle("appC", L_HOST."/includes/lib/core/appCenter.css");
   		$LC->head("App Manager");
   		?>
  	</head>
  	<body>
-  		<?php include "$docRoot/includes/source/top.php";?>
+  		<?php include "$docRoot/includes/lib/core/php/top.php";?>
   		<?php include "$docRoot/admin/sidebar.php";?>
   		<div class="workspace">
-			<div class="contents">
+			<div class="content">
     			<?php
     			if(isset($_GET['id']) && $_GET['id']!=""){
      				$appJSON = $LC->loadURL(L_SERVER."/appCenter", array(
@@ -23,7 +23,7 @@
      				
      				$app 	  = json_decode($appJSON, true);
      				$app 	  = $app[$_GET['id']];
-     				$appImage = $app['image'] != "" ? $app['image'] : L_HOST . "/includes/source/img/blank_app.png";
+     				$appImage = $app['image'] != "" ? $app['image'] : L_HOST . "/includes/lib/core/img/blank.png";
     			?>
     				<h1><?php echo $app['name'];?></h1>
     				<p style="margin-bottom:15px;margin-top:-5px;"><?php echo $app['shortDescription'];?></p>
@@ -93,7 +93,7 @@
 						}
     				
 						foreach($apps as $appID => $appArray){
-							$appImage = isset($appArray['image']) ? L_HOST."/includes/source/img/blank_app.png" : $appArray['image'];
+							$appImage = isset($appArray['image']) ? L_HOST."/includes/lib/core/img/blank.png" : $appArray['image'];
 						?>
 							<div class="app">
 								<div class="left">

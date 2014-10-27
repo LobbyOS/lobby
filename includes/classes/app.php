@@ -33,6 +33,8 @@ class AppProgram {
 		if(count($vars) != 0){
 			extract($vars);
 		}
+		if(substr($path, 0, 1) != "/")
+			$path = "/$path";
 		
 		/* Get the content of the file in a variable */
 		ob_start();
