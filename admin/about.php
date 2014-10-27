@@ -4,10 +4,10 @@
 		<?php $LC->head("Lobby Info");?>
 	</head>
 	<body>
-		<?php include "$docRoot/includes/source/top.php";?>
+		<?php include "$docRoot/includes/lib/core/php/top.php";?>
 		<?php include "$docRoot/admin/sidebar.php";?>
 		<div class="workspace">
-			<div class="contents">
+			<div class="content">
 				<?php
 				if(isset($_GET['upgraded'])){
 					sss("Upgraded", "Lobby was successfully upgraded to Version <b>".getOption("lobby_version")."</b> from the old ".$_GET['oldver']." version.");

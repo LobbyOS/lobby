@@ -27,20 +27,20 @@ if(!isset($_SESSION['checkedForLatestVersion'])){
 }
 
 /* Default Styles */
-$LC->addStyle( "main", Helpers::URL("/includes/source/css/main.css") );
+$LC->addStyle( "main", Helpers::URL("/includes/lib/core/main.css") );
 
 if(Helpers::curPage() != "/admin/install.php"){
  	/* Styles */
- 	$LC->addStyle( "jqueryui", Helpers::URL("/includes/source/css/jquery-ui.css") ); // jQuery UI
- 	$LC->addStyle( "home", Helpers::URL("/includes/source/css/home.css") );
- 	$LC->addStyle( "panels", Helpers::URL("/includes/source/css/panels.css") );
+ 	$LC->addStyle( "jqueryui", Helpers::URL("/includes/lib/jquery/jquery-ui.css") ); // jQuery UI
+ 	$LC->addStyle( "home", Helpers::URL("/includes/lib/core/home.css") );
+ 	$LC->addStyle( "panels", Helpers::URL("/includes/lib/core/panels.css") );
  
  	/* Scripts */
- 	$LC->addScript( "jquery", Helpers::URL("/includes/source/js/jquery.js") );
- 	$LC->addScript( "jqueryui", Helpers::URL("/includes/source/js/jquery-ui.js") ); // jQuery UI
- 	$LC->addScript( "main", Helpers::URL("/includes/source/js/main.js") );
- 	$LC->addScript( "superfish", Helpers::URL("/includes/source/js/superfish.js") );
- 	$LC->addScript( "home", Helpers::URL("/includes/source/js/home.js") );
+ 	$LC->addScript( "jquery", Helpers::URL("/includes/lib/jquery/jquery.js") );
+ 	$LC->addScript( "jqueryui", Helpers::URL("/includes/lib/jquery/jquery-ui.js") ); // jQuery UI
+ 	$LC->addScript( "main", Helpers::URL("/includes/lib/core/main.js") );
+ 	$LC->addScript( "superfish", Helpers::URL("/includes/lib/superfish/superfish.js") );
+ 	$LC->addScript( "home", Helpers::URL("/includes/lib/core/home.js") );
  
  	/* Design */
  		/*Left Menu*/
@@ -86,6 +86,6 @@ if(Helpers::curPage() != "/admin/install.php"){
 }
 
 if( substr(Helpers::curPage(), 0, 6) == "/admin" ){
-	$LC->addStyle("admin", Helpers::URL("/includes/source/css/admin.css"));
+	$LC->addStyle("admin", Helpers::URL("/includes/lib/core/admin.css"));
 }
 ?>

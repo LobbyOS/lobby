@@ -8,10 +8,10 @@ require "$docRoot/admin/handleUpgrade.php";
  		<?php $LC->head("Upgrade");?>
 	</head>
 	<body>
- 		<?php include "$docRoot/includes/source/top.php";?>
+ 		<?php include "$docRoot/includes/lib/core/php/top.php";?>
 		<?php include "$docRoot/admin/sidebar.php";?>
  		<div class="workspace">
- 			<div class="content" style="width: 600px;">
+ 			<div class="content" style="min-width: 600px;">
 	  			<h1>
 	  				<center>Upgrade</center>
 	  			</h1>
