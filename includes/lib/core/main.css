@@ -1,0 +1,175 @@
+/* Some Basic Stuff */
+*{
+ font-family:"Ubuntu", sans-serif;
+}
+html, body{
+	margin:0px;
+ 	border:0px;
+ 	padding:0px;
+ 	line-height: 20px;
+ 	font-size:14px;
+}
+form{
+	margin-bottom:0.5em;
+}
+/* End Basic */
+
+body{
+ 	background: #EEE;
+}
+.content{
+ 	position: relative;
+ 	display: block;
+	width: auto;
+ 	padding: 0px 14px 15px 14px;
+ 	background: white;
+}
+h1,h2,h3,h4{
+ 	padding: 15px 0px;
+ 	margin:0px;
+ 	line-height:1em;
+}
+
+/* Headings */
+h1{
+ 	font-size: 2.7em;
+}
+h2{
+ 	font-size: 1.7em;
+}
+h3{
+ 	font-size: 1.4em;
+}
+h4{
+ 	font-size: 1em;
+}
+
+/* Paragraph */
+p{
+	margin:0px;
+	margin-top:5px;
+}
+
+/* Links */
+body a[href]{
+ color:#21759B;
+ text-decoration:none;
+}
+body a[href]:hover{
+ color:#D54E21;
+}
+
+/* Buttons */
+button, input[type=submit], input[type=button], .button{
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0px 5px 0px 5px;
+	padding: 5px 10px;
+	cursor: pointer;
+	outline: none;
+	font-size: 13px;
+	text-decoration: none;
+	text-align: center;
+	color:#fff !important;
+	background-color: #4D90FE;
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#4D90FE), to(#4787ED));
+	background-image: -webkit-linear-gradient(top,#4D90FE, #4787ED);
+	background-image: -moz-linear-gradient(top,#4D90FE, #4787ED);
+	background-image: -ms-linear-gradient(top,#4D90FE, #4787ED);
+	background-image: -o-linear-gradient(top,#4D90FE, #4787ED);
+	background-image: linear-gradient(top,#4D90FE, #4787ED);
+	border: 1px solid #4787ED;
+	box-shadow: 0 1px 3px #BFBFBF;
+}
+button:hover, input[type=submit]:hover, input[type=button]:hover, .button:hover{
+	box-shadow: inset 0px 1px 2px #8C8C8C;
+}
+button:active, input[type=submit]:active, input[type=button]:active, .button:active{
+	box-shadow: #8C8C8C 0px 2px 10px 0px inset;
+}
+button.red, input[type=submit].red, input[type=button].red, .button.red{
+	background-color: #DF554A;
+	background-image: linear-gradient(top, #EC7762, #DF554A);
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#EC7762), to(#DF554A));
+	background-image: -moz-linear-gradient(top, #EC7762, #DF554A);
+	border: 1px solid #DF554A;
+}
+button.green, input[type=submit].green, input[type=button].green, .button.green{
+	background-color: #DF554A;
+	background-image: linear-gradient(top, #65C435, #5DB531);
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#65C435), to(#5DB531));
+	background-image: -moz-linear-gradient(top, #65C435, #5DB531);
+	border: 1px solid #5DB531;
+}
+
+/* Text Fields */
+input[type=text], input[type=number], textarea, input[type=password]{
+	display: inline-block;
+	vertical-align: middle;
+	line-height: 20px;
+	font-size: 14px;
+	border: 1px rgb(223, 223, 223) solid;
+	border-radius: 3px;
+	font-family: sans-serif;
+	outline:none;
+	padding:3px 5px;
+	min-width: 300px;
+}
+input[type=text]:hover,input[type=number]:hover,textarea:hover,input[type=password]:hover,.textEditor:hover{
+	border:1px solid rgba(204, 204, 204,1);
+	background: rgba(255, 255, 255,.8);
+	box-shadow: inset 0 .5px 1px rgba(0,0,0,0.1);
+}
+input[type=text]:focus,input[type=number]:focus,textarea:focus,input[type=password]:focus,.textEditor:focus{
+	border:1px solid rgb(77, 137, 254);
+	background: rgba(255, 255, 255,1);
+}
+
+/* Useful Attributes */
+[hide]{
+ display:none;
+}
+/* A line breaker with margin of 5px. As a short replacement of <br/> */
+[clear], cl{
+ 	margin-top: 5px;
+ 	display:	   block;
+}
+/* Appearance */
+table{
+	word-wrap: break-word;
+	font-size: 14px;
+	width: 100%;
+	background:white;
+ 	border: 1px solid #e5e5e5;
+ 	border-spacing: 0px;
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);
+	box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+table thead{
+	background:#fff;
+	border-bottom: 1px solid #e1e1e1;
+}
+table tbody tr{
+	background-color: #f7fcfe;
+}
+table tbody tr td:nth-child(1){
+	border-left: 4px solid #2ea2cc;
+}
+table tr td{
+	padding: 10px 10px;
+	-webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,.1);
+	box-shadow: inset 0 -1px 0 rgba(0,0,0,.1);
+	border: 0px;
+}
+.message{
+	background : white;
+	border-left: 4px solid #2ea2cc;
+	padding: 10px;
+	margin: 5px 0px;
+}
+.message .title{
+	font-size: 22px;
+	font-weight: bold;
+	font-family: Ubuntu;
+	margin-bottom: 10px;
+}

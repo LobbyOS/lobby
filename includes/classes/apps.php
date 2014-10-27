@@ -12,7 +12,7 @@ class App extends L{
 		$this->app 	  = $name;
 		$this->appDir = $appDir;
    	
-		if( $this->checkAppExistCriteria() ){
+		if( $this->validApp() ){
     		/* Insert the App Manifest Info into the class object */
     		$this->getInfo();
     		$this->exists = true;
@@ -22,7 +22,6 @@ class App extends L{
     		if( $this->disableApp() ){
     			$this->log("App $name was disabled because it was not a valid App.");
     		}
-    		
     		return false;
 		}
   	}
@@ -88,7 +87,7 @@ class App extends L{
   	$apps 		= array();
   	
   	foreach($appFolders as $appFolder){
-		if( $this->checkAppExistCriteria($appFolder) ){
+		if( $this->validApp($appFolder) ){
     		$apps[] = $appFolder;
 		}
   	}
@@ -173,11 +172,9 @@ class App extends L{
  		$appInfo   = $this->getInfo();
  		$className = str_replace("-", "DASH", $this->app);
  		
- 		/* Create the App Program Object */
- 		$program = new ReflectionClass( $className );
+ 		/* Create the AppProgram Object */
+ 		$class = new $className;
  		
- 		/* Make the class object */
- 		$class = $program->newInstanceArgs();
  		/* Send app details and LC object to the AppProgram */
  		$class->setTheVars($LC, $appInfo);
  		
@@ -187,10 +184,34 @@ class App extends L{
  }
  
  /* Since we check if App is valid in multiple places, we make it into a function */
- public function checkAppExistCriteria($name = ""){
- 	$appDir = $name == "" ? $this->appDir : APPS_DIR . "/$name";
- 	
- 	return is_dir($appDir) && file_exists("$appDir/manifest.json") && file_exists("$appDir/program.php") ? true : false;
+ public function validApp($name = ""){
+ 	if( $name == "" ){
+		$appDir = $this->appDir;
+		$name	= $this->app;
+	}else{
+		$appDir = APPS_DIR . "/$name";
+	}
+ 	$valid	= false;
+ 	if( is_dir($appDir) && file_exists("$appDir/manifest.json") ){
+		$valid = true; // Initial checking assumpts that app is valid
+	}
+	if( $valid === true && file_exists("$appDir/program.php") ){
+		/* Make sure the App class exists */
+		require_once L_ROOT . "/includes/classes/app.php";
+		require_once "$appDir/program.php";
+		$className = str_replace("-", "DASH", $name);
+		if( !class_exists($className) ){
+			$valid = false; // The class doesn't exist, so app's not valid
+		}else{
+			$class = new $className;
+			if (!is_subclass_of($class, 'AppProgram') || !method_exists($class, 'page')){
+				$valid = false;
+			}
+		}
+	}else{
+		$valid = false; // The program.php file is not found
+	}
+ 	return $valid;
  }
 }
 ?>

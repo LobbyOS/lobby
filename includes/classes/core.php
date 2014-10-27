@@ -21,11 +21,11 @@ class L {
  	}
  
  	public function addScript($name, $url){
-  		$this->js[$name]  = $url;
+  		$this->js[$name]  = Helpers::URL($url);
  	}
  
  	public function addStyle($name, $url){
-  		$this->css[$name] = $url;
+  		$this->css[$name] = Helpers::URL($url);
  	}
  
  	public function head($title=""){
@@ -35,7 +35,7 @@ class L {
   	
   		/* JS */
   		if(count($this->js)!=0){
-			echo "<script async='async' src='" . L_HOST . "/includes/serve.php?file=" . implode(",", $this->js) . "'></script>";
+			echo "<script src='" . L_HOST . "/includes/serve.php?file=" . implode(",", $this->js) . "'></script>";
   		}
   		/* CSS */
   		if(count($this->css)!=0){
@@ -141,7 +141,7 @@ class L {
 		if($title == ''){
 			/* If no Title, give a 404 Page */
 			header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found', true, 404);
-			include(L_ROOT . "/includes/source/error.php");
+			include(L_ROOT . "/includes/lib/core/php/error.php");
 			exit;
 		}else{
 			$html .= "<div class='message'>";

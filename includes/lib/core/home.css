@@ -1,0 +1,18 @@
+html, body{
+	overflow: hidden;
+}
+/* Workspace */
+.workspace{
+	position: absolute;
+	top: 32px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	overflow: auto;
+}
+.workspace .contents{
+	display: table;
+	margin: 0px auto 40px;
+	width: 700px;
+	overflow: auto;
+}
