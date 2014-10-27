@@ -9,7 +9,7 @@ require L_ROOT . "/admin/handleUpgrade.php";
 	</head>
 	<body>
  		<?php
- 		include L_ROOT . "/includes/source/top.php";
+ 		include L_ROOT . "/includes/lib/core/php/top.php";
  		?>
  		<div class="workspace">
   			<div class="contents">

@@ -41,9 +41,14 @@ $router->with('/app', function () use ($router, $LC, $LD) {
 
 /* Route / to Dashboard Page */
 $router->respond("/", function() use ($LC) {
-	$LC->addStyle("dashboard", L_HOST."/includes/source/css/dashboard.css");
+	$LC->addScript("metrojs", "/includes/lib/metrojs/metrojs.js");
+	$LC->addStyle("metrojs", "/includes/lib/metrojs/metrojs.css");
+	$LC->addScript("dynscroll", "/includes/lib/scrollbar/scrollbar.js");
+	$LC->addStyle("dynscroll", "/includes/lib/scrollbar/scrollbar.css");
+	$LC->addScript("dashboard", "/includes/lib/core/dashboard.js");
+	$LC->addStyle("dashboard", "/includes/lib/core/dashboard.css");
 	$LC->setTitle("Dashboard");
-	$GLOBALS['workspaceHTML'] = array(L_ROOT . "/includes/source/main.php");
+	$GLOBALS['workspaceHTML'] = array(L_ROOT . "/includes/lib/core/php/main.php");
 });
 
 /* The default 404 pages */
@@ -54,7 +59,7 @@ $router->respond('404', function () {
 $router->dispatch();
 
 if($GLOBALS['workspaceHTML'] != "" || is_array($GLOBALS['workspaceHTML'])){
-	include L_ROOT . "/includes/source/page.php";
+	include L_ROOT . "/includes/lib/core/php/page.php";
 }else{
 	ser();
 }

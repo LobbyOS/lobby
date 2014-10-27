@@ -1,0 +1,41 @@
+.workspace .content {
+	padding: 0px 10px 20px 220px;
+	width: auto;
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	overflow: auto;
+	background: #EEE;
+}
+.sidebar{
+	width: 200px;
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	top: 0px;
+	background: #6AAEEC;
+	color: white;
+	z-index: 1;
+}
+.sidebar a.link{
+	display: block;
+	margin: 5px 0px;
+	padding: 8px 0px 8px 15px;
+	background: #DDD;
+	color: black !important;
+}
+.sidebar a.link:hover, .sidebar a.active{
+	color: black;
+	background: #EEE;
+}
+@media screen and (max-width: 1300px){
+	.sidebar{
+		display: none;
+	}
+	.workspace .contents {
+		margin: fallback;
+		width: fallback;
+	}
+}

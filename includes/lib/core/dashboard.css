@@ -1,0 +1,57 @@
+.panel.top{
+	background: #F06D6D;
+}
+.workspace{
+	position:absolute;
+}
+.workspace .tiles{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	bottom: 0px;
+	right: 0px;
+	overflow-x: scroll;
+	overflow-y: hidden;
+}
+.workspace .tiles .row{
+	width: 100%;
+	height: 200px;
+}
+.workspace .tiles .tile {
+	position: relative;
+	float: left;
+	height: 200px;
+	width: 200px;
+}
+.workspace .tiles .tile.tile-placeholder{
+	box-shadow: inset 0px 1px 46px black;
+    height: 200px;
+    width: 200px;
+    float: left;
+}
+.workspace .tiles .tile .inner{
+	position: absolute;
+	left: 3px;
+	top: 3px;
+	bottom: 0px;
+	right: 3px;
+	color: black;
+	background: #fff;
+}
+.workspace .tiles .tile.tile-placeholder .inner{
+	z-index: -1;
+}
+.workspace .tiles .tile .image{
+	max-height: 197px;
+	max-width: 197px;
+}
+.workspace .tiles .tile .title{
+	font-size:14px;
+	font-weight: bold;
+	position: absolute;
+	bottom: 3px;
+	left: 7px;
+}
+.scroll-element.scroll-y {
+    display: none !important;
+}

@@ -35,12 +35,15 @@ class Helpers {
 		return $url;
 	}
 	
-	public static function curPage($page = false){
+	public static function curPage($page = false, $full = false){
+		$url = self::URL();
+		$parts = parse_url($url);
 		if($page){
-			$parts = explode("/", $_SERVER['REQUEST_URI']);
-			return $parts[ count($parts)-1 ];
+			$pathParts 	= explode("/", $parts['path']);
+			$last		= $pathParts[ count($pathParts) - 1 ]; // Get the string after last "/"
+			return $full === false ? $last : $last . (isset($parts['query']) ? $parts['query'] : "");
 		}else{
-			return $_SERVER['REQUEST_URI'];
+			return $full === false ? $parts['path'] : $_SERVER["REQUEST_URI"];
 		}
 	}
 }

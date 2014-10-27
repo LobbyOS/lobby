@@ -6,7 +6,7 @@ if(preg_match("/\.css/", $f)){
  	header("Content-type: text/css");
  	$css = 1;
 }
-if(preg_match("/\.js/", $f)){
+if(preg_match("/\.js/", $f) && !isset($css)){
  	header("Content-type: application/x-javascript");
  	$js = 1;
 }
@@ -15,13 +15,13 @@ if(preg_match("/,/", $f)){
 }else{
  	$files = array($f);
 }
-$content		  = "";
-$extraContent = "";
+$content		= "";
+$extraContent 	= "";
 
 /* Loop through files and */
 foreach($files as $file){
  	$file = str_replace(L_HOST, "", $file);
- 	if($file == "/includes/source/js/jquery-ui.js" || $file == "/includes/source/js/jquery.js"){
+ 	if($file == "/includes/lib/jquery/jquery-ui.js" || $file == "/includes/lib/jquery/jquery.js"){
   		$extraContent .= file_get_contents(L_ROOT . $file);
  	}else{
   		$content .= file_get_contents(L_ROOT . $file);

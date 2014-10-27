@@ -1,0 +1,11 @@
+.active, .ui-selected{
+ background: #F07746;
+ color:white;
+}
+.ui-selecting {
+ background: #FECA40;
+}
+.panel.top li.prnt ul li.item:hover{
+ background:white;
+ color:black;
+}

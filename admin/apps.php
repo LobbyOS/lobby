@@ -4,10 +4,10 @@
 		<?php $LC->head("App Manager");?>
 	</head>
 	<body>
-		<?php include "$docRoot/includes/source/top.php";?>
+		<?php include "$docRoot/includes/lib/core/php/top.php";?>
 		<?php include "$docRoot/admin/sidebar.php";?>
 		<div class="workspace">
-			<div class="contents">
+			<div class="content">
 				<h2>App Manager</h2>
 				<p>You can remove or disable installed apps using this page. You can Find and Install More Apps from <a href="<?php echo L_HOST;?>/admin/appCenter.php">App Center</a>.</p>
 				<?php
@@ -63,14 +63,14 @@
 							foreach($Apps as $app){
 								$App	  = new App($app);
 								$data	  = $App->getInfo();
-								$appImage = !isset($data['image']) ? L_HOST."/includes/source/img/blank_app.png" : $data['image'];
+								$appImage = !isset($data['image']) ? L_HOST."/includes/lib/core/img/blank.png" : $data['image'];
 								$enabled  = $App->isEnabled();
 							?>
 								<tr <?php if(!$enabled){ echo 'style="background:#DDD;"'; } ?>>
 									<td><a href="<?php echo L_HOST.'/app/'.$app;?>"><?php echo $data['name'];?></a></td>
 									<td><?php echo $data['version'];?></td>
 									<td><?php echo $data['short_description'];?></td>
-									<td style="text-align:center;">
+									<td style="//text-align:center;">
 										<?php
 										if( $enabled ){
 											echo '<a class="button" href="?action=disable&app='. $app .'">Disable</a>';
