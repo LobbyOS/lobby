@@ -1,0 +1,79 @@
+.panel.top{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  height: 32px;
+  padding: 5px;
+  background: #64c235;
+  color: white;
+  z-index: 1000;
+  box-shadow: 0px 2px 4px rgba(0,0,0,.5);
+}
+.panel.top a{
+  color:white;
+}
+.panel.top a:hover{
+  color:inherit;
+}
+.panel.top .left{
+  position:absolute;
+  left:5px;
+  list-style: none;
+  margin: 0px;
+}
+.panel.top .left li.prnt, .panel.top .right li.prnt{
+  position: relative;
+  cursor: pointer;
+  margin-right: 15px;
+}
+.panel.top .left ul, .panel.top .right ul{
+  display:none;
+  position:absolute;
+  top: 27px;
+  list-style: none;
+  padding: 0px;
+  max-width: 150px;
+  background:#64c235;
+}
+.panel.top .left ul a, .panel.top .right ul a{
+  display: block;
+  margin: 0;
+  padding: 5px 10px;
+  min-width:120px;
+}
+.panel.top .left li.item, .panel.top .right li.item{
+  display: inline-block;
+  vertical-align: top;
+}
+.panel.top .right{
+  position:absolute;
+  right:5px;
+  list-style: none;
+  margin: 0px;
+}
+.panel.top .right ul{
+  right: 0px;
+  text-align: right;
+}
+/* Icons */
+.panel.top .right .item span{
+  height:22px;
+  width:17px;
+  display: inline-block;
+}
+.panel.top .right #net{
+  background: url(<?host?>/includes/lib/modules/panel/lib/connection/connection.png) 0px 2px no-repeat;
+}
+.panel.top .right #net.off{
+  background: url(<?host?>/includes/lib/modules/panel/lib/connection/connection.png) -23px 3px no-repeat;
+}
+.panel.top .right #update{
+  background: url(<?host?>/includes/lib/core/Img/update.png) 0px -1px no-repeat;
+  background-size: 24px;
+  width:22px;
+}
+.panel.top li.prnt ul li.item:hover{
+  background: white;
+  color: black;
+}
