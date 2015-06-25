@@ -1,15 +1,17 @@
-lobby
+Lobby
 =====
 
-Lobby is a localhost, Web application that hosts web apps. Lobby is Open Source and anyone who knows PHP can create apps for Lobby.
+Lobby is a Web App Software for your localhost computer.
 
-Current Official Web Version can be seen [http://lobby.subinsb.com](here)
+Lobby is Open Source and anyone who knows PHP can create apps for Lobby.
 
-[http://lobby.subinsb.com/docs](Docs)
+[Download & Install](http://lobby.subinsb.com/download)
+
+Learn More [http://lobby.subinsb.com](here)
+
+[http://lobby.subinsb.com/docs](Documentation)
 
 Some things to note
 ===================
 
-This repo reflects my Lobby repo and therefore this repo contains some extra code and apps that I'm testing. Examples are **site-compressor** and **anagram** app.
-
-Please include that too when you're pushing to this repo.
+I hope you contribute to this project. The docs are not complete and I will be glad if you help. :-)

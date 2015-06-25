@@ -1,0 +1,5 @@
+{
+    "require": {
+        "klein/klein": "dev-master"
+    }
+}
