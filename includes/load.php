@@ -1,35 +1,54 @@
 <?php
 session_start();
-/* Define the Root */
-$docRoot = isset($docRoot) ? $docRoot : realpath( dirname( dirname(__FILE__) ) );
-define("L_ROOT", $docRoot);
+/**
+ * Define the Lobby Location
+ */
+$docRoot = isset($docRoot) ? $docRoot : realpath(dirname(__DIR__));
+define("L_DIR", str_replace("\\", "/", $docRoot));
 
-/* Make the request URL relative to the base URL of Lobby installation. http://localhost/lobby will be changed to "/" and http://lobby.local to "/" */
-$lobbyBase = str_replace($_SERVER['DOCUMENT_ROOT'], "", $docRoot);
+$_SERVER['ORIG_REQUEST_URI'] = $_SERVER['REQUEST_URI'];
+/**
+ * Make the request URL relative to the base URL of Lobby installation.
+ * http://localhost/lobby will be changed to "/"
+ * and http://lobby.local to "/"
+ * ---------------------
+ * We do this directly to $_SERVER['REQUEST_URI'] because, Klein (router)
+ * obtains the value from it. Hence we keep the original value in ORIG_REQUEST_URI
+ */
+$lobbyBase = str_replace(str_replace("\\", "/", $_SERVER['DOCUMENT_ROOT']), "", L_DIR);
+$lobbyBase = substr($lobbyBase, 0) == "/" ? substr_replace($lobbyBase, "", 0) : $lobbyBase;
+
 $_SERVER['REQUEST_URI'] = str_replace($lobbyBase, "", $_SERVER['REQUEST_URI']);
 $_SERVER['REQUEST_URI'] = substr($_SERVER['REQUEST_URI'], -1) == "/" && $_SERVER['REQUEST_URI'] != "/" ? substr_replace($_SERVER['REQUEST_URI'], "", -1) : $_SERVER['REQUEST_URI'];
 
-require_once L_ROOT . "/includes/classes/core.php"; /* the Core Class */
-require_once L_ROOT . "/includes/classes/db.php"; /* The Database Class */
-require_once L_ROOT . "/includes/extraDefinitions.php"; /* Define extra variables or constants */
-require_once L_ROOT . "/includes/classes/apps.php"; /* The App Class */
-require_once L_ROOT . "/includes/functions.php"; /* Functions that are a shortcut to class functions */
+require_once L_DIR . "/includes/src/Helpers.php";
+require_once L_DIR . "/includes/src/FileSystem.php"; /* The File System Class */
 
-require_once L_ROOT . "/includes/classes/Helpers.php"; /* Helping Functions that provides additional functionality */
+require_once \Lobby\FS::loc("/includes/src/Lobby.php"); /* The Core */
+require_once \Lobby\FS::loc("/includes/src/Database.php"); /* The Database Class */
+require_once \Lobby\FS::loc("/includes/src/Query.php"); /* The Database Class */
+require_once \Lobby\FS::loc("/includes/src/Apps.php"); /* The App Class */
+require_once \Lobby\FS::loc("/includes/src/Router.php"); /* The Router Class */
+require_once \Lobby\FS::loc("/includes/src/Server.php"); /* The File System Class */
 
-/* Load System Installation configuration */
-require_once L_ROOT . "/includes/config.php";
+require_once \Lobby\FS::loc("/includes/functions.php"); /* Non class functions */
+require_once \Lobby\FS::loc("/includes/extra.php"); /* Define extra variables or constants */
 
-if(Helpers::curPage() != "/includes/serve.php"){
- 	/* Extends */
- 	require L_ROOT . "/includes/classes/home.php";
+/**
+ * Run not on CDN files serving
+ */
+if(!\Lobby::status("lobby.serve")){
+  /**
+   * Init the page setup
+   */
+  require_once \Lobby\FS::loc("/includes/init.php");
  
- 	/* Load Default Style For Home*/
- 	require L_ROOT . "/includes/loadHome.php";
- 
- 	/* Is Lobby Installed ? */
- 	if(!$db->db && Helpers::curPage() != "/admin/install.php"){
-  		$LC->redirect("{$LC->host}/admin/install.php");
- 	}
+  /**
+   * Is Lobby Installed ?
+   */
+  if(!\Lobby::$installed && !\Lobby::status("lobby.install")){
+    \Lobby::redirect("/admin/install.php");
+  }
 }
-?>
+
+\Lobby::doHook("init");
