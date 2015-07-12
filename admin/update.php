@@ -1,6 +1,6 @@
 <?php
 include "../load.php";
-require \Lobby\FS::loc("/includes/src/Update.php");
+require L_DIR . "/includes/src/Update.php";
 ?>
 <!DOCTYPE html>
 <html>

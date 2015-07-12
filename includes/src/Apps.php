@@ -82,7 +82,7 @@ class Apps extends \Lobby {
       /**
        * Make sure the App class exists
        */
-      require_once \Lobby\FS::loc("/includes/src/App.php", false);
+      require_once L_DIR . "/includes/src/App.php";
       require_once "$appDir/App.php";
       
       $className = str_replace("-", "_", $name);
@@ -151,7 +151,7 @@ class Apps extends \Lobby {
       $details['URL'] = L_URL . "/app/{$this->app}";
       $details['srcURL'] = L_URL . "/contents/apps/{$this->app}";
       
-      $details['image'] = isset($details['image']) && $details['image'] == "true" ?
+      $details['logo'] = isset($details['logo']) ?
         APPS_URL . "/{$this->app}/src/Image/logo.png" :
         L_URL . "/includes/lib/core/Img/blank.png";
        

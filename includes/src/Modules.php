@@ -4,30 +4,31 @@ namespace Lobby;
 class Modules extends \Lobby {
 
   private static $required = array("panel"); // List of required modules by default
-  private static $modules = array();
+  private static $core_modules, $custom_modules, $modules = array();
   
   public static function init(){
-    self::$modules = array_merge(self::dirModules("/includes/lib/modules"), self::dirModules("/contents/modules"));
+    self::$core_modules = self::dirModules("/includes/lib/modules");
+    self::$custom_modules = self::dirModules("/contents/modules");
+    self::$modules = array_merge(self::$core_modules, self::$custom_modules);
   }
   
   public static function get($type = "all"){
     if($type == "all"){
       return self::$modules;
     }elseif($type == "core"){
-      $modules = self::dirModules("/includes/lib/modules");
+      return self::$core_modules;
     }elseif($type == "custom"){
-      $modules = self::dirModules("/contents/modules");
+      return self::$custom_modules;
     }
-    return $modules;
   }
   
   public static function dirModules($location){
-    $location = \Lobby\FS::loc($location);
+    $location = L_DIR . $location;
     $modules = array_diff(scandir($location), array('..', '.'));
     $validModules = array();
     
     foreach($modules as $module){
-      $loc = \Lobby\FS::loc("$location/$module");
+      $loc = "$location/$module";
       $disable = 0;
       if(file_exists("$loc/disabled.txt") && array_search($module, self::$required) === false){
         // Module Disabled

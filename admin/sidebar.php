@@ -10,8 +10,9 @@
     "/admin/modules.php" => "Modules",
     "/admin/about.php" => "About",
   );
+  $curPage = \Lobby::curPage();
   foreach($links as $link => $text){
-    if($link == \Lobby::curPage()){
+    if($link == $curPage || ($curPage == "/admin/update.php" && $text == "About")){
       echo \Lobby::l($link, $text, "class='link active'");
     }else{
       echo \Lobby::l($link, $text, "class='link'");

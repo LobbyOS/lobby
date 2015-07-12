@@ -30,7 +30,11 @@ class App {
   }
   
   public static function l($path, $text = "", $extra = ""){
-    return \Lobby::l(APP_URL. $path, $text, $extra);
+    return \Lobby::l(APP_URL . $path, $text, $extra);
+  }
+  
+  public static function get($path){
+    return \Lobby\FS::get(APP_DIR . $path);
   }
   
   /**

@@ -34,7 +34,7 @@
   list-style: none;
   padding: 0px;
   max-width: 150px;
-  background:#64c235;
+  background: #000;
 }
 .panel.top .left ul a, .panel.top .right ul a{
   display: block;
@@ -63,13 +63,13 @@
   display: inline-block;
 }
 .panel.top .right #net{
-  background: url(<?host?>/includes/lib/modules/panel/lib/connection/connection.png) 0px 2px no-repeat;
+  background: url(<?L_URL?>/includes/lib/modules/panel/lib/connection/connection.png) 0px 2px no-repeat;
 }
 .panel.top .right #net.off{
-  background: url(<?host?>/includes/lib/modules/panel/lib/connection/connection.png) -23px 3px no-repeat;
+  background: url(<?L_URL?>/includes/lib/modules/panel/lib/connection/connection.png) -23px 3px no-repeat;
 }
 .panel.top .right #update{
-  background: url(<?host?>/includes/lib/core/Img/update.png) 0px -1px no-repeat;
+  background: url(<?L_URL?>/includes/lib/core/Img/update.png) 0px -1px no-repeat;
   background-size: 24px;
   width:22px;
 }

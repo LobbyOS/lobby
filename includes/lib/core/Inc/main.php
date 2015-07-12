@@ -18,7 +18,7 @@ if(count($apps) == 0){
   foreach($apps as $app){
     $App = new \Lobby\Apps($app);
     $data = $App->info;
-    $jsCode .= "lobby.dash.addTile('app', {'id' : '{$app}', 'img' : '{$data['image']}', 'name' : '{$data['name']}'});";
+    $jsCode .= "lobby.dash.addTile('app', {'id' : '{$app}', 'img' : '{$data['logo']}', 'name' : '{$data['name']}'});";
   }
   /**
    * A call to create Dashboard
