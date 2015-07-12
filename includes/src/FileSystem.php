@@ -16,13 +16,10 @@ class FS {
   /**
    * Make relative path of Lobby to Absolute Path
    */
-  public static function loc($path, $localized = true){
+  public static function loc($path){
     $new = str_replace(L_DIR, "", $path);
-    if(!defined("APP_DIR") || $localized === false){
-      $new = L_DIR . $new;
-    }else{
-      $new = APP_DIR . $new;
-    }
+    $new = L_DIR . $new;
+    
     return str_replace("\\", "/", $new);
   }
   

@@ -5,6 +5,10 @@ window.clog = function(msg){
 /* A temporary array for adding stuff */
 window.tmp = {};
 
+if(typeof lobby == "undefined"){
+  window.lobby = {};
+}
+
 /* Get the current page URL */
 lobby.curLoc = window.location.protocol + "//" + window.location.host + window.location.pathname;
 

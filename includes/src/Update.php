@@ -64,8 +64,7 @@ class Update extends \Lobby {
     $latest_version = getOption("lobby_latest_version");
     $url = \Lobby\Server::download("lobby", $latest_version);
       
-    $zipFile = "/contents/update/" . $latest_version . ".zip";
-    $zipFile = \Lobby\FS::loc($zipFile);
+    $zipFile = L_DIR . "/contents/update/" . $latest_version . ".zip";
     self::zipFile($url, $zipFile);
     
     // Make the Zip Object
@@ -83,9 +82,17 @@ class Update extends \Lobby {
     $zip->close();
     \Lobby\FS::remove($zipFile);
     
-    if(isset($admin_previously_installed)){
+    self::finish_software_update(isset($admin_previously_installed));
+    
+    return L_URL . "/admin/about.php?updated=1&oldver={$oldVer}" . \H::csrf("g");
+  }
+  
+  public static function finish_software_update($admin_previously_installed = false){
+    if($admin_previously_installed){
       \Lobby\FS::remove("/contents/modules/admin/disabled.txt");
     }
+    
+    $latest_version = getOption("lobby_latest_version");
     \Lobby::log("Updated Lobby Software To version {$latest_version}");
  
     /* Remove Depreciated Files */
@@ -95,11 +102,14 @@ class Update extends \Lobby {
       
       if(count($files) != 0){
         foreach($files as $file){ // iterate files
-          $fileLoc = \Lobby\FS::loc("/$file");
+          $fileLoc = L_DIR . "/$file";
+          
           if(file_exists($fileLoc) && $fileLoc != L_DIR){
             $type = filetype($fileLoc);
             if($type == "file"){
               \Lobby\FS::remove($fileLoc);
+            }else if($type == "dir"){
+              rmdir($fileLoc);
             }
           }
         }
@@ -108,25 +118,29 @@ class Update extends \Lobby {
       }
     }
  
-    /* Database */
+    /**
+     * Database Update
+     */
     if(\Lobby\FS::exists("/update/sqlExecute.sql")){
       \Lobby::log("Upgrading Lobby Database");
       $sqlCode = \Lobby\FS::get("/update/sqlExecute.sql");
       $sql = \Lobby\DB::prepare($sqlCode);
-      if( !$sql->execute() ){
-       ser("Error", "Database Update Couldn't be made. <a href='update.php'>Try again</a>");
+      
+      if(!$sql->execute()){
+        ser("Error", "Database Update Couldn't be made. <a href='update.php'>Try again</a>");
       }else{
-       \Lobby\FS::remove("/update/sqlExecute.sql");
+        \Lobby\FS::remove("/update/sqlExecute.sql");
       }
       \Lobby::log("Updated Lobby Database");
     }
     
     $oldVer = getOption("lobby_version");
-    saveOption( "lobby_version", getOption("lobby_latest_version") );
-    saveOption( "lobby_version_release", getOption("lobby_latest_version_release") );
-    \Lobby::log("Lobby is successfully Updated.");
+    saveOption("lobby_version", $latest_version);
+    saveOption("lobby_version_release", getOption("lobby_latest_version_release"));
     
-    return L_URL . "/admin/about.php?updated=1&oldver={$oldVer}" . \H::csrf("g");
+    \Lobby\FS::remove("/upgrade.lobby");
+    
+    \Lobby::log("Lobby is successfully Updated.");
   }
   
   /**
@@ -139,7 +153,7 @@ class Update extends \Lobby {
     \Lobby::log("Installing Latest Version of App {$id}");
     
     $url = \Lobby\Server::download("app", $id);
-    $zipFile = \Lobby\FS::loc("/contents/update/{$id}.zip");
+    $zipFile = L_DIR . "/contents/update/{$id}.zip";
     self::zipFile($url, $zipFile);
  
     // Un Zip the file
