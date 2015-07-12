@@ -67,8 +67,21 @@ if(\Lobby::curPage() != "/admin/install.php"){
    * "Update Available" icon on the right side of panel
    */
   $AppUpdates = json_decode(getOption("app_updates"), true);
+  $lobby_version = getOption("lobby_version");
   $latestVersion = getOption("lobby_latest_version");
-  if((isset($AppUpdates) && count($AppUpdates) != 0) || ($latestVersion && getOption("lobby_version") != $latestVersion)){
+  
+  if(\Lobby\FS::exists("/upgrade.lobby")){
+    require_once L_DIR . "/includes/src/Update.php";
+    $l_info = json_decode(\Lobby\FS::get("/lobby.json"));
+    
+    if($lobby_version != $l_info->version){
+      saveOption("lobby_latest_version", $l_info->version);
+      saveOption("lobby_latest_version_release", $l_info->released);
+    }
+    \Lobby\Update::finish_software_update();
+  }
+  
+  if((count($AppUpdates) != 0) || ($latestVersion && $lobby_version != $latestVersion)){
     \Lobby\Panel::addTopItem("updateNotify", array(
       "html" => \Lobby::l("/admin/update.php", "<span id='update' title='An Update Is Available'></span>"),
       "position" => "right"

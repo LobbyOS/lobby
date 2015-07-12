@@ -67,7 +67,7 @@ class Install extends \Lobby {
   public static function makeConfigFile(){
     $lobbyID = self::randStr(10) . self::randStr(15) . self::randStr(20); // Lobby Global ID
     $lobbySID   = hash("sha512", self::randStr(15) . self::randStr(30)); // Lobby Secure ID
-    $configFileLoc = \Lobby\FS::loc("/config.php");
+    $configFileLoc = L_DIR . "/config.php";
     $cfg = self::$database;
     
     /* Make the configuration file */
@@ -88,7 +88,7 @@ class Install extends \Lobby {
     if(\Lobby\FS::write($configFileLoc, $config_file) === false){
       ser("Failed Creating Config File", "Something happened while creating the file. Perhaps it was something that you did ?");
     }else{
-      chmod(\Lobby\FS::loc("/config.php"), 0550);
+      chmod(L_DIR . "/config.php", 0550);
     }
   }
   

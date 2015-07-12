@@ -14,13 +14,16 @@ if(!\Lobby::status("lobby.serve")){
     \Lobby::addScript("panel", "/includes/lib/modules/panel/lib/panel.js");
   }
   
-  /**
-   * Default Items provided by the module
-   */
-  \Lobby\Panel::addTopItem("netStatus", array(
-    "html" => "<span id='net' title='Online'></span>",
-    "position" => "right"
-  ));
+  if(\Lobby::$config['server_check'] === true){
+    /**
+     * Default Items provided by the module
+     */
+    \Lobby\Panel::addTopItem("netStatus", array(
+      "html" => "<span id='net' title='Online'></span>",
+      "position" => "right"
+    ));
+    \Lobby::addScript("panel-item-connection", "/includes/lib/modules/panel/connection/connection.js");
+  }
     
   \Lobby::hook("body.begin", function(){
     include __DIR__ . "/panel.ui.php";

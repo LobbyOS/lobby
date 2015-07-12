@@ -67,7 +67,7 @@
                 $appImage = !isset($data['image']) ? L_URL . "/includes/lib/core/Img/blank.png" : $data['image'];
                 $enabled = $App->isEnabled();
               ?>
-                <tr <?php if(!$enabled){echo 'style="background:#DDD;"';}?>>
+                <tr <?php if(!$enabled){echo 'style="background: #EEE;"';}?>>
                   <td>
                     <a href="<?php echo \Lobby::u("/admin/app/$app");?>"><?php echo $data['name'];?></a>
                   </td>

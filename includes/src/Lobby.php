@@ -32,18 +32,21 @@ class Lobby {
     });
     self::sysinfo();
     self::config();
+    
     $docRoot = substr($_SERVER['DOCUMENT_ROOT'], -1) == "/" ? substr_replace($_SERVER['DOCUMENT_ROOT'], "", -1) : $_SERVER['DOCUMENT_ROOT'];
     $host = str_replace($docRoot, $_SERVER['HTTP_HOST'], L_DIR);
+    $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https://' : 'http://';
+    
     self::$cleanHost = $host;
-    self::$host = "http://$host";
+    self::$host = $protocol . $host;
   }
   
   /**
    * Reads configuration & set Lobby according to it
    */
   public static function config($db = false){
-    if(file_exists(\Lobby\FS::loc("/config.php"))){
-      $config = include(\Lobby\FS::loc("/config.php"));
+    if(file_exists(L_DIR . "/config.php")){
+      $config = include(L_DIR . "/config.php");
       
       if(is_array($config) && count($config) != 0){
         self::$config = array_merge(self::$config, $config);
@@ -205,7 +208,7 @@ class Lobby {
        * If no Title, give a 404 Page
        */
       header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found', true, 404);
-      include(\Lobby\FS::loc("/includes/lib/core/Inc/error.php", false));
+      include(L_DIR . "/includes/lib/core/Inc/error.php");
       exit;
     }else{
       $html .= "<div class='message'>";
