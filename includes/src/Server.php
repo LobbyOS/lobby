@@ -27,7 +27,7 @@ class Server {
         \Lobby::log("Lobby Server Replied : {$response}");
         return false;
       }else{
-        return count($arr) == 1 ? $arr[0] : $arr;
+        return $arr;
       }
     }
   }

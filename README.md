@@ -1,15 +1,15 @@
 Lobby
 =====
 
-Lobby is a Web App Software for your localhost computer.
+Lobby is a localhost/Web Operating System.
 
 Lobby is Open Source and anyone who knows PHP can create apps for Lobby.
 
 [Download & Install](http://lobby.subinsb.com/download)
 
-Learn More [http://lobby.subinsb.com](here)
+Learn More [here](http://lobby.subinsb.com)
 
-[http://lobby.subinsb.com/docs](Documentation)
+[Documentation](http://lobby.subinsb.com/docs])
 
 Some things to note
 ===================

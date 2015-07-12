@@ -1,6 +1,6 @@
 <?php
 include "../load.php";
-require \Lobby\FS::loc("/includes/src/Install.php");
+require L_DIR . "/includes/src/Install.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -244,7 +244,7 @@ require \Lobby\FS::loc("/includes/src/Install.php");
                       <td>
                         <input type="text" name="dbname" />
                       </td>
-                      <td>The name of the database you want to run Lobby in</td>
+                      <td>The name of the database you want to run Lobby in. Database should exist and Lobby won't create if it doesn't.</td>
                     </tr>
                     <tr>
                       <td>User Name</td>

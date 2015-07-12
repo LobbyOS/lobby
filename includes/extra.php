@@ -11,7 +11,7 @@ define("L_SERVER", "http://lobby.subinsb.com/api");
  */
 define("L_URL", \Lobby::$host);
 define("APPS_URL", L_URL . "/contents/apps");
-define("APPS_DIR", \Lobby\FS::loc("/contents/apps"));
+define("APPS_DIR", L_DIR . "/contents/apps");
 
 /**
  * LOAD MODULES
@@ -19,5 +19,5 @@ define("APPS_DIR", \Lobby\FS::loc("/contents/apps"));
  * It will : First, load the core modules
  * Then the custom modules
  */
-require_once \Lobby\FS::loc("/includes/src/Modules.php");
+require_once L_DIR . "/includes/src/Modules.php";
 \Lobby\Modules::load();

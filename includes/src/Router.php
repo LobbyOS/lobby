@@ -48,37 +48,31 @@ class Router {
        */
       $App = new \Lobby\Apps($AppID);
       if($App->exists && $App->isEnabled()){
-        /**
-         * Redirect /src/ files to App's Source in /contents folder
-         */
-        if(substr($page, 0, 5) == "/src/"){
-          \Lobby::redirect("/contents/apps/{$AppID}/src/" . substr($page, 5));
-        }else{
-          $class = $App->run();
-          $AppInfo = $App->info;
+        $class = $App->run();
+        $AppInfo = $App->info;
       
-          /**
-           * Set the title
-           */
-          \Lobby::setTitle($AppInfo['name']);
+        /**
+         * Set the title
+         */
+        \Lobby::setTitle($AppInfo['name']);
           
-          /**
-           * Add the App item to the navbar
-           */
-          \Lobby\Panel::addTopItem("lobbyApp{$AppID}", array(
-            "text" => $AppInfo['name'],
-            "href" => APP_URL,
-            "position" => "left"
-          ));
-          $page_response = $class->page($page);
-          if($page_response == "auto"){
-            if($page == "/"){
-              $page = "/index";
-            }
-            $GLOBALS['workspaceHTML'] = $class->inc("/src/Page{$page}.php");
-          }else{
-            $GLOBALS['workspaceHTML'] = $page_response;
+        /**
+         * Add the App item to the navbar
+         */
+        \Lobby\Panel::addTopItem("lobbyApp{$AppID}", array(
+          "text" => $AppInfo['name'],
+          "href" => APP_URL,
+          "position" => "left"
+        ));
+        $page_response = $class->page($page);
+        
+        if($page_response == "auto"){
+          if($page == "/"){
+            $page = "/index";
           }
+          $GLOBALS['workspaceHTML'] = $class->inc("/src/Page{$page}.php");
+        }else{
+          $GLOBALS['workspaceHTML'] = $page_response;
         }
       }else{
         ser();

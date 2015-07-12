@@ -22,7 +22,8 @@ header( 'Content-type: text/html; charset=utf-8' );
             "get" => "app",
             "id" => $_GET['id']
           ));
-          if(count($app) == 0){
+
+          if($app == "false"){
             ser("404 - App Not Found", "App was not found in Lobby Store.");
           }else{
             $appImage = $app['image'] != "" ? $app['image'] : L_URL . "/includes/lib/core/Img/blank.png";
@@ -70,7 +71,7 @@ header( 'Content-type: text/html; charset=utf-8' );
                   </tr>
                 </tbody>
               </table>
-              <p style="max-width: 500px;">
+              <p style="max-width: 500px;margin-top: 20px;">
                 <?php echo $app['description'];?>
               </p>
             </div>
@@ -87,23 +88,23 @@ header( 'Content-type: text/html; charset=utf-8' );
           </form>
           <?php
           if(isset($_GET['q'])){
-            $apps = \Lobby\Server::Store(array(
+            $request_data = array(
               "q" => $_GET['q']
-            ));
+            );
           }else{
-            $apps = \Lobby\Server::Store(array(
+            $request_data = array(
               "get" => "newApps"
-            ));
+            );
           }
-          if($apps == false){
+          if(isset($_GET['p'])){
+            $request_data['p'] = $_GET['p'];
+          }
+          
+          $server_response = \Lobby\Server::Store($request_data);
+          if($server_response == false){
             ser("Nothing Found", "Nothing was found that matches your criteria. Sorry...");
           }else{
-            if(!isset($apps[0])){
-              $apps = array(
-                0 => $apps
-              );
-            }
-            foreach($apps as $app){
+            foreach($server_response['apps'] as $app){
               $appImage = $app['image'] != "" ? $app['image'] : L_URL."/includes/lib/core/Img/blank.png";
               $url = \Lobby::u("/admin/lobby-store.php?id={$app['id']}");
           ?>
@@ -128,6 +129,12 @@ header( 'Content-type: text/html; charset=utf-8' );
             </div>
           <?php
             }
+            $apps_pages = (ceil($server_response['apps_count'] / 10)) + 1;
+            echo "<div class='pages'>";
+              for($i = 1;$i < $apps_pages;$i++){
+                echo "<a href='?p=$i' class='button ". (isset($_GET['p']) && $_GET['p'] == $i ? "blue" : "green") ."'>$i</a>";
+              }
+            echo '</div>';
           }
         }
         ?>
