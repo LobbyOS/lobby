@@ -1,6 +1,6 @@
 <?php
 /**
- * A Functions file that are simple duplicates of long functions of classes
+ * A Functions file that are simple aliases of class methods
  * Example :
  * \Lobby::getOption() can be used with just getOption()
  * 
@@ -27,12 +27,17 @@ function saveOption($key, $value){
 
 /* Show Error Messages */
 function ser($title = "", $description="", $exit = false){
-   Lobby::ser($title, $description, $exit);
+  \Lobby::ser($title, $description, $exit);
 }
 
 /* Show Success Messages */
 function sss($title, $description){
-   Lobby::sss($title, $description);
+  \Lobby::sss($title, $description);
+}
+
+/* Show Messages */
+function sme($title, $description){
+  \Lobby::sme($title, $description);
 }
 
 /* A map of $db->filt() that strips out HTML content */

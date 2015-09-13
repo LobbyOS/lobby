@@ -6,8 +6,8 @@ $GLOBALS['AppID'] = $AppID;
     <?php
     \Lobby::doHook("head.begin");
     ?>
-    <script>window.lobby = {};<?php if(isset($AppID)){
-        echo 'lobby["app"] = { id: "'. $AppID .'", url: "'. APP_URL .'", src: "'. \Lobby::u("/contents/apps/{$AppID}") .'" };';
+    <script>window.lobbyExtra = {};<?php if(isset($AppID)){
+        echo 'lobbyExtra["app"] = { id: "'. $AppID .'", url: "'. APP_URL .'", src: "'. \Lobby::u("/contents/apps/{$AppID}") .'" };';
       }
     ?></script>
     <?php
