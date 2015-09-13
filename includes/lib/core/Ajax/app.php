@@ -1,6 +1,6 @@
 <?php
 require "../../../../load.php";
-if(isset($_POST['s7c8csw91']) && isset($_POST['cx74e9c6a45'])){
+if(isset($_POST['s7c8csw91']) && isset($_POST['cx74e9c6a45']) && H::csrf()){
   
   $AppID = $_POST['s7c8csw91']; // App ID
   $AjaxFile = urldecode($_POST['cx74e9c6a45']); // Ajax File Location
@@ -12,7 +12,11 @@ if(isset($_POST['s7c8csw91']) && isset($_POST['cx74e9c6a45'])){
       ser();
     }else{
       $AppClass = $App->run();
-      echo $AppClass->inc("/src/Ajax/$AjaxFile");
+      $html = $AppClass->page("/Ajax/$AjaxFile");
+      if($html == "auto"){
+        $html = $AppClass->inc("/src/Ajax/$AjaxFile");
+      }
+      echo $html;
     }
   }
 }

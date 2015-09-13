@@ -15,7 +15,7 @@ if(count($apps) == 0){
   if($dashItems != null){
     $jsCode .= "lobby.dash.data = ". $dashItems .";";
   }
-  foreach($apps as $app){
+  foreach($apps as $app => $null){
     $App = new \Lobby\Apps($app);
     $data = $App->info;
     $jsCode .= "lobby.dash.addTile('app', {'id' : '{$app}', 'img' : '{$data['logo']}', 'name' : '{$data['name']}'});";
