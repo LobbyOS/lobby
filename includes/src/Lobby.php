@@ -35,7 +35,7 @@ class Lobby {
     
     $docRoot = substr($_SERVER['DOCUMENT_ROOT'], -1) == "/" ? substr_replace($_SERVER['DOCUMENT_ROOT'], "", -1) : $_SERVER['DOCUMENT_ROOT'];
     $host = str_replace($docRoot, $_SERVER['HTTP_HOST'], L_DIR);
-    $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https://' : 'http://';
+    $protocol = stripos($_SERVER['SERVER_PROTOCOL'], 'https') === true ? 'https://' : 'http://';
     
     self::$cleanHost = $host;
     self::$host = $protocol . $host;
@@ -83,11 +83,11 @@ class Lobby {
     }
     
     /* JS */
-    if(count(self::$js) != 0){
+    if(count(self::$js) != 0 && !\Lobby::status("lobby.install")){
       /**
-       * Load jQuery, jQuery UI, Lobby Main separately without async
+       * Load jQuery, jQuery UI, Lobby Main, App separately without async
        */
-      $url = L_URL . "/includes/serve.php?file=" . implode(",", array(self::$js['jquery'], self::$js['jqueryui'], self::$js['main']));
+      $url = L_URL . "/includes/serve.php?file=" . implode(",", array(self::$js['jquery'], self::$js['jqueryui'], self::$js['main'], isset(self::$js['app']) ? self::$js['app'] : ""));
       echo "<script src='{$url}'></script>";
       unset(self::$js['jquery']);
       unset(self::$js['jqueryui']);
@@ -105,6 +105,7 @@ class Lobby {
       }
       echo "<link async href='{$url}' rel='stylesheet'/>";
     }
+    echo "<link href='". L_URL ."/favicon.ico' sizes='16x16 32x32 64x64' rel='shortcut icon' />";
     
     /* Title */
     echo "<title>" . self::$title . "</title>";
@@ -146,9 +147,12 @@ class Lobby {
     return $str;
   }
   
-  /* Add message to log files */
+  /**
+   * Add message to log files 
+   */
   public static function log($msg = "", $file = "lobby.log"){
-    if( $msg != "" && self::$debug === true ){
+    $msg = !is_string($msg) ? serialize($msg) : $msg;
+    if($msg != "" && self::$debug === true){
       $logFile = "/contents/extra/{$file}";
       $message = "[" . date("Y-m-d H:i:s") . "] $msg";
       \Lobby\FS::write($logFile, $message, "a");
@@ -170,15 +174,25 @@ class Lobby {
     }
   }
   
-  /* A HTTP Request Function */
+  /**
+   * A HTTP Request Function
+   */
   public static function loadURL($url, $params = array(), $type="GET"){
     $ch = curl_init();
+    
+    $fields_string = "";
     if(count($params) != 0){
-      $fields_string = "";
+      /**
+       * Add Lobby ID
+       */
+      $params["lobbyID"] = self::$lid;
+      
       foreach($params as $key => $value){
-      $fields_string .= "{$key}={$value}&";
+        $fields_string .= "{$key}={$value}&";
       }
-      /* Remove Last & char */
+      /**
+       * Remove Last & char
+       */
       rtrim($fields_string, '&');
     }
     
@@ -187,20 +201,28 @@ class Lobby {
       $url .= "?{$fields_string}";
     }
     
-    /* Start Making cURL request */
+    /**
+     * Set options of cURL request
+     */
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_CAINFO, __DIR__ . "/ca_bundle.crt");
     
-    if($type == "POST" && count($params) != 0){
+    if($type == "POST"){
       curl_setopt($ch, CURLOPT_POST, count($params));
       curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
     }
-    /* Give back the response */
+    
+    /**
+     * Give back the response
+     */
     $output = curl_exec($ch);
     return $output;
   }
   
-  /* Show Error Messages */
+  /**
+   * Show Error Messages
+   */
   public static function ser($title = "", $description = "", $exit = false){
     $html = "";
     if($title == ''){
@@ -224,7 +246,9 @@ class Lobby {
     }
   }
 
-  /* Show Success Messages */
+  /**
+   * Show Success Messages
+   */
   public static function sss($title, $description){
     $html = "<div class='message'>";
     if($title == ""){
@@ -234,6 +258,23 @@ class Lobby {
     }
     if($description != ""){
       $html .= "<div style='color:green;'>$description</div>";
+    }
+    $html .= "</div>";
+    echo $html;
+  }
+  
+  /**
+   * Show Neutral Messages
+   */
+  public static function sme($title, $description = ""){
+    $html = "<div class='message'>";
+    if($title == ""){
+      $html .= "<div style='color:black;' class='title'>Message</div>";
+    }else{
+      $html .= "<div style='color:black;' class='title'>$title</div>";
+    }
+    if($description != ""){
+      $html .= "<div style='color:black;'>$description</div>";
     }
     $html .= "</div>";
     echo $html;
@@ -345,6 +386,8 @@ class Lobby {
       }
       
       $url = $pageURL;
+    }elseif($path == L_URL){
+      $url = L_URL;
     }elseif(!preg_match("/http/", $path) || $parts['host'] != $_SERVER['HTTP_HOST']){
       if(!defined("APP_DIR") || substr($orPath, 0, 1) == "/"){
         $url = L_URL . "/$path";

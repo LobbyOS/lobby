@@ -137,19 +137,20 @@ class DB extends \Lobby {
   /**
    * Save App Data
    */
-  public static function saveData($appID, $key = "", $value = ""){
+  public static function saveData($appID, $key, $value = ""){
     if(self::$installed && \Lobby\Apps::exists($appID) && $key != ""){
-     $sql = self::$dbh->prepare("SELECT COUNT(`name`) FROM `". self::$prefix ."data` WHERE `name` = ? AND `app`=?");
-     $sql->execute(array($key, $appID));
+      $sql = self::$dbh->prepare("SELECT COUNT(`name`) FROM `". self::$prefix ."data` WHERE `name` = ? AND `app`=?");
+      $sql->execute(array($key, $appID));
      
-     if($sql->fetchColumn() != 0){
-       $sql = self::$dbh->prepare("UPDATE `". self::$prefix ."data` SET `content` = ?, `updated` = NOW() WHERE `name` = ? AND `app` = ?");
-       $sql->execute(array($value, $key, $appID));
-       return true;
-     }else{
-       $sql = self::$dbh->prepare("INSERT INTO `". self::$prefix ."data` (`app`, `name`, `content`, `created`, `updated`) VALUES (?, ?, ?, NOW(), NOW())");
-       return $sql->execute(array($appID, $key, $value));
-     }
+      if($sql->fetchColumn() != 0){
+        $sql = self::$dbh->prepare("UPDATE `". self::$prefix ."data` SET `content` = ?, `updated` = NOW() WHERE `name` = ? AND `app` = ?");
+        $sql->execute(array($value, $key, $appID));
+        return true;
+      }else{
+        
+        $sql = self::$dbh->prepare("INSERT INTO `". self::$prefix ."data` (`app`, `name`, `content`, `created`, `updated`) VALUES (?, ?, ?, NOW(), NOW())");
+        return $sql->execute(array($appID, $key, $value));
+      }
     }else{
       return false;
     }

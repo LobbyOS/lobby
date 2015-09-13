@@ -47,7 +47,7 @@ class Router {
        * Check if App exists
        */
       $App = new \Lobby\Apps($AppID);
-      if($App->exists && $App->isEnabled()){
+      if($App->exists && $App->isEnabled() && substr($page, 0, 7) != "/Admin/"){
         $class = $App->run();
         $AppInfo = $App->info;
       
@@ -73,6 +73,9 @@ class Router {
           $GLOBALS['workspaceHTML'] = $class->inc("/src/Page{$page}.php");
         }else{
           $GLOBALS['workspaceHTML'] = $page_response;
+        }
+        if($GLOBALS['workspaceHTML'] == null){
+          ser();
         }
       }else{
         ser();
@@ -133,14 +136,18 @@ class Router {
             $page = "/index";
           }
           $GLOBALS['workspaceHTML'] = $class->inc("/src/Page{$page}.php");
-          if($GLOBALS['workspaceHTML'] === false){
-            echo "The app '<strong>{$AppID}</strong>' does not have an Admin Page";
-          }
         }else{
           $GLOBALS['workspaceHTML'] = $page_response;
         }
-      }else{
-        ser();
+        
+        if($GLOBALS['workspaceHTML'] === false || $GLOBALS['workspaceHTML'] == null){
+          ob_start();
+            ser("Error", "The app '<strong>{$AppID}</strong>' does not have an Admin Page");
+          $error = ob_get_contents();
+          ob_end_clean();
+          
+          $GLOBALS['workspaceHTML'] = "<div class='contents'>". $error ."</div>";
+        }
       }
     });
   }

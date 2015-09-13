@@ -1,0 +1,6 @@
+DirectoryIndex index.php /includes/lib/core/Inc/error.php
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.php [L]

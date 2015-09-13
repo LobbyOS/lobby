@@ -2,6 +2,7 @@
 namespace Lobby;
 
 class App {
+
   public $dir, $url, $id, $srcURL;
   
   public function setTheVars($array){
@@ -9,6 +10,7 @@ class App {
     $this->name = $array['name'];
     $this->URL  = $array['URL'];
     $this->srcURL = $array['srcURL'];
+    $this->manifest = $array;
   }
   
   public function addStyle($fileName){
@@ -41,8 +43,9 @@ class App {
    * Include a page from the app's source
    */
   public function inc($path, $vars = array()){
-    $app_dir_location = APP_DIR . $path;
-    if(!file_exists($app_dir_location)){
+    $app_file_location = APP_DIR . $path;
+
+    if(!file_exists($app_file_location)){
       return false;
     }else{    
       /**
@@ -56,11 +59,22 @@ class App {
        * Get the output of the file in a variable
        */
       ob_start();
-        include $app_dir_location;
+        include $app_file_location;
       $html = ob_get_clean();
     
       return $html;
     }
+  }
+  
+  public function page(){
+    return "auto";
+  }
+  
+  /**
+   * Write messages to log file
+   */
+  public function log($msg){
+    \Lobby::log($msg, "apps.log");
   }
 }
 ?>

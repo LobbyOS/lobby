@@ -4,12 +4,22 @@ namespace Lobby;
 class Modules extends \Lobby {
 
   private static $required = array("panel"); // List of required modules by default
-  private static $core_modules, $custom_modules, $modules = array();
+  private static $core_modules = array(), $custom_modules = array(), $app_modules = array(), $modules = array();
   
   public static function init(){
+    $apps = \Lobby\Apps::getApps();
+    foreach($apps as $app => $null){
+      $module_name = 'apps/' . $app . '/module';
+      $loc = APPS_DIR . "/$app/module";
+      if(self::valid($module_name, $loc)){
+        self::$app_modules[$module_name] = $loc;
+      }
+    }
+    
     self::$core_modules = self::dirModules("/includes/lib/modules");
     self::$custom_modules = self::dirModules("/contents/modules");
-    self::$modules = array_merge(self::$core_modules, self::$custom_modules);
+
+    self::$modules = array_merge(self::$core_modules, self::$custom_modules, self::$app_modules);
   }
   
   public static function get($type = "all"){
@@ -19,6 +29,17 @@ class Modules extends \Lobby {
       return self::$core_modules;
     }elseif($type == "custom"){
       return self::$custom_modules;
+    }elseif($type == "app"){
+      return self::$app_modules;
+    }
+  }
+  
+  public static function valid($module, $loc){
+    if(!file_exists("$loc/load.php") || (file_exists("$loc/disabled.txt") && array_search($module, self::$required) === false)){
+      // Module Disabled or not valid
+      return false;
+    }else{
+      return true;
     }
   }
   
@@ -29,10 +50,7 @@ class Modules extends \Lobby {
     
     foreach($modules as $module){
       $loc = "$location/$module";
-      $disable = 0;
-      if(file_exists("$loc/disabled.txt") && array_search($module, self::$required) === false){
-        // Module Disabled
-      }else{
+      if(self::valid($module, $loc)){
         $validModules[$module] = $loc;
       }
     }
