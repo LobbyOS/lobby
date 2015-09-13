@@ -55,5 +55,33 @@ class H {
       }
     }
   }
+  
+  /**
+   * Get JSON decoded array from a value of App's Data Storage
+   */
+  public static function getJSONData($key){
+    $a = getData($key);
+    $a = json_decode($a, true);
+    return is_array($a) ? $a : array();
+  }
+  
+  /**
+   * Save JSON as a value of App's Data Storage
+   */
+  public static function saveJSONData($key, $values){
+    $a = getData($key);
+    $a = json_decode($a, true);
+    $a = is_array($a) ? $a : array();
+    
+    $new = array_merge_recursive($a, $values);    
+    foreach($values as $k => $v){
+      if($v === false){
+        unset($new[$k]);
+      }
+    }
+    $new = json_encode($new);
+    saveData($key, $new);
+    return true;
+  }
 }
 H::init();

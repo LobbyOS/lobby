@@ -59,11 +59,11 @@ class Panel extends \Lobby {
   
   public static function makeItem($text, $href, $id, $extraClass = ""){
     $html = '<li class="item ' . $extraClass . '" id="' . $id . '">';
-     if($href == ""){
-      $html .= $text;
-     }else{
-      $html .= $href == "htmlContent" ? $text : self::l($href, $text);
-     }
+      if($href == ""){
+        $html .= $text;
+      }else{
+        $html .= $href == "htmlContent" ? $text : self::l($href, $text);
+      }
     $html .= '</li>';
     return $html;
   }

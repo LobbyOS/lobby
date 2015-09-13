@@ -46,8 +46,9 @@ class Server {
    * Get updates
    */
   public static function check(){
+    $apps = array_keys(\Lobby\Apps::getApps());
     $response = \Lobby::loadURL(L_SERVER . "/updates", array(
-      "apps" => implode(",", \Lobby\Apps::getApps())
+      "apps" => implode(",", $apps)
     ), "POST");
     if($response){
       
