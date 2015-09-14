@@ -24,7 +24,7 @@ if(count($apps) == 0){
    * A call to create Dashboard
    */
   $jsCode .= "lobby.dash.init();";
-  echo "<script>window.addEventListener('load', function(){ $jsCode });</script>";
+  echo "<script>lobby.load(function(){ $jsCode });</script>";
   echo "<div class='tiles'></div>";
 }
 ?>
