@@ -91,6 +91,8 @@ class Router {
       \Lobby::addStyle("metrojs", "/includes/lib/metrojs/metrojs.css");
       \Lobby::addScript("dynscroll", "/includes/lib/scrollbar/scrollbar.js");
       \Lobby::addStyle("dynscroll", "/includes/lib/scrollbar/scrollbar.css");
+      \Lobby::addScript("jquery.contextmenu", "/includes/lib/jquery/jquery.contextmenu.js");
+      \Lobby::addStyle("jquery.contextmenu", "/includes/lib/jquery/jquery.contextmenu.css");
       \Lobby::addScript("dashboard", "/includes/lib/core/JS/dashboard.js");
       \Lobby::addStyle("dashboard", "/includes/lib/core/CSS/dashboard.css");
       \Lobby::setTitle("Dashboard");
