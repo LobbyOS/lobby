@@ -12,7 +12,7 @@ class Lobby {
   public static $js, $css = array();
   
   public static $valid_hooks = array(
-    "init", "body.begin", "admin.body.begin", "head.begin", "router.finish"
+    "init", "body.begin", "admin.body.begin", "head.begin", "head.end", "router.finish"
   );
   public static $config = array(
     "db" => array(),
@@ -94,7 +94,7 @@ class Lobby {
       unset(self::$js['main']);
       
       $url = L_URL . "/includes/serve.php?file=" . implode(",", self::$js);
-      echo "<script async src='{$url}'></script>";
+      echo "<script>lobby.load_script_url = '{$url}';</script>";
     }
     /* CSS */
     if(count(self::$css) != 0){

@@ -81,7 +81,7 @@
                       echo '<a class="button" href="?action=enable&app='. $app . H::csrf('g') .'">Enable</a>';
                     }
                     ?>
-                    <a class="button red" href="?action=remove&app=<?php echo $app;H::csrf('g');?>">Remove</a>
+                    <a class="button red" href="?action=remove&app=<?php echo $app . H::csrf('g');?>">Remove</a>
                   </td>
                 </tr>
               <?php
