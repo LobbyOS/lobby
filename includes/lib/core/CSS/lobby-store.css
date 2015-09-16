@@ -1,1 +1,69 @@
-.app{display:inline-block;vertical-align:top;position:relative;height:200px;width:200px;margin:0 0 10px;border-radius:2px;background:white;overflow:hidden}.app:hover .outer{top:-200px}.app .image{height:85%;width:100%}.app .outer{position:absolute;top:0;left:0;right:0;bottom:0;height:200px;width:200px;background:white;z-index:2;transition:all 0.4s}.app .inner{position:absolute;top:5px;bottom:0;left:0;right:0;height:195px;width:200px}.app .title,.app .inner .byline{position:absolute;bottom:0;left:0;right:0;padding:5px;word-wrap:break-word;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:white;box-shadow:0 -1px 2px rgba(0,0,0,.3);z-index:1}.app .inner .byline{background:#4A8BF5}.app .inner .byline a{color:white}.app .inner .button{position:absolute;bottom:40px;left:0;right:0;width:99%;margin:0;padding:5px 0}
+/* Short For Lobby Store */
+.app{
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  height: 200px;
+  width: 200px;
+  margin: 0px 0px 10px;
+  border-radius: 2px;
+  background: white;
+  overflow: hidden;
+}
+.app:hover .outer{
+  top: -200px;
+}
+.app .image{
+  height: 85%;
+  width: 100%;
+}
+.app .outer{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  height: 200px;
+  width: 200px;
+  background: white;
+  z-index: 2;
+  transition: all 0.4s;
+}
+.app .inner{
+  position: absolute;
+  top: 5px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  height: 195px;
+  width: 200px;
+}
+.app .title, .app .inner .byline{
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  padding: 5px;
+  word-wrap: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: white;
+  box-shadow: 0 -1px 2px rgba(0, 0, 0, .3);
+  z-index: 1;
+}
+.app .inner .byline{
+  background: #4A8BF5;
+}
+.app .inner .byline a{
+  color: white;
+}
+.app .inner .button{
+  position: absolute;
+  bottom: 40px;
+  left: 0px;
+  right: 0px;
+  width: 99%;
+  margin: 0px;
+  padding: 5px 0px;
+}
