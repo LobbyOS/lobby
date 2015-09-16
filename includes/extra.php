@@ -9,7 +9,7 @@ define("L_SERVER", "http://lobby.subinsb.com/api");
  * Make important locations and URLs as constants
  * to easily access them
  */
-define("L_URL", \Lobby::$host);
+define("L_URL", \Lobby::$url);
 define("APPS_URL", L_URL . "/contents/apps");
 define("APPS_DIR", L_DIR . "/contents/apps");
 
