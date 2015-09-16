@@ -1,1 +1,57 @@
-.workspace .content{padding:0 10px 20px 170px;width:auto;position:absolute;top:0;bottom:0;left:0;right:0;overflow:auto;background:#F1F1F1}.sidebar{width:150px;position:fixed;left:0;bottom:0;top:0;background:#DDD;color:white;z-index:1}.sidebar a.link{display:block;margin:5px 0;padding:8px 0 8px 15px;background:#DDD;color:black;position:relative}.sidebar a.link:hover,.sidebar a.active{color:white;background:#888}.sidebar a.active:after{right:0;border:solid 8px transparent;content:" ";height:0;width:0;position:absolute;pointer-events:none;border-right-color:#f1f1f1;top:50%;margin-top:-8px}@media screen and (max-width:1000px){.sidebar{display:none}.workspace .contents,.workspace .content{padding-left:10px;width:fallback}}
+/*.workspace{
+  top: 0px;
+}*/
+.workspace .content {
+  padding: 0px 10px 20px 170px;
+  width: auto;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow: auto;
+  background: #F1F1F1;
+}
+.sidebar{
+  width: 150px;
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  top: 0px;
+  background: #DDD;
+  color: white;
+  z-index: 1;
+}
+.sidebar a.link{
+  display: block;
+  margin: 5px 0px;
+  padding: 8px 0px 8px 15px;
+  background: #DDD;
+  color: black;
+  position: relative;
+}
+.sidebar a.link:hover, .sidebar a.active{
+  color: white;
+  background: #888;
+}
+.sidebar a.active:after{
+  right: 0;
+  border: solid 8px transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-right-color: #f1f1f1;
+  top: 50%;
+  margin-top: -8px;
+}
+@media screen and (max-width: 1000px){
+  .sidebar{
+    display: none;
+  }
+  .workspace .contents, .workspace .content {
+    padding-left: 10px;
+    width: fallback;
+  }
+}
