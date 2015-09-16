@@ -5,7 +5,7 @@
  */
 class Lobby {
 
-  public static $debug, $root, $host, $cleanHost, $title, $serverCheck, $db, $lid, $error = "";
+  public static $debug, $root, $url, $host_name, $title, $serverCheck, $db, $lid, $error = "";
   public static $installed = false;
   public static $sysinfo, $hooks = array();
 
@@ -33,12 +33,22 @@ class Lobby {
     self::sysinfo();
     self::config();
     
-    $docRoot = substr($_SERVER['DOCUMENT_ROOT'], -1) == "/" ? substr_replace($_SERVER['DOCUMENT_ROOT'], "", -1) : $_SERVER['DOCUMENT_ROOT'];
-    $host = str_replace($docRoot, $_SERVER['HTTP_HOST'], L_DIR);
-    $protocol = stripos($_SERVER['SERVER_PROTOCOL'], 'https') === true ? 'https://' : 'http://';
-    
-    self::$cleanHost = $host;
-    self::$host = $protocol . $host;
+    if(isset(self::$config['lobby_url'])){
+      $url_parts = parse_url(self::$config['lobby_url']);
+      self::$host_name = $url_parts['host'];
+      self::$url = self::$config['lobby_url'];
+    }else{
+      $base_dir  = L_DIR;
+      $doc_root  = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
+      $base_url  = preg_replace("!^${doc_root}!", '', $base_dir); # ex: '' or '/mywebsite'
+      $protocol  = empty($_SERVER['HTTPS']) ? 'http' : 'https';
+      $port      = $_SERVER['SERVER_PORT'];
+      $disp_port = ($protocol == 'http' && $port == 80 || $protocol == 'https' && $port == 443) ? '' : ":$port";
+      $domain    = $_SERVER['SERVER_NAME'];
+      
+      self::$url  = "${protocol}://${domain}${disp_port}${base_url}";
+      self::$host_name = $domain;
+    }
   }
   
   /**
