@@ -11,7 +11,7 @@ Lobby is Open Source and anyone who knows PHP can create apps for Lobby.
 
 Learn More [here](http://lobby.subinsb.com)
 
-[Documentation](http://lobby.subinsb.com/docs])
+[Documentation](http://lobby.subinsb.com/docs)
 
 Some things to note
 ===================
