@@ -19,7 +19,7 @@ class DB extends \Lobby {
         \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
       );
       try{
-        self::$dbh = new \PDO("mysql:dbname={$config['dbname']};host={$config['host']};port={$config['port']}", $config['username'], $config['password'], $options);
+        self::$dbh = new \PDO("mysql:dbname={$config['dbname']};host={$config['host']};port={$config['port']};charset=utf8;", $config['username'], $config['password'], $options);
         
         $notable = false;
         $tables = array("options", "data"); // The Tables of Lobby
