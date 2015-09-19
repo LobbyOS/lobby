@@ -344,7 +344,7 @@ class Lobby {
         return isset($status) ? $status : false;
       };
       foreach(self::$statuses as $func){
-        $return = $func(\Lobby::curPage());
+        $return = $func(self::curPage());
         if($return != false){
           $status = $return;
         }
@@ -377,7 +377,7 @@ class Lobby {
     $url = $path;
     $parts = parse_url($path);
     
-    if($path == ""){
+    if($path === ""){
       /**
        * If no path, give the current page URL
        */
@@ -396,7 +396,7 @@ class Lobby {
       }
       
       $url = $pageURL;
-    }elseif($path == L_URL){
+    }elseif($path === L_URL){
       $url = L_URL;
     }elseif(!preg_match("/http/", $path) || $parts['host'] != $_SERVER['HTTP_HOST']){
       if(!defined("APP_DIR") || substr($orPath, 0, 1) == "/"){
@@ -410,13 +410,21 @@ class Lobby {
   
   /**
    * Get the current page
+   * --------------------
+   * To get the query part of the URL too, pass TRUE to $full
+   * To get the last part only ("install" in "/folder/subfolder/admin/install), pass TRUE to $page
    */
   public static function curPage($page = false, $full = false){
     $url = self::u("", true);
     $parts = parse_url($url);
+    
     if($page){
       $pathParts = explode("/", $parts['path']);
-      $last = $pathParts[ count($pathParts) - 1 ]; // Get the string after last "/"
+      /**
+       * Get the string after last "/"
+       */
+      $last = $pathParts[ count($pathParts) - 1 ];
+      
       return $full === false ? $last : $last . (isset($parts['query']) ? $parts['query'] : "");
     }else{
       return $full === false ? $parts['path'] : $_SERVER["REQUEST_URI"];
