@@ -22,7 +22,7 @@ if(!\Lobby::status("lobby.serve")){
       "html" => "<span id='net' title='Online'></span>",
       "position" => "right"
     ));
-    \Lobby::addScript("panel-item-connection", "/includes/lib/modules/panel/connection/connection.js");
+    \Lobby::addScript("panel-item-connection", "/includes/lib/modules/panel/lib/connection/connection.js");
   }
     
   \Lobby::hook("body.begin", function(){
