@@ -5,33 +5,43 @@ window.clog = function(msg){
    console.log(msg);
 };
 
-if(typeof lobby == "undefined"){
-  window.lobby = {
-    load_callbacks: [],
-    load: function(callback){
-      lobby.load_callbacks.push(callback);
-    },
-    load_init: function(){
-      if(typeof lobby.load_script_url != "undefined"){
-        var d = document, o = d.createElement('script');
-        o.type = "text/javascript";
-        o.async = true;
-        o.src = lobby.load_script_url;
-        o.addEventListener('load', function (e){
-          setTimeout(function(){
-            $.each(lobby.load_callbacks, function(i, callback){
-              callback();
-            });
-            lobby.load_callbacks = [];
-          }, 10);
-        }, false);
-        d.getElementsByTagName('head')[0].appendChild(o);
-      }
-    },
-    
-    mod: {}
-  };
-}
+window.lobby = {
+  /**
+   * Array to store all callbacks
+   */
+  load_callbacks: [],
+  
+  /**
+   * Add a callback when the page is loaded
+   */
+  load: function(callback){
+    lobby.load_callbacks.push(callback);
+  },
+  
+  /**
+   * Call when Lobby is completely loaded
+   */
+  load_init: function(){
+    if(typeof lobby.load_script_url != "undefined"){
+      var d = document, o = d.createElement('script');
+      o.type = "text/javascript";
+      o.async = true;
+      o.src = lobby.load_script_url;
+      o.addEventListener('load', function (e){
+        setTimeout(function(){
+          $.each(lobby.load_callbacks, function(i, callback){
+            callback();
+          });
+          lobby.load_callbacks = [];
+        }, 10);
+      }, false);
+      d.getElementsByTagName('head')[0].appendChild(o);
+    }
+  },
+  
+  mod: {}
+};
+
 if(typeof lobbyExtra != "undefined"){
   window.lobby = $.extend(lobbyExtra, lobby);
 }

@@ -24,18 +24,26 @@ if(isset($GLOBALS['initError'])){
   echo "</div></div></body></html>";
   exit;
 }
-
-/* Add the <head> files if it's not the install page */
+\Lobby::curPage(true);
+/**
+ * Add the <head> files if it's not the install page
+ */
 if(\Lobby::curPage() != "/admin/install.php"){
-  /* Styles */
-  \Lobby::addStyle( "jqueryui", "/includes/lib/jquery/jquery-ui.css"); // jQuery UI
+  /**
+   * Styles
+   */
+  \Lobby::addStyle("jqueryui", "/includes/lib/jquery/jquery-ui.css"); // jQuery UI
  
-  /* Scripts */
+  /**
+   * Scripts
+   */
   \Lobby::addScript("jquery", "/includes/lib/jquery/jquery.js");
   \Lobby::addScript("jqueryui", "/includes/lib/jquery/jquery-ui.js"); // jQuery UI
   \Lobby::addScript("main", "/includes/lib/core/JS/main.js");
 
-  /*Left Menu*/
+  /**
+   * Left Menu
+   */
   \Lobby\Panel::addTopItem("lobbyHome", array(
     "text" => "Home",
     "href" => L_URL,
@@ -88,9 +96,11 @@ if(\Lobby::curPage() != "/admin/install.php"){
     ));
   }
 }
+
 if(\Lobby::status("lobby.install")){
   \Lobby::addStyle("admin", "/includes/lib/core/CSS/admin.css");
 }
+
 if(\Lobby::status("lobby.admin")){
   /**
    * Add Admin Pages' stylesheet
