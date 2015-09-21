@@ -1,4 +1,10 @@
 <?php
+/**
+*
+* index.php file for LobbyOS
+*
+*/
+
 require_once __DIR__ . "/load.php";
 $GLOBALS['workspaceHTML'] = "";
 
