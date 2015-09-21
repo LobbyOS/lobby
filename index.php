@@ -3,6 +3,8 @@
 *
 * index.php file for LobbyOS
 *
+* A localhost/Web OS For Web Apps: http://lobby.subinsb.com!
+*
 * @category   lobby
 * @package    lobby
 * @author     The LobbyOS developer community
