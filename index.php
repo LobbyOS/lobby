@@ -6,6 +6,7 @@
 * @category   lobby
 * @package    lobby
 * @author     The LobbyOS developer community
+* @license    Copyright
 */
 
 require_once __DIR__ . "/load.php";
