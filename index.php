@@ -3,6 +3,7 @@
 *
 * index.php file for LobbyOS
 *
+* @category   lobby
 */
 
 require_once __DIR__ . "/load.php";
