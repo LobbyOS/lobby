@@ -4,6 +4,7 @@
 * index.php file for LobbyOS
 *
 * @category   lobby
+* @package    lobbyos
 */
 
 require_once __DIR__ . "/load.php";
