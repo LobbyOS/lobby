@@ -142,7 +142,6 @@ class Lobby {
   */
   public static function redirect($url, $status = 302){
     $url = self::u($url);
-    echo $url;
     header("Location: $url", true, $status);
     exit;
     return true;
