@@ -23,8 +23,7 @@ $GLOBALS['AppID'] = $AppID;
     <div class="workspace" <?php if(isset($AppID)){ echo 'id="'.$AppID.'"'; } ?>>
       <?php
       if(is_array($GLOBALS['workspaceHTML'])){
-        $fileLoc = $GLOBALS['workspaceHTML'][0];
-        include L_DIR . $fileLoc;
+        require_once L_DIR . $GLOBALS['workspaceHTML'][0];
       }else{
         echo $GLOBALS['workspaceHTML'];
       }

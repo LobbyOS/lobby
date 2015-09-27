@@ -6,6 +6,7 @@ header( 'Content-type: text/html; charset=utf-8' );
   <head>
     <?php
     \Lobby::addStyle("lobby-store", "/includes/lib/core/CSS/lobby-store.css");
+    \Lobby::doHook("admin.head.begin");
     \Lobby::head("Lobby Store");
     ?>
   </head>

@@ -3,7 +3,10 @@ require "../load.php";?>
 <!DOCTYPE html>
 <html>
   <head>
-     <?php \Lobby::head("Install App");?>
+    <?php 
+    \Lobby::doHook("admin.head.begin");
+    \Lobby::head("Install App");
+    //~ ?>
   </head>
   <body>
     <?php

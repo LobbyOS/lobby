@@ -1,7 +1,10 @@
 <?php include "../load.php";?>
 <html>
   <head>
-    <?php \Lobby::head("Admin");?>
+    <?php
+    \Lobby::doHook("admin.head.begin");
+    \Lobby::head("Admin");
+    ?>
   </head>
   <body>
     <?php

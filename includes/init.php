@@ -44,7 +44,7 @@ if(\Lobby::curPage() != "/admin/install.php"){
   /**
    * Left Menu
    */
-  \Lobby\Panel::addTopItem("lobbyHome", array(
+  \Lobby\UI\Panel::addTopItem("lobbyHome", array(
     "text" => "Home",
     "href" => L_URL,
     "position" => "left"
@@ -68,7 +68,7 @@ if(\Lobby::curPage() != "/admin/install.php"){
       "href" => "/admin/about.php"
     )
   );
-  \Lobby\Panel::addTopItem("lobbyAdmin", $adminArray);
+  \Lobby\UI\Panel::addTopItem("lobbyAdmin", $adminArray);
   
   /**
    * If there is a update available either app or core, add an 
@@ -90,7 +90,7 @@ if(\Lobby::curPage() != "/admin/install.php"){
   }
   
   if((count($AppUpdates) != 0) || ($latestVersion && $lobby_version != $latestVersion)){
-    \Lobby\Panel::addTopItem("updateNotify", array(
+    \Lobby\UI\Panel::addTopItem("updateNotify", array(
       "html" => \Lobby::l("/admin/update.php", "<span id='update' title='An Update Is Available'></span>"),
       "position" => "right"
     ));

@@ -35,6 +35,11 @@ require_once L_DIR . "/includes/functions.php"; /* Non class functions */
 require_once L_DIR . "/includes/extra.php"; /* Define extra variables or constants */
 
 /**
+ * The User Interface Classes
+ */
+require_once L_DIR . "/includes/src/UI/Themes.php";
+
+/**
  * Run not on CDN files serving
  */
 if(!\Lobby::status("lobby.serve")){

@@ -12,7 +12,7 @@ class Lobby {
   public static $js, $css = array();
   
   public static $valid_hooks = array(
-    "init", "body.begin", "admin.body.begin", "head.begin", "head.end", "router.finish"
+    "init", "body.begin", "admin.body.begin", "head.begin", "admin.head.begin", "head.end", "router.finish"
   );
   public static $config = array(
     "db" => array(),
@@ -92,7 +92,9 @@ class Lobby {
       self::setTitle($title);
     }
     
-    /* JS */
+    /**
+     * JS Files
+     */
     if(count(self::$js) != 0 && !\Lobby::status("lobby.install")){
       /**
        * Load jQuery, jQuery UI, Lobby Main, App separately without async
@@ -106,7 +108,9 @@ class Lobby {
       $url = L_URL . "/includes/serve.php?file=" . implode(",", self::$js);
       echo "<script>lobby.load_script_url = '{$url}';</script>";
     }
-    /* CSS */
+    /**
+     * CSS Files
+     */
     if(count(self::$css) != 0){
       $url = L_URL . "/includes/serve.php?file=" . implode(",", self::$css);
       if(defined("APP_URL")){
