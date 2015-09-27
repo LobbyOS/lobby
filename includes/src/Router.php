@@ -59,7 +59,7 @@ class Router {
         /**
          * Add the App item to the navbar
          */
-        \Lobby\Panel::addTopItem("lobbyApp{$AppID}", array(
+        \Lobby\UI\Panel::addTopItem("lobbyApp{$AppID}", array(
           "text" => $AppInfo['name'],
           "href" => APP_URL,
           "position" => "left"
@@ -87,16 +87,9 @@ class Router {
      * The main Page. Add CSS & JS accordingly
      */
     self::route("/", function() {
-      \Lobby::addScript("metrojs", "/includes/lib/metrojs/metrojs.js");
-      \Lobby::addStyle("metrojs", "/includes/lib/metrojs/metrojs.css");
-      \Lobby::addScript("dynscroll", "/includes/lib/scrollbar/scrollbar.js");
-      \Lobby::addStyle("dynscroll", "/includes/lib/scrollbar/scrollbar.css");
-      \Lobby::addScript("jquery.contextmenu", "/includes/lib/jquery/jquery.contextmenu.js");
-      \Lobby::addStyle("jquery.contextmenu", "/includes/lib/jquery/jquery.contextmenu.css");
-      \Lobby::addScript("dashboard", "/includes/lib/core/JS/dashboard.js");
-      \Lobby::addStyle("dashboard", "/includes/lib/core/CSS/dashboard.css");
       \Lobby::setTitle("Dashboard");
-      $GLOBALS['workspaceHTML'] = array("/includes/lib/core/Inc/main.php");
+      \Lobby\UI\Themes::loadDashboard("head");
+      $GLOBALS['workspaceHTML'] = array("/includes/lib/core/Inc/dashboard.php");
     });
     
     /**
@@ -126,7 +119,7 @@ class Router {
         /**
          * Add the App item to the navbar
          */
-        \Lobby\Panel::addTopItem("lobbyApp{$AppID}", array(
+        \Lobby\UI\Panel::addTopItem("lobbyApp{$AppID}", array(
           "text" => "Admin > " . $AppInfo['name'],
           "href" => "/admin/app/$AppID",
           "position" => "left"

@@ -5,7 +5,10 @@ require L_DIR . "/includes/src/Update.php";
 <!DOCTYPE html>
 <html>
   <head>
-    <?php \Lobby::head("Update");?>
+    <?php
+    \Lobby::doHook("admin.head.begin");
+    \Lobby::head("Update");
+    ?>
   </head>
   <body>
     <?php

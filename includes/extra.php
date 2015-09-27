@@ -10,8 +10,10 @@ define("L_SERVER", "http://lobby.subinsb.com/api");
  * to easily access them
  */
 define("L_URL", \Lobby::$url);
-define("APPS_URL", L_URL . "/contents/apps");
 define("APPS_DIR", L_DIR . "/contents/apps");
+define("APPS_URL", L_URL . "/contents/apps");
+define("THEMES_DIR", L_DIR . "/contents/themes");
+define("THEMES_URL", L_URL . "/contents/themes");
 
 /**
  * LOAD MODULES
