@@ -1,0 +1,11 @@
+{
+     "name"                 : "Static Site Generator",
+     "description"          : "Generate static website pages. Useful for hosting sites on GitHub Pages or on Google Drive.",
+     "short_description"    : "Generate static sites",
+     "category"             : "development",
+     "sub_category"         : "web",
+     "version"              : "0.1",
+     "author"               : "Subin Siby",
+     "author_page"          : "http://subinsb.com",
+     "app_page"             : "http://subinsb.com/compress-php-website-html-css-js"
+}
