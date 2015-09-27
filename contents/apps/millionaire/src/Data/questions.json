@@ -1,0 +1,332 @@
+{
+  "1": {
+    "0": {
+      "question": "Who Created Google ?",
+      "options": [
+        "Larry Page & Sergy Brin",
+        "Mark Zuckerberg & Taylor Elliot",
+        "Steve Jobs & Michael Dorovich",
+        "Michelle Vine & Stuart Little"
+      ],
+      "answer": "1419a2d0780b20307b4b6fd0bc520159"
+    },
+    "1": {
+      "question": "Which Element Is Common In All Acids ?",
+      "options": [
+        "Oxygen",
+        "Magnesium",
+        "Hydrogen",
+        "Calcium"
+      ],
+      "answer": "e4ce2ac56db8b92aa60065aee6884c25"
+    }
+  },
+  "2": {
+    "0": {
+      "question": "Who was the Prime Minister of India during the Kargil War of 1999 ?",
+      "options": [
+        "Manmohan Singh",
+        "Adal Bihari Vajpayee",
+        "Indira Gandhi",
+        "Morarji Desai"
+      ],
+      "answer": "31c7714bb9d760cd1e199baa61622e6a"
+    },
+    "1": {
+      "question": "Who was the women that won the Nobel Peace Prize of 2014 ?",
+      "options": [
+        "Indira Gandhi",
+        "Prathiba Patil",
+        "Marie Curie",
+        "Malala"
+      ],
+      "answer": "2a5c29ad0725db64cb720dc1217da2f7"
+    }
+  },
+  "3": {
+    "0": {
+      "question": "Who Was The Leader Who Introduced Five Year Plans ?",
+      "options": [
+        "Joseph Stalin",
+        "Vladimir Ilyich Ulyanov",
+        "John Maynard Keynes",
+        "George W. Bush"
+      ],
+      "answer": "4ae616eb7c9196e2cf8c78efea13f64c"
+    },
+    "1": {
+      "question": "Who Was The First Person To Win Nobel Prize In Both Physics And Chemistry ?",
+      "options": [
+        "Pierre Curie",
+        "Marie Curie",
+        "Irène Joliot‑Curie",
+        "Albert Einstein"
+      ],
+      "answer": "8ee140eab9e0fc6fc162ba80793e9b06"
+    }
+  },
+  "4": {
+    "0": {
+      "question": "Who Founded International Red Cross and Red Crescent Movement ?",
+      "options": [
+        "Adan Dilday, Rayford Vanderford",
+        "Henry Dunant, Gustave Moynier",
+        "Moises Laferriere, Timmy Jeppson",
+        "Adrien Barrientez, Sean Harvard"
+      ],
+      "answer": "f6fd70438c2c2337c059dbb0b21da1e5"
+    },
+    "1": {
+      "question": "Which Scientist Among The Following Has A Chemical Element Named After Him ?",
+      "options": [
+        "Issac Newton",
+        "Albert Einstein",
+        "Alexander Graham Bell",
+        "Satyendra Nath Bose"
+      ],
+      "answer": "7560afa1f46d5e5fefe4ad93e42a293d"
+    }
+  },
+  "5": {
+    "0": {
+      "question": "'Mein Kampf' Is The Autobiography of Whom ?",
+      "options": [
+        "Mahatma Gandhi",
+        "Helen Keller",
+        "Benito Mussolini",
+        "Adolf Hitler"
+      ],
+      "answer": "540dea05a35b0fc9a050f36db954a484"
+    },
+    "1": {
+      "question": "Whose Autobiogrpahy's Title Is 'The Story Of My Experiements With Truth' ?",
+      "options": [
+        "Helen Keller",
+        "Martin Luther King",
+        "Mahatma Gandhi",
+        "Nelson Mandela"
+      ],
+      "answer": "17f43afc21a80eeda781fee0b64aace7"
+    }
+  },
+  "6": {
+    "0": {
+      "question": "Which Was The Paramilitary Wing Of Nazi Party ?",
+      "options": [
+        "Brownshirts",
+        "Blackshirts",
+        "Redshirts",
+        "Darkshirts"
+      ],
+      "answer": "561c4f8d3e2bcac35469cf076118a5e0"
+    },
+    "1": {
+      "question": "Which Was The Paramilitary Wing Of Fascist Party ?",
+      "options": [
+        "Brownshirts",
+        "Blackshirts",
+        "Redshirts",
+        "Darkshirts"
+      ],
+      "answer": "408a0e3d567d753dac2bfb17d4c6f7ef"
+    }
+  },
+  "7": {
+    "0": {
+      "question": "Which Of The Following Gases Is Used In Fluorescent Lamps ?",
+      "options": [
+        "Mercury",
+        "Oxygen",
+        "Hydrogen",
+        "Chlorine"
+      ],
+      "answer": "34dae487e31f37aa74633258b7774d4f"
+    },
+    "1": {
+      "question": "Which Is The Chemical Element With The Least Electronegativity ?",
+      "options": [
+        "Fulorine",
+        "Curium",
+        "Einsteinium",
+        "Francium"
+      ],
+      "answer": "8a85b22d3e098dfba96b12c0b044239a"
+    }
+  },
+  "8": {
+    "0": {
+      "question": "What Does HTTP Stands For In Terms Of Internet ?",
+      "options": [
+        "Hyper Text Tele Protocol",
+        "High Tele Transfer Protocol",
+        "Hyper Text Transfer Protocol",
+        "Hyper Traversing Transfer Protocol"
+      ],
+      "answer": "aad79b04a086589c5d1f24b822b340d8"
+    },
+    "1": {
+      "question": "Which Canal Links Mediterranean Sea And Red Sea ?",
+      "options": [
+        "Suez Canal",
+        "Panama Canal",
+        "Manchester Canal",
+        "Grand Canal"
+      ],
+      "answer": "3803cb4ab3ac5ac8ce9fb441767d592e"
+    }
+  },
+  "9": {
+    "0": {
+      "question": "Which two months in a year have the same calendar ? ",
+      "options": [
+        "June, October ",
+        "October, December ",
+        "June, July",
+        "April, July"
+      ],
+      "answer": "d8656973dbb65cf225e66c609fec43dc"
+    },
+    "1": {
+      "question": "Who Introduced The New Deal Policy During The Great Depression ?",
+      "options": [
+        "Joseph Stalin",
+        "Franklin Roosevelt",
+        "Theodore Roosevelt",
+        "Winston Churchill"
+      ],
+      "answer": "a87b2ffeb02d87630898992cbc88aa48"
+    }
+  },
+  "10": {
+    "0": {
+      "question": "Who Wrote The Book 'War & Peace' ?",
+      "options": [
+        "Karl Marx",
+        "Leo Tolstoy",
+        "William Shakespeare",
+        "Agatha Christie"
+      ],
+      "answer": "4bd0257a6736b9a1066d6ee32ae9218b"
+    },
+    "1": {
+      "question": "Athos & Porthos Are Among The Three Muskteers, Who Is Third One ?",
+      "options": [
+        "D'Artagnan",
+        "Rochefort",
+        "Planchet",
+        "Aramis"
+      ],
+      "answer": "d6b3462a8b22d946ee0913c00a247145"
+    }
+  },
+  "11": {
+    "0": {
+      "question": "Where Did Vasco Da Gama Die ?",
+      "options": [
+        "Portugal",
+        "India",
+        "Spain",
+        "South Africa"
+      ],
+      "answer": "7d31e0da1ab99fe8b08a22118e2f402b"
+    },
+    "1": {
+      "question": "Which Chemical Is Used To Artificially Ripen Fruits ?",
+      "options": [
+        "Ethylene",
+        "Carbon Di Oxide",
+        "Methane",
+        "Neon"
+      ],
+      "answer": "18f71a980170960aca68f74ec702c5be"
+    }
+  },
+  "12": {
+    "0": {
+      "question": "Who Developed The First Vaccine ?",
+      "options": [
+        "Louis Pasteur",
+        "Harvi",
+        "Ronald Ross",
+        "Edward Jenner"
+      ],
+      "answer": "4d954b7bb05e3f07e9a16eb6b05a47b3"
+    },
+    "1": {
+      "question": "Which Disease Is Caused Due To Deficiency Of Vitamin-B1 ?",
+      "options": [
+        "Ricket",
+        "Scurvy",
+        "Beriberi",
+        "Goitre"
+      ],
+      "answer": "d97d6fc0904d1b7b82411962d8c48ac3"
+    }
+  },
+  "13": {
+    "0": {
+      "question": "What Is The Name Of The Lowest Part Of Atmosphere ?",
+      "options": [
+        "Stratosphere",
+        "Troposphere",
+        "Exosphere",
+        "Mesosphere"
+      ],
+      "answer": "1b4f1cbc72838eb58299591c20f3a872"
+    },
+    "1": {
+      "question": "Who Is The First Women Prime Minister In The World ?",
+      "options": [
+        "Indira Gandhi",
+        "Margaret Thatcher",
+        "Sirimavo Bandaranaike",
+        "Hilary Clinton"
+      ],
+      "answer": "1283f060a5a067cba97cb22a0116371e"
+    }
+  },
+  "14": {
+    "0": {
+      "question": "Which Country Is Not A Permanent Member in United Nations' Security Council ?",
+      "options": [
+        "France",
+        "China",
+        "Japan",
+        "Russia"
+      ],
+      "answer": "53a577bb3bc587b0c28ab808390f1c9b"
+    },
+    "1": {
+      "question": "Which planet is named after the Roman god of war?",
+      "options": [
+        "Neptune",
+        "Mars",
+        "Mercury",
+        "Venus"
+      ],
+      "answer": "671f028142280b556a85ffdd90e0a43d"
+    }
+  },
+  "15": {
+    "0": {
+      "question": "When Did The Russian Revolution Occur According To Gregorian Calendar (Provisional Government) ?",
+      "options": [
+        "March 1917",
+        "February 1917",
+        "March 1918",
+        "February 1918"
+      ],
+      "answer": "116e0d810a9b7052863fd14dcf03b0a9"
+    },
+    "1": {
+      "question": "When Did United Nations Came Into Existence ?",
+      "options": [
+        "1948",
+        "1946",
+        "1945",
+        "1947"
+      ],
+      "answer": "2d00f43f07911355d4151f13925ff292"
+    }
+  }
+}

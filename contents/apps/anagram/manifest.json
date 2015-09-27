@@ -1,0 +1,12 @@
+{
+   "name" : "Anagram",
+   "description" : "Find as many as words you can from a pile of scrambled letters",
+   "short_description" : "Find words from scrambled letters",
+   "category" : "games",
+   "sub_category": "puzzles",
+   "version" : "0.1",
+   "author" : "Subin Siby",
+   "author_page" : "http://subinsb.com",
+   "app_page" : "http://subinsb.com/lobby-anagram",
+   "logo" : "true"
+}

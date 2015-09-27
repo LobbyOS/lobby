@@ -1,0 +1,62 @@
+{
+  "short" : {
+    "0" : {
+      "question" : "Who found Apple Inc ?",
+      "options" : [
+        "Sergey Brin",
+        "Steve Jobs",
+        "Mark Zuckerberg",
+        "Larry Page"
+      ],
+      "answer"  : ""
+    },
+    "1" : {
+      "question" : "The Port to Which Old Keyboards were connected ?",
+      "options" : [
+        "PS/2",
+        "LAN",
+        "USB",
+        "Serial Port"
+      ],
+      "answer"  : ""
+    }
+  },
+  "multiple" : {
+    "0" : {
+      "question"   : "Who invented Google ?",
+      "options"  : [
+        "Sergey Brin",
+        "Steve Jobs",
+        "Mark Zuckerberg",
+        "Larry Page"
+      ],
+      "answer"  : [
+        "",
+        ""
+      ]
+    },
+    "1" : {
+      "question"   : "Which components are connected to PS/2 Port ?",
+      "options"  : [
+        "Speaker",
+        "Mouse",
+        "Microphone",
+        "Keyboard"
+      ],
+      "answer"  : [
+        "",
+        ""
+      ]
+    }
+  },
+  "note" : {
+    "0" : {
+      
+    }
+  },
+  "practical" : {
+    "0" : {
+      
+    }
+  }
+}

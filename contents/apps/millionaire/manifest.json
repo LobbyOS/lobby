@@ -1,0 +1,13 @@
+{
+  "name" : "Who Wants To Be A Millionaire",
+  "lobby_web" : "true",
+  "short_description" : "Play the popular quiz game adapted from the T.V show",
+  "description" : "Who Wants To Be A Millionaire is a popular game show where the participant is asked 15 questions for which she/he receives money as prize. This app is a game and you DON'T ACTUALLY GET ANY MONEY.",
+  "category" : "games",
+  "sub_category" : "puzzles",
+  "version" : "0.1",
+  "logo" : true,
+  "author" : "Subin",
+  "author_page" : "http://subinsb.com",
+  "app_page" : "http://subinsb.com"
+}

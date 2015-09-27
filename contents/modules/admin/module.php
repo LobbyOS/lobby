@@ -31,11 +31,11 @@ if(\Fr\LS::$loggedIn){
      * This is done by first removing the Log Out item, adding the Change
      * Password item and then adding back the Log Out item
      */
-    \Lobby\Panel::$top_items['left']['lobbyAdmin']['subItems']['ChangePassword'] = array(
+    \Lobby\UI\Panel::$top_items['left']['lobbyAdmin']['subItems']['ChangePassword'] = array(
       "text" => "Change Password",
       "href" => "/admin/ChangePassword"
     );
-    \Lobby\Panel::$top_items['left']['lobbyAdmin']['subItems']['LogOut'] = array(
+    \Lobby\UI\Panel::$top_items['left']['lobbyAdmin']['subItems']['LogOut'] = array(
       "text" => "Log Out",
       "href" => "/admin/login?logout"
     );
@@ -54,6 +54,6 @@ if(\Fr\LS::$loggedIn){
     }
   }
   \Lobby::hook("init", function(){
-    unset(\Lobby\Panel::$top_items['left']['lobbyAdmin']);
+    unset(\Lobby\UI\Panel::$top_items['left']['lobbyAdmin']);
   });
 }

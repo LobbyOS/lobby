@@ -1,0 +1,11 @@
+{
+     "name" : "Kerala State IT Exam",
+     "short_description" : "A demo of IT@School Kerala's software of IT Exam",
+     "description" : "An app for Kerala State students to practice IT theory and practical questions.",
+     "category" : "education",
+     "version" : "0.1",
+     "logo" : false,
+     "author" : "Subin Siby",
+     "author_page" : "http://subinsb.com",
+     "app_page" : "http://lobby.subinsb.com/apps/kerala-it-exam"
+}
