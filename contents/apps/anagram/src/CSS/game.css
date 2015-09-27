@@ -1,0 +1,96 @@
+.workspace .contents{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -25%;
+  right: -25%;
+  margin: 0 50%;
+  min-width: 700px;
+  background: rgb(241, 163, 101);
+  padding: 20px 20px;
+  overflow-y: hidden;
+}
+.workspace .contents .loading{
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 22;
+  background: rgba(255, 255, 255, 0.7);
+}
+.workspace .contents .loading img{
+  position: absolute;
+  top: -20%;
+  bottom: -50%;
+  left: -10%;
+  right: -50%;
+  margin: 50%;
+}
+.workspace .controls{
+  text-align:right;
+  margin-bottom: 10px;
+}
+.workspace .controls a{
+  color: white;
+  font-size: 16px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.workspace .contents .letters, .workspace .contents .input{
+  position: relative;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  padding-top: 20px;
+  height: 65px;
+  font-weight: bold;
+  font-size: 20px;
+  background: white;
+  border: 2px solid black;
+  text-transform: uppercase;
+  text-align: center;
+}
+.workspace .contents .letter{
+  font-weight: bold;
+}
+.workspace .contents .letters .letter.hidden{
+  color: white;
+  z-index: -1;
+}
+.workspace .contents .status{
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/**
+ * The words
+ */
+.workspace .contents .boxes{
+  margin-top: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.workspace .contents .boxes-inner{
+  width: 100%;
+}
+.workspace .contents .box{
+  margin-bottom: 5px;
+}
+.workspace .contents .box .sub{
+  display: inline-block;
+  margin-right: 5px;
+  height: 20px;
+  width: 20px;
+  background: white;
+  text-align: center;
+  text-transform: uppercase;
+}
+.workspace .contents .boxes .section{
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 20px;
+}
+.workspace audio{
+  display: none;
+}
