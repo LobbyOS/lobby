@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <rss version="2.0" xmlns:openSearch="http://a9.com/-/spec/opensearch/1.1/">
+   <channel>
+     <title>title</title>
+     <link>link</link>
+     <description>description</description>
+     <openSearch:totalResults>1</openSearch:totalResults>
+     <openSearch:startIndex>1</openSearch:startIndex>
+     <openSearch:itemsPerPage>1</openSearch:itemsPerPage>
+     <item>
+       <title>Error</title>
+       <description>error message</description>
+     </item>
+   </channel>
+ </rss>
