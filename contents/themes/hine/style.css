@@ -2,7 +2,7 @@
  * Workspace
  */
 .workspace{
-  background: #EEE;
+  background: #fbfbfc;
 }
 .workspace .contents{
   margin: 0px auto 40px;
@@ -207,7 +207,6 @@ table tr td, table tr th{
  */
 .workspace{
   position: absolute;
-  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
