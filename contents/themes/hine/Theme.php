@@ -26,4 +26,38 @@ class hine extends \Lobby\UI\Theme {
     $this->addStyle("/Dashboard/CSS/dashboard.css");
   }
   
+  public function makePanelTree($id, $item){
+    $html = substr($this->makePanelItem($item['text'], $item['href'], $id, "prnt"), 0, -5);
+      $html .= "<ul>";
+      foreach($item['subItems'] as $itemID => $subItem){
+        $html .= $this->makePanelItem($subItem['text'], $subItem['href'], $itemID);
+      }
+      $html .= "</ul>";
+    $html .= "</li>";
+    return $html;
+  }
+  
+  public function makePanelItem($text, $href, $id, $extraClass = ""){
+    if($href == L_URL){
+      /**
+       * Home button
+       */
+      $html = "<li class='item home'><a href='". L_URL ."' class='$extraClass'></a></li>";
+    }else if($href == "/admin"){
+      /**
+       * Admin button
+       */
+      $html = "<li class='item lobby'><a href='". $href ."' class='$extraClass'>Lobby</a></li>";
+    }else{
+      $html = '<li class="item ' . $extraClass . '" id="' . $id . '">';
+        if($href == ""){
+          $html .= $text;
+        }else{
+          $html .= $href == "htmlContent" ? $text : \Lobby::l($href, $text);
+        }
+      $html .= '</li>';
+    }
+    return $html;
+  }
+  
 }

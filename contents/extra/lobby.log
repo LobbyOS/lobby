@@ -1,0 +1,19 @@
+[2015-09-27 22:11:33] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/site-compressor/src/Inc/html-compress.php on line 70 : Non-static method SiteCompressor::_compressor() should not be called statically
+[2015-10-02 11:55:13] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/site-compressor/src/Inc/html-compress.php on line 70 : Non-static method SiteCompressor::_compressor() should not be called statically
+[2015-10-02 12:11:57] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/site-compressor/src/Inc/html-compress.php on line 70 : Non-static method SiteCompressor::_compressor() should not be called statically
+[2015-10-02 12:12:52] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/site-compressor/src/Inc/html-compress.php on line 70 : Non-static method SiteCompressor::_compressor() should not be called statically
+[2015-10-05 18:04:48] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/site-compressor/src/Inc/html-compress.php on line 70 : Non-static method SiteCompressor::_compressor() should not be called statically
+[2015-10-05 18:05:34] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/site-compressor/src/Inc/class.site-compressor.php on line 331 : rmdir(/home/simsu/Other/projects/Web/Open/open/.git): Directory not empty
+[2015-10-05 21:56:01] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/site-compressor/src/Inc/html-compress.php on line 70 : Non-static method SiteCompressor::_compressor() should not be called statically
+[2015-10-08 16:10:50] CSS file was not found in location given : /includes/lib/scrollbar/scrollbar.css
+[2015-10-08 16:10:51] JavaScript file was not found in location given : /includes/lib/scrollbar/scrollbar.js
+[2015-10-08 16:20:39] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/themes/hine/Panel/load.php on line 14 : Call to undefined method Lobby\UI\Theme::makeItem()
+[2015-10-08 16:21:54] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/themes/hine/Panel/load.php on line 29 : Call to undefined method Lobby\UI\Panel::panelItems()
+[2015-10-08 16:22:22] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/themes/hine/Panel/load.php on line 14 : Undefined variable: html
+[2015-10-08 16:46:58] 4 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/themes/hine/Theme.php on line 29 : syntax error, unexpected 'funtion' (T_STRING), expecting variable (T_VARIABLE)
+[2015-10-08 16:47:08] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/themes/hine/Theme.php on line 30 : Undefined variable: id
+[2015-10-08 16:48:39] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/themes/hine/Theme.php on line 32 : Invalid argument supplied for foreach()
+[2015-10-08 17:09:34] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/themes/hine/Panel/load.admin.php on line 8 : Call to undefined method Lobby\UI\Panel::panelItems()
+[2015-10-08 17:09:48] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/themes/hine/Panel/load.admin.php on line 8 : Call to undefined method Lobby\UI\Panel::panelItems()
+[2015-10-08 17:12:30] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/themes/hine/Panel/load.admin.php on line 8 : Call to undefined method Lobby\UI\Panel::panelItems()
+[2015-10-08 17:13:27] CSS file was not found in location given : /contents/themes/hine/admin.css

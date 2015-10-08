@@ -1,4 +1,7 @@
 <?php
+/**
+ * Makes the Top Panel
+ */
 namespace Lobby\UI;
 
 class Panel {
@@ -29,42 +32,13 @@ class Panel {
     }
   }
   
-  public static function panelItems($side = "left"){
+  public static function getPanelItems($side = "left"){
     $items = self::$top_items;
     $html = "";
     if($side == "right"){
       ksort($items['right']);
     }
-    
-    foreach($items[$side] as $id => $item){
-      if( !isset($item['subItems']) ){
-        if( !isset($item['text']) && isset($item['html']) ){
-          $html .= self::makeItem($item['html'], "htmlContent", $id, "prnt");
-        }else{
-          $html .= self::makeItem($item['text'], $item['href'], $id, "prnt");
-        }
-     }else{
-        $html .= substr(self::makeItem($item['text'], $item['href'], $id, "prnt"), 0, -5);
-          $html .= "<ul>";
-          foreach($item['subItems'] as $itemID => $subItem){
-            $html .= self::makeItem($subItem['text'], $subItem['href'], $itemID);
-          }
-          $html .= "</ul>";
-        $html .= "</li>";
-      }
-    }
-    echo $html;
-  }
-  
-  public static function makeItem($text, $href, $id, $extraClass = ""){
-    $html = '<li class="item ' . $extraClass . '" id="' . $id . '">';
-      if($href == ""){
-        $html .= $text;
-      }else{
-        $html .= $href == "htmlContent" ? $text : \Lobby::l($href, $text);
-      }
-    $html .= '</li>';
-    return $html;
+    return $items[$side];
   }
 
 }
