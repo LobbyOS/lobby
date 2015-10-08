@@ -1,14 +1,14 @@
 .workspace{
-  top: 32px;
+  top: 50px;
 }
 .panel.top{
   position: absolute;
   top: 0px;
   left: 0px;
   right: 0px;
-  height: 32px;
+  height: 50px;
   padding: 5px;
-  background: #64c235;
+  background: #42A9CE;
   color: white;
   z-index: 1000;
   box-shadow: 0px 2px 4px rgba(0,0,0,.5);
@@ -33,7 +33,7 @@
 .panel.top .left ul, .panel.top .right ul{
   display:none;
   position:absolute;
-  top: 27px;
+  top: 46px;
   list-style: none;
   padding: 0px;
   max-width: 150px;
@@ -47,7 +47,8 @@
 }
 .panel.top .left li.item, .panel.top .right li.item{
   display: inline-block;
-  vertical-align: top;
+  vertical-align: middle;
+  margin-right: 20px;
 }
 .panel.top .right{
   position:absolute;
@@ -59,7 +60,19 @@
   right: 0px;
   text-align: right;
 }
-/* Icons */
+/**
+ * Icons
+ */
+.panel.top .left .lobby a.prnt{
+  font-size: 30px;
+}
+.panel.top .left .home a{
+  display: block;
+  height: 40px;
+  width: 40px;
+  background: url(<?THEME_URL?>/Panel/Image/home.svg);
+  background-size: contain;
+}
 .panel.top .right .item span{
   height:22px;
   width:17px;
