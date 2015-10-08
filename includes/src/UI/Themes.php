@@ -23,6 +23,10 @@ class Themes extends \Lobby {
     }else if(self::validTheme(self::$theme) === false){
       self::$theme = "hine";
     }
+    define("THEME_ID", self::$theme);
+    define("THEME_DIR", THEMES_DIR . "/" . self::$theme);
+    define("THEME_URL", THEMES_URL . "/" . self::$theme);
+    
     if(!\Lobby::status("lobby.serve") && !\Lobby::status("lobby.install")){
       self::loadTheme();
     }
@@ -49,10 +53,6 @@ class Themes extends \Lobby {
    * Load a theme
    */
   public static function loadTheme(){
-    define("THEME_ID", self::$theme);
-    define("THEME_DIR", THEMES_DIR . "/" . self::$theme);
-    define("THEME_URL", THEMES_URL . "/" . self::$theme);
-    
     require_once L_DIR . "/includes/src/UI/Theme.php";
     require_once THEME_DIR . "/Theme.php";
     $className = "\Lobby\UI\Themes\\" . self::$theme;
@@ -66,6 +66,7 @@ class Themes extends \Lobby {
       \Lobby::hook("admin.head.begin", function(){
         $GLOBALS["THEME_OBJ"]->panel(true);
         $GLOBALS["THEME_OBJ"]->addStyle("/style.css");
+        $GLOBALS["THEME_OBJ"]->addStyle("/admin.style.css");
       });
       \Lobby::hook("admin.body.begin", function() {
         echo $GLOBALS["THEME_OBJ"]->inc("/Panel/load.admin.php");
