@@ -40,11 +40,12 @@ foreach($files as $file){
   
   if(isset($css)){
     $to_replace = array(
-      "<?L_URL?>" => L_URL
+      "<?L_URL?>" => L_URL,
+      "<?THEME_URL?>" => THEME_URL
     );
     if(isset($_GET['APP_URL'])){
-      $to_replace["<?APP_URL?>"] = urldecode($_GET['APP_URL']);
-      $to_replace["<?APP_SRC?>"] = urldecode($_GET['APP_SRC']);
+      $to_replace["<?APP_URL?>"] = htmlspecialchars(urldecode($_GET['APP_URL']));
+      $to_replace["<?APP_SRC?>"] = htmlspecialchars(urldecode($_GET['APP_SRC']));
     }
     foreach($to_replace as $from => $to){
       $content = str_replace($from, $to, $content);
