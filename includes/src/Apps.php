@@ -188,6 +188,7 @@ class Apps extends \Lobby {
       $details['location'] = $this->appDir;
       $details['URL'] = L_URL . "/app/{$this->app}";
       $details['srcURL'] = L_URL . "/contents/apps/{$this->app}";
+      $details['adminURL'] = L_URL . "/admin/app/{$this->app}";
       
       $details['logo'] = isset($details['logo']) ?
         APPS_URL . "/{$this->app}/src/Image/logo.png" :
@@ -286,10 +287,14 @@ class Apps extends \Lobby {
       $appInfo = $this->info;
       $className = str_replace("-", "_", $this->app);
      
-      /* Create the \Lobby\App Object */
+      /**
+       * Create the \Lobby\App Object
+       */
       $class = new $className;
      
-      /* Send app details to the \Lobby\App */
+      /**
+       * Send app details to the App Object
+       */
       $class->setTheVars($appInfo);
       
       /**
@@ -303,6 +308,7 @@ class Apps extends \Lobby {
          * because it may be already defined by `singleapp` module.
          */
         define("APP_URL", $this->info['URL']);
+        define("APP_ADMIN_URL", $this->info['adminURL']);
       }
      
       /* Return the App Object */

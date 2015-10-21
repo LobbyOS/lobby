@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f71993605555b45e0a08cb4f4307d2ad",
+    "hash": "73e2b0a2da7c0b216f02d84727c0ab8e",
+    "content-hash": "f5e754feed71db76b5b6b93678595e96",
     "packages": [
         {
             "name": "klein/klein",
@@ -61,13 +62,63 @@
                 "sinatra"
             ],
             "time": "2014-12-16 01:08:24"
+        },
+        {
+            "name": "rmccue/requests",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rmccue/Requests.git",
+                "reference": "c3fe7fa67309dd1bea065d5874799befd9d04591"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rmccue/Requests/zipball/c3fe7fa67309dd1bea065d5874799befd9d04591",
+                "reference": "c3fe7fa67309dd1bea065d5874799befd9d04591",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "require-dev": {
+                "requests/test-server": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Requests": "library/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "ISC"
+            ],
+            "authors": [
+                {
+                    "name": "Ryan McCue",
+                    "homepage": "http://ryanmccue.info"
+                }
+            ],
+            "description": "A HTTP library written in PHP, for human beings.",
+            "homepage": "http://github.com/rmccue/Requests",
+            "keywords": [
+                "curl",
+                "fsockopen",
+                "http",
+                "idna",
+                "ipv6",
+                "iri",
+                "sockets"
+            ],
+            "time": "2015-10-12 07:28:05"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "klein/klein": 20
+        "klein/klein": 20,
+        "rmccue/requests": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

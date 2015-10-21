@@ -4,7 +4,11 @@ $GLOBALS['AppID'] = $AppID;
 <html>
   <head>
     <?php
-    \Lobby::doHook("head.begin");
+    if(\Lobby::status("lobby.admin")){
+      \Lobby::doHook("admin.head.begin");
+    }else{
+      \Lobby::doHook("head.begin");
+    }
     ?>
     <script>
       window.tmp = {};window.lobbyExtra = {};<?php if(isset($AppID)){
@@ -13,12 +17,20 @@ $GLOBALS['AppID'] = $AppID;
     ?></script>
     <?php
     \Lobby::head();
-    \Lobby::doHook("head.end");
+    if(\Lobby::status("lobby.admin")){
+      \Lobby::doHook("admin.head.end");
+    }else{
+      \Lobby::doHook("head.end");
+    }
     ?>
   </head>
   <body>
     <?php
-    \Lobby::doHook("body.begin");
+    if(\Lobby::status("lobby.admin")){
+      \Lobby::doHook("admin.body.begin");
+    }else{
+      \Lobby::doHook("body.begin");
+    }
     ?>
     <div class="workspace" <?php if(isset($AppID)){ echo 'id="'.$AppID.'"'; } ?>>
       <?php

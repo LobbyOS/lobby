@@ -21,33 +21,30 @@ class Update extends \Lobby {
     
     $userAgent = 'LobbyBot/0.1 (' . L_SERVER . ')';
     
-    // Get The Zip From Server
-    $ch = curl_init();
-    $zipResource = fopen($zipFile, "w");
-    curl_setopt($ch, CURLOPT_USERAGENT, $userAgent);
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_FAILONERROR, true);
-    curl_setopt($ch, CURLOPT_HEADER, 0);
+    /**
+     * Get The Zip From Server
+     */
+    $hooks = new \Requests_Hooks();
     if(self::$progress != null){
-      curl_setopt($ch, CURLOPT_NOPROGRESS, false);
-      curl_setopt($ch, CURLOPT_PROGRESSFUNCTION, self::$progress);
+      $progress = self::$progress;
+      $hooks->register('curl.before_send', function($ch) use($progress){
+        curl_setopt($ch, CURLOPT_NOPROGRESS, false);
+        curl_setopt($ch, CURLOPT_PROGRESSFUNCTION, $progress);
+      });
     }
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    curl_setopt($ch, CURLOPT_AUTOREFERER, true);
-    curl_setopt($ch, CURLOPT_BINARYTRANSFER,true);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 0);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); 
-    curl_setopt($ch, CURLOPT_FILE, $zipResource);
-    
-    $page = curl_exec($ch);
-    if(!$page) {
-      $error = curl_error($ch);
-      \Lobby::log("cURL Error ($url) : $error");
-      ser("Error", "cURL Error : " . $error);
+    try {
+      \Requests::get($url, array(
+        "User-Agent" => $userAgent
+      ), array(
+        'filename' => $zipFile,
+        'hooks' => $hooks,
+        'timeout' => time()
+      ));
+    }catch(\Requests_Exception $error){
+      \Lobby::log("HTTP Requests Error ($url) : $error");
+      ser("Error", "HTTP Requests Error : " . $error);
       return false;
     }
-    curl_close($ch);
     \Lobby::log("Downloaded Zip File from {$url} to {$zipFile}");
     
     return $zipFile;
