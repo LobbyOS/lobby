@@ -64,7 +64,6 @@ class Modules extends \Lobby {
       $Module = new $moduleIdentifier(array(
         $loc, L_URL . "/contents/modules/$module"
       ));
-      $Module->init();
     }
   }
   
