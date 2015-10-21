@@ -8,16 +8,16 @@
   right: 0px;
   height: 50px;
   padding: 5px;
-  background: #42A9CE;
+  background: #497EB2;
   color: white;
   z-index: 1000;
-  box-shadow: 0px 2px 4px rgba(0,0,0,.5);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, .5);
 }
 .panel.top a{
-  color:white;
+  color: white;
 }
 .panel.top a:hover{
-  color:inherit;
+  color: #63C034;
 }
 .panel.top .left{
   position:absolute;
@@ -33,11 +33,14 @@
 .panel.top .left ul, .panel.top .right ul{
   display:none;
   position:absolute;
-  top: 46px;
+  top: 36px;
   list-style: none;
   padding: 0px;
   max-width: 150px;
   background: #000;
+}
+.panel.top .left .item.lobby ul{
+  top: 46px;
 }
 .panel.top .left ul a, .panel.top .right ul a{
   display: block;
@@ -88,8 +91,4 @@
   background: url(<?L_URL?>/includes/lib/core/Img/update.png) 0px -1px no-repeat;
   background-size: 24px;
   width:22px;
-}
-.panel.top li.prnt ul li.item:hover{
-  background: white;
-  color: black;
 }
