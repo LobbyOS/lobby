@@ -1,20 +1,20 @@
 <?php
 /**
  * \Lobby\Server
- * Class for communication with server
+ * A Class for communication with Lobby server
  */
 namespace Lobby;
 
 class Server {
   
   /**
-   * Lobby Store functions
+   * Lobby Store
    */
   public static function Store($data) {
     /**
      * Response is in JSON
      */
-    $response = \Lobby::loadURL(L_SERVER . "/apps", $data, "POST");
+    $response = \Requests::post(L_SERVER . "/apps", array(), $data)->body;
     if($response == "false"){
       return false;
     }else{
@@ -32,6 +32,9 @@ class Server {
     }
   }
   
+  /**
+   * Download Zip files
+   */
   public static function download($type = "app", $id){
     $url = "";
     if($type == "app"){
@@ -46,10 +49,16 @@ class Server {
    * Get updates
    */
   public static function check(){
+    $url = L_SERVER . "/updates";
     $apps = array_keys(\Lobby\Apps::getApps());
-    $response = \Lobby::loadURL(L_SERVER . "/updates", array(
-      "apps" => implode(",", $apps)
-    ), "POST");
+    try {
+      $response = \Requests::post($url, array(), array(
+        "apps" => implode(",", $apps)
+      ))->body;
+    }catch (\Requests_Exception $error){
+      \Lobby::log("Checkup with server failed ($url) : $error");
+      $response = false;
+    }
     if($response){
       
       $response = json_decode($response, true);

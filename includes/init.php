@@ -30,18 +30,6 @@ if(isset($GLOBALS['initError'])){
  */
 if(\Lobby::curPage() != "/admin/install.php"){
   /**
-   * Styles
-   */
-  \Lobby::addStyle("jqueryui", "/includes/lib/jquery/jquery-ui.css"); // jQuery UI
- 
-  /**
-   * Scripts
-   */
-  \Lobby::addScript("jquery", "/includes/lib/jquery/jquery.js");
-  \Lobby::addScript("jqueryui", "/includes/lib/jquery/jquery-ui.js"); // jQuery UI
-  \Lobby::addScript("main", "/includes/lib/core/JS/main.js");
-
-  /**
    * Left Menu
    */
   \Lobby\UI\Panel::addTopItem("lobbyHome", array(

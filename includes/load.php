@@ -35,7 +35,7 @@ require_once L_DIR . "/includes/functions.php"; /* Non class functions */
 require_once L_DIR . "/includes/extra.php"; /* Define extra variables or constants */
 
 /**
- * The User Interface Classes
+ * The UI Classes
  */
 require_once L_DIR . "/includes/src/UI/Themes.php";
 
