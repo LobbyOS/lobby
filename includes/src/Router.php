@@ -62,6 +62,20 @@ class Router {
         \Lobby\UI\Panel::addTopItem("lobbyApp{$AppID}", array(
           "text" => $AppInfo['name'],
           "href" => APP_URL,
+          "subItems" => array(
+            "app_admin" => array(
+              "text" => "Admin Page",
+              "href" => "/admin/app/$AppID"
+            ),
+            "app_disable" => array(
+              "text" => "Disable",
+              "href" => "/admin/apps.php?action=disable&app=$AppID" . \H::csrf("g")
+            ),
+            "app_remove" => array(
+              "text" => "Remove",
+              "href" => "/admin/apps.php?action=remove&app=$AppID" . \H::csrf("g")
+            )
+          ),
           "position" => "left"
         ));
         $page_response = $class->page($page);
@@ -93,7 +107,7 @@ class Router {
     });
     
     /**
-     * Administration
+     * App Admin Page
      */
     self::route("/admin/app/[:appID]?/[**:page]?", function($request){
       $AppID = $request->appID;
@@ -105,9 +119,6 @@ class Router {
        */
       $App = new \Lobby\Apps($AppID);
       if($App->exists && $App->isEnabled()){
-        /**
-         * Redirect /src/ files to App's Source in /contents folder
-         */
         $class = $App->run();
         $AppInfo = $App->info;
       

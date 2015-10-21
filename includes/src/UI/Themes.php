@@ -28,6 +28,7 @@ class Themes extends \Lobby {
     define("THEME_URL", THEMES_URL . "/" . self::$theme);
     
     if(!\Lobby::status("lobby.serve") && !\Lobby::status("lobby.install")){
+      self::loadDefaults();
       self::loadTheme();
     }
   }
@@ -47,6 +48,23 @@ class Themes extends \Lobby {
       }
     }
     return self::$cache['themes'];
+  }
+  
+  /**
+   * Load Default CSS & JS
+   */
+  public function loadDefaults(){
+    /**
+     * Styles
+     */
+    \Lobby::addStyle("jqueryui", "/includes/lib/jquery/jquery-ui.css"); // jQuery UI
+ 
+    /**
+     * Scripts
+     */
+    \Lobby::addScript("jquery", "/includes/lib/jquery/jquery.js");
+    \Lobby::addScript("jqueryui", "/includes/lib/jquery/jquery-ui.js"); // jQuery UI
+    \Lobby::addScript("main", "/includes/lib/core/JS/main.js");
   }
   
   /**
