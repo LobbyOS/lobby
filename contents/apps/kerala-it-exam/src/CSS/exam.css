@@ -101,6 +101,7 @@
   margin: 40px 0px;
   padding: 5px 50px;
   background: #eee;
+  width: 100%;
 }
 #short-box:target, #multiple-box:target, #note-box:target{
   display: table;

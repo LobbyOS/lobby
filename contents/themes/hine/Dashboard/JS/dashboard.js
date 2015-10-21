@@ -121,6 +121,7 @@ lobby.dash = {
         selector: ".tiles .tile .app",
         items: {
           open: {name: "Open App", icon: "open", callback: function(key, opt){ window.location = $(this).find("a[href]").attr("href"); }},
+          admin: {name: "Go To Admin", icon: "open", callback: function(key, opt){ lobby.redirect("/admin/app/"+ $(this).attr("id")); }},
           disable: {name: "Disable App", icon: "close", callback: function(key, opt){ lobby.redirect("/admin/apps.php?action=disable&app="+ $(this).attr("id") +"&csrf_token="+ lobby.csrf_token); }},
           remove: {name: "Remove App", icon: "trash", callback: function(key, opt){ lobby.redirect("/admin/apps.php?action=remove&app="+ $(this).attr("id") +"&csrf_token="+ lobby.csrf_token); }}
         }

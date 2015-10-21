@@ -14,8 +14,8 @@
 .workspace .tiles .tile {
   position: relative;
   float: left;
-  height: 200px;
-  width: 200px;
+  height: 190px;
+  width: 190px;
 }
 .workspace .tiles .tile.taken:hover{
   box-shadow: inset 0px 0px 10px black;
