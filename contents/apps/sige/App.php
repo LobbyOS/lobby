@@ -6,7 +6,7 @@ class sige extends \Lobby\App {
   );
   
   public function page($p){
-    require APP_DIR . "/src/Inc/class.site.php";
+    require \Lobby\FS::loc("/src/Inc/class.site.php");
     $pages = array(
       "index", "/new"
     );

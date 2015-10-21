@@ -27,7 +27,7 @@ class hine extends \Lobby\UI\Theme {
   }
   
   public function makePanelTree($id, $item){
-    $html = substr($this->makePanelItem($item['text'], $item['href'], $id, "prnt"), 0, -5);
+    $html = isset($item['html']) ? $item['html'] : substr($this->makePanelItem($item['text'], $item['href'], $id, "prnt"), 0, -5);
       $html .= "<ul>";
       foreach($item['subItems'] as $itemID => $subItem){
         $html .= $this->makePanelItem($subItem['text'], $subItem['href'], $itemID);
