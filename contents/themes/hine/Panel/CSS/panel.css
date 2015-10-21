@@ -39,9 +39,7 @@
   max-width: 150px;
   background: #000;
 }
-.panel.top .left .item.lobby ul{
-  top: 46px;
-}
+
 .panel.top .left ul a, .panel.top .right ul a{
   display: block;
   margin: 0;
