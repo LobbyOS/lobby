@@ -118,7 +118,7 @@ $questions = $_SESSION['kerala-it-exam-qs'];
   <?php
   echo "var practicalQuestions = ". json_encode($questions['practical']) . ";";
   ?>
-  $(window).load(function(){
+  lobby.load(function(){
     lobby.app.practicalQuestions = practicalQuestions;
     lobby.app.startExam();
   });

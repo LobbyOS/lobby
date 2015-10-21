@@ -17,3 +17,507 @@
 [2015-10-08 17:09:48] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/themes/hine/Panel/load.admin.php on line 8 : Call to undefined method Lobby\UI\Panel::panelItems()
 [2015-10-08 17:12:30] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/themes/hine/Panel/load.admin.php on line 8 : Call to undefined method Lobby\UI\Panel::panelItems()
 [2015-10-08 17:13:27] CSS file was not found in location given : /contents/themes/hine/admin.css
+[2015-10-09 21:03:34] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/Router.php on line 141 : Undefined variable: error
+[2015-10-09 23:09:23] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/App.php on line 123 : Invalid argument supplied for foreach()
+[2015-10-09 23:09:49] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/App.php on line 123 : Invalid argument supplied for foreach()
+[2015-10-09 23:09:51] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/App.php on line 123 : Invalid argument supplied for foreach()
+[2015-10-09 23:09:58] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/App.php on line 123 : Invalid argument supplied for foreach()
+[2015-10-09 23:10:10] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/App.php on line 123 : Invalid argument supplied for foreach()
+[2015-10-09 23:10:37] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/App.php on line 123 : Invalid argument supplied for foreach()
+[2015-10-09 23:45:17] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/Ajax/validate.php on line 67 : Invalid argument supplied for foreach()
+[2015-10-09 23:45:33] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/Ajax/validate.php on line 67 : Invalid argument supplied for foreach()
+[2015-10-09 23:46:32] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/App.php on line 123 : Invalid argument supplied for foreach()
+[2015-10-09 23:46:42] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/App.php on line 123 : Invalid argument supplied for foreach()
+[2015-10-09 23:46:49] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/App.php on line 123 : Invalid argument supplied for foreach()
+[2015-10-09 23:51:22] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/App.php on line 123 : Invalid argument supplied for foreach()
+[2015-10-09 23:51:34] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/App.php on line 123 : Invalid argument supplied for foreach()
+[2015-10-10 11:25:59] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/themes/hine/Theme.php on line 33 : Undefined index: href
+[2015-10-10 12:46:22] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php on line 58 : json_decode() expects parameter 1 to be string, object given
+[2015-10-10 12:46:31] 4096 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php on line 27 : Object of class Requests_Response could not be converted to string
+[2015-10-10 12:58:16] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php on line 280 : Uncaught exception 'Requests_Exception' with message 'cURL error 28: Resolving timed out after 10524 milliseconds' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:280
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(123): Requests_Transport_cURL->process_response(false, Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(317): Requests_Transport_cURL->request('http://lobby.su...', Array, Array, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(224): Requests::request('http://lobby.su...', Array, Array, 'POST', Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php(17): Requests::post('http://lobby.su...', Array, Array)
+#4 /home/simsu/Other/projects/Web/Lobby/local/admin/lobby-store.php(2
+[2015-10-10 12:58:48] Installing Latest Version of App sige
+[2015-10-10 12:58:48] Started Downloading Zip File from http://lobby.subinsb.com/api/download/app/sige to /home/simsu/Other/projects/Web/Lobby/local/contents/update/sige.zip
+[2015-10-10 12:58:48] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/Update.php on line 27 : Class 'Lobby\Requests_Hooks' not found
+[2015-10-10 12:59:05] Installing Latest Version of App sige
+[2015-10-10 12:59:05] Started Downloading Zip File from http://lobby.subinsb.com/api/download/app/sige to /home/simsu/Other/projects/Web/Lobby/local/contents/update/sige.zip
+[2015-10-10 12:59:05] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/Update.php on line 35 : Class 'Lobby\Requests' not found
+[2015-10-10 12:59:22] Installing Latest Version of App sige
+[2015-10-10 12:59:22] Started Downloading Zip File from http://lobby.subinsb.com/api/download/app/sige to /home/simsu/Other/projects/Web/Lobby/local/contents/update/sige.zip
+[2015-10-10 12:59:42] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php on line 280 : Uncaught exception 'Requests_Exception' with message 'cURL error 28: Operation timed out after 9988 milliseconds with 37666 out of 450668 bytes received' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:280
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(123): Requests_Transport_cURL->process_response(false, Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(317): Requests_Transport_cURL->request('https://caef907...', Array, NULL, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(600): Requests::request('https://caef907...', Array, NULL, false, Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(321): Requests::parse_response('HTTP/1.1 302 Mo
+[2015-10-10 13:02:53] 4 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/Update.php on line 35 : syntax error, unexpected '(', expecting '{'
+[2015-10-10 13:03:06] Installing Latest Version of App sige
+[2015-10-10 13:03:06] Started Downloading Zip File from http://lobby.subinsb.com/api/download/app/sige to /home/simsu/Other/projects/Web/Lobby/local/contents/update/sige.zip
+[2015-10-10 13:03:26] HTTP Requests Error (http://lobby.subinsb.com/api/download/app/sige) : 
+[2015-10-10 13:03:26] Unable to open Downloaded App (sige) File : /home/simsu/Other/projects/Web/Lobby/local/contents/update/sige.zip
+[2015-10-10 13:03:26] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/Update.php on line 44 : Undefined variable: error
+[2015-10-10 13:04:04] Installing Latest Version of App sige
+[2015-10-10 13:04:04] Started Downloading Zip File from http://lobby.subinsb.com/api/download/app/sige to /home/simsu/Other/projects/Web/Lobby/local/contents/update/sige.zip
+[2015-10-10 13:04:22] HTTP Requests Error (http://lobby.subinsb.com/api/download/app/sige) : exception 'Requests_Exception' with message 'cURL error 28: Operation timed out after 9930 milliseconds with 74574 out of 450668 bytes received' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:280
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(123): Requests_Transport_cURL->process_response(false, Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(317): Requests_Transport_cURL->request('https://caef907...', Array, NULL, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(600): Requests::request('https://caef907...', Array, NULL, false, Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(321): Requests::parse_response('HTTP/1.1 302 Mo...', 'https://googled...', Array, NULL, Array)
+#4 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(600): Requests::request('https://googled...', Array, NULL, false, Array)
+#5 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(321): Requests::parse_response('HTTP/1.1 301 Mo...', 'http://googledr...', Array, NULL, Array)
+#6 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(600): Requests::request('http://googledr...', Array, NULL, false, Array)
+#7 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(321): Requests::parse_response('HTTP/1.1 302 Fo...', 'http://lobby.su...', Array, NULL, Array)
+#8 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(194): Requests::request('http://lobby.su...', Array, NULL, 'GET', Array)
+#9 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Update.php(41): Requests::get('http://lobby.su...', Array, Array)
+#10 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Update.php(154): Lobby\Update::zipFile('http://lobby.su...', '/home/simsu/Oth...')
+#11 /home/simsu/Other/projects/Web/Lobby/local/admin/download.php(80): Lobby\Update::app('sige')
+#12 {main}
+[2015-10-10 13:04:22] Unable to open Downloaded App (sige) File : /home/simsu/Other/projects/Web/Lobby/local/contents/update/sige.zip
+[2015-10-10 13:04:22] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/admin/download.php on line 18 : ob_end_flush(): failed to delete and flush buffer. No buffer to delete or flush
+[2015-10-10 13:06:27] Installing Latest Version of App sige
+[2015-10-10 13:06:27] Started Downloading Zip File from http://lobby.subinsb.com/api/download/app/sige to /home/simsu/Other/projects/Web/Lobby/local/contents/update/sige.zip
+[2015-10-10 13:07:13] Downloaded Zip File from http://lobby.subinsb.com/api/download/app/sige to /home/simsu/Other/projects/Web/Lobby/local/contents/update/sige.zip
+[2015-10-10 13:07:13] Installed App sige
+[2015-10-10 13:07:13] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/Update.php on line 48 : curl_close() expects parameter 1 to be resource, null given
+[2015-10-10 13:09:17] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php on line 280 : Uncaught exception 'Requests_Exception' with message 'cURL error 28: Resolving timed out after 10523 milliseconds' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:280
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(123): Requests_Transport_cURL->process_response(false, Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(317): Requests_Transport_cURL->request('http://lobby.su...', Array, Array, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(224): Requests::request('http://lobby.su...', Array, Array, 'POST', Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php(17): Requests::post('http://lobby.su...', Array, Array)
+#4 /home/simsu/Other/projects/Web/Lobby/local/admin/download.php(32):
+[2015-10-10 13:11:11] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php on line 280 : Uncaught exception 'Requests_Exception' with message 'cURL error 28: Operation timed out after 10001 milliseconds with 0 bytes received' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:280
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(123): Requests_Transport_cURL->process_response(false, Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(317): Requests_Transport_cURL->request('http://lobby.su...', Array, Array, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(224): Requests::request('http://lobby.su...', Array, Array, 'POST', Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php(17): Requests::post('http://lobby.su...', Array, Array)
+#4 /home/simsu/Other/projects/Web/Lobby/local/a
+[2015-10-11 12:16:39] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php on line 280 : Uncaught exception 'Requests_Exception' with message 'cURL error 28: Resolving timed out after 10518 milliseconds' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:280
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(123): Requests_Transport_cURL->process_response(false, Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(317): Requests_Transport_cURL->request('http://lobby.su...', Array, Array, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(224): Requests::request('http://lobby.su...', Array, Array, 'POST', Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php(55): Requests::post('http://lobby.su...', Array, Array)
+#4 /home/simsu/Other/projects/Web/Lobby/local/includes/init.php(114):
+[2015-10-11 12:35:53] 64 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/Page/Admin/questions.php on line 4 : Cannot use isset() on the result of an expression (you can use "null !== expression" instead)
+[2015-10-11 12:43:05] 4 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/Page/Admin/questions.php on line 18 : syntax error, unexpected ')', expecting variable (T_VARIABLE) or '$'
+[2015-10-11 13:04:08] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/Page/Admin/questions.php on line 23 : Array to string conversion
+[2015-10-11 13:21:21] 4 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/Page/Admin/questions.php on line 61 : syntax error, unexpected 'as' (T_AS)
+[2015-10-11 13:45:28] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/Page/Admin/questions.php on line 8 : Undefined index: questions
+[2015-10-11 13:45:38] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/Page/Admin/questions.php on line 8 : Undefined index: short
+[2015-10-11 13:46:26] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/Page/Admin/questions.php on line 8 : Undefined index: short
+[2015-10-11 13:46:55] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/Page/Admin/questions.php on line 8 : Undefined index: short
+[2015-10-11 21:04:54] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/App.php on line 123 : Invalid argument supplied for foreach()
+[2015-10-11 21:05:01] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/App.php on line 123 : Invalid argument supplied for foreach()
+[2015-10-11 21:05:14] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php on line 280 : Uncaught exception 'Requests_Exception' with message 'cURL error 28: Connection timed out after 10000 milliseconds' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:280
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(123): Requests_Transport_cURL->process_response(false, Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(317): Requests_Transport_cURL->request('http://lobby.su...', Array, Array, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(224): Requests::request('http://lobby.su...', Array, Array, 'POST', Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php(55): Requests::post('http://lobby.su...', Array, Array)
+#4 /home/simsu/Other/projects/Web/Lobby/local/includes/init.php(114)
+[2015-10-11 22:04:52] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php on line 280 : Uncaught exception 'Requests_Exception' with message 'cURL error 28: Operation timed out after 10001 milliseconds with 0 bytes received' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:280
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(123): Requests_Transport_cURL->process_response(false, Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(317): Requests_Transport_cURL->request('http://lobby.su...', Array, Array, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(224): Requests::request('http://lobby.su...', Array, Array, 'POST', Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php(55): Requests::post('http://lobby.su...', Array, Array)
+#4 /home/simsu/Other/projects/Web/Lobby/local/i
+[2015-10-12 22:08:44] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/Page/Admin/questions.php on line 20 : Invalid argument supplied for foreach()
+[2015-10-12 22:08:49] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/Page/Admin/questions.php on line 8 : Undefined index: short
+[2015-10-12 22:10:21] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/Page/Admin/questions.php on line 8 : Undefined index: short
+[2015-10-12 22:10:54] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php on line 342 : Uncaught exception 'Requests_Exception' with message 'cURL error 28: Resolving timed out after 10518 milliseconds' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:342
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(168): Requests_Transport_cURL->process_response('', Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(334): Requests_Transport_cURL->request('http://lobby.su...', Array, Array, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(236): Requests::request('http://lobby.su...', Array, Array, 'POST', Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php(17): Requests::post('http://lobby.su...', Array, Array)
+#4 /home/simsu/Other/projects/Web/Lobby/local/admin/lobby-store.php(25):
+[2015-10-17 11:24:41] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php on line 342 : Uncaught exception 'Requests_Exception' with message 'cURL error 28: Resolving timed out after 10517 milliseconds' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:342
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(168): Requests_Transport_cURL->process_response('', Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(334): Requests_Transport_cURL->request('http://lobby.su...', Array, Array, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(236): Requests::request('http://lobby.su...', Array, Array, 'POST', Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php(55): Requests::post('http://lobby.su...', Array, Array)
+#4 /home/simsu/Other/projects/Web/Lobby/local/includes/init.php(114): Lo
+[2015-10-17 12:50:55] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php on line 342 : Uncaught exception 'Requests_Exception' with message 'cURL error 28: Resolving timed out after 10518 milliseconds' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:342
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(168): Requests_Transport_cURL->process_response('', Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(334): Requests_Transport_cURL->request('http://lobby.su...', Array, Array, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(236): Requests::request('http://lobby.su...', Array, Array, 'POST', Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php(55): Requests::post('http://lobby.su...', Array, Array)
+#4 /home/simsu/Other/projects/Web/Lobby/local/includes/init.php(114): Lo
+[2015-10-17 13:02:31] Checkup with server failed (http://lobby.subinsb.com/api/updates) : exception 'Requests_Exception' with message 'cURL error 28: Resolving timed out after 10526 milliseconds' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:342
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(168): Requests_Transport_cURL->process_response('', Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(334): Requests_Transport_cURL->request('http://lobby.su...', Array, Array, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(236): Requests::request('http://lobby.su...', Array, Array, 'POST', Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php(57): Requests::post('http://lobby.su...', Array, Array)
+#4 /home/simsu/Other/projects/Web/Lobby/local/includes/init.php(114): Lobby\Server::check()
+#5 /home/simsu/Other/projects/Web/Lobby/local/includes/load.php(49): require_once('/home/simsu/Oth...')
+#6 /home/simsu/Other/projects/Web/Lobby/local/load.php(9): require_once('/home/simsu/Oth...')
+#7 /home/simsu/Other/projects/Web/Lobby/local/index.php(15): require_once('/home/simsu/Oth...')
+#8 {main}
+[2015-10-17 15:26:15] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/Page/Admin/questions.php on line 8 : Undefined index: short
+[2015-10-17 15:43:43] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/Page/Admin/questions.php on line 44 : Undefined offset: 0
+[2015-10-17 15:43:45] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/Page/Admin/questions.php on line 44 : Undefined offset: 0
+[2015-10-17 16:20:24] 4 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/Page/Admin/questions.php on line 8 : syntax error, unexpected ''multiple'' (T_CONSTANT_ENCAPSED_STRING)
+[2015-10-17 17:29:19] Checkup with server failed (http://lobby.subinsb.com/api/updates) : exception 'Requests_Exception' with message 'cURL error 28: Resolving timed out after 10520 milliseconds' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:342
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(168): Requests_Transport_cURL->process_response('', Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(334): Requests_Transport_cURL->request('http://lobby.su...', Array, Array, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(236): Requests::request('http://lobby.su...', Array, Array, 'POST', Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php(57): Requests::post('http://lobby.su...', Array, Array)
+#4 /home/simsu/Other/projects/Web/Lobby/local/includes/init.php(114): Lobby\Server::check()
+#5 /home/simsu/Other/projects/Web/Lobby/local/includes/load.php(49): require_once('/home/simsu/Oth...')
+#6 /home/simsu/Other/projects/Web/Lobby/local/load.php(9): require_once('/home/simsu/Oth...')
+#7 /home/simsu/Other/projects/Web/Lobby/local/index.php(15): require_once('/home/simsu/Oth...')
+#8 {main}
+[2015-10-18 10:38:53] Checkup with server failed (http://lobby.subinsb.com/api/updates) : exception 'Requests_Exception' with message 'cURL error 6: Could not resolve host: lobby.subinsb.com' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:342
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(168): Requests_Transport_cURL->process_response('', Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(334): Requests_Transport_cURL->request('http://lobby.su...', Array, Array, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(236): Requests::request('http://lobby.su...', Array, Array, 'POST', Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php(57): Requests::post('http://lobby.su...', Array, Array)
+#4 /home/simsu/Other/projects/Web/Lobby/local/includes/init.php(114): Lobby\Server::check()
+#5 /home/simsu/Other/projects/Web/Lobby/local/includes/load.php(49): require_once('/home/simsu/Oth...')
+#6 /home/simsu/Other/projects/Web/Lobby/local/load.php(9): require_once('/home/simsu/Oth...')
+#7 /home/simsu/Other/projects/Web/Lobby/local/index.php(15): require_once('/home/simsu/Oth...')
+#8 {main}
+[2015-10-18 10:55:49] Checkup with server failed (http://lobby.subinsb.com/api/updates) : exception 'Requests_Exception' with message 'cURL error 6: Could not resolve host: lobby.subinsb.com' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:342
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(168): Requests_Transport_cURL->process_response('', Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(334): Requests_Transport_cURL->request('http://lobby.su...', Array, Array, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(236): Requests::request('http://lobby.su...', Array, Array, 'POST', Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php(57): Requests::post('http://lobby.su...', Array, Array)
+#4 /home/simsu/Other/projects/Web/Lobby/local/includes/init.php(114): Lobby\Server::check()
+#5 /home/simsu/Other/projects/Web/Lobby/local/includes/load.php(49): require_once('/home/simsu/Oth...')
+#6 /home/simsu/Other/projects/Web/Lobby/local/load.php(9): require_once('/home/simsu/Oth...')
+#7 /home/simsu/Other/projects/Web/Lobby/local/index.php(15): require_once('/home/simsu/Oth...')
+#8 {main}
+[2015-10-18 11:34:00] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php on line 342 : Uncaught exception 'Requests_Exception' with message 'cURL error 6: Could not resolve host: lobby.subinsb.com' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:342
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(168): Requests_Transport_cURL->process_response('', Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(334): Requests_Transport_cURL->request('http://lobby.su...', Array, Array, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(236): Requests::request('http://lobby.su...', Array, Array, 'POST', Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php(17): Requests::post('http://lobby.su...', Array, Array)
+#4 /home/simsu/Other/projects/Web/Lobby/local/admin/lobby-store.php(104): Lo
+[2015-10-18 11:34:07] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php on line 342 : Uncaught exception 'Requests_Exception' with message 'cURL error 6: Could not resolve host: lobby.subinsb.com' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:342
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(168): Requests_Transport_cURL->process_response('', Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(334): Requests_Transport_cURL->request('http://lobby.su...', Array, Array, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(236): Requests::request('http://lobby.su...', Array, Array, 'POST', Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php(17): Requests::post('http://lobby.su...', Array, Array)
+#4 /home/simsu/Other/projects/Web/Lobby/local/admin/lobby-store.php(104): Lo
+[2015-10-18 11:34:17] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php on line 342 : Uncaught exception 'Requests_Exception' with message 'cURL error 6: Could not resolve host: lobby.subinsb.com' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:342
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(168): Requests_Transport_cURL->process_response('', Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(334): Requests_Transport_cURL->request('http://lobby.su...', Array, Array, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(236): Requests::request('http://lobby.su...', Array, Array, 'POST', Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php(17): Requests::post('http://lobby.su...', Array, Array)
+#4 /home/simsu/Other/projects/Web/Lobby/local/admin/lobby-store.php(104): Lo
+[2015-10-18 11:37:32] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/init.php on line 47 : Class 'Lobby\UI\Panel' not found
+[2015-10-18 11:37:46] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/serve.php on line 45 : Use of undefined constant THEME_URL - assumed 'THEME_URL'
+[2015-10-18 11:38:57] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:38:58] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/serve.php on line 45 : Use of undefined constant THEME_URL - assumed 'THEME_URL'
+[2015-10-18 11:38:58] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:38:59] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:38:59] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/serve.php on line 45 : Use of undefined constant THEME_URL - assumed 'THEME_URL'
+[2015-10-18 11:39:00] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:39:04] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:39:05] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/serve.php on line 45 : Use of undefined constant THEME_URL - assumed 'THEME_URL'
+[2015-10-18 11:39:05] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:39:08] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:39:08] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/serve.php on line 45 : Use of undefined constant THEME_URL - assumed 'THEME_URL'
+[2015-10-18 11:39:08] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:39:10] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/serve.php on line 45 : Use of undefined constant THEME_URL - assumed 'THEME_URL'
+[2015-10-18 11:39:31] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:39:36] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:39:41] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:39:45] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:39:55] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:39:58] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:40:01] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:40:15] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:40:16] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:40:18] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:40:19] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:40:33] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:40:40] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:40:45] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:41:16] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:41:27] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:41:29] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:41:31] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:41:50] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:42:01] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:42:29] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:44:48] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:45:03] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:45:11] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:45:40] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:46:28] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:46:40] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:46:52] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:47:25] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:47:34] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:48:04] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:48:16] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:48:18] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:48:29] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:48:36] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:48:38] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:48:39] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:48:42] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:49:02] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:49:12] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:49:15] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:49:29] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:49:43] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:49:47] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:49:50] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:49:51] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php on line 342 : Uncaught exception 'Requests_Exception' with message 'cURL error 6: Could not resolve host: lobby.subinsb.com' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:342
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(168): Requests_Transport_cURL->process_response('', Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(334): Requests_Transport_cURL->request('http://lobby.su...', Array, Array, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(236): Requests::request('http://lobby.su...', Array, Array, 'POST', Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php(17): Requests::post('http://lobby.su...', Array, Array)
+#4 /home/simsu/Other/projects/Web/Lobby/local/admin/lobby-store.php(104): Lo
+[2015-10-18 11:49:52] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:49:53] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:49:54] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:49:55] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:49:59] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:50:00] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:50:25] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:50:26] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:50:28] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:50:57] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:50:59] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:51:04] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/themes/hine/Theme.php on line 32 : Invalid argument supplied for foreach()
+[2015-10-18 11:52:04] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:54:01] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:54:06] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:54:28] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:56:04] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 11:56:19] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:00:05] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:04:28] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:06:23] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:06:26] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:08:40] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:09:29] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:09:43] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:09:46] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:09:46] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:09:50] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:09:51] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:09:58] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:09:59] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:10:10] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:11:19] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:11:21] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:11:23] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:11:46] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:11:46] Checkup with server failed (http://lobby.subinsb.com/api/updates) : exception 'Requests_Exception' with message 'cURL error 6: Could not resolve host: lobby.subinsb.com' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:342
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(168): Requests_Transport_cURL->process_response('', Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(334): Requests_Transport_cURL->request('http://lobby.su...', Array, Array, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(236): Requests::request('http://lobby.su...', Array, Array, 'POST', Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php(57): Requests::post('http://lobby.su...', Array, Array)
+#4 /home/simsu/Other/projects/Web/Lobby/local/includes/init.php(102): Lobby\Server::check()
+#5 /home/simsu/Other/projects/Web/Lobby/local/includes/load.php(49): require_once('/home/simsu/Oth...')
+#6 /home/simsu/Other/projects/Web/Lobby/local/load.php(9): require_once('/home/simsu/Oth...')
+#7 /home/simsu/Other/projects/Web/Lobby/local/index.php(15): require_once('/home/simsu/Oth...')
+#8 {main}
+[2015-10-18 12:11:46] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:11:50] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:11:53] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:11:53] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:11:58] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:13:16] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:13:48] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/themes/hine/Theme.php on line 30 : Undefined index: href
+[2015-10-18 12:14:41] 4 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/modules/admin/module.php on line 37 : syntax error, unexpected ';'
+[2015-10-18 12:14:45] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Panel.php on line 15 : Undefined index: position
+[2015-10-18 12:14:50] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Panel.php on line 15 : Undefined index: position
+[2015-10-18 12:14:53] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Panel.php on line 15 : Undefined index: position
+[2015-10-18 12:15:08] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:15:33] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:17:07] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:17:23] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:17:34] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:27:18] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:28:07] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:33:07] Checkup with server failed (http://lobby.subinsb.com/api/updates) : exception 'Requests_Exception' with message 'cURL error 6: Could not resolve host: lobby.subinsb.com' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:342
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(168): Requests_Transport_cURL->process_response('', Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(334): Requests_Transport_cURL->request('http://lobby.su...', Array, Array, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(236): Requests::request('http://lobby.su...', Array, Array, 'POST', Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php(57): Requests::post('http://lobby.su...', Array, Array)
+#4 /home/simsu/Other/projects/Web/Lobby/local/includes/init.php(102): Lobby\Server::check()
+#5 /home/simsu/Other/projects/Web/Lobby/local/includes/load.php(49): require_once('/home/simsu/Oth...')
+#6 /home/simsu/Other/projects/Web/Lobby/local/load.php(9): require_once('/home/simsu/Oth...')
+#7 /home/simsu/Other/projects/Web/Lobby/local/index.php(15): require_once('/home/simsu/Oth...')
+#8 {main}
+[2015-10-18 12:33:07] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:44:57] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-18 12:45:57] 4 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/modules/admin/module.php on line 42 : syntax error, unexpected '=', expecting ')'
+[2015-10-18 12:46:11] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/themes/hine/Theme.php on line 30 : Undefined index: href
+[2015-10-18 12:47:11] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-19 17:29:01] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-19 17:30:27] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-19 17:30:29] Checkup with server failed (http://lobby.subinsb.com/api/updates) : exception 'Requests_Exception' with message 'cURL error 6: Could not resolve host: lobby.subinsb.com' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:342
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(168): Requests_Transport_cURL->process_response('', Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(334): Requests_Transport_cURL->request('http://lobby.su...', Array, Array, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(236): Requests::request('http://lobby.su...', Array, Array, 'POST', Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php(57): Requests::post('http://lobby.su...', Array, Array)
+#4 /home/simsu/Other/projects/Web/Lobby/local/includes/init.php(102): Lobby\Server::check()
+#5 /home/simsu/Other/projects/Web/Lobby/local/includes/load.php(49): require_once('/home/simsu/Oth...')
+#6 /home/simsu/Other/projects/Web/Lobby/local/load.php(9): require_once('/home/simsu/Oth...')
+#7 /home/simsu/Other/projects/Web/Lobby/local/index.php(15): require_once('/home/simsu/Oth...')
+#8 {main}
+[2015-10-19 17:30:29] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-19 17:30:58] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-19 17:31:24] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-19 17:31:25] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-19 17:31:26] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-19 17:33:05] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-19 17:33:10] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-19 17:33:11] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-19 17:33:15] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-19 17:33:15] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-19 17:33:15] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-19 17:34:35] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/Page/Admin/questions.php on line 70 : Undefined index: Path -&gt; Union
+[2015-10-19 17:34:59] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-19 17:35:09] 4 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/Page/Admin/questions.php on line 69 : syntax error, unexpected ':'
+[2015-10-19 17:35:13] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/Page/Admin/questions.php on line 69 : Class 'ENT' not found
+[2015-10-19 17:35:17] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/Page/Admin/questions.php on line 69 : Class 'ENT' not found
+[2015-10-19 17:35:21] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-19 17:35:32] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-19 17:38:33] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-19 17:42:27] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-19 17:43:01] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-19 17:43:07] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-19 17:43:49] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-19 17:45:12] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-19 17:45:31] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 08:56:03] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 08:56:14] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 09:56:09] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 09:56:09] 64 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/modules/admin/load.php on line 8 : require_once(): Failed opening required '/home/simsu/Other/projects/Web/Lobby/local/contents/modules/admin/config.php' (include_path='.:/usr/share/php:/usr/share/pear')
+[2015-10-21 09:56:09] 64 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/modules/admin/load.php on line 8 : require_once(): Failed opening required '/home/simsu/Other/projects/Web/Lobby/local/contents/modules/admin/config.php' (include_path='.:/usr/share/php:/usr/share/pear')
+[2015-10-21 09:56:25] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:14:44] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:15:06] Checkup with server failed (http://lobby.subinsb.com/api/updates) : exception 'Requests_Exception' with message 'cURL error 28: Resolving timed out after 10519 milliseconds' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:342
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(168): Requests_Transport_cURL->process_response('', Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(334): Requests_Transport_cURL->request('http://lobby.su...', Array, Array, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(236): Requests::request('http://lobby.su...', Array, Array, 'POST', Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php(57): Requests::post('http://lobby.su...', Array, Array)
+#4 /home/simsu/Other/projects/Web/Lobby/local/includes/init.php(102): Lobby\Server::check()
+#5 /home/simsu/Other/projects/Web/Lobby/local/includes/load.php(49): require_once('/home/simsu/Oth...')
+#6 /home/simsu/Other/projects/Web/Lobby/local/load.php(9): require_once('/home/simsu/Oth...')
+#7 /home/simsu/Other/projects/Web/Lobby/local/admin/apps.php(1): include('/home/simsu/Oth...')
+#8 {main}
+[2015-10-21 10:15:06] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:15:36] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:15:37] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:15:37] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:15:48] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:15:48] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:15:48] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:15:51] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:15:54] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:15:55] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:15:55] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:16:44] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:16:45] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:16:45] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:16:47] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:17:09] Checkup with server failed (http://lobby.subinsb.com/api/updates) : exception 'Requests_Exception' with message 'cURL error 28: Resolving timed out after 10521 milliseconds' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:342
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(168): Requests_Transport_cURL->process_response('', Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(334): Requests_Transport_cURL->request('http://lobby.su...', Array, Array, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(236): Requests::request('http://lobby.su...', Array, Array, 'POST', Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php(57): Requests::post('http://lobby.su...', Array, Array)
+#4 /home/simsu/Other/projects/Web/Lobby/local/includes/init.php(102): Lobby\Server::check()
+#5 /home/simsu/Other/projects/Web/Lobby/local/includes/load.php(49): require_once('/home/simsu/Oth...')
+#6 /home/simsu/Other/projects/Web/Lobby/local/load.php(9): require_once('/home/simsu/Oth...')
+#7 /home/simsu/Other/projects/Web/Lobby/local/admin/apps.php(1): include('/home/simsu/Oth...')
+#8 {main}
+[2015-10-21 10:17:09] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:17:09] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:17:10] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:17:20] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:17:20] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:17:20] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:17:35] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:17:36] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:17:36] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:17:54] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:18:01] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:18:05] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:18:08] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:18:16] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:18:23] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:18:25] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:19:11] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:19:11] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:19:16] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:19:41] Checkup with server failed (http://lobby.subinsb.com/api/updates) : exception 'Requests_Exception' with message 'cURL error 28: Resolving timed out after 10521 milliseconds' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php:342
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests/Transport/cURL.php(168): Requests_Transport_cURL->process_response('', Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(334): Requests_Transport_cURL->request('http://lobby.su...', Array, Array, Array)
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/src/composer/vendor/rmccue/requests/library/Requests.php(236): Requests::request('http://lobby.su...', Array, Array, 'POST', Array)
+#3 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Server.php(57): Requests::post('http://lobby.su...', Array, Array)
+#4 /home/simsu/Other/projects/Web/Lobby/local/includes/init.php(102): Lobby\Server::check()
+#5 /home/simsu/Other/projects/Web/Lobby/local/includes/load.php(49): require_once('/home/simsu/Oth...')
+#6 /home/simsu/Other/projects/Web/Lobby/local/load.php(9): require_once('/home/simsu/Oth...')
+#7 /home/simsu/Other/projects/Web/Lobby/local/index.php(15): require_once('/home/simsu/Oth...')
+#8 {main}
+[2015-10-21 10:19:41] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:19:46] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:19:50] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:19:54] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:19:54] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:23:34] 4 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/modules/admin/load.php on line 70 : syntax error, unexpected '.'
+[2015-10-21 10:59:12] 64 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/Modules.php on line 62 : require_once(): Failed opening required '/home/simsu/Other/projects/Web/Lobby/local/contents/modules/admin/Module.php' (include_path='.:/usr/share/php:/usr/share/pear')
+[2015-10-21 10:59:38] 64 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/Modules.php on line 62 : require_once(): Failed opening required '/home/simsu/Other/projects/Web/Lobby/local/contents/apps/keyring/module/Module.php' (include_path='.:/usr/share/php:/usr/share/pear')
+[2015-10-21 10:59:55] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 10:59:58] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 11:00:00] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 11:01:30] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 11:01:43] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 11:01:45] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 11:01:47] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 11:38:00] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 11:47:02] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 11:47:13] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 11:47:15] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 11:47:17] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 11:47:20] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 11:47:26] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 11:47:53] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 11:47:54] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 11:47:54] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 11:47:54] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 11:47:55] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 11:47:55] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 11:48:13] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/modules/admin/Module.php on line 4 : Class 'Lobby\Module' not found
+[2015-10-21 11:48:15] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/modules/admin/Module.php on line 4 : Class 'Lobby\Module' not found
+[2015-10-21 11:49:51] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/Modules.php on line 65 : Class '\Lobby\Modules$module' not found
+[2015-10-21 11:49:58] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/Modules.php on line 65 : Class '\Lobby\Modules$module' not found
+[2015-10-21 11:50:09] 64 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/Modules.php on line 62 : require_once(): Failed opening required '/home/simsu/Other/projects/Web/Lobby/local/contents/apps/anagram/module/Module.php' (include_path='.:/usr/share/php:/usr/share/pear')
+[2015-10-21 11:50:15] 64 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/Modules.php on line 62 : require_once(): Failed opening required '/home/simsu/Other/projects/Web/Lobby/local/contents/apps/anagram/module/Module.php' (include_path='.:/usr/share/php:/usr/share/pear')
+[2015-10-21 11:51:06] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/Modules.php on line 65 : Class '\Lobby\Modules\app_keyring_module' not found
+[2015-10-21 11:52:12] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 11:52:41] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2015-10-21 11:52:47] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
