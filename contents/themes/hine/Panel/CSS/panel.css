@@ -33,13 +33,12 @@
 .panel.top .left ul, .panel.top .right ul{
   display:none;
   position:absolute;
-  top: 36px;
+  top: 46px;
   list-style: none;
   padding: 0px;
   max-width: 150px;
   background: #000;
 }
-
 .panel.top .left ul a, .panel.top .right ul a{
   display: block;
   margin: 0;
