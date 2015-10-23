@@ -197,7 +197,7 @@ require L_DIR . "/includes/src/Install.php";
                * Check if connection to database can be established using the credentials given by the user
                */
               if($prefix == "" || preg_match("/[^0-9,a-z,A-Z,\$,_]+/i", $prefix) != 0 || strlen($prefix) > 50){
-                ser("Error", "A Prefix should only contain basic Latin letters, digits 0-9, dollar, underscore and shouldn't exceed 50 characters. <a href='install.php?step=2'>Try Again</a>");
+                ser("Error", "A Prefix should only contain basic Latin letters, digits 0-9, dollar, underscore and shouldn't exceed 50 characters." . \Lobby::l("/admin/install.php?step=2" . H::csrf("g"), "Try Again", "class='button'"));
               }elseif(\Lobby\Install::checkDatabaseConnection() !== false){
                 /**
                  * Make the Config File
@@ -218,7 +218,7 @@ require L_DIR . "/includes/src/Install.php";
                   $App->enableApp();
                   echo '<cl/><a href="?step=3" class="button">Proceed</a>';
                 }else{
-                  ser("Unable To Create Database Tables", "Are there any tables with the same name ? Or Does the user have the permissions to create tables ?<cl/>The <b>config.php</b> file is created. To try again, remove the <b>config.php</b> file and click the button. <cl/>" . \Lobby::l("/admin/install.php?step=2", "Try Again", "class='button'"));
+                  ser("Unable To Create Database Tables", "Are there any tables with the same name ? Or Does the user have the permissions to create tables ?<cl/>The <b>config.php</b> file is created. To try again, remove the <b>config.php</b> file and click the button. <cl/>" . \Lobby::l("/admin/install.php?step=2" . H::csrf("g"), "Try Again", "class='button'"));
                   
                 }
               }
