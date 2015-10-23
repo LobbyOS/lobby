@@ -5,7 +5,10 @@ require L_DIR . "/includes/src/Install.php";
 <!DOCTYPE html>
 <html>
   <head>
-     <?php \Lobby::head("Install");?>
+     <?php
+     \Lobby::addStyle("style", "/contents/themes/hine/style.css");
+     \Lobby::head("Install");
+     ?>
   </head>
   <body class="workspace">
      <div class="contents">
