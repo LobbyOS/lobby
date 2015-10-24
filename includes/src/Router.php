@@ -133,7 +133,13 @@ class Router {
         \Lobby\UI\Panel::addTopItem("lobbyApp{$AppID}", array(
           "text" => "Admin > " . $AppInfo['name'],
           "href" => "/admin/app/$AppID",
-          "position" => "left"
+          "position" => "left",
+          "subItems" => array(
+            "gotoapp" => array(
+              "text" => "Go To App",
+              "href" => "/app/$AppID"
+            )
+          )
         ));
         
         $page_response = $class->page($page);

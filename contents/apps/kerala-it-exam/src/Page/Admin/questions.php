@@ -2,23 +2,47 @@
   <?php
   $classes = array(10 => 0, 9 => 0, 8 => 0);
   $class = isset($_GET['class']) ? $_GET['class'] : "";
+  
   if(!isset($classes[$class])){
     ser("Invalid Class");
   }else{
+    /**
+     * Load the questions
+     */
+    $questions_file_loc = APP_DIR . "/src/Data/questions.$class.json";
+    $questions = json_decode($this->get("/src/Data/questions.$class.json"), true);
+    $questions = array_merge_recursive(array(
+      "short" => array(),
+      "multiple" => array(),
+      "note" => array(),
+      "practical" => array()
+    ), $questions);
+    
+    /**
+     * Update Questions and save to file
+     */
     if(isset($_POST['short']) && isset($_POST['multiple']) && isset($_POST['note']) && isset($_POST['practical']) && \H::csrf()){
-      $questions = array_merge_recursive(array(
+      $questions = array_replace_recursive($questions, array(
         "short" => $_POST['short'],
         "multiple" => $_POST['multiple'],
         "note" => $_POST['note'],
         "practical" => $_POST['practical']
-      ), json_decode($this->get("/src/Data/questions.$class.json"), true));
-    }else{
-      $questions = array_merge_recursive(array(
-        "short" => array(),
-        "multiple" => array(),
-        "note" => array(),
-        "practical" => array()
-      ), json_decode($this->get("/src/Data/questions.$class.json"), true));
+      ));
+      foreach($questions['short'] as $i => $arr){
+        $questions['short'][$i]['answer'] = $arr['answer'] == "" ? "" : strtoupper(hash("md5", $arr['answer']));
+      }
+      foreach($questions['multiple'] as $i => $arr){
+        $questions['multiple'][$i]['answer'][0] = $arr['answer'][0] == "" ? "" : strtoupper(hash("md5", $arr['answer'][0]));
+        $questions['multiple'][$i]['answer'][1] = $arr['answer'][1] == "" ? "" : strtoupper(hash("md5", $arr['answer'][1]));
+      }
+      foreach($questions['note'] as $i => $arr){
+        $questions['note'][$i]['answer'][0] = $arr['answer'][0] == "" ? "" : strtoupper(hash("md5", $arr['answer'][0]));
+        $questions['note'][$i]['answer'][1] = $arr['answer'][1] == "" ? "" : strtoupper(hash("md5", $arr['answer'][1]));
+        $questions['note'][$i]['answer'][2] = $arr['answer'][2] == "" ? "" : strtoupper(hash("md5", $arr['answer'][2]));
+        $questions['note'][$i]['answer'][3] = $arr['answer'][3] == "" ? "" : strtoupper(hash("md5", $arr['answer'][3]));
+      }
+      file_put_contents($questions_file_loc, json_encode($questions));
+      sss("Saved!", "The questions was saved successfully.");
     }
   ?>
     <h1>Manage Questions</h1>
@@ -26,6 +50,7 @@
     <ul>
       <li>Use single quotes <b>not double quotes ("")</b></li>
       <li>For inserting images into questions, use the following markup : <blockquote>[img](relative_path_in_src/Data/10.png)</blockquote></li>
+      <li>Answer values are <b>Case Sensitive</b>. So, answer must be absolutely same as the correct option</li>
     </ul>
     <h2>Short Answer</h2>
     <form method="POST" action="<?php echo \Lobby::u();?>">
@@ -45,7 +70,7 @@
             foreach($questionArr['options'] as $option){
               $hashed[$option] = strtoupper(hash("md5", $option));
             ?>
-              <input type='text' name='short[<?php echo $id;?>][options][]' value="<?php echo $option;?>"title='Encrypted Answer : <?php echo $hashed[$option];?>' />
+              <input type='text' name='short[<?php echo $id;?>][options][]' value="<?php echo $option;?>" />
             <?php
             }
             ?>
@@ -76,15 +101,15 @@
             foreach($questionArr['options'] as $option){
               $hashed[$option] = strtoupper(hash("md5", $option));
             ?>
-              <input type='text' name='multiple[<?php echo $id;?>][options][]' value="<?php echo htmlspecialchars($option);?>" title='Encrypted Answer : <?php echo $hashed[$option];?>' />
+              <input type='text' name='multiple[<?php echo $id;?>][options][]' value="<?php echo htmlspecialchars($option);?>"  />
             <?php
             }
             ?>
           </label>
           <label>
             <div>Answers</div>
-            <input type='text' name='multiple[<?php echo $id;?>][answer][0]' value="<?php echo array_search($questionArr['answer'][0], $hashed);?>"placeholder='1st right answer' />
-            <input type='text' name='multiple[<?php echo $id;?>][answer][1]' value="<?php echo array_search($questionArr['answer'][1], $hashed);?>"placeholder='2nd right answer' />
+            <input type='text' name='multiple[<?php echo $id;?>][answer][0]' value="<?php echo array_search($questionArr['answer'][0], $hashed);?>" placeholder='1st right answer' />
+            <input type='text' name='multiple[<?php echo $id;?>][answer][1]' value="<?php echo array_search($questionArr['answer'][1], $hashed);?>" placeholder='2nd right answer' />
           </label>
         </div>
       <?php
@@ -108,7 +133,7 @@
             foreach($questionArr['options'][0] as $option){
               $hashed[$option] = strtoupper(hash("md5", $option));
             ?>
-              <input type='text' name='note[<?php echo $id;?>][options][0][]' value="<?php echo htmlspecialchars($option);?>" title='Encrypted Answer : <?php echo $hashed[$option];?>' />
+              <input type='text' name='note[<?php echo $id;?>][options][0][]' value="<?php echo htmlspecialchars($option);?>"  />
             <?php
             }
             ?>
@@ -119,7 +144,7 @@
             foreach($questionArr['options'][1] as $option){
               $hashed[$option] = strtoupper(hash("md5", $option));
             ?>
-              <input type='text' name='note[<?php echo $id;?>][options][1][]' value="<?php echo htmlspecialchars($option);?>" title='Encrypted Answer : <?php echo $hashed[$option];?>' />
+              <input type='text' name='note[<?php echo $id;?>][options][1][]' value="<?php echo htmlspecialchars($option);?>"  />
             <?php
             }
             ?>
@@ -130,7 +155,7 @@
             foreach($questionArr['options'][2] as $option){
               $hashed[$option] = strtoupper(hash("md5", $option));
             ?>
-              <input type='text' name='note[<?php echo $id;?>][options][2][]' value="<?php echo htmlspecialchars($option);?>" title='Encrypted Answer : <?php echo $hashed[$option];?>' />
+              <input type='text' name='note[<?php echo $id;?>][options][2][]' value="<?php echo htmlspecialchars($option);?>"  />
             <?php
             }
             ?>
@@ -141,7 +166,7 @@
             foreach($questionArr['options'][3] as $option){
               $hashed[$option] = strtoupper(hash("md5", $option));
             ?>
-              <input type='text' name='note[<?php echo $id;?>][options][3][]' value="<?php echo htmlspecialchars($option);?>" title='Encrypted Answer : <?php echo $hashed[$option];?>' />
+              <input type='text' name='note[<?php echo $id;?>][options][3][]' value="<?php echo htmlspecialchars($option);?>"  />
             <?php
             }
             ?>
@@ -166,7 +191,7 @@
         <div clear style="margin-left: 20px;">
           <label>
             <div>Question</div>
-            <textarea type='text' name='short[<?php echo $id;?>][question]' id='question_input'><?php echo $questionArr['question'];?></textarea>
+            <textarea type='text' name='practical[<?php echo $id;?>][question]' id='question_input'><?php echo $questionArr['question'];?></textarea>
           </label>
         </div>
       <?php
@@ -197,7 +222,7 @@
          */
         $("#newShortQuestion").live("click", function(){
           id = tmp.lastShortQuestion - 1;
-          var html = "<h4>Question # "+ tmp.lastShortQuestion +"</h4><div clear style='margin-left: 20px;'><label><div>Question</div><input type='text' name='short["+ id +"][question]' /></label><label><div>Options</div><input type='text' name='short["+ id +"][options][]' /><input type='text' name='short["+ id +"][options][]' /><input type='text' name='short["+ id +"][options][]' /><input type='text' name='short["+ id +"][options][]' /></label><label><div>Answer</div><input type='text' name='short["+ id +"][answer]' /><div>Paste answer above ^ (<b>case sensitive</b>). It will be encrypted when the form is submitted</div></label></div>";
+          var html = "<h4>Question # "+ tmp.lastShortQuestion +"</h4><div clear style='margin-left: 20px;'><label><div>Question</div><input type='text' name='short["+ id +"][question]' /></label><label><div>Options</div><input type='text' name='short["+ id +"][options][]' /><input type='text' name='short["+ id +"][options][]' /><input type='text' name='short["+ id +"][options][]' /><input type='text' name='short["+ id +"][options][]' /></label><label><div>Answer</div><input type='text' name='short["+ id +"][answer]' /><div>Paste answer above ^ (<b>case sensitive</b>).</div></label></div>";
           $(this).before(html);
           tmp.lastShortQuestion++;
         });
@@ -230,7 +255,7 @@
         tmp.lastPracticalQuestion = <?php echo count($questions['practical']) + 1;?>;
         $("#newPracticalQuestion").live("click", function(){
           id = tmp.lastPracticalQuestion - 1;
-          var html = "<h4>Question # "+ tmp.lastPracticalQuestion +"</h4><div clear style='margin-left: 20px;'><label><div>Question</div><textarea type='text' name='short["+ id +"][question]' id='question_input'></textarea></label></div>";
+          var html = "<h4>Question # "+ tmp.lastPracticalQuestion +"</h4><div clear style='margin-left: 20px;'><label><div>Question</div><textarea type='text' name='practical["+ id +"][question]' id='question_input'></textarea></label></div>";
           $(this).before(html);
           tmp.lastPracticalQuestion++;
         });

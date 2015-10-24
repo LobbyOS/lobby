@@ -47,7 +47,7 @@ class hine extends \Lobby\UI\Theme {
       /**
        * Admin button
        */
-      $html = "<li class='item lobby'><a href='". $href ."' class='$extraClass'>Lobby</a></li>";
+      $html = "<li class='item lobby'><a href='". \Lobby::u($href) ."' class='$extraClass'>Lobby</a></li>";
     }else{
       $html = '<li class="item ' . $extraClass . '" id="' . $id . '">';
         if($href == ""){

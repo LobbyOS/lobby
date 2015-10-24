@@ -167,7 +167,9 @@ class Apps extends \Lobby {
     }else{
       $enabledApps = self::getEnabledApps();
       $enabled = isset($enabledApps[$this->app]);
-      self::$cache["enabled_apps"][$this->app] = $enabled;
+      if($enabled){
+        self::$cache["enabled_apps"][$this->app] = $enabled;
+      }
     }
     return $enabled;
   }
@@ -210,6 +212,7 @@ class Apps extends \Lobby {
   public function enableApp(){
     if($this->app){
       $apps = self::getEnabledApps();
+      var_dump($apps);
       if(!isset($apps[$this->app])){
         $apps[$this->app] = 1;
         

@@ -6,8 +6,11 @@ $panelLeftItems = \Lobby\UI\Panel::getPanelItems("left");
 ?>
 <div class="panel top">
   <ul class="left">
-    <?php echo $this->makePanelTree("lobbyAdmin", $panelLeftItems["lobbyAdmin"]);unset($panelLeftItems["lobbyAdmin"]);?>
-    <?php 
+    <?php
+    if(isset($panelLeftItems["lobbyAdmin"])){
+      echo $this->makePanelTree("lobbyAdmin", $panelLeftItems["lobbyAdmin"]);
+      unset($panelLeftItems["lobbyAdmin"]);
+    }
     $html = "";
     foreach($panelLeftItems as $id => $item){
       if( !isset($item['subItems']) ){
