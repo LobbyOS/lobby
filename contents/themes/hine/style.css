@@ -3,6 +3,7 @@
  */
 .workspace{
   background: #fbfbfc;
+  top: 50px;
 }
 .workspace .contents{
   margin: 0px auto 40px;
