@@ -16,11 +16,11 @@ class H {
   }
   
   /**
-   * Get value from $_GET and $_POST
+   * Get value from $_GET and $_POST according to request
    * returns null if it doesn't exist
    */
   public static function input($name, $type = ""){
-    if($type == "GET" || (count($_GET) != 0 && $type != "POST")){
+    if($type == "GET" || (count($_GET) != 0 && $type != "POST" && count($_POST) == 0)){
       $arr = $_GET;
     }elseif($type == "POST" || count($_POST) != 0){
       $arr = $_POST;
