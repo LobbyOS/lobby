@@ -1,10 +1,9 @@
 <?php
-\Lobby::addScript("dynscroll", "/includes/lib/scrollbar/scrollbar.js");
-\Lobby::addStyle("dynscroll", "/includes/lib/scrollbar/scrollbar.css");
-
-$this->addScript("/jquery.scrollTo.js");
-$this->addStyle("/game.css");
-$this->addScript("/game.js");
+$this->addScript("jquery.scrollTo.js");
+$this->addScript("jquery.niceScroll.js");
+$this->addStyle("scrollbar.css");
+$this->addStyle("game.css");
+$this->addScript("game.js");
 ?>
 <div class="contents">
   <div class="loading">

@@ -3,6 +3,7 @@
   <head>
     <?php
     \Lobby::doHook("admin.head.begin");
+    \Lobby::addScript("admin.apps.js", "/admin/JS/apps.js");
     \Lobby::head("App Manager");
     ?>
   </head>
@@ -18,31 +19,41 @@
         <?php
         if(isset($_GET['action']) && isset($_GET['app']) && H::csrf()){
           $action = $_GET['action'];
-          $app = $_GET['app'];
-          $App = new \Lobby\Apps($app);
-          if( !$App->exists ){
-            ser("Error", "I checked all over, but App does not Exist");
+          $apps = $_GET['app'];
+          
+          /**
+           * If only a single app, make it as a value of array
+           */
+          if(!is_array($apps)){
+            $apps = array($apps);
           }
-          if($action == "disable"){
-            if($App->disableApp()){
-              sss("Disabled", "The App <strong>$app</strong> has been disabled.");
-            }else{
-              ser("Error", "The App <strong>$app</strong> couldn't be disabled. Try again.", false);
+          
+          foreach($apps as $app){
+            $App = new \Lobby\Apps($app);
+            if( !$App->exists ){
+              ser("Error", "I checked all over, but App does not Exist");
             }
-          }else if($action == "remove"){
-        ?>
-            <h2>Confirm</h2>
-            <p>Are you sure you want to remove the app <b><?php echo $app;?></b> ?</p>
-            <div clear></div>
-            <a class="button green" href="<?php echo L_URL ."/admin/install-app.php?action=remove&id={$app}&".H::csrf("g");?>">Yes, I'm Sure</a>
-            <a class="button red" href="<?php echo L_URL ."/admin/apps.php";?>">No, I'm Not</a>
-        <?php
-            exit;
-          }else if($action == "enable"){
-            if($App->enableApp()){
-              sss("Enabled", "App has been enabled.");
-            }else{
-              ser("Error", "The App couldn't be enabled. Try again.", false);
+            if($action == "disable"){
+              if($App->disableApp()){
+                sss("Disabled", "The App <strong>$app</strong> has been disabled.");
+              }else{
+                ser("Error", "The App <strong>$app</strong> couldn't be disabled. Try again.", false);
+              }
+            }else if($action == "remove"){
+          ?>
+              <h2>Confirm</h2>
+              <p>Are you sure you want to remove the app <b><?php echo $app;?></b> ?</p>
+              <div clear></div>
+              <a class="button green" href="<?php echo L_URL ."/admin/install-app.php?action=remove&id={$app}&".H::csrf("g");?>">Yes, I'm Sure</a>
+              <a class="button red" href="<?php echo L_URL ."/admin/apps.php";?>">No, I'm Not</a>
+          <?php
+              exit;
+            }else if($action == "enable"){
+              if($App->enableApp()){
+                sss("Enabled", "The App <strong>$app</strong> has been enabled.");
+              }else{
+                ser("Error", "The App couldn't be enabled. Try again.", false);
+              }
             }
           }
         }
@@ -53,45 +64,59 @@
         }
         if(count($Apps) != 0){
         ?>
-          <table style="width: 100%;margin-top:5px">
-            <thead>
-              <tr>
-                <td>Name</td>
-                <td>Version</td>
-                <td>Description</td>
-                <td>Actions</td>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-              foreach($Apps as $app => $null){
-                $App = new \Lobby\Apps($app);
-                $data = $App->info;
-                $appImage = !isset($data['image']) ? L_URL . "/includes/lib/core/Img/blank.png" : $data['image'];
-                $enabled = $App->isEnabled();
-              ?>
-                <tr <?php if(!$enabled){echo 'style="background: #EEE;"';}?>>
+          <form>
+            <table style="width: 100%;margin-top:5px" id="apps_table">
+              <thead>
+                <tr>
                   <td>
-                    <a href="<?php echo \Lobby::u("/admin/app/$app");?>"><?php echo $data['name'];?></a>
+                    <input type="checkbox" id="select_all_apps" />
                   </td>
-                  <td><?php echo $data['version'];?></td>
-                  <td><?php echo $data['short_description'];?></td>
-                  <td style="//text-align:center;">
-                    <?php
-                    if($enabled){
-                      echo '<a class="button" href="?action=disable&app='. $app . H::csrf('g') .'">Disable</a>';
-                    }else{
-                      echo '<a class="button" href="?action=enable&app='. $app . H::csrf('g') .'">Enable</a>';
-                    }
-                    ?>
-                    <a class="button red" href="?action=remove&app=<?php echo $app . H::csrf('g');?>">Remove</a>
-                  </td>
+                  <td>Name</td>
+                  <td>Version</td>
+                  <td>Description</td>
+                  <td>Actions</td>
                 </tr>
-              <?php
-              }
-              ?>
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                <?php
+                foreach($Apps as $app => $null){
+                  $App = new \Lobby\Apps($app);
+                  $data = $App->info;
+                  $appImage = !isset($data['image']) ? L_URL . "/includes/lib/core/Img/blank.png" : $data['image'];
+                  $enabled = $App->isEnabled();
+                ?>
+                  <tr <?php if(!$enabled){echo 'style="background: #EEE;"';}?>>
+                    <td>
+                      <input type="checkbox" name="app[]" value="<?php echo $app;?>" />
+                    </td>
+                    <td>
+                      <a href="<?php echo \Lobby::u("/admin/app/$app");?>"><?php echo $data['name'];?></a>
+                    </td>
+                    <td><?php echo $data['version'];?></td>
+                    <td><?php echo $data['short_description'];?></td>
+                    <td style="text-align:center;">
+                      <?php
+                      if($enabled){
+                        echo '<a class="button" href="?action=disable&app='. $app . H::csrf('g') .'">Disable</a>';
+                      }else{
+                        echo '<a class="button" href="?action=enable&app='. $app . H::csrf('g') .'">Enable</a>';
+                      }
+                      ?>
+                      <a class="button red" href="?action=remove&app=<?php echo $app . H::csrf('g');?>">Remove</a>
+                    </td>
+                  </tr>
+                <?php
+                }
+                ?>
+              </tbody>
+            </table>
+            <div id="combined_actions">
+              <span style="padding-left: 20px;">^</span>
+              <button class="button green" name="action" value="enable">Enable</button>
+              <button class="button blue" name="action" value="disable">Disable</button>
+            </div>
+            <?php echo H::csrf('i');?>
+          </form>
         <?php
         }
         ?>

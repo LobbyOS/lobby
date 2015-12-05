@@ -1,4 +1,5 @@
 <?php
+namespace Lobby\App;
 class site_compressor extends \Lobby\App {
   public function page($page){
     if( $page == "/site" ){

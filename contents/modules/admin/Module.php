@@ -66,8 +66,8 @@ class admin extends \Lobby\Module {
       /**
        * Install Module
        */
-      $salt = \Lobby::randStr(15);
-      $cookie = \Lobby::randStr(15);
+      $salt = \H::randStr(15);
+      $cookie = \H::randStr(15);
       saveOption("admin_secure_salt", $salt);
       saveOption("admin_secure_cookie", $cookie);
       

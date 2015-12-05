@@ -22,10 +22,10 @@ lobby.dash = {
    */
   init : function(adjust){
     if(adjust !== true){
-      var w = $(".workspace").width();
-      var h = $(".workspace").height();
-      var xItems = Math.round($(".tiles").width() / 200);
-      var yItems = Math.round($(".tiles").height() / 200);
+      var w = 1368;
+      var h = 768;
+      var xItems = Math.round(w / 200);
+      var yItems = Math.round(h / 200);
       var items = xItems * yItems;
       lobby.dash.opt["yItems"] = yItems;
       lobby.dash.opt["xItems"] = xItems;
@@ -45,15 +45,18 @@ lobby.dash = {
       left: "0px",
       right: "0px"
     });
+    lobby.dash.adjust();
     lobby.dash.addTiles();
     lobby.dash.addTileEvents();
   },
+  
   /**
    * Register a tile to be added
    */
   addTile : function(type, data){
     lobby.dash.tiles[type].push(data);
   },
+  
   /**
    * Add all the tiles registered
    */
@@ -77,7 +80,6 @@ lobby.dash = {
    */
   addTileEvents : function(){
     setTimeout(function(){
-      //$(".tiles .tile").liveTile();
       $(".workspace .tiles .tile").each(function(){
         if(typeof $(this).data("ui-draggable") != "undefined" && typeof $(".workspace .tiles .tile").data("ui-droppable") != "undefined"){
           $(this).draggable("destroy");
@@ -143,9 +145,15 @@ lobby.dash = {
    */
   adjust : function(){
     if(Object.keys(lobby.dash.data).length != 0){
-      $(".tiles").empty();
-      $(".workspace").niceScroll().remove();
-      lobby.dash.init();
+      ratio = ($(window).width() / 200) / ($(window).height() / 190);
+      if(ratio < 1){
+        h = 190 * ratio;
+        w = 200 * ratio;
+        $(".tiles .tile").css({
+          height: h,
+          width: w
+        });
+      }
     }
   }
 };

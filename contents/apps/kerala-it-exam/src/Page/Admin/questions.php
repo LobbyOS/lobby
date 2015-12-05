@@ -9,8 +9,8 @@
     /**
      * Load the questions
      */
-    $questions_file_loc = APP_DIR . "/src/Data/questions.$class.json";
-    $questions = json_decode($this->get("/src/Data/questions.$class.json"), true);
+    $questions_file_loc = "/src/Data/questions.$class.json";
+    $questions = json_decode($this->get($questions_file_loc), true);
     $questions = array_merge_recursive(array(
       "short" => array(),
       "multiple" => array(),
@@ -41,7 +41,7 @@
         $questions['note'][$i]['answer'][2] = $arr['answer'][2] == "" ? "" : strtoupper(hash("md5", $arr['answer'][2]));
         $questions['note'][$i]['answer'][3] = $arr['answer'][3] == "" ? "" : strtoupper(hash("md5", $arr['answer'][3]));
       }
-      file_put_contents($questions_file_loc, json_encode($questions));
+      $this->write($questions_file_loc, json_encode($questions));
       sss("Saved!", "The questions was saved successfully.");
     }
   ?>
