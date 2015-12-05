@@ -1,4 +1,5 @@
 <?php
+namespace Lobby\App;
 
 /**
  * The Kerala IT Exam Class

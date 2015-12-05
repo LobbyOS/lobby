@@ -23,7 +23,7 @@ class Install extends \Lobby {
       ser("Error", "Lobby Directory is not Writable. Please set <blockquote>" . L_DIR . "</blockquote> directory's permission to writable.<cl/><a href='install.php?step=1' class='button'>Check Again</a>");
       return false;
     }elseif(\Lobby\FS::exists("/config.php")){
-      ser("config.php File Exists", "A config.php file already exitsts in <blockquote>". L_DIR ."</blockquote> directory. Remove it and try again. <cl/><a href='install.php?step=1". H::csrf('g') ."' class='button'>Check Again</a>");
+      ser("config.php File Exists", "A config.php file already exitsts in <blockquote>". L_DIR ."</blockquote> directory. Remove it and try again. <cl/><a href='install.php?step=1". \H::csrf('g') ."' class='button'>Check Again</a>");
       return false;
     }else{
       return true;
@@ -65,8 +65,8 @@ class Install extends \Lobby {
    * Make the config.php file
    */
   public static function makeConfigFile(){
-    $lobbyID = self::randStr(10) . self::randStr(15) . self::randStr(20); // Lobby Global ID
-    $lobbySID   = hash("sha512", self::randStr(15) . self::randStr(30)); // Lobby Secure ID
+    $lobbyID = \H::randStr(10) . \H::randStr(15) . \H::randStr(20); // Lobby Global ID
+    $lobbySID   = hash("sha512", \H::randStr(15) . \H::randStr(30)); // Lobby Secure ID
     $configFileLoc = L_DIR . "/config.php";
     $cfg = self::$database;
     

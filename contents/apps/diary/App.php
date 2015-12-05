@@ -1,4 +1,5 @@
 <?php
+namespace Lobby\App;
 class diary extends \Lobby\App {
 
   public function page($p){

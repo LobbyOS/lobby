@@ -39,6 +39,10 @@ class App {
     return \Lobby\FS::get(APP_DIR . $path);
   }
   
+  public static function write($path, $content, $type = "w"){
+    return \Lobby\FS::write(APP_DIR . $path, $content, $type);
+  }
+  
   /**
    * Include a page from the app's source
    */
