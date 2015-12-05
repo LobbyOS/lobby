@@ -22,7 +22,7 @@ $_SERVER['REQUEST_URI'] = str_replace($lobbyBase, "", $_SERVER['REQUEST_URI']);
 $_SERVER['REQUEST_URI'] = substr($_SERVER['REQUEST_URI'], -1) == "/" && $_SERVER['REQUEST_URI'] != "/" ? substr_replace($_SERVER['REQUEST_URI'], "", -1) : $_SERVER['REQUEST_URI'];
 
 require_once L_DIR . "/includes/src/Helpers.php";
-require_once L_DIR . "/includes/src/FileSystem.php"; /* The File System Class */
+require_once L_DIR . "/includes/src/FileSystem.php"; // The FileSystem Class
 
 require_once L_DIR . "/includes/src/Lobby.php"; /* The Core */
 require_once L_DIR . "/includes/src/Database.php"; /* The Database Class */

@@ -14,9 +14,9 @@ class Module {
   public $url = "";
   
   public function __construct($vars){
-    $this->init();
     $this->dir = $vars[0];
     $this->url = $vars[1];
+    $this->init();
   }
   
   public function init(){}

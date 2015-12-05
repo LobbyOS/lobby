@@ -1,4 +1,5 @@
 <?php
+namespace Lobby\App;
 class sige extends \Lobby\App {
   
   public $themes = array(

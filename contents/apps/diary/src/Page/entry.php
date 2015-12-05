@@ -23,7 +23,7 @@ if($entry == null && !$today){
     if($today){
       $this->addScript("jquery.notebook.js");
       $this->addScript("diary.js");
-      echo '<p>Diary is saved every 30 seconds, <a class="button green" id="save_diary">Save Now</a></p>';
+      echo '<p>Diary will be saved in <span id="seconds_counter">30</span> seconds, <a class="button green" id="save_diary">Save Now</a></p>';
     }
     ?>
     <div class="diary">

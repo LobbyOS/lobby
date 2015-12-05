@@ -1,4 +1,5 @@
 <?php
+namespace Lobby\App;
 class ledit extends \Lobby\App {
   
   public function page($page){

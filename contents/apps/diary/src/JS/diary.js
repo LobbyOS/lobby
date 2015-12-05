@@ -1,3 +1,4 @@
+lobby.app.counter = 30;
 lobby.app.saveDiary = function(){
   data = $(".diary .entry").html().replace(/<p(.*?)>(.*?)<\/p>/g, '[p]$2[/p]');
   
@@ -16,11 +17,18 @@ lobby.app.saveDiary = function(){
 };
 $(".workspace #save_diary").live("click", function(){
   lobby.app.saveDiary();
+  lobby.app.counter = 30;
 });
 
 setInterval(function(){
   lobby.app.saveDiary();
+  lobby.app.counter = 30;
 }, 30000);
+
+setInterval(function(){
+  lobby.app.counter--;
+  $(".workspace #seconds_counter").text(lobby.app.counter);
+}, 1000);
 
 $(function(){
   $(".paper .entry").notebook({

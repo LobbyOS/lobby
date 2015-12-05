@@ -1,4 +1,5 @@
 <?php
+namespace Lobby\App;
 class millionaire extends \Lobby\App {
   
   public $currency = "$";
