@@ -1,4 +1,5 @@
 <?php
+namespace Lobby\App;
 class keyring extends \Lobby\App {
   
   public $set = false;
@@ -12,7 +13,7 @@ class keyring extends \Lobby\App {
   }
   
   public function MasterAdd($id, $name, $description, $password){
-    $random_salt = \Lobby::randStr(15);
+    $random_salt = \H::randStr(15);
     $hashed = hash("sha512", $this->master_salt . $password . $random_salt);
     
     if(!$this->MasterExists($id)){

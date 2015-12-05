@@ -1,3 +1,6 @@
+.workspace{
+  background: #fff;
+}
 .workspace .tiles{
   position: absolute;
   left: 0px;
@@ -15,14 +18,15 @@
   position: relative;
   float: left;
   height: 190px;
-  width: 190px;
+  width: 200px;
+  margin: 0 30px;
 }
 .workspace .tiles .tile.taken:hover{
-  box-shadow: inset 0px 0px 10px black;
+  box-shadow: inset 0px 0px 1px black;
 }
 .workspace .tiles .tile.tile-placeholder{
   box-shadow: inset 0px 1px 46px black;
-  height: 200px;
+  height: 190px;
   width: 200px;
   float: left;
 }
@@ -39,8 +43,9 @@
   z-index: -1;
 }
 .workspace .tiles .tile .image{
-  max-height: 197px;
-  max-width: 197px;
+  max-height: 165px;
+  max-width: 165px;
+  margin: 0 auto;
 }
 .workspace .tiles .tile .title{
   position: absolute;
@@ -49,6 +54,11 @@
   padding: 0px 6px;
   font-size: 14px;
   font-weight: 500;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .workspace .tiles .tile:hover .title{
   color: #D54E21;

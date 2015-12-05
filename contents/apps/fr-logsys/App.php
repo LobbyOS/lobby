@@ -1,4 +1,5 @@
 <?php
+namespace Lobby\App;
 class fr_logsys extends \Lobby\App {
   
   public $set = false;
