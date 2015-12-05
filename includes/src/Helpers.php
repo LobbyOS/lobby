@@ -9,10 +9,23 @@ class H {
   
   public static function init(){
     if(!isset($_COOKIE['csrf_token'])){
-      $token = base64_encode(rand(20000, 30000));
+      $token = self::randStr(10);
       setcookie("csrf_token", $token, 0);
       $_COOKIE['csrf_token'] = $token;
     }
+  }
+  
+  /**
+   * Generate a random string
+   */
+  public static function randStr($length){
+    $str = "";
+    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    $size = 62; // strlen($chars)
+    for($i=0;$i < $length;$i++){
+      $str .= $chars[rand(0, $size-1)];
+    }
+    return $str;
   }
   
   /**

@@ -1,4 +1,5 @@
 <?php
+namespace Lobby\App;
 /**
  * School Election
  * - Subin Siby

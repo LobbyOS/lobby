@@ -1,4 +1,5 @@
 <?php
+namespace Lobby\App;
 class chatkin extends \Lobby\App {
   
   /**

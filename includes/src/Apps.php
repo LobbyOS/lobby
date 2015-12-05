@@ -115,7 +115,7 @@ class Apps extends \Lobby {
         require_once L_DIR . "/includes/src/App.php";
         require_once "$appDir/App.php";
       
-        $className = str_replace("-", "_", $name);
+        $className = "\\Lobby\App\\" . str_replace("-", "_", $name);
         if( !class_exists($className) ){
           $valid = false; // The class doesn't exist, so app's not valid
         }else{
@@ -212,7 +212,6 @@ class Apps extends \Lobby {
   public function enableApp(){
     if($this->app){
       $apps = self::getEnabledApps();
-      var_dump($apps);
       if(!isset($apps[$this->app])){
         $apps[$this->app] = 1;
         
@@ -288,7 +287,7 @@ class Apps extends \Lobby {
       \Lobby::addScript("app", "/includes/lib/core/JS/app.js");
      
       $appInfo = $this->info;
-      $className = str_replace("-", "_", $this->app);
+      $className = "\\Lobby\App\\" . str_replace("-", "_", $this->app);
      
       /**
        * Create the \Lobby\App Object

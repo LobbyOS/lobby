@@ -8,7 +8,6 @@ namespace Lobby;
 
 class FS {
   
-  
   public static function init(){
     
   }
@@ -59,4 +58,3 @@ class FS {
   }
 }
 //\Lobby\FS::init();
-?>

@@ -102,16 +102,6 @@ require L_DIR . "/includes/src/Install.php";
                     ?></td>
                   </tr>
                   <tr>
-                    <td>PHP cURL Extension</td>
-                    <td><?php if (extension_loaded('curl')){
-                      sss("Ok", "cURL extension is enabled");
-                    }else{
-                      $error = 1;
-                      ser("Not Ok", "cURL extension seems to be missing");
-                    }
-                    ?></td>
-                  </tr>
-                  <tr>
                     <td>PHP Zip Extension</td>
                     <td><?php if (extension_loaded('zip')){
                       sss("Ok", "Zip extension is enabled");
