@@ -33,8 +33,7 @@ $this->addScript("editor.js");
     }else if( !ctype_alnum(str_replace(" ", "", $pname)) ){
       \Lobby::ser("Invalid Name", "The page name should only contain alphanumeric characters");
     }else{
-      $layout = \Lobby\FS::get("/src/Data/themes/{$site['theme']}/layout.html");
-      $gSite = new sigeSite($site);
+      $gSite = new \Lobby\App\sige\Site($site, $this);
       $page = $gSite->page($slug, array(
         "{{page-title}}" => $title,
         "{{page-content}}" => $body

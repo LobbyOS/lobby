@@ -1,5 +1,5 @@
 <?php
-namespace fr_logsys\Fr;
+namespace Lobby\App\fr_logsys\Fr;
 
 /**
 .---------------------------------------------------------------------------.

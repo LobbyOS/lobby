@@ -10,12 +10,12 @@
 .workspace#site-compressor h2{
   font-size: 20px;
 }
-.workspacee#site-compressor h3{
+.workspace#site-compressor h3{
   font-size: 16px;
 }
 .workspace#site-compressor .top{
   width: 100%;
-  height: 270px;
+  height: 40%;
   display: inline-block;
   border-bottom: 2px solid #00C0C0;
 }
@@ -23,12 +23,11 @@
   width: 100%;
   height: 100%;
 }
-.workspace#site-compressor .left, .right{
+.workspace#site-compressor #left, #right{
   padding: 0px 5px !important;
   height: 100%;
-  float: left;
 }
-.workspace#site-compressor .right{
+.workspace#site-compressor #right{
   border-left:2px solid #00C0C0;
 }
 .workspace#site-compressor .compress-status{

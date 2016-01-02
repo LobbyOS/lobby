@@ -1,5 +1,6 @@
 <?php
 namespace Lobby\App;
+
 class sige extends \Lobby\App {
   
   public $themes = array(
@@ -7,7 +8,8 @@ class sige extends \Lobby\App {
   );
   
   public function page($p){
-    require \Lobby\FS::loc("/src/Inc/class.site.php");
+    require APP_DIR . "/src/Inc/class.site.php";
+    
     $pages = array(
       "index", "/new"
     );
@@ -101,4 +103,3 @@ class sige extends \Lobby\App {
     return true;
   }
 }
-?>

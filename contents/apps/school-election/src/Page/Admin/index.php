@@ -36,7 +36,7 @@ $this->setTitle("Admin Panel");
   </div>
   <h2>Other Tools</h2>
   <div style="margin-top:10px;">
-    <form action="<?php echo \Lobby::u();?>" method="POST" onsubmit="return confirm('Are you sure ?') !== true ? false : true;"><button title="Empty all the data of election stored in database ?" name="clearData" class="red">CLEAR ALL DATA !</button></form>
+    <form action="<?php echo \Lobby::u();?>" method="POST" onsubmit="return confirm('Are you sure ?') !== true ? false : true;"><button title="Empty all the data of election stored in database ?" name="clearData" class="button red">CLEAR ALL DATA !</button></form>
   </div>
   <div style="margin-top:10px;">
     <a href="?action=reload" class="button">Reload Election Pages</a>

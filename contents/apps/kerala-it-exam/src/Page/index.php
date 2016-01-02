@@ -32,7 +32,7 @@ $this->addScript("register.js");
       <p>Your Register Number is :</p>
       <blockquote id="register_number">8A1</blockquote>
     </p>
-    <button clear="" name="submit" class="red">Start Exam</button>
+    <button clear="" name="submit" class="button red">Start Exam</button>
   </form>
   <?php
   if(isset($_SESSION['kerala-it-exam-rid'])){

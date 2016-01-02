@@ -263,7 +263,7 @@ require L_DIR . "/includes/src/Install.php";
                     <tr>
                       <td></td>
                       <td>
-                        <button name="submit" style="width:200px;font-size:15px;" class="green">Install Lobby</button>
+                        <button name="submit" style="width:200px;font-size:15px;" class="button green">Install Lobby</button>
                       </td>
                       <td></td>
                     </tr>
