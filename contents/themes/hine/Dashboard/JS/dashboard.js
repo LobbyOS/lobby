@@ -21,31 +21,6 @@ lobby.dash = {
    * Add blank tiles and then replace empty tiles with registered tiles
    */
   init : function(adjust){
-    if(adjust !== true){
-      var w = 1368;
-      var h = 768;
-      var xItems = Math.round(w / 200);
-      var yItems = Math.round(h / 200);
-      var items = xItems * yItems;
-      lobby.dash.opt["yItems"] = yItems;
-      lobby.dash.opt["xItems"] = xItems;
-
-      for(i = 0;i < items;i++){
-        $(".tiles").append("<div class='tile'></div>");
-      }
-      $(".tiles").width(xItems * 200);
-    }
-    $(".workspace").niceScroll({
-      horizrailenabled : true
-    });
-    $("body").css({
-      position: "absolute",
-      top: "0px",
-      bottom: "0px",
-      left: "0px",
-      right: "0px"
-    });
-    lobby.dash.adjust();
     lobby.dash.addTiles();
     lobby.dash.addTileEvents();
   },
@@ -65,11 +40,9 @@ lobby.dash = {
       if(type == "app" && typeof items == "object" && items.length != 0){
         $.each(items, function(i, data){
           var id = data['id'];
-          var html = '<div class="app" id="'+ id +'" data-mode="none" data-initdelay="50"><a href="'+ lobby.url +'/app/'+ id +'"><div class="inner"><div class="image"><img src="'+ data['img'] +'" height="100%" width="100%"/></div><div class="title">'+ data['name'] +'</div></div></a></div>';
-          if(typeof lobby.dash.data[id] != "undefined" && $(".tiles .tile").eq(lobby.dash.data[id]).hasClass("taken") == false ){
-            $(".tiles .tile").eq(lobby.dash.data[id]).html(html).addClass("taken ui-draggable");
-          }else{
-            $(".tiles .tile").not(".taken").first().html(html).addClass("taken ui-draggable");
+          var html = '<div class="tile"><div class="app" id="'+ id +'" data-mode="none" data-initdelay="50"><a href="'+ lobby.url +'/app/'+ id +'"><div class="inner"><div class="image"><img src="'+ data['img'] +'" height="100%" width="100%"/></div><div class="title">'+ data['name'] +'</div></div></a></div></div>';
+          if(typeof lobby.dash.data[id] != "undefined"){
+            $(".tiles").append(html);
           }
         });
       }
@@ -139,27 +112,5 @@ lobby.dash = {
       e[$(this).find(".app").attr("id")] = $(this).index();
     });
     lobby.saveOption("dashItems", JSON.stringify(e));
-  },
-  /**
-   * Remove all tiles and re add tiles allover
-   */
-  adjust : function(){
-    if(Object.keys(lobby.dash.data).length != 0){
-      ratio = ($(window).width() / 200) / ($(window).height() / 190);
-      if(ratio < 1){
-        h = 190 * ratio;
-        w = 200 * ratio;
-        $(".tiles .tile").css({
-          height: h,
-          width: w
-        });
-      }
-    }
   }
 };
-/**
- * When window is resized, call for removing all tiles and readd all tiles
- */
-$(window).resize(function(){
-  lobby.dash.adjust();
-});

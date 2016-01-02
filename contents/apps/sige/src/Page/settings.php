@@ -16,7 +16,7 @@
         $this->addSite($name, $tagline, $output, $theme, (isset($_POST['empty']) ? 1 : 0), (isset($_POST['titleTag']) ? 1 : 0));
         
         /* Generate the site */
-        $gSite = new sigeSite($this->getSite($name));
+        $gSite = new \Lobby\App\sige\Site($this->getSite($name), $this);
         $gSite->generate($this->getPages($name));
         \Lobby::sss("Site updated", "The site was updated and generated successfully");
       }
@@ -56,7 +56,7 @@
         ?>
           <label class='theme'>
             <a title="Click to see example" target="_blank" href="<?php echo $this->u("/src/Data/themes/{$theme}/example.html");?>">
-              <img src="<?php echo $this->u("/src/Data/themes/{$theme}/thumbnail.png");?>" />
+              <img src="<?php echo APP_SRC . "/src/Data/themes/{$theme}/thumbnail.png";?>" />
             </a>
             <input type="radio" name="theme" value="<?php echo $theme;?>" checked="<?php echo $checked;?>" />
           </label>
