@@ -13,7 +13,7 @@ if(isset($_POST['diary']) && H::csrf()){
     <p>Want to name your diary ?</p>
     <?php H::csrf(1);?>
     <input type="text" name="diary" placeholder="Type name here... (Kitty, John)" value="<?php echo getData("name");?>" />
-    <button>Submit</button>
+    <button class="button red">Submit</button>
   </form>
   <?php
   if(isset($_POST['diary'])){

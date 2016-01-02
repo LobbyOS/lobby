@@ -4,7 +4,7 @@ $this->setTitle("Site Compressor");
 <div class="contents" style="margin-top: 100px;">
   <center>
     <div style="margin-bottom: 20px;">
-      <a class="button" href="<?php echo \Lobby\App::u("/site");?>"><h2>Compress A Site</h2></a>
+      <a class="button" href="<?php echo \Lobby\App::u("/site");?>" style='font-size: 30px;'>Compress A Site</a>
     </div>
     <div style="margin-bottom: 20px;">
       <a class="button"  href="<?php echo \Lobby\App::u("/html");?>">Compress Hyper Text Markup Language (HTML)</a>

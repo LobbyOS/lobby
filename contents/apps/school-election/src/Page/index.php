@@ -41,7 +41,7 @@ $_SESSION['election-validated'] = "false";
     <div class="candidates">
        <?php $ELEC->showCandidates();?>
     </div>
-    <button class="vote" name="vote" value="vote">Cast Your Vote</button>
+    <button class="button vote" name="vote" value="vote">Cast Your Vote</button>
     <div id="username"></div>
   </form>
   <div class='thankyou'>

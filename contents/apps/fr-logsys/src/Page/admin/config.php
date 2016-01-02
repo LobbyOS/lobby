@@ -59,7 +59,7 @@ require_once APP_DIR . "/src/Inc/partial/layout.php";
       <span>Table</span>
       <input type='text' name='db_table' value='<?php echo $cfg['db_table'];?>' />
     </label>
-    <button>Save</button>
+    <button class="button red">Save</button>
   </form>
   <style>
   form label, form span{

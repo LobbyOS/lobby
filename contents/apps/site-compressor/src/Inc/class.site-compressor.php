@@ -224,7 +224,7 @@ class SiteCompressor {
            $replaced = str_replace($from, $to, $replaced);
          }
          /* Check if content changed */
-         if($contents != $replaced){
+         if($contents !== $replaced){
             $this->status("Replacing Strings in $file");
             $this->output($file, $replaced);
          }

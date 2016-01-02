@@ -1,7 +1,7 @@
 <?php include APP_DIR . "/src/load.php";?>
 <div class="top">
   <div class="table">
-    <div class="left">
+    <div id="left" class="left">
       <div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
       <h2>Site Details</h2>
       <form id="siteDetails">
@@ -39,7 +39,7 @@
         <button class="button">Let's Start Compressing</button>
       </form>
     </div>
-    <div class="right">
+    <div id="right" class="left">
       <h2>Compression Options</h2>
       <form id="options">
         <label>
