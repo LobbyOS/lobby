@@ -2,13 +2,9 @@
   background: #fff;
 }
 .workspace .tiles{
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  bottom: 0px;
-  right: 0px;
-  overflow-x: scroll;
-  overflow-y: hidden;
+  display: table;
+  margin: 0 auto;
+  width: 1024px;
 }
 .workspace .tiles .row{
   width: 100%;
@@ -16,10 +12,10 @@
 }
 .workspace .tiles .tile {
   position: relative;
-  float: left;
-  height: 190px;
+  display: inline-block;
   width: 200px;
-  margin: 0 30px;
+  height: 200px;
+  margin: 5px 0;
 }
 .workspace .tiles .tile.taken:hover{
   box-shadow: inset 0px 0px 1px black;
@@ -65,4 +61,9 @@
 }
 .scroll-element.scroll-y {
   display: none !important;
+}
+@media screen and (max-width: 1024px){
+  .workspace .tiles .tile{
+    width: 
+  }
 }

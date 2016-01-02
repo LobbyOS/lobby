@@ -85,7 +85,7 @@ header( 'Content-type: text/html; charset=utf-8' );
           <div clear></div>
           <form method="GET" action="<?php echo \Lobby::u("/admin/lobby-store.php");?>">
             <input type="text" placeholder="Type an app name" name="q" style="width:450px;"/>
-            <button>Search</button>
+            <button class="button red">Search</button>
           </form>
           <?php
           if(isset($_GET['q'])){

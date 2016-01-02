@@ -200,7 +200,7 @@
       <a id='newPracticalQuestion' class='button blue'>Add New Practical Question</a>
       <cl></cl>
       <?php echo \H::csrf("i");?>
-      <button class="red" style="padding: 13px;font-size: 20px;">SAVE QUESTIONS</button>
+      <button class="button red" style="padding: 13px;font-size: 20px;">SAVE QUESTIONS</button>
     </form>
     <style>
       label{

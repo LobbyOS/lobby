@@ -11,7 +11,7 @@ $this->setTitle("Generate User Passwords");
       <span>Number of Students :</span><cl/>
       <input type="number" name="students" placeholder="Number of Students" value="<?php echo $this->config['max_strength'];?>" /><cl/>
     </label>
-    <button>Generate</button>
+    <button class="button red">Generate</button>
   </form>
   <?php
   if(isset($_POST['students'])){

@@ -111,8 +111,8 @@ $(document).ready(function(){
   localStorage["lastSaveName"] = "";
  
   /* Add Dynamic Srollbars */
-  $(".workspace#site-compressor .left, .workspace#site-compressor .right, .workspace#site-compressor .compress-status").addClass("scrollbar-inner").scrollbar();
-  $(".workspace#site-compressor .table .left:first, .workspace#site-compressor .table .right:first").width(($(document).width()/2)-10);
+  $(".workspace#site-compressor #left, .workspace#site-compressor #right, .workspace#site-compressor .compress-status").addClass("scrollbar-inner").scrollbar();
+  $(".workspace#site-compressor .table #left:first, .workspace#site-compressor .table #right:first").width(($(document).width()/2)-10);
  
   /* Display the saved configs */
   tmp.displaySaves();
@@ -147,7 +147,7 @@ $(document).ready(function(){
   
     $(".workspace#site-compressor .compress-status").html("");
     $("<iframe/>").attr({
-      "height"      : ( $(document).height() - $(".workspace#site-compressor .top").height() ) - 40,
+      "height"      : ($(document).height() - ($(".workspace#site-compressor .top").offset().top + $(".workspace#site-compressor .top").height())) - 50,
       "width"       : "100%",
       "frameborder" : 0,
     }).appendTo(".workspace#site-compressor .compress-status");
