@@ -1,11 +1,13 @@
 <?php
-class sigeSite {
+namespace Lobby\App\sige;
+
+class Site {
   
   var $init = false;
   private $theme;
   private $path;
   
-  public function __construct($site){
+  public function __construct($site, $AppObject){
     $this->name = $site['name'];
     $this->path = $site['out'];
     $this->theme = $site['theme'];
@@ -13,6 +15,8 @@ class sigeSite {
     $this->tagline = $site['tagline'];
     $this->titleTag = $site['titleTag'];
     $this->init = true;
+    
+    $this->app = $AppObject;
   }
   
   public function generate($pages){
@@ -30,7 +34,7 @@ class sigeSite {
     
     if($this->init){
       /* Start copying the theme contents to output directory */
-      $objects = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path), RecursiveIteratorIterator::SELF_FIRST);
+      $objects = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path), \RecursiveIteratorIterator::SELF_FIRST);
       foreach($objects as $location => $object){
         $name = str_replace("{$path}/", "", $location); // Make into relative path
         $outLoc = "{$out}/$name";
@@ -59,7 +63,7 @@ class sigeSite {
   public function page($slug = "", $values = array(), $layout = ""){
     $location = "{$this->path}/{$slug}.html";
     if($layout == ""){
-      $layout = \Lobby\FS::get("/src/Data/themes/{$this->theme}/layout.html");
+      $layout = $this->app->get("/src/Data/themes/{$this->theme}/layout.html");
     }
     if($this->titleTag && $values["{{page-title}}"] != $this->name){
       $layout = str_replace("<title>{{page-title}}</title>", "<title>{{page-title}} - {{site-name}}</title>", $layout);

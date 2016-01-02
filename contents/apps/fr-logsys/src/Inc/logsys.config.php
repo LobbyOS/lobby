@@ -2,7 +2,7 @@
 if(isset($dbinfo)){
   require_once APP_DIR . "/src/Inc/class.logsys.php";
 
-  \fr_logsys\Fr\LS::config(array(
+  \Lobby\App\fr_logsys\Fr\LS::config(array(
     "db" => array(
       "host" => $dbinfo['db_host'],
       "port" => $dbinfo['db_port'],

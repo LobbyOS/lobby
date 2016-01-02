@@ -35,7 +35,7 @@ $field = str_replace(array("\r","\n"), "", ("<tr>
   </thead><tbody>
     <?php echo $field;?>
   </tbody></table>
-  <button>Add Column(s)</button>
+  <button class="button red">Add Column(s)</button>
 </form>
 <style>
   form label{

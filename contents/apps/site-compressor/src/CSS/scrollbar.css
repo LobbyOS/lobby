@@ -18,7 +18,6 @@
     padding: 0;
     position: relative !important;
     top: 0;
-    width: auto !important;
 }
 
 .scroll-wrapper > .scroll-content::-webkit-scrollbar {

@@ -3,6 +3,11 @@ namespace Lobby\UI\Themes;
 
 class hine extends \Lobby\UI\Theme {
   
+  public function init(){
+    $this->addScript("/Lib/material-design/materialize.js");
+    $this->addStyle("/Lib/material-design/materialize.css");
+  }
+  
   /**
    * Called before panel is made
    */
@@ -22,6 +27,7 @@ class hine extends \Lobby\UI\Theme {
     $this->addStyle("/Dashboard/CSS/scrollbar.css");
     $this->addScript("/Dashboard/JS/jquery.contextmenu.js");
     $this->addStyle("/Dashboard/CSS/jquery.contextmenu.css");
+    $this->addScript("/Dashboard/JS/Packery.js");
     $this->addScript("/Dashboard/JS/dashboard.js");
     $this->addStyle("/Dashboard/CSS/dashboard.css");
   }

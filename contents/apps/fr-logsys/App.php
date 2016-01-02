@@ -1,5 +1,6 @@
 <?php
 namespace Lobby\App;
+
 class fr_logsys extends \Lobby\App {
   
   public $set = false;
@@ -23,8 +24,8 @@ class fr_logsys extends \Lobby\App {
   public function setInfo(){
     $this->load();
     
-    $number_of_users = \fr_logsys\Fr\LS::$dbh->query("SELECT COUNT(1) FROM `". $this->table ."`")->fetchColumn();
-    $number_of_tokens = \fr_logsys\Fr\LS::$dbh->query("SELECT COUNT(1) FROM `resetTokens`")->fetchColumn();
+    $number_of_users = \Lobby\App\fr_logsys\Fr\LS::$dbh->query("SELECT COUNT(1) FROM `". $this->table ."`")->fetchColumn();
+    $number_of_tokens = \Lobby\App\fr_logsys\Fr\LS::$dbh->query("SELECT COUNT(1) FROM `resetTokens`")->fetchColumn();
     
     $this->info = array(
       "users" => $number_of_users,
