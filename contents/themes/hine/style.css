@@ -18,16 +18,7 @@
   background: white;
 }
 h1,h2,h3,h4{
-  padding: 15px 0px;
-  margin:0px;
-  line-height:1em;
   font-weight: 500;
-}
-
-/* Paragraph */
-p{
-  margin:0px;
-  margin-top:5px;
 }
 
 b, strong{
