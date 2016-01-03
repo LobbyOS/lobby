@@ -4,7 +4,7 @@ namespace chatkin;
 class ChatBase {
   
   public $cookies = "";
-  public $s_server = "http://server.lobby.dev/services/chatkin/"; // Service Server - https://lobby-subins.rhcloud.com
+  public $s_server = "http://server.lobby.sim/services/chatkin/"; // Service Server - https://lobby-subins.rhcloud.com
   
   public function post($url, $params = array()){
     $this->cookies();
