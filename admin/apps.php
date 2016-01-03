@@ -69,7 +69,7 @@
               <thead>
                 <tr>
                   <td>
-                    <input type="checkbox" id="select_all_apps" />
+                    <label><input type="checkbox" id="select_all_apps" /><span></span></label>
                   </td>
                   <td>Name</td>
                   <td>Version</td>
@@ -87,7 +87,10 @@
                 ?>
                   <tr <?php if(!$enabled){echo 'style="background: #EEE;"';}?>>
                     <td>
-                      <input type="checkbox" name="app[]" value="<?php echo $app;?>" />
+                      <label>
+                        <input type="checkbox" name="app[]" value="<?php echo $app;?>" id="checkbox-app" />
+                        <span></span>
+                      </label>
                     </td>
                     <td>
                       <a href="<?php echo \Lobby::u("/admin/app/$app");?>"><?php echo $data['name'];?></a>
