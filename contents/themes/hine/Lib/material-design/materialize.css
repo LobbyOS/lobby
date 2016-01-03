@@ -2414,8 +2414,6 @@ input,
 optgroup,
 select,
 textarea {
-  color: inherit;
-  /* 1 */
   font: inherit;
   /* 2 */
   margin: 0;
@@ -9187,7 +9185,7 @@ form p:last-child {
   /* checkbox aspect */
 }
 
-[type="checkbox"] + label {
+[type="checkbox"] + span {
   position: relative;
   padding-left: 35px;
   cursor: pointer;
@@ -9205,7 +9203,7 @@ form p:last-child {
   /* IE10+ */
 }
 
-[type="checkbox"] + label:before {
+[type="checkbox"] + span:before {
   content: '';
   position: absolute;
   top: 0;
@@ -9219,12 +9217,31 @@ form p:last-child {
   transition: .2s;
 }
 
-[type="checkbox"]:not(:checked):disabled + label:before {
+[type="checkbox"]:not(:checked):disabled + span:before {
   border: none;
   background-color: rgba(0, 0, 0, 0.26);
 }
 
-[type="checkbox"]:checked + label:before {
+[type="checkbox"] + span:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  z-index: 0;
+  border: 2px solid #5a5a5a;
+  border-radius: 1px;
+  margin-top: 2px;
+  transition: .2s;
+}
+
+[type="checkbox"]:not(:checked):disabled + span:before {
+  border: none;
+  background-color: rgba(0, 0, 0, 0.26);
+}
+
+[type="checkbox"]:checked + span:before {
   top: -4px;
   left: -3px;
   width: 12px;
@@ -9241,13 +9258,13 @@ form p:last-child {
           transform-origin: 100% 100%;
 }
 
-[type="checkbox"]:checked:disabled + label:before {
+[type="checkbox"]:checked:disabled + span:before {
   border-right: 2px solid rgba(0, 0, 0, 0.26);
   border-bottom: 2px solid rgba(0, 0, 0, 0.26);
 }
 
 /* Indeterminate checkbox */
-[type="checkbox"]:indeterminate + label:before {
+[type="checkbox"]:indeterminate + span:before {
   left: -10px;
   top: -11px;
   width: 10px;
@@ -9264,17 +9281,17 @@ form p:last-child {
           transform-origin: 100% 100%;
 }
 
-[type="checkbox"]:indeterminate:disabled + label:before {
+[type="checkbox"]:indeterminate:disabled + span:before {
   border-right: 2px solid rgba(0, 0, 0, 0.26);
   background-color: transparent;
 }
 
-[type="checkbox"].filled-in + label:after {
+[type="checkbox"].filled-in + span:after {
   border-radius: 2px;
 }
 
-[type="checkbox"].filled-in + label:before,
-[type="checkbox"].filled-in + label:after {
+[type="checkbox"].filled-in + span:before,
+[type="checkbox"].filled-in + span:after {
   content: '';
   left: 0;
   position: absolute;
@@ -9283,7 +9300,7 @@ form p:last-child {
   z-index: 1;
 }
 
-[type="checkbox"].filled-in:not(:checked) + label:before {
+[type="checkbox"].filled-in:not(:checked) + span:before {
   width: 0;
   height: 0;
   border: 3px solid transparent;
@@ -9295,7 +9312,7 @@ form p:last-child {
   transform-origin: 100% 100%;
 }
 
-[type="checkbox"].filled-in:not(:checked) + label:after {
+[type="checkbox"].filled-in:not(:checked) + span:after {
   height: 20px;
   width: 20px;
   background-color: transparent;
@@ -9304,7 +9321,7 @@ form p:last-child {
   z-index: 0;
 }
 
-[type="checkbox"].filled-in:checked + label:before {
+[type="checkbox"].filled-in:checked + span:before {
   top: 0;
   left: 1px;
   width: 8px;
@@ -9319,7 +9336,7 @@ form p:last-child {
   transform-origin: 100% 100%;
 }
 
-[type="checkbox"].filled-in:checked + label:after {
+[type="checkbox"].filled-in:checked + span:after {
   top: 0px;
   width: 20px;
   height: 20px;
@@ -9328,21 +9345,21 @@ form p:last-child {
   z-index: 0;
 }
 
-[type="checkbox"].filled-in:disabled:not(:checked) + label:before {
+[type="checkbox"].filled-in:disabled:not(:checked) + span:before {
   background-color: transparent;
   border: 2px solid transparent;
 }
 
-[type="checkbox"].filled-in:disabled:not(:checked) + label:after {
+[type="checkbox"].filled-in:disabled:not(:checked) + span:after {
   border-color: transparent;
   background-color: #BDBDBD;
 }
 
-[type="checkbox"].filled-in:disabled:checked + label:before {
+[type="checkbox"].filled-in:disabled:checked + span:before {
   background-color: transparent;
 }
 
-[type="checkbox"].filled-in:disabled:checked + label:after {
+[type="checkbox"].filled-in:disabled:checked + span:after {
   background-color: #BDBDBD;
   border-color: #BDBDBD;
 }
@@ -9468,10 +9485,6 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
   position: absolute;
   top: -14px;
   font-size: 0.8rem;
-}
-
-select {
-  display: none;
 }
 
 select.browser-default {
@@ -9727,7 +9740,6 @@ input[type=range]:focus::-ms-fill-upper {
    Text Inputs + Textarea
 ****************************/
 select {
-  background-color: rgba(255, 255, 255, 0.9);
   width: 100%;
   padding: 5px;
   border: 1px solid #f2f2f2;

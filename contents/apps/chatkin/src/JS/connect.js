@@ -1,6 +1,6 @@
 lobby.app.connect = function(n){
   if(n == "facebook"){
-    //window.open("http://server.lobby.dev/services/chatkin/login.php?n=facebook", "Login To Facebook", "height=200,width=400");
+    //window.open("http://server.lobby.sim/services/chatkin/login.php?n=facebook", "Login To Facebook", "height=200,width=400");
     
     return true;
   }else{
