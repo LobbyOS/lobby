@@ -10,18 +10,18 @@ $this->addScript("register.js");
     <label>
       <p>Select Class</p>
       <select name="class">
-        <option name="eight">8</option>
-        <option name="nine">9</option>
-        <option name="ten">10</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
       </select>
     </label>
     <label>
       <p>Select Division</p>
       <select name="div">
-        <option name="a">A</option>
-        <option name="b">B</option>
-        <option name="c">C</option>
-        <option name="d">D</option>
+        <option value="a">A</option>
+        <option value="b">B</option>
+        <option value="c">C</option>
+        <option value="d">D</option>
       </select>
     </label>
     <label>
