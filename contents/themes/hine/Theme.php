@@ -4,32 +4,32 @@ namespace Lobby\UI\Themes;
 class hine extends \Lobby\UI\Theme {
   
   public function init(){
-    $this->addScript("/Lib/material-design/materialize.js");
-    $this->addStyle("/Lib/material-design/materialize.css");
+    $this->addScript("/src/lib/material-design/materialize.js");
+    $this->addStyle("/src/lib/material-design/materialize.css");
   }
   
   /**
    * Called before panel is made
    */
   public function panel($isAdmin){
-    $this->addStyle("/Panel/CSS/panel.css");
-    $this->addScript("/Panel/JS/superfish.js");
-    $this->addScript("/Panel/JS/panel.js");
+    $this->addStyle("/src/panel/css/panel.css");
+    $this->addScript("/src/panel/js/superfish.js");
+    $this->addScript("/src/panel/js/panel.js");
   }
   
   /**
    * Include stuff for designing dashboard
    */
   public function dashboard(){
-    $this->addScript("/Dashboard/JS/metrojs.js");
-    $this->addStyle("/Dashboard/CSS/metrojs.css");
-    $this->addScript("/Dashboard/JS/scrollbar.js");
-    $this->addStyle("/Dashboard/CSS/scrollbar.css");
-    $this->addScript("/Dashboard/JS/jquery.contextmenu.js");
-    $this->addStyle("/Dashboard/CSS/jquery.contextmenu.css");
-    $this->addScript("/Dashboard/JS/Packery.js");
-    $this->addScript("/Dashboard/JS/dashboard.js");
-    $this->addStyle("/Dashboard/CSS/dashboard.css");
+    $this->addScript("/src/dashboard/js/metrojs.js");
+    $this->addStyle("/src/dashboard/css/metrojs.css");
+    $this->addScript("/src/dashboard/js/scrollbar.js");
+    $this->addStyle("/src/dashboard/css/scrollbar.css");
+    $this->addScript("/src/dashboard/js/jquery.contextmenu.js");
+    $this->addStyle("/src/dashboard/css/jquery.contextmenu.css");
+    $this->addScript("/src/dashboard/js/Packery.js");
+    $this->addScript("/src/dashboard/js/dashboard.js");
+    $this->addStyle("/src/dashboard/css/dashboard.css");
   }
   
   public function makePanelTree($id, $item){

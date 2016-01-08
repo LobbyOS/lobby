@@ -194,7 +194,7 @@ class Apps extends \Lobby {
       
       $details['logo'] = isset($details['logo']) ?
         APPS_URL . "/{$this->app}/src/Image/logo.png" :
-        L_URL . "/includes/lib/core/Img/blank.png";
+        L_URL . "/includes/lib/lobby/image/blank.png";
        
       /**
        *Insert the info as a property
@@ -284,7 +284,7 @@ class Apps extends \Lobby {
       require_once L_DIR . "/includes/src/App.php";
       require_once $this->appDir . "/App.php";
       
-      \Lobby::addScript("app", "/includes/lib/core/JS/app.js");
+      \Lobby::addScript("app", "/includes/lib/lobby/js/app.js");
      
       $appInfo = $this->info;
       $className = "\\Lobby\App\\" . str_replace("-", "_", $this->app);
