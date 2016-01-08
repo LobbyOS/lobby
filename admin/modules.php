@@ -20,7 +20,7 @@
         $custom_modules = \Lobby\Modules::get("custom");
         $app_modules = \Lobby\Modules::get("app");
 
-        echo "<h2>Custom Modules</h2>";
+        echo "<h3>Custom Modules</h3>";
         if(count($custom_modules) == 0){
           ser("No Custom Modules", "No custom modules are enabled or installed", false);
         }else{
@@ -31,7 +31,7 @@
           echo "</ul><p>To disable a <b>custom module</b>, create a 'disabled.txt' file in the module directory</p>";
         }
         
-        echo "<h2>App Modules</h2>";
+        echo "<h3>App Modules</h3>";
         if(count($app_modules) == 0){
           ser("No App Modules", "No app's modules are enabled or installed", false);
         }else{
@@ -42,7 +42,7 @@
           echo "</ul>";
         }
         
-        echo "<h2>Core Modules</h2><ul>";
+        echo "<h3>Core Modules</h3><ul>";
         foreach($core_modules as $module => $loc){
           echo "<li data-loc='$loc'>$module</li>";
         }
