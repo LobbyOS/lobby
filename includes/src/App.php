@@ -14,12 +14,12 @@ class App {
   }
   
   public function addStyle($fileName){
-    $url = "/contents/apps/{$this->id}/src/CSS/$fileName";
+    $url = "/contents/apps/{$this->id}/src/Css/$fileName";
     \Lobby::addStyle("{$this->id}-{$fileName}", $url);
   }
   
   public function addScript($fileName){
-    $url = "/contents/apps/{$this->id}/src/JS/$fileName";
+    $url = "/contents/apps/{$this->id}/src/Js/$fileName";
     \Lobby::addScript("{$this->id}-{$fileName}", $url);
   }
   

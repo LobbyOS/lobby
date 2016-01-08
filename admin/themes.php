@@ -67,7 +67,7 @@
               foreach($Apps as $app => $null){
                 $App = new \Lobby\Apps($app);
                 $data = $App->info;
-                $appImage = !isset($data['image']) ? L_URL . "/includes/lib/core/Img/blank.png" : $data['image'];
+                $appImage = !isset($data['image']) ? L_URL . "/includes/lib/lobby/image/blank.png" : $data['image'];
                 $enabled = $App->isEnabled();
               ?>
                 <tr <?php if(!$enabled){echo 'style="background: #EEE;"';}?>>

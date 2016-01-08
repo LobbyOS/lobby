@@ -64,7 +64,7 @@ class Themes extends \Lobby {
      */
     \Lobby::addScript("jquery", "/includes/lib/jquery/jquery.js");
     \Lobby::addScript("jqueryui", "/includes/lib/jquery/jquery-ui.js"); // jQuery UI
-    \Lobby::addScript("main", "/includes/lib/core/JS/main.js");
+    \Lobby::addScript("main", "/includes/lib/lobby/js/main.js");
   }
   
   /**
@@ -83,19 +83,19 @@ class Themes extends \Lobby {
     if(\Lobby::status("lobby.admin")){
       \Lobby::hook("admin.head.begin", function(){
         $GLOBALS["THEME_OBJ"]->panel(true);
-        $GLOBALS["THEME_OBJ"]->addStyle("/style.css");
-        $GLOBALS["THEME_OBJ"]->addStyle("/admin.style.css");
+        $GLOBALS["THEME_OBJ"]->addStyle("/src/css/style.css");
+        $GLOBALS["THEME_OBJ"]->addStyle("/src/css/admin.style.css");
       });
       \Lobby::hook("admin.body.begin", function() {
-        echo $GLOBALS["THEME_OBJ"]->inc("/Panel/load.admin.php");
+        echo $GLOBALS["THEME_OBJ"]->inc("/src/panel/load.admin.php");
       });
     }else{
-      $GLOBALS["THEME_OBJ"]->addStyle("/style.css");
+      $GLOBALS["THEME_OBJ"]->addStyle("/src/css/style.css");
       \Lobby::hook("head.begin", function(){
         $GLOBALS["THEME_OBJ"]->panel(false);
       });
       \Lobby::hook("body.begin", function() {
-        echo $GLOBALS["THEME_OBJ"]->inc("/Panel/load.php");
+        echo $GLOBALS["THEME_OBJ"]->inc("/src/panel/load.php");
       });
     }
   }
@@ -107,7 +107,7 @@ class Themes extends \Lobby {
     if($dashboard_items == "head"){
       $GLOBALS["THEME_OBJ"]->dashboard();
     }else{
-      echo $GLOBALS["THEME_OBJ"]->inc("/Dashboard/load.php");
+      echo $GLOBALS["THEME_OBJ"]->inc("/src/dashboard/load.php");
     }
   }
   
@@ -121,7 +121,7 @@ class Themes extends \Lobby {
     /**
      * Does the "Theme.php" file in theme directory exist ?
      */
-    if(file_exists("$loc/Dashboard/load.php") && file_exists("$loc/Panel/load.php")){
+    if(file_exists("$loc/src/dashboard/load.php") && file_exists("$loc/src/panel/load.php")){
       $valid = true;
     }
     return $valid;

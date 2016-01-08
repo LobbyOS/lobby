@@ -92,12 +92,12 @@ lobby.ajax = function(fileName, options, callback, appID){
   
   /**
    * If the App ID is not defined, then it is a direct contact
-   * to the AJAX file in /includes/lib/core/Ajax
+   * to the AJAX file in /includes/lib/lobby/Ajax
    */
   if(appID === false){
-    var requestURL = lobby.url + "/includes/lib/core/Ajax/" + fileName;
+    var requestURL = lobby.url + "/includes/lib/lobby/ajax/" + fileName;
   }else{
-    var requestURL = lobby.url + "/includes/lib/core/Ajax" + "/app.php";
+    var requestURL = lobby.url + "/includes/lib/lobby/Ajax" + "/app.php";
   }
   
   if(typeof options == "object"){
@@ -127,7 +127,7 @@ lobby.ajax = function(fileName, options, callback, appID){
 lobby.saveOption = function(key, value, callback){
    /* If the callback given is a function, use it otherwise make a simple function that is of no use */
    var callback = typeof callback == "function" ? callback : function(){};
-   var requestURL = lobby.url + "/includes/lib/core/Ajax/saveOption.php";
+   var requestURL = lobby.url + "/includes/lib/lobby/ajax/saveOption.php";
    
    if(key == "" || value == ""){
       callback("bad");

@@ -12,9 +12,9 @@ if(isset($_POST['s7c8csw91']) && isset($_POST['cx74e9c6a45']) && H::csrf()){
       ser();
     }else{
       $AppClass = $App->run();
-      $html = $AppClass->page("/Ajax/$AjaxFile");
+      $html = $AppClass->page("/ajax/$AjaxFile");
       if($html == "auto"){
-        $html = $AppClass->inc("/src/Ajax/$AjaxFile");
+        $html = $AppClass->inc("/src/ajax/$AjaxFile");
       }
       echo $html;
     }

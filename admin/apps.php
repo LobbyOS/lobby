@@ -3,7 +3,7 @@
   <head>
     <?php
     \Lobby::doHook("admin.head.begin");
-    \Lobby::addScript("admin.apps.js", "/admin/JS/apps.js");
+    \Lobby::addScript("admin.apps.js", "/admin/js/apps.js");
     \Lobby::head("App Manager");
     ?>
   </head>
@@ -82,7 +82,7 @@
                 foreach($Apps as $app => $null){
                   $App = new \Lobby\Apps($app);
                   $data = $App->info;
-                  $appImage = !isset($data['image']) ? L_URL . "/includes/lib/core/Img/blank.png" : $data['image'];
+                  $appImage = !isset($data['image']) ? L_URL . "/includes/lib/lobby/image/blank.png" : $data['image'];
                   $enabled = $App->isEnabled();
                 ?>
                   <tr <?php if(!$enabled){echo 'style="background: #EEE;"';}?>>

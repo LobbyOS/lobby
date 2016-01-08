@@ -71,7 +71,7 @@ class Install extends \Lobby {
     $cfg = self::$database;
     
     /* Make the configuration file */
-    $config_sample = \Lobby\FS::get("/includes/lib/core/Inc/config-sample.php");
+    $config_sample = \Lobby\FS::get("/includes/lib/lobby/inc/config-sample.php");
     $config_file   = $config_sample;
     $config_file   = preg_replace("/host'(.*?)'(.*?)'/", "host'$1'{$cfg['host']}'", $config_file);
     $config_file   = preg_replace("/port'(.*?)'(.*?)'/", "port'$1'{$cfg['port']}'", $config_file);
