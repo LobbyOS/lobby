@@ -9,7 +9,7 @@ class ledit extends \Lobby\App {
   public function indexPage(){
     $this->addStyle("main.css");
     $this->addScript("main.js");
-    $html = $this->inc("/src/Page/index.php");
+    $html = $this->inc("/src/page/index.php");
     
     /* We obtain the save name from page-index.php */
     if(isset($id)){

@@ -84,7 +84,7 @@ class Router {
           if($page == "/"){
             $page = "/index";
           }
-          $GLOBALS['workspaceHTML'] = $class->inc("/src/Page{$page}.php");
+          $GLOBALS['workspaceHTML'] = $class->inc("/src/page{$page}.php");
         }else{
           $GLOBALS['workspaceHTML'] = $page_response;
         }
@@ -103,7 +103,7 @@ class Router {
     self::route("/", function() {
       \Lobby::setTitle("Dashboard");
       \Lobby\UI\Themes::loadDashboard("head");
-      $GLOBALS['workspaceHTML'] = array("/includes/lib/core/Inc/dashboard.php");
+      $GLOBALS['workspaceHTML'] = array("/includes/lib/lobby/inc/dashboard.php");
     });
     
     /**
@@ -112,7 +112,7 @@ class Router {
     self::route("/admin/app/[:appID]?/[**:page]?", function($request){
       $AppID = $request->appID;
       $GLOBALS['AppID'] = $AppID;
-      $page = $request->page != "" ? "/Admin/{$request->page}" : "/Admin/index";
+      $page = $request->page != "" ? "/admin/{$request->page}" : "/admin/index";
 
       /**
        * Check if App exists
@@ -144,10 +144,10 @@ class Router {
         
         $page_response = $class->page($page);
         if($page_response == "auto"){
-          if($page == "/"){
+          if($page === "/"){
             $page = "/index";
           }
-          $GLOBALS['workspaceHTML'] = $class->inc("/src/Page{$page}.php");
+          $GLOBALS['workspaceHTML'] = $class->inc("/src/page{$page}.php");
         }else{
           $GLOBALS['workspaceHTML'] = $page_response;
         }

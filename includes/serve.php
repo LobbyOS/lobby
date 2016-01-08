@@ -27,7 +27,7 @@ if(preg_match("/,/", $f)){
 foreach($files as $file){
   $file = str_replace(L_URL, "", $file);
   
-  if($file == "/includes/lib/jquery/jquery-ui.js" || $file == "/includes/lib/jquery/jquery.js" || $file == "/includes/lib/core/JS/main.js" || $file == "/includes/lib/core/JS/app.js"){
+  if($file == "/includes/lib/jquery/jquery-ui.js" || $file == "/includes/lib/jquery/jquery.js" || $file == "/includes/lib/lobby/js/main.js" || $file == "/includes/lib/core/JS/app.js"){
     $extraContent .= \Lobby\FS::get($file);
   }else{
     if(\Lobby\FS::exists($file)){
