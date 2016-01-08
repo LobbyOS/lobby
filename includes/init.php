@@ -2,8 +2,8 @@
 /**
  * Default Styles
  */
-\Lobby::addStyle("home", "/includes/lib/core/CSS/font.css");
-\Lobby::addStyle("main", "/includes/lib/core/CSS/main.css");
+\Lobby::addStyle("home", "/includes/lib/lobby/css/font.css");
+\Lobby::addStyle("main", "/includes/lib/lobby/css/main.css");
 
 /**
  * Some checking to make sure Lobby works fine
@@ -86,14 +86,14 @@ if(\Lobby::curPage() != "/admin/install.php"){
 }
 
 if(\Lobby::status("lobby.install")){
-  \Lobby::addStyle("admin", "/includes/lib/core/CSS/admin.css");
+  \Lobby::addStyle("admin", "/includes/lib/lobby/css/admin.css");
 }
 
 if(\Lobby::status("lobby.admin")){
   /**
    * Add Admin Pages' stylesheet
    */
-  \Lobby::addStyle("admin", "/includes/lib/core/CSS/admin.css");
+  \Lobby::addStyle("admin", "/includes/lib/lobby/css/admin.css");
   
   /**
    * Check For New Versions (Apps & Core)

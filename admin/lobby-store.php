@@ -5,7 +5,7 @@ header( 'Content-type: text/html; charset=utf-8' );
 <html>
   <head>
     <?php
-    \Lobby::addStyle("lobby-store", "/admin/CSS/lobby-store.css");
+    \Lobby::addStyle("lobby-store", "/admin/css/lobby-store.css");
     \Lobby::doHook("admin.head.begin");
     \Lobby::head("Lobby Store");
     ?>
@@ -27,7 +27,7 @@ header( 'Content-type: text/html; charset=utf-8' );
           if($app == "false"){
             ser("404 - App Not Found", "App was not found in Lobby Store.");
           }else{
-            $appImage = $app['image'] != "" ? $app['image'] : L_URL . "/includes/lib/core/Img/blank.png";
+            $appImage = $app['image'] != "" ? $app['image'] : L_URL . "/includes/lib/lobby/image/blank.png";
             $c = $app['category'];
             $sc = $app['sub_category'];
         ?>
@@ -106,7 +106,7 @@ header( 'Content-type: text/html; charset=utf-8' );
             ser("Nothing Found", "Nothing was found that matches your criteria. Sorry...");
           }else{
             foreach($server_response['apps'] as $app){
-              $appImage = $app['image'] != "" ? $app['image'] : L_URL."/includes/lib/core/Img/blank.png";
+              $appImage = $app['image'] != "" ? $app['image'] : L_URL."/includes/lib/lobby/image/blank.png";
               $url = \Lobby::u("/admin/lobby-store.php?id={$app['id']}");
           ?>
             <div class="app">

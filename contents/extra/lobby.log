@@ -24,8 +24,8 @@
 [2015-10-09 23:09:58] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/App.php on line 123 : Invalid argument supplied for foreach()
 [2015-10-09 23:10:10] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/App.php on line 123 : Invalid argument supplied for foreach()
 [2015-10-09 23:10:37] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/App.php on line 123 : Invalid argument supplied for foreach()
-[2015-10-09 23:45:17] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/Ajax/validate.php on line 67 : Invalid argument supplied for foreach()
-[2015-10-09 23:45:33] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/Ajax/validate.php on line 67 : Invalid argument supplied for foreach()
+[2015-10-09 23:45:17] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/ajax/validate.php on line 67 : Invalid argument supplied for foreach()
+[2015-10-09 23:45:33] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/src/ajax/validate.php on line 67 : Invalid argument supplied for foreach()
 [2015-10-09 23:46:32] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/App.php on line 123 : Invalid argument supplied for foreach()
 [2015-10-09 23:46:42] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/App.php on line 123 : Invalid argument supplied for foreach()
 [2015-10-09 23:46:49] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/kerala-it-exam/App.php on line 123 : Invalid argument supplied for foreach()
@@ -1063,12 +1063,12 @@ Stack trace:
 [2015-11-24 21:06:10] CSS file was not found in location given : /includes/lib/scrollbar/scrollbar.css
 [2015-11-24 21:06:10] JavaScript file was not found in location given : /includes/lib/scrollbar/scrollbar.js
 [2015-11-24 21:09:16] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2015-11-24 21:09:16] JavaScript file was not found in location given : /contents/apps/anagram/src/JS//scrollbar.js
+[2015-11-24 21:09:16] JavaScript file was not found in location given : /contents/apps/anagram/src/js//scrollbar.js
 [2015-11-24 21:09:49] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2015-11-24 21:09:49] CSS file was not found in location given : /contents/apps/anagram/src/CSS//scrollbar.css
+[2015-11-24 21:09:49] CSS file was not found in location given : /contents/apps/anagram/src/css//scrollbar.css
 [2015-11-24 21:09:56] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2015-11-24 21:10:02] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2015-11-24 21:10:03] CSS file was not found in location given : /contents/apps/anagram/src/CSS//scrollbar.css
+[2015-11-24 21:10:03] CSS file was not found in location given : /contents/apps/anagram/src/css//scrollbar.css
 [2015-11-24 21:10:08] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2015-11-24 21:11:00] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2015-11-24 21:11:04] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
@@ -1076,13 +1076,13 @@ Stack trace:
 [2015-11-25 08:09:01] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2015-11-25 08:09:32] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2015-11-25 08:09:35] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2015-11-25 08:09:35] CSS file was not found in location given : /contents/apps/anagram/src/CSS/scrollbar.css
-[2015-11-25 08:09:44] CSS file was not found in location given : /contents/apps/anagram/src/CSS/scrollbar.css
+[2015-11-25 08:09:35] CSS file was not found in location given : /contents/apps/anagram/src/css/scrollbar.css
+[2015-11-25 08:09:44] CSS file was not found in location given : /contents/apps/anagram/src/css/scrollbar.css
 [2015-11-25 08:11:08] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2015-11-25 08:11:08] CSS file was not found in location given : /contents/apps/anagram/src/CSS/scrollbar.css
+[2015-11-25 08:11:08] CSS file was not found in location given : /contents/apps/anagram/src/css/scrollbar.css
 [2015-11-25 08:11:19] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2015-11-25 08:11:19] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2015-11-25 08:11:20] CSS file was not found in location given : /contents/apps/anagram/src/CSS/scrollbar.css
+[2015-11-25 08:11:20] CSS file was not found in location given : /contents/apps/anagram/src/css/scrollbar.css
 [2015-11-25 08:11:32] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2015-11-25 08:12:02] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2015-11-25 08:12:46] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
@@ -1798,7 +1798,7 @@ Stack trace:
 [2016-01-02 15:07:03] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-02 15:07:10] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-02 15:07:20] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-02 15:07:20] CSS file was not found in location given : /contents/apps/anagram/src/CSS/scrollbar.css
+[2016-01-02 15:07:20] CSS file was not found in location given : /contents/apps/anagram/src/css/scrollbar.css
 [2016-01-02 15:07:26] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-02 15:07:26] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-02 15:07:35] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
@@ -1806,42 +1806,42 @@ Stack trace:
 [2016-01-02 15:09:36] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-02 15:10:26] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-02 15:11:50] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-02 15:11:50] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-02 15:11:51] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-02 15:11:50] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-02 15:11:51] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-02 15:12:04] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-02 15:12:05] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-02 15:12:05] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-02 15:12:05] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-02 15:12:05] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-02 15:12:28] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-02 15:12:28] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-02 15:12:29] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-02 15:12:28] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-02 15:12:29] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-02 15:13:05] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-02 15:13:05] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-02 15:13:06] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-02 15:13:05] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-02 15:13:06] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-02 15:13:12] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-02 15:13:12] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-02 15:13:13] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-02 15:13:12] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-02 15:13:13] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-02 15:13:21] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-02 15:13:21] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-02 15:13:21] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-02 15:13:21] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-02 15:13:21] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-02 15:13:27] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-02 15:13:28] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-02 15:13:28] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-02 15:13:28] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-02 15:13:28] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-02 15:14:20] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-02 15:14:20] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-02 15:14:21] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-02 15:14:20] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-02 15:14:21] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-02 15:14:54] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-02 15:14:54] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-02 15:14:55] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-02 15:14:54] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-02 15:14:55] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-02 15:15:33] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-02 15:15:34] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-02 15:15:34] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
-[2016-01-02 15:15:38] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
+[2016-01-02 15:15:34] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-02 15:15:34] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
+[2016-01-02 15:15:38] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
 [2016-01-02 15:16:11] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-02 15:16:11] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-02 15:16:12] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-02 15:16:11] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-02 15:16:12] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-02 15:47:24] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-02 15:47:25] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-02 15:47:26] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-02 15:47:25] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-02 15:47:26] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-02 16:10:46] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-02 16:10:52] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-02 16:10:52] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
@@ -1869,8 +1869,8 @@ Stack trace:
 [2016-01-02 16:42:54] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-02 16:42:54] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-02 16:42:57] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-02 16:42:57] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-02 16:42:58] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-02 16:42:57] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-02 16:42:58] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-02 16:43:01] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-02 16:44:10] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-02 16:44:14] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
@@ -1886,17 +1886,17 @@ Stack trace:
 [2016-01-02 16:47:49] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-02 16:51:46] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-02 20:13:04] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-02 20:13:05] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-02 20:13:05] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-02 20:13:05] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-02 20:13:05] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-02 20:13:17] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-02 20:13:18] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-02 20:13:18] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-02 20:13:19] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-02 20:13:18] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-02 20:13:19] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-02 20:13:24] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-02 21:38:26] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-02 23:14:45] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-02 23:14:45] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-02 23:14:46] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-02 23:14:45] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-02 23:14:46] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-02 23:14:48] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-02 23:14:50] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-02 23:14:51] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
@@ -1910,20 +1910,20 @@ Stack trace:
 [2016-01-03 00:07:36] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 00:07:41] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 00:07:44] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-03 00:07:44] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-03 00:07:45] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-03 00:07:44] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-03 00:07:45] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-03 00:07:50] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 00:07:52] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 00:07:53] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 00:17:39] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 00:17:40] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 11:42:21] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-03 11:42:22] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-03 11:42:22] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-03 11:42:22] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-03 11:42:22] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-03 11:42:28] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 11:42:29] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-03 11:42:29] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-03 11:42:29] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-03 11:42:29] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-03 11:42:29] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-03 11:42:32] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 11:42:36] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 11:42:37] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
@@ -1957,8 +1957,8 @@ Stack trace:
 [2016-01-03 12:09:31] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 12:09:33] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 12:09:57] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-03 12:09:57] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-03 12:09:57] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-03 12:09:57] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-03 12:09:57] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-03 12:10:00] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 12:16:07] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 12:16:27] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
@@ -1995,8 +1995,8 @@ Stack trace:
 [2016-01-03 12:34:26] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 12:34:38] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 12:35:51] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-03 12:35:52] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-03 12:35:52] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-03 12:35:52] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-03 12:35:52] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-03 12:35:54] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 12:36:00] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 12:36:13] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
@@ -2024,8 +2024,8 @@ Stack trace:
 [2016-01-03 12:46:23] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 12:46:32] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 12:46:34] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-03 12:46:34] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-03 12:46:35] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-03 12:46:34] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-03 12:46:35] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-03 12:46:36] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 12:46:40] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 12:49:06] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
@@ -2062,9 +2062,9 @@ Stack trace:
 [2016-01-03 13:01:49] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 13:53:31] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 13:53:33] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-03 13:53:34] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-03 13:53:34] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-03 13:53:34] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-03 13:53:34] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-03 13:53:34] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-03 13:53:34] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-03 13:53:39] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 13:53:41] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 13:53:42] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
@@ -2073,25 +2073,25 @@ Stack trace:
 [2016-01-03 13:59:11] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-03 13:59:11] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-05 18:41:05] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-05 18:41:06] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-05 18:41:07] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-05 18:41:06] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-05 18:41:07] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-05 18:41:08] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-05 18:41:10] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-05 18:41:11] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-05 18:41:31] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/site-compressor/src/Inc/html-compress.php on line 70 : Non-static method SiteCompressor::_compressor() should not be called statically
 [2016-01-05 19:18:16] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-05 19:18:17] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-05 19:18:17] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-05 19:18:17] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-05 19:18:17] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-05 19:18:23] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-05 19:18:24] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-05 19:18:24] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-05 19:18:24] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-05 19:18:24] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-05 19:18:25] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-05 19:18:26] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-05 19:18:27] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-05 19:18:44] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/site-compressor/src/Inc/html-compress.php on line 70 : Non-static method SiteCompressor::_compressor() should not be called statically
 [2016-01-08 08:11:20] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-08 08:11:21] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-08 08:11:22] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-08 08:11:21] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-08 08:11:22] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-08 08:13:19] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-08 08:13:54] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-08 08:14:03] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
@@ -2110,18 +2110,18 @@ Stack trace:
 [2016-01-08 08:17:57] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-08 08:18:23] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-08 08:18:34] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-08 08:18:34] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-08 08:18:34] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-08 08:18:34] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-08 08:18:34] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-08 08:18:59] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-08 08:18:59] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-08 08:18:59] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-08 08:18:59] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-08 08:18:59] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-08 08:19:09] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-08 08:19:10] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-08 08:19:10] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-08 08:19:10] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-08 08:19:10] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-08 08:19:13] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-08 08:19:20] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
-[2016-01-08 08:19:20] CSS file was not found in location given : /contents/themes/hine/Dashboard/CSS/metrojs.css
-[2016-01-08 08:19:20] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/JS/metrojs.js
+[2016-01-08 08:19:20] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-08 08:19:20] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
 [2016-01-08 08:19:23] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-08 08:19:26] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-08 08:19:26] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
@@ -2135,3 +2135,205 @@ Stack trace:
 [2016-01-08 08:27:01] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-08 08:27:06] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-08 08:32:56] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 21:43:04] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 21:43:05] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-08 21:43:05] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
+[2016-01-08 21:43:16] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 21:52:26] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 21:53:00] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 21:53:28] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 21:56:06] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:12:08] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:12:16] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:12:36] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/ledit/src/page/index.php on line 17 : include(): Failed opening '/home/simsu/Other/projects/Web/Lobby/local/contents/apps/ledit/src/ajax/saves.php' for inclusion (include_path='.:/usr/share/php:/usr/share/pear')
+[2016-01-08 22:12:36] CSS file was not found in location given : /contents/apps/ledit/src/Css/main.css
+[2016-01-08 22:12:37] JavaScript file was not found in location given : /contents/apps/ledit/src/Js/main.js
+[2016-01-08 22:12:59] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:13:43] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/ledit/src/Page/index.php on line 17 : include(): Failed opening '/home/simsu/Other/projects/Web/Lobby/local/contents/apps/ledit/src/ajax/saves.php' for inclusion (include_path='.:/usr/share/php:/usr/share/pear')
+[2016-01-08 22:13:44] CSS file was not found in location given : /contents/apps/ledit/src/Css/main.css
+[2016-01-08 22:13:44] JavaScript file was not found in location given : /contents/apps/ledit/src/Js/main.js
+[2016-01-08 22:15:28] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:18:29] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:18:45] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:18:54] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:18:55] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:19:06] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/ledit/src/page/index.php on line 17 : include(): Failed opening '/home/simsu/Other/projects/Web/Lobby/local/contents/apps/ledit/src/ajax/saves.php' for inclusion (include_path='.:/usr/share/php:/usr/share/pear')
+[2016-01-08 22:19:06] CSS file was not found in location given : /contents/apps/ledit/src/Css/main.css
+[2016-01-08 22:19:06] JavaScript file was not found in location given : /contents/apps/ledit/src/Js/main.js
+[2016-01-08 22:19:10] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/ledit/src/page/index.php on line 17 : include(): Failed opening '/home/simsu/Other/projects/Web/Lobby/local/contents/apps/ledit/src/ajax/saves.php' for inclusion (include_path='.:/usr/share/php:/usr/share/pear')
+[2016-01-08 22:19:10] CSS file was not found in location given : /contents/apps/ledit/src/Css/main.css
+[2016-01-08 22:19:10] JavaScript file was not found in location given : /contents/apps/ledit/src/Js/main.js
+[2016-01-08 22:21:25] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:21:25] JavaScript file was not found in location given : /includes/lib/lobby/js/app.js
+[2016-01-08 22:21:25] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/FileSystem.php on line 33 : file_get_contents(/home/simsu/Other/projects/Web/Lobby/local/includes/lib/lobby/js/main.js): failed to open stream: No such file or directory
+[2016-01-08 22:21:25] CSS file was not found in location given : /includes/lib/lobby/css/font.css
+[2016-01-08 22:21:25] CSS file was not found in location given : /includes/lib/lobby/css/main.css
+[2016-01-08 22:21:25] CSS file was not found in location given : /contents/apps/ledit/src/Css/main.css
+[2016-01-08 22:21:25] CSS file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/css/filechooser.css
+[2016-01-08 22:21:25] CSS file was not found in location given : /contents/themes/hine/Panel/css/panel.css
+[2016-01-08 22:21:26] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:21:26] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:21:26] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:21:26] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:21:26] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:21:26] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:21:44] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:21:44] JavaScript file was not found in location given : /includes/lib/lobby/js/app.js
+[2016-01-08 22:21:44] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/FileSystem.php on line 33 : file_get_contents(/home/simsu/Other/projects/Web/Lobby/local/includes/lib/lobby/js/main.js): failed to open stream: No such file or directory
+[2016-01-08 22:21:44] CSS file was not found in location given : /includes/lib/lobby/css/font.css
+[2016-01-08 22:21:44] CSS file was not found in location given : /includes/lib/lobby/css/main.css
+[2016-01-08 22:21:44] CSS file was not found in location given : /contents/apps/ledit/src/Css/main.css
+[2016-01-08 22:21:44] CSS file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/css/filechooser.css
+[2016-01-08 22:21:44] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:21:44] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:21:44] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:21:45] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:21:45] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:21:45] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:21:45] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:23:51] 64 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/ui/Themes.php on line 4 : require_once(): Failed opening required '/home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Panel.php' (include_path='.:/usr/share/php:/usr/share/pear')
+[2016-01-08 22:24:05] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/ui/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:24:05] JavaScript file was not found in location given : /includes/lib/lobby/js/app.js
+[2016-01-08 22:24:05] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/FileSystem.php on line 33 : file_get_contents(/home/simsu/Other/projects/Web/Lobby/local/includes/lib/lobby/js/main.js): failed to open stream: No such file or directory
+[2016-01-08 22:24:05] CSS file was not found in location given : /contents/themes/hine/Lib/material-design/materialize.css
+[2016-01-08 22:24:05] CSS file was not found in location given : /includes/lib/lobby/css/font.css
+[2016-01-08 22:24:05] CSS file was not found in location given : /includes/lib/lobby/css/main.css
+[2016-01-08 22:24:05] CSS file was not found in location given : /contents/apps/ledit/src/Css/main.css
+[2016-01-08 22:24:05] CSS file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/css/filechooser.css
+[2016-01-08 22:24:05] CSS file was not found in location given : /contents/themes/hine/Panel/css/panel.css
+[2016-01-08 22:24:33] 64 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/load.php on line 40 : require_once(): Failed opening required '/home/simsu/Other/projects/Web/Lobby/local/includes/src/ui/Themes.php' (include_path='.:/usr/share/php:/usr/share/pear')
+[2016-01-08 22:24:48] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:24:48] JavaScript file was not found in location given : /includes/lib/lobby/js/app.js
+[2016-01-08 22:24:48] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/FileSystem.php on line 33 : file_get_contents(/home/simsu/Other/projects/Web/Lobby/local/includes/lib/lobby/js/main.js): failed to open stream: No such file or directory
+[2016-01-08 22:24:48] CSS file was not found in location given : /contents/themes/hine/Lib/material-design/materialize.css
+[2016-01-08 22:24:48] CSS file was not found in location given : /includes/lib/lobby/css/font.css
+[2016-01-08 22:24:48] CSS file was not found in location given : /includes/lib/lobby/css/main.css
+[2016-01-08 22:24:48] CSS file was not found in location given : /contents/apps/ledit/src/Css/main.css
+[2016-01-08 22:24:48] CSS file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/css/filechooser.css
+[2016-01-08 22:24:48] CSS file was not found in location given : /contents/themes/hine/Panel/css/panel.css
+[2016-01-08 22:25:55] 64 caused by /home/simsu/Other/projects/Web/Lobby/local/index.php on line 25 : require_once(): Failed opening required '/home/simsu/Other/projects/Web/Lobby/local/includes/lib/lobby/inc/page.php' (include_path='.:/usr/share/php:/usr/share/pear')
+[2016-01-08 22:27:19] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:27:19] CSS file was not found in location given : /contents/themes/hine/Lib/material-design/materialize.css
+[2016-01-08 22:27:19] CSS file was not found in location given : /contents/apps/ledit/src/Css/main.css
+[2016-01-08 22:27:19] CSS file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/css/filechooser.css
+[2016-01-08 22:27:19] CSS file was not found in location given : /contents/themes/hine/Panel/css/panel.css
+[2016-01-08 22:27:19] JavaScript file was not found in location given : /contents/themes/hine/Lib/material-design/materialize.js
+[2016-01-08 22:27:19] JavaScript file was not found in location given : /contents/apps/ledit/src/Js/main.js
+[2016-01-08 22:27:19] JavaScript file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/js/filechooser.js
+[2016-01-08 22:27:19] JavaScript file was not found in location given : /contents/themes/hine/Panel/js/superfish.js
+[2016-01-08 22:27:19] JavaScript file was not found in location given : /contents/themes/hine/Panel/js/panel.js
+[2016-01-08 22:28:58] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:28:58] CSS file was not found in location given : /contents/themes/hine/Lib/material-design/materialize.css
+[2016-01-08 22:28:58] CSS file was not found in location given : /contents/apps/ledit/src/Css/main.css
+[2016-01-08 22:28:58] CSS file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/css/filechooser.css
+[2016-01-08 22:28:58] CSS file was not found in location given : /contents/themes/hine/Panel/css/panel.css
+[2016-01-08 22:28:58] JavaScript file was not found in location given : /contents/themes/hine/Lib/material-design/materialize.js
+[2016-01-08 22:28:58] JavaScript file was not found in location given : /contents/apps/ledit/src/Js/main.js
+[2016-01-08 22:28:58] JavaScript file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/js/filechooser.js
+[2016-01-08 22:28:58] JavaScript file was not found in location given : /contents/themes/hine/Panel/js/superfish.js
+[2016-01-08 22:28:58] JavaScript file was not found in location given : /contents/themes/hine/Panel/js/panel.js
+[2016-01-08 22:29:10] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:29:10] CSS file was not found in location given : /contents/themes/hine/Lib/material-design/materialize.css
+[2016-01-08 22:29:10] CSS file was not found in location given : /contents/apps/ledit/src/Css/main.css
+[2016-01-08 22:29:10] CSS file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/css/filechooser.css
+[2016-01-08 22:29:10] CSS file was not found in location given : /contents/themes/hine/Panel/css/panel.css
+[2016-01-08 22:29:10] JavaScript file was not found in location given : /contents/themes/hine/Lib/material-design/materialize.js
+[2016-01-08 22:29:10] JavaScript file was not found in location given : /contents/apps/ledit/src/Js/main.js
+[2016-01-08 22:29:10] JavaScript file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/js/filechooser.js
+[2016-01-08 22:29:10] JavaScript file was not found in location given : /contents/themes/hine/Panel/js/superfish.js
+[2016-01-08 22:29:10] JavaScript file was not found in location given : /contents/themes/hine/Panel/js/panel.js
+[2016-01-08 22:29:12] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:29:12] CSS file was not found in location given : /contents/themes/hine/Lib/material-design/materialize.css
+[2016-01-08 22:29:12] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-08 22:29:12] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/scrollbar.css
+[2016-01-08 22:29:12] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/jquery.contextmenu.css
+[2016-01-08 22:29:12] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/dashboard.css
+[2016-01-08 22:29:12] CSS file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/css/filechooser.css
+[2016-01-08 22:29:12] CSS file was not found in location given : /contents/themes/hine/Panel/css/panel.css
+[2016-01-08 22:29:13] JavaScript file was not found in location given : /contents/themes/hine/Lib/material-design/materialize.js
+[2016-01-08 22:29:13] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
+[2016-01-08 22:29:13] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/scrollbar.js
+[2016-01-08 22:29:13] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/jquery.contextmenu.js
+[2016-01-08 22:29:13] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/Packery.js
+[2016-01-08 22:29:13] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/dashboard.js
+[2016-01-08 22:29:13] JavaScript file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/js/filechooser.js
+[2016-01-08 22:29:13] JavaScript file was not found in location given : /contents/themes/hine/Panel/js/superfish.js
+[2016-01-08 22:29:13] JavaScript file was not found in location given : /contents/themes/hine/Panel/js/panel.js
+[2016-01-08 22:31:49] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:31:49] CSS file was not found in location given : /contents/themes/hine/Lib/material-design/materialize.css
+[2016-01-08 22:31:49] CSS file was not found in location given : /contents/themes/hine/src/css/style.css
+[2016-01-08 22:31:49] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-08 22:31:49] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/scrollbar.css
+[2016-01-08 22:31:49] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/jquery.contextmenu.css
+[2016-01-08 22:31:49] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/dashboard.css
+[2016-01-08 22:31:49] CSS file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/css/filechooser.css
+[2016-01-08 22:31:49] CSS file was not found in location given : /contents/themes/hine/Panel/css/panel.css
+[2016-01-08 22:31:49] JavaScript file was not found in location given : /contents/themes/hine/Lib/material-design/materialize.js
+[2016-01-08 22:31:49] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
+[2016-01-08 22:31:49] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/scrollbar.js
+[2016-01-08 22:31:49] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/jquery.contextmenu.js
+[2016-01-08 22:31:49] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/Packery.js
+[2016-01-08 22:31:49] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/dashboard.js
+[2016-01-08 22:31:49] JavaScript file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/js/filechooser.js
+[2016-01-08 22:31:49] JavaScript file was not found in location given : /contents/themes/hine/Panel/js/superfish.js
+[2016-01-08 22:31:49] JavaScript file was not found in location given : /contents/themes/hine/Panel/js/panel.js
+[2016-01-08 22:40:15] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:40:15] CSS file was not found in location given : /contents/themes/hine/src/css/style.css
+[2016-01-08 22:40:15] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/metrojs.css
+[2016-01-08 22:40:15] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/scrollbar.css
+[2016-01-08 22:40:15] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/jquery.contextmenu.css
+[2016-01-08 22:40:15] CSS file was not found in location given : /contents/themes/hine/Dashboard/css/dashboard.css
+[2016-01-08 22:40:15] CSS file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/css/filechooser.css
+[2016-01-08 22:40:15] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/metrojs.js
+[2016-01-08 22:40:15] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/scrollbar.js
+[2016-01-08 22:40:15] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/jquery.contextmenu.js
+[2016-01-08 22:40:15] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/Packery.js
+[2016-01-08 22:40:15] JavaScript file was not found in location given : /contents/themes/hine/Dashboard/js/dashboard.js
+[2016-01-08 22:40:15] JavaScript file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/js/filechooser.js
+[2016-01-08 22:40:15] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:40:29] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:40:29] CSS file was not found in location given : /contents/themes/hine/src/css/style.css
+[2016-01-08 22:40:29] CSS file was not found in location given : /contents/themes/hine/src/dashboard/css/metrojs.css
+[2016-01-08 22:40:29] CSS file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/css/filechooser.css
+[2016-01-08 22:40:29] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:40:29] JavaScript file was not found in location given : /contents/themes/hine/src/dashboard/js/metrojs.js
+[2016-01-08 22:40:29] JavaScript file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/js/filechooser.js
+[2016-01-08 22:41:14] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:41:15] CSS file was not found in location given : /contents/themes/hine/src/css/style.css
+[2016-01-08 22:41:15] CSS file was not found in location given : /contents/themes/hine/src/dashboard/css/metrojs.css
+[2016-01-08 22:41:15] CSS file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/css/filechooser.css
+[2016-01-08 22:41:15] JavaScript file was not found in location given : /contents/themes/hine/src/dashboard/js/metrojs.js
+[2016-01-08 22:41:15] JavaScript file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/js/filechooser.js
+[2016-01-08 22:41:15] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:41:16] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:41:16] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:41:19] CSS file was not found in location given : /contents/themes/hine/src/css/style.css
+[2016-01-08 22:41:19] CSS file was not found in location given : /contents/themes/hine/src/dashboard/css/metrojs.css
+[2016-01-08 22:41:19] CSS file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/css/filechooser.css
+[2016-01-08 22:41:53] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:41:53] CSS file was not found in location given : /contents/themes/hine/src/dashboard/css/metrojs.css
+[2016-01-08 22:41:53] CSS file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/css/filechooser.css
+[2016-01-08 22:41:53] JavaScript file was not found in location given : /contents/themes/hine/src/dashboard/js/metrojs.js
+[2016-01-08 22:41:53] JavaScript file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/js/filechooser.js
+[2016-01-08 22:41:53] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:42:03] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:43:49] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:43:51] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:43:51] CSS file was not found in location given : /contents/themes/hine/src/dashboard/css/metrojs.css
+[2016-01-08 22:43:51] CSS file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/css/filechooser.css
+[2016-01-08 22:43:51] JavaScript file was not found in location given : /contents/themes/hine/src/dashboard/js/metrojs.js
+[2016-01-08 22:43:51] JavaScript file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/js/filechooser.js
+[2016-01-08 22:43:55] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:43:56] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:43:57] CSS file was not found in location given : /contents/themes/hine/src/dashboard/css/metrojs.css
+[2016-01-08 22:43:57] CSS file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/css/filechooser.css
+[2016-01-08 22:43:57] JavaScript file was not found in location given : /contents/themes/hine/src/dashboard/js/metrojs.js
+[2016-01-08 22:43:57] JavaScript file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/js/filechooser.js
+[2016-01-08 22:44:17] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:44:20] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:44:20] CSS file was not found in location given : /contents/themes/hine/src/dashboard/css/metrojs.css
+[2016-01-08 22:44:20] CSS file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/css/filechooser.css
+[2016-01-08 22:44:21] JavaScript file was not found in location given : /contents/themes/hine/src/dashboard/js/metrojs.js
+[2016-01-08 22:44:21] JavaScript file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/js/filechooser.js
+[2016-01-08 22:44:22] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-08 22:44:24] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
