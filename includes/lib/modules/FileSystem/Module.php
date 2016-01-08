@@ -11,8 +11,8 @@ class FileSystem extends \Lobby\Module {
   public function init(){
     if(!\Lobby::status("lobby.serve")){
       \Lobby::hook("head.begin", function(){
-        \Lobby::addScript("Lobby.FS.filechooser", $this->dir . "/JS/filechooser.js");
-        \Lobby::addStyle("Lobby.FS.filechooser", $this->dir . "/CSS/filechooser.css");
+        \Lobby::addScript("Lobby.FS.filechooser", $this->dir . "/js/filechooser.js");
+        \Lobby::addStyle("Lobby.FS.filechooser", $this->dir . "/css/filechooser.css");
       });
     }
   }

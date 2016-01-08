@@ -18,7 +18,7 @@ lobby.app.save = function(key, value, callback){
 
   /* If the callback given is a function, use it otherwise make a simple function that is of no use */
   var callback = typeof callback == "function" ? callback : function(){};
-  var requestURL = lobby.url + "/includes/lib/core/Ajax/saveData.php";
+  var requestURL = lobby.url + "/includes/lib/lobby/ajax/saveData.php";
   
   if(key == "" || value == ""){
      callback("bad");
@@ -38,7 +38,7 @@ lobby.app.remove = function(key, callback){
 
   /* If the callback given is a function, use it otherwise make a simple function that is of no use */
   var callback = typeof callback == "function" ? callback : function(){};
-  var requestURL = lobby.url + "/includes/lib/core/Ajax/removeData.php";
+  var requestURL = lobby.url + "/includes/lib/lobby/ajax/removeData.php";
    if(key == ""){
      callback("bad");
   }else{

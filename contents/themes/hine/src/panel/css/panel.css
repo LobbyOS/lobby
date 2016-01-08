@@ -73,7 +73,7 @@
   display: block;
   height: 40px;
   width: 40px;
-  background: url(<?THEME_URL?>/Panel/Image/home.svg);
+  background: url(<?THEME_URL?>/src/panel/image/home.svg);
   background-size: contain;
 }
 .panel.top .right .item span{
@@ -81,14 +81,8 @@
   width:17px;
   display: inline-block;
 }
-.panel.top .right #net{
-  background: url(<?L_URL?>/includes/lib/modules/panel/lib/connection/connection.png) 0px 2px no-repeat;
-}
-.panel.top .right #net.off{
-  background: url(<?L_URL?>/includes/lib/modules/panel/lib/connection/connection.png) -23px 3px no-repeat;
-}
 .panel.top .right #update{
-  background: url(<?L_URL?>/includes/lib/core/Img/update.png) 0px -1px no-repeat;
+  background: url(<?L_URL?>/includes/lib/lobby/image/update.png) 0px -1px no-repeat;
   background-size: 24px;
   width:22px;
 }

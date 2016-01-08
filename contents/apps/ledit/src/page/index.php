@@ -14,7 +14,7 @@
   ?>
   <div class="saves-outer">
     <div id="saves">
-      <?php include(APP_DIR . "/src/Ajax/saves.php");?>
+      <?php include(APP_DIR . "/src/ajax/saves.php");?>
     </div>
   </div>
   <div id="editor">

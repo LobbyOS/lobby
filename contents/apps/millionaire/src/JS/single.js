@@ -26,7 +26,7 @@ $.extend(lobby.app, {
     /**
      * Scripts
      */
-    "chart_bar" : lobby.app.src + "/src/JS/chart.bar.js",
+    "chart_bar" : lobby.app.src + "/src/js/chart.bar.js",
     
     /**
      * Images

@@ -135,7 +135,7 @@ $(document).ready(function(){
  
   $(".workspace#site-compressor #siteDetails").live("submit", function(e){
     e.preventDefault();
-    var formURL = lobby.app.src + "/src/Ajax/compress.php";
+    var formURL = lobby.app.src + "/src/ajax/compress.php";
   
     /* Make the fake form to be inserted in iframe */
     var formHTML = $("<form>").html(

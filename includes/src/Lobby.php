@@ -230,7 +230,7 @@ class Lobby {
        * If no Title, give a 404 Page
        */
       header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found', true, 404);
-      include(L_DIR . "/includes/lib/core/Inc/error.php");
+      include(L_DIR . "/includes/lib/lobby/inc/error.php");
       exit;
     }else{
       $html .= "<div class='message'>";
