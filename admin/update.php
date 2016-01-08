@@ -40,8 +40,8 @@ require L_DIR . "/includes/src/Update.php";
             <table>
               <thead>
                 <tr>
-                  <td style='width: 5%;'>Update ?</td>
-                  <td style='width: 10%;'>App</td>
+                  <td style='width: 2%;'>Update ?</td>
+                  <td style='width: 20%;'>App</td>
                   <td style='width: 5%;'>Current Version</td>
                   <td style='width: 20%;'>Latest Version</td>
                 </tr>
@@ -52,7 +52,7 @@ require L_DIR . "/includes/src/Update.php";
                 $App = new \Lobby\Apps($appID);
                 $AppInfo = $App->info;
                 echo '<tr>';
-                  echo '<td><input style="vertical-align:top;display:inline-block;" checked="checked" type="checkbox" name="'. $appID .'" /></td>';
+                  echo '<td><label><input style="vertical-align:top;display:inline-block;" checked="checked" type="checkbox" name="'. $appID .'" /><span></span></label></td>';
                   echo '<td><span style="vertical-align:middle;display:inline-block;margin-left:5px;">'. $AppInfo['name'] .'</span></td>';
                   echo '<td>'. $AppInfo['version'] .'</td>';
                   echo '<td>'. $latest_version .'</td>';
