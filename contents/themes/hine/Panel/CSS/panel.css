@@ -14,8 +14,8 @@
   color: white;
 }
 .panel.top a:hover{
-  -webkit-transform: scale(0.9);
-  transform: scale(0.9);
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
   color: #fff;
 }
 .panel.top .left{
@@ -30,6 +30,7 @@
   margin-right: 15px;
   line-height: 40px;
   min-height: 40px;
+  max-height: 40px;
 }
 .panel.top .left ul, .panel.top .right ul{
   display:none;
@@ -51,7 +52,6 @@
   display: inline-block;
   vertical-align: middle;
   margin-right: 20px;
-  max-height: 40px;
 }
 .panel.top .right{
   position:absolute;
