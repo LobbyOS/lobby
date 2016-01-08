@@ -61,7 +61,7 @@ require L_DIR . "/includes/src/Update.php";
               ?>
             </tbody></table>
             <input type="hidden" name="action" value="updateApps" />
-            <button class="button red" style='padding: 10px 15px;' clear>Update Selected Apps</button>
+            <button class="button red" clear>Update Selected Apps</button>
           </form>
         <?php
         }
