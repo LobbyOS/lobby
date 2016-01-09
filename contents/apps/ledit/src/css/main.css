@@ -48,3 +48,6 @@
   font-size: 18px;
   margin-bottom: 10px;
 }
+.workspace#ledit #saves .saveItem .updated{
+  color: #CCC;
+}
