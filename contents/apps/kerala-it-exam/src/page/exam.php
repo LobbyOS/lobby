@@ -22,7 +22,7 @@ $questions = $_SESSION['kerala-it-exam-qs'];
       <a class='button red' id='finishTheory'>Finish Theory Examination</a>
     </span>
   </div>
-  <div class="left">
+  <div>
     Register No : <span><?php echo $_SESSION['kerala-it-exam-rid'];?></span>
     <span>
       <?php echo $this->l("/restart", "Restart Exam");?>
@@ -30,12 +30,12 @@ $questions = $_SESSION['kerala-it-exam-qs'];
   </div>
 </div>
 <form class="exam">
+  <ul class="tabs examTabs">
+    <li class='tab' class="active"><a href="#short-box">Short Answer</a></li>
+    <li class='tab'><a href="#multiple-box">Multiple Choice</a></li>
+    <li class='tab'><a href="#note-box">Short Note</a></li>
+  </ul>
   <div id="short-box" style="display: table;height: 85%;">
-    <ul class="tabs">
-      <li class="cur"><a href="#short-box">Short Answer</a></li>
-      <li><a href="#multiple-box">Multiple Choice</a></li>
-      <li><a href="#note-box">Short Note</a></li>
-    </ul>
     <div class="left">
       <?php
       $this->sidebar("short");
@@ -48,11 +48,6 @@ $questions = $_SESSION['kerala-it-exam-qs'];
     </div>
   </div>
   <div id="multiple-box">
-    <ul class="tabs">
-      <li><a href="#short-box">Short Answer</a></li>
-      <li class="cur"><a href="#multiple-box">Multiple Choice</a></li>
-      <li><a href="#note-box">Short Note</a></li>
-    </ul>
     <div class="left">
       <?php
       $this->sidebar("multiple");
@@ -65,11 +60,6 @@ $questions = $_SESSION['kerala-it-exam-qs'];
     </div>
   </div>
   <div id="note-box">
-    <ul class="tabs">
-      <li><a href="#short-box">Short Answer</a></li>
-      <li><a href="#multiple-box">Multiple Choice</a></li>
-      <li class="cur"><a href="#note-box">Short Note</a></li>
-    </ul>
     <div class="left">
       <?php
       $this->sidebar("note");
@@ -82,16 +72,16 @@ $questions = $_SESSION['kerala-it-exam-qs'];
     </div>
   </div>
   <div id="practical-box">
-    <ul class="tabs">
-      <li class="cur" data-id="0"><a>Group 1</a></li>
-      <li data-id="1"><a>Group 2</a></li>
-      <li data-id="2"><a>Group 3</a></li>
-      <li data-id="3"><a>Group 4</a></li>
+    <ul class="tabs groups">
+      <li class='tab' class="active" data-id="0"><a>Group 1</a></li>
+      <li class='tab' data-id="1"><a>Group 2</a></li>
+      <li class='tab' data-id="2"><a>Group 3</a></li>
+      <li class='tab' data-id="3"><a>Group 4</a></li>
     </ul>
     <ul class="choices">
-      <li class="cur" data-id="0"><a>Choice 1</a></li>
-      <li data-id="1"><a>Choice 2</a></li>
-    </ul><br/><br/>
+      <li data-id="0"><a class="button active">Choice 1</a></li>
+      <li data-id="1"><a class="button">Choice 2</a></li>
+    </ul>
     <div class='questionArea'>
       <div class="question"></div>
     </div>

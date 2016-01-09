@@ -1187,7 +1187,6 @@ $(document).ready(function(){
       var $this = $(this),
           window_width = $(window).width();
 
-      $this.width('100%');
       var $active, $content, $links = $this.find('li.tab a'),
           $tabs_width = $this.width(),
           $tab_width = $this.find('li').first().outerWidth(),
@@ -1420,8 +1419,7 @@ $(document).ready(function(){
                 marginTop: tooltipHeight/2,
                 marginLeft: '0px'
               });
-            }
-            else {
+            }else {
               // Bottom Position
               targetTop = origin.offset().top + origin.outerHeight() + margin;
               targetLeft = origin.offset().left + originWidth/2 - tooltipWidth/2;
