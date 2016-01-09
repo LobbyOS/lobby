@@ -2,7 +2,7 @@
   background: #eee;
 }
 .workspace .top{
-  padding: 10px;
+  padding: 10;
   background: #ccc;
   color: white;
 }
@@ -10,67 +10,43 @@
   float: right;
   color: red;
   font-size: 18px;
-  margin-right: 20px;
+  margin-right: 20;
 }
 .workspace .top .right div, .workspace .top .right span{
   display: inline-block;
 }
 .workspace .top .right span .button{
-  margin: -5px 5px 0px;
+  margin: -5px 5px 0;
 }
 .workspace #expired_overlay, .workspace #finished_overlay{
   display: none;
   position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   color: white;
-  font-size: 20px;
+  font-size: 20;
   text-align: center;
   background: rgba(0, 0, 0, 0.6);
 }
 .workspace #expired_overlay .button, .workspace #finished_overlay .button{
   font-size: 18px;
-  margin-top: 20px;
+  margin-top: 20;
 }
 .workspace #finished_overlay h2{
-  font-size: 120px;
+  font-size: 120;
 }
 .workspace .exam{
   position: absolute;
-  top: 35px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
+  top: 40px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
 }
-.workspace .exam .tabs{
-  position: absolute;
-  bottom: 100%;
-  margin: 0px;
-  padding: 0px;
-  list-style: none;
-  margin: 0px;
-}
-.workspace .exam .tabs li, .workspace .exam .choices li{
+.workspace .exam .examTabs li, .workspace .exam .choices li{
   display: inline;
-}
-.workspace .exam .tabs li a, .workspace .exam .choices li a{
-  display: block;
-  position: relative;
-  left: 1px;
-  float: left;
-  padding: 4px 10px;
-  margin-left: -1px;
-  background: #eee;
-  color: black;
-  border: 1px solid #ccc;
-  text-decoration: none;
-  cursor: pointer;
-}
-.workspace .exam .tabs li.cur a, .workspace .exam .choices li.cur a {
-  background: white;
-  border-bottom: 1px solid white;
 }
 .workspace .exam .left{
   display: table-cell;
@@ -78,11 +54,11 @@
 }
 .workspace .exam .left .toggleQuestion, .workspace .exam .left .toggleGroup{
   display: block;
-  margin: 5px 0px;
+  margin: 5px 0;
 }
 .workspace .exam .left .toggleGroupContainer{
-  padding-bottom: 10px;
-  margin-bottom: 10px;
+  padding-bottom: 10;
+  margin-bottom: 10;
   border-bottom: 2px solid #CCC;
 }
 .workspace .exam .right{
@@ -97,9 +73,8 @@
   right: 0;
   top: 0;
   bottom: 0;
-  border-top: 1px solid #ccc;
-  margin: 40px 0px;
-  padding: 5px 50px;
+  margin: 50 0 0;
+  padding: 5px 50;
   background: #eee;
   width: 100%;
 }
@@ -119,10 +94,10 @@
 }
 .workspace .exam .questionArea .question{
   background: white;
-  height: 250px;
-  padding: 10px;
+  height: 250;
+  padding: 10;
   overflow: auto;
-  box-shadow: inset 0px -1px 15px #ccc;
+  box-shadow: inset 0 -1px 15px #ccc;
   font-size: 15px;
 }
 #practical-box .questionArea .question{
@@ -130,11 +105,11 @@
 }
 .workspace .exam .questionArea .question img{
   display: block;
-  margin: 20px 0px;
+  margin: 20 0;
   max-width: 100%;
 }
 .workspace .exam .questionArea .options{
-  margin-top: 10px;
+  margin-top: 10;
   text-align: center;
 }
 .workspace .exam .questionArea .option{
@@ -142,8 +117,8 @@
   vertical-align: top;
   background: white;
   width: 40%;
-  margin: 5px 0px 5px 5px;
-  padding: 20px;  
+  margin: 5px 0 5px 5px;
+  padding: 20;  
   text-align: left;
   font-size: 13px;
 }
@@ -152,8 +127,11 @@
   vertical-align: top;
   margin-left: 5px;
 }
-@media screen and (max-width: 1000px){
+.workspace .exam .left .toggleGroup.active{
+  font-weight: bold;
+}
+@media screen and (max-width: 1000){
   #short-box, #multiple-box, #note-box{
-    padding: 0px;
+    padding: 0;
   }
 }
