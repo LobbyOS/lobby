@@ -1,5 +1,6 @@
 <?php
 namespace Lobby\App;
+
 /**
  * Have fun and don't forget to mess around the code
  * - Subin Siby - //subinsb.com
