@@ -16,6 +16,8 @@ $.extend(lobby.app, {
     });
     
     $(".workspace .dialog").live("click", function(){
+      $.fancybox.defaults.minHeight = 100;
+      $.fancybox.defaults.minWidth = 600;
       lobby.app.ajax($(this).data("dialog"), $(this).data("params"), function(r){
         $.fancybox.open(r);
       });
