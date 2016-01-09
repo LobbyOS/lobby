@@ -3,14 +3,9 @@
 }
 .workspace#ledit .contents{
   display: table;
-  margin-bottom: 0;
-}
-.workspace#ledit .saves-outer, .workspace#ledit #editor{
-  display: table-cell;
-  vertical-align: top;
 }
 .workspace#ledit #editor{
-  width: 75%;
+  width: 100%;
 }
 .workspace#ledit .saves-outer{
   width: 25%;
@@ -20,9 +15,12 @@
 .workspace#ledit #editor h2{
   width: 600px;
 }
-.workspace#ledit textarea{
+.workspace#ledit #saveName{
+  margin-bottom: 0;
+}
+.workspace#ledit #editor{
   width: 100%;
-  height: 460px;
+  height: 300px;
 }
 .workspace#ledit .button{
   width:100px;
@@ -39,18 +37,14 @@
 }
 .workspace#ledit #saves{
   height: 100%;
-  background: white;
   overflow: auto;
 }
-.workspace#ledit #saves h2{
-  margin-top: 0px;
+.workspace#ledit #saves .saveItem{
+  margin: 10px 0;
+  background: #fff;
+  padding: 2px 10px;
 }
-.workspace#ledit #saves li{
-  display:block;
-  margin: 2px 0px;
-  padding: 2px 0px 2px 5px;
-  width:100%;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  background:white;
+.workspace#ledit #saves .saveItem .title{
+  font-size: 18px;
+  margin-bottom: 10px;
 }
