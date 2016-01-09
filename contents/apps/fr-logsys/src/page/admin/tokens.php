@@ -9,14 +9,14 @@ require_once APP_DIR . "/src/inc/partial/layout.php";
     $this->load();
     
     if(isset($_POST['clear_tokens'])){
-      $sql = \fr_logsys\Fr\LS::$dbh->prepare("TRUNCATE TABLE `resetTokens`");
+      $sql = \Lobby\App\fr_logsys\Fr\LS::$dbh->prepare("TRUNCATE TABLE `resetTokens`");
       $sql->execute();
       echo sme("Tokens Cleared", "All tokens were cleared from the table");
     }
     
     $_GET['start'] = isset($_GET['start']) ? $_GET['start'] : 0;
     
-    $sql = \fr_logsys\Fr\LS::$dbh->prepare("SELECT * FROM `resetTokens` LIMIT :start, 10");
+    $sql = \Lobby\App\fr_logsys\Fr\LS::$dbh->prepare("SELECT * FROM `resetTokens` LIMIT :start, 10");
     $sql->bindParam(":start", $_GET['start'], \PDO::PARAM_INT);
     $sql->execute();
     
@@ -27,7 +27,7 @@ require_once APP_DIR . "/src/inc/partial/layout.php";
       while($r = $sql->fetch()){
   ?>
         <tr>
-          <td title="User ID: <?php echo $r['uid'];?>"><?php echo \fr_logsys\Fr\LS::getUser("name", $r['uid']);?></td>
+          <td title="User ID: <?php echo $r['uid'];?>"><?php echo \Lobby\App\fr_logsys\Fr\LS::getUser("name", $r['uid']);?></td>
           <td><?php echo $r['token'];?></td>
           <td><?php echo $r['requested'];?></td>
         </tr>
