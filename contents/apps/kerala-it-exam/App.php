@@ -14,7 +14,7 @@ class kerala_it_exam extends \Lobby\App {
    * Fetch the questions array
    */
   public function questions($class){
-    return json_decode($this->get("/src/Data/questions.{$class}.json"), true);
+    return json_decode($this->get("/src/data/questions.{$class}.json"), true);
   }
   
   /**
@@ -177,7 +177,7 @@ class kerala_it_exam extends \Lobby\App {
    * Filter Question
    */
   public function filterQuestion($str){
-    $new_str = preg_replace("/\[img\]\((.*?)\)/", "<img src='". APP_SRC . "/src/Data/image/$1" ."' />", $str);
+    $new_str = preg_replace("/\[img\]\((.*?)\)/", "<img src='". APP_SRC . "/src/data/image/$1" ."' />", $str);
     $new_str = str_replace("\n", "<br/>", $new_str);
     return $new_str;
   }
