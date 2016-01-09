@@ -19,7 +19,7 @@ class ChatBase {
       rtrim($fields_string, '&');
     }
     
-    $cookie_jar = realpath(APP_DIR . "/src/Data/cookies.txt"); //tempnam(sys_get_temp_dir(), "Lobby")
+    $cookie_jar = realpath(APP_DIR . "/src/data/cookies.txt"); //tempnam(sys_get_temp_dir(), "Lobby")
     file_put_contents($cookie_jar, $this->cookies);
     
     curl_setopt($ch, CURLOPT_URL, $url);
