@@ -42,8 +42,8 @@
       foreach($this->themes as $theme){
       ?>
         <label class='theme'>
-          <a target="_blank" href="<?php echo $this->u("/src/Data/themes/{$theme}/example.html");?>">
-            <img src="<?php echo $this->u("/src/Data/themes/{$theme}/thumbnail.png");?>" />
+          <a target="_blank" href="<?php echo $this->u("/src/data/themes/{$theme}/example.html");?>">
+            <img src="<?php echo $this->u("/src/data/themes/{$theme}/thumbnail.png");?>" />
           </a>
           <input type="radio" name="theme" value="<?php echo $theme;?>" />
         </label>

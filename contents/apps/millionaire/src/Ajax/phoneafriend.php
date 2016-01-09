@@ -2,7 +2,7 @@
 $q = H::input("question_id");
 
 if($q != null && isset($_POST['options']) && is_array($_POST['options'])){
-  $questions = json_decode($this->get("/src/Data/questions.json"), true);
+  $questions = json_decode($this->get("/src/data/questions.json"), true);
   
   $options = array_flip($_POST['options']);
   list($q_parent, $q_child) = explode("-", $q);

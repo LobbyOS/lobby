@@ -29,7 +29,7 @@ class millionaire extends \Lobby\App {
   
   public function questions(){
     $return = array();
-    $questions = json_decode($this->get("/src/Data/questions.json"), true);
+    $questions = json_decode($this->get("/src/data/questions.json"), true);
     
     foreach($questions as $level => $collection){
       $i = rand(0, count($collection) - 1);

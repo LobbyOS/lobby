@@ -21,7 +21,7 @@ class Site {
   
   public function generate($pages){
     $out = $this->path;
-    $path = APP_DIR . "/src/Data/themes/{$this->theme}"; // The theme path
+    $path = APP_DIR . "/src/data/themes/{$this->theme}"; // The theme path
     
     if($this->delete == 1){
       $this->log("Emptying Output Directory");
@@ -63,7 +63,7 @@ class Site {
   public function page($slug = "", $values = array(), $layout = ""){
     $location = "{$this->path}/{$slug}.html";
     if($layout == ""){
-      $layout = $this->app->get("/src/Data/themes/{$this->theme}/layout.html");
+      $layout = $this->app->get("/src/data/themes/{$this->theme}/layout.html");
     }
     if($this->titleTag && $values["{{page-title}}"] != $this->name){
       $layout = str_replace("<title>{{page-title}}</title>", "<title>{{page-title}} - {{site-name}}</title>", $layout);

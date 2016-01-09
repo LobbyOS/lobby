@@ -29,6 +29,7 @@
   font-size: 20;
   text-align: center;
   background: rgba(0, 0, 0, 0.6);
+  overflow: auto;
 }
 .workspace #expired_overlay .button, .workspace #finished_overlay .button{
   font-size: 18px;

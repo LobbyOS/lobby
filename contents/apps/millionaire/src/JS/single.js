@@ -38,20 +38,20 @@ $.extend(lobby.app, {
     /**
      * Audio
      */
-    "audio_audiencepoll" : lobby.app.src + "/src/Data/Audio/audiencepoll.ogg",
-    "audio_bg" : lobby.app.src + "/src/Data/Audio/bg.ogg",
-    "audio_correct" : lobby.app.src + "/src/Data/Audio/correct.ogg",
-    "audio_end" : lobby.app.src + "/src/Data/Audio/end.ogg",
-    "audio_fiftyfifty" : lobby.app.src + "/src/Data/Audio/fiftyfifty.ogg",
-    "audio_intro" : lobby.app.src + "/src/Data/Audio/intro.ogg",
-    "audio_locked" : lobby.app.src + "/src/Data/Audio/locked.ogg",
-    "audio_millionaire" : lobby.app.src + "/src/Data/Audio/millionaire.ogg",
-    "audio_ovation" : lobby.app.src + "/src/Data/Audio/ovation.ogg",
-    "audio_phoneafriend" : lobby.app.src + "/src/Data/Audio/phoneafriend.ogg",
-    "audio_rules" : lobby.app.src + "/src/Data/Audio/rules.ogg",
-    "audio_suspense" : lobby.app.src + "/src/Data/Audio/suspense.ogg",
-    "audio_timeout" : lobby.app.src + "/src/Data/Audio/timeout.ogg",
-    "audio_wrong" : lobby.app.src + "/src/Data/Audio/wrong.ogg",
+    "audio_audiencepoll" : lobby.app.src + "/src/data/Audio/audiencepoll.ogg",
+    "audio_bg" : lobby.app.src + "/src/data/Audio/bg.ogg",
+    "audio_correct" : lobby.app.src + "/src/data/Audio/correct.ogg",
+    "audio_end" : lobby.app.src + "/src/data/Audio/end.ogg",
+    "audio_fiftyfifty" : lobby.app.src + "/src/data/Audio/fiftyfifty.ogg",
+    "audio_intro" : lobby.app.src + "/src/data/Audio/intro.ogg",
+    "audio_locked" : lobby.app.src + "/src/data/Audio/locked.ogg",
+    "audio_millionaire" : lobby.app.src + "/src/data/Audio/millionaire.ogg",
+    "audio_ovation" : lobby.app.src + "/src/data/Audio/ovation.ogg",
+    "audio_phoneafriend" : lobby.app.src + "/src/data/Audio/phoneafriend.ogg",
+    "audio_rules" : lobby.app.src + "/src/data/Audio/rules.ogg",
+    "audio_suspense" : lobby.app.src + "/src/data/Audio/suspense.ogg",
+    "audio_timeout" : lobby.app.src + "/src/data/Audio/timeout.ogg",
+    "audio_wrong" : lobby.app.src + "/src/data/Audio/wrong.ogg",
   },
   
   init : function(){
@@ -455,7 +455,7 @@ $.extend(lobby.app, {
       audioBG.pause();
     }
     if(file != "bgoff"){
-      audioSrc = lobby.app.src + "/src/Data/Audio/" + file + ".ogg";
+      audioSrc = lobby.app.src + "/src/data/Audio/" + file + ".ogg";
       audio = $(".workspace .audios #audio_" + file)[0];
       audio.play();
     }

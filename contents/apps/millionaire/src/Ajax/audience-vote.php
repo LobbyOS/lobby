@@ -2,7 +2,7 @@
 $q = H::input("question_id");
 
 if($q != null){
-  $questions = json_decode($this->get("/src/Data/questions.json"), true);
+  $questions = json_decode($this->get("/src/data/questions.json"), true);
   
   list($q_parent, $q_child) = explode("-", $q);
   if(isset($questions[$q_parent][$q_child])){
