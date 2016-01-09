@@ -92,12 +92,12 @@ lobby.ajax = function(fileName, options, callback, appID){
   
   /**
    * If the App ID is not defined, then it is a direct contact
-   * to the AJAX file in /includes/lib/lobby/Ajax
+   * to the AJAX file in /includes/lib/lobby/ajax
    */
   if(appID === false){
     var requestURL = lobby.url + "/includes/lib/lobby/ajax/" + fileName;
   }else{
-    var requestURL = lobby.url + "/includes/lib/lobby/Ajax" + "/app.php";
+    var requestURL = lobby.url + "/includes/lib/lobby/ajax" + "/app.php";
   }
   
   if(typeof options == "object"){

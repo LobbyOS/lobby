@@ -24,8 +24,11 @@ class fr_logsys extends \Lobby\App {
   public function setInfo(){
     $this->load();
     
-    $number_of_users = \Lobby\App\fr_logsys\Fr\LS::$dbh->query("SELECT COUNT(1) FROM `". $this->table ."`")->fetchColumn();
-    $number_of_tokens = \Lobby\App\fr_logsys\Fr\LS::$dbh->query("SELECT COUNT(1) FROM `resetTokens`")->fetchColumn();
+    $number_of_users = \Lobby\App\fr_logsys\Fr\LS::$dbh->query("SELECT COUNT(1) FROM `". $this->table ."`");
+    $number_of_users = $number_of_users !== FALSE ? $number_of_users->fetchColumn() : 0;
+    
+    $number_of_tokens = \Lobby\App\fr_logsys\Fr\LS::$dbh->query("SELECT COUNT(1) FROM `resetTokens`");
+    $number_of_tokens = $number_of_tokens !== FALSE ? $number_of_tokens->fetchColumn() : 0;
     
     $this->info = array(
       "users" => $number_of_users,
@@ -44,18 +47,17 @@ class fr_logsys extends \Lobby\App {
     ), $credentials);
     
     try{
-      $this->dbh = new \PDO("mysql:dbname={$config['db_name']};host={$config['db_host']};port={$config['db_port']};charset=utf8", $config['db_username'], $config['db_password']);
+      $this->dbh = new \PDO("mysql:dbname={$config['db_name']};host={$config['db_host']};port={$config['db_port']};charset=utf8;", $config['db_username'], $config['db_password']);
       /**
        * SQL Injection Vulnerable.
        */
       $table = htmlspecialchars($config['db_table']);
-      $sql = $this->dbh->prepare("SELECT 1 FROM `". $table ."` LIMIT 1");
-      $sql->execute();
       
-      if($sql->rowCount() == 0){
-        return "no_table";
-      }else{
+      $sql = $this->dbh->query("SELECT 1 FROM `". $table ."` LIMIT 1");
+      if($sql !== false){
         return true;
+      }else{
+        return "no_table";
       }
     }catch(\PDOException $e){
       return false;

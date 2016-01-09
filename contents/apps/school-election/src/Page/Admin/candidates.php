@@ -1,5 +1,5 @@
 <?php
-include APP_DIR . "/src/Inc/load.php";
+include APP_DIR . "/src/inc/load.php";
 
 if(isset($_POST['update_male_candidates']) || isset($_POST['update_female_candidates'])){
   $candidates = isset($_POST['update_male_candidates']) ? getData("male_candidates") : getData("female_candidates");

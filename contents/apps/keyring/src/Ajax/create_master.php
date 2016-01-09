@@ -5,7 +5,7 @@ if(isset($_POST['master_id']) && isset($_POST['master_name']) && isset($_POST['m
   $master_description = htmlspecialchars($_POST['master_description']);
   
   if(!isset($_POST['master_password'])){
-    $add_form = $this->inc("/src/Inc/partial/create_master.php", array(
+    $add_form = $this->inc("/src/inc/partial/create_master.php", array(
       "master_id" => strtolower($master_id),
       "master_name" => $master_name
     ));

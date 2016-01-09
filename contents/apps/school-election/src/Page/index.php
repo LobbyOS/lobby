@@ -1,5 +1,5 @@
 <?php
-include APP_DIR . "/src/Inc/load.php";
+include APP_DIR . "/src/inc/load.php";
 
 $this->addStyle("style.css");
 $this->addScript("election.js");
