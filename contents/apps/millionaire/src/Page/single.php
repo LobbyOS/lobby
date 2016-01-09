@@ -27,7 +27,7 @@ $_SESSION['app-millionaire-level'] = 0;
 <div class="clearfix">
   <div class="left">
     <div class="overlay phoneafriend-container">
-      <img src="<?php echo APP_SRC . "/src/Image/phone.png";?>" />
+      <img src="<?php echo APP_SRC . "/src/image/phone.png";?>" />
       <div class="text"></div>
     </div>
     <div class="overlay audiencevote-container">

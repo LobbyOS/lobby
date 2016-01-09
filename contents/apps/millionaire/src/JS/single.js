@@ -31,9 +31,9 @@ $.extend(lobby.app, {
     /**
      * Images
      */
-    "img_bg" : lobby.app.src + "/src/Image/bg.png",
-    "img_lifelines" : lobby.app.src + "/src/Image/Lifelines.png",
-    "img_lozenge" : lobby.app.src + "/src/Image/Lozenge.png",
+    "img_bg" : lobby.app.src + "/src/image/bg.png",
+    "img_lifelines" : lobby.app.src + "/src/image/Lifelines.png",
+    "img_lozenge" : lobby.app.src + "/src/image/Lozenge.png",
     
     /**
      * Audio
@@ -74,7 +74,7 @@ $.extend(lobby.app, {
         }
       });
       
-      $(".workspace#millionaire").css({backgroundImage : "url("+ lobby.app.src +"/src/Image/bg.png)"});
+      $(".workspace#millionaire").css({backgroundImage : "url("+ lobby.app.src +"/src/image/bg.png)"});
       $(".workspace#millionaire .loading").fadeOut(1000, function(){
         $(".clearfix").fadeIn(1000);
       });

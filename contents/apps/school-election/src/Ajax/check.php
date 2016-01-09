@@ -1,5 +1,5 @@
 <?php
-include \Lobby\FS::loc("/src/Inc/load.php");
+include \Lobby\FS::loc("/src/inc/load.php");
 
 if(isset($_POST['id']) && isset($_POST['roll']) && isset($_POST['password'])){
   $roll = $_POST['roll'];

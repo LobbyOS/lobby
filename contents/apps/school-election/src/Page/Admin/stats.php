@@ -1,5 +1,5 @@
 <?php
-include APP_DIR . "/src/Inc/load.php";
+include APP_DIR . "/src/inc/load.php";
 ?>
 <div class="content-full" style="top:-40%;width:600px;">
 	<h2>Statistics</h2>

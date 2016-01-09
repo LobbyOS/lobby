@@ -94,7 +94,7 @@
 .clearfix .left .question{
   height: 95px;
   color: white;
-  background: url(<?APP_SRC?>/src/Image/Lozenge.png);
+  background: url(<?APP_SRC?>/src/image/Lozenge.png);
   background-size: cover;
 }
 .clearfix .left .question .text{
@@ -113,7 +113,7 @@
   width: 50%;
   margin-bottom: 20px;
   padding: 0 0 0 7em;
-  background: url(<?APP_SRC?>/src/Image/Lozenge.png);
+  background: url(<?APP_SRC?>/src/image/Lozenge.png);
   background-size: 880px;
   background-position: 0 -97px;
   cursor: pointer;
@@ -165,7 +165,7 @@
   height: 52px;
   width: 72px;
   cursor: pointer;
-  background: url(<?APP_SRC?>/src/Image/Lifelines.png);
+  background: url(<?APP_SRC?>/src/image/Lifelines.png);
   background-size: 16em;
   background-repeat: no-repeat;
 }
