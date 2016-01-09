@@ -30,7 +30,7 @@ class sige extends \Lobby\App {
         
         if($p2 == "site" || $p2 == "settings" || $p2 == "pages" || $p2 == "edit"){
           $site = $this->getSite($name);
-          return $this->inc("/src/Page/$p2.php", array(
+          return $this->inc("/src/page/$p2.php", array(
             "name" => $name,
             "site" => $site,
             "su" => $this->u("/site/".urlencode($name)), // Short for site URL

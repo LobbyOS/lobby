@@ -15,7 +15,7 @@ $this->setTitle("Site $name");
   <?php
   if(isset($_POST['generate'])){
     /* Generate the site */
-    $gSite = new \Lobby\App\sige\Site($this->getSite($name));
+    $gSite = new \Lobby\App\sige\Site($this->getSite($name), $this);
     $gSite->generate($this->getPages($name));
     \Lobby::sss("Generated Site", "The site was successfully generated");
   }

@@ -10,7 +10,7 @@ class site_compressor extends \Lobby\App {
       $this->addScript("scrollbar.js");
       $this->addScript("main.js");
       
-      return $this->inc("/src/Page/site.php");
+      return $this->inc("/src/page/site.php");
     }elseif( $page == "/html" || $page == "/css" || $page == "/js" ){
       $this->setTitle("Compress ". strtoupper(substr($page, 1)));
       return "auto";
