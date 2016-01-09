@@ -1,0 +1,159 @@
+.workspace{
+  background: #eee;
+}
+.workspace .top{
+  padding: 10px;
+  background: #ccc;
+  color: white;
+}
+.workspace .top .right{
+  float: right;
+  color: red;
+  font-size: 18px;
+  margin-right: 20px;
+}
+.workspace .top .right div, .workspace .top .right span{
+  display: inline-block;
+}
+.workspace .top .right span .button{
+  margin: -5px 5px 0px;
+}
+.workspace #expired_overlay, .workspace #finished_overlay{
+  display: none;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.6);
+}
+.workspace #expired_overlay .button, .workspace #finished_overlay .button{
+  font-size: 18px;
+  margin-top: 20px;
+}
+.workspace #finished_overlay h2{
+  font-size: 120px;
+}
+.workspace .exam{
+  position: absolute;
+  top: 35px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+.workspace .exam .tabs{
+  position: absolute;
+  bottom: 100%;
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  margin: 0px;
+}
+.workspace .exam .tabs li, .workspace .exam .choices li{
+  display: inline;
+}
+.workspace .exam .tabs li a, .workspace .exam .choices li a{
+  display: block;
+  position: relative;
+  left: 1px;
+  float: left;
+  padding: 4px 10px;
+  margin-left: -1px;
+  background: #eee;
+  color: black;
+  border: 1px solid #ccc;
+  text-decoration: none;
+  cursor: pointer;
+}
+.workspace .exam .tabs li.cur a, .workspace .exam .choices li.cur a {
+  background: white;
+  border-bottom: 1px solid white;
+}
+.workspace .exam .left{
+  display: table-cell;
+  width: 15%;
+}
+.workspace .exam .left .toggleQuestion, .workspace .exam .left .toggleGroup{
+  display: block;
+  margin: 5px 0px;
+}
+.workspace .exam .left .toggleGroupContainer{
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #CCC;
+}
+.workspace .exam .right{
+  display: table-cell;
+  vertical-align: top;
+  width: 85%;
+  padding-left: 15px;
+}
+#short-box, #multiple-box, #note-box, #practical-box{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-top: 1px solid #ccc;
+  margin: 40px 0px;
+  padding: 5px 50px;
+  background: #eee;
+  width: 100%;
+}
+#short-box:target, #multiple-box:target, #note-box:target{
+  display: table;
+  height: 85%;
+  z-index: 6;
+}
+#short-box{
+  z-index: 4;
+}
+#practical-box{
+  display: none;
+}
+.workspace .exam .questionArea{
+  display: none;
+}
+.workspace .exam .questionArea .question{
+  background: white;
+  height: 250px;
+  padding: 10px;
+  overflow: auto;
+  box-shadow: inset 0px -1px 15px #ccc;
+  font-size: 15px;
+}
+#practical-box .questionArea .question{
+  height: auto;
+}
+.workspace .exam .questionArea .question img{
+  display: block;
+  margin: 20px 0px;
+  max-width: 100%;
+}
+.workspace .exam .questionArea .options{
+  margin-top: 10px;
+  text-align: center;
+}
+.workspace .exam .questionArea .option{
+  display: inline-block;
+  vertical-align: top;
+  background: white;
+  width: 40%;
+  margin: 5px 0px 5px 5px;
+  padding: 20px;  
+  text-align: left;
+  font-size: 13px;
+}
+.workspace .exam .questionArea .option span{
+  width: 92%;
+  vertical-align: top;
+  margin-left: 5px;
+}
+@media screen and (max-width: 1000px){
+  #short-box, #multiple-box, #note-box{
+    padding: 0px;
+  }
+}
