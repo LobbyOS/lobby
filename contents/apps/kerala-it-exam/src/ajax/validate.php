@@ -5,7 +5,7 @@ if(isset($_POST['answers'])){
    */
   $class = $_SESSION['kerala-it-exam-class'];
   $questions = $this->questions($class);
-  $marks = json_decode($this->get("/src/Data/mark.json"), true);
+  $marks = json_decode($this->get("/src/data/mark.json"), true);
   $awarded = array();
   $total_mark = $marks['total'];
 

@@ -55,8 +55,8 @@
           $checked = $site['theme'] == $theme ? "checked" : "false";
         ?>
           <label class='theme'>
-            <a title="Click to see example" target="_blank" href="<?php echo $this->u("/src/Data/themes/{$theme}/example.html");?>">
-              <img src="<?php echo APP_SRC . "/src/Data/themes/{$theme}/thumbnail.png";?>" />
+            <a title="Click to see example" target="_blank" href="<?php echo $this->u("/src/data/themes/{$theme}/example.html");?>">
+              <img src="<?php echo APP_SRC . "/src/data/themes/{$theme}/thumbnail.png";?>" />
             </a>
             <input type="radio" name="theme" value="<?php echo $theme;?>" checked="<?php echo $checked;?>" />
           </label>

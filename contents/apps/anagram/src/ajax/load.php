@@ -16,7 +16,7 @@ if( isset($_POST['length']) ){
   /**
    * Get Dictionary
    */
-  $dict = file_get_contents(APP_DIR . "/src/Data/wordlist.txt");
+  $dict = file_get_contents(APP_DIR . "/src/data/wordlist.txt");
   $dict = explode("\n", $dict);
   
   /**
