@@ -1,12 +1,22 @@
-<h2>My Saves</h2>
 <?php
 $saves = getData("", "ledit");
 if( !$saves ){
   echo "You haven't saved anything.";
 }else{
+  function cmp($a, $b) {
+    return $b["updated"] - $a["updated"];
+  }
+  usort($saves, "cmp");
   foreach($saves as $save){
     $url = APP_URL . "?id=" . urlencode($save['name']);
-    echo "<li><a href='{$url}'>" . $save['name'] . "</a></li>";
+?>
+    <a href="<?php echo $url;?>">
+      <div class="saveItem">
+        <div class="title"><?php echo $save['name'];?></div>
+        <div class="updated"><?php echo $save['updated'];?></div>
+      </div>
+    </a>
+<?php
   }
 }
 ?>
