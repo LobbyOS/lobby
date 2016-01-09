@@ -8,7 +8,7 @@ class sige extends \Lobby\App {
   );
   
   public function page($p){
-    require APP_DIR . "/src/Inc/class.site.php";
+    require APP_DIR . "/src/inc/class.site.php";
     
     $pages = array(
       "index", "/new"

@@ -1,5 +1,5 @@
 <?php
-include \Lobby\FS::loc("/src/Inc/load.php");
+include \Lobby\FS::loc("/src/inc/load.php");
 
 if(isset($_POST['vote']) && isset($_POST['candidates']) && isset($_POST['voterID'])){
 	

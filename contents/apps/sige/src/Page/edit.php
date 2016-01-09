@@ -5,7 +5,7 @@ $this->addScript("editor.js");
  * $pname is for the Page Name
  */
 ?>
-<script src="<?php echo $this->u("/src/Lib/tinymce/tinymce.min.js");?>"></script>
+<script src="<?php echo $this->u("/src/lib/tinymce/tinymce.min.js");?>"></script>
 <div class="contents">
   <h2>Create Page</h2>
   <?php

@@ -1,6 +1,6 @@
 <?php
-include \Lobby\FS::loc("/src/Inc/load.php");
-include \Lobby\FS::loc("/src/Inc/graph.php");
+include \Lobby\FS::loc("/src/inc/load.php");
+include \Lobby\FS::loc("/src/inc/graph.php");
 
 $data = array();
 

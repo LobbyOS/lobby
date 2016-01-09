@@ -5,7 +5,7 @@ if(isset($_POST['master']) && isset($_POST['key']) && isset($_POST['value'])){
   $value = htmlspecialchars($_POST['value']);
   
   if(!$this->MasterExists($master)){
-    $add_form = $this->inc("/src/Inc/partial/create_master.php", array(
+    $add_form = $this->inc("/src/inc/partial/create_master.php", array(
       "master_id" => strtolower($master),
       "master_name" => $master
     ));
@@ -14,7 +14,7 @@ if(isset($_POST['master']) && isset($_POST['key']) && isset($_POST['value'])){
     );
   }else if(!isset($_POST['password'])){
     $master_name = getData("master_" . $master . "_name");
-    $add_form = $this->inc("/src/Inc/partial/add_key.php", array(
+    $add_form = $this->inc("/src/inc/partial/add_key.php", array(
       "master_id" => strtolower($master),
       "master_name" => $master_name,
       "key" => $key
