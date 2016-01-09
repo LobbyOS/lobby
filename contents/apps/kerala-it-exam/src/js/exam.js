@@ -159,7 +159,8 @@ lobby.app = $.extend(lobby.app, {
       $(".workspace#kerala-it-exam .exam input[type=checkbox]:checked").each(function(){
         name = $(this).attr("name");
         data[name] = $(this).val();
-      });clog(data);
+      });
+      clog(data);
       
       // What's Programming without a but of fun ?
       lobby.app.ajax("validate.php", data, function(json){
