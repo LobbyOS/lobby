@@ -1,23 +1,22 @@
 <div class="contents">
-  <h1>HTML Compressor</h1>
-  <p>Paste your HTML code in the textbox below and COMPRESS !</p>
+  <h1>CSS Compressor</h1>
+  <p>Paste your CSS code in the textbox below and COMPRESS !</p>
   <form action="<?php echo \Lobby::u();?>" method="POST">
     <center>
       <textarea name="code"></textarea></textarea><cl/>
-      <button style="font-size: 18px;">Compress</button>
+      <button class="button blue" style="font-size: 18px;">Compress</button>
     </center>
   </form>
   <?php
   if( isset($_POST['code']) ){
     include APP_DIR . "/src/load.php";
     $code = $_POST['code'];
-    $cmp = $SC->_compressor("html", $code);
+    $cmp = $SC->_compressor("css", $code);
     $cmp = htmlspecialchars($cmp);
   ?>
     <h2>Compressed Code</h2>
     <p>Here is the compressed code. Hurray!</p>
     <textarea><?php echo $cmp;?></textarea>
-    <p>and I left out PHP to itself, because it's tooooo complicated.</p>
   <?php
   }
   ?>
