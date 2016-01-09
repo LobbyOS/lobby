@@ -1,5 +1,5 @@
 <?php
-require_once APP_DIR . "/src/Inc/partial/layout.php";
+require_once APP_DIR . "/src/inc/partial/layout.php";
 ?>
 <div class='contentLoader'>
   <h1>Home</h1>
@@ -40,4 +40,4 @@ require_once APP_DIR . "/src/Inc/partial/layout.php";
   }
   ?>
 </div>
-<?php require_once APP_DIR . "/src/Inc/partial/layout_footer.php";?>
+<?php require_once APP_DIR . "/src/inc/partial/layout_footer.php";?>

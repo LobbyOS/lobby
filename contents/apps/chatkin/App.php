@@ -13,7 +13,7 @@ class chatkin extends \Lobby\App {
   public $connected = false;
   
   public function init(){
-    require_once APP_DIR . "/src/Inc/class.chat.php";
+    require_once APP_DIR . "/src/inc/class.chat.php";
     
     foreach($this->available_networks as $network => $null){
       $connected = getData("network_". $network ."_connected");
