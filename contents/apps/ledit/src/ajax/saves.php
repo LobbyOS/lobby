@@ -4,7 +4,7 @@ if( !$saves ){
   echo "You haven't saved anything.";
 }else{
   function cmp($a, $b) {
-    return $b["updated"] - $a["updated"];
+    return strtotime($b["updated"]) - strtotime($a["updated"]);
   }
   usort($saves, "cmp");
   foreach($saves as $save){
