@@ -1,0 +1,24 @@
+classes
+    The classes that is going to vote in numbers quoted
+
+divisions
+    The divisions of classes
+
+max_strength
+    The maximum number of children in classes
+    That is, the number of students in the class with the most number of students
+    Example: If 5A has 60 students and 5B has 61 students, then the value should be 61
+
+male_candidates
+    Number of Male Candidates in the election
+
+female_candidates
+    Number of female candidates in the election
+
+total_candidates
+    Total candidates in the election
+
+able_to_choose
+    How many boys/girls candidates can the voter (student) choose ?
+    Example : If 2 boys or girls can be chose, then the value should be 2
+
