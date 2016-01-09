@@ -18,10 +18,10 @@ $this->addScript("register.js");
     <label>
       <p>Select Division</p>
       <select name="div">
-        <option value="a">A</option>
-        <option value="b">B</option>
-        <option value="c">C</option>
-        <option value="d">D</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="D">D</option>
       </select>
     </label>
     <label>
