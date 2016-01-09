@@ -4,7 +4,7 @@ if(isset($_POST['master']) && isset($_POST['key'])){
   $key = htmlspecialchars($_POST['key']);
   
   if(!isset($_POST['password'])){
-    $add_form = $this->inc("/src/Inc/partial/get_key.php", array(
+    $add_form = $this->inc("/src/inc/partial/get_key.php", array(
       "master_id" => strtolower($master_id),
       "key" => $key
     ));

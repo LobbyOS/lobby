@@ -1,6 +1,6 @@
 <?php
 if(isset($dbinfo)){
-  require_once APP_DIR . "/src/Inc/class.logsys.php";
+  require_once APP_DIR . "/src/inc/class.logsys.php";
 
   \Lobby\App\fr_logsys\Fr\LS::config(array(
     "db" => array(

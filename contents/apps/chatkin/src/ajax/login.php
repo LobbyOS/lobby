@@ -4,7 +4,7 @@ if(isset($_POST['network']) && isset($_POST['username']) && isset($_POST['passwo
   $username = $_POST['username'];
   $password = $_POST['password'];
   
-  require_once APP_DIR . "/src/Inc/class.chat.php";
+  require_once APP_DIR . "/src/inc/class.chat.php";
   if($network == "facebook"){
     $class = new chatkin\Facebook();
     echo $class->login($username, $password) == true ? 1 : 0;

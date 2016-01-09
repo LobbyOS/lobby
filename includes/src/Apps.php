@@ -193,7 +193,7 @@ class Apps extends \Lobby {
       $details['adminURL'] = L_URL . "/admin/app/{$this->app}";
       
       $details['logo'] = isset($details['logo']) ?
-        APPS_URL . "/{$this->app}/src/Image/logo.png" :
+        APPS_URL . "/{$this->app}/src/image/logo.png" :
         L_URL . "/includes/lib/lobby/image/blank.png";
        
       /**

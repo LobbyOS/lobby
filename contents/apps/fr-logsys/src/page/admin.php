@@ -26,7 +26,7 @@ require_once APP_DIR . "/src/inc/partial/layout.php";
       </a>
     </div>
     <div style='background: white;padding: 20px 15px;margin: 40px 0px;width: 450px;'>logSys is running because of support and feedback from you. If you found logSys helpful, please consider a <a target='_blank' class='button red' href='http://subinsb.com/donate?utm_source=lobby_logsys.admin
-'>Donation</a>.<br/><a target='_blank' href='http://subinsb.com/?utm_source=lobby_logsys.admin'><img src='<?php echo APP_SRC;?>/src/Image/blog_logo.png' width='100%'  /></a>
+'>Donation</a>.<br/><a target='_blank' href='http://subinsb.com/?utm_source=lobby_logsys.admin'><img src='<?php echo APP_SRC;?>/src/image/blog_logo.png' width='100%'  /></a>
     <ul>
       <li><a href='http://subinsb.com/php-logsys?utm_source=lobby_logsys.admin' target='_blank'>logSys Documentation</a></li>
       <li><a href='http://github.com/subins2000/logSys' target='_blank'>GitHub Repository</a></li>
