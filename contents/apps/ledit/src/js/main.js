@@ -42,14 +42,14 @@ $(document).ready(function(){
         });
       }
    });
-   $(app+" #remove.button").live("click", function(){
-      var currentFile = $(app+" #saveName").val();
-      if(currentFile == ""){
+  $(app+" #remove.button").live("click", function(){
+    var currentFile = $(app+" #saveName").val();
+    if(currentFile == ""){
       $(app+" #error").text("This File is not saved.").fadeIn().delay(2000).fadeOut();
-      }else{
+    }else{
       lobby.app.remove(currentFile, function(data){
-          window.location = lobby.url + "/app/ledit";
+        window.location = lobby.app.url;
       });
-      }
-   });
+    }
+  });
 });
