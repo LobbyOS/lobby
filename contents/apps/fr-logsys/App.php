@@ -18,7 +18,7 @@ class fr_logsys extends \Lobby\App {
   public function load(){
     $dbinfo = \H::getJSONData("credentials");
     $this->table = $dbinfo['db_table'];
-    require_once APP_DIR . "/src/Inc/logsys.config.php";
+    require_once APP_DIR . "/src/inc/logsys.config.php";
   }
   
   public function setInfo(){

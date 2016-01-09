@@ -8,7 +8,7 @@ $this->addScript("admin.js");
 ?>
 <div class='leftpane'>
   <center>
-    <h2>logSys<br/><span style='font-size: 12px;'><?php echo $this->manifest['version'];?><br/><a href='http://subinsb.com/php-logsys?utm_source=lobby_logsys.admin' target='_blank'>Documentation</a></span></h2>
+    <h3>logSys<br/><span style='font-size: 12px;'><?php echo $this->manifest['version'];?><a style='display: block;' href='http://subinsb.com/php-logsys?utm_source=lobby_logsys.admin' target='_blank'>Documentation</a></span></h3>
   </center>
   <div>
     <?php
