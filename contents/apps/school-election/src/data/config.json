@@ -1,0 +1,13 @@
+{
+  "classes" : [
+    "5", "6", "7", "8", "9", "10"
+  ],
+  "divisions" : [
+    "A", "B", "C", "D"
+  ],
+  "max_strength" : "70",
+  "male_candidates" : "4",
+  "female_candidates" : "4",
+  "total_candidates" : "8",
+  "able_to_choose" : "2"
+}
