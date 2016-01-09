@@ -7,7 +7,7 @@ $this->addScript("game.js");
 ?>
 <div class="contents">
   <div class="loading">
-    <img src="<?php echo APP_SRC;?>/src/Image/loading.gif" />
+    <img src="<?php echo APP_SRC;?>/src/image/loading.gif" />
   </div>
   <div class="controls">
     <a id="newGame">New</a>

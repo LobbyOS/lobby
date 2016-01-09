@@ -1,5 +1,5 @@
 <?php
-include APP_DIR . "/src/Inc/load.php";
+include APP_DIR . "/src/inc/load.php";
 $this->setTitle("Admin Panel");
 ?>
 <div class="content-full">

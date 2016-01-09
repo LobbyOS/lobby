@@ -52,7 +52,7 @@ class keyring extends \Lobby\App {
   
   public function KeyAdd($master, $password, $key, $value){
     if($this->MasterExists($master)){
-      require_once APP_DIR . "/src/Inc/Crypto.php";
+      require_once APP_DIR . "/src/inc/Crypto.php";
       
       $items = getData("master_". $master ."_items");
       $pass_salt = getData("master_". $master . "_password_salt");
@@ -76,7 +76,7 @@ class keyring extends \Lobby\App {
   
   public function KeyGet($master, $password, $key){
     if($this->MasterExists($master)){
-      require_once APP_DIR . "/src/Inc/Crypto.php";
+      require_once APP_DIR . "/src/inc/Crypto.php";
       
       $items = getData("master_". $master ."_items");
       $pass_salt = getData("master_". $master . "_password_salt");

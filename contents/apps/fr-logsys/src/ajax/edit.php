@@ -59,7 +59,7 @@ if(!isset($_POST['uid'])){
         }
       }
       ?>
-      <button class='green'>Update User</button>
+      <button class='button green'>Update User</button>
     </form>
     <style>
     form label{

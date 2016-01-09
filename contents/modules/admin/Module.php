@@ -7,7 +7,7 @@ class admin extends \Lobby\Module {
     if(\Lobby::status("lobby.serve") === false){
       $this->install();
       
-      require_once __DIR__ . "/Inc/config.php";
+      require_once __DIR__ . "/inc/config.php";
       $this->routes();
       
       if(\Fr\LS::$loggedIn){
@@ -21,7 +21,7 @@ class admin extends \Lobby\Module {
            * Password item and then adding back the Log Out item
            */
           \Lobby\UI\Panel::addTopItem('adminModule', array(
-            "text" => "<img src='". $this->url ."/Image/admin.svg' style='width: 40px;height: 40px;' />",
+            "text" => "<img src='". $this->url ."/image/admin.svg' style='width: 40px;height: 40px;' />",
             "href" => "/",
             "position" => "left",
             "subItems" => array(
@@ -106,14 +106,14 @@ class admin extends \Lobby\Module {
           "created" => date("Y-m-d H:i:s")
         ));
       }
-      include __DIR__ . "/Page/login.php";
+      include __DIR__ . "/page/login.php";
     });
     
     /**
      * Add the Change Password Page in /admin/ChangePassword route
      */
     \Lobby\Router::route("/admin/ChangePassword", function(){
-      include __DIR__ . "/Page/change_password.php";
+      include __DIR__ . "/page/change_password.php";
     });
   }
 }
