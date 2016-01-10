@@ -3,6 +3,11 @@
  * Get installed apps and make the tiles on dashboard
  */
 $apps = \Lobby\Apps::getEnabledApps();
+/**
+ * Ascending order
+ */
+asort($apps);
+
 if(count($apps) == 0){
   ser("No Apps", "You haven't enabled or installed any apps. <br/>Get great Apps from " . \Lobby::l("/admin/lobby-store.php", "Lobby Store"));
 }else{
@@ -15,7 +20,7 @@ if(count($apps) == 0){
   if($dashItems != null){
     $jsCode .= "lobby.dash.data = ". $dashItems .";";
   }
-  foreach($apps as $app => $null){
+  foreach($apps as $app){
     $App = new \Lobby\Apps($app);
     $data = $App->info;
     $jsCode .= "lobby.dash.addTile('app', {'id' : '{$app}', 'img' : '{$data['logo']}', 'name' : '{$data['name']}'});";

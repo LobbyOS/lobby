@@ -79,7 +79,7 @@
               </thead>
               <tbody>
                 <?php
-                foreach($Apps as $app => $null){
+                foreach($Apps as $app){
                   $App = new \Lobby\Apps($app);
                   $data = $App->info;
                   $appImage = !isset($data['image']) ? L_URL . "/includes/lib/lobby/image/blank.png" : $data['image'];
