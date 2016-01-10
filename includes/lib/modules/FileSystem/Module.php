@@ -1,5 +1,5 @@
 <?php
-namespace Lobby\Modules;
+namespace Lobby\Module;
 
 /**
  * Adds more functionality to \Lobby\FS
