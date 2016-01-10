@@ -38,7 +38,7 @@ class Apps extends \Lobby {
     
       foreach($appFolders as $appFolderName){
         if(self::valid($appFolderName)){
-          $apps[$appFolderName] = 1;
+          $apps[] = $appFolderName;
         }
       }
       self::$cache["apps"] = $apps;
@@ -76,7 +76,7 @@ class Apps extends \Lobby {
 
       foreach(self::getApps() as $app){
         if(array_search($app, $enabledApps) === false){
-          $disabled_apps[$app] = 1;
+          $disabled_apps[] = $app;
         }
       }
       self::$cache["disabled_apps"] = $disabled_apps;
@@ -89,7 +89,7 @@ class Apps extends \Lobby {
    */
   public static function exists($app){
     $apps = self::getApps();
-    return isset($apps[$app]);
+    return in_array($app, $apps);
   }
   
   /**
@@ -212,8 +212,8 @@ class Apps extends \Lobby {
   public function enableApp(){
     if($this->app){
       $apps = self::getEnabledApps();
-      if(!isset($apps[$this->app])){
-        $apps[$this->app] = 1;
+      if(!in_array($this->app, $apps)){
+        $apps[] = $this->app;
         
         saveOption("active_apps", json_encode($apps));
         self::clearCache();
@@ -233,8 +233,8 @@ class Apps extends \Lobby {
     if($this->app && $this->isEnabled()){
       $apps = self::getEnabledApps();
       
-      if(isset($apps[$this->app])){
-        unset($apps[$this->app]);
+      if(!in_array($this->app, $apps)){
+        unset($apps[array_search($this->app, $apps)]);
         
         saveOption("active_apps", json_encode($apps));
         self::clearCache();
