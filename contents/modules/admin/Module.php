@@ -1,5 +1,5 @@
 <?php
-namespace Lobby\Modules;
+namespace Lobby\Module;
 
 class admin extends \Lobby\Module {
   

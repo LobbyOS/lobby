@@ -60,7 +60,7 @@ class Modules extends \Lobby {
   public static function load(){
     foreach(self::$modules as $module => $loc){
       require_once "$loc/Module.php";
-      $moduleIdentifier = "\Lobby\Modules\\$module";
+      $moduleIdentifier = "\Lobby\Module\\$module";
       $Module = new $moduleIdentifier(array(
         $loc, L_URL . "/contents/modules/$module"
       ));
