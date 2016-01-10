@@ -83,6 +83,8 @@
 }
 .panel.top .right #update{
   background: url(<?L_URL?>/includes/lib/lobby/image/update.png) 0px -1px no-repeat;
-  background-size: 24px;
-  width:22px;
+  background-size: 45px;
+  width: 50px;
+  display: block;
+  height: 45px;
 }

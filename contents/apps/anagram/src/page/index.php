@@ -24,7 +24,7 @@ $this->addScript("game.js");
       <div class='section' id='sec1'></div>
     </div>
   </div>
-  <audio src='<?php echo APP_SRC;?>/src/Audio/wrong.mp3' id='wrong'></audio>
-  <audio src='<?php echo APP_SRC;?>/src/Audio/correct.mp3' id='correct'></audio>
-  <audio src='<?php echo APP_SRC;?>/src/Audio/select.mp3' id='select'></audio>
+  <audio src='<?php echo APP_SRC;?>/src/audio/wrong.mp3' id='wrong'></audio>
+  <audio src='<?php echo APP_SRC;?>/src/audio/correct.mp3' id='correct'></audio>
+  <audio src='<?php echo APP_SRC;?>/src/audio/select.mp3' id='select'></audio>
 </div>
