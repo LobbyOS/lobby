@@ -166,7 +166,7 @@ class Apps extends \Lobby {
       $enabled = self::$cache["enabled_apps"][$this->app];
     }else{
       $enabledApps = self::getEnabledApps();
-      $enabled = isset($enabledApps[$this->app]);
+      $enabled = in_array($this->app, $enabledApps);
       if($enabled){
         self::$cache["enabled_apps"][$this->app] = $enabled;
       }
