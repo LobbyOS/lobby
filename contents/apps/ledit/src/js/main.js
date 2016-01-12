@@ -1,19 +1,11 @@
-function curDate() {
- t = new Date();
- function twoDigits(d) {
-    if(0 <= d && d < 10) return "0" + d.toString();
-    if(-10 < d && d < 0) return "-0" + (-1*d).toString();
-    return d.toString();
- }
- return t.getFullYear() + "-" + twoDigits(1 + t.getMonth()) + "-" + twoDigits(t.getDate()) + " " + twoDigits(t.getHours()) + ":" + twoDigits(t.getMinutes()) + ":" + twoDigits(t.getSeconds());
-}
-
 $(document).ready(function(){
     tinymce.init({
       selector: ".workspace#ledit #editor",
       plugins: "autoresize"
     });
-   /* The App Parent Element URI */
+   /**
+    * The App Parent Element URI
+    */
    var app = ".workspace#ledit";
    
    $(app + " #save.button").live("click", function(){
@@ -23,7 +15,7 @@ $(document).ready(function(){
         key = $(app + " #saveName").val(); // The key Name
         value = tinyMCE.activeEditor.getContent(); // The Content
         if(key == ""){
-          key = curDate();
+          key = Date.today().toString("MMMM dS, yyyy");
         }
          
         lobby.app.save(key, value, function(data){
