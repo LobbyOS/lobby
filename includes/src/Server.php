@@ -65,6 +65,7 @@ class Server {
       if(is_array($response)){
         saveOption("lobby_latest_version", $response['version']);
         saveOption("lobby_latest_version_release", $response['released']);
+        saveOption("lobby_latest_version_release_notes", $response['release_notes']);
     
         if(isset($response['apps']) && count($response['apps']) != 0){
           $AppUpdates = array();

@@ -75,8 +75,11 @@ require L_DIR . "/includes/src/Update.php";
             Welcome To The Lobby Update Page. A latest version is available for you to upgrade.
           </p>
           <blockquote>
-            Latest Version is <?php echo getOption("lobby_latest_version");?>
-            released on <?php echo date( "jS F Y", strtotime(getOption("lobby_latest_version_release")) );?>
+            Latest Version is <?php echo getOption("lobby_latest_version");?> released on <?php echo date( "jS F Y", strtotime(getOption("lobby_latest_version_release")) );?>
+          </blockquote>
+          <p>Release Notes :</p>
+          <blockquote>
+            <?php echo htmlspecialchars_decode(getOption("lobby_latest_version_release_notes"));?>
           </blockquote>
           <p style="margin-bottom: 10px;">
             Lobby will automatically download the latest version and install. In case something happens, Lobby will not be accessible anymore. So backup your database and Lobby installation before you do anything.
