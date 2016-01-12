@@ -6,6 +6,8 @@ if(isset($id)){
   $this->setTitle($id);
 }
 $this->addStyle("main.css");
+
+$this->addScript("date.js");
 $this->addScript("main.js");
 ?>
 <script src="<?php echo APP_SRC;?>/src/lib/tinymce/tinymce.min.js"></script>
@@ -20,6 +22,7 @@ $this->addScript("main.js");
       $id = urldecode(htmlspecialchars_decode($_GET['id']));
       $appData = getData($id, true);
       $content = $appData['content'];
+      $created = $appData['created'];
       $updated = $appData['updated'];
     
       /* Show error if a save of the ID is not present */
