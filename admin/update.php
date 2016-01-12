@@ -1,5 +1,5 @@
 <?php
-include "../load.php";
+require "../load.php";
 require L_DIR . "/includes/src/Update.php";
 ?>
 <!DOCTYPE html>
@@ -13,7 +13,7 @@ require L_DIR . "/includes/src/Update.php";
   <body>
     <?php
     \Lobby::doHook("admin.body.begin");
-    include "$docRoot/admin/sidebar.php";
+    require "$docRoot/admin/inc/sidebar.php";
     ?>
     <div class="workspace">
       <div class="content">
