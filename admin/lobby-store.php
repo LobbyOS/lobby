@@ -1,5 +1,5 @@
 <?php
-include "../load.php";
+require "../load.php";
 header( 'Content-type: text/html; charset=utf-8' );
 ?>
 <html>
@@ -13,7 +13,7 @@ header( 'Content-type: text/html; charset=utf-8' );
   <body>
     <?php
     \Lobby::doHook("admin.body.begin");
-    include "$docRoot/admin/sidebar.php";
+    require "$docRoot/admin/inc/sidebar.php";
     ?>
     <div class="workspace">
       <div class="content">
