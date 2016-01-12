@@ -1,5 +1,5 @@
 <?php
-include "../load.php";
+require "../load.php";
 require L_DIR . "/includes/src/Install.php";
 ?>
 <!DOCTYPE html>

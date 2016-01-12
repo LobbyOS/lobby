@@ -1,4 +1,4 @@
-<?php include "../load.php";?>
+<?php require "../load.php";?>
 <html>
   <head>
     <?php
@@ -10,7 +10,7 @@
   <body>
     <?php
     \Lobby::doHook("admin.body.begin");
-    include "$docRoot/admin/sidebar.php";
+    require "$docRoot/admin/inc/sidebar.php";
     ?>
     <div class="workspace">
       <div class="content">
