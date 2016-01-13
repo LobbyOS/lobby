@@ -102,11 +102,11 @@ class DB extends \Lobby {
       $return = array();
       $prefix = self::$prefix;
       if($id != "" && $name == ""){
-        $sql = self::$dbh->prepare("SELECT `content`, `name`, `updated` FROM `{$prefix}data` WHERE `app` = ?");
+        $sql = self::$dbh->prepare("SELECT * FROM `{$prefix}data` WHERE `app` = ?");
         $sql->execute(array($id));
         $return = $sql->fetchAll();
       }else{
-        $sql = self::$dbh->prepare("SELECT `content`, `name`, `updated` FROM `{$prefix}data` WHERE `name` = ? AND `app` = ?");
+        $sql = self::$dbh->prepare("SELECT * FROM `{$prefix}data` WHERE `name` = ? AND `app` = ?");
         $sql->execute(array($name, $id));
         if($sql->rowCount() > 1){
           /**
