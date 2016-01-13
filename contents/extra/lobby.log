@@ -30,3 +30,4 @@
 [2016-01-13 08:14:57] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-13 08:16:03] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
 [2016-01-13 08:17:29] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-13 08:22:31] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
