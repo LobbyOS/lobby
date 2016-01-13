@@ -39,6 +39,7 @@ $this->addScript("main.js");
         <input type="hidden" id="saveName" value="<?php echo $id;?>" />
         <a class="button" id="save">Update</a>
         <a class="button red" id="remove">Remove</a>
+        <div style="margin: 10px;">Created On <b><?php echo $created;?></b></div>
         <div style="margin: 10px;">Last Updated On <b><?php echo $updated;?></b></div>
       <?php
       }else{
