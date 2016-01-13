@@ -1,9 +1,10 @@
 <?php
 session_start();
+
 /**
  * Define the Lobby Location
+ * $docRoot would be set by /load.php
  */
-$docRoot = isset($docRoot) ? $docRoot : realpath(dirname(__DIR__));
 define("L_DIR", str_replace("\\", "/", $docRoot));
 
 $_SERVER['ORIG_REQUEST_URI'] = $_SERVER['REQUEST_URI'];
