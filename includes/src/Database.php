@@ -79,7 +79,7 @@ class DB extends \Lobby {
    * Save option
    */
   public static function saveOption($name, $value){
-   if(self::$installed&& $value != null){
+   if(self::$installed && $value != null){
      $sql = self::$dbh->prepare("SELECT COUNT(`name`) FROM `". self::$prefix ."options` WHERE `name` = ?");
      $sql->execute(array($name));
      if($sql->fetchColumn() != 0){

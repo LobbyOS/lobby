@@ -1,1 +1,70 @@
 
+[2016-01-13 16:23:46] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/admin/settings.php on line 22 : date_default_timezone_set(): Timezone ID 'UTC+0' is invalid
+[2016-01-14 02:28:18] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/load.php on line 46 : Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1298 Unknown or incorrect time zone: 'Europe/Helsinki'' in /home/simsu/Other/projects/Web/Lobby/local/includes/load.php:46
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/load.php(46): PDOStatement->execute(Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/load.php(9): require_once('/home/simsu/Oth...')
+#2 /home/simsu/Other/projects/Web/Lobby/local/admin/settings.php(1): require('/home/simsu/Oth...')
+#3 {main}
+  thrown
+[2016-01-14 02:40:16] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/load.php on line 46 : Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1298 Unknown or incorrect time zone: 'Europe/Helsinki'' in /home/simsu/Other/projects/Web/Lobby/local/includes/load.php:46
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/load.php(46): PDOStatement->execute(Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/load.php(9): require_once('/home/simsu/Oth...')
+#2 /home/simsu/Other/projects/Web/Lobby/local/admin/settings.php(1): require('/home/simsu/Oth...')
+#3 {main}
+  thrown
+[2016-01-14 02:40:25] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/load.php on line 46 : Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1298 Unknown or incorrect time zone: 'Europe/Helsinki'' in /home/simsu/Other/projects/Web/Lobby/local/includes/load.php:46
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/load.php(46): PDOStatement->execute(Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/load.php(9): require_once('/home/simsu/Oth...')
+#2 /home/simsu/Other/projects/Web/Lobby/local/admin/settings.php(1): require('/home/simsu/Oth...')
+#3 {main}
+  thrown
+[2016-01-14 02:40:39] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/load.php on line 46 : Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1298 Unknown or incorrect time zone: 'Europe/Helsinki'' in /home/simsu/Other/projects/Web/Lobby/local/includes/load.php:46
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/load.php(46): PDOStatement->execute(Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/load.php(9): require_once('/home/simsu/Oth...')
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/serve.php(2): require_once('/home/simsu/Oth...')
+#3 {main}
+  thrown
+[2016-01-14 02:40:39] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/load.php on line 46 : Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1298 Unknown or incorrect time zone: 'Europe/Helsinki'' in /home/simsu/Other/projects/Web/Lobby/local/includes/load.php:46
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/load.php(46): PDOStatement->execute(Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/load.php(9): require_once('/home/simsu/Oth...')
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/serve.php(2): require_once('/home/simsu/Oth...')
+#3 {main}
+  thrown
+[2016-01-14 02:40:40] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/load.php on line 46 : Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1298 Unknown or incorrect time zone: 'Europe/Helsinki'' in /home/simsu/Other/projects/Web/Lobby/local/includes/load.php:46
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/load.php(46): PDOStatement->execute(Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/load.php(9): require_once('/home/simsu/Oth...')
+#2 /home/simsu/Other/projects/Web/Lobby/local/admin/settings.php(1): require('/home/simsu/Oth...')
+#3 {main}
+  thrown
+[2016-01-14 02:40:41] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/load.php on line 46 : Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1298 Unknown or incorrect time zone: 'Europe/Helsinki'' in /home/simsu/Other/projects/Web/Lobby/local/includes/load.php:46
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/load.php(46): PDOStatement->execute(Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/load.php(9): require_once('/home/simsu/Oth...')
+#2 /home/simsu/Other/projects/Web/Lobby/local/admin/settings.php(1): require('/home/simsu/Oth...')
+#3 {main}
+  thrown
+[2016-01-13 18:10:57] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/admin/settings.php on line 21 : date_default_timezone_set(): Timezone ID 'UTC+0' is invalid
+[2016-01-13 12:41:11] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/load.php on line 46 : Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1298 Unknown or incorrect time zone: 'Europe/Helsinki'' in /home/simsu/Other/projects/Web/Lobby/local/includes/load.php:46
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/load.php(46): PDOStatement->execute(Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/load.php(9): require_once('/home/simsu/Oth...')
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/serve.php(2): require_once('/home/simsu/Oth...')
+#3 {main}
+  thrown
+[2016-01-13 12:41:11] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/load.php on line 46 : Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1298 Unknown or incorrect time zone: 'Europe/Helsinki'' in /home/simsu/Other/projects/Web/Lobby/local/includes/load.php:46
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/load.php(46): PDOStatement->execute(Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/load.php(9): require_once('/home/simsu/Oth...')
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/serve.php(2): require_once('/home/simsu/Oth...')
+#3 {main}
+  thrown
+[2016-01-13 18:11:52] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/admin/settings.php on line 21 : date_default_timezone_set(): Timezone ID 'UTC+0' is invalid
+[2016-01-13 18:11:56] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/admin/settings.php on line 21 : date_default_timezone_set(): Timezone ID 'UTC-10' is invalid
+[2016-01-13 18:15:50] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/admin/settings.php on line 21 : date_default_timezone_set(): Timezone ID '' is invalid
+[2016-01-13 18:16:34] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/admin/settings.php on line 22 : Call to undefined function removeOption()

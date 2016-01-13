@@ -43,7 +43,7 @@ $tz = getOption("lobby_timezone");
 if($tz){
   date_default_timezone_set($tz);
   $sql = \Lobby\DB::$dbh->prepare("SET time_zone = ?;");
-  //$sql->execute(array($tz));
+  $sql->execute(array('Europe/Helsinki'));
 }
 
 /**
