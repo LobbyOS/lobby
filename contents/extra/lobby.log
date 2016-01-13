@@ -1,3 +1,16 @@
 [2016-01-13 08:06:27] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/apps/ledit/src/page/index.php on line 25 : Undefined index: created
 [2016-01-13 08:06:27] CSS file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/css/filechooser.css
 [2016-01-13 08:06:28] JavaScript file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/js/filechooser.js
+[2016-01-13 08:08:14] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-13 08:08:14] CSS file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/css/filechooser.css
+[2016-01-13 08:08:14] JavaScript file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/js/filechooser.js
+[2016-01-13 08:08:37] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-13 08:08:38] CSS file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/css/filechooser.css
+[2016-01-13 08:08:38] JavaScript file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/js/filechooser.js
+[2016-01-13 08:08:49] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-13 08:08:50] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-13 08:08:52] 2048 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/UI/Themes.php on line 31 : Non-static method Lobby\UI\Themes::loadDefaults() should not be called statically
+[2016-01-13 08:08:52] CSS file was not found in location given : /contents/themes/hine/src/dashboard/css/metrojs.css
+[2016-01-13 08:08:52] CSS file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/css/filechooser.css
+[2016-01-13 08:08:52] JavaScript file was not found in location given : /contents/themes/hine/src/dashboard/js/metrojs.js
+[2016-01-13 08:08:52] JavaScript file was not found in location given : /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/FileSystem/js/filechooser.js
