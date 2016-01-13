@@ -62,7 +62,7 @@ class DB extends \Lobby {
    */
   public static function getOption($name){
     if(self::$installed){
-      $sql = self::$dbh->prepare("SELECT `val` FROM `". self::$prefix ."options` WHERE `name` = ?");
+      $sql = self::$dbh->prepare("SELECT `value` FROM `". self::$prefix ."options` WHERE `name` = ?");
       $sql->execute(array($name));
       
       if($sql->rowCount() != 0){
@@ -83,10 +83,10 @@ class DB extends \Lobby {
      $sql = self::$dbh->prepare("SELECT COUNT(`name`) FROM `". self::$prefix ."options` WHERE `name` = ?");
      $sql->execute(array($name));
      if($sql->fetchColumn() != 0){
-       $sql = self::$dbh->prepare("UPDATE `". self::$prefix ."options` SET `val` = ? WHERE `name` = ?");
+       $sql = self::$dbh->prepare("UPDATE `". self::$prefix ."options` SET `value` = ? WHERE `name` = ?");
        return $sql->execute(array($value, $name));
      }else{
-       $sql = self::$dbh->prepare("INSERT INTO `". self::$prefix ."options` (`name`, `val`) VALUES (?, ?)");
+       $sql = self::$dbh->prepare("INSERT INTO `". self::$prefix ."options` (`name`, `value`) VALUES (?, ?)");
        return $sql->execute(array($name, $value));
      }
     }else{
@@ -120,7 +120,7 @@ class DB extends \Lobby {
           if($sql->rowCount() != 0){
             $return = $sql->fetch(\PDO::FETCH_ASSOC);
             if($extra === false){
-              $return = $return['content'];
+              $return = $return['value'];
             }
           }else{
             $return = array();

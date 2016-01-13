@@ -43,13 +43,13 @@ $tz = getOption("lobby_timezone");
 if($tz){
   date_default_timezone_set($tz);
   $sql = \Lobby\DB::$dbh->prepare("SET time_zone = ?;");
-  $sql->execute(array($tz));
+  //$sql->execute(array($tz));
 }
 
 /**
  * The UI Classes
  */
-require_once L_DIR . "/includes/src/UI/Themes.php";
+require_once L_DIR . "/includes/src/ui/Themes.php";
 
 /**
  * Run not on CDN files serving
