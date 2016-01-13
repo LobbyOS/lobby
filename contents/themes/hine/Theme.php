@@ -21,8 +21,6 @@ class hine extends \Lobby\UI\Theme {
    * Include stuff for designing dashboard
    */
   public function dashboard(){
-    $this->addScript("/src/dashboard/js/metrojs.js");
-    $this->addStyle("/src/dashboard/css/metrojs.css");
     $this->addScript("/src/dashboard/js/scrollbar.js");
     $this->addStyle("/src/dashboard/css/scrollbar.css");
     $this->addScript("/src/dashboard/js/jquery.contextmenu.js");

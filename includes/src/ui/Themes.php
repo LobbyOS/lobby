@@ -1,7 +1,7 @@
 <?php
 namespace Lobby\UI;
 
-require_once L_DIR . "/includes/src/UI/Panel.php";
+require_once L_DIR . "/includes/src/ui/Panel.php";
 
 class Themes extends \Lobby {
   
@@ -53,7 +53,7 @@ class Themes extends \Lobby {
   /**
    * Load Default CSS & JS
    */
-  public function loadDefaults(){
+  public static function loadDefaults(){
     /**
      * Styles
      */
@@ -71,7 +71,7 @@ class Themes extends \Lobby {
    * Load a theme
    */
   public static function loadTheme(){
-    require_once L_DIR . "/includes/src/UI/Theme.php";
+    require_once L_DIR . "/includes/src/ui/Theme.php";
     require_once THEME_DIR . "/Theme.php";
     $className = "\Lobby\UI\Themes\\" . self::$theme;
     $GLOBALS["THEME_OBJ"] = new $className();
