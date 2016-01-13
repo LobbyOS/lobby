@@ -8,6 +8,7 @@ session_start();
 define("L_DIR", str_replace("\\", "/", $docRoot));
 
 $_SERVER['ORIG_REQUEST_URI'] = $_SERVER['REQUEST_URI'];
+
 /**
  * Make the request URL relative to the base URL of Lobby installation.
  * http://localhost/lobby will be changed to "/"
@@ -34,6 +35,16 @@ require_once L_DIR . "/includes/src/Server.php"; /* The File System Class */
 
 require_once L_DIR . "/includes/functions.php"; /* Non class functions */
 require_once L_DIR . "/includes/extra.php"; /* Define extra variables or constants */
+
+/**
+ * Timezone
+ */
+$tz = getOption("lobby_timezone");
+if($tz){
+  date_default_timezone_set($tz);
+  $sql = \Lobby\DB::$dbh->prepare("SET time_zone = ?;");
+  $sql->execute(array($tz));
+}
 
 /**
  * The UI Classes
