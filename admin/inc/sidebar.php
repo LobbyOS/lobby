@@ -8,11 +8,11 @@
     "/admin/apps.php" => "Apps",
     "/admin/lobby-store.php" => "Lobby Store",
     "/admin/modules.php" => "Modules",
-    "/admin/about.php" => "About",
+    "/admin/settings.php" => "Settings",
   );
   $curPage = \Lobby::curPage();
   foreach($links as $link => $text){
-    if($link == $curPage || ($curPage == "/admin/update.php" && $text == "About")){
+    if($link == $curPage || ($curPage == "/admin/update.php" && $text == "Settings")){
       echo \Lobby::l($link, $text, "class='link active'");
     }else{
       echo \Lobby::l($link, $text, "class='link'");
