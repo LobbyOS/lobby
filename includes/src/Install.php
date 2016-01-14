@@ -98,20 +98,17 @@ class Install extends \Lobby {
       /* Create Tables */
       $sql = self::$dbh->prepare("
         CREATE TABLE IF NOT EXISTS `{$prefix}options` (
-          `id` int(11) NOT NULL AUTO_INCREMENT,
+          `id` int(11) NOT NULL,
           `name` varchar(64) NOT NULL,
-          `val` text NOT NULL,
-          PRIMARY KEY (`id`),
-          UNIQUE(`name`)
-        ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+          `value` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+        ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
         CREATE TABLE IF NOT EXISTS `{$prefix}data` (
-          `id` int(11) NOT NULL AUTO_INCREMENT,
+          `id` int(11) NOT NULL,
           `app` varchar(50) NOT NULL,
           `name` varchar(150) NOT NULL,
-          `content` longtext NOT NULL,
+          `value` longblob NOT NULL,
           `created` datetime NOT NULL,
-          `updated` datetime NOT NULL,
-           PRIMARY KEY (`id`)
+          `updated` datetime NOT NULL
         ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;"
       );
       $sql->execute();
@@ -120,19 +117,11 @@ class Install extends \Lobby {
       $lobby_info = \Lobby\FS::get("/lobby.json");
       $lobby_info = json_decode($lobby_info, true);
       $sql = self::$dbh->prepare("
-        INSERT INTO `{$prefix}options` (
-          `id`, 
-          `name`, 
-          `val`
-        ) VALUES (
-          NULL,
-          'lobby_version',
-          ?
-        ),(
-          NULL,
-          'lobby_version_release',
-          ?
-        );"
+        INSERT INTO `{$prefix}options`
+          (`id`, `name`, `val`)
+        VALUES
+          (NULL, 'lobby_version', ?),
+          (NULL, 'lobby_version_release', ?);"
       );
       $sql->execute(array($lobby_info['version'], $lobby_info['released']));
       
