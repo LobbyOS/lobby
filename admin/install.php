@@ -6,13 +6,14 @@ require L_DIR . "/includes/src/Install.php";
 <html>
   <head>
      <?php
-     \Lobby::addStyle("style", "/contents/themes/hine/style.css");
+     \Lobby\UI\Themes::loadTheme();
+     \Lobby::addStyle("install", "/admin/css/install.css");
      \Lobby::head("Install");
      ?>
   </head>
   <body class="workspace">
      <div class="contents">
-        <h1 style="margin-bottom: 32px;text-align: center;">
+        <h1 style="text-align: center;">
           <?php echo \Lobby::l(L_URL, "Install Lobby");?>
         </h1>
         <?php
@@ -21,8 +22,8 @@ require L_DIR . "/includes/src/Install.php";
         }elseif(!isset($_GET['step'])){
         ?>
           <p>Welcome to the Lobby Installation process. Thank you for downloading Lobby.</p>
-          <p>For further help, see our <a target='_blank' href='http://lobby.subinsb.com/docs/quick'>documentation</a>.</p>
-          <p>To Start Installation, click the Install button</p>
+          <p>For further help, see <a target='_blank' href='http://lobby.subinsb.com/docs/quick'>Quick Install</a>.</p>
+          <p>To start Installation, click the Install button</p>
           <center clear>
             <a href="?step=1<?php echo H::csrf("g");?>" class="button red" style="font-size: 18px;width: 200px;">Install</a>
           </center>
@@ -139,7 +140,7 @@ require L_DIR . "/includes/src/Install.php";
             <?php
             if(!isset($error)){
             ?>
-              <a href="?step=2<?php echo H::csrf("g");?>" class="button">Proceed To Installation</a>
+              <a href="?step=2<?php echo H::csrf("g");?>" class="button orange" id="step1_continue">Proceed To Installation</a>
           <?php
             }else{
               echo "<p>Cannot Procced to Installation. Please make the requirements satisfied.</p>";
@@ -214,9 +215,14 @@ require L_DIR . "/includes/src/Install.php";
               }
             }else{
             ?>
-              <h2 style="margin-top: -20px;">Database Configuration</h2>
+              <h2>Database</h2>
+              <p>Provide the database credentials. Double check before submitting</p>
               <form action="<?php \Lobby::u();?>" method="POST">
-                 <table>
+                <table>
+                  <thead>
+                    <tr colsize="15%"></tr>
+                    <tr></tr>
+                  </thead>
                   <tbody>
                     <tr>
                       <td>Database Host</td>
