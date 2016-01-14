@@ -188,7 +188,7 @@ require L_DIR . "/includes/src/Install.php";
                * Check if connection to database can be established using the credentials given by the user
                */
               if($prefix == "" || preg_match("/[^0-9,a-z,A-Z,\$,_]+/i", $prefix) != 0 || strlen($prefix) > 50){
-                ser("Error", "A Prefix should only contain basic Latin letters, digits 0-9, dollar, underscore and shouldn't exceed 50 characters." . \Lobby::l("/admin/install.php?step=2" . H::csrf("g"), "Try Again", "class='button'"));
+                ser("Error", "A Prefix should only contain basic Latin letters, digits 0-9, dollar, underscore and shouldn't exceed 50 characters.<cl/>" . \Lobby::l("/admin/install.php?step=2" . H::csrf("g"), "Try Again", "class='button'"));
               }elseif(\Lobby\Install::checkDatabaseConnection() !== false){
                 /**
                  * Make the Config File
@@ -199,7 +199,7 @@ require L_DIR . "/includes/src/Install.php";
                  * Create Tables
                  */
                 if(\Lobby\Install::makeDatabase($prefix)){
-                  sss("Success", "Database Tables and configuration file was successfully created.");
+                  sss("Success", "Database Tables and <b>config.php</b> file was successfully created.");
                   /**
                    * Enable app lEdit
                    */
@@ -210,7 +210,6 @@ require L_DIR . "/includes/src/Install.php";
                   echo '<cl/><a href="?step=3" class="button">Proceed</a>';
                 }else{
                   ser("Unable To Create Database Tables", "Are there any tables with the same name ? Or Does the user have the permissions to create tables ?<cl/>The <b>config.php</b> file is created. To try again, remove the <b>config.php</b> file and click the button. <cl/>" . \Lobby::l("/admin/install.php?step=2" . H::csrf("g"), "Try Again", "class='button'"));
-                  
                 }
               }
             }else{
@@ -220,8 +219,11 @@ require L_DIR . "/includes/src/Install.php";
               <form action="<?php \Lobby::u();?>" method="POST">
                 <table>
                   <thead>
-                    <tr colsize="15%"></tr>
-                    <tr></tr>
+                    <tr>
+                      <td width="20%">Name</td>
+                      <td width="40%">Value</td>
+                      <td width="40%">Description</td>
+                    </tr>
                   </thead>
                   <tbody>
                     <tr>
@@ -229,7 +231,7 @@ require L_DIR . "/includes/src/Install.php";
                       <td>
                         <input type="text" name="dbhost" value="localhost">
                       </td>
-                      <td>On Most Systems, It's localhost</td>
+                      <td>The hostname of database</td>
                     </tr>
                     <tr>
                       <td>Database Port</td>
@@ -243,7 +245,7 @@ require L_DIR . "/includes/src/Install.php";
                       <td>
                         <input type="text" name="dbname" />
                       </td>
-                      <td>The name of the database you want to run Lobby in. Database should exist and Lobby won't create if it doesn't.</td>
+                      <td>The name of the database you want to run Lobby in. <b>Database should exist</b> and Lobby won't create DB if it doesn't exist.</td>
                     </tr>
                     <tr>
                       <td>User Name</td>
@@ -264,7 +266,7 @@ require L_DIR . "/includes/src/Install.php";
                       <td>
                         <input type="text" name="prefix" value="l_" />
                       </td>
-                      <td>Lobby's Table name starts with this value</td>
+                      <td>The name of tables created by Lobby would start with this value</td>
                     </tr>
                     <tr>
                       <td></td>
