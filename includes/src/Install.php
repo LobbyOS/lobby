@@ -98,18 +98,18 @@ class Install extends \Lobby {
       /* Create Tables */
       $sql = self::$dbh->prepare("
         CREATE TABLE IF NOT EXISTS `{$prefix}options` (
-          `id` int(11) NOT NULL,
+          `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
           `name` varchar(64) NOT NULL,
           `value` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
         ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
         CREATE TABLE IF NOT EXISTS `{$prefix}data` (
-          `id` int(11) NOT NULL,
+          `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
           `app` varchar(50) NOT NULL,
           `name` varchar(150) NOT NULL,
           `value` longblob NOT NULL,
           `created` datetime NOT NULL,
           `updated` datetime NOT NULL
-        ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;"
+        ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;"
       );
       $sql->execute();
 
@@ -118,15 +118,15 @@ class Install extends \Lobby {
       $lobby_info = json_decode($lobby_info, true);
       $sql = self::$dbh->prepare("
         INSERT INTO `{$prefix}options`
-          (`id`, `name`, `val`)
+          (`id`, `name`, `value`)
         VALUES
           (NULL, 'lobby_version', ?),
           (NULL, 'lobby_version_release', ?);"
       );
       $sql->execute(array($lobby_info['version'], $lobby_info['released']));
-      
-      return true;
+    return true;
     }catch(\PDOException $Exception){
+      self::log("Install error : " . $Exception->getMessage());
       return false;
     }
   }
