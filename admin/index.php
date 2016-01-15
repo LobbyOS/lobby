@@ -16,7 +16,7 @@
         <h1>Admin</h1>
         <p>Welcome to the Admin panel of Lobby. You can manage your Lobby installation from here</p>
         <ul>
-          <li><?php echo \Lobby::l("admin/about.php", "About"); ?></li>
+          <li><?php echo \Lobby::l("admin/settings.php", "Settings"); ?></li>
           <li><?php echo \Lobby::l("admin/apps.php", "Installed Apps"); ?></li>
           <li><?php echo \Lobby::l("admin/lobby-store.php", "Lobby Store"); ?></li>
           <?php

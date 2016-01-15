@@ -81,7 +81,7 @@ class Update extends \Lobby {
     
     self::finish_software_update(isset($admin_previously_installed));
     
-    return L_URL . "/admin/about.php?updated=1&oldver={$oldVer}" . \H::csrf("g");
+    return L_URL . "/admin/settings.php?updated=1&oldver={$oldVer}" . \H::csrf("g");
   }
   
   public static function finish_software_update($admin_previously_installed = false){
