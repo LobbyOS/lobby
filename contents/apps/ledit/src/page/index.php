@@ -25,8 +25,10 @@ $this->addScript("main.js");
       $created = $appData['created'];
       $updated = $appData['updated'];
     
-      /* Show error if a save of the ID is not present */
-      if($content == ""){
+      /**
+       * Show error if a save of the ID is not present
+       */
+      if($content === ""){
         ser("No Such Save Found");
       }
     }
@@ -44,7 +46,7 @@ $this->addScript("main.js");
       <?php
       }else{
       ?>
-        <input id="saveName" type="text" placeholder="The Save Name. Default : timestamp" size="35" />
+        <input id="saveName" type="text" placeholder="The Save Name. Default: today's date" size="35" />
       <?php
       }
       ?>
