@@ -1,13 +1,7 @@
 /**
  * The Dashboard Object. For Managing the Tiles
  */
-lobby.dash = {
-  /**
-   * The position of tiles data.
-   * The positions that are saved by the user of each tiles
-   */
-  data : {},
-  
+lobby.dash = {  
   /**
    * The registered tiles data
    */
@@ -41,9 +35,7 @@ lobby.dash = {
         $.each(items, function(i, data){
           var id = data['id'];
           var html = '<div class="tile"><div class="app" id="'+ id +'" data-mode="none" data-initdelay="50"><a href="'+ lobby.url +'/app/'+ id +'"><div class="inner"><div class="image"><img src="'+ data['img'] +'" height="100%" width="100%"/></div><div class="title">'+ data['name'] +'</div></div></a></div></div>';
-          if(typeof lobby.dash.data[id] != "undefined"){
-            $(".tiles").append(html);
-          }
+          $(".tiles").append(html);
         });
       }
     });
