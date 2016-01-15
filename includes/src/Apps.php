@@ -162,13 +162,7 @@ class Apps extends \Lobby {
    * Returns boolean of installation status
    */
   public function isEnabled(){
-    if(in_array($this->app, self::$cache["enabled_apps"], true)){
-      $enabled = true;
-    }else{
-      self::getEnabledApps();
-      return $this->isEnabled();
-    }
-    return $enabled;
+    return in_array($this->app, self::getEnabledApps(), true);
   }
  
   /**
