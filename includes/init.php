@@ -52,8 +52,8 @@ if(\Lobby::curPage() != "/admin/install.php"){
       "href" => "/admin/lobby-store.php",
     ),
     "About" => array(
-      "text" => "About",
-      "href" => "/admin/about.php"
+      "text" => "Settings",
+      "href" => "/admin/settings.php"
     )
   );
   \Lobby\UI\Panel::addTopItem("lobbyAdmin", $adminArray);

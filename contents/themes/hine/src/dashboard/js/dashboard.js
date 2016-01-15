@@ -9,8 +9,6 @@ lobby.dash = {
     "app" : []
   },
   
-  opt  : {},
-  
   /**
    * Add blank tiles and then replace empty tiles with registered tiles
    */
