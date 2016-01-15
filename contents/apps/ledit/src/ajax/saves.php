@@ -1,7 +1,7 @@
 <?php
 $saves = getData("", "ledit");
 if( !$saves ){
-  echo "You haven't saved anything.";
+  echo '<div class="saveItem">You haven\'t saved anything.</div>';
 }else{
   function cmp($a, $b) {
     return strtotime($b["updated"]) - strtotime($a["updated"]);
