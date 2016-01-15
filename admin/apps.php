@@ -60,7 +60,7 @@
         $Apps = \Lobby\Apps::getApps();
     
         if(count($Apps) == 0){
-          ser("No Enabled Apps", "Lobby didn't find any apps that has been enabled", false);
+          ser("No Enabled Apps", "Lobby didn't find any apps", false);
         }
         if(count($Apps) != 0){
         ?>
