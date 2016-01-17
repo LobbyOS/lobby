@@ -18,4 +18,5 @@ Learn More [here](http://lobby.subinsb.com)
 Some things to note
 ===================
 
-I hope you contribute to this project. The docs are not complete and I will be glad if you help. :-)
+* The git repo has apps along with **ledit** that is in development. No guarantee that it will work.
+* The docs are not complete and I will be glad if you help. :-)
