@@ -162,7 +162,11 @@ class Update extends \Lobby {
       /**
        * Extract App
        */
-      $zip->extractTo(APPS_DIR);
+      $appDir = APPS_DIR . "/$id";
+      if(!file_exists($appDir)){
+        mkdir($appDir);
+      }
+      $zip->extractTo($appDir);
       $zip->close();
       
       \Lobby\FS::remove($zipFile);
