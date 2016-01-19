@@ -38,9 +38,9 @@ class Server {
   public static function download($type = "app", $id){
     $url = "";
     if($type == "app"){
-      $url = L_SERVER . "/download/app/{$id}";
+      $url = L_SERVER . "/app/{$id}/download";
     }elseif($type == "lobby"){
-      $url = L_SERVER . "/download/lobby/{$id}";
+      $url = L_SERVER . "/lobby/{$id}/download";
     }
     return $url;
   }
@@ -49,7 +49,7 @@ class Server {
    * Get updates
    */
   public static function check(){
-    $url = L_SERVER . "/updates";
+    $url = L_SERVER . "/lobby/updates";
     $apps = array_keys(\Lobby\Apps::getApps());
     try {
       $response = \Requests::post($url, array(), array(
