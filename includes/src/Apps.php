@@ -251,15 +251,7 @@ class Apps extends \Lobby {
         }
         
         $this->disableApp();
-        $files = array_diff(scandir($dir), array('.', '..'));
-        foreach ($files as $file) { 
-          if(is_dir("$dir/$file")){
-            delTree("$dir/$file");
-          }else{
-            \Lobby\FS::remove("$dir/$file");
-          }
-        } 
-        return rmdir($dir);
+        return \Lobby\FS::remove($dir);
       }else{
         return false;
       }

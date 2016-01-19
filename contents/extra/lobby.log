@@ -17,3 +17,39 @@
 <tr><td bgcolor='#eeeeec' align='center'>10</td><td bgcolor='#eeeeec' align='center'>0.0136</td><td bgcolor='#eeeeec' align='right'>383216</td><td bgcolor='#eeeeec'>include( <font color='#00bb00'>'/home/simsu/Other/projects/Web/Lobby/Web/contents/apps/lobby-server/src/page/api.php'</font> )</td><td title='/home/simsu/Other/projects/Web/Lobby/Web/includes/src/App.php' bgcolor='#eeeeec'>.../App.php<b>:</b>66</td></tr>
 </table></font>
 error : app doesn't exist
+[2016-01-19 08:06:00] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/themes/hine/src/dashboard/load.php on line 33 : Undefined index: name
+[2016-01-19 08:06:05] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/themes/hine/src/dashboard/load.php on line 33 : Undefined index: name
+[2016-01-19 08:06:11] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/contents/themes/hine/src/dashboard/load.php on line 33 : Undefined index: name
+[2016-01-19 08:06:25] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/Apps.php on line 257 : Call to undefined function Lobby\delTree()
+[2016-01-19 08:08:51] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/FileSystem.php on line 59 : Class 'Lobby\RecursiveDirectoryIterator' not found
+[2016-01-19 08:09:03] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/FileSystem.php on line 59 : Uncaught exception 'UnexpectedValueException' with message 'RecursiveDirectoryIterator::__construct(/home/simsu/Other/projects/Web/Lobby/local/contents/apps/anagram/App.php): failed to open dir: Not a directory' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/FileSystem.php:59
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/FileSystem.php(59): RecursiveDirectoryIterator->__construct('/home/simsu/Oth...', 4096)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Apps.php(259): Lobby\FS::remove('/home/simsu/Oth...')
+#2 /home/simsu/Other/projects/Web/Lobby/local/admin/install-app.php(34): Lobby\Apps->removeApp()
+#3 {main}
+  thrown
+[2016-01-19 08:10:07] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/FileSystem.php on line 74 : rmdir(/home/simsu/Other/projects/Web/Lobby/local/contents/apps/anagram): Directory not empty
+[2016-01-19 08:27:41] Installing Latest Version of App anagram
+[2016-01-19 08:27:41] Started Downloading Zip File from http://server.lobby.sim/api/app/anagram/download to /home/simsu/Other/projects/Web/Lobby/local/contents/update/anagram.zip
+[2016-01-19 08:27:41] Downloaded Zip File from http://server.lobby.sim/api/app/anagram/download to /home/simsu/Other/projects/Web/Lobby/local/contents/update/anagram.zip
+[2016-01-19 08:27:41] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/FileSystem.php on line 59 : Uncaught exception 'UnexpectedValueException' with message 'RecursiveDirectoryIterator::__construct(/home/simsu/Other/projects/Web/Lobby/local/contents/update/anagram.zip): failed to open dir: Not a directory' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/FileSystem.php:59
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/FileSystem.php(59): RecursiveDirectoryIterator->__construct('/home/simsu/Oth...', 4096)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Update.php(172): Lobby\FS::remove('/home/simsu/Oth...')
+#2 /home/simsu/Other/projects/Web/Lobby/local/admin/download.php(80): Lobby\Update::app('anagram')
+#3 {main}
+  thrown
+[2016-01-19 08:29:10] Installing Latest Version of App anagram
+[2016-01-19 08:29:10] Started Downloading Zip File from http://server.lobby.sim/api/app/anagram/download to /home/simsu/Other/projects/Web/Lobby/local/contents/update/anagram.zip
+[2016-01-19 08:29:10] Downloaded Zip File from http://server.lobby.sim/api/app/anagram/download to /home/simsu/Other/projects/Web/Lobby/local/contents/update/anagram.zip
+[2016-01-19 08:29:10] Installed App anagram
+[2016-01-19 08:29:10] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/admin/download.php on line 18 : ob_end_flush(): failed to delete and flush buffer. No buffer to delete or flush
+[2016-01-19 08:29:54] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/admin/install-app.php on line 27 : Undefined index: URL
+[2016-01-19 08:29:55] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/admin/install-app.php on line 27 : Undefined index: URL
+[2016-01-19 08:30:05] Installing Latest Version of App anagram
+[2016-01-19 08:30:05] Started Downloading Zip File from http://server.lobby.sim/api/app/anagram/download to /home/simsu/Other/projects/Web/Lobby/local/contents/update/anagram.zip
+[2016-01-19 08:30:05] Downloaded Zip File from http://server.lobby.sim/api/app/anagram/download to /home/simsu/Other/projects/Web/Lobby/local/contents/update/anagram.zip
+[2016-01-19 08:30:05] Installed App anagram
+[2016-01-19 08:30:05] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/admin/download.php on line 18 : ob_end_flush(): failed to delete and flush buffer. No buffer to delete or flush
+[2016-01-19 08:30:09] CSS file was not found in location given : /contents/apps/anagram/src/css/scrollbar.css
