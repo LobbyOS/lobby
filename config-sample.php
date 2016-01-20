@@ -4,7 +4,7 @@
  * A Sample Configuration File
  *
  * If you're doing manual installation, you can obtain lobbyID & secureID from
- * http://lobby.subinsb.com/api/lobby-installation-id
+ * http://lobby.subinsb.com/api/lobby/installation-id
  *
  */
 return array(

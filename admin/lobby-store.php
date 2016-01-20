@@ -40,7 +40,7 @@ header( 'Content-type: text/html; charset=utf-8' );
               <?php
               $App = new \Lobby\Apps($_GET['id']);
               if(!$App->exists){
-                echo \Lobby::l("/admin/install-app.php?id={$_GET['id']}" . H::csrf("g"), "Install", "class='button'");
+                echo \Lobby::l("/admin/install-app.php?id={$_GET['id']}" . H::csrf("g"), "Install", "class='button red'");
               }elseif(version_compare($App->info['version'], $app['version'])){
                 echo \Lobby::l("/admin/check-updates.php", "Update App", "class='button red'");
               }else{
