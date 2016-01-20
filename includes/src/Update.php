@@ -58,6 +58,7 @@ class Update extends \Lobby {
       $admin_previously_installed = true;
     }
     
+    $oldVer = getOption("lobby_version");
     $latest_version = getOption("lobby_latest_version");
     $url = \Lobby\Server::download("lobby", $latest_version);
       
@@ -85,6 +86,7 @@ class Update extends \Lobby {
   }
   
   public static function finish_software_update($admin_previously_installed = false){
+    \Lobby\FS::write("/upgrade.lobby", "1", "w");
     if($admin_previously_installed){
       \Lobby\FS::remove("/contents/modules/admin/disabled.txt");
     }

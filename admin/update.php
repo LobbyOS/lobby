@@ -25,7 +25,7 @@ require L_DIR . "/includes/src/Update.php";
           foreach($AppUpdates as $appID => $neverMindThisVariable){
             if(isset($_POST[$appID])){
               echo '<iframe src="'. L_URL . "/admin/download.php?type=app&id={$appID}". H::csrf("g") .'" style="border: 0;width: 100%;height: 200px;"></iframe>';
-              unset($AppUpdates[$appID]);              
+              unset($AppUpdates[$appID]);
             }
           }
           saveOption("app_updates", json_encode($AppUpdates));
@@ -94,7 +94,10 @@ require L_DIR . "/includes/src/Update.php";
         }
         if(isset($_GET['step']) && $_GET['step'] != "" && H::csrf()){
           $step = $_GET['step'];
-          if($step == 1){
+          if($step === "1"){
+            if(!is_writable(L_DIR)){
+              ser("Lobby Directory Not Writable", "The Lobby directory (". L_DIR .") is not writable. Make the folder writable to update Lobby.");
+            }
           ?>
             <p>
               Looks like everything is ok. Hope you backed up Lobby installation & Database.

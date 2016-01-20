@@ -53,3 +53,11 @@ Stack trace:
 [2016-01-19 08:30:05] Installed App anagram
 [2016-01-19 08:30:05] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/admin/download.php on line 18 : ob_end_flush(): failed to delete and flush buffer. No buffer to delete or flush
 [2016-01-19 08:30:09] CSS file was not found in location given : /contents/apps/anagram/src/css/scrollbar.css
+[2016-01-19 17:35:49] CSS file was not found in location given : /contents/apps/anagram/src/css/scrollbar.css
+[2016-01-19 18:26:27] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/Database.php on line 152 : Uncaught exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'content' in 'field list'' in /home/simsu/Other/projects/Web/Lobby/local/includes/src/Database.php:152
+Stack trace:
+#0 /home/simsu/Other/projects/Web/Lobby/local/includes/src/Database.php(152): PDOStatement->execute(Array)
+#1 /home/simsu/Other/projects/Web/Lobby/local/includes/functions.php(64): Lobby\DB::saveData('ledit', 'January 19th, 2...', '<p>sdf</p>')
+#2 /home/simsu/Other/projects/Web/Lobby/local/includes/lib/lobby/ajax/saveData.php(7): saveData('January 19th, 2...', '<p>sdf</p>', 'ledit')
+#3 {main}
+  thrown
