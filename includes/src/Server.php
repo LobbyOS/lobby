@@ -37,10 +37,10 @@ class Server {
    */
   public static function download($type = "app", $id){
     $url = "";
-    if($type == "app"){
+    if($type === "app"){
       $url = L_SERVER . "/app/{$id}/download";
-    }elseif($type == "lobby"){
-      $url = L_SERVER . "/lobby/{$id}/download";
+    }elseif($type === "lobby"){
+      $url = L_SERVER . "/lobby/download/{$id}";
     }
     return $url;
   }

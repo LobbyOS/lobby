@@ -12,7 +12,7 @@
   );
   $curPage = \Lobby::curPage();
   foreach($links as $link => $text){
-    if($link == $curPage || ($curPage == "/admin/update.php" && $text == "Settings")){
+    if($link == $curPage || ($curPage == "/admin/update.php" && $text == "Settings") || ($curPage == "/admin/install-app.php" && $text == "Apps")){
       echo \Lobby::l($link, $text, "class='link active'");
     }else{
       echo \Lobby::l($link, $text, "class='link'");
