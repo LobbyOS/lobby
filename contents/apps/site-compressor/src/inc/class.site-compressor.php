@@ -73,7 +73,7 @@ class SiteCompressor {
   /* Execute before commands */
  if($this->curOptions["site"]["beforeCommand"]!=""){
      $this->status("Executing Terminal Command");
-     system($this->curOptions["site"]["beforeCommand"]);
+     exec($this->curOptions["site"]["beforeCommand"]);
   }
       
   $this->status("Emptying Output Directory");
@@ -129,7 +129,7 @@ class SiteCompressor {
       /* Execute after commands */
       if($this->curOptions["site"]["afterCommand"]!=""){
         $this->status("Executing Terminal Command");
-        system($this->curOptions["site"]["afterCommand"]);
+        exec($this->curOptions["site"]["afterCommand"]);
       }
       $this->status("Finished Site Compression. Thank you. Hope everything went OK.");
    }

@@ -40,12 +40,12 @@ class FS {
    */
   public static function write($path, $content, $type = "w"){
     $file = self::loc($path, false);
-    if($type == "w"){
+    if($type === "w"){
       $fh = fopen($file, 'w');
       $status = fwrite($fh, $content);
       fclose($fh);
       return $status === false || $status == 0 ? false : true;
-    }elseif($type == "a"){
+    }elseif($type === "a"){
       $fh = fopen($file, 'a');
       $status = fwrite($fh, "$content\n");
       fclose($fh);
