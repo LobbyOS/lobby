@@ -23,6 +23,7 @@
   left:60px;
   list-style: none;
   margin: 0px;
+  padding: 0;
 }
 .panel.top .left li.prnt, .panel.top .right li.prnt{
   position: relative;
