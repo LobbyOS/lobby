@@ -57,7 +57,6 @@
   color:green;
 }
 .workspace#site-compressor .button{
-  padding: 5px 15px;
   background: #00C0C0;
   display: inline-block;
   margin: 5px;
@@ -65,9 +64,6 @@
   outline: none;
   border: 0px;
   cursor: pointer;
-}
-.workspace#site-compressor .button:hover{
-  box-shadow:0px 0px 1px black;
 }
 .workspace#site-compressor #replaceFields{
   margin-left:10px;
