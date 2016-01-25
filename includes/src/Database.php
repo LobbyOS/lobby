@@ -128,7 +128,9 @@ class DB extends \Lobby {
         }
       }
       if(is_array($return) && $safe === true){
-        array_walk_recursive($return, function(&$c){ $c = self::filt($c); });
+        array_walk_recursive($return, function(&$c){
+          $c = \Lobby\DB::filt($c);
+        });
       }
       return is_array($return) && count($return) == 0 ? null : $return;
     }

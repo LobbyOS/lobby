@@ -61,3 +61,9 @@ Stack trace:
 #2 /home/simsu/Other/projects/Web/Lobby/local/includes/lib/lobby/ajax/saveData.php(7): saveData('January 19th, 2...', '<p>sdf</p>', 'ledit')
 #3 {main}
   thrown
+[2016-01-25 08:13:35] Installing Latest Version of App diary
+[2016-01-25 08:13:35] Started Downloading Zip File from http://server.lobby.sim/api/app/diary/download to /home/simsu/Other/projects/Web/Lobby/local/contents/update/diary.zip
+[2016-01-25 08:13:36] Downloaded Zip File from http://server.lobby.sim/api/app/diary/download to /home/simsu/Other/projects/Web/Lobby/local/contents/update/diary.zip
+[2016-01-25 08:13:36] Installed App diary
+[2016-01-25 08:13:36] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/admin/download.php on line 18 : ob_end_flush(): failed to delete and flush buffer. No buffer to delete or flush
+[2016-01-25 17:16:07] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/Database.php on line 132 : Call to undefined method Lobby::filt()
