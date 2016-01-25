@@ -36,10 +36,12 @@ class Install extends \Lobby {
    */
   public static function checkDatabaseConnection(){
     try {
-      $db = new \PDO("mysql:dbname=". self::$database['dbname'] .";host=". self::$database['host'] .";port=". self::$database['port'], self::$database['username'], self::$database['password'], array(
+      $db = new \PDO("mysql:host=". self::$database['host'] .";port=". self::$database['port'], self::$database['username'], self::$database['password'], array(
         \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
       ));
       self::$dbh = $db;
+      self::$dbh->exec("CREATE DATABASE IF NOT EXISTS `" . self::$database['dbname'] . "`");
+      self::$dbh->query("USE `" . self::$database['dbname'] . "`");
       
       $notable = false;
       $tables = array("options", "data"); // The Tables of Lobby
