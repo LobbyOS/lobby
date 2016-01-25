@@ -245,7 +245,7 @@ require L_DIR . "/includes/src/Install.php";
                       <td>
                         <input type="text" name="dbname" />
                       </td>
-                      <td>The name of the database you want to run Lobby in. <b>Database should exist</b> and Lobby won't create DB if it doesn't exist.</td>
+                      <td>The name of the database you want to run Lobby in. Lobby will create DB if it doesn't exist.</td>
                     </tr>
                     <tr>
                       <td>User Name</td>
