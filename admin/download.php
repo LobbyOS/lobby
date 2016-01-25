@@ -59,7 +59,18 @@ function convertToReadableSize($size){
 }
 
 $GLOBALS['last'] = 0;
-\Lobby\Update::$progress = function($resource, $download_size, $downloaded, $upload_size, $uploaded){
+\Lobby\Update::$progress = function($resource, $download_size, $downloaded, $upload_size, $uploaded = ""){
+  /**
+   * On new versions of cURL, $resource parameter is not passed
+   * So, swap vars if it doesn't exist
+   */
+  if(!is_resource($resource)){
+    $uploaded = $upload_size;
+    $upload_size = $downloaded;
+    $downloaded = $download_size;
+    $download_size = $resource;
+  }
+  
   if($download_size == 0){
     $percent = 0;
   }else{
