@@ -8,8 +8,8 @@ class Modules extends \Lobby {
   
   public static function init(){
     $apps = \Lobby\Apps::getApps();
-    foreach($apps as $app => $null){
-      $module_name = 'app_' . $app;
+    foreach($apps as $app){
+      $module_name = 'app_' . str_replace("-", "_", $app);
       $loc = APPS_DIR . "/$app/module";
       if(self::valid($module_name, $loc)){
         self::$app_modules[$module_name] = $loc;
