@@ -67,3 +67,4 @@ Stack trace:
 [2016-01-25 08:13:36] Installed App diary
 [2016-01-25 08:13:36] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/admin/download.php on line 18 : ob_end_flush(): failed to delete and flush buffer. No buffer to delete or flush
 [2016-01-25 17:16:07] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/Database.php on line 132 : Call to undefined method Lobby::filt()
+[2016-01-28 19:05:01] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/src/Modules.php on line 64 : Class '\Lobby\Module\app_keyring' not found
