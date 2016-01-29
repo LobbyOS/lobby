@@ -1,5 +1,5 @@
 <?php
-namespace Lobby\Modules;
+namespace Lobby\Module;
 
 class app_keyring extends \Lobby\Module {
 
