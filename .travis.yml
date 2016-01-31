@@ -5,4 +5,5 @@ php:
 - 5.5
 - 7.0
 - hhvm
+before_script: composer self-update
 script: phpunit tests/LobbyTest.php
