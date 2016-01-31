@@ -1,4 +1,4 @@
-tmp.saves = {};
+lobby.app.saves = {};
 
 /* Make an associative array of Forms' data */
 $.fn.serializeHTML = function() {
@@ -20,47 +20,52 @@ $.fn.serializeHTML = function() {
     return formData;
 };
 
-/* Restoring Configuration */
-tmp.restoreConfig = function(configName){
- /* Get the config as JSON object */
- $replaceData = tmp["saves"][configName]["replacer"];
- $mainData = tmp["saves"][configName]["main"];
+/**
+ * Restoring/Loading Configuration
+ */
+lobby.app.restoreConfig = function(configName){
+ /**
+  * Get the config as JSON object
+  */
+  clog(configName);
+  $replaceData = lobby.app["saves"][configName]["replacer"];
+  $mainData = lobby.app["saves"][configName]["main"];
  
- /* Replacer Config */
- var replaceFields={};
- $("#replaceFields div").remove();
- $.each($replaceData, function(key, val){
-   $(".workspace#site-compressor .addReplaceField").click();
-   $(".workspace#site-compressor #replaceFields div:last").find("[name='replaceFrom[]']").val(key);
-   $(".workspace#site-compressor #replaceFields div:last").find("[name='replaceTo[]']").val(val);
- });
- 
- /* Restore Site Details */
- $('.workspace#site-compressor .top [data-binding]').each(function(){ 
-        // handle the set value
-        // need consider the different value type for different field type
-        var $this = $(this);
-        var val = $mainData[$this.data('binding')];
-
-         // for chechbox
-        if($this.is('[type=checkbox]')){
-            $this.prop('checked',val)
-         // for others
-        }else{
-            $this.val(
-             decodeURIComponent(
-               val.replace($this.attr("name") + "=", "")
-             )
-            );
-        }
- });
- $(".workspace#site-compressor [name='beforeCommand'], .workspace#site-compressor [name='afterCommand']").each(function(){
-   $(this).val($(this).val().replace(/\+/g, " "));
- });
+  /* Replacer Config */
+  var replaceFields={};
+  $("#replaceFields div").remove();
+  $.each($replaceData, function(key, val){
+     $(".workspace#site-compressor .addReplaceField").click();
+     $(".workspace#site-compressor #replaceFields div:last").find("[name='replaceFrom[]']").val(key);
+     $(".workspace#site-compressor #replaceFields div:last").find("[name='replaceTo[]']").val(val);
+  });
+   
+   /* Restore Site Details */
+  $('.workspace#site-compressor .top [data-binding]').each(function(){ 
+    // handle the set value
+    // need consider the different value type for different field type
+    var $this = $(this);
+    var val = $mainData[$this.data('binding')];
+  
+     // for chechbox
+    if($this.is('[type=checkbox]')){
+      $this.prop('checked',val)
+      // for others
+    }else{
+      $this.val(
+       decodeURIComponent(
+         val.replace($this.attr("name") + "=", "")
+       )
+      );
+    }
+  });
+  $(".workspace#site-compressor [name='beforeCommand'], .workspace#site-compressor [name='afterCommand']").each(function(){
+    $(this).val($(this).val().replace(/\+/g, " "));
+  });
 };
 
 /* Save Configuration */
-tmp.saveConfig = function(configName){
+lobby.app.saveConfig = function(configName){
    /* Save Site Details & Compression Options */
     var generalSettings = {};
   $('.workspace#site-compressor .top [data-binding]').each(function(){
@@ -86,12 +91,12 @@ tmp.saveConfig = function(configName){
       if(data == "bad"){
       alert("Failed Saving Data");
     }else{
-        tmp.displaySaves();
+        lobby.app.displaySaves();
       }
   });
 }
 
-tmp.displaySaves = function(){
+lobby.app.displaySaves = function(){
   lobby.app.ajax("saves.php", {}, function(data){
     var data = JSON.parse(data);
     if( data.length == 0 ){
@@ -100,10 +105,10 @@ tmp.displaySaves = function(){
       $(".workspace#site-compressor #configSaves").html(""); // Empty the saves
       
       $.each(data, function(key){
-        $(".workspace#site-compressor #configSaves").append("<div style='margin:5px;' id='" + key + "'>" + key + " - " + "<a href='javascript:void(0);' class='loadConfig'>Load</a> <a href='javascript:void(0);' class='removeConfig'>Remove</a>" + "</div>");
+        $(".workspace#site-compressor #configSaves").append("<tr><td>" + key + "</td><td><a href='javascript:void(0);' id='" + key + "' class='loadConfig button blue'>Load</a><a href='javascript:void(0);' id='" + key + "' class='removeConfig button red'>Remove</a></td></tr>");
       });
     }
-    tmp.saves = data;
+    lobby.app.saves = data;
   });
 };
 
@@ -112,24 +117,25 @@ $(document).ready(function(){
  
   /* Add Dynamic Srollbars */
   $(".workspace#site-compressor #left, .workspace#site-compressor #right, .workspace#site-compressor .compress-status").addClass("scrollbar-inner").scrollbar();
-  $(".workspace#site-compressor .table #left:first, .workspace#site-compressor .table #right:first").width(($(document).width()/2)-10);
+  $(".workspace#site-compressor .table #left:first").width($(document).width() * 40/100);
+  $(".workspace#site-compressor .table #right:first").width($(document).width() * 57/100);
  
   /* Display the saved configs */
-  tmp.displaySaves();
+  lobby.app.displaySaves();
  
   /* Load Config when requested */
   $(".workspace#site-compressor .loadConfig").live("click", function(){
-    id = $(this).parent().attr("id");
+    id = $(this).attr("id");
     localStorage["lastSaveName"] = id;
-    tmp.restoreConfig(id);
+    lobby.app.restoreConfig(id);
   });
  
   /* Remove Config when requested */
   $(".workspace#site-compressor .removeConfig").live("click", function(){
-    configName = $(this).parent().attr("id");
+    configName = $(this).attr("id");
     lobby.app.remove(configName, function(){
       /* After deletion, Display the saves that are left */
-      tmp.displaySaves();
+      lobby.app.displaySaves();
     });
   });
  
@@ -147,7 +153,7 @@ $(document).ready(function(){
   
     $(".workspace#site-compressor .compress-status").html("");
     $("<iframe/>").attr({
-      "height"      : ($(document).height() - ($(".workspace#site-compressor .top").offset().top + $(".workspace#site-compressor .top").height())) - 50,
+      "height"      : ($(document).height() - ($(".workspace#site-compressor .top").offset().top + $(".workspace#site-compressor .top").height())) - 5,
       "width"       : "100%",
       "frameborder" : 0,
     }).appendTo(".workspace#site-compressor .compress-status");
@@ -159,7 +165,7 @@ $(document).ready(function(){
   });
  
   $(".workspace#site-compressor #saveConfig").live("click", function(){
-    var saveName = prompt("Name the configuration ?", localStorage["lastSaveName"]);
+    var saveName = prompt("Please type in the name of the configuration", localStorage["lastSaveName"]);
     if(saveName != null){ /* If user didn't clicked cancel button */
       if(saveName.match("'")){
         alert("Can't have special characters in the save name");
@@ -168,7 +174,7 @@ $(document).ready(function(){
           saveName = "default";
         }
         localStorage["lastSaveName"] = saveName;
-        tmp.saveConfig(saveName);
+        lobby.app.saveConfig(saveName);
       }
     }
   });

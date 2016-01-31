@@ -2,20 +2,62 @@
 <div class="top">
   <div class="table">
     <div id="left" class="left">
-      <div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
+      <h2>Saves</h2>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <td>Name</td>
+              <td>Actions</td>
+            </tr>
+          </thead>
+          <tbody id="configSaves"></tbody>
+        </table>
+      </div>
+    </div>
+    <div id="right" class="left">
+      <h2>Save</h2>
+      <a class="button" id="saveConfig">Save Current Configuration</a>
+      <h2>Compression Options</h2>
+      <form id="options">
+        <label>
+          <input type="checkbox" data-binding="minHtml" checked="checked" name="minHtml"/>
+          <span>Minimize HTML</span>
+        </label>
+        <label>
+          <input type="checkbox" data-binding="minPHP" checked="checked" name="minPHP"/>
+          <span>Minimize HTML in .php Files</span>
+        </label>
+        <label>
+          <input type="checkbox" data-binding="noComments" checked="checked" name="noComments"/>
+          <span>Remove Comments</span>
+        </label>
+        <label>
+          <input type="checkbox" data-binding="minCss" checked="checked" name="minCss"/>
+          <span>Minimize CSS</span>
+        </label>
+        <label>
+          <input type="checkbox" data-binding="minJs" checked="checked" name="minJs"/>
+          <span>Minimize JS</span>
+        </label>
+        <label>
+          <input type="checkbox" data-binding="minInline" checked="checked" name="minInline"/>
+          <span>Minimize Inline CSS, JS (&lt;script>&lt;/script>, &lt;style>&lt;/style>)</span>
+        </label>
+      </form>
       <h2>Site Details</h2>
       <form id="siteDetails">
         <label>
           <span>Site Location</span>
-          <input type="text" data-binding="siteLoc" name="location"/>
-          <p>The site's source code full absolute location</p>
+          <input type="text" data-binding="siteLoc" name="location" placeholder="/var/www/html/mysite/local" />
+          <p>The full absolute location of site's source code</p>
         </label>
         <label>
           <span>Output</span>
-          <input type="text" data-binding="siteOutput" name="output"/>
+          <input type="text" data-binding="siteOutput" name="output" placeholder="/var/www/html/mysite/compressed" />
           <p>The location where the output must be written</p>
-            </label>
-            <h2>Replacer</h2>
+        </label>
+        <h2>Replacer</h2>
         <div id="replaceFields">       
           <p>You can also replace strings like <b>localsite.dev</b> to <b>mydomain.com</b></p>
           <a class="addReplaceField button">Add New Field</a>
@@ -23,54 +65,20 @@
         <div>
           <h2>Before Compression</h2>
           <label>
+          <p>Run a Terminal command before compression starts (Avoid using double quotes ("))</p>
             <input type="text" data-binding="beforeCommand" placeholder="Type Command Here" name="beforeCommand"/>
-            <p>Run a Terminal command before compression starts</p>
-            <p>Avoid using double quotes (")</p>
           </label>
         </div>
         <div>
           <h2>After Compression</h2>
           <label>
+            <p>Run a Terminal command after compression finished (Avoid using double quotes ("))</p>
             <input type="text" data-binding="afterCommand" placeholder="Type Command Here" name="afterCommand"/>
-            <p>Run a Terminal command after compression finished</p>
-            <p>Avoid using double quotes (")</p>
           </label>
         </div>
-        <button class="button">Let's Start Compressing</button>
+        <button class="button green">Start Compressing</button>
+        <a class="button" id="saveConfig">Save Current Configuration</a>
       </form>
-    </div>
-    <div id="right" class="left">
-      <h2>Compression Options</h2>
-      <form id="options">
-        <label>
-          <input type="checkbox" data-binding="minHtml" checked="checked" name="minHtml"/>
-          Minimize HTML
-        </label>
-        <label>
-          <input type="checkbox" data-binding="minPHP" checked="checked" name="minPHP"/>
-          Minimize HTML in .php Files
-        </label>
-        <label>
-          <input type="checkbox" data-binding="noComments" checked="checked" name="noComments"/>
-          Remove Comments
-        </label>
-        <label>
-          <input type="checkbox" data-binding="minCss" checked="checked" name="minCss"/>
-          Minimize CSS
-        </label>
-        <label>
-          <input type="checkbox" data-binding="minJs" checked="checked" name="minJs"/>
-          Minimize JS
-        </label>
-        <label>
-          <input type="checkbox" data-binding="minInline" checked="checked" name="minInline"/>
-          Minimize Inline CSS, JS (&lt;script>&lt;/script>, &lt;style>&lt;/style>)
-        </label>      
-      </form>
-      <a class="button" id="saveConfig">Save Current Configuration</a>
-      <p>(including Site & Replacer Details)</p>
-      <h2>Saves</h2>
-      <div id="configSaves"></div>
     </div>
    </div>
 </div>
