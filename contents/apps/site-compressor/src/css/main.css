@@ -1,21 +1,23 @@
 .workspace#site-compressor *{
   font-family: Ubuntu;
-  margin: 0px;
-  font-size: 13px;
+  font-size: 1rem;
+}
+.workspace#site-compressor h1{
+  font-size: 3rem;
 }
 .workspace#site-compressor h2, h3{
-  margin: 10px 0px;
+  margin: 20px 0px;
   padding: 0px;
 }
 .workspace#site-compressor h2{
-  font-size: 20px;
+  font-size: 1.8rem;
 }
 .workspace#site-compressor h3{
-  font-size: 16px;
+  font-size: 1.2rem;
 }
 .workspace#site-compressor .top{
   width: 100%;
-  height: 40%;
+  height: 55%;
   display: inline-block;
   border-bottom: 2px solid #00C0C0;
 }
@@ -24,11 +26,15 @@
   height: 100%;
 }
 .workspace#site-compressor #left, #right{
-  padding: 0px 5px !important;
+  padding: 0 5px;
   height: 100%;
 }
 .workspace#site-compressor #right{
-  border-left:2px solid #00C0C0;
+  border-left: 2px solid #00C0C0;
+}
+.workspace#site-compressor #right #replaceFields input{
+  display: inline-block;
+  width: 48%;
 }
 .workspace#site-compressor .compress-status{
   padding: 5px;
