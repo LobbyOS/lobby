@@ -5,5 +5,5 @@ php:
 - 5.5
 - 7.0
 - hhvm
-before_script: composer self-update
+install: composer install
 script: phpunit tests/LobbyTest.php
