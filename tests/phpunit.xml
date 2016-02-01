@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="./autoload.php">
+  <testsuites>
+    <testsuite name="Lobby">
+      <directory>./</directory>
+      <file>tests/LobbyInstall.php</file>
+    </testsuite>
+  </testsuites>
+  <php>
+    <const name="WEB_SERVER_HOST" value="localhost" />
+    <const name="WEB_SERVER_PORT" value="8000" />
+  </php>
+</phpunit>
