@@ -1,0 +1,7 @@
+.workspace#pocket .tpane{
+  background: #fff;
+  padding: 10px 20px;
+}
+.tpane #balance{
+  color: #008000;
+}
