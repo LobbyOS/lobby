@@ -49,8 +49,8 @@
       <form id="siteDetails">
         <label>
           <span>Site Location</span>
-          <input type="text" data-binding="siteLoc" name="location" placeholder="/var/www/html/mysite/local" />
-          <p>The full absolute location of site's source code</p>
+          <input type="text" id="site_location" data-binding="siteLoc" name="location" placeholder="/var/www/html/mysite/local" />
+          <a data-lobby="filechooser" data-lobby-input=".workspace#site-compressor #site_location">Choose Path</a>
         </label>
         <label>
           <span>Output</span>
