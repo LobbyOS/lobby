@@ -1,0 +1,160 @@
+/**
+ * Program Name: File Picker
+ * Program URI: http://code.google.com/p/file-picker/
+ * Description: This program will let you browse server-side folders and files
+ * 				like a Windows Explorer, and you can pick several files that you
+ * 				want to process in somewhere.
+ * 
+ * Copyright (c) 2008-2009 Hpyer (coolhpy[at]163.com)
+ * Dual licensed under the MIT (MIT-LICENSE.txt)
+ * and GPL (GPL-LICENSE.txt) licenses.
+ */
+
+ul,ol{list-style-type:none;}
+*{
+	font: 12px Arial, Tahoma !important; font: 11px Arial, Tahoma; margin:0px; padding:0px;
+}
+#container{
+	width:389px; margin:0 3px 0 3px;
+}
+	#header{
+		width:389px;
+	}
+		#header li{
+			float:left; margin:5px 0 5px 0;
+		}
+		#header img{
+			border:0px; margin:0 3px 0 0; width:16px; height:16px; cursor:pointer;
+		}
+	#body{
+		width:389px;
+	}
+		#list_box{
+			float:left; width:380px; height:180px; border:1px solid #333; padding:3px 0 0 0;
+		}
+			#loading_img{
+				margin:40px 0 0 130px;
+			}
+		.order_list{
+			overflow:auto;
+		}
+			.order_list li{
+				width:95px; height:18px; line-height:18px; word-break:break-all; overflow:hidden; cursor:default; float:left;
+				margin:0 3px 0 3px; padding:0 0 0 18px; background:url(images/list/unknown.gif) no-repeat;
+			}
+			.order_list li.selected{
+				color:#fff; background-color:#66a;
+			}
+			.order_list .folder{
+				background:url(images/list/folder.gif) no-repeat;
+			}
+			.order_list .gif, .order_list .jpg, .order_list .bmp, .order_list .png{
+				background:url(images/list/image.gif) no-repeat;
+			}
+			.order_list .txt{
+				background:url(images/list/document.gif) no-repeat;
+			}
+			.order_list .wmv, .order_list .rm, .order_list .rmvb, .order_list .mp4, .order_list .avi, .order_list .flv, .order_list .3gp{
+				background:url(images/list/movie.gif) no-repeat;
+			}
+			.order_list .zip, .order_list .rar, .order_list .tar, .order_list .gz, .order_list .7z{
+				background:url(images/list/zip.gif) no-repeat;
+			}
+			.order_list .swf, .order_list .fla{
+				background:url(images/list/flash.gif) no-repeat;
+			}
+			.order_list .mp3, .order_list .wav, .order_list .wma, .order_list .mid, .order_list .aac, .order_list .ape{
+				background:url(images/list/music.gif) no-repeat;
+			}
+			.order_list .htm, .order_list .html, .order_list .php, .order_list .asp, .order_list .jsp, .order_list .aspx, .order_list .cfm{
+				background:url(images/list/web.gif) no-repeat;
+			}
+			.order_list .doc{
+				background:url(images/list/word.gif) no-repeat;
+			}
+			.order_list .pdf{
+				background:url(images/list/pdf.gif) no-repeat;
+			}
+			.order_list .xml{
+				background:url(images/list/xml.gif) no-repeat;
+			}
+			.order_list .xls{
+				background:url(images/list/excel.gif) no-repeat;
+			}
+	#footer{
+		width:389px;
+	}
+.info_box{
+	position:absolute; width:240px; border:1px solid #333; padding:3px; display:none; background:#fff; cursor:default; word-break:break-all;
+}
+	#btn_close{
+		float:right; cursor:pointer; font-weight:bold;
+	}
+	#info_loading_img{
+		margin:0 0 0 82px;
+	}
+	#preview_img{
+		float:left; width:100px; border:1px solid #ccc; padding:1px; margin:2px 7px 0 2px; cursor:pointer;
+	}
+#container table{
+	width:389px; float:left; margin:5px 0 0 0;
+}
+#container .select{
+	width:205px;
+}
+#container .select2{
+	width:200px;
+}
+#container .label{
+	width:60px;
+}
+#container .button{
+	width:120px;
+}
+#container .btn{
+	width:60px;
+}
+
+/* For Auto-Compelete */
+.ac_results{
+	padding: 0px;
+	border: 1px solid WindowFrame;
+	background-color: Window;
+	overflow-x: hidden;
+	overflow-y: auto;
+	height: 60px;
+}
+.ac_results ul{
+	width: 100%;
+	list-style-position: outside;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.ac_results iframe{
+	display:none;/*sorry for IE5*/
+	display/**/:block;/*sorry for IE5*/
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:-1;
+	filter:mask();
+	width:3000px;
+}
+.ac_results li{
+	margin: 0px;
+	padding: 2px 5px;
+	cursor: pointer;
+	display: block;
+	width: 100%;
+	font: menu;
+	font-size: 12px;
+	overflow: hidden;
+}
+.ac_loading{
+	/*background : Window url('./indicator.gif') right center no-repeat;*/
+}
+.ac_over{
+	background-color: Highlight;
+	color: HighlightText;
+}
