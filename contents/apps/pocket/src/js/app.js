@@ -4,6 +4,15 @@ $.extend(lobby.app, {
   
   init: function(){
     this.loadBalance();
+    this.events_binder();
+  },
+  
+  events_binder: function(){
+    $("#settings").live("click", function(){
+      lobby.app.ajax("settings.html", function(response){
+        $("<div id='settings'>"+ response +"</div>").dialog();
+      });
+    });
   },
 
   loadBalance: function(){
