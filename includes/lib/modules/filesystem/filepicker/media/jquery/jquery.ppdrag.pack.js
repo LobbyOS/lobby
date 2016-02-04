@@ -1,0 +1,9 @@
+/*
+ * ppDrag 0.2 - Extremely Fast Drag&Drop for jQuery
+ * http://ppdrag.ppetrov.com/
+ *
+ * Copyright (c) 2008 Peter Petrov (ppetrov AT ppetrov.com)
+ * Licensed under the LGPL (LGPL-LICENSE.txt) license.
+ */
+
+eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('(3(A){A.W.1=3(B){2(Y B=="X"){2(B=="V"){b 5.s(3(){A.1.j(5,"r",A.1.p,g);A.l(5,"k-1",h)})}}b 5.s(3(){A.l(5,"k-1",{a:A.Z({},B)});A.1.m(5,"r",A.1.p,g)})};A.1={p:3(B){2(!A.1.9){A.1.9={4:5,x:H(5.7.y)||0,u:H(5.7.G)||0,z:B.w||B.v,q:B.F||B.I};c D=A.1.9;c C=A.l(D.4,"k-1");2(C.a.6){D.6=D.4.7.6;D.4.7.6=C.a.6}A.1.m(n,"J",A.1.f,i);A.1.m(n,"M",A.1.o,i)}2(B.8){B.8()}2(B.d){B.d()}b g},o:3(B){2(!B){c B=Q.L}c C=A.1.9;C.4.7.y=(C.x+(B.w||B.v)-C.z)+"t";C.4.7.G=(C.u+(B.F||B.I)-C.q)+"t";2(B.8){B.8()}2(B.d){B.d()}b g},f:3(B){c D=A.1.9;c C=A.l(D.4,"k-1");A.1.j(n,"M",A.1.o,i);A.1.j(n,"J",A.1.f,i);2(C.a.6){D.4.7.6=D.6}2(C.a.f){C.a.f.T(D.4,[D.4])}A.1.9=h;2(B.8){B.8()}2(B.d){B.d()}b g},m:3(D,C,B,E){2(D.R){D.R(C,B,E)}O{2(D.K){D["e"+C+B]=B;D[C+B]=3(){b D["e"+C+B](Q.L)};D.K("S"+C,D[C+B])}}},j:3(D,C,B,E){2(D.N){D.N(C,B,E)}O{2(D.P){D.P("S"+C,D[C+B]);D[C+B]=h;D["e"+C+B]=h}}}}})(U);',62,62,'|ppdrag|if|function|el|this|zIndex|style|stopPropagation|current|options|return|var|preventDefault||stop|false|null|true|removeEvent|pp|data|addEvent|document|drag|start|oy|mousedown|each|px|otop|screenX|pageX|oleft|left|ox||||||pageY|top|parseInt|screenY|mouseup|attachEvent|event|mousemove|removeEventListener|else|detachEvent|window|addEventListener|on|apply|jQuery|destroy|fn|string|typeof|extend'.split('|'),0,{}))
