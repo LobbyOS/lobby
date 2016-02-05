@@ -14,7 +14,7 @@
 // -------------------- Configration begin -------------------------
 
 // Folder path
-define('FP_ROOT_PATH', '/home/simsu');
+define('FP_ROOT_PATH', '/');
 
 // Folder URI
 define('FP_ROOT_URI', 'http://localhost/eclipse/file-picker/trunk/1.1/media');
@@ -58,7 +58,7 @@ $lang = FP_LANGUAGE;
 load_textdomain(FP_SCRIPT_ROOT . '/languages');
 
 $fp = new FilePicker();
-$action = $_GET['action'];
+$action = isset($_GET['action']) ? $_GET['action'] : "";
 
 switch ($action){
 	case 'list':
@@ -79,34 +79,24 @@ switch ($action){
 		break;
 */
 	default :
-		$key = $_GET['var'] ? $_GET['var'] : 'FP_RESULT';
-		$filter = $_GET['filter'] ? $_GET['filter'] : 31;
-		$multi = $_GET['multi'] ? true : false;
+		$key = isset($_GET['var']) ? $_GET['var'] : 'FP_RESULT';
+		$filter = isset($_GET['filter']) ? $_GET['filter'] : 31;
+		$multi = isset($_GET['multi']) ? true : false;
 
 		$filters = '';
 		$filters = $fp->get_filters($filter);
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
 <title><?php _e('File Picker'); ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css" href="./media/file-picker.css" />
-<script type="text/javascript" src="./media/jquery/jquery.pack.js"></script>
-<script type="text/javascript" src="./media/jquery/jquery.autocomplete.min.js"></script>
-<script type="text/javascript" src="./media/jquery/jquery.ppdrag.pack.js"></script>
-<script type="text/javascript" src="./media/jquery/jquery.base64.min.js"></script>
 <script type="text/javascript" src="./media/file-picker.js"></script>
-</head>
-
-<body>
 <form id="file_picker_form" name="file_picker_form">
 <div id="container">
 	<div id="header">
 		<table cellspacing="0" cellpadding="0"><tr>
 			<td class="label"><label><?php _e('Folder'); ?></label>:</td>
-			
+			<td><select id="folders_tree" class="select" style="display: none;"></select><input type="hidden" id="target_dir" value="/" /></td>
 			<td class="button"><ul>
 				<li><img id="btn_refresh" src="./media/images/refresh.gif" alt="<?php _e('Refresh'); ?>" /></li>
 				<li><img id="btn_up" src="./media/images/up.gif" alt="<?php _e('Up'); ?>" /></li>
@@ -145,8 +135,6 @@ $(document).ready(function(){
 	});
 });
 </script>
-</body>
-</html>
 <?php
 		continue;
 }

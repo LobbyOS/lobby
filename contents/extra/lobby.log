@@ -81,3 +81,5 @@ Stack trace:
 [2016-02-01 18:48:33] 8192 caused by Unknown on line 0 : Automatically populating $HTTP_RAW_POST_DATA is deprecated and will be removed in a future version. To avoid this warning set 'always_populate_raw_post_data' to '-1' in php.ini and use the php://input stream instead.
 [2016-02-01 19:00:56] 8192 caused by Unknown on line 0 : Automatically populating $HTTP_RAW_POST_DATA is deprecated and will be removed in a future version. To avoid this warning set 'always_populate_raw_post_data' to '-1' in php.ini and use the php://input stream instead.
 [2016-02-01 19:02:53] 8192 caused by Unknown on line 0 : Automatically populating $HTTP_RAW_POST_DATA is deprecated and will be removed in a future version. To avoid this warning set 'always_populate_raw_post_data' to '-1' in php.ini and use the php://input stream instead.
+[2016-02-05 20:36:39] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/dialog.php on line 82 : Undefined index: var
+[2016-02-05 20:36:40] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/dialog.php on line 82 : Undefined index: var
