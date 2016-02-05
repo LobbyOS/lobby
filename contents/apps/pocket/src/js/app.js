@@ -9,7 +9,7 @@ $.extend(lobby.app, {
   
   events_binder: function(){
     $("#settings").live("click", function(){
-      lobby.app.ajax("settings.html", function(response){
+      lobby.app.ajax("settings.html", {}, function(response){
         $("<div id='settings'>"+ response +"</div>").dialog();
       });
     });
