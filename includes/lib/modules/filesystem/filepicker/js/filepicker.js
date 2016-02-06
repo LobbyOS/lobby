@@ -492,8 +492,8 @@ lobby.mod.filepicker = {
     this.init();
     lobby.ajax(this.u + "/dialog.php", {}, function(r){
       $(".workspace .Lobby-FS-filepicker").html(r).dialog({
-        width: "80%",
-        height: "60%",
+        width: "auto",
+        height: "auto",
       });
       FilePicker.init({
         uri: '',
