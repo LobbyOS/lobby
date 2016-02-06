@@ -86,3 +86,10 @@ Stack trace:
 [2016-02-05 23:51:41] 64 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/dialog.php on line 53 : require_once(): Failed opening required '/home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/l10n.php' (include_path='.:/usr/share/php:/usr/share/pear')
 [2016-02-06 13:59:17] 64 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/dialog.php on line 54 : require_once(): Failed opening required '/home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/l10n.php' (include_path='.:/usr/share/php:/usr/share/pear')
 [2016-02-06 14:16:22] 4 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/functions.php on line 79 : syntax error, unexpected '::' (T_PAAMAYIM_NEKUDOTAYIM)
+[2016-02-06 21:29:45] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/dialog.php on line 58 : Call to undefined function load_textdomain()
+[2016-02-06 21:32:08] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/dialog.php on line 81 : Undefined index: multi
+[2016-02-06 21:41:04] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/dialog.php on line 81 : Undefined index: multi
+[2016-02-06 21:44:56] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/dialog.php on line 64 : Undefined index: filter
+[2016-02-06 21:57:22] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/dialog.php on line 82 : Undefined index: multi
+[2016-02-06 21:58:50] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/dialog.php on line 59 : Undefined index: action
+[2016-02-06 21:59:06] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/dialog.php on line 59 : Undefined index: action
