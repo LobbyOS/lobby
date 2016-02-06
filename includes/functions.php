@@ -74,4 +74,11 @@ function removeData($key = "", $appID = ""){
     return \Lobby\DB::removeData($appID, $key);
   }
 }
-?>
+
+function __($text, $domain = 'main'){
+	return \Lobby\l10n::__($text, $domain);
+}
+
+function _e($text, $domain = 'main'){
+	echo \Lobby\l10n::__($text, $domain);
+}
