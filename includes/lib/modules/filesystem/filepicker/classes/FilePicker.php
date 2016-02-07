@@ -59,8 +59,8 @@ class FilePicker {
 	 * @access	public
 	 * @return	void
 	 */
-	function FilePicker($cb = ""){
-		$this->callback = $cb == "" ? function($e){} : $cb;
+	public function __construct($cb = ""){
+    $this->callback = function($e){};
     
     $this->filters = array(
 			__('All files'),

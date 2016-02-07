@@ -154,3 +154,8 @@ Stack trace:
 [2016-02-07 14:43:55] 4 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 62 : syntax error, unexpected 'function' (T_FUNCTION)
 [2016-02-07 14:44:57] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 269 : Call to undefined method FilePicker::callback()
 [2016-02-07 14:45:47] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 269 : Call to undefined method FilePicker::callback()
+[2016-02-07 14:46:42] 8 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 63 : Undefined variable: cb
+[2016-02-07 14:46:56] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 269 : Call to undefined method FilePicker::callback()
+[2016-02-07 14:47:37] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 269 : Call to undefined method FilePicker::callback()
+[2016-02-07 14:49:54] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 269 : Method name must be a string
+[2016-02-07 14:50:26] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 269 : Method name must be a string
