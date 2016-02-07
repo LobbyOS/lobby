@@ -68,7 +68,7 @@ if(isset($_GET['img'])){
   
   $fp = new FilePicker(function($e){
     if($e === "permission_denied"){
-      
+      echo $e;
     }
   });
   $action = \H::input('action');
