@@ -428,7 +428,10 @@ var FilePicker = {
 		$('body').bind('selectstart', function(){return false;});
 		$('#file_picker_form').bind('submit', function(){return false;});
 		$('#list_box').bind('click', self.do_unselect);
-		$('#target_tree').bind('change', function(){self.get_list(true);});
+		$('#target_dir_path').bind('change', function(){
+      $('#target_dir').val($.base64.encode($(this).val()));
+      self.get_list(true);
+    });
 		$('#btn_refresh').bind('click', function(){self.get_list(false);});
 		$('#btn_up').bind('click', self.do_up);
 		$('#btn_complete').bind('click', self.do_complete);
@@ -458,8 +461,8 @@ lobby.mod.filepicker = {
     lobby.ajax(access_url, {}, function(r){
       o = JSON.parse(r);
       $(".workspace .Lobby-FS-filepicker").html(o.html).dialog({
-        width: $(window).width() / 1.5,
-        height: $(window).height() / 1.1,
+        width: "875",
+        height: "572",
       });
       FilePicker.init({
         uri: o.uri,

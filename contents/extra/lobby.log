@@ -159,3 +159,15 @@ Stack trace:
 [2016-02-07 14:47:37] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 269 : Call to undefined method FilePicker::callback()
 [2016-02-07 14:49:54] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 269 : Method name must be a string
 [2016-02-07 14:50:26] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 269 : Method name must be a string
+[2016-02-07 21:02:17] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 269 : Call to undefined method FilePicker::callback()
+[2016-02-07 21:02:19] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 273 : sort() expects parameter 1 to be array, null given
+[2016-02-07 21:10:00] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 273 : sort() expects parameter 1 to be array, null given
+[2016-02-07 21:10:04] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 273 : sort() expects parameter 1 to be array, null given
+[2016-02-07 21:16:25] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 269 : Call to undefined method FilePicker::callback()
+[2016-02-07 21:16:27] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 269 : Call to undefined method FilePicker::callback()
+[2016-02-07 21:16:29] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 269 : Call to undefined method FilePicker::callback()
+[2016-02-07 21:18:18] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 269 : Call to undefined method FilePicker::callback()
+[2016-02-07 21:18:19] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 273 : sort() expects parameter 1 to be array, null given
+[2016-02-07 21:24:20] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 273 : sort() expects parameter 1 to be array, null given
+[2016-02-07 21:24:23] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 273 : sort() expects parameter 1 to be array, null given
+[2016-02-07 21:24:27] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 273 : sort() expects parameter 1 to be array, null given

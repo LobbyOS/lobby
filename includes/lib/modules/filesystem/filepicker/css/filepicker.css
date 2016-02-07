@@ -9,76 +9,95 @@
  * Dual licensed under the MIT (MIT-LICENSE.txt)
  * and GPL (GPL-LICENSE.txt) licenses.
  */
-.Lobby-FS-filepicker #header{
-  margin: 0 0 10px 0;
-}
-.Lobby-FS-filepicker #header li{
+.Lobby-FS-filepicker .Lobby-FS-filepicker-picker-nav li{
   list-style: none;
   display: inline-block;
   vertical-align: middle;
   margin:5px 0 5px 0;
 }
-.Lobby-FS-filepicker #header img{
+.Lobby-FS-filepicker .Lobby-FS-filepicker-picker-nav img{
   border:0px;
   margin:0 3px 0 0;
-  width:16px;
-  height:16px;
+  width: 32px;
+  height: 32px;
   cursor:pointer;
 }
 #loading_img{
   display: table;
   margin: 80px auto;
 }
-.order_list{
-  overflow:auto;
+.Lobby-FS-filepicker #viewbox{
+  float: left;
+  width: 75%;
+  height: 75%;
+  border: 1px solid #333;
+  padding: 3px 0 0 0;
+  overflow: auto;
+  padding: 10px 0;
 }
-.order_list li{
-  width:95px; height:18px; line-height:18px; word-break:break-all; overflow:hidden; cursor:default; float:left;
-  margin:0 3px 0 3px; padding:0 0 0 18px; background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/unknown.gif) no-repeat;
+#viewbox ul{
+  padding: 0;
+  margin: 0;
 }
-.order_list li.selected{
-  color:#fff; background-color:#66a;
+#viewbox li{
+  width: 24%;
+  height: 32px;
+  line-height: 35px;
+  word-break:break-all;
+  overflow:hidden;
+  cursor:default;
+  float:left;
+  margin:0 3px 0 3px;
+  padding: 0px 0px 35px 38px;
+  background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/unknown.gif) no-repeat;
+  background-position: 2px 0;
 }
-.order_list .folder{
-  background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/folder.gif) no-repeat;
+#viewbox li.selected{
+  color:#fff;
+  background-color:#66a;
 }
-.order_list .gif, .order_list .jpg, .order_list .bmp, .order_list .png{
+#viewbox .folder{
+  background: url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/folder.svg) no-repeat;
+}
+#viewbox .gif, #viewbox .jpg, #viewbox .bmp, #viewbox .png{
   background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/image.gif) no-repeat;
 }
-.order_list .txt{
+#viewbox .txt{
   background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/document.gif) no-repeat;
 }
-.order_list .wmv, .order_list .rm, .order_list .rmvb, .order_list .mp4, .order_list .avi, .order_list .flv, .order_list .3gp{
+#viewbox .wmv, #viewbox .rm, #viewbox .rmvb, #viewbox .mp4, #viewbox .avi, #viewbox .flv, #viewbox .3gp{
   background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/movie.gif) no-repeat;
 }
-.order_list .zip, .order_list .rar, .order_list .tar, .order_list .gz, .order_list .7z{
+#viewbox .zip, #viewbox .rar, #viewbox .tar, #viewbox .gz, #viewbox .7z{
   background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/zip.gif) no-repeat;
 }
-.order_list .swf, .order_list .fla{
+#viewbox .swf, #viewbox .fla{
   background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/flash.gif) no-repeat;
 }
-.order_list .mp3, .order_list .wav, .order_list .wma, .order_list .mid, .order_list .aac, .order_list .ape{
+#viewbox .mp3, #viewbox .wav, #viewbox .wma, #viewbox .mid, #viewbox .aac, #viewbox .ape{
   background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/music.gif) no-repeat;
 }
-.order_list .htm, .order_list .html, .order_list .php, .order_list .asp, .order_list .jsp, .order_list .aspx, .order_list .cfm{
+#viewbox .htm, #viewbox .html, #viewbox .php, #viewbox .asp, #viewbox .jsp, #viewbox .aspx, #viewbox .cfm{
   background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/web.gif) no-repeat;
 }
-.order_list .doc{
+#viewbox .doc{
   background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/word.gif) no-repeat;
 }
-.order_list .pdf{
+#viewbox .pdf{
   background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/pdf.gif) no-repeat;
 }
-.order_list .xml{
+#viewbox .xml{
   background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/xml.gif) no-repeat;
 }
-.order_list .xls{
+#viewbox .xls{
   background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/excel.gif) no-repeat;
 }
-#btn_close{
-  float:right; cursor:pointer; font-weight:bold;
+.Lobby-FS-filepicker #btn_close{
+  float:right;
+  cursor:pointer;
+  font-weight:bold;
 }
-#preview_img{
+.Lobby-FS-filepicker #preview_img{
   display: block;
   width:100%;
   border:1px solid #ccc;
@@ -86,93 +105,44 @@
   margin:2px 7px 0 2px;
   cursor:pointer;
 }
-.Lobby-FS-filepicker #container table{
+.Lobby-FS-filepicker table{
 	width: 100%;
   margin: 5px 0 0 0;
   background: none;
   border: none;
 }
-.Lobby-FS-filepicker #container table tr{
+.Lobby-FS-filepicker table tr{
   background: none;
 }
-.Lobby-FS-filepicker #container table td{
+.Lobby-FS-filepicker table td{
 	padding: 0 15px;
   background: none;
   border: none;
   box-shadow: none;
   vertical-align: middle;
 }
-.Lobby-FS-filepicker #footer table{
+.Lobby-FS-filepicker table td:nth-child(1){
+  border: none;
+}
+.Lobby-FS-filepicker-picker-footer table{
   display: inline-table;
   width: auto;
   vertical-align: middle;
 }
-#container .label{
+.Lobby-FS-filepicker .label{
 	width:60px;
-}
-
-/* For Auto-Compelete */
-.ac_results{
-	padding: 0px;
-	border: 1px solid WindowFrame;
-	background-color: Window;
-	overflow-x: hidden;
-	overflow-y: auto;
-	height: 60px;
-}
-.ac_results ul{
-	width: 100%;
-	list-style-position: outside;
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-.ac_results iframe{
-	display:none;/*sorry for IE5*/
-	display/**/:block;/*sorry for IE5*/
-	position:absolute;
-	top:0;
-	left:0;
-	z-index:-1;
-	filter:mask();
-	width:3000px;
-}
-.ac_results li{
-	margin: 0px;
-	padding: 2px 5px;
-	cursor: pointer;
-	display: block;
-	width: 100%;
-	font: menu;
-	font-size: 12px;
-	overflow: hidden;
-}
-.ac_loading{
-	/*background : Window url('./indicator.gif') right center no-repeat;*/
-}
-.ac_over{
-	background-color: Highlight;
-	color: HighlightText;
 }
 
 /**
  * Lobby
  */
 .Lobby-FS-filepicker{
-  height: 80%;
-  width: 80%;
+  display: none;
 }
 .ui-dialog{
   overflow: visible;
 }
-.Lobby-FS-filepicker #list_box{
-  float: left;
-  width: 75%;
-  height: 75%;
-  border: 1px solid #333;
-  padding: 3px 0 0 0;
-}
-.Lobby-FS-filepicker .info_box{
+.Lobby-FS-filepicker #info_box{
 	height: 75%;
   width: 25%;
   margin-left: 75%;
