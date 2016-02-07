@@ -100,45 +100,44 @@ if(isset($_GET['img'])){
       $dir_b64 = base64_encode($dir);
       ob_start();
   ?>
-      <form id="file_picker_form" name="file_picker_form">
-        <div id="container">
-          <div id="header">
-            <table cellspacing="0" cellpadding="0"><tr>
-              <td class="label"><label><?php _e('Folder'); ?></label></td>
-              <td>
-                <input type="text" id="target_dir_path" value="<?php echo $dir_b64;?>" />
-                <input type="hidden" id="target_dir" value="/" />
-              </td>
-              <td>
-                <li><img id="btn_refresh" src="<?php echo L_URL;?>/includes/lib/modules/filesystem/filepicker/image/refresh.gif" alt="<?php _e('Refresh'); ?>" /></li>
-                <li><img id="btn_up" src="<?php echo L_URL;?>/includes/lib/modules/filesystem/filepicker/image/up.gif" alt="<?php _e('Up'); ?>" /></li>
-              </td>
-            </tr></table>
-          </div>
-          <div id="body">
-            <div id="list_box" class="order_list"><img id="loading_img" src="<?php echo L_URL;?>/includes/lib/modules/filesystem/filepicker/image/loading.gif" alt="<?php _e('Loading...'); ?>" /><ul id="list"></ul></div>
-            <div id="info_box" class="info_box"></div>
-          </div>
-          <div id="footer">
-            <table cellspacing="0" cellpadding="0">
-              <tr>
-                <td class="label"><label><?php _e('Filter'); ?></label>:</td>
-                <td><select id="filter_box" class="select"><?php echo $filters; ?></select></td>
-              </tr>
-            </table>
-            <table cellspacing="0" cellpadding="0">
-              <tr>
-                <td class="label"><label for="filename_box"><?php _e('Filename'); ?></label>:</td>
-                <td><input type="text" id="filename_box" name="filename" value="" class="select2" /></td>
-                <td>
-                  <input type="button" id="btn_complete" value="<?php _e('OK'); ?>" class="button green" />&nbsp;
-                  <input type="button" id="btn_cancel" value="<?php _e('Cancel'); ?>" class="button red" />
-                </td>
-              </tr>
-            </table>
-          </div>
+      <div class="Lobby-FS-filepicker-picker-nav">
+        <table cellspacing="0" cellpadding="0"><tr>
+          <td class="label"><label><?php _e('Folder'); ?></label></td>
+          <td>
+            <input type="text" id="target_dir_path" value="<?php echo $dir_b64;?>" />
+            <input type="hidden" id="target_dir" value="/" />
+          </td>
+          <td>
+            <li><img id="btn_refresh" src="<?php echo L_URL;?>/includes/lib/modules/filesystem/filepicker/image/refresh.svg" alt="<?php _e('Refresh'); ?>" /></li>
+            <li><img id="btn_up" src="<?php echo L_URL;?>/includes/lib/modules/filesystem/filepicker/image/up.svg" alt="<?php _e('Up'); ?>" /></li>
+          </td>
+        </tr></table>
+      </div>
+      <div class="Lobby-FS-filepicker-picker-body">
+        <div id="viewbox">
+          <img id="loading_img" src="<?php echo L_URL;?>/includes/lib/modules/filesystem/filepicker/image/loading.gif" alt="<?php _e('Loading...'); ?>" />
+          <ul id="list"></ul>
         </div>
-      </form>
+        <div id="info_box"></div>
+      </div>
+      <div class="Lobby-FS-filepicker-picker-footer">
+        <table cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="label"><label><?php _e('Filter'); ?></label>:</td>
+            <td><select id="filter_box" class="select"><?php echo $filters; ?></select></td>
+          </tr>
+        </table>
+        <table cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="label"><label for="filename_box"><?php _e('Filename'); ?></label>:</td>
+            <td><input type="text" id="filename_box" name="filename" value="" class="select2" /></td>
+            <td>
+              <input type="button" id="btn_complete" value="<?php _e('OK'); ?>" class="button green" />&nbsp;
+              <input type="button" id="btn_cancel" value="<?php _e('Cancel'); ?>" class="button red" />
+            </td>
+          </tr>
+        </table>
+      </div>
   <?php
       $html = ob_get_contents();
       ob_end_clean();
