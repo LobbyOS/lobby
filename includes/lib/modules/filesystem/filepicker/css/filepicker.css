@@ -25,12 +25,6 @@
   height:16px;
   cursor:pointer;
 }
-#list_box{
-  width: 100%;
-  height: 100%;
-  border: 1px solid #333;
-  padding: 3px 0 0 0;
-}
 #loading_img{
   display: table;
   margin: 80px auto;
@@ -81,9 +75,6 @@
 .order_list .xls{
   background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/excel.gif) no-repeat;
 }
-.info_box{
-	position:absolute; width:240px; border:1px solid #333; padding:3px; display:none; background:#fff; cursor:default; word-break:break-all;
-}
 #btn_close{
   float:right; cursor:pointer; font-weight:bold;
 }
@@ -91,7 +82,12 @@
   margin:0 0 0 82px;
 }
 #preview_img{
-  float:left; width:100px; border:1px solid #ccc; padding:1px; margin:2px 7px 0 2px; cursor:pointer;
+  display: block;
+  width:100%;
+  border:1px solid #ccc;
+  padding:1px;
+  margin:2px 7px 0 2px;
+  cursor:pointer;
 }
 .Lobby-FS-filepicker #container table{
 	width: 100%;
@@ -168,4 +164,25 @@
 .Lobby-FS-filepicker{
   height: 80%;
   width: 80%;
+}
+.ui-dialog{
+  overflow: visible;
+}
+.Lobby-FS-filepicker #list_box{
+  float: left;
+  width: 75%;
+  height: 75%;
+  border: 1px solid #333;
+  padding: 3px 0 0 0;
+}
+.Lobby-FS-filepicker .info_box{
+	height: 75%;
+  width: 25%;
+  margin-left: 75%;
+  border:1px solid #333;
+  padding:3px;
+  background:#fff;
+  cursor:default;
+  word-break:break-all;
+  overflow: auto;
 }
