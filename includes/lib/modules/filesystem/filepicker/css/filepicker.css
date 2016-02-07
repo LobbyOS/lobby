@@ -78,9 +78,6 @@
 #btn_close{
   float:right; cursor:pointer; font-weight:bold;
 }
-#info_loading_img{
-  margin:0 0 0 82px;
-}
 #preview_img{
   display: block;
   width:100%;
