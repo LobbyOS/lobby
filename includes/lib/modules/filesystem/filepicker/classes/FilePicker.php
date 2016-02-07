@@ -46,7 +46,12 @@ class FilePicker {
 	 * @access	private
 	 * @type	object
 	 */
-	var $json;
+	private $json = true;
+  
+  /**
+   * A callback to receive errors
+   */
+  public $callback;
 
 
 	/**
@@ -54,15 +59,10 @@ class FilePicker {
 	 * @access	public
 	 * @return	void
 	 */
-	function FilePicker(){
-		if (function_exists('json_encode')){
-			$this->json = true;
-		} elseif (class_exists('Services_JSON')){
-			$this->json = new Services_JSON();
-		} else {
-			exit(__('This script need JSON support. Please install JSON as a moudle of PHP, or include class `Services_JSON` if your server is still using PHP older then 5.2.0.'));
-		}
-		$this->filters = array(
+	function FilePicker($cb = ""){
+		$this->callback = $cb == "" ? function($e){} : $cb;
+    
+    $this->filters = array(
 			__('All files'),
 			__('Images'),
 			__('Documents'),
@@ -255,15 +255,19 @@ class FilePicker {
 	 */
 	function read_dir($dir){
 		if (is_dir($dir)){
-			if ($dh = opendir($dir)){
-				while (($file = readdir($dh)) !== false){
-					if ($file == '.' || $file == '..') continue;
-					$filename = $dir . '/' . $file;
-					if (is_dir($filename)) $this->folders[] = $file;
-					if (is_file($filename)) $this->files[] = $file;
-				}
-				closedir($dh);
-			}
+			if(is_readable($dir)){
+        if ($dh = opendir($dir)){
+          while (($file = readdir($dh)) !== false){
+            if ($file == '.' || $file == '..') continue;
+            $filename = $dir . '/' . $file;
+            if (is_dir($filename)) $this->folders[] = $file;
+            if (is_file($filename)) $this->files[] = $file;
+          }
+          closedir($dh);
+        }
+      }else{
+        $this->callback("permission_denied");
+      }
 		}
 		@sort($this->folders);
 		@sort($this->files);

@@ -149,3 +149,8 @@ Stack trace:
 [2016-02-07 14:35:57] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 269 : sort() expects parameter 1 to be array, null given
 [2016-02-07 14:35:57] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 268 : sort() expects parameter 1 to be array, null given
 [2016-02-07 14:38:03] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 269 : sort() expects parameter 1 to be array, null given
+[2016-02-07 14:39:44] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 269 : sort() expects parameter 1 to be array, null given
+[2016-02-07 14:41:38] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 269 : Call to undefined method FilePicker::callback()
+[2016-02-07 14:43:55] 4 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 62 : syntax error, unexpected 'function' (T_FUNCTION)
+[2016-02-07 14:44:57] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 269 : Call to undefined method FilePicker::callback()
+[2016-02-07 14:45:47] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 269 : Call to undefined method FilePicker::callback()

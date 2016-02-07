@@ -328,7 +328,7 @@ var FilePicker = {
 		this.do_hide_info(true);
 		var t = $('li.selected');
 		if (t.length == 1){
-			$('<img />').attr('id', 'info_loading_img').attr('src', $('#loading_img')
+			$('<img />').attr('id', 'loading_img').attr('src', $('#loading_img')
 				.attr('src')).appendTo('#info_box');
 			lobby.ajax(this.params.access, {
 					action: 'info',
