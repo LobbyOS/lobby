@@ -66,7 +66,11 @@ if(isset($_GET['img'])){
   require_once(FP_CLASS_ROOT . '/JSON.php');
   require_once(FP_CLASS_ROOT . '/FilePicker.php');
   
-  $fp = new FilePicker();
+  $fp = new FilePicker(function($e){
+    if($e === "permission_denied"){
+      
+    }
+  });
   $action = \H::input('action');
   
   switch ($action){
