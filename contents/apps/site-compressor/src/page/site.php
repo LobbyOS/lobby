@@ -50,13 +50,14 @@
         <label>
           <span>Site Location</span>
           <input type="text" id="site_location" data-binding="siteLoc" name="location" placeholder="/var/www/html/mysite/local" />
-          <a id="choose_site_path">Choose Path</a>
+          <a id="choose_site_path" class="button orange">Choose Path</a>
         </label>
         <label>
           <span>Output</span>
-          <input type="text" data-binding="siteOutput" name="output" placeholder="/var/www/html/mysite/compressed" />
-          <p>The location where the output must be written</p>
+          <input type="text" id="site_output_location" data-binding="siteOutput" name="output" placeholder="/var/www/html/mysite/compressed" />
+          <a id="choose_site_output_path" class="button orange">Choose Path</a>
         </label>
+        <p>^ The location where the output must be written</p>
         <h2>Replacer</h2>
         <div id="replaceFields">       
           <p>You can also replace strings like <b>localsite.dev</b> to <b>mydomain.com</b></p>
