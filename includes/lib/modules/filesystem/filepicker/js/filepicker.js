@@ -108,23 +108,29 @@ var FilePicker = {
 	 */
 	do_complete: function() {
 		var self = FilePicker;
-		var obj = '{' +
-			'dir:"' + self.get_path() + '", ' +
-			'selected:{' +
-        'files: [' + self.get_selected() + '], ' +
-        'dirs: [' + self.get_selected(1) + ']' +
-      '}' +
-		'}';
+    
+    /**
+     * If folder is selected, then open that folder
+     */
+    if($("li.folder.selected").length != 0){
+      $("li.folder.selected").trigger("dblclick");
+    }
+    
+		var obj = {
+			dir: self.get_path(),
+      files: [
+        self.get_selected()
+      ]
+		};
 		self.do_close(obj);
 	},
 
 	/**
 	 * @desc	Close window, and return the JSON string
-	 * @param	string	obj
+	 * @param	obj	obj
 	 * @return	void
 	 */
 	do_close: function(obj) {
-		if (typeof(obj) != 'string') obj = '';
     this.params.callback(obj);
 	},
 
@@ -150,11 +156,12 @@ var FilePicker = {
 	/**
 	 * @desc	Get JSON string that be translated with all the selected file(s)
 	 * @return	string
+   * wq - Without Quotes
 	 */
-	get_selected: function(dirs) {
-    var t = dirs == true ? $("li.folder.selected") : $("li.selected:not(.folder)");
+	get_selected: function(wq) {
+    var t = $("li.selected:not(.folder)");
 		if (t.length === 1){
-			return '"' + t.text() + '"';
+			return wq == true ? t.text() : '"' + t.text() + '"';
 		}
 		return $.map(t, function(li){
       return '"' + li.innerHTML + '"';
@@ -170,7 +177,7 @@ var FilePicker = {
 	do_select: function(obj, set_filename) {
 		set_filename = set_filename || false;
 		obj.addClass('selected');
-		$('#filename_box').val(set_filename ? this.get_selected() : '');
+		$('#filename_box').val(set_filename ? this.get_selected(1) : '');
 	},
 
 	/**
@@ -443,33 +450,37 @@ var FilePicker = {
 		$('#btn_up').bind('click', self.do_up);
 		$('#btn_complete').bind('click', self.do_complete);
 		$('#btn_cancel').bind('click', self.do_close);
+    $("#filter_box").live("change", function(){
+      FilePicker.get_list();
+    });
 	}
 
 }
 
-
+/**
+ * FilePicker Object
+ * Path and Callback
+ */
 lobby.mod.filepicker = {
   
-  u: "",
-  inited: false,
+  u: "/includes/lib/modules/filesystem/filepicker",
   
-  init: function(){
-    if(!this.inited){
-      this.u = "/includes/lib/modules/filesystem/filepicker";
-      $(".workspace").append("<div class='Lobby-FS-filepicker'><"+"/div>");
-    }
-  },
-
+  /**
+   * Show the dialog
+   */
   dialog: function(path, cb){
     cb = typeof cb !== "function" ? function(){} : cb;
-    this.init();
     access_url = this.u + "/filepicker.php";
     
     lobby.ajax(access_url, {}, function(r){
       o = JSON.parse(r);
-      $(".workspace .Lobby-FS-filepicker").html(o.html).dialog({
+      $("<div></div>").attr("class", "Lobby-FS-filepicker").html(o.html).appendTo(".workspace");
+      $(".workspace .Lobby-FS-filepicker").dialog({
         width: "875",
         height: "572",
+        close: function(){
+          lobby.mod.filepicker.close();
+        }
       });
       FilePicker.init({
         uri: o.uri,
@@ -483,31 +494,17 @@ lobby.mod.filepicker = {
           cb(obj);
         }
       });
-      lobby.mod.filepicker.events_binder();
-    });
-  },
-  
-  events_binder: function(){
-    $("#filter_box").live("change", function(){
-      FilePicker.get_list();
     });
   },
   
   close: function(){
-    $(".Lobby-FS-filepicker").html('').dialog('close');
+    $(".Lobby-FS-filepicker").dialog("close").remove();
   }
-  
 };
-lobby.mod.FilePicker = function(path, options, callback){
-  return lobby.mod.filepicker.dialog(path, callback);
+lobby.mod.FilePicker = function(path, cb){
+  if($(".workspace .Lobby-FS-filepicker").length == 0){
+    lobby.mod.filepicker.dialog(path, cb);
+  }else{
+    this.close();
+  }
 };
-
-lobby.load(function(){
-  $("[data-lobby]").live("click", function(){
-    if($(this).data("lobby") === "filepicker" && $(this).data("lobby-input") !== undefined){
-      fc = lobby.mod.FilePicker($(this).data("lobby-input"), function(path){
-        alert(path);
-      });
-    }
-  });
-});

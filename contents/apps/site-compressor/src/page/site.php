@@ -50,7 +50,7 @@
         <label>
           <span>Site Location</span>
           <input type="text" id="site_location" data-binding="siteLoc" name="location" placeholder="/var/www/html/mysite/local" />
-          <a data-lobby="filepicker" data-lobby-input=".workspace#site-compressor #site_location">Choose Path</a>
+          <a id="choose_site_path">Choose Path</a>
         </label>
         <label>
           <span>Output</span>
