@@ -47,9 +47,9 @@
   overflow:hidden;
   cursor:default;
   float:left;
-  margin:0 3px 0 3px;
+  margin: 6px 0 0 6px;
   padding: 0px 0px 35px 38px;
-  background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/unknown.gif) no-repeat;
+  background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/unknown.svg) no-repeat;
   background-position: 2px 0;
 }
 #viewbox li.selected{
@@ -63,7 +63,7 @@
   background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/image.gif) no-repeat;
 }
 #viewbox .txt{
-  background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/document.gif) no-repeat;
+  background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/document.svg) no-repeat;
 }
 #viewbox .wmv, #viewbox .rm, #viewbox .rmvb, #viewbox .mp4, #viewbox .avi, #viewbox .flv, #viewbox .3gp{
   background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/movie.gif) no-repeat;
