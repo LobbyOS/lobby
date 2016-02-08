@@ -1,6 +1,6 @@
 <?php
 // Folder path
-define('FP_ROOT_PATH', '/home/simsu');
+define('FP_ROOT_PATH', '/');
 
 if(isset($_GET['img'])){
   $img_path = FP_ROOT_PATH . base64_decode($_GET['img']);
