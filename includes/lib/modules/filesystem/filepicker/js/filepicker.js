@@ -110,7 +110,10 @@ var FilePicker = {
 		var self = FilePicker;
 		var obj = '{' +
 			'dir:"' + self.get_path() + '", ' +
-			'files:[' + self.get_selected(true) + ']' +
+			'selected:{' +
+        'files: [' + self.get_selected() + '], ' +
+        'dirs: [' + self.get_selected(1) + ']' +
+      '}' +
 		'}';
 		self.do_close(obj);
 	},
@@ -148,12 +151,14 @@ var FilePicker = {
 	 * @desc	Get JSON string that be translated with all the selected file(s)
 	 * @return	string
 	 */
-	get_selected: function(with_quote) {
-		var t = $('li.selected');
-		if (t.length == 1){
-			return with_quote ? '"' + t.text() + '"' : t.text();
+	get_selected: function(dirs) {
+    var t = dirs == true ? $("li.folder.selected") : $("li.selected:not(.folder)");
+		if (t.length === 1){
+			return '"' + t.text() + '"';
 		}
-		return $.map(t, function(li){return '"' + li.innerHTML + '"';}).join(', ');
+		return $.map(t, function(li){
+      return '"' + li.innerHTML + '"';
+    }).join(', ');
 	},
 
 	/**
@@ -399,6 +404,9 @@ var FilePicker = {
 				if (self.params.auto_complete == true) {
 					$('#filename_box').autocomplete({
             source: files,
+            position: {
+              collision: "flip"
+            },
             select: function(){
               // `Click` the file that selected from the list of Auto-Complete
               $('li:not(li[ftyp:folder])').each(function(){
@@ -425,7 +433,6 @@ var FilePicker = {
 	 */
 	events_binder: function() {
 		var self = FilePicker;
-		$('body').bind('selectstart', function(){return false;});
 		$('#file_picker_form').bind('submit', function(){return false;});
 		$('#viewbox').bind('click', self.do_unselect);
 		$('#target_dir_path').bind('change', function(){
@@ -466,8 +473,7 @@ lobby.mod.filepicker = {
       });
       FilePicker.init({
         uri: o.uri,
-        key: '',
-        multi: '',
+        multi: '1',
         access: access_url,
         unicode: true,
         delay: 300,
@@ -492,7 +498,7 @@ lobby.mod.filepicker = {
   }
   
 };
-lobby.mod.FilePicker = function(path, callback){
+lobby.mod.FilePicker = function(path, options, callback){
   return lobby.mod.filepicker.dialog(path, callback);
 };
 
