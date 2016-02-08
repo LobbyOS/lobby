@@ -1,12 +1,13 @@
-$(document).ready(function(){
+lobby.load(function(){
+  /**
+   * Panel
+   */
   $('.panel.top .left, .panel.top .right').superfish({
     delay: 100
   });
-  $(document).tooltip({
-    position: {
-      my: "left top+5",
-      at: "left bottom",
-      collision: "flipfit" 
-    }
-  });
+  
+  /**
+   * General
+   */
+  $("[title]").tooltip();
 });
