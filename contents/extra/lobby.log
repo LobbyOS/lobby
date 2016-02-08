@@ -171,3 +171,12 @@ Stack trace:
 [2016-02-07 21:24:20] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 273 : sort() expects parameter 1 to be array, null given
 [2016-02-07 21:24:23] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 273 : sort() expects parameter 1 to be array, null given
 [2016-02-07 21:24:27] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 273 : sort() expects parameter 1 to be array, null given
+[2016-02-08 08:30:54] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 273 : sort() expects parameter 1 to be array, null given
+[2016-02-08 08:32:22] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 273 : sort() expects parameter 1 to be array, null given
+[2016-02-08 08:33:28] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 273 : sort() expects parameter 1 to be array, null given
+[2016-02-08 08:34:05] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 273 : sort() expects parameter 1 to be array, null given
+[2016-02-08 08:36:38] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 269 : Call to undefined method FilePicker::callback()
+[2016-02-08 08:36:39] 1 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 269 : Call to undefined method FilePicker::callback()
+[2016-02-08 08:38:57] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 272 : sort() expects parameter 1 to be array, null given
+[2016-02-08 08:39:41] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 273 : sort() expects parameter 1 to be array, null given
+[2016-02-08 08:39:49] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 272 : sort() expects parameter 1 to be array, null given
