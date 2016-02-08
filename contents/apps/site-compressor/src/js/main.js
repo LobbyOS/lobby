@@ -112,7 +112,7 @@ lobby.app.displaySaves = function(){
   });
 };
 
-$(document).ready(function(){
+lobby.load(function(){
   localStorage["lastSaveName"] = "";
  
   /* Add Dynamic Srollbars */
@@ -177,5 +177,14 @@ $(document).ready(function(){
         lobby.app.saveConfig(saveName);
       }
     }
+  });
+  
+  /**
+   * Site path Picker
+   */
+  $(".workspace #choose_site_path").live("click", function(){
+    lobby.mod.FilePicker("/", function(result){
+      $(".workspace #site_location").val(result.dir);
+    });
   });
 });
