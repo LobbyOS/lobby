@@ -78,7 +78,7 @@
   background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/music.gif) no-repeat;
 }
 #viewbox .htm, #viewbox .html, #viewbox .php, #viewbox .asp, #viewbox .jsp, #viewbox .aspx, #viewbox .cfm{
-  background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/web.gif) no-repeat;
+  background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/web.svg) no-repeat;
 }
 #viewbox .doc{
   background:url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/word.gif) no-repeat;
