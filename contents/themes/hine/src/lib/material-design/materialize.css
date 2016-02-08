@@ -1,3 +1,9 @@
+/**
+ * Lobby
+ * -----
+ * Tooltip removed as it conflicts with jQuery UI
+ */ 
+
 /*!
  * Materialize v0.97.5 (http://materializecss.com)
  * Copyright 2014-2015 Materialize
@@ -7961,40 +7967,6 @@ small {
   height: 2px;
   background-color: #f6b2b5;
   will-change: left, right;
-}
-
-.material-tooltip {
-  padding: 10px 8px;
-  font-size: 1rem;
-  z-index: 2000;
-  background-color: transparent;
-  border-radius: 2px;
-  color: #fff;
-  min-height: 36px;
-  line-height: 120%;
-  opacity: 0;
-  display: none;
-  position: absolute;
-  text-align: center;
-  max-width: calc(100% - 4px);
-  overflow: hidden;
-  left: 0;
-  top: 0;
-  will-change: top, left;
-}
-
-.backdrop {
-  position: absolute;
-  opacity: 0;
-  display: none;
-  height: 7px;
-  width: 14px;
-  border-radius: 0 0 14px 14px;
-  background-color: #323232;
-  z-index: -1;
-  -webkit-transform-origin: 50% 10%;
-          transform-origin: 50% 10%;
-  will-change: transform, opacity;
 }
 
 .button, .button-large, .button-flat {

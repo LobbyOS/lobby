@@ -53,8 +53,8 @@
   background-position: 2px 0;
 }
 #viewbox li.selected{
-  color:#fff;
-  background-color:#66a;
+  color: #fff;
+  background-color: #4CAF50;
 }
 #viewbox .folder{
   background: url(<?L_URL?>/includes/lib/modules/filesystem/filepicker/image/list/folder.svg) no-repeat;
@@ -141,6 +141,10 @@
 }
 .ui-dialog{
   overflow: visible;
+}
+.ui-autocomplete{
+  max-height: 300px;
+  overflow-y: auto;
 }
 .Lobby-FS-filepicker #info_box{
 	height: 75%;
