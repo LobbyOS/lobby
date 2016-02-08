@@ -404,10 +404,10 @@ var FilePicker = {
               $('li:not(li[ftyp:folder])').each(function(){
                 if ($(this).html() == $('#filename_box').val()){
                   self.do_select($(this), true);
-                  $('#list_box').scrollTop(
-                    $('#list_box').scrollTop() + 
+                  $('#viewbox').scrollTop(
+                    $('#viewbox').scrollTop() + 
                     $(this).position().top - 
-                    $('#list_box').position().top
+                    $('#viewbox').position().top
                   );
                   return false;
                 }
@@ -427,7 +427,7 @@ var FilePicker = {
 		var self = FilePicker;
 		$('body').bind('selectstart', function(){return false;});
 		$('#file_picker_form').bind('submit', function(){return false;});
-		$('#list_box').bind('click', self.do_unselect);
+		$('#viewbox').bind('click', self.do_unselect);
 		$('#target_dir_path').bind('change', function(){
       $('#target_dir').val($.base64.encode($(this).val()));
       self.get_list(true);
