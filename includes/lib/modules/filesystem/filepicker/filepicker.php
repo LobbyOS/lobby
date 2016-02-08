@@ -105,7 +105,7 @@ if(isset($_GET['img'])){
           <td class="label"><label><?php _e('Folder'); ?></label></td>
           <td>
             <input type="text" id="target_dir_path" value="<?php echo $dir_b64;?>" />
-            <input type="hidden" id="target_dir" value="/" />
+            <input type="hidden" id="target_dir" value="Lw==" />
           </td>
           <td>
             <li><img id="btn_refresh" src="<?php echo L_URL;?>/includes/lib/modules/filesystem/filepicker/image/refresh.svg" alt="<?php _e('Refresh'); ?>" /></li>
