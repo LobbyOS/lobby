@@ -60,7 +60,7 @@ class FilePicker {
 	 * @return	void
 	 */
 	public function __construct($cb = ""){
-    $this->callback = function($e){};
+    $this->callback = $cb === "" ? function($e){} : $cb;
     
     $this->filters = array(
 			__('All files'),
@@ -266,7 +266,7 @@ class FilePicker {
           closedir($dh);
         }
       }else{
-        $this->callback("permission_denied");
+        call_user_func($this->callback, "permission_denied");
       }
 		}
 		@sort($this->folders);
