@@ -28,13 +28,10 @@ if(isset($_GET['img'])){
   
   // -------------------- Configration begin -------------------------
   
-  // Folder URI
-  define('FP_ROOT_URI', "/includes/lib/modules/filesystem/filepicker/filepicker.php");
+  // Language [Default: en]
+  define('FP_LANGUAGE', 'en');
   
-  // Langeuage [Default: en]
-  define('FP_LANGUAGE', 'zh_CN');
-  
-  // Data format [Default: Y-m-d]
+  // Date format [Default: Y-m-d]
   define('FP_DATE', 'Y-m-d');
   
   // Time format [Default: H:i:s]
@@ -60,7 +57,7 @@ if(isset($_GET['img'])){
   
   header('Content-Type: text/html; charset=UTF-8');
   
-  define('FP_SCRIPT_ROOT', dirname(__FILE__));
+  define('FP_SCRIPT_ROOT', dirname(__DIR__));
   define('FP_CLASS_ROOT', FP_SCRIPT_ROOT . '/inc');
   
   require_once(FP_CLASS_ROOT . '/FilePicker.php');
@@ -142,7 +139,6 @@ if(isset($_GET['img'])){
       $html = ob_get_contents();
       ob_end_clean();
       echo json_encode(array(
-        "uri" => FP_ROOT_URI,
         "dir" => FP_ROOT_PATH,
         "html" => $html
       ));
