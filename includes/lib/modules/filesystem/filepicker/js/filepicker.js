@@ -420,7 +420,7 @@ var FilePicker = {
             },
             select: function(){
               // `Click` the file that selected from the list of Auto-Complete
-              $('li:not(li[ftyp:folder])').each(function(){
+              $('li:not(li[ftype=folder])').each(function(){
                 if ($(this).html() == $('#filename_box').val()){
                   self.do_select($(this), true);
                   $('#viewbox').scrollTop(
