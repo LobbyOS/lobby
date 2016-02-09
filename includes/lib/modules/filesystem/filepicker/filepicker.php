@@ -69,6 +69,7 @@ if(isset($_GET['img'])){
     if($e === "permission_denied"){
       echo $e;
     }
+    exit;
   });
   $action = \H::input('action');
   
