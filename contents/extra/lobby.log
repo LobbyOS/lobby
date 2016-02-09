@@ -282,3 +282,7 @@ Stack trace:
 [2016-02-08 18:30:12] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 273 : sort() expects parameter 1 to be array, null given
 [2016-02-08 18:30:14] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 273 : sort() expects parameter 1 to be array, null given
 [2016-02-08 18:30:19] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 272 : sort() expects parameter 1 to be array, null given
+[2016-02-09 09:19:02] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 273 : sort() expects parameter 1 to be array, null given
+[2016-02-09 09:19:05] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 273 : sort() expects parameter 1 to be array, null given
+[2016-02-09 09:19:06] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 273 : sort() expects parameter 1 to be array, null given
+[2016-02-09 09:19:07] 2 caused by /home/simsu/Other/projects/Web/Lobby/local/includes/lib/modules/filesystem/filepicker/classes/FilePicker.php on line 273 : sort() expects parameter 1 to be array, null given
