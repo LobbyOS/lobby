@@ -61,9 +61,8 @@ if(isset($_GET['img'])){
   header('Content-Type: text/html; charset=UTF-8');
   
   define('FP_SCRIPT_ROOT', dirname(__FILE__));
-  define('FP_CLASS_ROOT', FP_SCRIPT_ROOT . '/classes');
+  define('FP_CLASS_ROOT', FP_SCRIPT_ROOT . '/inc');
   
-  require_once(FP_CLASS_ROOT . '/JSON.php');
   require_once(FP_CLASS_ROOT . '/FilePicker.php');
   
   $fp = new FilePicker(function($e){
