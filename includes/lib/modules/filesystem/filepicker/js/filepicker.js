@@ -347,30 +347,34 @@ var FilePicker = {
 					dir: $('#target_dir').val(),
 					file: $.base64.encode(t.text())
 				}, function(r){
-          json = JSON.parse(r);
-          var self = FilePicker;
-					$('#info_box').html($('<label></label>').attr('id', 'btn_close')
-						.text('X').click(function(){self.do_hide_info(false);}));
-					var i = 0;
-					$.each(json, function(i, item){
-						if ($('#info_box').css('display') == 'none') return false;
-						if (item.key == 'preview'){
-							var src = self.params.access + '?img=' + $.base64.encode($('#target_dir_path').val() + "/" + $.base64.decode(item.value));
-							$('<img />').attr('id', 'preview_img')
-								.attr('alt', item.trans).attr('src', src)
-								.click(function(){window.open(this.src, '_blank','');})
-								.prependTo('#info_box');
-						} else {
-							if (i == 0){
-								item.value = $.base64.decode(item.value);
-							}
-							$('#info_box').append(
-								'<strong>' + item.trans + '</strong>:<br />' + 
-								' &nbsp; ' + item.value + '<br />'
-							);
-						}
-						i++;
-					});
+          if(r === "permission_denied"){
+            $('#info_box').html("<div style='word-break: break-word;'><h5>Permission Denied</h5><p>Web server doesn't have access to this folder.</p><p>Change the permissions of the folder to make it accessible.</p></div>");
+          }else{
+            json = JSON.parse(r);
+            var self = FilePicker;
+            $('#info_box').html($('<label></label>').attr('id', 'btn_close')
+              .text('X').click(function(){self.do_hide_info(false);}));
+            var i = 0;
+            $.each(json, function(i, item){
+              if ($('#info_box').css('display') == 'none') return false;
+              if (item.key == 'preview'){
+                var src = self.params.access + '?img=' + $.base64.encode($('#target_dir_path').val() + "/" + $.base64.decode(item.value));
+                $('<img />').attr('id', 'preview_img')
+                  .attr('alt', item.trans).attr('src', src)
+                  .click(function(){window.open(this.src, '_blank','');})
+                  .prependTo('#info_box');
+              } else {
+                if (i == 0){
+                  item.value = $.base64.decode(item.value);
+                }
+                $('#info_box').append(
+                  '<strong>' + item.trans + '</strong>:<br />' + 
+                  ' &nbsp; ' + item.value + '<br />'
+                );
+              }
+              i++;
+            });
+          }
 				});
 		}
 	},
