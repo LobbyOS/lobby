@@ -467,7 +467,7 @@ var FilePicker = {
  */
 lobby.mod.filepicker = {
   
-  u: "/includes/lib/modules/filesystem/filepicker",
+  u: "/includes/lib/modules/filepicker/ajax",
   
   /**
    * Show the dialog
@@ -487,7 +487,7 @@ lobby.mod.filepicker = {
         }
       });
       FilePicker.init({
-        uri: o.uri,
+        uri: access_url,
         multi: '1',
         access: access_url,
         unicode: true,
