@@ -105,14 +105,14 @@ if(isset($_GET['img'])){
             <input type="hidden" id="target_dir" value="Lw==" />
           </td>
           <td>
-            <li><img id="btn_refresh" src="<?php echo L_URL;?>/includes/lib/modules/filesystem/filepicker/image/refresh.svg" alt="<?php _e('Refresh'); ?>" /></li>
-            <li><img id="btn_up" src="<?php echo L_URL;?>/includes/lib/modules/filesystem/filepicker/image/up.svg" alt="<?php _e('Up'); ?>" /></li>
+            <li><img id="btn_refresh" src="<?php echo L_URL;?>/includes/lib/modules/filepicker/image/refresh.svg" alt="<?php _e('Refresh'); ?>" /></li>
+            <li><img id="btn_up" src="<?php echo L_URL;?>/includes/lib/modules/filepicker/image/up.svg" alt="<?php _e('Up'); ?>" /></li>
           </td>
         </tr></table>
       </div>
       <div class="Lobby-FS-filepicker-picker-body">
         <div id="viewbox">
-          <img id="loading_img" src="<?php echo L_URL;?>/includes/lib/modules/filesystem/filepicker/image/loading.gif" alt="<?php _e('Loading...'); ?>" />
+          <img id="loading_img" src="<?php echo L_URL;?>/includes/lib/modules/filepicker/image/loading.gif" alt="<?php _e('Loading...'); ?>" />
           <ul id="list"></ul>
         </div>
         <div id="info_box"></div>
