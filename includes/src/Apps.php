@@ -183,8 +183,14 @@ class Apps extends \Lobby {
       $details['srcURL'] = L_URL . "/contents/apps/{$this->app}";
       $details['adminURL'] = L_URL . "/admin/app/{$this->app}";
       
+      /**
+       * Prefer SVG over PNG
+       */
       $details['logo'] = isset($details['logo']) ?
-        APPS_URL . "/{$this->app}/src/image/logo.png" :
+        (file_exists($this->appDir . "/src/image/logo.svg") ?
+          APPS_URL . "/{$this->app}/src/image/logo.svg" :
+          APPS_URL . "/{$this->app}/src/image/logo.png" :
+        ) :
         L_URL . "/includes/lib/lobby/image/blank.png";
        
       /**
