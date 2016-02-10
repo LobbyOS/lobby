@@ -100,7 +100,6 @@ window.FilePicker = {
 		this.events_binder();
     this.do_translate_options();
 		this.get_list();
-    this.get_info();
 	},
 
 	/**
@@ -201,7 +200,6 @@ window.FilePicker = {
 		var box = $('#info_box').empty();
 		if (!without_box){
 			box.html('');
-      this.get_info();
 		}
 	},
   
@@ -242,7 +240,6 @@ window.FilePicker = {
       $('#target_dir_path').val(dir + elmt.text());
 			$('#target_dir').val($.base64.encode(dir + elmt.text()));
 			self.get_list();
-      self.get_info();
 		} else {
 			self.do_select(elmt);
 			self.do_complete();
@@ -357,6 +354,7 @@ window.FilePicker = {
       dir: dir,
       file: file
     }, function(r){
+      $('#info_box').html('');
       if(r === "permission_denied"){
         $('#info_box').html("<div style='word-break: break-word;'><h5>Permission Denied</h5><p>Web server doesn't have access to this folder.</p><p>Change the permissions of the folder to make it accessible.</p></div>");
       }else{
