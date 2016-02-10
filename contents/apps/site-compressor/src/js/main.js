@@ -61,7 +61,6 @@ lobby.app.restoreConfig = function(configName){
   $(".workspace#site-compressor [name='beforeCommand'], .workspace#site-compressor [name='afterCommand']").each(function(){
     $(this).val($(this).val().replace(/\+/g, " "));
   });
-  $('.workspace#site-compressor .top #right').scrollTop($('.workspace#site-compressor .top #right')[0].scrollHeight);
 };
 
 /* Save Configuration */
