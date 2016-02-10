@@ -189,7 +189,7 @@ class Apps extends \Lobby {
       $details['logo'] = isset($details['logo']) ?
         (file_exists($this->appDir . "/src/image/logo.svg") ?
           APPS_URL . "/{$this->app}/src/image/logo.svg" :
-          APPS_URL . "/{$this->app}/src/image/logo.png" :
+          APPS_URL . "/{$this->app}/src/image/logo.png"
         ) :
         L_URL . "/includes/lib/lobby/image/blank.png";
        
