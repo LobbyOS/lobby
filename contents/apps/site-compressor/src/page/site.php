@@ -16,7 +16,8 @@
       </div>
     </div>
     <div id="right" class="left">
-      <h2>Save</h2>
+      <h2>Quick Actions</h2>
+      <button class="button green">Start Compressing</button>
       <a class="button" id="saveConfig">Save Current Configuration</a>
       <h2>Compression Options</h2>
       <form id="options">
@@ -77,6 +78,8 @@
             <input type="text" data-binding="afterCommand" placeholder="Type Command Here" name="afterCommand"/>
           </label>
         </div>
+        <h2>Finish</h2>
+        <p>Don't forget to save !</p>
         <button class="button green">Start Compressing</button>
         <a class="button" id="saveConfig">Save Current Configuration</a>
       </form>
