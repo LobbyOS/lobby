@@ -31,7 +31,7 @@ jQuery.base64={is_unicode:false,encode:function(C){if(this.is_unicode){C=this._u
  * and GPL (GPL-LICENSE.txt) licenses.
  */
 
-var FilePicker = {
+window.FilePicker = {
 
 	/**
 	 * @desc	
@@ -100,6 +100,7 @@ var FilePicker = {
 		this.events_binder();
     this.do_translate_options();
 		this.get_list();
+    this.get_info();
 	},
 
 	/**
@@ -200,6 +201,7 @@ var FilePicker = {
 		var box = $('#info_box').empty();
 		if (!without_box){
 			box.html('');
+      this.get_info();
 		}
 	},
   
@@ -240,6 +242,7 @@ var FilePicker = {
       $('#target_dir_path').val(dir + elmt.text());
 			$('#target_dir').val($.base64.encode(dir + elmt.text()));
 			self.get_list();
+      self.get_info();
 		} else {
 			self.do_select(elmt);
 			self.do_complete();
@@ -338,45 +341,49 @@ var FilePicker = {
 	 */
 	get_info: function(evt) {
 		this.do_hide_info(true);
-		var t = $('li.selected');
-		if (t.length == 1){
-			$('<img />').attr('id', 'loading_img').attr('src', $('#loading_img')
-				.attr('src')).appendTo('#info_box');
-			lobby.ajax(this.params.access, {
-					action: 'info',
-					dir: $('#target_dir').val(),
-					file: $.base64.encode(t.text())
-				}, function(r){
-          if(r === "permission_denied"){
-            $('#info_box').html("<div style='word-break: break-word;'><h5>Permission Denied</h5><p>Web server doesn't have access to this folder.</p><p>Change the permissions of the folder to make it accessible.</p></div>");
-          }else{
-            json = JSON.parse(r);
-            var self = FilePicker;
-            $('#info_box').html($('<label></label>').attr('id', 'btn_close')
-              .text('X').click(function(){self.do_hide_info(false);}));
-            var i = 0;
-            $.each(json, function(i, item){
-              if ($('#info_box').css('display') == 'none') return false;
-              if (item.key == 'preview'){
-                var src = self.params.access + '?img=' + $.base64.encode($('#target_dir_path').val() + "/" + $.base64.decode(item.value));
-                $('<img />').attr('id', 'preview_img')
-                  .attr('alt', item.trans).attr('src', src)
-                  .click(function(){window.open(this.src, '_blank','');})
-                  .prependTo('#info_box');
-              } else {
-                if (i == 0){
-                  item.value = $.base64.decode(item.value);
-                }
-                $('#info_box').append(
-                  '<strong>' + item.trans + '</strong>:<br />' + 
-                  ' &nbsp; ' + item.value + '<br />'
-                );
-              }
-              i++;
-            });
+		t = $('li.selected');
+    if(t.length === 0){
+      dir = "/";
+      file = $('#target_dir').val()
+    }else{
+      dir = $('#target_dir').val();
+      file = $.base64.encode(t.text());
+    }
+
+    $('<img />').attr('id', 'loading_img').attr('src', $('#loading_img')
+      .attr('src')).appendTo('#info_box');
+    lobby.ajax(this.params.access, {
+      action: 'info',
+      dir: dir,
+      file: file
+    }, function(r){
+      if(r === "permission_denied"){
+        $('#info_box').html("<div style='word-break: break-word;'><h5>Permission Denied</h5><p>Web server doesn't have access to this folder.</p><p>Change the permissions of the folder to make it accessible.</p></div>");
+      }else{
+        json = JSON.parse(r);
+        var self = FilePicker;
+        var i = 0;
+        $.each(json, function(i, item){
+          if ($('#info_box').css('display') == 'none') return false;
+          if (item.key == 'preview'){
+            var src = self.params.access + '?img=' + $.base64.encode($('#target_dir_path').val() + "/" + $.base64.decode(item.value));
+            $('<img />').attr('id', 'preview_img')
+              .attr('alt', item.trans).attr('src', src)
+              .click(function(){window.open(this.src, '_blank','');})
+              .prependTo('#info_box');
+          } else {
+            if (i == 0){
+              item.value = $.base64.decode(item.value);
+            }
+            $('#info_box').append(
+              '<strong>' + item.trans + '</strong>:<br />' + 
+              ' &nbsp; ' + item.value + '<br />'
+            );
           }
-				});
-		}
+          i++;
+        });
+      }
+    });
 	},
 
 	/**
@@ -397,44 +404,49 @@ var FilePicker = {
 				dir: $('#target_dir').val(),
 				filter: $('#filter_box').val()
 			}, function(r){
-				json = JSON.parse(r);
-        var self = FilePicker;
-				$('#loading_img').hide();
-				// To store filename(s) that be used for Auto-Complete
-				var files = [];
-				$.each(json, function(i,item){
-					item.name = $.base64.decode(item.name);
-					$('<li></li>').attr('id','item_'+i).attr('ftype',item.type)
-						.attr('title', item.name).html(item.name)
-						.addClass(item.type).click(self.do_click)
-						.dblclick(self.do_dblclick).appendTo('#list');
-					if (self.params.auto_complete == true && item.type != 'folder') {
-						files.push(item.name);
-					}
-				});
-				if (self.params.auto_complete == true) {
-					$('#filename_box').autocomplete({
-            source: files,
-            position: {
-              collision: "flip"
-            },
-            select: function(){
-              // `Click` the file that selected from the list of Auto-Complete
-              $('li:not(li[ftype=folder])').each(function(){
-                if ($(this).html() == $('#filename_box').val()){
-                  self.do_select($(this), true);
-                  $('#viewbox').scrollTop(
-                    $('#viewbox').scrollTop() + 
-                    $(this).position().top - 
-                    $('#viewbox').position().top
-                  );
-                  return false;
-                }
-              });
-					  }
+        $('#loading_img').hide();
+        if(r === "permission_denied"){
+          $("#viewbox #list").html("<div style='word-break: break-word;'><h5>Permission Denied</h5><p>Web server doesn't have access to this folder.</p><p>Change the permissions of the folder to make it accessible.</p></div>");
+        }else{
+          json = JSON.parse(r);
+          var self = FilePicker;
+          
+          // To store filename(s) that be used for Auto-Complete
+          var files = [];
+          $.each(json, function(i,item){
+            item.name = $.base64.decode(item.name);
+            $('<li></li>').attr('id','item_'+i).attr('ftype',item.type)
+              .attr('title', item.name).html(item.name)
+              .addClass(item.type).click(self.do_click)
+              .dblclick(self.do_dblclick).appendTo('#list');
+            if (self.params.auto_complete == true && item.type != 'folder') {
+              files.push(item.name);
+            }
           });
-				}
-				self.do_unselect();
+          if (self.params.auto_complete == true) {
+            $('#filename_box').autocomplete({
+              source: files,
+              position: {
+                collision: "flip"
+              },
+              select: function(){
+                // `Click` the file that selected from the list of Auto-Complete
+                $('li:not(li[ftype=folder])').each(function(){
+                  if ($(this).html() == $('#filename_box').val()){
+                    self.do_select($(this), true);
+                    $('#viewbox').scrollTop(
+                      $('#viewbox').scrollTop() + 
+                      $(this).position().top - 
+                      $('#viewbox').position().top
+                    );
+                    return false;
+                  }
+                });
+              }
+            });
+          }
+          self.do_unselect();
+        }
 			});
 	},
 
@@ -444,16 +456,16 @@ var FilePicker = {
 	 */
 	events_binder: function() {
 		var self = FilePicker;
-		$('#file_picker_form').bind('submit', function(){return false;});
-		$('#viewbox').bind('click', self.do_unselect);
-		$('#target_dir_path').bind('change', function(){
+		$('#file_picker_form').live('submit', function(){return false;});
+		$('#viewbox').live('click', self.do_unselect);
+		$('#target_dir_path').live('change', function(){
       $('#target_dir').val($.base64.encode($(this).val()));
       self.get_list(true);
     });
-		$('#btn_refresh').bind('click', function(){self.get_list(false);});
-		$('#btn_up').bind('click', self.do_up);
-		$('#btn_complete').bind('click', self.do_complete);
-		$('#btn_cancel').bind('click', self.do_close);
+		$('#btn_refresh').live('click', function(){self.get_list(false);});
+		$('#btn_up').live('click', self.do_up);
+		$('#btn_complete').live('click', self.do_complete);
+		$('#btn_cancel').live('click', self.do_close);
     $("#filter_box").live("change", function(){
       FilePicker.get_list();
     });
