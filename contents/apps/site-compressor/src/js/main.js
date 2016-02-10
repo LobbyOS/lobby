@@ -27,7 +27,6 @@ lobby.app.restoreConfig = function(configName){
  /**
   * Get the config as JSON object
   */
-  clog(configName);
   $replaceData = lobby.app["saves"][configName]["replacer"];
   $mainData = lobby.app["saves"][configName]["main"];
  
@@ -62,6 +61,7 @@ lobby.app.restoreConfig = function(configName){
   $(".workspace#site-compressor [name='beforeCommand'], .workspace#site-compressor [name='afterCommand']").each(function(){
     $(this).val($(this).val().replace(/\+/g, " "));
   });
+  $('.workspace#site-compressor .top #right').scrollTop($('.workspace#site-compressor .top #right')[0].scrollHeight);
 };
 
 /* Save Configuration */
@@ -128,6 +128,8 @@ lobby.load(function(){
     id = $(this).attr("id");
     localStorage["lastSaveName"] = id;
     lobby.app.restoreConfig(id);
+    $(".workspace .left #configSaves tr").attr("style", "");
+    $(this).parents("tr").css("background-color", "#FAEBD7");
   });
  
   /* Remove Config when requested */
