@@ -17,7 +17,7 @@
     </div>
     <div id="right" class="left">
       <h2>Quick Actions</h2>
-      <button class="button green">Start Compressing</button>
+      <button class="button green" id="startCompress">Start Compressing</button>
       <a class="button" id="saveConfig">Save Current Configuration</a>
       <h2>Compression Options</h2>
       <form id="options">
