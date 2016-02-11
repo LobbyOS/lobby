@@ -467,6 +467,12 @@ window.FilePicker = {
     $("#filter_box").live("change", function(){
       FilePicker.get_list();
     });
+    $(window).live("keyup", function(e){
+      e.preventDefault();
+      if(e.keyCode === 8){
+        self.do_up();
+      }
+    });
 	}
 
 }

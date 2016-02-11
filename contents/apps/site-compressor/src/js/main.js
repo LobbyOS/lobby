@@ -139,6 +139,13 @@ lobby.load(function(){
       lobby.app.displaySaves();
     });
   });
+  
+  /**
+   * Quick Action Compress
+   */
+  $(".workspace#site-compressor #startCompress").live("click", function(){
+    $(".workspace#site-compressor #siteDetails").submit();
+  });
  
   $(".workspace#site-compressor #siteDetails").live("submit", function(e){
     e.preventDefault();
@@ -154,8 +161,9 @@ lobby.load(function(){
   
     $(".workspace#site-compressor .compress-status").html("");
     $("<iframe/>").attr({
-      "height"      : ($(document).height() - ($(".workspace#site-compressor .top").offset().top + $(".workspace#site-compressor .top").height())) - 5,
+      "height"      : ($(document).height() - ($(".workspace#site-compressor .top").offset().top + $(".workspace#site-compressor .top").height())) - 25,
       "width"       : "100%",
+      "style"       : "margin: 10px 0;",
       "frameborder" : 0,
     }).appendTo(".workspace#site-compressor .compress-status");
     $(".workspace#site-compressor .compress-status").find("iframe").contents().find("body").html(formHTML);
