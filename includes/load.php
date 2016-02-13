@@ -64,7 +64,7 @@ if(!\Lobby::status("lobby.serve")){
   /**
    * Is Lobby Installed ?
    */
-  if(!\Lobby::$installed && !\Lobby::status("lobby.install")){
+  if(!\Lobby::$installed && !\Lobby::status("lobby.install") && \Lobby::curPage() !== "/includes/lib/lobby/ajax/app.php"){
     \Lobby::redirect("/admin/install.php");
   }
 }

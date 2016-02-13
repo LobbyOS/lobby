@@ -6,11 +6,19 @@ $install_step = H::input('step');
 <!DOCTYPE html>
 <html>
   <head>
-     <?php
-     \Lobby\UI\Themes::loadTheme();
-     \Lobby::addStyle("install", "/admin/css/install.css");
-     \Lobby::head("Install");
-     ?>
+    <?php
+    \Lobby\UI\Themes::loadTheme();
+    \Lobby::doHook("head.begin");
+   
+    /**
+     * Install Head
+     */
+    \Lobby::addStyle("install", "/admin/css/install.css");
+    \Lobby::addScript("install", "/admin/js/install.js");
+    \Lobby::head("Install");
+   
+    \Lobby::doHook("head.end");
+    ?>
   </head>
   <body class="workspace">
      <div class="contents" id="<?php
@@ -159,22 +167,36 @@ $install_step = H::input('step');
             <table>
               <tbody>
                 <tr>
-                  <td><?php
+                  <td width="50%"><?php
                     $mysql_version = stristr($info, 'Client API version'); 
                     preg_match('/[1-9].[0-9].[1-9][0-9]/', $mysql_version, $match); 
                     $mysql_version = $match[0];
                     if(version_compare($mysql_version, '5.0') >= 0){
-                      echo "<a class='button green' href=''>MySQL</a>";
+                      echo "<a class='button green' href='?step=3&db=mysql". H::csrf("g") ."'>MySQL</a>";
                     }else{
                       echo "<a class='button disabled'>MySQL Not Available</a><p>Lobby Requires MySQL version atleast 5.0</p>";
                     }
                   ?></td>
-                  <td><?php
-                    $mysql_version = stristr($info, 'SQLite Library'); 
-                    preg_match('/[1-9].[0-9].[1-9][0-9]/', $mysql_version, $match); 
-                    $mysql_version = $match[0];
-                    if(version_compare($mysql_version, '3.8.0') >= 0){
-                      echo "<a class='button green' href=''>SQLite</a>";
+                  <td width="50%"><?php
+                    $sqlite_version = stristr($info, 'SQLite Library'); 
+                    preg_match('/[1-9].[0-9].[1-9][0-9]/', $sqlite_version, $match); 
+                    $sqlite_version = $match[0];
+                    if(version_compare($sqlite_version, '3.8.0') >= 0){
+                      $whitelist = array(
+                          '127.0.0.1',
+                          '::1'
+                      );
+                      if(in_array($_SERVER['REMOTE_ADDR'], $whitelist)){
+                        /**
+                         * Localhost
+                         */
+                        echo "<a class='button green' href='?step=3&db_type=sqlite". H::csrf("g") ."'>SQLite</a>";
+                      }else{
+                        /**
+                         * Give warning when using SQLite on a web server
+                         */
+                        echo "<a class='button red' href='?step=3&db_type=sqlite". H::csrf("g") ."'>SQLite</a><p style='color:red;'>WARNING<br/>It is very unsafe to use SQLite on a non localhost server</p>";
+                      }
                     }else{
                       echo "<a class='button disabled'>SQLite Not Available</a><p>Lobby Requires SQLite version atleast 3.8</p>";
                     }
@@ -187,10 +209,9 @@ $install_step = H::input('step');
             /**
              * We call it again, so that the user had already went through the First Step
              */
-            
             if(\Lobby\Install::step1() === false){
               // The stuff mentioned in step 1 hasn't been done
-            }elseif(isset($_POST['submit'])){
+            }else if(isset($_POST['submit'])){
               $dbhost = \H::input('dbhost', "POST");
               $dbport = \H::input('dbport', "POST");
               $dbname = \H::input('dbname', "POST");
@@ -240,73 +261,91 @@ $install_step = H::input('step');
                 }
               }
             }else{
+              $db_type = H::input("db_type");
+              if($db_type === "mysql"){
             ?>
-              <h3>Database</h3>
-              <p>Provide the database credentials. Double check before submitting</p>
-              <form action="<?php \Lobby::u();?>" method="POST">
-                <table>
-                  <thead>
-                    <tr>
-                      <td width="20%">Name</td>
-                      <td width="40%">Value</td>
-                      <td width="40%">Description</td>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Database Host</td>
-                      <td>
-                        <input type="text" name="dbhost" value="localhost">
-                      </td>
-                      <td>The hostname of database</td>
-                    </tr>
-                    <tr>
-                      <td>Database Port</td>
-                      <td>
-                        <input type="text" name="dbport" value="3306">
-                      </td>
-                      <td>On Most Systems, It's 3306</td>
-                    </tr>
-                    <tr>
-                      <td>Database Name</td>
-                      <td>
-                        <input type="text" name="dbname" />
-                      </td>
-                      <td>The name of the database you want to run Lobby in. Lobby will create DB if it doesn't exist.</td>
-                    </tr>
-                    <tr>
-                      <td>User Name</td>
-                      <td>
-                        <input type="text" name="dbusername" />
-                      </td>
-                      <td>Your MySQL Username</td>
-                    </tr>
-                    <tr>
-                      <td>Password</td>
-                      <td>
-                        <input type="password" name="dbpassword" />
-                      </td>
-                      <td>Your MySQL Password</td>
-                    </tr>
-                    <tr>
-                      <td>Table Prefix</td>
-                      <td>
-                        <input type="text" name="prefix" value="l_" />
-                      </td>
-                      <td>The name of tables created by Lobby would start with this value</td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td>
-                        <button name="submit" style="width:200px;font-size:15px;" class="button green">Install Lobby</button>
-                      </td>
-                      <td></td>
-                    </tr>
-                  </tbody>
-                </table>
-                <?php H::csrf(1);?>
-              </form>
+                <h3>Database</h3>
+                <p>Provide the database credentials. Double check before submitting</p>
+                <form action="<?php \Lobby::u();?>" method="POST">
+                  <table>
+                    <thead>
+                      <tr>
+                        <td width="20%">Name</td>
+                        <td width="40%">Value</td>
+                        <td width="40%">Description</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Database Host</td>
+                        <td>
+                          <input type="text" name="dbhost" value="localhost">
+                        </td>
+                        <td>The hostname of database</td>
+                      </tr>
+                      <tr>
+                        <td>Database Port</td>
+                        <td>
+                          <input type="text" name="dbport" value="3306">
+                        </td>
+                        <td>On Most Systems, It's 3306</td>
+                      </tr>
+                      <tr>
+                        <td>Database Name</td>
+                        <td>
+                          <input type="text" name="dbname" />
+                        </td>
+                        <td>The name of the database you want to run Lobby in. Lobby will create DB if it doesn't exist.</td>
+                      </tr>
+                      <tr>
+                        <td>User Name</td>
+                        <td>
+                          <input type="text" name="dbusername" />
+                        </td>
+                        <td>Your MySQL Username</td>
+                      </tr>
+                      <tr>
+                        <td>Password</td>
+                        <td>
+                          <input type="password" name="dbpassword" />
+                        </td>
+                        <td>Your MySQL Password</td>
+                      </tr>
+                      <tr>
+                        <td>Table Prefix</td>
+                        <td>
+                          <input type="text" name="prefix" value="l_" />
+                        </td>
+                        <td>The name of tables created by Lobby would start with this value</td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td>
+                          <button name="submit" style="width:200px;font-size:15px;" class="button green">Install Lobby</button>
+                        </td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <?php H::csrf(1);?>
+                </form>
             <?php
+              }else if($db_type === "sqlite"){
+              ?>
+                <h3>Database</h3>
+                <form action="<?php \Lobby::u();?>" method="POST">
+                  <p>Choose the location where the ".sqlite" file will be stored :</p>
+                  <label>
+                    <input type="text" name="db_location" id="db_location" value="<?php echo \Lobby\FS::loc("/contents/extra");?>" />
+                    <a class="button orange" id="choose_db_location">Choose Path</a>
+                  </label>
+                  
+                  <button name="submit" style="width:200px;font-size:15px;" class="button green">Install Lobby</button>
+                  <input type="hidden" name="db_type" value="sqlite" />
+                  <?php H::csrf(1);?>
+                </form>
+              <?php
+              }
             }
           }
         }
