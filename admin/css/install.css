@@ -1,5 +1,8 @@
+.workspace{
+  top: 0;
+}
 .contents h1{
-  margin-top: 0;
+  margin: 2.1rem 0;
 }
 #step1 #continue{
   margin: 20px;
