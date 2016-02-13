@@ -272,9 +272,19 @@ $install_step = H::input('step');
                  */
                 if($db_create && \Lobby\Install::makeDatabase("l_", "sqlite")){
                   /**
+                   * We give the database config to the Install Class
+                   */
+                  \Lobby\Install::dbConfig(array(
+                    /**
+                     * Make path relative if DB file in Lobby dir
+                     */
+                    "path" => str_replace(L_DIR, "", $db_loc)
+                  ));
+                
+                  /**
                    * Make the Config File
                    */
-                  //\Lobby\Install::makeConfigFile();
+                  \Lobby\Install::makeConfigFile("sqlite");
                   
                   /**
                    * Enable app lEdit

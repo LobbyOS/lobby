@@ -67,23 +67,34 @@ class Install extends \Lobby {
   /**
    * Make the config.php file
    */
-  public static function makeConfigFile(){
+  public static function makeConfigFile($db_type = "mysql"){
     $lobbyID = \H::randStr(10) . \H::randStr(15) . \H::randStr(20); // Lobby Global ID
     $lobbySID   = hash("sha512", \H::randStr(15) . \H::randStr(30)); // Lobby Secure ID
     $configFileLoc = L_DIR . "/config.php";
     $cfg = self::$database;
     
-    /* Make the configuration file */
+    /**
+     * Make the configuration file
+     */
     $config_sample = \Lobby\FS::get("/includes/lib/lobby/inc/config-sample.php");
     $config_file   = $config_sample;
-    $config_file   = preg_replace("/host'(.*?)'(.*?)'/", "host'$1'{$cfg['host']}'", $config_file);
-    $config_file   = preg_replace("/port'(.*?)'(.*?)'/", "port'$1'{$cfg['port']}'", $config_file);
-    $config_file   = preg_replace("/username'(.*?)''/", "username'$1'{$cfg['username']}'", $config_file);
-    $config_file   = preg_replace("/password'(.*?)''/", "password'$1'{$cfg['password']}'", $config_file);
-    $config_file   = preg_replace("/dbname'(.*?)''/", "dbname'$1'{$cfg['dbname']}'", $config_file);
-    $config_file   = preg_replace("/lobbyID'(.*?)''/", "lobbyID'$1'{$lobbyID}'", $config_file);
-    $config_file   = preg_replace("/secureID'(.*?)''/", "secureID'$1'{$lobbySID}'", $config_file);
-    $config_file   = preg_replace("/prefix'(.*?)'(.*?)'/", "prefix'$1'{$cfg['prefix']}'", $config_file);
+    if($db_type === "mysql"){
+      $config_file = preg_replace("/host'(.*?)'(.*?)'/", "host'$1'{$cfg['host']}'", $config_file);
+      $config_file = preg_replace("/port'(.*?)'(.*?)'/", "port'$1'{$cfg['port']}'", $config_file);
+      $config_file = preg_replace("/username'(.*?)''/", "username'$1'{$cfg['username']}'", $config_file);
+      $config_file = preg_replace("/password'(.*?)''/", "password'$1'{$cfg['password']}'", $config_file);
+      $config_file = preg_replace("/dbname'(.*?)''/", "dbname'$1'{$cfg['dbname']}'", $config_file);
+      $config_file = preg_replace("/prefix'(.*?)'(.*?)'/", "prefix'$1'{$cfg['prefix']}'", $config_file);
+    }else{
+      $config_file = preg_replace("/type'(.*?)'(.*?)'/", "type'$1'sqlite'", $config_file);
+      $config_file = preg_replace("/port'(.*?)'(.*?)',/", "path'$1'{$cfg['path']}'", $config_file);
+      $config_file = preg_replace("/'username'(.*?)'',\n/", "", $config_file);
+      $config_file = preg_replace("/'password'(.*?)'',\n/", "", $config_file);
+      $config_file = preg_replace("/'dbname'(.*?)'',\n/", "", $config_file);
+      $config_file = preg_replace("/[[:blank:]]+(.*?)'prefix'(.*?)'(.*?)'\n/", "", $config_file);
+    }
+    $config_file = preg_replace("/lobbyID'(.*?)''/", "lobbyID'$1'{$lobbyID}'", $config_file);
+    $config_file = preg_replace("/secureID'(.*?)''/", "secureID'$1'{$lobbySID}'", $config_file);
     
     /**
      * Create the config.php file
