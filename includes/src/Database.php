@@ -25,20 +25,29 @@ class DB extends \Lobby {
       try{
         if($config['type'] === 'mysql'){
           self::$dbh = new \PDO("mysql:dbname={$config['dbname']};host={$config['host']};port={$config['port']};charset=utf8;", $config['username'], $config['password'], $options);
-        }else if($config['type'] === 'sqlite'){
-          self::$dbh = new \PDO("sqlite:" . L_DIR . "/contents/extra/lobby_db.sqlite", "", "", $options);
-        }
-        
-        $notable = false;
-        $tables = array("options", "data"); // The Tables of Lobby
-        foreach($tables as $tableName){
-          $results = self::$dbh->prepare("SHOW TABLES LIKE ?");
-          $results->execute(array(self::$prefix . $tableName));
-          if($results->rowCount() == 0) {
-            $notable = true;
+          
+          /**
+           * Check if Lobby tables exist
+           */
+          $notable = false;
+          $tables = array("options", "data"); // The Tables of Lobby
+          foreach($tables as $tableName){
+            $results = self::$dbh->prepare("SHOW TABLES LIKE ?");
+            $results->execute(array(self::$prefix . $tableName));
+            if($results->rowCount() == 0) {
+              $notable = true;
+            }
           }
+        }else if($config['type'] === 'sqlite'){
+          self::$dbh = new \PDO("sqlite:" . \Lobby\FS::loc($config['path']), "", "", $options);
+          
+          /**
+           * Check if Lobby tables exist
+           */
+          $sql = self::$dbh->query("SELECT COUNT(1) FROM sqlite_master WHERE type = 'table' AND (`name` = 'l_data' OR `name` = 'l_options')");
+          $notable = $sql->fetchColumn() === "2" ? false : true;
         }
-        
+
         if($notable === false){ /* There are database tables */
           parent::$installed = true;
         }else{
@@ -72,9 +81,10 @@ class DB extends \Lobby {
     if(self::$installed){
       $sql = self::$dbh->prepare("SELECT `value` FROM `". self::$prefix ."options` WHERE `name` = ?");
       $sql->execute(array($name));
-      
-      if($sql->rowCount() != 0){
-        $column = $sql->fetchColumn();
+      $r = $sql->fetchColumn();
+
+      if($r !== false){
+        $column = $r;
         $return = self::filt($column);
       }else{
         $return = null;
@@ -87,16 +97,16 @@ class DB extends \Lobby {
    * Save option
    */
   public static function saveOption($name, $value){
-   if(self::$installed && $value != null){
-     $sql = self::$dbh->prepare("SELECT COUNT(`name`) FROM `". self::$prefix ."options` WHERE `name` = ?");
-     $sql->execute(array($name));
-     if($sql->fetchColumn() != 0){
-       $sql = self::$dbh->prepare("UPDATE `". self::$prefix ."options` SET `value` = ? WHERE `name` = ?");
-       return $sql->execute(array($value, $name));
-     }else{
-       $sql = self::$dbh->prepare("INSERT INTO `". self::$prefix ."options` (`name`, `value`) VALUES (?, ?)");
-       return $sql->execute(array($name, $value));
-     }
+    if(self::$installed && $value != null){
+      $sql = self::$dbh->prepare("SELECT COUNT(`name`) FROM `". self::$prefix ."options` WHERE `name` = ?");
+      $sql->execute(array($name));
+      if($sql->fetchColumn() != 0){
+        $sql = self::$dbh->prepare("UPDATE `". self::$prefix ."options` SET `value` = ? WHERE `name` = ?");
+        return $sql->execute(array($value, $name));
+      }else{
+        $sql = self::$dbh->prepare("INSERT INTO `". self::$prefix ."options` (`name`, `value`) VALUES (?, ?)");
+        return $sql->execute(array($name, $value));
+      }
     }else{
       return false;
     }
@@ -114,9 +124,9 @@ class DB extends \Lobby {
         $sql->execute(array($id));
         $return = $sql->fetchAll();
       }else{
-        $sql = self::$dbh->prepare("SELECT * FROM `{$prefix}data` WHERE `name` = ? AND `app` = ?");
+        $sql = self::$dbh->prepare("SELECT COUNT(*), * FROM `{$prefix}data` WHERE `name` = ? AND `app` = ?");
         $sql->execute(array($name, $id));
-        if($sql->rowCount() > 1){
+        if($sql->fetchColumn(0) > '1'){
           /**
            * Multiple Results; so give a multidimensional array of results
            */
@@ -158,7 +168,7 @@ class DB extends \Lobby {
         return true;
       }else{
         
-        $sql = self::$dbh->prepare("INSERT INTO `". self::$prefix ."data` (`app`, `name`, `value`, `created`, `updated`) VALUES (?, ?, ?, NOW(), NOW())");
+        $sql = self::$dbh->prepare("INSERT INTO `". self::$prefix ."data` (`app`, `name`, `value`, `created`, `updated`) VALUES (?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
         return $sql->execute(array($appID, $key, $value));
       }
     }else{

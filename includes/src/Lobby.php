@@ -61,17 +61,16 @@ class Lobby {
       $config = include(L_DIR . "/config.php");
       
       if(is_array($config) && count($config) != 0){
-        self::$config = array_merge(self::$config, $config);
-        
-        $config = self::$config;
+        self::$config = array_replace_recursive(self::$config, $config);
+
         if($db === true){
-          return $config['db'];
+          return self::$config['db'];
         }else{
-          if($config['debug'] === true){
+          if(self::$config['debug'] === true){
             ini_set("display_errors","on");
             self::$debug = true;
           }
-          self::$lid = $config['lobbyID'];// The Global Lobby installation ID
+          self::$lid = self::$config['lobbyID'];// The Global Lobby installation ID
         }
       }else{
         return false;
