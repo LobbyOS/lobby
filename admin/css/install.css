@@ -10,3 +10,13 @@
 #step2 table td{
   text-align: center !important;
 }
+#step3 #db_location, #step3 #choose_db_location{
+  display: inline-block;
+  vertical-align: middle;
+}
+#step3 #db_location{
+  width: 70%;
+}
+#step3 #choose_db_location{
+  
+}

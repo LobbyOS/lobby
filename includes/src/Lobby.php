@@ -97,7 +97,7 @@ class Lobby {
     /**
      * JS Files
      */
-    if(count(self::$js) != 0 && !\Lobby::status("lobby.install")){
+    if(count(self::$js) != 0){
       /**
        * Load jQuery, jQuery UI, Lobby Main, App separately without async
        */
