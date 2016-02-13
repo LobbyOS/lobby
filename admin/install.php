@@ -1,6 +1,7 @@
 <?php
 require "../load.php";
 require L_DIR . "/includes/src/Install.php";
+$install_step = H::input('step');
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,14 +13,21 @@ require L_DIR . "/includes/src/Install.php";
      ?>
   </head>
   <body class="workspace">
-     <div class="contents">
+     <div class="contents" id="<?php
+      $steps = array(
+        "1", "2", "3", "4"
+      );
+      if(in_array($install_step, $steps)){
+        echo "step$install_step";
+      }
+     ?>">
         <h1 style="text-align: center;">
           <?php echo \Lobby::l(L_URL, "Install Lobby");?>
         </h1>
         <?php
         if(\Lobby::$installed && H::input("step") != 3){
           sss("<a href='". L_URL ."'>Lobby Installed</a>", "Lobby Is Installed. If you want to reinstall, delete the database tables and remove <b>config.php</b> file.<cl/>If you want to just remake the <b>config.php</b> file, don't delete the database tables, delete the existing <b>config.php</b> file and do ". \Lobby::l("/admin/install.php?step=1", "this installation") ." until Step 3 where \"Database Tables Exist\" error occur");
-        }elseif(!isset($_GET['step'])){
+        }else if($install_step === null){
         ?>
           <p>Welcome to the Lobby Installation process. Thank you for downloading Lobby.</p>
           <p>For further help, see <a target='_blank' href='http://lobby.subinsb.com/docs/quick'>Quick Install</a>.</p>
@@ -29,10 +37,10 @@ require L_DIR . "/includes/src/Install.php";
           </center>
         <?php
         }
-        if(isset($_GET['step'])){
-          if($_GET['step'] == 1 && H::csrf()){
+        if(isset($install_step)){
+          if($install_step === "1" && H::csrf()){
         ?>
-            <h2>Requirements</h2>
+            <h3>Requirements</h3>
             <p>Your system must meet the requirements to install Lobby.</p>
             <table>
               <tbody>
@@ -72,26 +80,11 @@ require L_DIR . "/includes/src/Install.php";
                 </tr>
                 <?php
                 if(ini_get('output_buffering') != "Off"){
+                  ob_start(); 
+                    phpinfo(INFO_MODULES); 
+                  $info = ob_get_contents(); 
+                  ob_end_clean();
                 ?>
-                  <tr>
-                    <td>MySQL 5.0</td>
-                    <td><?php
-                    ob_start(); 
-                      phpinfo(INFO_MODULES); 
-                    $info = ob_get_contents(); 
-                    ob_end_clean();
-                    
-                    $mysql_version = stristr($info, 'Client API version'); 
-                    preg_match('/[1-9].[0-9].[1-9][0-9]/', $mysql_version, $match); 
-                    $mysql_version = $match[0];
-                    if(version_compare($mysql_version, '5.0') >= 0){
-                      sss("Ok", "Your MySQL version is compatible with Lobby");
-                    }else{
-                      $error = 1;
-                      ser("Not Ok", "Lobby requires atleast MySQ version 5.0");
-                    }
-                    ?></td>
-                  </tr>
                   <tr>
                     <td>PHP JSON Extension</td>
                     <td><?php if (extension_loaded('json')){
@@ -140,12 +133,12 @@ require L_DIR . "/includes/src/Install.php";
             <?php
             if(!isset($error)){
             ?>
-              <a href="?step=2<?php echo H::csrf("g");?>" class="button orange" id="step1_continue">Proceed To Installation</a>
+              <a href="?step=2<?php echo H::csrf("g");?>" class="button orange" id="continue">Proceed To Installation</a>
           <?php
             }else{
               echo "<p>Cannot Procced to Installation. Please make the requirements satisfied.</p>";
             }
-          }elseif($_GET['step'] == 3){
+          }elseif($install_step === "4"){
             echo "<h2>Safety</h2>";
             $safe = \Lobby\Install::safe();
             if($safe == "configFile"){
@@ -156,7 +149,41 @@ require L_DIR . "/includes/src/Install.php";
             }else{
               \Lobby::redirect("/#");
             }
-          }elseif($_GET['step'] == 2 && H::csrf()){
+          }else if($install_step === "2" && H::csrf()){
+            ob_start(); 
+              phpinfo(INFO_MODULES); 
+            $info = ob_get_contents(); 
+            ob_end_clean();
+          ?>
+            <h3>Choose Database System</h3>
+            <table>
+              <tbody>
+                <tr>
+                  <td><?php
+                    $mysql_version = stristr($info, 'Client API version'); 
+                    preg_match('/[1-9].[0-9].[1-9][0-9]/', $mysql_version, $match); 
+                    $mysql_version = $match[0];
+                    if(version_compare($mysql_version, '5.0') >= 0){
+                      echo "<a class='button green' href=''>MySQL</a>";
+                    }else{
+                      echo "<a class='button disabled'>MySQL Not Available</a><p>Lobby Requires MySQL version atleast 5.0</p>";
+                    }
+                  ?></td>
+                  <td><?php
+                    $mysql_version = stristr($info, 'SQLite Library'); 
+                    preg_match('/[1-9].[0-9].[1-9][0-9]/', $mysql_version, $match); 
+                    $mysql_version = $match[0];
+                    if(version_compare($mysql_version, '3.8.0') >= 0){
+                      echo "<a class='button green' href=''>SQLite</a>";
+                    }else{
+                      echo "<a class='button disabled'>SQLite Not Available</a><p>Lobby Requires SQLite version atleast 3.8</p>";
+                    }
+                  ?></td>
+                </tr>
+              </tbody>
+            </table>
+          <?php
+          }else if($install_step === "3" && H::csrf()){
             /**
              * We call it again, so that the user had already went through the First Step
              */
@@ -214,7 +241,7 @@ require L_DIR . "/includes/src/Install.php";
               }
             }else{
             ?>
-              <h2>Database</h2>
+              <h3>Database</h3>
               <p>Provide the database credentials. Double check before submitting</p>
               <form action="<?php \Lobby::u();?>" method="POST">
                 <table>
