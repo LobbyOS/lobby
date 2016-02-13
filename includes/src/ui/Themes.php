@@ -27,7 +27,7 @@ class Themes extends \Lobby {
     define("THEME_DIR", THEMES_DIR . "/" . self::$theme);
     define("THEME_URL", THEMES_URL . "/" . self::$theme);
     
-    if(!\Lobby::status("lobby.serve") && !\Lobby::status("lobby.install")){
+    if(!\Lobby::status("lobby.serve")){
       self::loadDefaults();
       self::loadTheme();
     }
