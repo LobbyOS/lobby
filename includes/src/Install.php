@@ -85,13 +85,14 @@ class Install extends \Lobby {
       $config_file = preg_replace("/password'(.*?)''/", "password'$1'{$cfg['password']}'", $config_file);
       $config_file = preg_replace("/dbname'(.*?)''/", "dbname'$1'{$cfg['dbname']}'", $config_file);
       $config_file = preg_replace("/prefix'(.*?)'(.*?)'/", "prefix'$1'{$cfg['prefix']}'", $config_file);
-    }else{
+    }else{      
       $config_file = preg_replace("/type'(.*?)'(.*?)'/", "type'$1'sqlite'", $config_file);
-      $config_file = preg_replace("/port'(.*?)'(.*?)',/", "path'$1'{$cfg['path']}'", $config_file);
-      $config_file = preg_replace("/'username'(.*?)'',\n/", "", $config_file);
-      $config_file = preg_replace("/'password'(.*?)'',\n/", "", $config_file);
-      $config_file = preg_replace("/'dbname'(.*?)'',\n/", "", $config_file);
-      $config_file = preg_replace("/[[:blank:]]+(.*?)'prefix'(.*?)'(.*?)'\n/", "", $config_file);
+      $config_file = preg_replace("/port'(.*?)'(.*?)',/", "path'$1'{$cfg['path']}',", $config_file);
+      $config_file = preg_replace("/[[:blank:]]+(.*?)'host'(.*?)'(.*?)',\n/", "", $config_file);
+      $config_file = preg_replace("/[[:blank:]]+(.*?)'username'(.*?)'',\n/", "", $config_file);
+      $config_file = preg_replace("/[[:blank:]]+(.*?)'password'(.*?)'',\n/", "", $config_file);
+      $config_file = preg_replace("/[[:blank:]]+(.*?)'dbname'(.*?)'',\n/", "", $config_file);
+      $config_file = preg_replace("/prefix'(.*?)'(.*?)'/", "prefix'$1'{$cfg['prefix']}'", $config_file);
     }
     $config_file = preg_replace("/lobbyID'(.*?)''/", "lobbyID'$1'{$lobbyID}'", $config_file);
     $config_file = preg_replace("/secureID'(.*?)''/", "secureID'$1'{$lobbySID}'", $config_file);
@@ -127,9 +128,16 @@ class Install extends \Lobby {
           `created` datetime NOT NULL,
           `updated` datetime NOT NULL
         ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;";
+        /**
+         * Create Tables
+         */
+        $sql = self::$dbh->prepare($sql_code);
+        $sql->execute();
       }else{
         /**
          * SQLite
+         * Multiple commands separated by ';' cannot be don in SQLite
+         * Weird, :P
          */
         $sql_code = "
         CREATE TABLE IF NOT EXISTS `{$prefix}options` (
@@ -137,21 +145,19 @@ class Install extends \Lobby {
           `name` varchar(64) NOT NULL,
           `value` text NOT NULL
         );
+        ";
+        self::$dbh->exec($sql_code);
+        $sql_code = "
         CREATE TABLE IF NOT EXISTS `{$prefix}data` (
           `id` INTEGER PRIMARY KEY AUTOINCREMENT,
           `app` varchar(50) NOT NULL,
           `name` varchar(150) NOT NULL,
-          `value` longblob NOT NULL,
+          `value` blob NOT NULL,
           `created` datetime NOT NULL,
           `updated` datetime NOT NULL
         );";
+        self::$dbh->exec($sql_code);
       }
-      
-      /**
-       * Create Tables
-       */
-      $sql = self::$dbh->prepare($sql_code);
-      $sql->execute();
 
       /* Insert The Default Data In To Tables */
       $lobby_info = \Lobby\FS::get("/lobby.json");

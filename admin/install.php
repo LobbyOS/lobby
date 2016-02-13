@@ -278,7 +278,8 @@ $install_step = H::input('step');
                     /**
                      * Make path relative if DB file in Lobby dir
                      */
-                    "path" => str_replace(L_DIR, "", $db_loc)
+                    "path" => str_replace(L_DIR, "", $db_loc),
+                    "prefix" => "l_"
                   ));
                 
                   /**
