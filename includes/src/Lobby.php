@@ -15,7 +15,9 @@ class Lobby {
     "init", "body.begin", "admin.body.begin", "head.begin", "admin.head.begin", "head.end", "router.finish"
   );
   public static $config = array(
-    "db" => array(),
+    "db" => array(
+      "type" => "mysql"
+    ),
     "debug" => false,
     "server_check" => true
   );
@@ -39,7 +41,7 @@ class Lobby {
       self::$url = self::$config['lobby_url'];
     }else{
       $base_dir  = L_DIR;
-      $doc_root  = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
+      $doc_root  = str_replace("\\", "/", preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']));
       $base_url  = preg_replace("!^${doc_root}!", '', $base_dir); # ex: '' or '/mywebsite'
       $protocol  = empty($_SERVER['HTTPS']) ? 'http' : 'https';
       $port      = $_SERVER['SERVER_PORT'];
@@ -153,7 +155,7 @@ class Lobby {
   public static function log($msg = "", $file = "lobby.log"){
     $msg = !is_string($msg) ? serialize($msg) : $msg;
     if($msg != "" && self::$debug === true){
-      $logFile = "/contents/extra/{$file}";
+      $logFile = "/contents/extra/logs/{$file}";
       $message = "[" . date("Y-m-d H:i:s") . "] $msg";
       \Lobby\FS::write($logFile, $message, "a");
     }

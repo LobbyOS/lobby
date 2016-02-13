@@ -1,6 +1,9 @@
 .contents h1{
   margin-top: 0;
 }
-#step1_continue{
+#step1 #continue{
   margin: 20px;
+}
+#step2 table td{
+  text-align: center !important;
 }

@@ -7,7 +7,11 @@ class DB extends \Lobby {
  
   public static function init(){
     $root = L_DIR;
+    /**
+     * Get DB config
+     */
     $config = \Lobby::config(true);
+    
     if(is_array($config)){
       /**
        * Make DB credentials variables from the config.php file
@@ -19,7 +23,11 @@ class DB extends \Lobby {
         \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
       );
       try{
-        self::$dbh = new \PDO("mysql:dbname={$config['dbname']};host={$config['host']};port={$config['port']};charset=utf8;", $config['username'], $config['password'], $options);
+        if($config['type'] === 'mysql'){
+          self::$dbh = new \PDO("mysql:dbname={$config['dbname']};host={$config['host']};port={$config['port']};charset=utf8;", $config['username'], $config['password'], $options);
+        }else if($config['type'] === 'sqlite'){
+          self::$dbh = new \PDO("sqlite:" . L_DIR . "/contents/extra/lobby_db.sqlite", "", "", $options);
+        }
         
         $notable = false;
         $tables = array("options", "data"); // The Tables of Lobby
