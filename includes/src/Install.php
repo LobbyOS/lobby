@@ -9,6 +9,7 @@ class Install extends \Lobby {
 
   private static $database = array();
   private static $dbh;
+  public static $error;
 
   /**
    * The $checking parameter tells if any Success output should be made or not.
@@ -94,11 +95,14 @@ class Install extends \Lobby {
     }
   }
   
-  /* Create Tables in the DB */
-  public static function makeDatabase($prefix){
+  /**
+   * Create Tables in the DB
+   * Supports both MySQL & SQLite
+   */
+  public static function makeDatabase($prefix, $db_type = "mysql"){
     try {
-      /* Create Tables */
-      $sql = self::$dbh->prepare("
+      if($db_type === "mysql"){
+        $sql_code = "
         CREATE TABLE IF NOT EXISTS `{$prefix}options` (
           `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
           `name` varchar(64) NOT NULL,
@@ -111,8 +115,31 @@ class Install extends \Lobby {
           `value` longblob NOT NULL,
           `created` datetime NOT NULL,
           `updated` datetime NOT NULL
-        ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;"
-      );
+        ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;";
+      }else{
+        /**
+         * SQLite
+         */
+        $sql_code = "
+        CREATE TABLE IF NOT EXISTS `{$prefix}options` (
+          `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+          `name` varchar(64) NOT NULL,
+          `value` text NOT NULL
+        );
+        CREATE TABLE IF NOT EXISTS `{$prefix}data` (
+          `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+          `app` varchar(50) NOT NULL,
+          `name` varchar(150) NOT NULL,
+          `value` longblob NOT NULL,
+          `created` datetime NOT NULL,
+          `updated` datetime NOT NULL
+        );";
+      }
+      
+      /**
+       * Create Tables
+       */
+      $sql = self::$dbh->prepare($sql_code);
       $sql->execute();
 
       /* Insert The Default Data In To Tables */
@@ -120,15 +147,16 @@ class Install extends \Lobby {
       $lobby_info = json_decode($lobby_info, true);
       $sql = self::$dbh->prepare("
         INSERT INTO `{$prefix}options`
-          (`id`, `name`, `value`)
+          (`name`, `value`)
         VALUES
-          (NULL, 'lobby_version', ?),
-          (NULL, 'lobby_version_release', ?);"
+          ('lobby_version', ?),
+          ('lobby_version_release', ?);"
       );
       $sql->execute(array($lobby_info['version'], $lobby_info['released']));
-    return true;
+      return true;
     }catch(\PDOException $Exception){
-      self::log("Install error : " . $Exception->getMessage());
+      self::$error = $Exception->getMessage();
+      self::log("Install error : " . self::$error);
       return false;
     }
   }
@@ -156,9 +184,8 @@ class Install extends \Lobby {
       ));
       return true;
     }catch(\PDOException $e){
-      $error = $e->getMessage();
-      \Lobby::log("Unable to make SQLite database : ". $error);
-      echo ser("Couldn't Make Database", "<blockquote>". $error ."</blockquote>");
+      self::$error = $e->getMessage();
+      \Lobby::log("Unable to make SQLite database : ". self::$error);
       return false;
     }
   }
