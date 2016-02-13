@@ -137,7 +137,9 @@ class Install extends \Lobby {
     self::$database = $array;
   }
   
-  /* After installation, check if Lobby installed directory is safe */
+  /**
+   * After installation, check if Lobby installed directory is safe
+   */
   public static function safe(){
     $configFile = L_DIR . "/config.php";
     if(is_writable($configFile)){
@@ -146,4 +148,19 @@ class Install extends \Lobby {
       return true;
     }
   }
+  
+  public static function createSQLiteDB($loc){
+    try{
+      self::$dbh = new \PDO("sqlite:$loc", "", "", array(
+        \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
+      ));
+      return true;
+    }catch(\PDOException $e){
+      $error = $e->getMessage();
+      \Lobby::log("Unable to make SQLite database : ". $error);
+      echo ser("Couldn't Make Database", "<blockquote>". $error ."</blockquote>");
+      return false;
+    }
+  }
+  
 }
