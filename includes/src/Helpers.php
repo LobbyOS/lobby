@@ -33,10 +33,20 @@ class H {
    * returns null if it doesn't exist
    */
   public static function input($name, $type = ""){
-    if($type == "GET" || (count($_GET) != 0 && $type != "POST" && count($_POST) == 0)){
-      $arr = $_GET;
-    }elseif($type == "POST" || count($_POST) != 0){
-      $arr = $_POST;
+    $post_count = count($_POST);
+    $get_count = count($_GET);
+    
+    if($post_count !== 0 && $get_count !== 0){
+      /**
+       * Both $_GET and $_POST are present
+       */
+      $arr = $_GET + $_POST;
+    }else{
+      if($type === "GET" || ($type !== "POST" && $get_count !== 0 && $post_count === 0)){
+        $arr = $_GET;
+      }else if($type == "POST" || $post_count != 0){
+        $arr = $_POST;
+      }
     }
     if(isset($arr[$name])){
       return urldecode($arr[$name]);

@@ -206,62 +206,69 @@ $install_step = H::input('step');
             </table>
           <?php
           }else if($install_step === "3" && H::csrf()){
+            $db_type = H::input("db_type");
             /**
              * We call it again, so that the user had already went through the First Step
              */
             if(\Lobby\Install::step1() === false){
               // The stuff mentioned in step 1 hasn't been done
             }else if(isset($_POST['submit'])){
-              $dbhost = \H::input('dbhost', "POST");
-              $dbport = \H::input('dbport', "POST");
-              $dbname = \H::input('dbname', "POST");
-              $username = \H::input('dbusername', "POST");
-              $password = \H::input('dbpassword', "POST");
-              $prefix = \H::input('prefix', "POST");
-
-              /**
-               * We give the database config to the Install Class
-               */
-              \Lobby\Install::dbConfig(array(
-                "host" => $dbhost,
-                "port" => $dbport,
-                "dbname" => $dbname,
-                "username" => $username,
-                "password" => $password,
-                "prefix" => $prefix
-              ));
-              
-              /**
-               * First, check if prefix is valid
-               * Check if connection to database can be established using the credentials given by the user
-               */
-              if($prefix == "" || preg_match("/[^0-9,a-z,A-Z,\$,_]+/i", $prefix) != 0 || strlen($prefix) > 50){
-                ser("Error", "A Prefix should only contain basic Latin letters, digits 0-9, dollar, underscore and shouldn't exceed 50 characters.<cl/>" . \Lobby::l("/admin/install.php?step=2" . H::csrf("g"), "Try Again", "class='button'"));
-              }elseif(\Lobby\Install::checkDatabaseConnection() !== false){
+              if($db_type === "mysql"){
+                $dbhost = \H::input('dbhost', "POST");
+                $dbport = \H::input('dbport', "POST");
+                $dbname = \H::input('dbname', "POST");
+                $username = \H::input('dbusername', "POST");
+                $password = \H::input('dbpassword', "POST");
+                $prefix = \H::input('prefix', "POST");
+  
                 /**
-                 * Make the Config File
+                 * We give the database config to the Install Class
                  */
-                \Lobby\Install::makeConfigFile();
-           
+                \Lobby\Install::dbConfig(array(
+                  "host" => $dbhost,
+                  "port" => $dbport,
+                  "dbname" => $dbname,
+                  "username" => $username,
+                  "password" => $password,
+                  "prefix" => $prefix
+                ));
+                
                 /**
-                 * Create Tables
+                 * First, check if prefix is valid
+                 * Check if connection to database can be established using the credentials given by the user
                  */
-                if(\Lobby\Install::makeDatabase($prefix)){
-                  sss("Success", "Database Tables and <b>config.php</b> file was successfully created.");
+                if($prefix == "" || preg_match("/[^0-9,a-z,A-Z,\$,_]+/i", $prefix) != 0 || strlen($prefix) > 50){
+                  ser("Error", "A Prefix should only contain basic Latin letters, digits 0-9, dollar, underscore and shouldn't exceed 50 characters.<cl/>" . \Lobby::l("/admin/install.php?step=2" . H::csrf("g"), "Try Again", "class='button'"));
+                }else if(\Lobby\Install::checkDatabaseConnection() !== false){
                   /**
-                   * Enable app lEdit
+                   * Make the Config File
                    */
-                  \Lobby::$installed = true;
-                  \Lobby\DB::init();
-                  $App = new \Lobby\Apps("ledit");
-                  $App->enableApp();
-                  echo '<cl/><a href="?step=3" class="button">Proceed</a>';
-                }else{
-                  ser("Unable To Create Database Tables", "Are there any tables with the same name ? Or Does the user have the permissions to create tables ?<cl/>The <b>config.php</b> file is created. To try again, remove the <b>config.php</b> file and click the button. <cl/>" . \Lobby::l("/admin/install.php?step=2" . H::csrf("g"), "Try Again", "class='button'"));
+                  \Lobby\Install::makeConfigFile();
+             
+                  /**
+                   * Create Tables
+                   */
+                  if(\Lobby\Install::makeDatabase($prefix)){
+                    sss("Success", "Database Tables and <b>config.php</b> file was successfully created.");
+                    /**
+                     * Enable app lEdit
+                     */
+                    \Lobby::$installed = true;
+                    \Lobby\DB::init();
+                    $App = new \Lobby\Apps("ledit");
+                    $App->enableApp();
+                    echo '<cl/><a href="?step=3" class="button">Proceed</a>';
+                  }else{
+                    ser("Unable To Create Database Tables", "Are there any tables with the same name ? Or Does the user have the permissions to create tables ?<cl/>The <b>config.php</b> file is created. To try again, remove the <b>config.php</b> file and click the button. <cl/>" . \Lobby::l("/admin/install.php?step=2" . H::csrf("g"), "Try Again", "class='button'"));
+                  }
+                }
+              }else{
+                $db_loc = $_POST['db_location'];
+                if(\Lobby\Install::createSQLiteDB($db_loc)){
+                  
                 }
               }
             }else{
-              $db_type = H::input("db_type");
               if($db_type === "mysql"){
             ?>
                 <h3>Database</h3>
@@ -334,10 +341,9 @@ $install_step = H::input('step');
               ?>
                 <h3>Database</h3>
                 <form action="<?php \Lobby::u();?>" method="POST">
-                  <p>Choose the location where the ".sqlite" file will be stored :</p>
+                  <p>The location of the SQLite database file :</p>
                   <label>
-                    <input type="text" name="db_location" id="db_location" value="<?php echo \Lobby\FS::loc("/contents/extra");?>" />
-                    <a class="button orange" id="choose_db_location">Choose Path</a>
+                    <input type="text" name="db_location" id="db_location" value="<?php echo \Lobby\FS::loc("/contents/extra/lobby_db.sqlite");?>" />
                   </label>
                   
                   <button name="submit" style="width:200px;font-size:15px;" class="button green">Install Lobby</button>
