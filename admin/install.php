@@ -241,15 +241,14 @@ $install_step = H::input('step');
                   ser("Error", "A Prefix should only contain basic Latin letters, digits 0-9, dollar, underscore and shouldn't exceed 50 characters.<cl/>" . \Lobby::l("/admin/install.php?step=2" . H::csrf("g"), "Try Again", "class='button'"));
                 }else if(\Lobby\Install::checkDatabaseConnection() !== false){
                   /**
-                   * Make the Config File
-                   */
-                  \Lobby\Install::makeConfigFile();
-             
-                  /**
                    * Create Tables
                    */
                   if(\Lobby\Install::makeDatabase($prefix)){
-                    sss("Success", "Database Tables and <b>config.php</b> file was successfully created.");
+                    /**
+                     * Make the Config File
+                     */
+                    \Lobby\Install::makeConfigFile();
+                  
                     /**
                      * Enable app lEdit
                      */
@@ -257,15 +256,38 @@ $install_step = H::input('step');
                     \Lobby\DB::init();
                     $App = new \Lobby\Apps("ledit");
                     $App->enableApp();
-                    echo '<cl/><a href="?step=3" class="button">Proceed</a>';
+                    
+                    sss("Success", "Database Tables and <b>config.php</b> file was successfully created.");
+                    echo '<cl/><a href="?step=4" class="button">Proceed</a>';
                   }else{
-                    ser("Unable To Create Database Tables", "Are there any tables with the same name ? Or Does the user have the permissions to create tables ?<cl/>The <b>config.php</b> file is created. To try again, remove the <b>config.php</b> file and click the button. <cl/>" . \Lobby::l("/admin/install.php?step=2" . H::csrf("g"), "Try Again", "class='button'"));
+                    ser("Unable To Create Database Tables", "Are there any tables with the same name ? Or Does the user have the permissions to create tables ? Error :<blockquote>". \Lobby\Install::$error ."</blockquote>" . \Lobby::l("/admin/install.php?step=2" . H::csrf("g"), "Try Again", "class='button'"));
                   }
                 }
               }else{
                 $db_loc = $_POST['db_location'];
-                if(\Lobby\Install::createSQLiteDB($db_loc)){
+                $db_create = \Lobby\Install::createSQLiteDB($db_loc);
+                
+                /**
+                 * Prefix is "l_" and can't be changed
+                 */
+                if($db_create && \Lobby\Install::makeDatabase("l_", "sqlite")){
+                  /**
+                   * Make the Config File
+                   */
+                  //\Lobby\Install::makeConfigFile();
                   
+                  /**
+                   * Enable app lEdit
+                   */
+                  \Lobby::$installed = true;
+                  \Lobby\DB::init();
+                  $App = new \Lobby\Apps("ledit");
+                  $App->enableApp();
+                  
+                  sss("Success", "Database and <b>config.php</b> file was successfully created.");
+                  echo '<cl/><a href="?step=4" class="button">Proceed</a>';
+                }else{
+                  ser("Couldn't Make SQLite Database", "I was unable to make the database. Error :<blockquote>". \Lobby\Install::$error ."</blockquote> <cl/>" . \Lobby::l("/admin/install.php?step=3&db_type=sqlite" . H::csrf("g"), "Try Again", "class='button'"));
                 }
               }
             }else{
