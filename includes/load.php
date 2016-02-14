@@ -40,11 +40,10 @@ require_once L_DIR . "/includes/extra.php"; /* Define extra variables or constan
 /**
  * Timezone
  */
-$tz = getOption("lobby_timezone");
-if($tz){
-  date_default_timezone_set($tz);
+date_default_timezone_set("UTC+0");
+if(\Lobby\DB::$type === "mysql"){
   $sql = \Lobby\DB::$dbh->prepare("SET time_zone = ?;");
-  $sql->execute(array('Europe/Helsinki'));
+  $sql->execute(array('UTC+0'));
 }
 
 /**
