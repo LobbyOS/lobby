@@ -18,17 +18,15 @@
           sss("Updated", "Lobby was successfully updated to Version <b>". getOption("lobby_version") ."</b> from the old ". htmlspecialchars($_GET['oldver']) ." version.");
         }
         if(isset($_POST['update_settings']) && \H::csrf()){
+          /**
+           * Sadly, PHP supports GMT+ and not UTC+
+           */
+          $php_time_zone = str_replace("UTC+", "GMT+", $_POST['timezone']);
+          
           if($_POST['timezone'] === ""){
             saveOption("lobby_timezone", "");
-          }else if(@date_default_timezone_set($_POST['timezone'])){
-            try{
-              $sql = \Lobby\DB::$dbh->prepare("SET time_zone = ?;");
-              $sql->execute(array($_POST['timezone']));
-              saveOption("lobby_timezone", $_POST['timezone']);
-            }catch(\PDOException $e){
-              ser("Invalid Timezone", "Your MySQL server doesn't support the timezone ".htmlspecialchars($_POST['timezone']));
-            }
-            
+          }else if(@date_default_timezone_set($php_time_zone)){
+            saveOption("lobby_timezone", $php_time_zone);
           }else{
             ser("Invalid Timezone", "Your PHP server doesn't support the timezone ".htmlspecialchars($_POST['timezone']));
           }
@@ -542,8 +540,9 @@
                 <option value="UTC+14">UTC+14</option>
               </optgroup>
             </select>
-            <button clear class="button green">Save Settings</button>
+            <p>Timestamp Now : <?php echo date("Y-m-d H:i:s");?></p>
           </label>
+          <button clear class="button green">Save Settings</button>
         </form>
         <h2>About</h2>
         <table border="1" style="margin-top:5px">
