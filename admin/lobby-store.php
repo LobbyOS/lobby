@@ -19,12 +19,13 @@ header( 'Content-type: text/html; charset=utf-8' );
       <div class="content">
         <?php
         if(isset($_GET['id']) && $_GET['id']!=""){
+          $AppID = $_GET['id'];
           $app = \Lobby\Server::Store(array(
             "get" => "app",
-            "id" => $_GET['id']
+            "id" => $AppID
           ));
 
-          if($app == "false"){
+          if($app === "false"){
             ser("404 - App Not Found", "App was not found in Lobby Store.");
           }else{
             $appImage = $app['image'] != "" ? $app['image'] : L_URL . "/includes/lib/lobby/image/blank.png";
@@ -38,13 +39,16 @@ header( 'Content-type: text/html; charset=utf-8' );
               <a clear="" href="<?php echo $app['app_page'];?>" target="_blank" class="button">App Page</a>
               <cl/>
               <?php
-              $App = new \Lobby\Apps($_GET['id']);
+              $App = new \Lobby\Apps($AppID);
               if(!$App->exists){
                 echo \Lobby::l("/admin/install-app.php?id={$_GET['id']}" . H::csrf("g"), "Install", "class='button red'");
-              }elseif(version_compare($App->info['version'], $app['version'])){
+              }else if(version_compare($App->info['version'], $app['version'])){
                 echo \Lobby::l("/admin/check-updates.php", "Update App", "class='button red'");
-              }else{
+              }else if($App->enabled){
                 echo \Lobby::l($App->info['URL'], "Open App", "class='button green'");
+              }else{
+                // App Diabled
+                echo \Lobby::l("/admin/apps.php?action=enable&redirect=1&app=" . $AppID . H::csrf("g"), "Enable App", "class='button green'");
               }
               ?>
               <style>#leftpane .button{width:100%;margin: 5px 0px;}</style>
