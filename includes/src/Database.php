@@ -124,25 +124,26 @@ class DB extends \Lobby {
         $sql->execute(array($id));
         $return = $sql->fetchAll();
       }else{
-        $sql = self::$dbh->prepare("SELECT COUNT(*), * FROM `{$prefix}data` WHERE `name` = ? AND `app` = ?");
+        $sql = self::$dbh->prepare("SELECT * FROM `{$prefix}data` WHERE `name` = ? AND `app` = ?");
         $sql->execute(array($name, $id));
-        if($sql->fetchColumn(0) > '1'){
+        $r = $sql->fetchAll(\PDO::FETCH_ASSOC);
+        $count = count($r);
+
+        if($count > 1){
           /**
            * Multiple Results; so give a multidimensional array of results
            */
-          $return = $sql->fetchAll();
-        }else{
+          $return = $r;
+        }else if($count === 1){
           /**
            * A single result is present, so give a single array only if $extra is TRUE
            */
-          if($sql->rowCount() != 0){
-            $return = $sql->fetch(\PDO::FETCH_ASSOC);
-            if($extra === false){
-              $return = $return['value'];
-            }
-          }else{
-            $return = array();
+          $return = $r[0];
+          if($extra === false){
+            $return = $return['value'];
           }
+        }else{
+          $return = array();
         }
       }
       if(is_array($return) && $safe === true){
