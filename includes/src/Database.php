@@ -3,7 +3,12 @@ namespace Lobby;
 
 class DB extends \Lobby {
   
-  public static $prefix, $dbh = "";
+  public static $prefix = "", $dbh;
+  
+  /**
+   * The DMBS begin used - MySQL or SQLite
+   */
+  public static $type;
  
   public static function init(){
     $root = L_DIR;
@@ -17,6 +22,7 @@ class DB extends \Lobby {
        * Make DB credentials variables from the config.php file
        */
       self::$prefix = $config['prefix'];
+      self::$type = $config['type'];
      
       $options = array(
         \PDO::ATTR_PERSISTENT => true,
@@ -141,14 +147,20 @@ class DB extends \Lobby {
           $return = $r[0];
           if($extra === false){
             $return = $return['value'];
+          }else{
+            $tz = getOption("lobby_timezone");
+            if($tz){
+              $date = new \DateTime($return["created"], new \DateTimeZone($tz));
+              $return["created"] = $date->format('Y-m-d H:i:s');
+            }
           }
         }else{
           $return = array();
         }
       }
       if(is_array($return) && $safe === true){
-        array_walk_recursive($return, function(&$c){
-          $c = \Lobby\DB::filt($c);
+        array_walk_recursive($return, function(&$value){
+          $value = \Lobby\DB::filt($value);
         });
       }
       return is_array($return) && count($return) == 0 ? null : $return;
