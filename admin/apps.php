@@ -50,6 +50,9 @@
               exit;
             }else if($action == "enable"){
               if($App->enableApp()){
+                if(isset($_GET['redirect'])){
+                  \Lobby::redirect("/app/$app");
+                }
                 sss("Enabled", "The App <strong>$app</strong> has been enabled.");
               }else{
                 ser("Error", "The App couldn't be enabled. Try again.", false);
