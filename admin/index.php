@@ -27,7 +27,7 @@
         <p>We, the <a href="https://github.com/orgs/LobbyOS/people" target="_blank">Lobby Team</a> would like to thank you for installing Lobby.</p>
         <p>Lobby is in <b>public beta mode</b>, so bugs may exist and some things may not work for you.</p>
         <p>As you know, Lobby is an <a href="https://en.wikipedia.org/wiki/Open-source_software">Open Source Software</a>. We will be very glad and happy if you report any kinds of problems/bugs you faced :</p>
-        <p>Encoutered a problem or want to make a suggestion ? Do it on our <a target="_blank" href="https://github.com/subins2000/lobby/issues">GitHub Repo</a></p>
+        <p>Encoutered a problem or want to make a suggestion ? Do it on our <a target="_blank" class="button orange" href="https://github.com/subins2000/lobby/issues">GitHub Repo</a></p>
       </div>
     </div>
   </body>
