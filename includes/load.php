@@ -29,7 +29,6 @@ require_once L_DIR . "/includes/src/FileSystem.php"; // The FileSystem Class
 
 require_once L_DIR . "/includes/src/Lobby.php"; /* The Core */
 require_once L_DIR . "/includes/src/Database.php"; /* The Database Class */
-require_once L_DIR . "/includes/src/Query.php"; /* The Database Class */
 require_once L_DIR . "/includes/src/Apps.php"; /* The App Class */
 require_once L_DIR . "/includes/src/Router.php"; /* The Router Class */
 require_once L_DIR . "/includes/src/Server.php"; /* The File System Class */
