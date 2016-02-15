@@ -21,14 +21,15 @@
           /**
            * Sadly, PHP supports GMT+ and not UTC+
            */
-          $php_time_zone = str_replace("UTC+", "GMT+", $_POST['timezone']);
-          
-          if($_POST['timezone'] === ""){
-            saveOption("lobby_timezone", "");
-          }else if(@date_default_timezone_set($php_time_zone)){
-            saveOption("lobby_timezone", $php_time_zone);
+          $time_zone = $_POST['timezone'];
+          if($time_zone === ""){
+            saveOption("lobby_timezone", "UTC");
+            \Lobby\Time::loadConfig();
+          }else if(@date_default_timezone_set($time_zone)){
+            saveOption("lobby_timezone", $time_zone);
+            \Lobby\Time::loadConfig();
           }else{
-            ser("Invalid Timezone", "Your PHP server doesn't support the timezone ".htmlspecialchars($_POST['timezone']));
+            ser("Invalid Timezone", "Your PHP server doesn't support the timezone ".htmlspecialchars($time_zone));
           }
         }
         ?>
@@ -540,7 +541,7 @@
                 <option value="UTC+14">UTC+14</option>
               </optgroup>
             </select>
-            <p>Timestamp Now : <?php echo date("Y-m-d H:i:s");?></p>
+            <p>Timestamp Now : <?php echo \Lobby\Time::now();?></p>
           </label>
           <button clear class="button green">Save Settings</button>
         </form>
