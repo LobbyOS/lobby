@@ -33,7 +33,7 @@ $install_step = H::input('step');
           <?php echo \Lobby::l(L_URL, "Install Lobby");?>
         </h1>
         <?php
-        if(\Lobby::$installed && H::input("step") != 3){
+        if(\Lobby::$installed && H::input("step") !== "4"){
           sss("<a href='". L_URL ."'>Lobby Installed</a>", "Lobby Is Installed. If you want to reinstall, delete the database tables and remove <b>config.php</b> file.<cl/>If you want to just remake the <b>config.php</b> file, don't delete the database tables, delete the existing <b>config.php</b> file and do ". \Lobby::l("/admin/install.php?step=1", "this installation") ." until Step 3 where \"Database Tables Exist\" error occur");
         }else if($install_step === null){
         ?>
@@ -45,108 +45,110 @@ $install_step = H::input('step');
           </center>
         <?php
         }
-        if(!\Lobby::$installed && isset($install_step)){
-          if($install_step === "1" && H::csrf() && \Lobby\Install::step1()){
+        if(isset($install_step)){
+          if($install_step === "1" && H::csrf()){
+            if(\Lobby\Install::step1()){
         ?>
-            <h3>Requirements</h3>
-            <p>Your system must meet the requirements to install Lobby.</p>
-            <table>
-              <tbody>
-                <tr>
-                  <td>Requires</td>
-                  <td>Status</td>
-                </tr>
-                <tr>
-                  <td>PHP 5.3</td>
-                  <td><?php if(version_compare(PHP_VERSION, '5.3') >= 0){
-                    sss("Ok", "Your PHP version is compatible with Lobby");
-                  }else{
-                    $error = 1;
-                    ser("Not Ok", "Lobby requires atleast PHP version 5.3");
+              <h3>Requirements</h3>
+              <p>Your system must meet the requirements to install Lobby.</p>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Requires</td>
+                    <td>Status</td>
+                  </tr>
+                  <tr>
+                    <td>PHP 5.3</td>
+                    <td><?php if(version_compare(PHP_VERSION, '5.3') >= 0){
+                      sss("Ok", "Your PHP version is compatible with Lobby");
+                    }else{
+                      $error = 1;
+                      ser("Not Ok", "Lobby requires atleast PHP version 5.3");
+                    }
+                    ?></td>
+                  </tr>
+                  <tr>
+                    <td>PHP Output Buffering</td>
+                    <td><?php if(ini_get('output_buffering') != "Off"){
+                      sss("Ok", "Ouput Buffering is enabled");
+                    }else{
+                      $error = 1;
+                      ser("Not Ok", "Lobby needs Output Buffering to be turned on.");
+                    }
+                    ?></td>
+                  </tr>
+                  <tr>
+                    <td>PHP PDO Extension</td>
+                    <td><?php if (extension_loaded('pdo')){
+                      sss("Ok", "PDO extension is enabled");
+                    }else{
+                      $error = 1;
+                      ser("Not Ok", "PDO extension seems to be missing");
+                    }
+                    ?></td>
+                  </tr>
+                  <?php
+                  if(ini_get('output_buffering') != "Off"){
+                    ob_start(); 
+                      phpinfo(INFO_MODULES); 
+                    $info = ob_get_contents(); 
+                    ob_end_clean();
+                  ?>
+                    <tr>
+                      <td>PHP JSON Extension</td>
+                      <td><?php if (extension_loaded('json')){
+                        sss("Ok", "JSON extension is enabled");
+                      }else{
+                        $error = 1;
+                        ser("Not Ok", "JSON extension seems to be missing");
+                      }
+                      ?></td>
+                    </tr>
+                    <tr>
+                      <td>PHP Zip Extension</td>
+                      <td><?php if (extension_loaded('zip')){
+                        sss("Ok", "Zip extension is enabled");
+                      }else{
+                        $error = 1;
+                        ser("Not Ok", "Zip extension seems to be missing");
+                      }
+                      ?></td>
+                    </tr>
+                    <tr>
+                      <td>Apache mod_rewrite Module</td>
+                      <td><?php if (preg_match("/mod_rewrite/", $info)){
+                        sss("Ok", "Apache mod_rewrite module is enabled");
+                      }else{
+                        $error = 1;
+                        ser("Not Ok", "Apache mod_rewrite module is not enabled");
+                      }
+                      ?></td>
+                    </tr>
+                    <tr>
+                      <td>Permissions</td>
+                      <td><?php if (is_writable(L_DIR)){
+                        sss("Ok", "Lobby directory is writable.");
+                      }else{
+                        $error = 1;
+                        ser("Not Ok", "Lobby directory is not writable. Please make it writable. Here's the location : <blockquote>". L_DIR ."</blockquote>");
+                      }
+                      ?></td>
+                    </tr>
+                  <?php
                   }
-                  ?></td>
-                </tr>
-                <tr>
-                  <td>PHP Output Buffering</td>
-                  <td><?php if(ini_get('output_buffering') != "Off"){
-                    sss("Ok", "Ouput Buffering is enabled");
-                  }else{
-                    $error = 1;
-                    ser("Not Ok", "Lobby needs Output Buffering to be turned on.");
-                  }
-                  ?></td>
-                </tr>
-                <tr>
-                  <td>PHP PDO Extension</td>
-                  <td><?php if (extension_loaded('pdo')){
-                    sss("Ok", "PDO extension is enabled");
-                  }else{
-                    $error = 1;
-                    ser("Not Ok", "PDO extension seems to be missing");
-                  }
-                  ?></td>
-                </tr>
-                <?php
-                if(ini_get('output_buffering') != "Off"){
-                  ob_start(); 
-                    phpinfo(INFO_MODULES); 
-                  $info = ob_get_contents(); 
-                  ob_end_clean();
-                ?>
-                  <tr>
-                    <td>PHP JSON Extension</td>
-                    <td><?php if (extension_loaded('json')){
-                      sss("Ok", "JSON extension is enabled");
-                    }else{
-                      $error = 1;
-                      ser("Not Ok", "JSON extension seems to be missing");
-                    }
-                    ?></td>
-                  </tr>
-                  <tr>
-                    <td>PHP Zip Extension</td>
-                    <td><?php if (extension_loaded('zip')){
-                      sss("Ok", "Zip extension is enabled");
-                    }else{
-                      $error = 1;
-                      ser("Not Ok", "Zip extension seems to be missing");
-                    }
-                    ?></td>
-                  </tr>
-                  <tr>
-                    <td>Apache mod_rewrite Module</td>
-                    <td><?php if (preg_match("/mod_rewrite/", $info)){
-                      sss("Ok", "Apache mod_rewrite module is enabled");
-                    }else{
-                      $error = 1;
-                      ser("Not Ok", "Apache mod_rewrite module is not enabled");
-                    }
-                    ?></td>
-                  </tr>
-                  <tr>
-                    <td>Permissions</td>
-                    <td><?php if (is_writable(L_DIR)){
-                      sss("Ok", "Lobby directory is writable.");
-                    }else{
-                      $error = 1;
-                      ser("Not Ok", "Lobby directory is not writable. Please make it writable. Here's the location : <blockquote>". L_DIR ."</blockquote>");
-                    }
-                    ?></td>
-                  </tr>
-                <?php
-                }
-                ?>
-              </tbody>
-            </table>
+                  ?>
+                </tbody>
+              </table>
+              <?php
+              if(!isset($error)){
+              ?>
+                <a href="?step=2<?php echo H::csrf("g");?>" class="button orange" id="continue">Proceed To Installation</a>
             <?php
-            if(!isset($error)){
-            ?>
-              <a href="?step=2<?php echo H::csrf("g");?>" class="button orange" id="continue">Proceed To Installation</a>
-          <?php
-            }else{
-              echo "<p>Cannot Procced to Installation. Please make the requirements satisfied.</p>";
+              }else{
+                echo "<p>Cannot Procced to Installation. Please make the requirements satisfied.</p>";
+              }
             }
-          }elseif($install_step === "4"){
+          }else if($install_step === "4"){
             echo "<h2>Safety</h2>";
             $safe = \Lobby\Install::safe();
             if($safe == "configFile"){
@@ -258,7 +260,7 @@ $install_step = H::input('step');
                     $App->enableApp();
                     
                     sss("Success", "Database Tables and <b>config.php</b> file was successfully created.");
-                    echo '<cl/><a href="?step=4" class="button">Proceed</a>';
+                    echo '<cl/><a href="?step=4'. H::csrf("g") .'" class="button">Proceed</a>';
                   }else{
                     ser("Unable To Create Database Tables", "Are there any tables with the same name ? Or Does the user have the permissions to create tables ? Error :<blockquote>". \Lobby\Install::$error ."</blockquote>" . \Lobby::l("/admin/install.php?step=2" . H::csrf("g"), "Try Again", "class='button'"));
                   }
@@ -296,7 +298,7 @@ $install_step = H::input('step');
                   $App->enableApp();
                   
                   sss("Success", "Database and <b>config.php</b> file was successfully created.");
-                  echo '<cl/><a href="?step=4" class="button">Proceed</a>';
+                  echo '<cl/><a href="?step=4'. H::csrf("g") .'" class="button">Proceed</a>';
                 }else{
                   ser("Couldn't Make SQLite Database", "I was unable to make the database. Error :<blockquote>". \Lobby\Install::$error ."</blockquote> <cl/>" . \Lobby::l("/admin/install.php?step=3&db_type=sqlite" . H::csrf("g"), "Try Again", "class='button'"));
                 }
