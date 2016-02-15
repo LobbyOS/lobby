@@ -45,7 +45,7 @@ $install_step = H::input('step');
           </center>
         <?php
         }
-        if(isset($install_step)){
+        if(!\Lobby::$installed && isset($install_step)){
           if($install_step === "1" && H::csrf() && \Lobby\Install::step1()){
         ?>
             <h3>Requirements</h3>
