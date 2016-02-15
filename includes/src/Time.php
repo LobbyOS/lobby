@@ -12,7 +12,7 @@ class Time {
     date_default_timezone_set("UTC");
     if(\Lobby\DB::$type === "mysql"){
       $sql = \Lobby\DB::$dbh->prepare("SET time_zone = ?;");
-      $sql->execute(array('UTC+0'));
+      $sql->execute(array('+00:00'));
     }
     self::loadConfig();
   }
