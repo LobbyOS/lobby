@@ -2,7 +2,6 @@
 /**
  * Default Styles
  */
-\Lobby::addStyle("home", "/includes/lib/lobby/css/font.css");
 \Lobby::addStyle("main", "/includes/lib/lobby/css/main.css");
 
 /**
