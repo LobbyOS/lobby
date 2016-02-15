@@ -46,7 +46,7 @@ $install_step = H::input('step');
         <?php
         }
         if(isset($install_step)){
-          if($install_step === "1" && H::csrf()){
+          if($install_step === "1" && H::csrf() && \Lobby\Install::step1()){
         ?>
             <h3>Requirements</h3>
             <p>Your system must meet the requirements to install Lobby.</p>
@@ -172,7 +172,7 @@ $install_step = H::input('step');
                     preg_match('/[1-9].[0-9].[1-9][0-9]/', $mysql_version, $match); 
                     $mysql_version = $match[0];
                     if(version_compare($mysql_version, '5.0') >= 0){
-                      echo "<a class='button green' href='?step=3&db=mysql". H::csrf("g") ."'>MySQL</a>";
+                      echo "<a class='button green' href='?step=3&db_type=mysql". H::csrf("g") ."'>MySQL</a>";
                     }else{
                       echo "<a class='button disabled'>MySQL Not Available</a><p>Lobby Requires MySQL version atleast 5.0</p>";
                     }
@@ -384,6 +384,8 @@ $install_step = H::input('step');
                   <?php H::csrf(1);?>
                 </form>
               <?php
+              }else{
+                ser("Error", "Uh... You didn't mention the DBMS to use");
               }
             }
           }
