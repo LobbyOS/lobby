@@ -3,7 +3,7 @@
  * The online server of Lobby.
  * Default : http://lobby.subinsb.com/api
  */
-define("L_SERVER", "http://server.lobby.sim/api");
+define("L_SERVER", "http://lobby.subinsb.com/api");
 
 /**
  * Make important locations and URLs as constants

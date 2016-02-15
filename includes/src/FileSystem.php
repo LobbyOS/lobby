@@ -8,22 +8,28 @@ namespace Lobby;
 
 class FS {
   
-  public static function init(){
-    
-  }
-  
   /**
    * Make relative path of Lobby to Absolute Path
    */
   public static function loc($path){
+    /**
+     * If path is absolute, make it relative
+     */
     $new = str_replace(L_DIR, "", $path);
+    
+    /**
+     * Make it absolute again
+     * :P
+     * If the below was done without doing above,
+     * path will be so idiotic
+     */
     $new = L_DIR . $new;
     
     return str_replace("\\", "/", $new);
   }
   
   /**
-   * Check if a File/Dir exist
+   * Check if a File/Dir exists
    */
   public static function exists($path){
     return file_exists(self::loc($path));
@@ -80,4 +86,3 @@ class FS {
     }
   }
 }
-//\Lobby\FS::init();

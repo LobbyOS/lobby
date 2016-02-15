@@ -15,7 +15,9 @@ class Lobby {
     "init", "body.begin", "admin.body.begin", "head.begin", "admin.head.begin", "head.end", "router.finish"
   );
   public static $config = array(
-    "db" => array(),
+    "db" => array(
+      "type" => "mysql"
+    ),
     "debug" => false,
     "server_check" => true
   );
@@ -39,7 +41,7 @@ class Lobby {
       self::$url = self::$config['lobby_url'];
     }else{
       $base_dir  = L_DIR;
-      $doc_root  = preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']);
+      $doc_root  = str_replace("\\", "/", preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']));
       $base_url  = preg_replace("!^${doc_root}!", '', $base_dir); # ex: '' or '/mywebsite'
       $protocol  = empty($_SERVER['HTTPS']) ? 'http' : 'https';
       $port      = $_SERVER['SERVER_PORT'];
@@ -59,17 +61,16 @@ class Lobby {
       $config = include(L_DIR . "/config.php");
       
       if(is_array($config) && count($config) != 0){
-        self::$config = array_merge(self::$config, $config);
-        
-        $config = self::$config;
+        self::$config = array_replace_recursive(self::$config, $config);
+
         if($db === true){
-          return $config['db'];
+          return self::$config['db'];
         }else{
-          if($config['debug'] === true){
+          if(self::$config['debug'] === true){
             ini_set("display_errors","on");
             self::$debug = true;
           }
-          self::$lid = $config['lobbyID'];// The Global Lobby installation ID
+          self::$lid = self::$config['lobbyID'];// The Global Lobby installation ID
         }
       }else{
         return false;
@@ -95,7 +96,7 @@ class Lobby {
     /**
      * JS Files
      */
-    if(count(self::$js) != 0 && !\Lobby::status("lobby.install")){
+    if(count(self::$js) != 0){
       /**
        * Load jQuery, jQuery UI, Lobby Main, App separately without async
        */
@@ -153,7 +154,7 @@ class Lobby {
   public static function log($msg = "", $file = "lobby.log"){
     $msg = !is_string($msg) ? serialize($msg) : $msg;
     if($msg != "" && self::$debug === true){
-      $logFile = "/contents/extra/{$file}";
+      $logFile = "/contents/extra/logs/{$file}";
       $message = "[" . date("Y-m-d H:i:s") . "] $msg";
       \Lobby\FS::write($logFile, $message, "a");
     }

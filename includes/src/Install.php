@@ -9,6 +9,7 @@ class Install extends \Lobby {
 
   private static $database = array();
   private static $dbh;
+  public static $error;
 
   /**
    * The $checking parameter tells if any Success output should be made or not.
@@ -36,10 +37,12 @@ class Install extends \Lobby {
    */
   public static function checkDatabaseConnection(){
     try {
-      $db = new \PDO("mysql:dbname=". self::$database['dbname'] .";host=". self::$database['host'] .";port=". self::$database['port'], self::$database['username'], self::$database['password'], array(
+      $db = new \PDO("mysql:host=". self::$database['host'] .";port=". self::$database['port'], self::$database['username'], self::$database['password'], array(
         \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
       ));
       self::$dbh = $db;
+      self::$dbh->exec("CREATE DATABASE IF NOT EXISTS `" . self::$database['dbname'] . "`");
+      self::$dbh->query("USE `" . self::$database['dbname'] . "`");
       
       $notable = false;
       $tables = array("options", "data"); // The Tables of Lobby
@@ -64,23 +67,35 @@ class Install extends \Lobby {
   /**
    * Make the config.php file
    */
-  public static function makeConfigFile(){
+  public static function makeConfigFile($db_type = "mysql"){
     $lobbyID = \H::randStr(10) . \H::randStr(15) . \H::randStr(20); // Lobby Global ID
     $lobbySID   = hash("sha512", \H::randStr(15) . \H::randStr(30)); // Lobby Secure ID
     $configFileLoc = L_DIR . "/config.php";
     $cfg = self::$database;
     
-    /* Make the configuration file */
+    /**
+     * Make the configuration file
+     */
     $config_sample = \Lobby\FS::get("/includes/lib/lobby/inc/config-sample.php");
     $config_file   = $config_sample;
-    $config_file   = preg_replace("/host'(.*?)'(.*?)'/", "host'$1'{$cfg['host']}'", $config_file);
-    $config_file   = preg_replace("/port'(.*?)'(.*?)'/", "port'$1'{$cfg['port']}'", $config_file);
-    $config_file   = preg_replace("/username'(.*?)''/", "username'$1'{$cfg['username']}'", $config_file);
-    $config_file   = preg_replace("/password'(.*?)''/", "password'$1'{$cfg['password']}'", $config_file);
-    $config_file   = preg_replace("/dbname'(.*?)''/", "dbname'$1'{$cfg['dbname']}'", $config_file);
-    $config_file   = preg_replace("/lobbyID'(.*?)''/", "lobbyID'$1'{$lobbyID}'", $config_file);
-    $config_file   = preg_replace("/secureID'(.*?)''/", "secureID'$1'{$lobbySID}'", $config_file);
-    $config_file   = preg_replace("/prefix'(.*?)'(.*?)'/", "prefix'$1'{$cfg['prefix']}'", $config_file);
+    if($db_type === "mysql"){
+      $config_file = preg_replace("/host'(.*?)'(.*?)'/", "host'$1'{$cfg['host']}'", $config_file);
+      $config_file = preg_replace("/port'(.*?)'(.*?)'/", "port'$1'{$cfg['port']}'", $config_file);
+      $config_file = preg_replace("/username'(.*?)''/", "username'$1'{$cfg['username']}'", $config_file);
+      $config_file = preg_replace("/password'(.*?)''/", "password'$1'{$cfg['password']}'", $config_file);
+      $config_file = preg_replace("/dbname'(.*?)''/", "dbname'$1'{$cfg['dbname']}'", $config_file);
+      $config_file = preg_replace("/prefix'(.*?)'(.*?)'/", "prefix'$1'{$cfg['prefix']}'", $config_file);
+    }else{      
+      $config_file = preg_replace("/type'(.*?)'(.*?)'/", "type'$1'sqlite'", $config_file);
+      $config_file = preg_replace("/port'(.*?)'(.*?)',/", "path'$1'{$cfg['path']}',", $config_file);
+      $config_file = preg_replace("/[[:blank:]]+(.*?)'host'(.*?)'(.*?)',\n/", "", $config_file);
+      $config_file = preg_replace("/[[:blank:]]+(.*?)'username'(.*?)'',\n/", "", $config_file);
+      $config_file = preg_replace("/[[:blank:]]+(.*?)'password'(.*?)'',\n/", "", $config_file);
+      $config_file = preg_replace("/[[:blank:]]+(.*?)'dbname'(.*?)'',\n/", "", $config_file);
+      $config_file = preg_replace("/prefix'(.*?)'(.*?)'/", "prefix'$1'{$cfg['prefix']}'", $config_file);
+    }
+    $config_file = preg_replace("/lobbyID'(.*?)''/", "lobbyID'$1'{$lobbyID}'", $config_file);
+    $config_file = preg_replace("/secureID'(.*?)''/", "secureID'$1'{$lobbySID}'", $config_file);
     
     /**
      * Create the config.php file
@@ -92,11 +107,14 @@ class Install extends \Lobby {
     }
   }
   
-  /* Create Tables in the DB */
-  public static function makeDatabase($prefix){
+  /**
+   * Create Tables in the DB
+   * Supports both MySQL & SQLite
+   */
+  public static function makeDatabase($prefix, $db_type = "mysql"){
     try {
-      /* Create Tables */
-      $sql = self::$dbh->prepare("
+      if($db_type === "mysql"){
+        $sql_code = "
         CREATE TABLE IF NOT EXISTS `{$prefix}options` (
           `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
           `name` varchar(64) NOT NULL,
@@ -109,24 +127,53 @@ class Install extends \Lobby {
           `value` longblob NOT NULL,
           `created` datetime NOT NULL,
           `updated` datetime NOT NULL
-        ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;"
-      );
-      $sql->execute();
+        ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;";
+        /**
+         * Create Tables
+         */
+        $sql = self::$dbh->prepare($sql_code);
+        $sql->execute();
+      }else{
+        /**
+         * SQLite
+         * Multiple commands separated by ';' cannot be don in SQLite
+         * Weird, :P
+         */
+        $sql_code = "
+        CREATE TABLE IF NOT EXISTS `{$prefix}options` (
+          `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+          `name` varchar(64) NOT NULL,
+          `value` text NOT NULL
+        );
+        ";
+        self::$dbh->exec($sql_code);
+        $sql_code = "
+        CREATE TABLE IF NOT EXISTS `{$prefix}data` (
+          `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+          `app` varchar(50) NOT NULL,
+          `name` varchar(150) NOT NULL,
+          `value` blob NOT NULL,
+          `created` datetime NOT NULL,
+          `updated` datetime NOT NULL
+        );";
+        self::$dbh->exec($sql_code);
+      }
 
       /* Insert The Default Data In To Tables */
       $lobby_info = \Lobby\FS::get("/lobby.json");
       $lobby_info = json_decode($lobby_info, true);
       $sql = self::$dbh->prepare("
         INSERT INTO `{$prefix}options`
-          (`id`, `name`, `value`)
+          (`name`, `value`)
         VALUES
-          (NULL, 'lobby_version', ?),
-          (NULL, 'lobby_version_release', ?);"
+          ('lobby_version', ?),
+          ('lobby_version_release', ?);"
       );
       $sql->execute(array($lobby_info['version'], $lobby_info['released']));
-    return true;
+      return true;
     }catch(\PDOException $Exception){
-      self::log("Install error : " . $Exception->getMessage());
+      self::$error = $Exception->getMessage();
+      self::log("Install error : " . self::$error);
       return false;
     }
   }
@@ -135,7 +182,9 @@ class Install extends \Lobby {
     self::$database = $array;
   }
   
-  /* After installation, check if Lobby installed directory is safe */
+  /**
+   * After installation, check if Lobby installed directory is safe
+   */
   public static function safe(){
     $configFile = L_DIR . "/config.php";
     if(is_writable($configFile)){
@@ -144,4 +193,18 @@ class Install extends \Lobby {
       return true;
     }
   }
+  
+  public static function createSQLiteDB($loc){
+    try{
+      self::$dbh = new \PDO("sqlite:$loc", "", "", array(
+        \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
+      ));
+      return true;
+    }catch(\PDOException $e){
+      self::$error = $e->getMessage();
+      \Lobby::log("Unable to make SQLite database : ". self::$error);
+      return false;
+    }
+  }
+  
 }
