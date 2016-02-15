@@ -21,7 +21,6 @@ $this->addScript("main.js");
     if(isset($_GET['id'])){
       $id = urldecode(htmlspecialchars_decode($_GET['id']));
       $appData = getData($id, true);
-      var_dump($appData);
       $content = $appData['value'];
       $created = $appData['created'];
       $updated = $appData['updated'];
