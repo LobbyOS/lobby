@@ -129,6 +129,10 @@ class DB extends \Lobby {
         $sql = self::$dbh->prepare("SELECT * FROM `{$prefix}data` WHERE `app` = ?");
         $sql->execute(array($id));
         $return = $sql->fetchAll();
+        foreach($return as &$v){
+          $v["created"] = \Lobby\Time::date($v["created"]);
+          $v["updated"] = \Lobby\Time::date($v["updated"]);
+        }
       }else{
         $sql = self::$dbh->prepare("SELECT * FROM `{$prefix}data` WHERE `name` = ? AND `app` = ?");
         $sql->execute(array($name, $id));
@@ -140,6 +144,10 @@ class DB extends \Lobby {
            * Multiple Results; so give a multidimensional array of results
            */
           $return = $r;
+          foreach($return as &$v){
+            $v["created"] = \Lobby\Time::date($v["created"]);
+            $v["updated"] = \Lobby\Time::date($v["updated"]);
+          }
         }else if($count === 1){
           /**
            * A single result is present, so give a single array only if $extra is TRUE
@@ -148,11 +156,11 @@ class DB extends \Lobby {
           if($extra === false){
             $return = $return['value'];
           }else{
-            $tz = getOption("lobby_timezone");
-            if($tz){
-              $date = new \DateTime($return["created"], new \DateTimeZone($tz));
-              $return["created"] = $date->format('Y-m-d H:i:s');
-            }
+            /**
+             * Cconvert time to the timezone chosen by user
+             */
+            $return["created"] = \Lobby\Time::date($return["created"]);
+            $return["updated"] = \Lobby\Time::date($return["updated"]);
           }
         }else{
           $return = array();

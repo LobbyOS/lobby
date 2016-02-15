@@ -38,13 +38,9 @@ require_once L_DIR . "/includes/functions.php"; /* Non class functions */
 require_once L_DIR . "/includes/extra.php"; /* Define extra variables or constants */
 
 /**
- * Timezone
+ * Time
  */
-date_default_timezone_set("UTC+0");
-if(\Lobby\DB::$type === "mysql"){
-  $sql = \Lobby\DB::$dbh->prepare("SET time_zone = ?;");
-  $sql->execute(array('UTC+0'));
-}
+require_once L_DIR . "/includes/src/Time.php";
 
 /**
  * The UI Classes
