@@ -40,16 +40,14 @@ class Lobby {
       self::$host_name = $url_parts['host'];
       self::$url = self::$config['lobby_url'];
     }else{
-      $base_dir  = L_DIR;
-      $doc_root  = str_replace("\\", "/", preg_replace("!${_SERVER['SCRIPT_NAME']}$!", '', $_SERVER['SCRIPT_FILENAME']));
-      $base_url  = preg_replace("!^${doc_root}!", '', $base_dir); # ex: '' or '/mywebsite'
-      $protocol  = empty($_SERVER['HTTPS']) ? 'http' : 'https';
-      $port      = $_SERVER['SERVER_PORT'];
-      $disp_port = ($protocol == 'http' && $port == 80 || $protocol == 'https' && $port == 443) ? '' : ":$port";
-      $domain    = $_SERVER['SERVER_NAME'];
+      $docDir = str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT']);
+      $subdir = str_replace($docDir, '', L_DIR);
+      $urladdr = $_SERVER['HTTP_HOST'] . $subdir;
+      $urladdr = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://" . $urladdr;
+      self::$url = rtrim($urladdr, "/");
       
-      self::$url  = "${protocol}://${domain}${disp_port}${base_url}";
-      self::$host_name = $domain;
+      unset($tempPath1, $tempPath2, $tempPath3, $urladdr);
+      self::$host_name = $_SERVER['HTTP_HOST'];
     }
   }
   
@@ -423,4 +421,3 @@ class Lobby {
   }
 }
 \Lobby::init();
-?>
