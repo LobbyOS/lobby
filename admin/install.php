@@ -114,16 +114,27 @@ $install_step = H::input('step');
                       }
                       ?></td>
                     </tr>
-                    <tr>
-                      <td>Apache mod_rewrite Module</td>
-                      <td><?php if (preg_match("/mod_rewrite/", $info)){
-                        sss("Ok", "Apache mod_rewrite module is enabled");
-                      }else{
-                        $error = 1;
-                        ser("Not Ok", "Apache mod_rewrite module is not enabled");
-                      }
-                      ?></td>
-                    </tr>
+                    <?php
+                    ob_start(); 
+                      phpinfo(INFO_GENERAL); 
+                    $g_info = ob_get_contents(); 
+                    ob_end_clean();
+                    $server_software = stristr($g_info, 'Server API'); 
+                    if(preg_match("/\>Apache/", $server_software)){
+                    ?>
+                      <tr>
+                        <td>Apache mod_rewrite Module</td>
+                        <td><?php if (preg_match("/mod_rewrite/", $info)){
+                          sss("Ok", "Apache mod_rewrite module is enabled");
+                        }else{
+                          $error = 1;
+                          ser("Not Ok", "Apache mod_rewrite module is not enabled");
+                        }
+                        ?></td>
+                      </tr>
+                    <?php
+                    }
+                    ?>
                     <tr>
                       <td>Permissions</td>
                       <td><?php if (is_writable(L_DIR)){
@@ -151,7 +162,7 @@ $install_step = H::input('step');
           }else if($install_step === "4"){
             echo "<h2>Safety</h2>";
             $safe = \Lobby\Install::safe();
-            if($safe == "configFile"){
+            if($safe === "configFile"){
               ser("Permission Error", "The <b>config.php</b> file still has write permission. Change the permission to Read Only.");
             }
             if($safe !== true){
@@ -170,7 +181,7 @@ $install_step = H::input('step');
               <tbody>
                 <tr>
                   <td width="50%"><?php
-                    $mysql_version = stristr($info, 'Client API version'); 
+                    $mysql_version = stristr($info, 'Client API version');
                     preg_match('/[1-9].[0-9].[1-9][0-9]/', $mysql_version, $match); 
                     $mysql_version = $match[0];
                     if(version_compare($mysql_version, '5.0') >= 0){

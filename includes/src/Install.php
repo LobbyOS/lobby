@@ -59,7 +59,7 @@ class Install extends \Lobby {
         return false;
       }
     }catch(\PDOException $Exception) {
-      ser("Error", "Unable to connect. Make sure that the settings you entered are correct. <cl/><a href='install.php?step=2'>Try Again</a>");
+      ser("Error", "Unable to connect. Make sure that the settings you entered are correct. <cl/><a class='button orange' href='install.php?step=2". \H::csrf("g") ."'>Try Again</a>");
       return false;
     }
   }
