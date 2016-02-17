@@ -33,7 +33,7 @@ window.lobby = {
             callback();
           });
           lobby.load_callbacks = [];
-        }, 10);
+        }, 225);
       }, false);
       d.getElementsByTagName('head')[0].appendChild(o);
     }
