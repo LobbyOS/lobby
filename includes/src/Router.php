@@ -169,10 +169,27 @@ class Router {
      * The default 404 page
      */
     self::$router->onHttpError(function ($code, $router) {
-      if($code == 404){
-        ser();
+      if($code === 404){
+        if(self::pathExists()){
+          $router->response()->code(200);
+        }else{
+          ser();
+        }
       }
     });
   }
+  
+  /**
+   * This is useful when Lobby is run using PHP Built In Server
+   * When no routes are matched, by default a 404 is inited,
+   * even when the file exists in Lobby as .php file. To prevent
+   * this, we check if the file exist and return false to the PHP
+   * Built in Server to make it serve the file normally
+   * http://php.net/manual/en/features.commandline.webserver.php#example-430
+   */
+  public static function pathExists(){
+    return file_exists(L_DIR . $_SERVER['PHP_SELF']);
+  }
+  
 }
 \Lobby\Router::init();
