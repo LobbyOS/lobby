@@ -54,12 +54,15 @@ class Install extends \Lobby {
         }
       }
         
-      if(!$notable){ /* There are database tables */
-        ser("Error", "Lobby Tables with prefix <b>". self::$database['prefix'] ."</b> exists. Delete (DROP) those tables and <a href='install.php?step=2". \H::csrf("g") ."'>try again.</a>");
+      if(!$notable){
+        /**
+         * Database tables exist
+         */
+        ser("Error", "Lobby Tables with prefix <b>". self::$database['prefix'] ."</b> exists. Delete (DROP) those tables and <cl/><a class='button orange' href='install.php?step=3&db_type=mysql". \H::csrf("g") ."'>Try Again</a>");
         return false;
       }
     }catch(\PDOException $Exception) {
-      ser("Error", "Unable to connect. Make sure that the settings you entered are correct. <cl/><a href='install.php?step=2'>Try Again</a>");
+      ser("Error", "Unable to connect. Make sure that the settings you entered are correct. <cl/><a class='button orange' href='install.php?step=3&db_type=mysql". \H::csrf("g") ."'>Try Again</a>");
       return false;
     }
   }

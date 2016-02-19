@@ -114,16 +114,27 @@ $install_step = H::input('step');
                       }
                       ?></td>
                     </tr>
-                    <tr>
-                      <td>Apache mod_rewrite Module</td>
-                      <td><?php if (preg_match("/mod_rewrite/", $info)){
-                        sss("Ok", "Apache mod_rewrite module is enabled");
-                      }else{
-                        $error = 1;
-                        ser("Not Ok", "Apache mod_rewrite module is not enabled");
-                      }
-                      ?></td>
-                    </tr>
+                    <?php
+                    ob_start(); 
+                      phpinfo(INFO_GENERAL); 
+                    $g_info = ob_get_contents(); 
+                    ob_end_clean();
+                    $server_software = stristr($g_info, 'Server API'); 
+                    if(preg_match("/\>Apache/", $server_software)){
+                    ?>
+                      <tr>
+                        <td>Apache mod_rewrite Module</td>
+                        <td><?php if (preg_match("/mod_rewrite/", $info)){
+                          sss("Ok", "Apache mod_rewrite module is enabled");
+                        }else{
+                          $error = 1;
+                          ser("Not Ok", "Apache mod_rewrite module is not enabled");
+                        }
+                        ?></td>
+                      </tr>
+                    <?php
+                    }
+                    ?>
                     <tr>
                       <td>Permissions</td>
                       <td><?php if (is_writable(L_DIR)){
@@ -151,7 +162,7 @@ $install_step = H::input('step');
           }else if($install_step === "4"){
             echo "<h2>Safety</h2>";
             $safe = \Lobby\Install::safe();
-            if($safe == "configFile"){
+            if($safe === "configFile"){
               ser("Permission Error", "The <b>config.php</b> file still has write permission. Change the permission to Read Only.");
             }
             if($safe !== true){
@@ -170,7 +181,7 @@ $install_step = H::input('step');
               <tbody>
                 <tr>
                   <td width="50%"><?php
-                    $mysql_version = stristr($info, 'Client API version'); 
+                    $mysql_version = stristr($info, 'Client API version');
                     preg_match('/[1-9].[0-9].[1-9][0-9]/', $mysql_version, $match); 
                     $mysql_version = $match[0];
                     if(version_compare($mysql_version, '5.0') >= 0){
@@ -222,47 +233,51 @@ $install_step = H::input('step');
                 $username = \H::input('dbusername', "POST");
                 $password = \H::input('dbpassword', "POST");
                 $prefix = \H::input('prefix', "POST");
-  
-                /**
-                 * We give the database config to the Install Class
-                 */
-                \Lobby\Install::dbConfig(array(
-                  "host" => $dbhost,
-                  "port" => $dbport,
-                  "dbname" => $dbname,
-                  "username" => $username,
-                  "password" => $password,
-                  "prefix" => $prefix
-                ));
                 
-                /**
-                 * First, check if prefix is valid
-                 * Check if connection to database can be established using the credentials given by the user
-                 */
-                if($prefix == "" || preg_match("/[^0-9,a-z,A-Z,\$,_]+/i", $prefix) != 0 || strlen($prefix) > 50){
-                  ser("Error", "A Prefix should only contain basic Latin letters, digits 0-9, dollar, underscore and shouldn't exceed 50 characters.<cl/>" . \Lobby::l("/admin/install.php?step=2" . H::csrf("g"), "Try Again", "class='button'"));
-                }else if(\Lobby\Install::checkDatabaseConnection() !== false){
-                  /**
-                   * Create Tables
-                   */
-                  if(\Lobby\Install::makeDatabase($prefix)){
-                    /**
-                     * Make the Config File
-                     */
-                    \Lobby\Install::makeConfigFile();
-                  
-                    /**
-                     * Enable app lEdit
-                     */
-                    \Lobby::$installed = true;
-                    \Lobby\DB::init();
-                    $App = new \Lobby\Apps("ledit");
-                    $App->enableApp();
-                    
-                    sss("Success", "Database Tables and <b>config.php</b> file was successfully created.");
-                    echo '<cl/><a href="?step=4'. H::csrf("g") .'" class="button">Proceed</a>';
+                if($dbhost === "" || $dbport === "" || $dbname === "" || $username === ""){
+                  ser("Empty Fields", "Buddy, you left out some details.<cl/>" . \Lobby::l("/admin/install.php?step=3&db_type=mysql" . H::csrf("g"), "Try Again", "class='button orange'"));
                   }else{
-                    ser("Unable To Create Database Tables", "Are there any tables with the same name ? Or Does the user have the permissions to create tables ? Error :<blockquote>". \Lobby\Install::$error ."</blockquote>" . \Lobby::l("/admin/install.php?step=2" . H::csrf("g"), "Try Again", "class='button'"));
+                  /**
+                   * We give the database config to the Install Class
+                   */
+                  \Lobby\Install::dbConfig(array(
+                    "host" => $dbhost,
+                    "port" => $dbport,
+                    "dbname" => $dbname,
+                    "username" => $username,
+                    "password" => $password,
+                    "prefix" => $prefix
+                  ));
+                  
+                  /**
+                   * First, check if prefix is valid
+                   * Check if connection to database can be established using the credentials given by the user
+                   */
+                  if($prefix == "" || preg_match("/[^0-9,a-z,A-Z,\$,_]+/i", $prefix) != 0 || strlen($prefix) > 50){
+                    ser("Error", "A Prefix should only contain basic Latin letters, digits 0-9, dollar, underscore and shouldn't exceed 50 characters.<cl/>" . \Lobby::l("/admin/install.php?step=3&db_type=mysql" . H::csrf("g"), "Try Again", "class='button orange'"));
+                  }else if(\Lobby\Install::checkDatabaseConnection() !== false){
+                    /**
+                     * Create Tables
+                     */
+                    if(\Lobby\Install::makeDatabase($prefix)){
+                      /**
+                       * Make the Config File
+                       */
+                      \Lobby\Install::makeConfigFile();
+                    
+                      /**
+                       * Enable app lEdit
+                       */
+                      \Lobby::$installed = true;
+                      \Lobby\DB::init();
+                      $App = new \Lobby\Apps("ledit");
+                      $App->enableApp();
+                      
+                      sss("Success", "Database Tables and <b>config.php</b> file was successfully created.");
+                      echo '<cl/><a href="?step=4'. H::csrf("g") .'" class="button">Proceed</a>';
+                    }else{
+                      ser("Unable To Create Database Tables", "Are there any tables with the same name ? Or Does the user have the permissions to create tables ? Error :<blockquote>". \Lobby\Install::$error ."</blockquote>" . \Lobby::l("/admin/install.php?step=2" . H::csrf("g"), "Try Again", "class='button'"));
+                    }
                   }
                 }
               }else{
