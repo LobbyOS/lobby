@@ -1,9 +1,12 @@
 <?php
 namespace Lobby;
+
 /**
  * The Update class.
  * For updating Lobby Core & Apps
+ * The script execution time is set to unlimited
  */
+set_time_limit(0);
 
 class Update extends \Lobby {
 
