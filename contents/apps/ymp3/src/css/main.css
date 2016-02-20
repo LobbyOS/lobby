@@ -1,0 +1,19 @@
+.footnote{
+ text-align:center;
+ margin:15px auto;
+ border-top:1px solid black;
+ padding-top:5px;
+}
+.footnote img{
+ margin:5px auto;
+}
+.message{
+ margin:20px 15px;
+}
+.vidInfo .title{
+  font-size: 2rem;
+  margin: 0 0 30px 0;
+}
+.vidInfo .download{
+ margin-top:5px;
+}
