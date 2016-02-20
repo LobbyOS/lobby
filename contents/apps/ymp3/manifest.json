@@ -1,11 +1,10 @@
 {
  "name" : "YouTube MP3 Converter",
- "description" : "A Tool that converts YouTube Video To MP3. Thanks To http://www.youtube-mp3.org/",
  "short_description" : "YouTube Video To MP3 Converter",
  "category" : "accessories",
  "version" : "0.1",
- "author" : "Lobby",
- "authorURI" : "http://www.youtube-mp3.org/",
- "appURI" : "http://www.youtube-mp3.org/",
- "logo" : "logo.gif"
+ "author" : "Subin",
+ "authorURI" : "http://subinsb.com",
+ "appURI" : "http://www.youtube2mp3.cc/",
+ "logo" : "1"
 }
