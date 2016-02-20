@@ -1,10 +1,10 @@
 <?php
+namespace Lobby\App;
+
 class ymp3 extends \Lobby\App{
   
   public function page($page){
-    if($page == "/"){
-      return $this->indexPage();
-    }
+    return "auto";
   }
   
   public function indexPage(){

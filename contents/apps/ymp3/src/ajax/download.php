@@ -1,13 +1,37 @@
 <?php
 ini_set("display_errors", "on");
-if(isset($_GET['videoId']) && isset($_GET['h']) && isset($_GET['r']) && isset($_GET['name'])){
+if(isset($_GET['hash']) && $_GET['s']){
+  $servers = array (
+    1 => 'gpkio',
+    2 => 'hpbnj',
+    3 => 'macsn',
+    4 => 'pikku',
+    5 => 'fgkzc',
+    6 => 'hmqbu',
+    7 => 'kyhxj',
+    8 => 'nwwxj',
+    9 => 'sbist',
+    10 => 'ditrj',
+    11 => 'qypbr',
+    12 => 'wiyqr',
+    13 => 'xxvcy',
+    14 => 'afyzk',
+    15 => 'kjzmv',
+    16 => 'txrys',
+    17 => 'kzrzi',
+    18 => 'rmira',
+    19 => 'umbbo',
+    20 => 'aigkk',
+    21 => 'qgxhg',
+    22 => 'twrri',
+    23 => 'fkaph',
+  );
   header('Expires: 0');
   header('Cache-Control: must-revalidate');
   header('Pragma: public');
   header('Keep-Alive: timeout=1200, max=4100');
-  $url = "http://www.youtube-mp3.org/get?ab=128&video_id=".$_GET['videoId']."&h=".$_GET['h']."&r=".$_GET['r'];
-  $headers = get_headers($url, 1);
-  $redirect = $headers['Location'];
+  $url = "http://". $servers[$_GET['s']] .".yt-downloader.org/download.php?id=" . $_GET['hash'];
+  $redirect = $url;
 }
 ?>
 <html>
