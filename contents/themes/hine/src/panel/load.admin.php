@@ -4,7 +4,7 @@
  */
 $panelLeftItems = \Lobby\UI\Panel::getPanelItems("left");
 ?>
-<div class="panel top">
+<nav>
   <ul class="left">
     <?php
     if(isset($panelLeftItems["lobbyAdmin"])){
@@ -29,4 +29,4 @@ $panelLeftItems = \Lobby\UI\Panel::getPanelItems("left");
   <ul class="right">
     <?php \Lobby\UI\Panel::getPanelItems("right"); ?>
   </ul>
-</div>
+</nav>

@@ -47,12 +47,12 @@ class hine extends \Lobby\UI\Theme {
       /**
        * Home button
        */
-      $html = "<li class='item home'><a href='". L_URL ."' class='$extraClass'></a></li>";
+      $html = "<li class='item home $extraClass'><a href='". L_URL ."'></a></li>";
     }else if($href == "/admin"){
       /**
        * Admin button
        */
-      $html = "<li class='item lobby'><a href='". \Lobby::u($href) ."' class='$extraClass'>Lobby</a></li>";
+      $html = "<li class='item lobby $extraClass'><a href='". \Lobby::u($href) ."' class='prnt'>Lobby</a></li>";
     }else{
       $html = '<li class="item ' . $extraClass . '" id="' . $id . '">';
         if($href == ""){
