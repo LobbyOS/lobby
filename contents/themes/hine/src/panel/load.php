@@ -5,7 +5,7 @@
 $panelLeftItems = \Lobby\UI\Panel::getPanelItems("left");
 $panelRightItems = \Lobby\UI\Panel::getPanelItems("right");
 ?>
-<div class="panel top">
+<nav>
   <ul class="left">
     <?php
     if(isset($panelLeftItems["lobbyAdmin"])){
@@ -44,4 +44,7 @@ $panelRightItems = \Lobby\UI\Panel::getPanelItems("right");
     echo $html;
     ?>
   </ul>
-</div>
+  <?php
+  \Lobby::doHook("panel.end");
+  ?>
+</nav>
