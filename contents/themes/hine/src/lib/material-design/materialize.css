@@ -3356,6 +3356,13 @@ nav ul a span.badge {
           font-feature-settings: 'liga';
 }
 
+@font-face {
+  font-family: "Material-Design-Icons";
+  src: url("<?THEME_URL?>/src/lib/material-design/fonts/Material-Design-Icons.eot?#iefix") format("embedded-opentype"), url("<?THEME_URL?>/src/lib/material-design/fonts/Material-Design-Icons.woff2") format("woff2"), url("<?THEME_URL?>/src/lib/material-design/fonts/Material-Design-Icons.woff") format("woff"), url("<?THEME_URL?>/src/lib/material-design/fonts/Material-Design-Icons.ttf") format("truetype"), url("<?THEME_URL?>/src/lib/material-design/fonts/Material-Design-Icons.svg#Material-Design-Icons") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
 [class^="mdi-"], [class*="mdi-"] {
   speak: none;
   display: inline-block;
@@ -7465,13 +7472,6 @@ nav .input-field label.active {
 
 a {
   text-decoration: none;
-}
-
-html {
-  line-height: 1.5;
-  font-family: "Roboto", sans-serif;
-  font-weight: normal;
-  color: rgba(0, 0, 0, 0.87);
 }
 
 @media only screen and (min-width: 0) {
