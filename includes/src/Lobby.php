@@ -12,7 +12,8 @@ class Lobby {
   public static $js, $css = array();
   
   public static $valid_hooks = array(
-    "init", "body.begin", "admin.body.begin", "head.begin", "admin.head.begin", "head.end", "router.finish"
+    "init", "body.begin", "admin.body.begin", "head.begin", "admin.head.begin", "head.end", "router.finish",
+    "panel.end"
   );
   public static $config = array(
     "db" => array(
