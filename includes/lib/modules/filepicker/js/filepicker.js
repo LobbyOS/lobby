@@ -454,25 +454,28 @@ window.FilePicker = {
 	 */
 	events_binder: function() {
 		var self = FilePicker;
-		$('#file_picker_form').live('submit', function(){return false;});
-		$('#viewbox').live('click', self.do_unselect);
-		$('#target_dir_path').live('change', function(){
-      $('#target_dir').val($.base64.encode($(this).val()));
-      self.get_list(true);
-    });
-		$('#btn_refresh').live('click', function(){self.get_list(false);});
-		$('#btn_up').live('click', self.do_up);
-		$('#btn_complete').live('click', self.do_complete);
-		$('#btn_cancel').live('click', self.do_close);
-    $("#filter_box").live("change", function(){
-      FilePicker.get_list();
-    });
-    $(window).live("keyup", function(e){
-      e.preventDefault();
-      if(e.keyCode === 8){
-        self.do_up();
-      }
-    });
+    if(typeof self.events_binded === "undefined"){
+      $('#file_picker_form').live('submit', function(){return false;});
+      $('#viewbox').live('click', self.do_unselect);
+      $('#target_dir_path').live('change', function(){
+        $('#target_dir').val($.base64.encode($(this).val()));
+        self.get_list(true);
+      });
+      $('#btn_refresh').live('click', function(){self.get_list(false);});
+      $('#btn_up').live('click', self.do_up);
+      $('#btn_complete').live('click', self.do_complete);
+      $('#btn_cancel').live('click', self.do_close);
+      $("#filter_box").live("change", function(){
+        FilePicker.get_list();
+      });
+      $(window).live("keyup", function(e){
+        e.preventDefault();
+        if(e.keyCode === 8){
+          self.do_up();
+        }
+      });
+      self.events_binded = 1;
+    }
 	}
 
 }

@@ -11,9 +11,17 @@ class Panel {
     "right" => array()
   );
   
+  private static $panel_item_format = array(
+    "text" => "",
+    "href" => "",
+    "subItems" => array(),
+    "position" => "left"
+  );
+  
   public static function addTopItem($name, $array){
+    $array = array_replace_recursive(self::$panel_item_format, $array);
     $loc = $array['position'];
-    if($loc == "right"){
+    if($loc === "right"){
       array_reverse($array);
     }
 
