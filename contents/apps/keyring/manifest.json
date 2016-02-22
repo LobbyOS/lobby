@@ -1,7 +1,0 @@
-{
-  "name" : "KeyRing",
-  "short_description" : "For storing Passwords and other sensitive information with a Master Password",
-  "category" : "accessories",
-  "sub_category" : "security",
-  "version" : "0.1"
-}
