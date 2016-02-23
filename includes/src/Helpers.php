@@ -57,12 +57,17 @@ class H {
   
   /**
    * CSRF token check
+   * ----------------
+   * 's' for outputting as string
+   * 'g' for a GET param URI
+   * (bool) FALSE for checking CSRF token present with request
+   * Any other vals will output an input field containing token
    */
   public static function csrf($type = false){
-    if($type == "s"){
+    if($type === "s"){
       // Output as string
       return urlencode($_COOKIE['csrf_token']);
-    }elseif($type == "g"){
+    }elseif($type === "g"){
       // Output as a GET parameter
       return "&csrf_token=" . urlencode($_COOKIE['csrf_token']);
     }elseif($type !== false){
@@ -90,6 +95,7 @@ class H {
   
   /**
    * Save JSON as a value of App's Data Storage
+   * To remove an item, set the value of it to (bool) FALSE
    */
   public static function saveJSONData($key, $values){
     $a = getData($key);
