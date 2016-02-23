@@ -84,3 +84,10 @@ nav .right #update{
   display: block;
   height: 45px;
 }
+
+/**
+ * Sidebar toggler
+ */
+nav .button-collapse i{
+  line-height: 40px !important;
+}
