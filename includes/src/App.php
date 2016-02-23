@@ -43,6 +43,10 @@ class App {
     return \Lobby\FS::write(APP_DIR . $path, $content, $type);
   }
   
+  public static function redirect($path){
+    return \Lobby::redirect(self::u($path));
+  }
+  
   /**
    * Include a page from the app's source
    */
