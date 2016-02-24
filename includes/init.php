@@ -90,9 +90,17 @@ if(\Lobby::status("lobby.install")){
 
 if(\Lobby::status("lobby.admin")){
   /**
-   * Add Admin Pages' stylesheet
+   * Add Admin Pages' stylesheet, script
    */
-  \Lobby::addStyle("admin", "/includes/lib/lobby/css/admin.css");
+  \Lobby::addStyle("admin", "/admin/css/admin.css");
+  \Lobby::addScript("admin", "/admin/js/admin.js");
+  
+  /**
+   * Add sidebar handler in panel
+   */
+  \Lobby::hook("panel.end", function(){
+    echo '<a href="#" data-activates="slide-out" class="sidebar-button-collapse"><i class="mdi-navigation-menu"></i></a>';
+  });
   
   /**
    * Check For New Versions (Apps & Core)
