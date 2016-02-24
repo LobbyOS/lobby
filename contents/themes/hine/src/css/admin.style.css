@@ -1,7 +1,12 @@
-.sidebar{
+.side-nav{
   top: 50px;
-  background: #000;
 }
 .workspace .content{
   padding: 0px 10px 40px 170px;
+}
+@media screen and (max-width: 992px){
+  .workspace .content {
+    padding: 0 10px;
+    width: fallback;
+  }
 }
