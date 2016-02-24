@@ -1,0 +1,39 @@
+/*.workspace{
+  top: 0px;
+}*/
+.workspace .content {
+  padding: 0px 10px 20px 170px;
+  width: auto;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  overflow: auto;
+  background: #F1F1F1;
+}
+.side-nav{
+  width: 150px;
+}
+.side-nav a.link{
+  display: block;
+  background: #DDD;
+  color: black;
+  position: relative;
+}
+.side-nav a.link:hover, .side-nav a.active{
+  color: white;
+  background: #888;
+}
+.side-nav a.active:after{
+  right: 0;
+  border: solid 8px transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-right-color: #f1f1f1;
+  top: 50%;
+  margin-top: -8px;
+}
