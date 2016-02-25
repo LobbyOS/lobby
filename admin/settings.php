@@ -70,7 +70,7 @@
             </select>
             <p>Timestamp Now : <?php echo \Lobby\Time::now();?></p>
           </label>
-          <button clear class="button green">Save Settings</button>
+          <button clear class="btn green">Save Settings</button>
         </form>
         <h2>About</h2>
         <table border="1" style="margin-top:5px">
@@ -94,14 +94,14 @@
             </tbody>
           </table>
           <div clear=""></div>
-          <a class="button" href="<?php echo L_URL; ?>/admin/update.php">Updates</a>
-          <a class='button green' href='<?php echo L_URL;?>/admin/check-updates.php'>Check For Updates</a>
+          <a class="btn" href="<?php echo L_URL; ?>/admin/update.php">Updates</a>
+          <a class='btn green' href='<?php echo L_URL;?>/admin/check-updates.php'>Check For Updates</a>
           <?php
           /* Check if the current version is not the latest version */
           if(getOption("lobby_version") != getOption("lobby_latest_version")){
           ?>
             <div clear></div>
-            <a class="button red" href="update.php">Update To Version <?php echo getOption("lobby_latest_version");?></a>
+            <a class="btn red" href="update.php">Update To Version <?php echo getOption("lobby_latest_version");?></a>
           <?php
           }
           ?>

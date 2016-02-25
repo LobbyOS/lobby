@@ -68,7 +68,7 @@ if(isset($_GET['img'])){
     }
     exit;
   });
-  $action = \H::input('action');
+  $action = \H::i('action');
   
   switch ($action){
     case 'list':
@@ -89,7 +89,7 @@ if(isset($_GET['img'])){
       break;
   */
     default :
-      $filter = \H::input('filter', 31);
+      $filter = \H::i('filter');
       $filters = '';
       $filters = $fp->get_filters($filter);
       
@@ -129,8 +129,8 @@ if(isset($_GET['img'])){
             <td class="label"><label for="filename_box"><?php _e('Filename'); ?></label>:</td>
             <td><input type="text" id="filename_box" name="filename" value="" class="select2" /></td>
             <td>
-              <input type="button" id="btn_complete" value="<?php _e('OK'); ?>" class="button green" />&nbsp;
-              <input type="button" id="btn_cancel" value="<?php _e('Cancel'); ?>" class="button red" />
+              <input type="button" id="btn_complete" value="<?php _e('OK'); ?>" class="btn green" />&nbsp;
+              <input type="button" id="btn_cancel" value="<?php _e('Cancel'); ?>" class="btn red" />
             </td>
           </tr>
         </table>

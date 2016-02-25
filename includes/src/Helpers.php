@@ -32,7 +32,7 @@ class H {
    * Get value from $_GET and $_POST according to request
    * returns null if it doesn't exist
    */
-  public static function input($name, $type = ""){
+  public static function i($name, $default_val = "", $type = ""){
     $post_count = count($_POST);
     $get_count = count($_GET);
     
@@ -51,7 +51,7 @@ class H {
     if(isset($arr[$name])){
       return urldecode($arr[$name]);
     }else{
-      return null;
+      return $default_val;
     }
   }
   
@@ -75,7 +75,7 @@ class H {
       echo "<input type='hidden' name='csrf_token' value='{$_COOKIE['csrf_token']}' />";
     }else{
       // Check CSRF validity
-      if($_COOKIE['csrf_token'] == self::input('csrf_token')){
+      if($_COOKIE['csrf_token'] == self::i('csrf_token')){
         return true;
       }else{
         ser("Error", "CSRF Token doesn't match. Try again.");
