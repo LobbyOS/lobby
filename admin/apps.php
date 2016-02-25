@@ -71,13 +71,13 @@
             <table style="width: 100%;margin-top:5px" id="apps_table">
               <thead>
                 <tr>
-                  <td>
+                  <td width="5%">
                     <label><input type="checkbox" id="select_all_apps" /><span></span></label>
                   </td>
-                  <td>Name</td>
-                  <td>Version</td>
-                  <td>Description</td>
-                  <td>Actions</td>
+                  <td width="15%">Name</td>
+                  <td width="10%">Version</td>
+                  <td width="40%">Description</td>
+                  <td width="30%">Actions</td>
                 </tr>
               </thead>
               <tbody>
@@ -103,12 +103,12 @@
                     <td style="text-align:center;">
                       <?php
                       if($enabled){
-                        echo '<a class="btn" clear href="?action=disable&app='. $app . H::csrf('g') .'">Disable</a>';
+                        echo '<a class="btn" href="?action=disable&app='. $app . H::csrf('g') .'">Disable</a>';
                       }else{
-                        echo '<a class="btn" clear href="?action=enable&app='. $app . H::csrf('g') .'">Enable</a>';
+                        echo '<a class="btn" href="?action=enable&app='. $app . H::csrf('g') .'">Enable</a>';
                       }
                       ?>
-                      <a class="btn red" clear href="?action=remove&app=<?php echo $app . H::csrf('g');?>">Remove</a>
+                      <a class="btn red" href="?action=remove&app=<?php echo $app . H::csrf('g');?>">Remove</a>
                     </td>
                   </tr>
                 <?php
