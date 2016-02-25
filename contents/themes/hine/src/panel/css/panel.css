@@ -88,7 +88,8 @@ nav .right #update{
 /**
  * Sidebar toggler
  */
-nav .sidebar-button-collapse i{
-  line-height: 43.5px !important;
+nav a.button-collapse i{
   font-size: 3rem;
+  height: 43px;
+  line-height: 43px;
 }

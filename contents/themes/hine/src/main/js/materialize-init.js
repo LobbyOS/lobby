@@ -6,5 +6,15 @@ lobby.load(function(){
     $(this).attr("title", "");
   });
   
+  /**
+   * Add <label> after 'select'
+   */
+  $('select').live("change", function(){
+    t = $(this);
+    t.material_select("destroy");
+    setTimeout(function(){
+      t.material_select();
+    }, 10);
+  });
   $('select').material_select();
 });

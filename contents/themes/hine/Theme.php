@@ -4,11 +4,11 @@ namespace Lobby\UI\Themes;
 class hine extends \Lobby\UI\Theme {
   
   public function init(){
-    $this->addScript("/src/lib/material-design/materialize.js");
-    $this->addStyle("/src/lib/material-design/materialize.css");
+    $this->addScript("/src/main/lib/material-design/materialize.js");
+    $this->addStyle("/src/main/lib/material-design/materialize.css");
     
-    $this->addScript("/src/js/materialize_init.js");
-    $this->addStyle("/src/css/font.css");
+    $this->addScript("/src/main/js/materialize-init.js");
+    $this->addStyle("/src/main/css/font.css");
   }
   
   /**
