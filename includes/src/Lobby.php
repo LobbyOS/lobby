@@ -371,7 +371,11 @@ class Lobby {
      * Make host along with port:
      * 127.0.0.1:9000
      */
-    $url_host = $parts['host'] . (isset($parts['port']) ? ":{$parts['port']}" : "");
+    if(isset($parts['host'])){
+      $url_host = $parts['host'] . (isset($parts['port']) ? ":{$parts['port']}" : "");
+    }else{
+      $url_host = "";
+    }
 
     if($path === ""){
       /**
