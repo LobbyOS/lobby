@@ -36,22 +36,22 @@ header( 'Content-type: text/html; charset=utf-8' );
             <p style="margin-bottom:15px;margin-top:-5px;"><?php echo $app['short_description'];?></p>
             <div id="leftpane" style="float:left;margin-right:10px;display:inline-block;width: 200px;text-align:center;">
               <img src="<?php echo $appImage;?>" height="200" width="200" />
-              <a clear="" href="<?php echo $app['app_page'];?>" target="_blank" class="button">App Page</a>
+              <a clear="" href="<?php echo $app['app_page'];?>" target="_blank" class="btn">App Page</a>
               <cl/>
               <?php
               $App = new \Lobby\Apps($AppID);
               if(!$App->exists){
-                echo \Lobby::l("/admin/install-app.php?id={$_GET['id']}" . H::csrf("g"), "Install", "class='button red'");
+                echo \Lobby::l("/admin/install-app.php?id={$_GET['id']}" . H::csrf("g"), "Install", "class='btn red'");
               }else if(version_compare($App->info['version'], $app['version'])){
-                echo \Lobby::l("/admin/check-updates.php", "Update App", "class='button red'");
+                echo \Lobby::l("/admin/check-updates.php", "Update App", "class='btn red'");
               }else if($App->enabled){
-                echo \Lobby::l($App->info['URL'], "Open App", "class='button green'");
+                echo \Lobby::l($App->info['URL'], "Open App", "class='btn green'");
               }else{
                 // App Diabled
-                echo \Lobby::l("/admin/apps.php?action=enable&redirect=1&app=" . $AppID . H::csrf("g"), "Enable App", "class='button green'");
+                echo \Lobby::l("/admin/apps.php?action=enable&redirect=1&app=" . $AppID . H::csrf("g"), "Enable App", "class='btn green'");
               }
               ?>
-              <style>#leftpane .button{width:100%;margin: 5px 0px;}</style>
+              <style>#leftpane .btn{width:100%;margin: 5px 0px;}</style>
             </div>
             <div style="display:inline-block;width: 60%;">
               <table>
@@ -85,11 +85,10 @@ header( 'Content-type: text/html; charset=utf-8' );
         }else{
         ?>
           <h1><a href='<?php echo L_SERVER . "/../apps";?>' target='_blank'>Lobby Store</a></h1>
-          <p>Find Great New Apps</p>
           <div clear></div>
           <form method="GET" action="<?php echo \Lobby::u("/admin/lobby-store.php");?>">
             <input type="text" placeholder="Type an app name" name="q" style="width:450px;"/>
-            <button class="button red">Search</button>
+            <button class="btn red">Search</button>
           </form>
           <?php
           if(isset($_GET['q'])){
@@ -109,35 +108,47 @@ header( 'Content-type: text/html; charset=utf-8' );
           if($server_response == false){
             ser("Nothing Found", "Nothing was found that matches your criteria. Sorry...");
           }else{
-            foreach($server_response['apps'] as $app){
-              $appImage = $app['image'] != "" ? $app['image'] : L_URL."/includes/lib/lobby/image/blank.png";
-              $url = \Lobby::u("/admin/lobby-store.php?id={$app['id']}");
-          ?>
-            <div class="app">
-              <a href="<?php echo $url;?>">
-                <div class="outer">
-                  <img class="image" src="<?php echo $appImage;?>" />
-                  <div class="title"><?php echo $app['name'];?></div>
-                </div>
-                <div class="inner">
-                  <a href="<?php echo $url;?>">
-                    <div style="padding: 5px;height: 200px;"><?php echo $app['short_description'];?></div>
-                  </a>
-                  <div class="byline">
-                    <?php echo "<a href='{$app['author_page']}' target='_blank'>{$app['author']}</a>";?>
-                    <span style="float: right;">
-                      <?php echo "<a href='{$app['app_page']}' target='_blank'>App Page</a>";?>
-                    </span>
+            echo "<div class='apps'>";
+              foreach($server_response['apps'] as $app){
+                $appImage = $app['image'] != "" ? $app['image'] : L_URL."/includes/lib/lobby/image/blank.png";
+                $url = \Lobby::u("/admin/lobby-store.php?id={$app['id']}");
+            ?>
+                <div class="app">
+                  <div class="app-inner">
+                    <div class="lpane">
+                      <a href="<?php echo $url;?>">
+                        <img src="<?php echo $appImage;?>" />
+                      </a>
+                    </div>
+                    <div class="rpane">
+                      <a href="<?php echo $url;?>" class="name"><?php echo $app['name'];?></a>
+                      <p class="description"><?php echo $app['short_description'];?></p>
+                      <p>By: <a href="<?php echo $app['author_page'];?>"><?php echo $app['author'];?></a></p>
+                    </div>
+                  </div>
+                  <div class="bpane">
+                    <div class="lside">
+                      <?php
+                      echo "<div>Rating: " . $app['rating'] . "</div>";
+                      echo "<div class='downloads'>" . $app['downloads'] . " downloads</div>";
+                      ?>
+                    </div>
+                    <div class="rside">
+                      <div>Updated <?php echo $app['updated'];?></div>
+                      <div>Version : <?php echo $app['version'];?></div>
+                    </div>
                   </div>
                 </div>
-              </a>
-            </div>
-          <?php
-            }
-            $apps_pages = (ceil($server_response['apps_count'] / 10)) + 1;
-            echo "<div class='pages'>";
+            <?php
+              }
+            echo '</div>';
+            $apps_pages = (ceil($server_response['apps_count'] / 6)) + 1;
+            $cur_page = \H::i("p", "1");
+            echo "<ul class='pagination'>";
               for($i = 1;$i < $apps_pages;$i++){
-                echo "<a href='?p=$i' class='button ". (isset($_GET['p']) && $_GET['p'] == $i ? "blue" : "green") ."'>$i</a>";
+                echo "<li class='waves-effect ". ($cur_page == $i ? "active" : "") ."'>";
+                  echo "<a href='?p=$i'>$i</a>";
+                echo "</li>";
               }
             echo '</div>';
           }

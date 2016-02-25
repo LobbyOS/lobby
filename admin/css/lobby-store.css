@@ -1,75 +1,50 @@
 /**
  * Lobby Store
  */
-.app{
+.apps .app{
   display: inline-block;
   vertical-align: top;
+  width: 48.5%;
+  margin: 5px;
+}
+.apps .app .app-inner{
   position: relative;
-  height: 230px;
-  width: 200px;
-  margin: 0px 0px 10px;
-  border-radius: 2px;
+  height: 170px;
   background: white;
-  overflow: hidden;
+  padding: 20px;
 }
-.app:hover .outer{
-  top: -200px;
+.apps .app .lpane{
+  float: left;
 }
-.app .image{
-  height: 200px;
-  width: 200px;
+.apps .app .lpane img{
+  width: 128px;
+  height: 128px;
 }
-.app .outer{
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  height: 230px;
-  width: 200px;
-  background: white;
-  z-index: 2;
-  transition: all 0.7s;
+.apps .app .rpane{
+  margin: 0 0 0 148px;
 }
-.app .inner{
-  position: absolute;
-  top: 30px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  height: 200px;
-  width: 200px;
+.apps .app .rpane .name{
+  font-size: 1.3rem;
+  line-height: 1.3;
 }
-.app .title, .app .inner .byline{
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  padding: 5px;
-  word-wrap: break-word;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  background: white;
-  box-shadow: 0 -1px 2px rgba(0, 0, 0, .3);
-  z-index: 1;
+.apps .app .bpane{
+  padding: 10px 20px;
+  margin: 0;
+  height: 65px;
+  background: #fafafa;
+  border-top: 1px solid #dedede;
 }
-.app .inner .byline{
-  background: #4A8BF5;
+.apps .app .bpane .lside{
+  float: left;
 }
-.app .inner .byline a{
-  color: white;
+.apps .app .bpane .rside{
+  float: right;
+  text-align: right;
 }
-.app .inner .button{
-  position: absolute;
-  bottom: 40px;
-  left: 0px;
-  right: 0px;
-  width: 99%;
-  margin: 0px;
-  padding: 5px 0px;
+.apps .app .bpane .lside .downloads{
+  margin: 5px 0 0;
 }
-.pages{
+.pagination {
   display: table;
-  margin: 20px auto;
+  margin: 20px;
 }

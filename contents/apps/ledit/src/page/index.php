@@ -39,8 +39,8 @@ $this->addScript("main.js");
       ?>
         <br/>
         <input type="hidden" id="saveName" value="<?php echo $id;?>" />
-        <a class="button" id="save">Update</a>
-        <a class="button red" id="remove">Remove</a>
+        <a class="btn" id="save">Update</a>
+        <a class="btn red" id="remove">Remove</a>
         <div style="margin: 10px;">Created On <b><?php echo $created;?></b></div>
         <div style="margin: 10px;">Last Updated On <b><?php echo $updated;?></b></div>
       <?php
@@ -61,7 +61,7 @@ $this->addScript("main.js");
     <?php
     if(!isset($content)){
     ?>
-    <a class="button" id="save">Save</a>
+    <a class="btn" id="save">Save</a>
     <?php
     }
     ?>

@@ -8,7 +8,7 @@ $(document).ready(function(){
     */
    var app = ".workspace#ledit";
    
-   $(app + " #save.button").live("click", function(){
+   $(app + " #save.btn").live("click", function(){
       if(tinyMCE.activeEditor.getContent() === ""){
         $(app + " #error").text("Please Enter Something :-(").fadeIn().delay(2000).fadeOut();
       }else{
@@ -34,7 +34,7 @@ $(document).ready(function(){
         });
       }
    });
-  $(app+" #remove.button").live("click", function(){
+  $(app+" #remove.btn").live("click", function(){
     var currentFile = $(app+" #saveName").val();
     if(currentFile == ""){
       $(app+" #error").text("This File is not saved.").fadeIn().delay(2000).fadeOut();
