@@ -18,10 +18,10 @@ require L_DIR . "/includes/src/Update.php";
     <div class="workspace">
       <div class="content">
         <h1>Update</h1>
-        <a class='button' href='check-updates.php'>Check For New Releases</a>
+        <a class='btn' href='check-updates.php'>Check For New Releases</a>
         <?php
         $AppUpdates = json_decode(getOption("app_updates"), true);
-        if(\H::input("action", "POST") == "updateApps" && H::csrf()){
+        if(\H::i("action", "", "POST") == "updateApps" && H::csrf()){
           foreach($AppUpdates as $appID => $neverMindThisVariable){
             if(isset($_POST[$appID])){
               echo '<iframe src="'. L_URL . "/admin/download.php?type=app&id={$appID}". H::csrf("g") .'" style="border: 0;width: 100%;height: 200px;"></iframe>';
@@ -61,14 +61,14 @@ require L_DIR . "/includes/src/Update.php";
               ?>
             </tbody></table>
             <input type="hidden" name="action" value="updateApps" />
-            <button class="button red" clear>Update Selected Apps</button>
+            <button class="btn red" clear>Update Selected Apps</button>
           </form>
         <?php
         }
-        if(getOption("lobby_version") == getOption("lobby_latest_version") && !\H::input("action", "POST") == "updateApps"){
+        if(getOption("lobby_version") == getOption("lobby_latest_version") && !\H::i("action", "", "POST") == "updateApps"){
           echo "<h2>Lobby</h2>";
           sss("Latest Version", "You are using the latest version of Lobby. There are no new releases yet.");
-        }elseif(!isset($_GET['step']) && !\H::input("action", "POST") == "updateApps"){
+        }elseif(!isset($_GET['step']) && !\H::i("action", "", "POST") == "updateApps"){
         ?>
           <h2>Lobby</h2>
           <p>
@@ -84,12 +84,12 @@ require L_DIR . "/includes/src/Update.php";
           <p style="margin-bottom: 10px;">
             Lobby will automatically download the latest version and install. In case something happens, Lobby will not be accessible anymore. So backup your database and Lobby installation before you do anything.
             <div clear></div>
-            <a class="button" href="backup-db.php">Export Lobby Database</a>
+            <a class="btn" href="backup-db.php">Export Lobby Database</a>
           </p>
         <?php
           if(is_writable(L_DIR)){
             echo '<div clear style="margin-top: 10px;"></div>';
-            echo \Lobby::l("/admin/update.php?step=1" . H::csrf("g"), "Setup Lobby Update", "class='button red'");
+            echo \Lobby::l("/admin/update.php?step=1" . H::csrf("g"), "Setup Lobby Update", "class='btn red'");
           }
         }
         if(isset($_GET['step']) && $_GET['step'] != "" && H::csrf()){
@@ -105,7 +105,7 @@ require L_DIR . "/includes/src/Update.php";
               You can update now.
             </p>
           <?php
-            echo \Lobby::l("/admin/update.php?step=2" . H::csrf("g"), "Start Update", "clear class='button green'");
+            echo \Lobby::l("/admin/update.php?step=2" . H::csrf("g"), "Start Update", "clear class='btn green'");
           }elseif($step == 2){
             $version = getOption("lobby_latest_version");
             echo '<iframe src="'. L_URL . "/admin/download.php?type=lobby&id=$version". H::csrf("g") .'" style="border: 0;width: 100%;height: 200px;"></iframe>';

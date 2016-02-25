@@ -1,9 +1,3 @@
-/**
- * Lobby
- * -----
- * Tooltip removed as it conflicts with jQuery UI
- */ 
-
 /*!
  * Materialize v0.97.5 (http://materializecss.com)
  * Copyright 2014-2015 Materialize
@@ -2197,6 +2191,7 @@
  *    user zoom.
  */
 html {
+  font-family: sans-serif;
   /* 1 */
   -ms-text-size-adjust: 100%;
   /* 2 */
@@ -2419,6 +2414,8 @@ input,
 optgroup,
 select,
 textarea {
+  color: inherit;
+  /* 1 */
   font: inherit;
   /* 2 */
   margin: 0;
@@ -2591,6 +2588,10 @@ html {
   box-sizing: inherit;
 }
 
+ul {
+  list-style-type: none;
+}
+
 a {
   color: #039be5;
   text-decoration: none;
@@ -2610,6 +2611,14 @@ a {
   display: block;
 }
 
+ul {
+  padding: 0;
+}
+
+ul li {
+  list-style-type: none;
+}
+
 .clearfix {
   clear: both;
 }
@@ -2618,11 +2627,11 @@ a {
   box-shadow: none !important;
 }
 
-.z-depth-1, nav, .card-panel, .card, .toast, .button, .button-large, .button-floating, .dropdown-content, .collapsible, .side-nav {
+.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
-.z-depth-1-half, .button:hover, .button-large:hover, .button-floating:hover {
+.z-depth-1-half, .btn:hover, .btn-large:hover, .btn-floating:hover {
   box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
 
@@ -3358,7 +3367,7 @@ nav ul a span.badge {
 
 @font-face {
   font-family: "Material-Design-Icons";
-  src: url("<?THEME_URL?>/src/lib/material-design/fonts/Material-Design-Icons.eot?#iefix") format("embedded-opentype"), url("<?THEME_URL?>/src/lib/material-design/fonts/Material-Design-Icons.woff2") format("woff2"), url("<?THEME_URL?>/src/lib/material-design/fonts/Material-Design-Icons.woff") format("woff"), url("<?THEME_URL?>/src/lib/material-design/fonts/Material-Design-Icons.ttf") format("truetype"), url("<?THEME_URL?>/src/lib/material-design/fonts/Material-Design-Icons.svg#Material-Design-Icons") format("svg");
+  src: url("../font/material-design-icons/Material-Design-Icons.eot?#iefix") format("embedded-opentype"), url("../font/material-design-icons/Material-Design-Icons.woff2") format("woff2"), url("../font/material-design-icons/Material-Design-Icons.woff") format("woff"), url("../font/material-design-icons/Material-Design-Icons.ttf") format("truetype"), url("../font/material-design-icons/Material-Design-Icons.svg#Material-Design-Icons") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -7401,7 +7410,7 @@ nav ul a {
   cursor: pointer;
 }
 
-nav ul a.button, nav ul a.button-large, nav ul a.button-large, nav ul a.button-flat, nav ul a.button-floating {
+nav ul a.btn, nav ul a.btn-large, nav ul a.btn-large, nav ul a.btn-flat, nav ul a.btn-floating {
   margin-top: -2px;
   margin-left: 15px;
   margin-right: 15px;
@@ -7470,8 +7479,50 @@ nav .input-field label.active {
   }
 }
 
+@font-face {
+  font-family: "Roboto";
+  src: local(Roboto Thin), url("../font/roboto/Roboto-Thin.eot");
+  src: url("../font/roboto/Roboto-Thin.eot?#iefix") format("embedded-opentype"), url("../font/roboto/Roboto-Thin.woff2") format("woff2"), url("../font/roboto/Roboto-Thin.woff") format("woff"), url("../font/roboto/Roboto-Thin.ttf") format("truetype");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: local(Roboto Light), url("../font/roboto/Roboto-Light.eot");
+  src: url("../font/roboto/Roboto-Light.eot?#iefix") format("embedded-opentype"), url("../font/roboto/Roboto-Light.woff2") format("woff2"), url("../font/roboto/Roboto-Light.woff") format("woff"), url("../font/roboto/Roboto-Light.ttf") format("truetype");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: local(Roboto Regular), url("../font/roboto/Roboto-Regular.eot");
+  src: url("../font/roboto/Roboto-Regular.eot?#iefix") format("embedded-opentype"), url("../font/roboto/Roboto-Regular.woff2") format("woff2"), url("../font/roboto/Roboto-Regular.woff") format("woff"), url("../font/roboto/Roboto-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../font/roboto/Roboto-Medium.eot");
+  src: url("../font/roboto/Roboto-Medium.eot?#iefix") format("embedded-opentype"), url("../font/roboto/Roboto-Medium.woff2") format("woff2"), url("../font/roboto/Roboto-Medium.woff") format("woff"), url("../font/roboto/Roboto-Medium.ttf") format("truetype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../font/roboto/Roboto-Bold.eot");
+  src: url("../font/roboto/Roboto-Bold.eot?#iefix") format("embedded-opentype"), url("../font/roboto/Roboto-Bold.woff2") format("woff2"), url("../font/roboto/Roboto-Bold.woff") format("woff"), url("../font/roboto/Roboto-Bold.ttf") format("truetype");
+  font-weight: 700;
+}
+
 a {
   text-decoration: none;
+}
+
+html {
+  line-height: 1.5;
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 @media only screen and (min-width: 0) {
@@ -7795,14 +7846,14 @@ small {
   padding: 20px;
 }
 
-.card .card-action a:not(.button):not(.button-large):not(.button-floating) {
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-floating) {
   color: #ffab40;
   margin-right: 20px;
   transition: color .3s ease;
   text-transform: uppercase;
 }
 
-.card .card-action a:not(.button):not(.button-large):not(.button-floating):hover {
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-floating):hover {
   color: #ffd8a6;
 }
 
@@ -7880,7 +7931,7 @@ small {
           justify-content: space-between;
 }
 
-.toast .button, .toast .button-large, .toast .button-flat {
+.toast .btn, .toast .btn-large, .toast .btn-flat {
   margin: 0;
   margin-left: 3rem;
 }
@@ -7969,7 +8020,41 @@ small {
   will-change: left, right;
 }
 
-.button, .button-large, .button-flat {
+.material-tooltip {
+  padding: 10px 8px;
+  font-size: 1rem;
+  z-index: 2000;
+  background-color: transparent;
+  border-radius: 2px;
+  color: #fff;
+  min-height: 36px;
+  line-height: 120%;
+  opacity: 0;
+  display: none;
+  position: absolute;
+  text-align: center;
+  max-width: calc(100% - 4px);
+  overflow: hidden;
+  left: 0;
+  top: 0;
+  will-change: top, left;
+}
+
+.backdrop {
+  position: absolute;
+  opacity: 0;
+  display: none;
+  height: 7px;
+  width: 14px;
+  border-radius: 0 0 14px 14px;
+  background-color: #323232;
+  z-index: -1;
+  -webkit-transform-origin: 50% 10%;
+          transform-origin: 50% 10%;
+  will-change: transform, opacity;
+}
+
+.btn, .btn-large, .btn-flat {
   border: none;
   border-radius: 2px;
   display: inline-block;
@@ -7982,28 +8067,28 @@ small {
   -webkit-tap-highlight-color: transparent;
 }
 
-.button.disabled, .disabled.button-large, .button-floating.disabled, .button-large.disabled, .button:disabled, .button-large:disabled, .button-large:disabled, .button-floating:disabled {
+.btn.disabled, .disabled.btn-large, .btn-floating.disabled, .btn-large.disabled, .btn:disabled, .btn-large:disabled, .btn-large:disabled, .btn-floating:disabled {
   background-color: #DFDFDF !important;
   box-shadow: none;
   color: #9F9F9F !important;
   cursor: default;
 }
 
-.button.disabled *, .disabled.button-large *, .button-floating.disabled *, .button-large.disabled *, .button:disabled *, .button-large:disabled *, .button-large:disabled *, .button-floating:disabled * {
+.btn.disabled *, .disabled.btn-large *, .btn-floating.disabled *, .btn-large.disabled *, .btn:disabled *, .btn-large:disabled *, .btn-large:disabled *, .btn-floating:disabled * {
   pointer-events: none;
 }
 
-.button.disabled:hover, .disabled.button-large:hover, .button-floating.disabled:hover, .button-large.disabled:hover, .button:disabled:hover, .button-large:disabled:hover, .button-large:disabled:hover, .button-floating:disabled:hover {
+.btn.disabled:hover, .disabled.btn-large:hover, .btn-floating.disabled:hover, .btn-large.disabled:hover, .btn:disabled:hover, .btn-large:disabled:hover, .btn-large:disabled:hover, .btn-floating:disabled:hover {
   background-color: #DFDFDF;
   color: #9F9F9F;
 }
 
-.button i, .button-large i, .button-floating i, .button-large i, .button-flat i {
+.btn i, .btn-large i, .btn-floating i, .btn-large i, .btn-flat i {
   font-size: 1.3rem;
   line-height: inherit;
 }
 
-.button, .button-large {
+.btn, .btn-large {
   text-decoration: none;
   color: #fff;
   background-color: #26a69a;
@@ -8013,11 +8098,11 @@ small {
   cursor: pointer;
 }
 
-.button:hover, .button-large:hover {
+.btn:hover, .btn-large:hover {
   background-color: #2bbbad;
 }
 
-.button-floating {
+.btn-floating {
   display: inline-block;
   color: #fff;
   position: relative;
@@ -8034,7 +8119,7 @@ small {
   vertical-align: middle;
 }
 
-.button-floating i {
+.btn-floating i {
   width: inherit;
   display: inline-block;
   text-align: center;
@@ -8043,24 +8128,24 @@ small {
   line-height: 37px;
 }
 
-.button-floating:hover {
+.btn-floating:hover {
   background-color: #26a69a;
 }
 
-.button-floating:before {
+.btn-floating:before {
   border-radius: 0;
 }
 
-.button-floating.button-large {
+.btn-floating.btn-large {
   width: 55.5px;
   height: 55.5px;
 }
 
-.button-floating.button-large i {
+.btn-floating.btn-large i {
   line-height: 55.5px;
 }
 
-button.button-floating {
+button.btn-floating {
   border: none;
 }
 
@@ -8112,32 +8197,32 @@ button.button-floating {
   margin-bottom: 15px;
 }
 
-.fixed-action-btn ul a.button-floating {
+.fixed-action-btn ul a.btn-floating {
   opacity: 0;
 }
 
-.button-flat {
+.btn-flat {
   box-shadow: none;
   background-color: transparent;
   color: #343434;
   cursor: pointer;
 }
 
-.button-flat.disabled {
+.btn-flat.disabled {
   color: #b3b3b3;
   cursor: default;
 }
 
-.button-large {
+.btn-large {
   height: 54px;
   line-height: 56px;
 }
 
-.button-large i {
+.btn-large i {
   font-size: 1.6rem;
 }
 
-.button-block {
+.btn-block {
   display: block;
 }
 
@@ -8356,7 +8441,7 @@ a.waves-effect .waves-ripple {
   width: 100%;
 }
 
-.modal .modal-footer .button, .modal .modal-footer .button-large, .modal .modal-footer .button-flat {
+.modal .modal-footer .btn, .modal .modal-footer .btn-large, .modal .modal-footer .btn-flat {
   float: right;
   margin: 6px 0;
 }
@@ -8573,7 +8658,7 @@ button:focus {
 }
 
 label {
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: #9e9e9e;
 }
 
@@ -8652,29 +8737,29 @@ textarea.materialize-textarea[readonly="readonly"] {
   border-bottom: 1px dotted rgba(0, 0, 0, 0.26);
 }
 
-input:not([type]):disabled + span, input:not([type])[readonly="readonly"] + span,
-input[type=text]:disabled + span,
-input[type=text][readonly="readonly"] + span,
-input[type=password]:disabled + span,
-input[type=password][readonly="readonly"] + span,
-input[type=email]:disabled + span,
-input[type=email][readonly="readonly"] + span,
-input[type=url]:disabled + span,
-input[type=url][readonly="readonly"] + span,
-input[type=time]:disabled + span,
-input[type=time][readonly="readonly"] + span,
-input[type=date]:disabled + span,
-input[type=date][readonly="readonly"] + span,
-input[type=datetime-local]:disabled + span,
-input[type=datetime-local][readonly="readonly"] + span,
-input[type=tel]:disabled + span,
-input[type=tel][readonly="readonly"] + span,
-input[type=number]:disabled + span,
-input[type=number][readonly="readonly"] + span,
-input[type=search]:disabled + span,
-input[type=search][readonly="readonly"] + span,
-textarea.materialize-textarea:disabled + span,
-textarea.materialize-textarea[readonly="readonly"] + span {
+input:not([type]):disabled + label, input:not([type])[readonly="readonly"] + label,
+input[type=text]:disabled + label,
+input[type=text][readonly="readonly"] + label,
+input[type=password]:disabled + label,
+input[type=password][readonly="readonly"] + label,
+input[type=email]:disabled + label,
+input[type=email][readonly="readonly"] + label,
+input[type=url]:disabled + label,
+input[type=url][readonly="readonly"] + label,
+input[type=time]:disabled + label,
+input[type=time][readonly="readonly"] + label,
+input[type=date]:disabled + label,
+input[type=date][readonly="readonly"] + label,
+input[type=datetime-local]:disabled + label,
+input[type=datetime-local][readonly="readonly"] + label,
+input[type=tel]:disabled + label,
+input[type=tel][readonly="readonly"] + label,
+input[type=number]:disabled + label,
+input[type=number][readonly="readonly"] + label,
+input[type=search]:disabled + label,
+input[type=search][readonly="readonly"] + label,
+textarea.materialize-textarea:disabled + label,
+textarea.materialize-textarea[readonly="readonly"] + label {
   color: rgba(0, 0, 0, 0.26);
 }
 
@@ -8694,18 +8779,18 @@ textarea.materialize-textarea:focus:not([readonly]) {
   box-shadow: 0 1px 0 0 #26a69a;
 }
 
-input:not([type]):focus:not([readonly]) + span,
-input[type=text]:focus:not([readonly]) + span,
-input[type=password]:focus:not([readonly]) + span,
-input[type=email]:focus:not([readonly]) + span,
-input[type=url]:focus:not([readonly]) + span,
-input[type=time]:focus:not([readonly]) + span,
-input[type=date]:focus:not([readonly]) + span,
-input[type=datetime-local]:focus:not([readonly]) + span,
-input[type=tel]:focus:not([readonly]) + span,
-input[type=number]:focus:not([readonly]) + span,
-input[type=search]:focus:not([readonly]) + span,
-textarea.materialize-textarea:focus:not([readonly]) + span {
+input:not([type]):focus:not([readonly]) + label,
+input[type=text]:focus:not([readonly]) + label,
+input[type=password]:focus:not([readonly]) + label,
+input[type=email]:focus:not([readonly]) + label,
+input[type=url]:focus:not([readonly]) + label,
+input[type=time]:focus:not([readonly]) + label,
+input[type=date]:focus:not([readonly]) + label,
+input[type=datetime-local]:focus:not([readonly]) + label,
+input[type=tel]:focus:not([readonly]) + label,
+input[type=number]:focus:not([readonly]) + label,
+input[type=search]:focus:not([readonly]) + label,
+textarea.materialize-textarea:focus:not([readonly]) + label {
   color: #26a69a;
 }
 
@@ -8736,30 +8821,30 @@ textarea.materialize-textarea:focus.valid {
   box-shadow: 0 1px 0 0 #4CAF50;
 }
 
-input:not([type]).valid + span:after,
-input:not([type]):focus.valid + span:after,
-input[type=text].valid + span:after,
-input[type=text]:focus.valid + span:after,
-input[type=password].valid + span:after,
-input[type=password]:focus.valid + span:after,
-input[type=email].valid + span:after,
-input[type=email]:focus.valid + span:after,
-input[type=url].valid + span:after,
-input[type=url]:focus.valid + span:after,
-input[type=time].valid + span:after,
-input[type=time]:focus.valid + span:after,
-input[type=date].valid + span:after,
-input[type=date]:focus.valid + span:after,
-input[type=datetime-local].valid + span:after,
-input[type=datetime-local]:focus.valid + span:after,
-input[type=tel].valid + span:after,
-input[type=tel]:focus.valid + span:after,
-input[type=number].valid + span:after,
-input[type=number]:focus.valid + span:after,
-input[type=search].valid + span:after,
-input[type=search]:focus.valid + span:after,
-textarea.materialize-textarea.valid + span:after,
-textarea.materialize-textarea:focus.valid + span:after {
+input:not([type]).valid + label:after,
+input:not([type]):focus.valid + label:after,
+input[type=text].valid + label:after,
+input[type=text]:focus.valid + label:after,
+input[type=password].valid + label:after,
+input[type=password]:focus.valid + label:after,
+input[type=email].valid + label:after,
+input[type=email]:focus.valid + label:after,
+input[type=url].valid + label:after,
+input[type=url]:focus.valid + label:after,
+input[type=time].valid + label:after,
+input[type=time]:focus.valid + label:after,
+input[type=date].valid + label:after,
+input[type=date]:focus.valid + label:after,
+input[type=datetime-local].valid + label:after,
+input[type=datetime-local]:focus.valid + label:after,
+input[type=tel].valid + label:after,
+input[type=tel]:focus.valid + label:after,
+input[type=number].valid + label:after,
+input[type=number]:focus.valid + label:after,
+input[type=search].valid + label:after,
+input[type=search]:focus.valid + label:after,
+textarea.materialize-textarea.valid + label:after,
+textarea.materialize-textarea:focus.valid + label:after {
   content: attr(data-success);
   color: #4CAF50;
   opacity: 1;
@@ -8792,47 +8877,47 @@ textarea.materialize-textarea:focus.invalid {
   box-shadow: 0 1px 0 0 #F44336;
 }
 
-input:not([type]).invalid + span:after,
-input:not([type]):focus.invalid + span:after,
-input[type=text].invalid + span:after,
-input[type=text]:focus.invalid + span:after,
-input[type=password].invalid + span:after,
-input[type=password]:focus.invalid + span:after,
-input[type=email].invalid + span:after,
-input[type=email]:focus.invalid + span:after,
-input[type=url].invalid + span:after,
-input[type=url]:focus.invalid + span:after,
-input[type=time].invalid + span:after,
-input[type=time]:focus.invalid + span:after,
-input[type=date].invalid + span:after,
-input[type=date]:focus.invalid + span:after,
-input[type=datetime-local].invalid + span:after,
-input[type=datetime-local]:focus.invalid + span:after,
-input[type=tel].invalid + span:after,
-input[type=tel]:focus.invalid + span:after,
-input[type=number].invalid + span:after,
-input[type=number]:focus.invalid + span:after,
-input[type=search].invalid + span:after,
-input[type=search]:focus.invalid + span:after,
-textarea.materialize-textarea.invalid + span:after,
-textarea.materialize-textarea:focus.invalid + span:after {
+input:not([type]).invalid + label:after,
+input:not([type]):focus.invalid + label:after,
+input[type=text].invalid + label:after,
+input[type=text]:focus.invalid + label:after,
+input[type=password].invalid + label:after,
+input[type=password]:focus.invalid + label:after,
+input[type=email].invalid + label:after,
+input[type=email]:focus.invalid + label:after,
+input[type=url].invalid + label:after,
+input[type=url]:focus.invalid + label:after,
+input[type=time].invalid + label:after,
+input[type=time]:focus.invalid + label:after,
+input[type=date].invalid + label:after,
+input[type=date]:focus.invalid + label:after,
+input[type=datetime-local].invalid + label:after,
+input[type=datetime-local]:focus.invalid + label:after,
+input[type=tel].invalid + label:after,
+input[type=tel]:focus.invalid + label:after,
+input[type=number].invalid + label:after,
+input[type=number]:focus.invalid + label:after,
+input[type=search].invalid + label:after,
+input[type=search]:focus.invalid + label:after,
+textarea.materialize-textarea.invalid + label:after,
+textarea.materialize-textarea:focus.invalid + label:after {
   content: attr(data-error);
   color: #F44336;
   opacity: 1;
 }
 
-input:not([type]) + span:after,
-input[type=text] + span:after,
-input[type=password] + span:after,
-input[type=email] + span:after,
-input[type=url] + span:after,
-input[type=time] + span:after,
-input[type=date] + span:after,
-input[type=datetime-local] + span:after,
-input[type=tel] + span:after,
-input[type=number] + span:after,
-input[type=search] + span:after,
-textarea.materialize-textarea + span:after {
+input:not([type]) + label:after,
+input[type=text] + label:after,
+input[type=password] + label:after,
+input[type=email] + label:after,
+input[type=url] + label:after,
+input[type=time] + label:after,
+input[type=date] + label:after,
+input[type=datetime-local] + label:after,
+input[type=tel] + label:after,
+input[type=number] + label:after,
+input[type=search] + label:after,
+textarea.materialize-textarea + label:after {
   display: block;
   content: "";
   position: absolute;
@@ -8916,13 +9001,13 @@ textarea.materialize-textarea + span:after {
   color: #444;
 }
 
-.input-field input[type=search]:focus + span i,
+.input-field input[type=search]:focus + label i,
 .input-field input[type=search]:focus ~ .mdi-navigation-close,
 .input-field input[type=search]:focus ~ .material-icons {
   color: #444;
 }
 
-.input-field input[type=search] + span {
+.input-field input[type=search] + label {
   left: 1rem;
 }
 
@@ -9378,10 +9463,14 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
   color: rgba(0, 0, 0, 0.26);
 }
 
-.select-wrapper + span {
+.select-wrapper + label {
   position: absolute;
   top: -14px;
   font-size: 0.8rem;
+}
+
+select {
+  display: none;
 }
 
 select.browser-default {
@@ -9454,7 +9543,7 @@ select:disabled {
   width: 100%;
 }
 
-.file-field .button, .file-field .button-large {
+.file-field .btn, .file-field .btn-large {
   float: left;
   height: 3rem;
   line-height: 3rem;
@@ -9637,6 +9726,7 @@ input[type=range]:focus::-ms-fill-upper {
    Text Inputs + Textarea
 ****************************/
 select {
+  background-color: rgba(255, 255, 255, 0.9);
   width: 100%;
   padding: 5px;
   border: 1px solid #f2f2f2;

@@ -6,6 +6,8 @@ class hine extends \Lobby\UI\Theme {
   public function init(){
     $this->addScript("/src/lib/material-design/materialize.js");
     $this->addStyle("/src/lib/material-design/materialize.css");
+    
+    $this->addScript("/src/js/materialize_init.js");
     $this->addStyle("/src/css/font.css");
   }
   

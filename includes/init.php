@@ -99,7 +99,7 @@ if(\Lobby::status("lobby.admin")){
    * Add sidebar handler in panel
    */
   \Lobby::hook("panel.end", function(){
-    echo '<a href="#" data-activates="slide-out" class="sidebar-button-collapse"><i class="mdi-navigation-menu"></i></a>';
+    echo '<a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>';
   });
   
   /**
