@@ -90,8 +90,8 @@ class Themes extends \Lobby {
         echo $GLOBALS["THEME_OBJ"]->inc("/src/panel/load.admin.php");
       });
     }else{
-      $GLOBALS["THEME_OBJ"]->addStyle("/src/main/css/style.css");
       \Lobby::hook("head.begin", function(){
+        $GLOBALS["THEME_OBJ"]->addStyle("/src/main/css/style.css");
         $GLOBALS["THEME_OBJ"]->panel(false);
       });
       \Lobby::hook("body.begin", function() {
