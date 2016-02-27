@@ -81,17 +81,17 @@ class Themes extends \Lobby {
      * Load Panel
      */
     if(\Lobby::status("lobby.admin")){
+      $GLOBALS["THEME_OBJ"]->addStyle("/src/main/css/style.css");
       \Lobby::hook("admin.head.begin", function(){
         $GLOBALS["THEME_OBJ"]->panel(true);
-        $GLOBALS["THEME_OBJ"]->addStyle("/src/main/css/style.css");
         $GLOBALS["THEME_OBJ"]->addStyle("/src/main/css/admin.style.css");
       });
       \Lobby::hook("admin.body.begin", function() {
         echo $GLOBALS["THEME_OBJ"]->inc("/src/panel/load.admin.php");
       });
     }else{
+      $GLOBALS["THEME_OBJ"]->addStyle("/src/main/css/style.css");
       \Lobby::hook("head.begin", function(){
-        $GLOBALS["THEME_OBJ"]->addStyle("/src/main/css/style.css");
         $GLOBALS["THEME_OBJ"]->panel(false);
       });
       \Lobby::hook("body.begin", function() {
