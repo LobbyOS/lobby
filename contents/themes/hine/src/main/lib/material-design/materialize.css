@@ -8,7 +8,7 @@
  * Lobby Modifications
  * -------------------
  * <label> should be parent of <input/> not the elem comging after
- * <select> should
+ * <select> is not hidden. Use native
  */
  
 .materialize-red.lighten-5 {
@@ -9443,14 +9443,6 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
   position: absolute;
   top: -14px;
   font-size: 0.8rem;
-}
-
-select {
-  display: none;
-}
-
-select.browser-default {
-  display: block;
 }
 
 select:disabled {
