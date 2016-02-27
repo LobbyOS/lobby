@@ -3,6 +3,14 @@
  * Copyright 2014-2015 Materialize
  * MIT License (https://raw.githubusercontent.com/Dogfalo/materialize/master/LICENSE)
  */
+ 
+/**
+ * Lobby Modifications
+ * -------------------
+ * <label> should be parent of <input/> not the elem comging after
+ * <select> should
+ */
+ 
 .materialize-red.lighten-5 {
   background-color: #fdeaeb !important;
 }
@@ -2588,10 +2596,6 @@ html {
   box-sizing: inherit;
 }
 
-ul {
-  list-style-type: none;
-}
-
 a {
   color: #039be5;
   text-decoration: none;
@@ -2613,6 +2617,7 @@ a {
 
 ul {
   padding: 0;
+  list-style-type: none;
 }
 
 ul li {
@@ -3363,6 +3368,13 @@ nav ul a span.badge {
   -webkit-font-feature-settings: 'liga';
      -moz-font-feature-settings: 'liga';
           font-feature-settings: 'liga';
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Material Icons'), local('MaterialIcons-Regular'), url(http://fonts.gstatic.com/s/materialicons/v12/2fcrYFNaTjcS6g4U3t-Y5ZjZjT5FdEJ140U2DJYC3mY.woff2) format('woff2');
 }
 
 @font-face {
