@@ -9,12 +9,16 @@ lobby.load(function(){
   /**
    * Add <label> after 'select'
    */
-  $('select').live("change", function(){
-    t = $(this);
-    t.material_select("destroy");
-    setTimeout(function(){
+  $('select').each(function(){
+    t=$(this);
+    if(!t.parents().hasClass("ui-datepicker")){
       t.material_select();
-    }, 10);
+      t.live("change", function(){
+        t.material_select("destroy");
+        setTimeout(function(){
+          t.material_select();
+        }, 1000);
+      });
+    }
   });
-  $('select').material_select();
 });

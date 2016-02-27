@@ -85,6 +85,13 @@ table tr td, table tr th{
 .ui-widget-content{
   border-color: #42A9CE;
 }
+/**
+ * Fix conflict with materializecss
+ */
+.ui-widget select{
+  display: inline-block;
+  color: #000;
+}
 
 /**
  * Workspace
