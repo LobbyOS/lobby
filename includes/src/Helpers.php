@@ -32,7 +32,7 @@ class H {
    * Get value from $_GET and $_POST according to request
    * returns null if it doesn't exist
    */
-  public static function i($name, $default_val = "", $type = ""){
+  public static function i($name, $default_val = null, $type = null){
     $post_count = count($_POST);
     $get_count = count($_GET);
     
