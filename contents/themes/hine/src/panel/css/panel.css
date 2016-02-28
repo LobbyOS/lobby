@@ -51,12 +51,11 @@ nav .left li.item, nav .right li.item{
 }
 nav .right{
   position:absolute;
-  right:5px;
+  right: 60px;
   list-style: none;
   margin: 0px;
 }
 nav .right ul{
-  right: 0px;
   text-align: right;
 }
 /**
@@ -78,11 +77,11 @@ nav .right .item span{
   display: inline-block;
 }
 nav .right #update{
-  background: url(<?L_URL?>/includes/lib/lobby/image/update.png) 0px -1px no-repeat;
+  background: url(<?THEME_URL?>/src/panel/image/update.svg) 0px -1px no-repeat;
   background-size: 45px;
   width: 50px;
   display: block;
-  height: 45px;
+  height: 40px;
 }
 
 /**
