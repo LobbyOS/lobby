@@ -97,26 +97,26 @@ class Update extends \Lobby {
     $latest_version = getOption("lobby_latest_version");
     \Lobby::log("Updated Lobby Software To version {$latest_version}");
  
-    /* Remove Depreciated Files */
-    if( \Lobby\FS::exists("/contents/update/removeFiles.php") ){
-      $files = \Lobby\FS::get("/contents/update/removeFiles.php");
+    /**
+     * Remove Depreciated Files
+     */
+    $deprecatedFilesInfoLoc = "/contents/update/removeFiles.php";
+    if( \Lobby\FS::exists($deprecatedFilesInfoLoc) ){
+      $files = \Lobby\FS::get($deprecatedFilesInfoLoc);
       $files = explode("\n", $files);
       
-      if(count($files) != 0){
-        foreach($files as $file){ // iterate files
+      if(count($files) !== 0){
+        $files = array_filter($files);
+        foreach($files as $file){
           $fileLoc = L_DIR . "/$file";
-          
           if(file_exists($fileLoc) && $fileLoc != L_DIR){
-            $type = filetype($fileLoc);
-            if($type == "file"){
-              \Lobby\FS::remove($fileLoc);
-            }else if($type == "dir"){
-              rmdir($fileLoc);
-            }
+            \Lobby\FS::remove($fileLoc);
+            \Lobby::log("Removed Deprecated File: $fileLoc");
           }
         }
-        \Lobby\FS::remove(L_DIR . "/contents/update/removeFiles.php");
-        \Lobby::log("Removed Deprecated Files");
+        copy($deprecatedFilesInfoLoc, "$deprecatedFilesInfoLoc.txt");
+        \Lobby\FS::remove($deprecatedFilesInfoLoc);
+        \Lobby::log("Finished Removing Deprecated Files");
       }
     }
  

@@ -18,7 +18,8 @@ require L_DIR . "/includes/src/Update.php";
     <div class="workspace">
       <div class="content">
         <h1>Update</h1>
-        <a class='btn' href='check-updates.php'>Check For New Releases</a>
+        <p>Lobby and it's apps can be updated automatically. <a href="http://lobby.subinsb.com/docs/update" target="_blank" class="btn">More Info</a></p>
+        <a class='btn blue' href='check-updates.php'>Check For New Releases</a>
         <?php
         $AppUpdates = json_decode(getOption("app_updates"), true);
         if(\H::i("action", "", "POST") == "updateApps" && H::csrf()){
@@ -77,19 +78,20 @@ require L_DIR . "/includes/src/Update.php";
           <blockquote>
             Latest Version is <?php echo getOption("lobby_latest_version");?> released on <?php echo date( "jS F Y", strtotime(getOption("lobby_latest_version_release")) );?>
           </blockquote>
-          <p>Release Notes :</p>
+          <h4>Release Notes</h4>
           <blockquote>
             <?php echo htmlspecialchars_decode(getOption("lobby_latest_version_release_notes"));?>
           </blockquote>
-          <p style="margin-bottom: 10px;">
+          <p style="margin: 10px 0;">
             Lobby will automatically download the latest version and install. In case something happens, Lobby will not be accessible anymore. So backup your database and Lobby installation before you do anything.
-            <div clear></div>
-            <a class="btn" href="backup-db.php">Export Lobby Database</a>
           </p>
+          <div clear></div>
+          <a class="btn green" href="backup-db.php">Export Lobby Database</a>
+          <a class="btn blue" href="backup-dir.php">Export Lobby Folder</a>
         <?php
           if(is_writable(L_DIR)){
             echo '<div clear style="margin-top: 10px;"></div>';
-            echo \Lobby::l("/admin/update.php?step=1" . H::csrf("g"), "Setup Lobby Update", "class='btn red'");
+            echo \Lobby::l("/admin/update.php?step=1" . H::csrf("g"), "Setup Lobby Update", "class='btn btn-large red'");
           }
         }
         if(isset($_GET['step']) && $_GET['step'] != "" && H::csrf()){

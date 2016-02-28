@@ -78,7 +78,7 @@ if(\Lobby::curPage() != "/admin/install.php"){
   
   if((count($AppUpdates) != 0) || ($latestVersion && $lobby_version != $latestVersion)){
     \Lobby\UI\Panel::addTopItem("updateNotify", array(
-      "html" => \Lobby::l("/admin/update.php", "<span id='update' title='An Update Is Available'></span>"),
+      "html" => \Lobby::l("/admin/update.php", "<span id='update' title='Updates Are Available'></span>"),
       "position" => "right"
     ));
   }
