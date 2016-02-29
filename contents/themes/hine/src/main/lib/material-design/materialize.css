@@ -8,7 +8,7 @@
  * Lobby Modifications
  * -------------------
  * <label> should be parent of <input/> not the elem comging after
- * <select> is not hidden. Use native
+ * <select> is not hidden. Use native with color: #000;
  */
  
 .materialize-red.lighten-5 {
@@ -9695,6 +9695,7 @@ input[type=range]:focus::-ms-fill-upper {
 ****************************/
 select {
   background-color: rgba(255, 255, 255, 0.9);
+  color: #000;
   width: 100%;
   padding: 5px;
   border: 1px solid #f2f2f2;

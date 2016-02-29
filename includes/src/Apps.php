@@ -190,8 +190,7 @@ class Apps extends \Lobby {
         (file_exists($this->appDir . "/src/image/logo.svg") ?
           APPS_URL . "/{$this->app}/src/image/logo.svg" :
           APPS_URL . "/{$this->app}/src/image/logo.png"
-        ) :
-        L_URL . "/includes/lib/lobby/image/blank.png";
+        ) : null;
        
       /**
        *Insert the info as a property
