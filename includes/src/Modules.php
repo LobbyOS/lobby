@@ -3,7 +3,6 @@ namespace Lobby;
 
 class Modules extends \Lobby {
 
-  private static $required = array("panel"); // List of required modules by default
   private static $core_modules = array(), $custom_modules = array(), $app_modules = array(), $modules = array();
   
   public static function init(){
@@ -35,7 +34,7 @@ class Modules extends \Lobby {
   }
   
   public static function valid($module, $loc){
-    if(!file_exists("$loc/Module.php") || (file_exists("$loc/disabled.txt") && array_search($module, self::$required) === false)){
+    if(!file_exists("$loc/Module.php") || file_exists("$loc/disabled.txt")){
       // Module Disabled or not valid
       return false;
     }else{
@@ -74,5 +73,15 @@ class Modules extends \Lobby {
       return false;
     }
   }
+  
+  public static function disableModule($module){
+    if(self::exists($module)){
+      \Lobby\FS::write(self::$modules[$module] . "/disabled.txt", "1");
+      return true;
+    }else{
+      return false;
+    }
+  }
+  
 }
 \Lobby\Modules::init();
