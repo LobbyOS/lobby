@@ -30,6 +30,7 @@ if(count($apps) == 0){
   
   foreach($appsSorted as $data){
     $app = $data['id'];
+    $data['logo'] = $data['logo'] === null ? THEME_URL . "/src/dashboard/image/blank.png" : $data['logo'];
     $jsCode .= "lobby.dash.addTile('app', {'id' : '{$app}', 'img' : '{$data['logo']}', 'name' : '{$data['name']}'});";
   }
   
