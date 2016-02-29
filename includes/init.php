@@ -1,10 +1,5 @@
 <?php
 /**
- * Default Styles
- */
-\Lobby::addStyle("main", "/includes/lib/lobby/css/main.css");
-
-/**
  * Some checking to make sure Lobby works fine
  */
 if(!is_writable(L_DIR) || !is_writable(APPS_DIR)){
