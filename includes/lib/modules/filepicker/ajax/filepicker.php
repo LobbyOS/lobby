@@ -2,6 +2,14 @@
 // Folder path
 define('FP_ROOT_PATH', '/');
 
+if(\Lobby\Module::exists("indi")){
+  /**
+   * If `indi` module is enabled, don't use FilePicker
+   */
+  return false;
+  exit;
+}
+
 if(isset($_GET['img'])){
   $img_path = FP_ROOT_PATH . base64_decode($_GET['img']);
 
