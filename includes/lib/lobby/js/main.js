@@ -81,27 +81,17 @@ $(document).mouseup(function (e){
 });
 
 /**
- * Make an AJAX Request to an app
+ * Make an AJAX Request
  */
 lobby.ajax = function(fileName, options, callback, appID){
   /**
    * If the callback given is a function, use it
    * otherwise make a simple function that is of no use
    */
-  var callback = typeof callback == "function" ? callback : function(){};
+  callback = typeof callback == "function" ? callback : function(){};
   
-  /**
-   * If the App ID is not defined, then it is a direct contact
-   * to the AJAX file in /includes/lib/lobby/ajax
-   */
-  if(appID === false){
-    var requestURL = lobby.url + "/includes/lib/lobby/ajax/" + fileName;
-  }else{
-    var requestURL = lobby.url + "/includes/lib/lobby/ajax" + "/app.php";
-  }
-  
-  if(typeof options == "object"){
-    options = $.param(options);
+  if(typeof options === "object"){
+    var options = $.param(options);
   }
   
   /**
@@ -109,17 +99,16 @@ lobby.ajax = function(fileName, options, callback, appID){
    * passed to this function doesn't have a field of same name.
    */
   if(appID != false){
-    var options = $.param({"s7c8csw91": appID, "cx74e9c6a45": fileName}) + "&" + options;
+    var options = $.param({"s7c8csw91": appID}) + "&" + options;
   }
-  var options = $.param({"csrf_token": lobby.csrf_token}) +"&"+ options;
- 
+  var options = $.param({"cx74e9c6a45": fileName, "csrf_token": lobby.csrf_token}) + "&" + options;
+
+  var requestURL = lobby.url + "/includes/lib/lobby/ajax/ajax.php";
   $.post(requestURL, options, function(data){
-    if(typeof callback == "function"){
-      /**
-       * On success, do callback function with the response data
-       */
-      callback(data);
-    }
+    /**
+     * On success, do callback function with the response data
+     */
+    callback(data);
   });
 };
 
@@ -149,17 +138,3 @@ lobby.saveOption = function(key, value, callback){
 lobby.redirect = function(path){
   window.location = lobby.url + path;
 };
-
-/*
-$("a[href]").die("click").live("click", function(e){
-  url = $(this).attr("href");
-  if( url.match(lobby.url) ){
-    e.preventDefault();
-    $(".panel #ajaxLoader").css("width", "100%");
-    setTimeout(function(){
-      window.location = url;
-    }, 500);
-  }else{
-    return true;
-  }
-});*/
