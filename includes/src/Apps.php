@@ -223,7 +223,7 @@ class Apps extends \Lobby {
    * Disable the app
    */
   public function disableApp(){
-    if($this->app && $this->isEnabled()){
+    if($this->app && $this->enabled){
       $apps = self::getEnabledApps();
 
       if(in_array($this->app, $apps, true)){

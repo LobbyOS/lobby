@@ -47,7 +47,7 @@ class Router {
        * Check if App exists
        */
       $App = new \Lobby\Apps($AppID);
-      if($App->exists && $App->isEnabled() && substr($page, 0, 7) != "/Admin/"){
+      if($App->exists && $App->enabled && substr($page, 0, 7) != "/Admin/"){
         $class = $App->run();
         $AppInfo = $App->info;
       
@@ -118,7 +118,7 @@ class Router {
        * Check if App exists
        */
       $App = new \Lobby\Apps($AppID);
-      if($App->exists && $App->isEnabled()){
+      if($App->exists && $App->enabled){
         $class = $App->run();
         $AppInfo = $App->info;
       

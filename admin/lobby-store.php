@@ -39,7 +39,7 @@ if($AppID !== null){
             $sc = $app['sub_category'];
         ?>
             <h1><?php echo "<a href='". L_SERVER ."/../apps/{$app['id']}' target='_blank'>{$app['name']}</a>";?></h1>
-            <p style="margin-bottom:15px;margin-top:-5px;"><?php echo $app['short_description'];?></p>
+            <p class="chip" style="margin: -5px 0 20px;"><?php echo $app['short_description'];?></p>
             <div class="row">
               <div class="col s3" id="leftpane" style="text-align: center;">
                 <img src="<?php echo $appImage;?>" height="200" width="200" />
@@ -50,11 +50,16 @@ if($AppID !== null){
                 if(!$App->exists){
                   echo \Lobby::l("/admin/install-app.php?id={$_GET['id']}" . H::csrf("g"), "Install", "class='btn red'");
                 }else if(version_compare($app['version'], $App->info['version'], ">")){
+                  /**
+                   * New version of app is available
+                   */
                   echo \Lobby::l("/admin/check-updates.php", "Update App", "class='btn red'");
                 }else if($App->enabled){
                   echo \Lobby::l($App->info['URL'], "Open App", "class='btn green'");
                 }else{
-                  // App Diabled
+                  /**
+                   * App is Disabled. Show button to enable it
+                   */
                   echo \Lobby::l("/admin/apps.php?action=enable&redirect=1&app=" . $AppID . H::csrf("g"), "Enable App", "class='btn green'");
                 }
                 ?>
@@ -108,8 +113,8 @@ if($AppID !== null){
           }
         }else{
         ?>
-          <h1><a href='<?php echo L_SERVER . "/../apps";?>' target='_blank'>Lobby Store</a></h1>
-          <div clear></div>
+          <h1><a href='<?php echo L_SERVER . "/../apps?lobby_url=" . urlencode(L_URL);?>' target='_blank'>Lobby Store</a></h1>
+          <cl/>
           <form method="GET" action="<?php echo \Lobby::u("/admin/lobby-store.php");?>">
             <input type="text" placeholder="Type an app name" name="q" style="width:450px;"/>
             <button class="btn red">Search</button>
@@ -137,7 +142,7 @@ if($AppID !== null){
                 $appImage = $app['image'] != "" ? $app['image'] : L_URL."/includes/lib/lobby/image/blank.png";
                 $url = \Lobby::u("/admin/lobby-store.php?id={$app['id']}");
             ?>
-                <div class="app">
+                <div class="app card">
                   <div class="app-inner">
                     <div class="lpane">
                       <a href="<?php echo $url;?>">
@@ -147,7 +152,7 @@ if($AppID !== null){
                     <div class="rpane">
                       <a href="<?php echo $url;?>" class="name"><?php echo $app['name'];?></a>
                       <p class="description"><?php echo $app['short_description'];?></p>
-                      <p>By: <a href="<?php echo $app['author_page'];?>"><?php echo $app['author'];?></a></p>
+                      <p style='font-style: italic;'>By <a href="<?php echo $app['author_page'];?>"><?php echo $app['author'];?></a></p>
                     </div>
                   </div>
                   <div class="bpane">
