@@ -9,12 +9,10 @@ namespace Lobby;
 class Apps extends \Lobby {
 
   private $app = false;
-  public $appDir = false;
-  public $exists = false;
-  public $info = array();
+  public $appDir = false, $exists = false, $info = array(), $enabled = false;
   
   /**
-   * To make Lobby faster
+   * Cache frequently used data
    */
   public static $cache = array(
     "valid_apps" => array()
@@ -159,13 +157,6 @@ class Apps extends \Lobby {
   }
  
   /**
-   * Returns boolean of installation status
-   */
-  public function isEnabled(){
-    return in_array($this->app, self::getEnabledApps(), true);
-  }
- 
-  /**
    * Get the manifest info of app as array
    */
   private function setInfo(){
@@ -193,9 +184,15 @@ class Apps extends \Lobby {
         ) : null;
        
       /**
-       *Insert the info as a property
+       * Insert the info as a property
        */
       $this->info = $details;
+      
+      /**
+       * Whether app is enabled
+       */
+      $this->enabled = in_array($this->app, self::getEnabledApps(), true);
+      
       return $details;
     }else{
       return false;
