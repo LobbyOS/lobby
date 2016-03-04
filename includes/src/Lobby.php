@@ -88,6 +88,7 @@ class Lobby {
   }
  
   public static function head($title = ""){
+    header('Content-type: text/html; charset=utf-8');
     if($title != ""){
       self::setTitle($title);
     }
