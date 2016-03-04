@@ -43,7 +43,7 @@ if($AppID !== null){
             <div class="row">
               <div class="col s3" id="leftpane" style="text-align: center;">
                 <img src="<?php echo $appImage;?>" height="200" width="200" />
-                <a clear="" href="<?php echo $app['app_page'];?>" target="_blank" class="btn">App Page</a>
+                <a clear href="<?php echo $app['permalink'];?>" target="_blank" class="btn">App Page</a>
                 <cl/>
                 <?php
                 $App = new \Lobby\Apps($AppID);
@@ -63,7 +63,6 @@ if($AppID !== null){
                   echo \Lobby::l("/admin/apps.php?action=enable&redirect=1&app=" . $AppID . H::csrf("g"), "Enable App", "class='btn green'");
                 }
                 ?>
-                <a class="btn blue" clear href="<?php echo $app['permalink'];?>" target="_blank">App On Lobby Store</a>
                 <style>#leftpane .btn{width:100%;margin: 5px 0px;}</style>
               </div>
               <div class="col s9">
@@ -78,9 +77,10 @@ if($AppID !== null){
                   <div class="chip">Version : <?php echo $app['version'];?></div><cl/>
                   <div class="chip">Developed By : <a href="<?php echo $app['author_page'];?>" target="_blank"><?php echo $app['author'];?></a></div><cl/>
                   <div class="chip">Last updated <?php echo $app['updated'];?></div>
+                  <div class="chip"><a href="<?php echo $app['app_page'];?>">App's Webpage</a></div>
                 </div>
                 <div id="app-description" class="tab-contents">
-                  <div class="card-panel teal">
+                  <div class="card-panel light-green">
                     <span class="white-text"><?php echo $app['description'];?></span>
                   </div>
                 </div>
@@ -90,9 +90,19 @@ if($AppID !== null){
                   if(count($screenshots) > 1){
                     foreach($screenshots as $screenshot){
                       if($screenshot != ""){
-                        echo "<a href='$screenshot' target='_blank' clear><img src='$screenshot' width='100%' /></a>";
+                        echo "<a href='$screenshot' target='_blank' clear><img src='' width='100%' /></a>";
                       }
                     }
+                    ?>
+                    <script>
+                      lobby.load(function(){
+                        screenshots = <?php echo json_encode($screenshots);?>;
+                        $.each(screenshots, function(i, elem){
+                          $("#app-screenshots img[src='']:first").attr("src", elem);
+                        });
+                      });
+                    </script>
+                    <?php
                   }else{
                     ser("No Screenshots", "This app has no screenshots");
                   }
