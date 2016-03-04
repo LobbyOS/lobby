@@ -8,7 +8,7 @@ if($file != "" && H::csrf()){
   if($appID !== ""){
     $App = new \Lobby\Apps($appID);
      
-    if($App->exists && $App->isEnabled()){
+    if($App->exists && $App->enabled){
       $AppClass = $App->run();
       $html = $AppClass->page("/ajax/$file");
       if($html === "auto"){
