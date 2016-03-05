@@ -131,6 +131,12 @@ window.FilePicker = {
 	 * @return	void
 	 */
 	do_close: function(obj) {
+    if(typeof obj === "undefined"){
+      var obj = {
+        dir: '',
+        files: []
+		  };
+    }
     this.params.callback(obj);
 	},
 
@@ -235,8 +241,7 @@ window.FilePicker = {
 		clearTimeout(self.timer);
 		var elmt = $(this);
 		if (elmt.attr('ftype') == 'folder'){
-			var dir = $.base64.decode($('#target_dir').val());
-			if (dir != '/') dir += '/';
+			var dir = $('#target_dir_path').val();
       $('#target_dir_path').val(dir + elmt.text());
 			$('#target_dir').val($.base64.encode(dir + elmt.text()));
 			self.get_list();
@@ -462,11 +467,15 @@ window.FilePicker = {
         self.get_list(true);
       });
       $('#btn_refresh').live('click', function(){self.get_list(false);});
-      $('#btn_up').live('click', self.do_up);
+      $('#btn_up').bind('click', function(){
+        self.do_up();
+      });
       $('#btn_complete').live('click', self.do_complete);
-      $('#btn_cancel').live('click', self.do_close);
+      $('#btn_cancel').live('click', function(){
+        self.do_close();
+      });
       $("#filter_box").live("change", function(){
-        FilePicker.get_list();
+        self.get_list();
       });
       $(window).live("keyup", function(e){
         e.preventDefault();
