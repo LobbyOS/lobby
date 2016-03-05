@@ -2,7 +2,7 @@
 // Folder path
 define('FP_ROOT_PATH', '/');
 
-if(\Lobby\Module::exists("indi")){
+if(\Lobby\Modules::exists("indi")){
   /**
    * If `indi` module is enabled, don't use FilePicker
    */
