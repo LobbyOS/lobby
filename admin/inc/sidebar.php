@@ -1,7 +1,5 @@
-<div class="sidebar">
-  <div style="height:32px;text-align:center;margin-top:10px;">
-    <a target="_blank" href="http://lobby.subinsb.com" style="color:white;">Lobby <?php echo getOption("lobby_version");?></a>
-  </div>
+<div class="side-nav fixed" id="slide-out">
+  <a target="_blank" href="http://lobby.subinsb.com" class="lobby-link">Lobby <?php echo getOption("lobby_version");?></a>
   <?php
   $links = array(
     "/admin" => "Dashboard",

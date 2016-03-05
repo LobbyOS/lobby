@@ -11,14 +11,26 @@ class Panel {
     "right" => array()
   );
   
+  private static $panel_item_format = array(
+    "text" => "",
+    "href" => "",
+    "subItems" => array(),
+    "position" => "left"
+  );
+  
   public static function addTopItem($name, $array){
+    $array = array_replace_recursive(self::$panel_item_format, $array);
     $loc = $array['position'];
-    if($loc == "right"){
+    
+    if($loc === "right"){
       array_reverse($array);
     }
 
     /**
      * Check if the item is already registered
+     * --
+     * If the item is already registered, then replace it
+     * else, register new one
      */
     if(isset(self::$top_items[$loc][$name])){
       $merged = array_merge(self::$top_items[$loc][$name], $array);

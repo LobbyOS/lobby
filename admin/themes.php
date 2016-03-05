@@ -34,8 +34,8 @@
             <h2>Confirm</h2>
             <p>Are you sure you want to remove the app <b><?php echo $app;?></b> ?</p>
             <div clear></div>
-            <a class="button green" href="<?php echo L_URL ."/admin/install-app.php?action=remove&id={$app}&".H::csrf("g");?>">Yes, I'm Sure</a>
-            <a class="button red" href="<?php echo L_URL ."/admin/apps.php";?>">No, I'm Not</a>
+            <a class="btn green" href="<?php echo L_URL ."/admin/install-app.php?action=remove&id={$app}&".H::csrf("g");?>">Yes, I'm Sure</a>
+            <a class="btn red" href="<?php echo L_URL ."/admin/apps.php";?>">No, I'm Not</a>
         <?php
             exit;
           }else if($action == "enable"){
@@ -68,7 +68,7 @@
                 $App = new \Lobby\Apps($app);
                 $data = $App->info;
                 $appImage = !isset($data['image']) ? L_URL . "/includes/lib/lobby/image/blank.png" : $data['image'];
-                $enabled = $App->isEnabled();
+                $enabled = $App->enabled;
               ?>
                 <tr <?php if(!$enabled){echo 'style="background: #EEE;"';}?>>
                   <td>
@@ -79,12 +79,12 @@
                   <td style="//text-align:center;">
                     <?php
                     if($enabled){
-                      echo '<a class="button" href="?action=disable&app='. $app . H::csrf('g') .'">Disable</a>';
+                      echo '<a class="btn" href="?action=disable&app='. $app . H::csrf('g') .'">Disable</a>';
                     }else{
-                      echo '<a class="button" href="?action=enable&app='. $app . H::csrf('g') .'">Enable</a>';
+                      echo '<a class="btn" href="?action=enable&app='. $app . H::csrf('g') .'">Enable</a>';
                     }
                     ?>
-                    <a class="button red" href="?action=remove&app=<?php echo $app . H::csrf('g');?>">Remove</a>
+                    <a class="btn red" href="?action=remove&app=<?php echo $app . H::csrf('g');?>">Remove</a>
                   </td>
                 </tr>
               <?php

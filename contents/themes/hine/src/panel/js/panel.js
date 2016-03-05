@@ -1,1 +1,1 @@
-lobby.load(function(){$('.panel.top .left, .panel.top .right').superfish({delay:100});$("[title]").tooltip();});
+lobby.load(function(){$('nav .left, nav .right').superfish({delay:100});});

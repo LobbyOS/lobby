@@ -55,11 +55,6 @@ class Themes extends \Lobby {
    */
   public static function loadDefaults(){
     /**
-     * Styles
-     */
-    \Lobby::addStyle("jqueryui", "/includes/lib/jquery/jquery-ui.css"); // jQuery UI
- 
-    /**
      * Scripts
      */
     \Lobby::addScript("jquery", "/includes/lib/jquery/jquery.js");
@@ -81,16 +76,16 @@ class Themes extends \Lobby {
      * Load Panel
      */
     if(\Lobby::status("lobby.admin")){
+      $GLOBALS["THEME_OBJ"]->addStyle("/src/main/css/style.css");
       \Lobby::hook("admin.head.begin", function(){
         $GLOBALS["THEME_OBJ"]->panel(true);
-        $GLOBALS["THEME_OBJ"]->addStyle("/src/css/style.css");
-        $GLOBALS["THEME_OBJ"]->addStyle("/src/css/admin.style.css");
+        $GLOBALS["THEME_OBJ"]->addStyle("/src/main/css/admin.style.css");
       });
       \Lobby::hook("admin.body.begin", function() {
         echo $GLOBALS["THEME_OBJ"]->inc("/src/panel/load.admin.php");
       });
     }else{
-      $GLOBALS["THEME_OBJ"]->addStyle("/src/css/style.css");
+      $GLOBALS["THEME_OBJ"]->addStyle("/src/main/css/style.css");
       \Lobby::hook("head.begin", function(){
         $GLOBALS["THEME_OBJ"]->panel(false);
       });

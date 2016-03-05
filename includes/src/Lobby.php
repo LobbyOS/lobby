@@ -12,7 +12,8 @@ class Lobby {
   public static $js, $css = array();
   
   public static $valid_hooks = array(
-    "init", "body.begin", "admin.body.begin", "head.begin", "admin.head.begin", "head.end", "router.finish"
+    "init", "body.begin", "admin.body.begin", "head.begin", "admin.head.begin", "head.end", "router.finish",
+    "panel.end"
   );
   public static $config = array(
     "db" => array(
@@ -87,6 +88,7 @@ class Lobby {
   }
  
   public static function head($title = ""){
+    header('Content-type: text/html; charset=utf-8');
     if($title != ""){
       self::setTitle($title);
     }
@@ -366,6 +368,16 @@ class Lobby {
     $url = $path;
     $parts = parse_url($path);
     
+    /**
+     * Make host along with port:
+     * 127.0.0.1:9000
+     */
+    if(isset($parts['host'])){
+      $url_host = $parts['host'] . (isset($parts['port']) ? ":{$parts['port']}" : "");
+    }else{
+      $url_host = "";
+    }
+
     if($path === ""){
       /**
        * If no path, give the current page URL
@@ -385,9 +397,9 @@ class Lobby {
       }
       
       $url = $pageURL;
-    }elseif($path === L_URL){
+    }else if($path === L_URL){
       $url = L_URL;
-    }elseif(!preg_match("/http/", $path) || $parts['host'] != $_SERVER['HTTP_HOST']){
+    }else if(!preg_match("/http/", $path) || $url_host != self::$host_name){
       if(!defined("APP_DIR") || substr($orPath, 0, 1) == "/"){
         $url = L_URL . "/$path";
       }else{

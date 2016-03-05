@@ -9,12 +9,10 @@ namespace Lobby;
 class Apps extends \Lobby {
 
   private $app = false;
-  public $appDir = false;
-  public $exists = false;
-  public $info = array();
+  public $appDir = false, $exists = false, $info = array(), $enabled = false;
   
   /**
-   * To make Lobby faster
+   * Cache frequently used data
    */
   public static $cache = array(
     "valid_apps" => array()
@@ -159,13 +157,6 @@ class Apps extends \Lobby {
   }
  
   /**
-   * Returns boolean of installation status
-   */
-  public function isEnabled(){
-    return in_array($this->app, self::getEnabledApps(), true);
-  }
- 
-  /**
    * Get the manifest info of app as array
    */
   private function setInfo(){
@@ -190,13 +181,18 @@ class Apps extends \Lobby {
         (file_exists($this->appDir . "/src/image/logo.svg") ?
           APPS_URL . "/{$this->app}/src/image/logo.svg" :
           APPS_URL . "/{$this->app}/src/image/logo.png"
-        ) :
-        L_URL . "/includes/lib/lobby/image/blank.png";
+        ) : null;
        
       /**
-       *Insert the info as a property
+       * Insert the info as a property
        */
       $this->info = $details;
+      
+      /**
+       * Whether app is enabled
+       */
+      $this->enabled = in_array($this->app, self::getEnabledApps(), true);
+      
       return $details;
     }else{
       return false;
@@ -227,7 +223,7 @@ class Apps extends \Lobby {
    * Disable the app
    */
   public function disableApp(){
-    if($this->app && $this->isEnabled()){
+    if($this->app && $this->enabled){
       $apps = self::getEnabledApps();
 
       if(in_array($this->app, $apps, true)){

@@ -1,7 +1,7 @@
 <?php
 require "../load.php";
 require L_DIR . "/includes/src/Install.php";
-$install_step = H::input('step');
+$install_step = H::i('step');
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,7 +33,7 @@ $install_step = H::input('step');
           <?php echo \Lobby::l(L_URL, "Install Lobby");?>
         </h1>
         <?php
-        if(\Lobby::$installed && H::input("step") !== "4"){
+        if(\Lobby::$installed && H::i("step") !== "4"){
           sss("<a href='". L_URL ."'>Lobby Installed</a>", "Lobby Is Installed. If you want to reinstall, delete the database tables and remove <b>config.php</b> file.<cl/>If you want to just remake the <b>config.php</b> file, don't delete the database tables, delete the existing <b>config.php</b> file and do ". \Lobby::l("/admin/install.php?step=1", "this installation") ." until Step 3 where \"Database Tables Exist\" error occur");
         }else if($install_step === null){
         ?>
@@ -41,7 +41,7 @@ $install_step = H::input('step');
           <p>For further help, see <a target='_blank' href='http://lobby.subinsb.com/docs/quick'>Quick Install</a>.</p>
           <p>To start Installation, click the Install button</p>
           <center clear>
-            <a href="?step=1<?php echo H::csrf("g");?>" class="button red" style="font-size: 18px;width: 200px;">Install</a>
+            <a href="?step=1<?php echo H::csrf("g");?>" class="btn red" style="font-size: 18px;width: 200px;">Install</a>
           </center>
         <?php
         }
@@ -153,7 +153,7 @@ $install_step = H::input('step');
               <?php
               if(!isset($error)){
               ?>
-                <a href="?step=2<?php echo H::csrf("g");?>" class="button orange" id="continue">Proceed To Installation</a>
+                <a href="?step=2<?php echo H::csrf("g");?>" class="btn orange" id="continue">Proceed To Installation</a>
             <?php
               }else{
                 echo "<p>Cannot Procced to Installation. Please make the requirements satisfied.</p>";
@@ -166,7 +166,7 @@ $install_step = H::input('step');
               ser("Permission Error", "The <b>config.php</b> file still has write permission. Change the permission to Read Only.");
             }
             if($safe !== true){
-              echo "<a class='button' href='javascript:;' onclick='window.location = window.location;'>Check Again</a>";
+              echo "<a class='btn' href='javascript:;' onclick='window.location = window.location;'>Check Again</a>";
             }else{
               \Lobby::redirect("/#");
             }
@@ -185,9 +185,9 @@ $install_step = H::input('step');
                     preg_match('/[1-9].[0-9].[1-9][0-9]/', $mysql_version, $match); 
                     $mysql_version = $match[0];
                     if(version_compare($mysql_version, '5.0') >= 0){
-                      echo "<a class='button green' href='?step=3&db_type=mysql". H::csrf("g") ."'>MySQL</a>";
+                      echo "<a class='btn green' href='?step=3&db_type=mysql". H::csrf("g") ."'>MySQL</a>";
                     }else{
-                      echo "<a class='button disabled'>MySQL Not Available</a><p>Lobby Requires MySQL version atleast 5.0</p>";
+                      echo "<a class='btn disabled'>MySQL Not Available</a><p>Lobby Requires MySQL version atleast 5.0</p>";
                     }
                   ?></td>
                   <td width="50%"><?php
@@ -203,15 +203,15 @@ $install_step = H::input('step');
                         /**
                          * Localhost
                          */
-                        echo "<a class='button green' href='?step=3&db_type=sqlite". H::csrf("g") ."'>SQLite</a>";
+                        echo "<a class='btn green' href='?step=3&db_type=sqlite". H::csrf("g") ."'>SQLite</a>";
                       }else{
                         /**
                          * Give warning when using SQLite on a web server
                          */
-                        echo "<a class='button red' href='?step=3&db_type=sqlite". H::csrf("g") ."'>SQLite</a><p style='color:red;'>WARNING<br/>It is very unsafe to use SQLite on a non localhost server</p>";
+                        echo "<a class='btn red' href='?step=3&db_type=sqlite". H::csrf("g") ."'>SQLite</a><p style='color:red;'>WARNING<br/>It is very unsafe to use SQLite on a non localhost server</p>";
                       }
                     }else{
-                      echo "<a class='button disabled'>SQLite Not Available</a><p>Lobby Requires SQLite version atleast 3.8</p>";
+                      echo "<a class='btn disabled'>SQLite Not Available</a><p>Lobby Requires SQLite version atleast 3.8</p>";
                     }
                   ?></td>
                 </tr>
@@ -219,7 +219,7 @@ $install_step = H::input('step');
             </table>
           <?php
           }else if($install_step === "3" && H::csrf()){
-            $db_type = H::input("db_type");
+            $db_type = H::i("db_type");
             /**
              * We call it again, so that the user had already went through the First Step
              */
@@ -227,15 +227,15 @@ $install_step = H::input('step');
               // The stuff mentioned in step 1 hasn't been done
             }else if(isset($_POST['submit'])){
               if($db_type === "mysql"){
-                $dbhost = \H::input('dbhost', "POST");
-                $dbport = \H::input('dbport', "POST");
-                $dbname = \H::input('dbname', "POST");
-                $username = \H::input('dbusername', "POST");
-                $password = \H::input('dbpassword', "POST");
-                $prefix = \H::input('prefix', "POST");
+                $dbhost = \H::i('dbhost', "", "POST");
+                $dbport = \H::i('dbport', "", "POST");
+                $dbname = \H::i('dbname', "", "POST");
+                $username = \H::i('dbusername', "", "POST");
+                $password = \H::i('dbpassword', "", "POST");
+                $prefix = \H::i('prefix', "", "POST");
                 
                 if($dbhost === "" || $dbport === "" || $dbname === "" || $username === ""){
-                  ser("Empty Fields", "Buddy, you left out some details.<cl/>" . \Lobby::l("/admin/install.php?step=3&db_type=mysql" . H::csrf("g"), "Try Again", "class='button orange'"));
+                  ser("Empty Fields", "Buddy, you left out some details.<cl/>" . \Lobby::l("/admin/install.php?step=3&db_type=mysql" . H::csrf("g"), "Try Again", "class='btn orange'"));
                   }else{
                   /**
                    * We give the database config to the Install Class
@@ -254,7 +254,7 @@ $install_step = H::input('step');
                    * Check if connection to database can be established using the credentials given by the user
                    */
                   if($prefix == "" || preg_match("/[^0-9,a-z,A-Z,\$,_]+/i", $prefix) != 0 || strlen($prefix) > 50){
-                    ser("Error", "A Prefix should only contain basic Latin letters, digits 0-9, dollar, underscore and shouldn't exceed 50 characters.<cl/>" . \Lobby::l("/admin/install.php?step=3&db_type=mysql" . H::csrf("g"), "Try Again", "class='button orange'"));
+                    ser("Error", "A Prefix should only contain basic Latin letters, digits 0-9, dollar, underscore and shouldn't exceed 50 characters.<cl/>" . \Lobby::l("/admin/install.php?step=3&db_type=mysql" . H::csrf("g"), "Try Again", "class='btn orange'"));
                   }else if(\Lobby\Install::checkDatabaseConnection() !== false){
                     /**
                      * Create Tables
@@ -274,9 +274,9 @@ $install_step = H::input('step');
                       $App->enableApp();
                       
                       sss("Success", "Database Tables and <b>config.php</b> file was successfully created.");
-                      echo '<cl/><a href="?step=4'. H::csrf("g") .'" class="button">Proceed</a>';
+                      echo '<cl/><a href="?step=4'. H::csrf("g") .'" class="btn">Proceed</a>';
                     }else{
-                      ser("Unable To Create Database Tables", "Are there any tables with the same name ? Or Does the user have the permissions to create tables ? Error :<blockquote>". \Lobby\Install::$error ."</blockquote>" . \Lobby::l("/admin/install.php?step=2" . H::csrf("g"), "Try Again", "class='button'"));
+                      ser("Unable To Create Database Tables", "Are there any tables with the same name ? Or Does the user have the permissions to create tables ? Error :<blockquote>". \Lobby\Install::$error ."</blockquote>" . \Lobby::l("/admin/install.php?step=2" . H::csrf("g"), "Try Again", "class='btn'"));
                     }
                   }
                 }
@@ -313,9 +313,9 @@ $install_step = H::input('step');
                   $App->enableApp();
                   
                   sss("Success", "Database and <b>config.php</b> file was successfully created.");
-                  echo '<cl/><a href="?step=4'. H::csrf("g") .'" class="button">Proceed</a>';
+                  echo '<cl/><a href="?step=4'. H::csrf("g") .'" class="btn">Proceed</a>';
                 }else{
-                  ser("Couldn't Make SQLite Database", "I was unable to make the database. Error :<blockquote>". \Lobby\Install::$error ."</blockquote> <cl/>" . \Lobby::l("/admin/install.php?step=3&db_type=sqlite" . H::csrf("g"), "Try Again", "class='button'"));
+                  ser("Couldn't Make SQLite Database", "I was unable to make the database. Error :<blockquote>". \Lobby\Install::$error ."</blockquote> <cl/>" . \Lobby::l("/admin/install.php?step=3&db_type=sqlite" . H::csrf("g"), "Try Again", "class='btn'"));
                 }
               }
             }else{
@@ -378,7 +378,7 @@ $install_step = H::input('step');
                       <tr>
                         <td></td>
                         <td>
-                          <button name="submit" style="width:200px;font-size:15px;" class="button green">Install Lobby</button>
+                          <button name="submit" style="width:200px;font-size:15px;" class="btn green">Install Lobby</button>
                         </td>
                         <td></td>
                       </tr>
@@ -396,7 +396,7 @@ $install_step = H::input('step');
                     <input type="text" name="db_location" id="db_location" value="<?php echo \Lobby\FS::loc("/contents/extra/lobby_db.sqlite");?>" />
                   </label>
                   
-                  <button name="submit" style="width:200px;font-size:15px;" class="button green">Install Lobby</button>
+                  <button name="submit" style="width:200px;font-size:15px;" class="btn green">Install Lobby</button>
                   <input type="hidden" name="db_type" value="sqlite" />
                   <?php H::csrf(1);?>
                 </form>

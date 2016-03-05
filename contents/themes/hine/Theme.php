@@ -4,9 +4,16 @@ namespace Lobby\UI\Themes;
 class hine extends \Lobby\UI\Theme {
   
   public function init(){
-    $this->addScript("/src/lib/material-design/materialize.js");
-    $this->addStyle("/src/lib/material-design/materialize.css");
-    $this->addStyle("/src/css/font.css");
+    $this->addScript("/src/main/lib/material-design/materialize.js");
+    $this->addStyle("/src/main/lib/material-design/materialize.css");
+    
+    /**
+     * jQuery UI
+     */
+    $this->addStyle("/src/main/lib/jquery-ui/jquery-ui.css");
+    
+    $this->addScript("/src/main/js/materialize-init.js");
+    $this->addStyle("/src/main/css/font.css");
   }
   
   /**
@@ -47,12 +54,12 @@ class hine extends \Lobby\UI\Theme {
       /**
        * Home button
        */
-      $html = "<li class='item home'><a href='". L_URL ."' class='$extraClass'></a></li>";
+      $html = "<li class='item home $extraClass'><a href='". L_URL ."'></a></li>";
     }else if($href == "/admin"){
       /**
        * Admin button
        */
-      $html = "<li class='item lobby'><a href='". \Lobby::u($href) ."' class='$extraClass'>Lobby</a></li>";
+      $html = "<li class='item lobby $extraClass'><a href='". \Lobby::u($href) ."' class='prnt'>Lobby</a></li>";
     }else{
       $html = '<li class="item ' . $extraClass . '" id="' . $id . '">';
         if($href == ""){

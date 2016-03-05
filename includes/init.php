@@ -1,10 +1,5 @@
 <?php
 /**
- * Default Styles
- */
-\Lobby::addStyle("main", "/includes/lib/lobby/css/main.css");
-
-/**
  * Some checking to make sure Lobby works fine
  */
 if(!is_writable(L_DIR) || !is_writable(APPS_DIR)){
@@ -78,7 +73,7 @@ if(\Lobby::curPage() != "/admin/install.php"){
   
   if((count($AppUpdates) != 0) || ($latestVersion && $lobby_version != $latestVersion)){
     \Lobby\UI\Panel::addTopItem("updateNotify", array(
-      "html" => \Lobby::l("/admin/update.php", "<span id='update' title='An Update Is Available'></span>"),
+      "html" => \Lobby::l("/admin/update.php", "<span id='update' title='Updates Are Available'></span>"),
       "position" => "right"
     ));
   }
@@ -90,9 +85,17 @@ if(\Lobby::status("lobby.install")){
 
 if(\Lobby::status("lobby.admin")){
   /**
-   * Add Admin Pages' stylesheet
+   * Add Admin Pages' stylesheet, script
    */
-  \Lobby::addStyle("admin", "/includes/lib/lobby/css/admin.css");
+  \Lobby::addStyle("admin", "/admin/css/admin.css");
+  \Lobby::addScript("admin", "/admin/js/admin.js");
+  
+  /**
+   * Add sidebar handler in panel
+   */
+  \Lobby::hook("panel.end", function(){
+    echo '<a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>';
+  });
   
   /**
    * Check For New Versions (Apps & Core)
