@@ -1,12 +1,14 @@
 {
-   "name" : "lEdit",
-   "description" : "lEdit is the official text editor from Lobby. It can save texts on browser or on the server. You can access saved text and can edit them if you like. lEdit is a default app that comes with Lobby installation.",
-   "short_description" : "The Default Text Editor Of Lobby",
-   "category" : "accessories",
-   "sub_catrgory" : "tools",
-   "version" : "0.1",
-   "author" : "Lobby",
-   "author_page" : "http://lobby.subinsb.com",
-   "app_page" : "http://lobby.subinsb.com/apps/ledit",
-   "logo" : true
+  "name" : "lEdit",
+  "short_description" : "The Default Text Editor Of Lobby",
+  "category" : "accessories",
+  "sub_catrgory" : "tools",
+  "version" : "0.1",
+  "requires" : {
+    "lobby" : [">=", "0.5"]
+  },
+  "author" : "Lobby",
+  "author_page" : "http://lobby.subinsb.com",
+  "app_page" : "http://lobby.subinsb.com/apps/ledit",
+  "logo" : "1"
 }
