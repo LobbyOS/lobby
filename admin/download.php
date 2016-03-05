@@ -85,8 +85,9 @@ $GLOBALS['last'] = 0;
       echo "<script>document.getElementById('downloadStatus').innerHTML = 'Downloaded {$downloaded}';</script>";
     }
     flush();
-    if($percent == 100){
+    if($percent == 100 && !isset($GLOBALS['install-msg-printed'])){
       echo "<p>Installing <b>{$GLOBALS['name']}</b>...</p>";
+      $GLOBALS['install-msg-printed'] = 1;
       flush();
     }
   }

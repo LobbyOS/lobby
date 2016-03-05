@@ -1,6 +1,26 @@
 <?php
+function makeOSPath($path){
+  $path = base64_decode($path);
+  if(DIRECTORY_SEPARATOR === '\\'){
+    // Windows
+    $drive = substr(L_DIR, 0, 2);
+    if($path == "/" || $path == ""){
+      $path = $drive . "\\";
+    }else{
+      $path = substr_replace($path, "$drive/", 0, 1);
+      $path = str_replace('/', '\\', $path);
+    }
+  }else{
+    if($path == "/" || $path == ""){
+      $path = "/";
+    }else{
+      $path = str_replace('\\', '/', $path);
+    }
+  }
+  return $path;
+}
 // Folder path
-define('FP_ROOT_PATH', '/');
+define('FP_ROOT_PATH', makeOSPath('/'));
 
 if(\Lobby\Modules::exists("indi")){
   /**
@@ -80,13 +100,13 @@ if(isset($_GET['img'])){
   
   switch ($action){
     case 'list':
-      $dir = isset($_POST['dir']) ? $_POST['dir'] : '/';
+      $dir = base64_encode(makeOSPath(\H::i("dir", "/", "POST")));
       $filter = isset($_POST['filter']) ? $_POST['filter'] : 0;
       echo $fp->get_list($dir, $filter);
       break;
     case 'info':
-      $dir = isset($_POST['dir']) ? $_POST['dir'] : '/';
-      $file = isset($_POST['file']) ? $_POST['file'] : '';
+      $dir = base64_encode(makeOSPath(\H::i("dir", "/", "POST")));
+      $file = \H::i("file", "", "POST");
       echo $fp->get_info($dir, $file);
       break;
   /*
@@ -101,7 +121,7 @@ if(isset($_GET['img'])){
       $filters = '';
       $filters = $fp->get_filters($filter);
       
-      $dir = isset($_POST['dir']) ? $_POST['dir'] : '/';
+      $dir = makeOSPath(\H::i("dir", "/", "POST"));
       $dir_b64 = base64_encode($dir);
       ob_start();
   ?>
