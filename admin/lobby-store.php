@@ -42,13 +42,31 @@ if($AppID !== null){
             <p class="chip" style="margin: -5px 0 20px;"><?php echo $app['short_description'];?></p>
             <div class="row">
               <div class="col s3" id="leftpane" style="text-align: center;">
-                <img src="<?php echo $appImage;?>" height="200" width="200" />
+                <img src='image/clear.gif' height="200" width="200" />
+                <script>
+                  $(window).load(function(){
+                    var image = $("#leftpane img");
+                    var downloadingImage = new Image();
+                    downloadingImage.onload = function(){
+                      image.attr("src", this.src);
+                    };
+                    downloadingImage.src = "<?php echo $appImage;?>";
+                  });
+                </script>
                 <a clear href="<?php echo $app['permalink'];?>" target="_blank" class="btn">App Page</a>
                 <cl/>
                 <?php
                 $App = new \Lobby\Apps($AppID);
+                $requires = $app['requires'];
                 if(!$App->exists){
-                  echo \Lobby::l("/admin/install-app.php?id={$_GET['id']}" . H::csrf("g"), "Install", "class='btn red'");
+                  /**
+                   * Check whether Lobby version is compatible
+                   */
+                  if(version_compare(getOption("lobby_version"), $requires['lobby'][1], $requires['lobby'][0])){
+                    echo \Lobby::l("/admin/install-app.php?id={$_GET['id']}" . H::csrf("g"), "Install", "class='btn red'");
+                  }else{
+                    echo "<a class='btn red disabled' title='App requires Lobby version {$requires['lobby'][0]} {$requires['lobby'][1]}'>Install</a>";
+                  }
                 }else if(version_compare($app['version'], $App->info['version'], ">")){
                   /**
                    * New version of app is available
@@ -75,9 +93,18 @@ if($AppID !== null){
                 <div id="app-info" class="tab-contents">
                   <?php echo "<div class='chip'><a href='". L_SERVER ."/../apps?c={$c}' target='_blank'>" . ucfirst($c) . "</a></div>";?> > <?php echo "<div class='chip'><a href='". L_SERVER ."/../apps?sc={$sc}' target='_blank' >" . ucfirst($sc) . "</a></div>";?><cl/>
                   <div class="chip">Version : <?php echo $app['version'];?></div><cl/>
+                  <div class="chip"><span>Requirements :</span></div>
+                    <ul class="collection" style="margin-left: 20px;">
+                      <?php
+                      foreach($requires as $k => $v){
+                        echo "<li class='collection-item'>$k {$v[0]} {$v[1]}</li>";
+                      }
+                      ?>
+                    </ul>
+                  <cl/>
                   <div class="chip">Developed By : <a href="<?php echo $app['author_page'];?>" target="_blank"><?php echo $app['author'];?></a></div><cl/>
-                  <div class="chip">Last updated <?php echo $app['updated'];?></div>
-                  <div class="chip"><a href="<?php echo $app['app_page'];?>">App's Webpage</a></div>
+                  <div class="chip">Last updated <?php echo $app['updated'];?></div><cl/>
+                  <div class="chip"><a href="<?php echo $app['app_page'];?>" target="_blank">App's Webpage</a></div>
                 </div>
                 <div id="app-description" class="tab-contents">
                   <div class="card-panel light-green">
@@ -90,15 +117,21 @@ if($AppID !== null){
                   if(count($screenshots) > 1){
                     foreach($screenshots as $screenshot){
                       if($screenshot != ""){
-                        echo "<a href='$screenshot' target='_blank' clear><img src='' width='100%' /></a>";
+                        echo "<a href='$screenshot' target='_blank' clear><img src='image/clear.gif' data-none='' width='100%' /></a>";
                       }
                     }
                     ?>
                     <script>
-                      lobby.load(function(){
-                        screenshots = <?php echo json_encode($screenshots);?>;
+                      $(window).load(function(){
+                        var screenshots = <?php echo json_encode($screenshots);?>;
                         $.each(screenshots, function(i, elem){
-                          $("#app-screenshots img[src='']:first").attr("src", elem);
+                          var image = $("#app-screenshots img[data-none]:first");
+                          var downloadingImage = new Image();
+                          downloadingImage.onload = function(){
+                            image.attr("src", this.src);
+                          };
+                          downloadingImage.src = elem;
+                          image.removeAttr("data-none");
                         });
                       });
                     </script>

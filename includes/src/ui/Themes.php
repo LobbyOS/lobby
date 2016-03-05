@@ -55,11 +55,6 @@ class Themes extends \Lobby {
    */
   public static function loadDefaults(){
     /**
-     * Styles
-     */
-    \Lobby::addStyle("jqueryui", "/includes/lib/jquery/jquery-ui.css"); // jQuery UI
- 
-    /**
      * Scripts
      */
     \Lobby::addScript("jquery", "/includes/lib/jquery/jquery.js");
