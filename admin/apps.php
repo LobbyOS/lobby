@@ -115,9 +115,20 @@
                 }
                 ?>
               </tbody>
+              <tfoot>
+                <tr>
+                  <td width="5%">
+                    <label><input type="checkbox" id="select_all_apps" /><span></span></label>
+                  </td>
+                  <td width="15%">Name</td>
+                  <td width="10%">Version</td>
+                  <td width="40%">Description</td>
+                  <td width="30%">Actions</td>
+                </tr>
+              </tfoot>
             </table>
-            <div id="combined_actions">
-              <span style="padding-left: 20px;">^</span>
+            <div id="combined_actions" clear>
+              <span style="padding-left: 15px;">^</span>
               <button class="btn green" name="action" value="enable">Enable</button>
               <button class="btn blue" name="action" value="disable">Disable</button>
             </div>
