@@ -50,7 +50,7 @@ class Server {
    */
   public static function check(){
     $url = L_SERVER . "/lobby/updates";
-    $apps = array_keys(\Lobby\Apps::getApps());
+    $apps = \Lobby\Apps::getApps();
     try {
       $response = \Requests::post($url, array(), array(
         "apps" => implode(",", $apps)
