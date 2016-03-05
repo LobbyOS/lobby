@@ -271,6 +271,8 @@ class Apps extends \Lobby {
       require_once $this->appDir . "/App.php";
       
       \Lobby::addScript("app", "/includes/lib/lobby/js/app.js");
+      
+      $GLOBALS['AppID'] = $this->app;
      
       $appInfo = $this->info;
       $className = "\\Lobby\App\\" . str_replace("-", "_", $this->app);
