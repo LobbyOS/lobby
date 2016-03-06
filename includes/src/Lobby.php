@@ -7,7 +7,7 @@ class Lobby {
 
   public static $debug, $root, $url, $host_name, $title, $serverCheck, $db, $lid, $error = "";
   public static $installed = false;
-  public static $sysinfo, $hooks = array();
+  public static $sysInfo, $hooks = array();
 
   public static $js, $css = array();
   
@@ -295,7 +295,7 @@ class Lobby {
     }else if ($os == 'mac') {
       $info['os'] = "mac";
     }
-    self::$sysinfo = $info;
+    self::$sysInfo = $info;
   }
   
   /* Hooks */
