@@ -7,7 +7,7 @@ function makeOSPath($path){
     if($path == "/" || $path == ""){
       $path = $drive . "\\";
     }else{
-      $path = substr_replace($path, "$drive/", 0, 1);
+      //$path = substr_replace($path, "$drive/", 0, 1);
       $path = str_replace('/', '\\', $path);
     }
   }else{
