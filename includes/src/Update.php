@@ -114,7 +114,7 @@ class Update extends \Lobby {
             \Lobby::log("Removed Deprecated File: $fileLoc");
           }
         }
-        copy($deprecatedFilesInfoLoc, "$deprecatedFilesInfoLoc.txt");
+        copy(\Lobby\FS::loc($deprecatedFilesInfoLoc), \Lobby\FS::loc("$deprecatedFilesInfoLoc.txt"));
         \Lobby\FS::remove($deprecatedFilesInfoLoc);
         \Lobby::log("Finished Removing Deprecated Files");
       }
