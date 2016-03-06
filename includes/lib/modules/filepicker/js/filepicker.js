@@ -242,6 +242,8 @@ window.FilePicker = {
 		var elmt = $(this);
 		if (elmt.attr('ftype') == 'folder'){
 			var dir = $('#target_dir_path').val();
+      clog(dir);
+      if (dir != '/' && dir != 'C:\\') dir += lobby.sysInfo.os == "windows" ? "\\" : '/';
       $('#target_dir_path').val(dir + elmt.text());
 			$('#target_dir').val($.base64.encode(dir + elmt.text()));
 			self.get_list();
