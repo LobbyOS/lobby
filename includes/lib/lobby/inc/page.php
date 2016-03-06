@@ -11,7 +11,7 @@ $GLOBALS['AppID'] = $AppID;
     }
     ?>
     <script>
-      window.tmp = {};window.lobbyExtra = {};<?php if(isset($AppID)){
+      window.tmp = {};window.lobbyExtra = {sysInfo: {os: "<?php echo \Lobby::$sysInfo['os'];?>"}};<?php if(isset($AppID)){
         echo 'lobbyExtra["app"] = { id: "'. $AppID .'", url: "'. APP_URL .'", src: "'. \Lobby::u("/contents/apps/{$AppID}") .'" };';
       }
     ?></script>
