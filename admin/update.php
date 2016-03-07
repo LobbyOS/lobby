@@ -19,7 +19,7 @@ require L_DIR . "/includes/src/Update.php";
       <div class="content">
         <h1>Update</h1>
         <p>Lobby and it's apps can be updated automatically. <a href="http://lobby.subinsb.com/docs/update" target="_blank" class="btn">More Info</a></p>
-        <a class='btn blue' href='check-updates.php'>Check For New Releases</a>
+        <a class='btn blue' href='check-updates.php'>Check For Updates</a>
         <?php
         $AppUpdates = json_decode(getOption("app_updates"), true);
         if(\H::i("action", "", "POST") == "updateApps" && H::csrf()){

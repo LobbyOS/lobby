@@ -95,7 +95,7 @@
           </table>
           <div clear=""></div>
           <a class="btn" href="<?php echo L_URL; ?>/admin/update.php">Updates</a>
-          <a class='btn green' href='<?php echo L_URL;?>/admin/check-updates.php'>Check For Updates</a>
+          <a class='btn blue' href='<?php echo L_URL;?>/admin/check-updates.php'>Check For Updates</a>
           <?php
           /* Check if the current version is not the latest version */
           if(getOption("lobby_version") != getOption("lobby_latest_version")){
