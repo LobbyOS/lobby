@@ -53,8 +53,9 @@ flush();
 
 function convertToReadableSize($size){
   $base = log($size) / log(1024);
-  $suffix = array("", "KB", "M", "G", "T")[floor($base)];
-  return round(pow(1024, $base - floor($base)), 1) . $suffix;
+  $suffix = array("", "KB", "M", "G", "T");
+  $f_base = floor($base);
+  return round(pow(1024, $base - floor($base)), 1) . $suffix[$f_base];
 }
 
 $GLOBALS['last'] = 0;
