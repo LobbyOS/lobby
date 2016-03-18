@@ -5,6 +5,8 @@ Lobby
 
 [![Build Status](https://travis-ci.org/LobbyOS/lobby.svg?branch=dev)](https://travis-ci.org/LobbyOS/lobby)
 
+[Please Vote For Lobby in PHPClasses](http://www.phpclasses.org/vote.html)
+
 The default branch is `dev` which means, most stuff are in development mode and can't be guaranteed to work.
 
 ## Branches
