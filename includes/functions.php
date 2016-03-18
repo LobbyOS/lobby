@@ -82,3 +82,11 @@ function __($text, $domain = 'main'){
 function _e($text, $domain = 'main'){
 	echo \Lobby\l10n::__($text, $domain);
 }
+
+function getJSONData($key){
+  return \H::getJSONData($key);
+}
+
+function saveJSONData($key, $values){
+  return \H::saveJSONData($key, $values);
+}
