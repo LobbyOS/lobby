@@ -10,7 +10,7 @@ class Server {
   /**
    * Lobby Store
    */
-  public static function Store($data) {
+  public static function store($data) {
     /**
      * Response is in JSON
      */
