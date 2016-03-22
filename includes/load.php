@@ -23,6 +23,7 @@ $lobbyBase = substr($lobbyBase, 0) == "/" ? substr_replace($lobbyBase, "", 0) : 
 $_SERVER['REQUEST_URI'] = str_replace($lobbyBase, "", $_SERVER['REQUEST_URI']);
 $_SERVER['REQUEST_URI'] = substr($_SERVER['REQUEST_URI'], -1) == "/" && $_SERVER['REQUEST_URI'] != "/" ? substr_replace($_SERVER['REQUEST_URI'], "", -1) : $_SERVER['REQUEST_URI'];
 
+require_once L_DIR . "/includes/src/composer/vendor/autoload.php";
 require_once L_DIR . "/includes/src/l10n.php";
 require_once L_DIR . "/includes/src/Helpers.php";
 require_once L_DIR . "/includes/src/FileSystem.php"; // The FileSystem Class
