@@ -1,6 +1,5 @@
 <?php
 namespace Lobby;
-require_once L_DIR . "/includes/src/composer/vendor/autoload.php";
 
 /**
  * The Router class for Routing paths coming to Lobby accordingly
