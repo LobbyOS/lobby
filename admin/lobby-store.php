@@ -4,7 +4,7 @@ require "../load.php";
 $page_title = "Lobby Store";
 $AppID = \H::i('id');
 if($AppID !== null){
-  $app = \Lobby\Server::Store(array(
+  $app = \Lobby\Server::store(array(
     "get" => "app",
     "id" => $AppID
   ));
@@ -41,7 +41,7 @@ if($AppID !== null){
             <h1><?php echo "<a href='". L_SERVER ."/../apps/{$app['id']}' target='_blank'>{$app['name']}</a>";?></h1>
             <p class="chip" style="margin: -5px 0 20px;"><?php echo $app['short_description'];?></p>
             <div class="row">
-              <div class="col s3" id="leftpane" style="text-align: center;">
+              <div class="col m3" id="leftpane" style="text-align: center;">
                 <img src='image/clear.gif' height="200" width="200" />
                 <script>
                   $(window).load(function(){
@@ -62,10 +62,10 @@ if($AppID !== null){
                   /**
                    * Check whether Lobby version is compatible
                    */
-                  if(version_compare(getOption("lobby_version"), $requires['lobby'][1], $requires['lobby'][0])){
-                    echo \Lobby::l("/admin/install-app.php?id={$_GET['id']}" . H::csrf("g"), "Install", "class='btn red'");
+                  if(\Lobby\Server::checkRequirements($requires, true)){
+                    echo "<a class='btn red disabled' title='The app requirements are not satisfied. See `Info` tab.'>Install</a>";
                   }else{
-                    echo "<a class='btn red disabled' title='App requires Lobby version {$requires['lobby'][0]} {$requires['lobby'][1]}'>Install</a>";
+                    echo \Lobby::l("/admin/install-app.php?id={$_GET['id']}" . H::csrf("g"), "Install", "class='btn red'");
                   }
                 }else if(version_compare($app['version'], $App->info['version'], ">")){
                   /**
@@ -83,7 +83,7 @@ if($AppID !== null){
                 ?>
                 <style>#leftpane .btn{width:100%;margin: 5px 0px;}</style>
               </div>
-              <div class="col s9">
+              <div class="col m9">
                 <ul class="tabs">
                   <li class="tab"><a href="#app-info">Info</a></li>
                   <li class="tab"><a href="#app-description">Description</a></li>
@@ -96,8 +96,13 @@ if($AppID !== null){
                   <div class="chip"><span>Requirements :</span></div>
                     <ul class="collection" style="margin-left: 20px;">
                       <?php
+                      $requirementsInSystemInfo = \Lobby\Server::checkRequirements($requires);
                       foreach($requires as $k => $v){
-                        echo "<li class='collection-item'>$k {$v[0]} {$v[1]}</li>";
+                        if($requirementsInSystemInfo[$k]){
+                          echo "<li class='collection-item'>$k {$v[0]} {$v[1]}</li>";
+                        }else{
+                          echo "<li class='collection-item red' title=''>$k {$v[0]} {$v[1]}</li>";
+                        }
                       }
                       ?>
                     </ul>
@@ -176,7 +181,7 @@ if($AppID !== null){
             $request_data['p'] = $_GET['p'];
           }
           
-          $server_response = \Lobby\Server::Store($request_data);
+          $server_response = \Lobby\Server::store($request_data);
           if($server_response == false){
             ser("Nothing Found", "Nothing was found that matches your criteria. Sorry...");
           }else{
