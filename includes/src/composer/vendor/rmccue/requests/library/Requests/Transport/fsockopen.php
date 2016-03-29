@@ -14,13 +14,6 @@
  */
 class Requests_Transport_fsockopen implements Requests_Transport {
 	/**
-	 * Second to microsecond conversion
-	 *
-	 * @var integer
-	 */
-	const SECOND_IN_MICROSECONDS = 1000000;
-
-	/**
 	 * Raw HTTP data
 	 *
 	 * @var string
@@ -33,13 +26,6 @@ class Requests_Transport_fsockopen implements Requests_Transport {
 	 * @var array Associative array of properties, see {@see http://php.net/stream_get_meta_data}
 	 */
 	public $info;
-
-	/**
-	 * What's the maximum number of bytes we should keep?
-	 *
-	 * @var int|bool Byte count, or false if no limit.
-	 */
-	protected $max_bytes = false;
 
 	protected $connect_error = '';
 
@@ -101,8 +87,6 @@ class Requests_Transport_fsockopen implements Requests_Transport {
 			$remote_socket = 'tcp://' . $host;
 		}
 
-		$this->max_bytes = $options['max_bytes'];
-
 		$proxy = isset( $options['proxy'] );
 		$proxy_auth = $proxy && isset( $options['proxy_username'] ) && isset( $options['proxy_password'] );
 
@@ -115,7 +99,7 @@ class Requests_Transport_fsockopen implements Requests_Transport {
 
 		$options['hooks']->dispatch('fsockopen.remote_socket', array(&$remote_socket));
 
-		$fp = stream_socket_client($remote_socket, $errno, $errstr, ceil($options['connect_timeout']), STREAM_CLIENT_CONNECT, $context);
+		$fp = stream_socket_client($remote_socket, $errno, $errstr, $options['timeout'], STREAM_CLIENT_CONNECT, $context);
 
 		restore_error_handler();
 
@@ -214,67 +198,46 @@ class Requests_Transport_fsockopen implements Requests_Transport {
 			$options['hooks']->dispatch('fsockopen.after_request', array(&$fake_headers));
 			return '';
 		}
+		stream_set_timeout($fp, $options['timeout']);
 
-		$timeout_sec = (int) floor($options['timeout']);
-		$timeout_msec = $timeout_sec == $options['timeout'] ? 0 : self::SECOND_IN_MICROSECONDS * $options['timeout'] % self::SECOND_IN_MICROSECONDS;
-		stream_set_timeout($fp, $timeout_sec, $timeout_msec);
-
-		$response = $body = $headers = '';
 		$this->info = stream_get_meta_data($fp);
-		$size = 0;
-		$doingbody = false;
-		$download = false;
-		if ($options['filename']) {
-			$download = fopen($options['filename'], 'wb');
+
+		$this->headers = '';
+		$this->info = stream_get_meta_data($fp);
+		if (!$options['filename']) {
+			while (!feof($fp)) {
+				$this->info = stream_get_meta_data($fp);
+				if ($this->info['timed_out']) {
+					throw new Requests_Exception('fsocket timed out', 'timeout');
+				}
+
+				$this->headers .= fread($fp, 1160);
+			}
 		}
-
-		while (!feof($fp)) {
-			$this->info = stream_get_meta_data($fp);
-			if ($this->info['timed_out']) {
-				throw new Requests_Exception('fsocket timed out', 'timeout');
-			}
-
-			$block = fread($fp, Requests::BUFFER_SIZE);
-			if (!$doingbody) {
-				$response .= $block;
-				if (strpos($response, "\r\n\r\n")) {
-					list($headers, $block) = explode("\r\n\r\n", $response, 2);
-					$doingbody = true;
-				}
-			}
-
-			// Are we in body mode now?
-			if ($doingbody) {
-				$options['hooks']->dispatch('request.progress', array($block, $size, $this->max_bytes));
-				$data_length = strlen($block);
-				if ($this->max_bytes) {
-					// Have we already hit a limit?
-					if ($size === $this->max_bytes) {
-						continue;
-					}
-					if (($size + $data_length) > $this->max_bytes) {
-						// Limit the length
-						$limited_length = ($this->max_bytes - $size);
-						$block = substr($block, 0, $limited_length);
-					}
+		else {
+			$download = fopen($options['filename'], 'wb');
+			$doingbody = false;
+			$response = '';
+			while (!feof($fp)) {
+				$this->info = stream_get_meta_data($fp);
+				if ($this->info['timed_out']) {
+					throw new Requests_Exception('fsocket timed out', 'timeout');
 				}
 
-				$size += strlen($block);
-				if ($download) {
+				$block = fread($fp, 1160);
+				if ($doingbody) {
 					fwrite($download, $block);
 				}
 				else {
-					$body .= $block;
+					$response .= $block;
+					if (strpos($response, "\r\n\r\n")) {
+						list($this->headers, $block) = explode("\r\n\r\n", $response, 2);
+						$doingbody = true;
+						fwrite($download, $block);
+					}
 				}
 			}
-		}
-		$this->headers = $headers;
-
-		if ($download) {
 			fclose($download);
-		}
-		else {
-			$this->headers .= "\r\n\r\n" . $body;
 		}
 		fclose($fp);
 
