@@ -63,18 +63,11 @@ class Requests {
 	const PATCH = 'PATCH';
 
 	/**
-	 * Default size of buffer size to read streams
-	 *
-	 * @var integer
-	 */
-	const BUFFER_SIZE = 1160;
-
-	/**
 	 * Current version of Requests
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.6';
+	const VERSION = '1.6.1';
 
 	/**
 	 * Registered transport classes
@@ -88,9 +81,9 @@ class Requests {
 	 *
 	 * Use {@see get_transport()} instead
 	 *
-	 * @var array
+	 * @var string|null
 	 */
-	public static $transport = array();
+	public static $transport = null;
 
 	/**
 	 * This is a static class, do not instantiate it
@@ -154,16 +147,11 @@ class Requests {
 	 * @throws Requests_Exception If no valid transport is found (`notransport`)
 	 * @return Requests_Transport
 	 */
-	protected static function get_transport($capabilities = array()) {
+	protected static function get_transport() {
 		// Caching code, don't bother testing coverage
 		// @codeCoverageIgnoreStart
-		// array of capabilities as a string to be used as an array key
-		ksort($capabilities);
-		$cap_string = serialize($capabilities);
-
-		// Don't search for a transport if it's already been done for these $capabilities
-		if (isset(self::$transport[$cap_string]) && self::$transport[$cap_string] !== null) {
-			return new self::$transport[$cap_string]();
+		if (self::$transport !== null) {
+			return new self::$transport();
 		}
 		// @codeCoverageIgnoreEnd
 
@@ -179,17 +167,17 @@ class Requests {
 			if (!class_exists($class))
 				continue;
 
-			$result = call_user_func(array($class, 'test'), $capabilities);
+			$result = call_user_func(array($class, 'test'));
 			if ($result) {
-				self::$transport[$cap_string] = $class;
+				self::$transport = $class;
 				break;
 			}
 		}
-		if (self::$transport[$cap_string] === null) {
+		if (self::$transport === null) {
 			throw new Requests_Exception('No working transports found', 'notransport', self::$transports);
 		}
-		
-		return new self::$transport[$cap_string]();
+
+		return new self::$transport();
 	}
 
 	/**#@+
@@ -265,9 +253,7 @@ class Requests {
 	 * options:
 	 *
 	 * - `timeout`: How long should we wait for a response?
-	 *    (float, seconds with a millisecond precision, default: 10, example: 0.01)
-	 * - `connect_timeout`: How long should we wait while trying to connect?
-	 *    (float, seconds with a millisecond precision, default: 10, example: 0.01)
+	 *    (integer, seconds, default: 10)
 	 * - `useragent`: Useragent to send to the server
 	 *    (string, default: php-requests/$version)
 	 * - `follow_redirects`: Should we follow 3xx redirects?
@@ -283,8 +269,6 @@ class Requests {
 	 *    (Requests_Auth|array|boolean, default: false)
 	 * - `proxy`: Proxy details to use for proxy by-passing and authentication
 	 *    (Requests_Proxy|array|boolean, default: false)
-	 * - `max_bytes`: Limit for the response body size.
-	 *    (integer|boolean, default: false)
 	 * - `idn`: Enable IDN parsing
 	 *    (boolean, default: true)
 	 * - `transport`: Custom transport. Either a class name, or a
@@ -326,10 +310,9 @@ class Requests {
 			if (is_string($options['transport'])) {
 				$transport = new $transport();
 			}
-		} else {
-			$need_ssl = (0 === stripos($url, 'https://'));
-			$capabilities = array('ssl' => $need_ssl);
-			$transport = self::get_transport($capabilities);
+		}
+		else {
+			$transport = self::get_transport();
 		}
 		$response = $transport->request($url, $headers, $data, $options);
 
@@ -360,6 +343,9 @@ class Requests {
 	 * - `type`: HTTP request type (use Requests constants). Same as the `$type`
 	 *    parameter to {@see Requests::request}
 	 *    (string, default: `Requests::GET`)
+	 * - `data`: Associative array of options. Same as the `$options` parameter
+	 *    to {@see Requests::request}
+	 *    (array, default: see {@see Requests::request})
 	 * - `cookies`: Associative array of cookie name to value, or cookie jar.
 	 *    (array|Requests_Cookie_Jar)
 	 *
@@ -457,7 +443,6 @@ class Requests {
 	protected static function get_default_options($multirequest = false) {
 		$defaults = array(
 			'timeout' => 10,
-			'connect_timeout' => 10,
 			'useragent' => 'php-requests/' . self::VERSION,
 			'redirected' => 0,
 			'redirects' => 10,
@@ -468,7 +453,6 @@ class Requests {
 			'auth' => false,
 			'proxy' => false,
 			'cookies' => false,
-			'max_bytes' => false,
 			'idn' => true,
 			'hooks' => null,
 			'transport' => null,
@@ -492,8 +476,8 @@ class Requests {
 	 * @return array $options
 	 */
 	protected static function set_defaults(&$url, &$headers, &$data, &$type, &$options) {
-		if (!preg_match('/^http(s)?:\/\//i', $url, $matches)) {
-			throw new Requests_Exception('Only HTTP(S) requests are handled.', 'nonhttp', $url);
+		if (!preg_match('/^http(s)?:\/\//i', $url)) {
+			throw new Requests_Exception('Only HTTP requests are handled.', 'nonhttp', $url);
 		}
 
 		if (empty($options['hooks'])) {
@@ -608,7 +592,7 @@ class Requests {
 				}
 				$options['redirected']++;
 				$location = $return->headers['location'];
-				if (strpos ($location, 'http://') !== 0 && strpos ($location, 'https://') !== 0) {
+				if (strpos ($location, '/') === 0) {
 					// relative redirect, for compatibility make it absolute
 					$location = Requests_IRI::absolutize($url, $location);
 					$location = $location->uri;

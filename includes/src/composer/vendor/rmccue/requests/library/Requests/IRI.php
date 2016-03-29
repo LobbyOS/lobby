@@ -115,9 +115,11 @@ class Requests_IRI
         ),
         'http' => array(
             'port' => 80,
+            'ipath' => '/'
         ),
         'https' => array(
             'port' => 443,
+            'ipath' => '/'
         ),
     );
 
@@ -741,10 +743,6 @@ class Requests_IRI
         {
             $this->ipath = '';
         }
-        if (isset($this->ihost) && empty($this->ipath))
-        {
-            $this->ipath = '/';
-        }
         if (isset($this->normalization[$this->scheme]['iquery']) && $this->iquery === $this->normalization[$this->scheme]['iquery'])
         {
             $this->iquery = null;
@@ -906,8 +904,7 @@ class Requests_IRI
             }
             if (($port_start = strpos($remaining, ':', strpos($remaining, ']'))) !== false)
             {
-                $port = substr($remaining, $port_start + 1);
-                if ($port === false || $port === '')
+                if (($port = substr($remaining, $port_start + 1)) === false)
                 {
                     $port = null;
                 }
@@ -1063,6 +1060,7 @@ class Requests_IRI
             $cache[$ipath] = array($valid, $removed);
             $this->ipath =  ($this->scheme !== null) ? $removed : $valid;
         }
+
         $this->scheme_normalization();
         return true;
     }

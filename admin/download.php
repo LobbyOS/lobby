@@ -26,7 +26,7 @@ if($id == null || H::csrf() == false){
 }
 
 if($type == "app"){
-  $app = \Lobby\Server::Store(array(
+  $app = \Lobby\Server::store(array(
     "get" => "app",
     "id" => $id
   ));

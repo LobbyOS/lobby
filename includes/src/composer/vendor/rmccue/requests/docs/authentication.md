@@ -27,5 +27,5 @@ Note that POST/PUT can also take a data parameter, so you also need that
 before `$options`:
 
 ```php
-Requests::post('http://httpbin.org/basic-auth/user/password', array(), null, $options);
+Requests::get('http://httpbin.org/basic-auth/user/password', array(), null, $options);
 ```

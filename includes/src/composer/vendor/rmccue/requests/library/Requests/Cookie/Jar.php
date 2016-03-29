@@ -121,19 +121,12 @@ class Requests_Cookie_Jar implements ArrayAccess, IteratorAggregate {
 	 * @param string $type
 	 * @param array $options
 	 */
-	public function before_request($url, &$headers, &$data, &$type, &$options) {
-		if ( ! $url instanceof Requests_IRI ) {
-			$url = new Requests_IRI($url);
-		}
-
+	public function before_request(&$url, &$headers, &$data, &$type, &$options) {
 		if (!empty($this->cookies)) {
 			$cookies = array();
 			foreach ($this->cookies as $key => $cookie) {
 				$cookie = $this->normalizeCookie($cookie, $key);
-
-				if ( $cookie->domainMatches( $url->host ) ) {
-					$cookies[] = $cookie->formatForHeader();
-				}
+				$cookies[] = $cookie->formatForHeader();
 			}
 
 			$headers['Cookie'] = implode('; ', $cookies);
@@ -146,12 +139,7 @@ class Requests_Cookie_Jar implements ArrayAccess, IteratorAggregate {
 	 * @var Requests_Response $response
 	 */
 	public function before_redirect_check(Requests_Response &$return) {
-		$url = $return->url;
-		if ( ! $url instanceof Requests_IRI ) {
-			$url = new Requests_IRI($url);
-		}
-
-		$cookies = Requests_Cookie::parseFromHeaders($return->headers, $url);
+		$cookies = Requests_Cookie::parseFromHeaders($return->headers);
 		$this->cookies = array_merge($this->cookies, $cookies);
 		$return->cookies = $this;
 	}

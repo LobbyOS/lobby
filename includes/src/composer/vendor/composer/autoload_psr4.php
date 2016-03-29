@@ -6,5 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Symfony\\Component\\Process\\' => array($vendorDir . '/symfony/process'),
+    'Symfony\\Component\\Filesystem\\' => array($vendorDir . '/symfony/filesystem'),
     'Klein\\' => array($vendorDir . '/klein/klein/src/Klein'),
 );
