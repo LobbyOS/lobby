@@ -57,6 +57,7 @@ nav .right{
 }
 nav .right ul{
   text-align: right;
+  right: 0;
 }
 /**
  * Icons
