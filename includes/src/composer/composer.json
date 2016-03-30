@@ -1,6 +1,8 @@
 {
     "require": {
         "klein/klein": "dev-master",
-        "rmccue/requests": "dev-master"
+        "symfony/filesystem": "^3.0",
+        "symfony/process": "^3.0",
+        "rmccue/requests": "^1.6"
     }
 }

@@ -102,7 +102,7 @@ class H {
     $a = json_decode($a, true);
     $a = is_array($a) ? $a : array();
     
-    $new = array_merge_recursive($a, $values);    
+    $new = array_replace_recursive($a, $values);    
     foreach($values as $k => $v){
       if($v === false){
         unset($new[$k]);

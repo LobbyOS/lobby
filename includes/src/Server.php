@@ -6,11 +6,18 @@
 namespace Lobby;
 
 class Server {
+
+  /**
+   * Where each dependecy info can be obtained
+   */
+  public static $requireInfo = array(
+    "lobby" => array("getOption", "lobby_version")
+  );
   
   /**
    * Lobby Store
    */
-  public static function Store($data) {
+  public static function store($data) {
     /**
      * Response is in JSON
      */
@@ -80,4 +87,35 @@ class Server {
       }
     }
   }
+  
+  /**
+   * Check requirements
+   */
+  public static function checkRequirements($requires, $boolean = false){
+    $result = $requires;
+    /**
+     * How $requiredVersionInfo will look like :
+     * array(
+     *   ">=",
+     *   "5.1"
+     * )
+     */
+    foreach($requires as $dependency => $requiredVersionInfo){
+      if(isset(self::$requireInfo[$dependency])){
+        $depInfo = self::$requireInfo[$dependency];
+        $currentVersion = $depInfo[0] == "getOption" ? getOption($depInfo[1]) : "";
+        
+        /**
+         * Compare the current version and required version
+         */
+        if(version_compare($currentVersion, $requiredVersionInfo[1], $requiredVersionInfo[0])){
+          $result[$dependency] = true;
+        }else{
+          $result[$dependency] = false;
+        }
+      }
+    }
+    return $boolean ? in_array(false, $result) : $result;
+  }
+  
 }

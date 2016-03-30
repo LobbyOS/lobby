@@ -390,7 +390,7 @@ class Lobby {
       $pageURL .= "://";
       $request_uri = $relative === false ? $_SERVER["ORIG_REQUEST_URI"] : $_SERVER["REQUEST_URI"];
       
-      if($_SERVER["SERVER_PORT"] != "80") {
+      if(isset($_SERVER["SERVER_PORT"]) && $_SERVER["SERVER_PORT"] != "80") {
         $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $request_uri;
       }else{
         $pageURL .= $_SERVER["SERVER_NAME"] . $request_uri;
