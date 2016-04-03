@@ -74,7 +74,7 @@ class App {
     }
   }
   
-  public function page($page = ""){
+  public function page($page){
     return "auto";
   }
   
