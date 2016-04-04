@@ -2,7 +2,7 @@
     "require": {
         "klein/klein": "dev-master",
         "symfony/filesystem": "^3.0",
-        "symfony/process": "^3.0",
-        "rmccue/requests": "^1.6"
+        "rmccue/requests": "^1.6",
+        "francium/process": "dev-master"
     }
 }
