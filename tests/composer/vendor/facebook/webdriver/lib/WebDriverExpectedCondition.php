@@ -379,7 +379,7 @@ class WebDriverExpectedCondition {
   /**
    * An expectation for whether an alert() box is present.
    *
-   * @return WebDriverExpectedCondition<?WebDriverAlert> if alert() is present,
+   * @return WebDriverExpectedCondition<?phpWebDriverAlert> if alert() is present,
    *         null otherwise.
    */
   public static function alertIsPresent() {
