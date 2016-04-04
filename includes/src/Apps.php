@@ -1,6 +1,6 @@
 <?php
 /**
- * \Lobby\App
+ * \Lobby\Apps
  * Associated with all kinds of operations with apps
  */
 
@@ -106,6 +106,7 @@ class Apps extends \Lobby {
       if( is_dir($appDir) && file_exists("$appDir/manifest.json") ){
         $valid = true;
       }
+      
       if( $valid === true && file_exists("$appDir/App.php") ){
         /**
          * Make sure the App class exists
@@ -125,6 +126,7 @@ class Apps extends \Lobby {
       }else{
         $valid = false; // The App.php file is not found
       }
+      
       self::$cache["valid_apps"][$name] = $valid;
     }
     return $valid;

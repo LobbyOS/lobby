@@ -82,7 +82,7 @@ class App {
    * Write messages to log file
    */
   public function log($msg){
-    \Lobby::log($msg, "apps.log");
+    \Lobby::log($msg, "app.". $this->id . ".log");
   }
 }
 ?>
