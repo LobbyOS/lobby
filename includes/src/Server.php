@@ -6,13 +6,6 @@
 namespace Lobby;
 
 class Server {
-
-  /**
-   * Where each dependecy info can be obtained
-   */
-  public static $requireInfo = array(
-    "lobby" => array("getOption", "lobby_version")
-  );
   
   /**
    * Lobby Store
@@ -89,6 +82,24 @@ class Server {
   }
   
   /**
+   * Get Version of a component
+   */
+  public static function getDependencyVersion($dependency){
+    
+    switch($dependency){
+      case "lobby":
+        return getOption("lobby_version");
+        break;
+      case "curl":
+        return function_exists("curl_version") ? curl_version() : 0;
+        break;
+      default:
+        return 0;
+    }
+    
+  }
+  
+  /**
    * Check requirements
    */
   public static function checkRequirements($requires, $boolean = false){
@@ -102,8 +113,7 @@ class Server {
      */
     foreach($requires as $dependency => $requiredVersionInfo){
       if(isset(self::$requireInfo[$dependency])){
-        $depInfo = self::$requireInfo[$dependency];
-        $currentVersion = $depInfo[0] == "getOption" ? getOption($depInfo[1]) : "";
+        $currentVersion = self::getDependencyVersion($dependency);
         
         /**
          * Compare the current version and required version

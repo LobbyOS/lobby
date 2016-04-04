@@ -4,8 +4,52 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a5da60443ce4d0ffc78bd0b2c3a29fe0",
+    "hash": "0bb869e9684be218c6e59f7000b6d36a",
     "packages": [
+        {
+            "name": "francium/process",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/subins2000/Francium-Process.git",
+                "reference": "8a66c12a5986396c0a34364620ed9306d0a9ccad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/subins2000/Francium-Process/zipball/8a66c12a5986396c0a34364620ed9306d0a9ccad",
+                "reference": "8a66c12a5986396c0a34364620ed9306d0a9ccad",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Francium\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache 2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Subin Siby",
+                    "homepage": "http://subinsb.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Run Background Process with Cross Platform Support",
+            "homepage": "http://subinsb.com/francium/process",
+            "keywords": [
+                "background",
+                "cross",
+                "platform",
+                "process"
+            ],
+            "time": "2016-03-30 18:17:46"
+        },
         {
             "name": "klein/klein",
             "version": "dev-master",
@@ -113,16 +157,16 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v3.0.3",
+            "version": "v3.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "23ae8f9648d0a7fe94a47c8e20e5bf37c489a451"
+                "reference": "f82499a459dcade2ea56df94cc58b19c8bde3d20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/23ae8f9648d0a7fe94a47c8e20e5bf37c489a451",
-                "reference": "23ae8f9648d0a7fe94a47c8e20e5bf37c489a451",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/f82499a459dcade2ea56df94cc58b19c8bde3d20",
+                "reference": "f82499a459dcade2ea56df94cc58b19c8bde3d20",
                 "shasum": ""
             },
             "require": {
@@ -158,63 +202,15 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2016-02-23 15:16:06"
-        },
-        {
-            "name": "symfony/process",
-            "version": "v3.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/process.git",
-                "reference": "dfecef47506179db2501430e732adbf3793099c8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/dfecef47506179db2501430e732adbf3793099c8",
-                "reference": "dfecef47506179db2501430e732adbf3793099c8",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.9"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Process\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Process Component",
-            "homepage": "https://symfony.com",
-            "time": "2016-02-02 13:44:19"
+            "time": "2016-03-27 10:24:39"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "klein/klein": 20
+        "klein/klein": 20,
+        "francium/process": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
