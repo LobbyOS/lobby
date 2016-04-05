@@ -6,3 +6,17 @@ includes/lib/lobby/css
 includes/lib/lobby/image
 includes/lib/lobby/ajax/app.php
 includes/lib/lobby/ajax/net.php
+includes/src/App.php
+includes/src/Apps.php
+includes/src/ca_bundle.crt
+includes/src/DB.php
+includes/src/FS.php
+includes/src/Install.php
+includes/src/l10n.php
+includes/src/Module.php
+includes/src/Modules.php
+includes/src/Router.php
+includes/src/Server.php
+includes/src/Time.php
+includes/src/Update.php
+includes/src/UI
