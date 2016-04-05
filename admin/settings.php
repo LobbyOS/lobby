@@ -15,7 +15,7 @@
       <div class="content">
         <?php
         if(isset($_GET['updated']) && H::csrf()){
-          sss("Updated", "Lobby was successfully updated to Version <b>". getOption("lobby_version") ."</b> from the old ". htmlspecialchars($_GET['oldver']) ." version.");
+          sss("Updated", "Lobby was successfully updated to Version <b>". \Lobby::$version ."</b> from the old ". htmlspecialchars($_GET['oldver']) ." version.");
         }
         if(isset($_POST['update_settings']) && \H::csrf()){
           /**
@@ -77,11 +77,11 @@
           <tbody>
             <tr>
               <td>Version</td>
-              <td><?php echo getOption("lobby_version");?></td>
+              <td><?php echo \Lobby::$version;?></td>
             </tr>
             <tr>
               <td>Release Date</td>
-              <td><?php echo getOption("lobby_version_release");?></td>
+              <td><?php echo \Lobby::$versionReleased;?></td>
             </tr>
                <tr>
               <td>Latest Version</td>
@@ -98,7 +98,7 @@
           <a class='btn blue' href='<?php echo L_URL;?>/admin/check-updates.php'>Check For Updates</a>
           <?php
           /* Check if the current version is not the latest version */
-          if(getOption("lobby_version") != getOption("lobby_latest_version")){
+          if(\Lobby::$version != getOption("lobby_latest_version")){
           ?>
             <div clear></div>
             <a class="btn red" href="update.php">Update To Version <?php echo getOption("lobby_latest_version");?></a>

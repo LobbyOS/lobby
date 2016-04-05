@@ -57,7 +57,7 @@ if(\Lobby::curPage() != "/admin/install.php"){
    * "Update Available" icon on the right side of panel
    */
   $AppUpdates = json_decode(getOption("app_updates"), true);
-  $lobby_version = getOption("lobby_version");
+  $lobby_version = \Lobby::$version;
   $latestVersion = getOption("lobby_latest_version");
   
   if(\Lobby\FS::exists("/upgrade.lobby")){

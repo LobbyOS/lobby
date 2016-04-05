@@ -66,7 +66,7 @@ require L_DIR . "/includes/src/Update.php";
           </form>
         <?php
         }
-        if(getOption("lobby_version") == getOption("lobby_latest_version") && !\H::i("action", "", "POST") == "updateApps"){
+        if(\Lobby::$version == getOption("lobby_latest_version") && !\H::i("action", "", "POST") == "updateApps"){
           echo "<h2>Lobby</h2>";
           sss("Latest Version", "You are using the latest version of Lobby. There are no new releases yet.");
         }elseif(!isset($_GET['step']) && !\H::i("action", "", "POST") == "updateApps"){
