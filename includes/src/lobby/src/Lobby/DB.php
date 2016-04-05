@@ -1,6 +1,11 @@
 <?php
 namespace Lobby;
 
+/**
+ * DB = DataBase
+ * Handling of Database
+ */
+
 class DB extends \Lobby {
   
   public static $prefix = "", $dbh;
