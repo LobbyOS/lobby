@@ -1,0 +1,16 @@
+{
+    "repositories": [
+        {
+            "type": "path",
+            "url": "lobby/"
+        }
+    ],
+    "require": {
+        "klein/klein": "dev-master",
+        "symfony/filesystem": "^3.0",
+        "rmccue/requests": "^1.6",
+        "francium/process": "dev-master",
+        "lobby/lobby": "*",
+        "stolz/assets": "^0.1.8"
+    }
+}

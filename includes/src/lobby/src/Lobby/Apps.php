@@ -111,7 +111,6 @@ class Apps extends \Lobby {
         /**
          * Make sure the App class exists
          */
-        require_once L_DIR . "/includes/src/App.php";
         require_once "$appDir/App.php";
       
         $className = "\\Lobby\App\\" . str_replace("-", "_", $name);

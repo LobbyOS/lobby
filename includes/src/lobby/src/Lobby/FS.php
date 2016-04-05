@@ -1,12 +1,21 @@
 <?php
+namespace Lobby;
+
 /**
  * FileSystem of Lobby
  * Retreive, Modify & Write Files inside Lobby
  */
 
-namespace Lobby;
-
 class FS {
+
+  public static function init(){
+    $lobbyInfo = self::get("/lobby.json");
+    if($lobbyInfo !== false){
+      $lobbyInfo = json_decode($lobbyInfo);
+      \Lobby::$version = $lobbyInfo->version;
+      \Lobby::$versionReleased = $lobbyInfo->released;
+    }
+  }
   
   /**
    * Make relative path of Lobby to Absolute Path
@@ -36,7 +45,8 @@ class FS {
   }
   
   public static function get($file){
-    return file_get_contents(self::loc($file));
+    $contents = file_get_contents(self::loc($file));
+    return $contents == false ? false : $contents;
   }
   
   /**
@@ -86,3 +96,4 @@ class FS {
     }
   }
 }
+\Lobby\FS::init();

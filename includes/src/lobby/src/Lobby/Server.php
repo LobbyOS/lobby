@@ -82,24 +82,6 @@ class Server {
   }
   
   /**
-   * Get Version of a component
-   */
-  public static function getDependencyVersion($dependency){
-    
-    switch($dependency){
-      case "lobby":
-        return getOption("lobby_version");
-        break;
-      case "curl":
-        return function_exists("curl_version") ? curl_version() : 0;
-        break;
-      default:
-        return 0;
-    }
-    
-  }
-  
-  /**
    * Check requirements
    */
   public static function checkRequirements($requires, $boolean = false){

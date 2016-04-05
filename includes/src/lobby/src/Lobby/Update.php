@@ -61,7 +61,7 @@ class Update extends \Lobby {
       $admin_previously_installed = true;
     }
     
-    $oldVer = getOption("lobby_version");
+    $oldVer = \Lobby::$version;
     $latest_version = getOption("lobby_latest_version");
     $url = \Lobby\Server::download("lobby", $latest_version);
       
@@ -95,7 +95,7 @@ class Update extends \Lobby {
     }
     
     $latest_version = getOption("lobby_latest_version");
-    \Lobby::log("Updated Lobby Software To version {$latest_version}");
+    \Lobby::log("Updated Lobby to version {$latest_version}");
  
     /**
      * Remove Depreciated Files
@@ -135,10 +135,6 @@ class Update extends \Lobby {
       }
       \Lobby::log("Updated Lobby Database");
     }
-    
-    $oldVer = getOption("lobby_version");
-    saveOption("lobby_version", $latest_version);
-    saveOption("lobby_version_release", getOption("lobby_latest_version_release"));
     
     \Lobby\FS::remove("/upgrade.lobby");
     

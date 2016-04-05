@@ -21,6 +21,4 @@ define("THEMES_URL", L_URL . "/contents/themes");
  * It will first, load the core modules
  * Then the custom modules
  */
-require_once L_DIR . "/includes/src/Module.php";
-require_once L_DIR . "/includes/src/Modules.php";
 \Lobby\Modules::load();

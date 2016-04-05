@@ -90,3 +90,7 @@ function getJSONData($key){
 function saveJSONData($key, $values){
   return \H::saveJSONData($key, $values);
 }
+
+function csrf($type){
+  return \H::csrf($type);
+}

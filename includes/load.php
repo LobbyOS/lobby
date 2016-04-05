@@ -23,29 +23,10 @@ $lobbyBase = substr($lobbyBase, 0) == "/" ? substr_replace($lobbyBase, "", 0) : 
 $_SERVER['REQUEST_URI'] = str_replace($lobbyBase, "", $_SERVER['REQUEST_URI']);
 $_SERVER['REQUEST_URI'] = substr($_SERVER['REQUEST_URI'], -1) == "/" && $_SERVER['REQUEST_URI'] != "/" ? substr_replace($_SERVER['REQUEST_URI'], "", -1) : $_SERVER['REQUEST_URI'];
 
-require_once L_DIR . "/includes/src/composer/vendor/autoload.php";
-require_once L_DIR . "/includes/src/l10n.php";
-require_once L_DIR . "/includes/src/Helpers.php";
-require_once L_DIR . "/includes/src/FileSystem.php"; // The FileSystem Class
-
-require_once L_DIR . "/includes/src/Lobby.php"; /* The Core */
-require_once L_DIR . "/includes/src/Database.php"; /* The Database Class */
-require_once L_DIR . "/includes/src/Apps.php"; /* The App Class */
-require_once L_DIR . "/includes/src/Router.php"; /* The Router Class */
-require_once L_DIR . "/includes/src/Server.php"; /* The File System Class */
+require_once L_DIR . "/includes/src/vendor/autoload.php";
 
 require_once L_DIR . "/includes/functions.php"; /* Non class functions */
 require_once L_DIR . "/includes/extra.php"; /* Define extra variables or constants */
-
-/**
- * Time
- */
-require_once L_DIR . "/includes/src/Time.php";
-
-/**
- * The UI Classes
- */
-require_once L_DIR . "/includes/src/ui/Themes.php";
 
 /**
  * Run not on CDN files serving
