@@ -5,8 +5,10 @@
  */
 class Lobby {
 
-  public static $debug, $root, $url, $host_name, $title, $serverCheck, $db, $lid, $error = "";
+  public static $version, $versionReleased, $debug, $root, $url, $host_name, $title, $serverCheck, $db, $lid, $error = "";
+  
   public static $installed = false;
+  
   public static $sysInfo, $hooks = array();
 
   public static $js, $css = array();
@@ -24,15 +26,18 @@ class Lobby {
   );
   
   public static $statuses = array();
+  
   private static $status = null;
  
   public static function init(){
+    
     /**
      * Callback on fatal errors
      */
     register_shutdown_function(function(){
       return \Lobby::fatalErrorHandler();
     });
+    
     self::sysinfo();
     self::config();
     
@@ -45,17 +50,18 @@ class Lobby {
       $subdir = str_replace($docDir, '', L_DIR);
       $urladdr = $_SERVER['HTTP_HOST'] . $subdir;
       $urladdr = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://" . $urladdr;
-      self::$url = rtrim($urladdr, "/");
       
-      unset($tempPath1, $tempPath2, $tempPath3, $urladdr);
+      self::$url = rtrim($urladdr, "/");
       self::$host_name = $_SERVER['HTTP_HOST'];
     }
+    
   }
   
   /**
    * Reads configuration & set Lobby according to it
    */
   public static function config($db = false){
+    
     if(file_exists(L_DIR . "/config.php")){
       $config = include(L_DIR . "/config.php");
       
@@ -74,9 +80,11 @@ class Lobby {
       }else{
         return false;
       }
+      
     }else{
       return false;
     }
+    
   }
  
   public static function addScript($name, $url){
@@ -431,5 +439,24 @@ class Lobby {
       return $full === false ? $parts['path'] : $_SERVER["REQUEST_URI"];
     }
   }
+  
+  /**
+   * Get Version of a component
+   */
+  public static function getDependencyVersion($dependency){
+    
+    switch($dependency){
+      case "lobby":
+        return \Lobby::$version;
+        break;
+      case "curl":
+        return function_exists("curl_version") ? curl_version() : 0;
+        break;
+      default:
+        return 0;
+    }
+    
+  }
+  
 }
 \Lobby::init();

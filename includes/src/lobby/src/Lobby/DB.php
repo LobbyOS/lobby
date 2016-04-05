@@ -6,12 +6,13 @@ class DB extends \Lobby {
   public static $prefix = "", $dbh;
   
   /**
-   * The DMBS begin used - MySQL or SQLite
+   * The DBMS begin used - MySQL or SQLite
    */
   public static $type;
  
   public static function init(){
     $root = L_DIR;
+    
     /**
      * Get DB config
      */
@@ -50,7 +51,7 @@ class DB extends \Lobby {
           /**
            * Check if Lobby tables exist
            */
-          $sql = self::$dbh->query("SELECT COUNT(1) FROM sqlite_master WHERE type = 'table' AND (`name` = 'l_data' OR `name` = 'l_options')");
+          $sql = self::$dbh->query("SELECT COUNT(1) FROM `sqlite_master` WHERE `type` = 'table' AND (`name` = 'l_data' OR `name` = 'l_options')");
           $notable = $sql->fetchColumn() === "2" ? false : true;
         }
 
@@ -211,4 +212,3 @@ class DB extends \Lobby {
   }
 }
 \Lobby\DB::init();
-?>

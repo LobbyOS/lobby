@@ -1,8 +1,6 @@
 <?php
 namespace Lobby\UI;
 
-require_once L_DIR . "/includes/src/ui/Panel.php";
-
 class Themes extends \Lobby {
   
   /**
@@ -66,8 +64,9 @@ class Themes extends \Lobby {
    * Load a theme
    */
   public static function loadTheme(){
-    require_once L_DIR . "/includes/src/ui/Theme.php";
+    
     require_once THEME_DIR . "/Theme.php";
+    
     $className = "\Lobby\UI\Themes\\" . self::$theme;
     $GLOBALS["THEME_OBJ"] = new $className();
     
@@ -93,6 +92,7 @@ class Themes extends \Lobby {
         echo $GLOBALS["THEME_OBJ"]->inc("/src/panel/load.php");
       });
     }
+    
   }
   
   /**

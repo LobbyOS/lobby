@@ -1,8 +1,8 @@
 <?php
+namespace Lobby\UI;
 /**
  * Makes the Top Panel
  */
-namespace Lobby\UI;
 
 class Panel {
 
