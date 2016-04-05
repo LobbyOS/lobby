@@ -1,6 +1,6 @@
 <?php
 require "../load.php";
-require L_DIR . "/includes/src/Install.php";
+
 $install_step = H::i('step');
 ?>
 <!DOCTYPE html>
