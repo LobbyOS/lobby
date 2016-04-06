@@ -5,7 +5,7 @@ class Modules extends \Lobby {
 
   private static $core_modules = array(), $custom_modules = array(), $app_modules = array(), $modules = array();
   
-  public static function init(){
+  public static function __constructStatic(){
     $apps = \Lobby\Apps::getApps();
     foreach($apps as $app){
       $module_name = 'app_' . str_replace("-", "_", $app);
@@ -84,4 +84,3 @@ class Modules extends \Lobby {
   }
   
 }
-\Lobby\Modules::init();

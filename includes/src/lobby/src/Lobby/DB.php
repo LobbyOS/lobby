@@ -15,7 +15,7 @@ class DB extends \Lobby {
    */
   public static $type;
  
-  public static function init(){
+  public static function __constructStatic(){
     $root = L_DIR;
     
     /**
@@ -215,5 +215,5 @@ class DB extends \Lobby {
      }
     }
   }
+  
 }
-\Lobby\DB::init();

@@ -8,8 +8,10 @@ $baseDir = dirname($vendorDir);
 return array(
     'Symfony\\Component\\Filesystem\\' => array($vendorDir . '/symfony/filesystem'),
     'Stolz\\Assets\\' => array($vendorDir . '/stolz/assets/src'),
-    'Lobby\\' => array($vendorDir . '/lobby/lobby/src'),
+    'Lobby\\UI\\' => array($vendorDir . '/lobby/lobby/src/Lobby/UI'),
+    'Lobby\\' => array($vendorDir . '/lobby/lobby/src/Lobby'),
     'Klein\\' => array($vendorDir . '/klein/klein/src/Klein'),
     'Francium\\' => array($vendorDir . '/francium/process/src'),
-    '' => array($vendorDir . '/lobby/lobby/src'),
+    'ConstructStatic\\' => array($vendorDir . '/vladimmi/construct-static/src'),
+    'Composer\\Semver\\' => array($vendorDir . '/composer/semver/src'),
 );

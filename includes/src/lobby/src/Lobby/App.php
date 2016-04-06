@@ -85,4 +85,3 @@ class App {
     \Lobby::log($msg, "app.". $this->id . ".log");
   }
 }
-?>
