@@ -4,9 +4,71 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "91b6209e0877ba3f24faa8b9edba60a6",
-    "content-hash": "906322ee4333e0edf023c79801d1161c",
+    "hash": "f4fd051dfe7169da78087f7e47d1d318",
+    "content-hash": "0d3dc2b243940721eb07a5f8e3ba7c0c",
     "packages": [
+        {
+            "name": "composer/semver",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/semver.git",
+                "reference": "84c47f3d8901440403217afc120683c7385aecb8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/composer/semver/zipball/84c47f3d8901440403217afc120683c7385aecb8",
+                "reference": "84c47f3d8901440403217afc120683c7385aecb8",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3.2 || ^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.5 || ^5.0.5",
+                "phpunit/phpunit-mock-objects": "2.3.0 || ^3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Composer\\Semver\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nils Adermann",
+                    "email": "naderman@naderman.de",
+                    "homepage": "http://www.naderman.de"
+                },
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "http://seld.be"
+                },
+                {
+                    "name": "Rob Bast",
+                    "email": "rob.bast@gmail.com",
+                    "homepage": "http://robbast.nl"
+                }
+            ],
+            "description": "Semver library that offers utilities, version constraint parsing and validation.",
+            "keywords": [
+                "semantic",
+                "semver",
+                "validation",
+                "versioning"
+            ],
+            "time": "2016-03-30 13:16:03"
+        },
         {
             "name": "francium/process",
             "version": "dev-master",
@@ -109,11 +171,11 @@
         },
         {
             "name": "lobby/lobby",
-            "version": "0.1",
+            "version": "0.5.27",
             "dist": {
                 "type": "path",
                 "url": "lobby/",
-                "reference": "ad7769ef6edf28667670eed9d3090d714aa66c41",
+                "reference": "85dec61738a9cd3b9e8228f165c203dcf684c7d1",
                 "shasum": null
             },
             "require": {
@@ -121,9 +183,16 @@
             },
             "type": "library",
             "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-0": {
+                    "Lobby": "src/",
+                    "H": "src/"
+                },
                 "psr-4": {
-                    "Lobby\\": "src",
-                    "": "src"
+                    "Lobby\\": "src/Lobby",
+                    "Lobby\\UI\\": "src/Lobby/UI"
                 }
             },
             "license": [
@@ -342,6 +411,36 @@
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
             "time": "2016-03-27 10:24:39"
+        },
+        {
+            "name": "vladimmi/construct-static",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vladimmi/construct-static.git",
+                "reference": "4a78a22ce740cda840909d4af01f42b7ff140c08"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vladimmi/construct-static/zipball/4a78a22ce740cda840909d4af01f42b7ff140c08",
+                "reference": "4a78a22ce740cda840909d4af01f42b7ff140c08",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ConstructStatic\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "vladimmi",
+                    "email": "vladimmi@gmail.com"
+                }
+            ],
+            "description": "Small Composer wrapper to implement static class constructors",
+            "time": "2016-03-28 15:28:30"
         }
     ],
     "packages-dev": [],
@@ -349,7 +448,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "klein/klein": 20,
-        "francium/process": 20
+        "francium/process": 20,
+        "vladimmi/construct-static": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -206,43 +206,6 @@
         ]
     },
     {
-        "name": "lobby/lobby",
-        "version": "0.1",
-        "version_normalized": "0.1.0.0",
-        "dist": {
-            "type": "path",
-            "url": "lobby/",
-            "reference": "ad7769ef6edf28667670eed9d3090d714aa66c41",
-            "shasum": null
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Lobby\\": "src",
-                "": "src"
-            }
-        },
-        "license": [
-            "Apache 2.0"
-        ],
-        "authors": [
-            {
-                "name": "Subin Siby",
-                "homepage": "http://subinsb.com",
-                "role": "Developer"
-            }
-        ],
-        "description": "Lobby Core",
-        "homepage": "http://lobby.subinsb.com",
-        "keywords": [
-            "lobby"
-        ]
-    },
-    {
         "name": "mrclay/minify",
         "version": "2.3.0",
         "version_normalized": "2.3.0.0",
@@ -347,6 +310,146 @@
             "laravel",
             "minify",
             "pipeline"
+        ]
+    },
+    {
+        "name": "vladimmi/construct-static",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/vladimmi/construct-static.git",
+            "reference": "4a78a22ce740cda840909d4af01f42b7ff140c08"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/vladimmi/construct-static/zipball/4a78a22ce740cda840909d4af01f42b7ff140c08",
+            "reference": "4a78a22ce740cda840909d4af01f42b7ff140c08",
+            "shasum": ""
+        },
+        "time": "2016-03-28 15:28:30",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "ConstructStatic\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "authors": [
+            {
+                "name": "vladimmi",
+                "email": "vladimmi@gmail.com"
+            }
+        ],
+        "description": "Small Composer wrapper to implement static class constructors"
+    },
+    {
+        "name": "lobby/lobby",
+        "version": "0.5.27",
+        "version_normalized": "0.5.27.0",
+        "dist": {
+            "type": "path",
+            "url": "lobby/",
+            "reference": "85dec61738a9cd3b9e8228f165c203dcf684c7d1",
+            "shasum": null
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "src/functions.php"
+            ],
+            "psr-0": {
+                "Lobby": "src/",
+                "H": "src/"
+            },
+            "psr-4": {
+                "Lobby\\": "src/Lobby",
+                "Lobby\\UI\\": "src/Lobby/UI"
+            }
+        },
+        "license": [
+            "Apache 2.0"
+        ],
+        "authors": [
+            {
+                "name": "Subin Siby",
+                "homepage": "http://subinsb.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "Lobby Core",
+        "homepage": "http://lobby.subinsb.com",
+        "keywords": [
+            "lobby"
+        ]
+    },
+    {
+        "name": "composer/semver",
+        "version": "1.4.0",
+        "version_normalized": "1.4.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/composer/semver.git",
+            "reference": "84c47f3d8901440403217afc120683c7385aecb8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/composer/semver/zipball/84c47f3d8901440403217afc120683c7385aecb8",
+            "reference": "84c47f3d8901440403217afc120683c7385aecb8",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.3.2 || ^7.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.5 || ^5.0.5",
+            "phpunit/phpunit-mock-objects": "2.3.0 || ^3.0"
+        },
+        "time": "2016-03-30 13:16:03",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Composer\\Semver\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nils Adermann",
+                "email": "naderman@naderman.de",
+                "homepage": "http://www.naderman.de"
+            },
+            {
+                "name": "Jordi Boggiano",
+                "email": "j.boggiano@seld.be",
+                "homepage": "http://seld.be"
+            },
+            {
+                "name": "Rob Bast",
+                "email": "rob.bast@gmail.com",
+                "homepage": "http://robbast.nl"
+            }
+        ],
+        "description": "Semver library that offers utilities, version constraint parsing and validation.",
+        "keywords": [
+            "semantic",
+            "semver",
+            "validation",
+            "versioning"
         ]
     }
 ]

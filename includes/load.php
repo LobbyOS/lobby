@@ -23,10 +23,18 @@ $lobbyBase = substr($lobbyBase, 0) == "/" ? substr_replace($lobbyBase, "", 0) : 
 $_SERVER['REQUEST_URI'] = str_replace($lobbyBase, "", $_SERVER['REQUEST_URI']);
 $_SERVER['REQUEST_URI'] = substr($_SERVER['REQUEST_URI'], -1) == "/" && $_SERVER['REQUEST_URI'] != "/" ? substr_replace($_SERVER['REQUEST_URI'], "", -1) : $_SERVER['REQUEST_URI'];
 
-require_once L_DIR . "/includes/src/vendor/autoload.php";
+/**
+ * Autoload and initialize classes
+ */
+$composer = require_once L_DIR . "/includes/src/vendor/autoload.php";
+$composer->loadClass("Lobby\\DB");
 
-require_once L_DIR . "/includes/functions.php"; /* Non class functions */
-require_once L_DIR . "/includes/extra.php"; /* Define extra variables or constants */
+$loader = new ConstructStatic\Loader($composer);
+$loader->processLoadedClasses();
+
+require_once L_DIR . "/includes/extra.php";
+
+$loader->loadClass("Lobby\\UI\\Themes");
 
 /**
  * Run not on CDN files serving
