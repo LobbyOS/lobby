@@ -10,7 +10,9 @@
         "symfony/filesystem": "^3.0",
         "rmccue/requests": "^1.6",
         "francium/process": "dev-master",
-        "lobby/lobby": "*",
-        "stolz/assets": "^0.1.8"
+        "stolz/assets": "^0.1.8",
+        "vladimmi/construct-static": "dev-master@dev",
+        "lobby/lobby": "^0.5.26",
+        "composer/semver": "^1.4"
     }
 }

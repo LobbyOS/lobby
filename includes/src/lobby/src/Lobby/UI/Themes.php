@@ -14,7 +14,7 @@ class Themes extends \Lobby {
   /**
    * Initialization
    */
-  public static function init(){
+  public static function __constructStatic(){
     self::$theme = getOption("active_theme");
     if(self::$theme == null){
       self::$theme = "hine";
@@ -123,4 +123,3 @@ class Themes extends \Lobby {
   }
   
 }
-\Lobby\UI\Themes::init();

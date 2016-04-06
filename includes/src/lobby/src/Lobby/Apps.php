@@ -262,13 +262,16 @@ class Apps extends \Lobby {
       return false;
     }
   }
+  
+  public function checkRequirements(){
+    $this->info
+  }
  
   /**
    * Return the app class object
    */
   public function run(){
     if($this->app){
-      require_once L_DIR . "/includes/src/App.php";
       require_once $this->appDir . "/App.php";
       
       \Lobby::addScript("app", "/includes/lib/lobby/js/app.js");

@@ -3,6 +3,7 @@
  * The Heart of Lobby
  * Other classes extend from this class
  */
+ 
 class Lobby {
 
   public static $version, $versionReleased, $debug, $root, $url, $host_name, $title, $serverCheck, $db, $lid, $error = "";
@@ -29,7 +30,7 @@ class Lobby {
   
   private static $status = null;
  
-  public static function init(){
+  public static function __constructStatic(){
     
     /**
      * Callback on fatal errors
@@ -54,7 +55,6 @@ class Lobby {
       self::$url = rtrim($urladdr, "/");
       self::$host_name = $_SERVER['HTTP_HOST'];
     }
-    
   }
   
   /**
@@ -459,4 +459,3 @@ class Lobby {
   }
   
 }
-\Lobby::init();

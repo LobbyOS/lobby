@@ -8,7 +8,7 @@ namespace Lobby;
 
 class FS {
 
-  public static function init(){
+  public static function __constructStatic(){
     $lobbyInfo = self::get("/lobby.json");
     if($lobbyInfo !== false){
       $lobbyInfo = json_decode($lobbyInfo);
@@ -96,4 +96,3 @@ class FS {
     }
   }
 }
-\Lobby\FS::init();

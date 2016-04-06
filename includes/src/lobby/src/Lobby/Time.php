@@ -5,7 +5,7 @@ class Time {
   
   private static $tz = "UTC";
   
-  public static function init(){
+  public static function __constructStatic(){
     /**
      * Default timezone of Lobby is UTC
      */
@@ -39,4 +39,3 @@ class Time {
   }
 
 }
-\Lobby\Time::init();
