@@ -10,7 +10,7 @@ class Router {
   
   public static $router;
   
-  public static function init(){
+  public static function __constructStatic(){
     self::$router = new \Klein\Klein();
   }
   
@@ -191,4 +191,3 @@ class Router {
   }
   
 }
-\Lobby\Router::init();

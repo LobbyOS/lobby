@@ -13,14 +13,18 @@
     }
   ],
   "autoload": {
+    "files": ["src/functions.php"],
+    "psr-0": {
+      "Lobby": "src/",
+      "H": "src/"
+    },
     "psr-4": {
-      "" : "src/",
-      "Lobby\\": "src/Lobby/"
+      "Lobby\\": "src/Lobby",
+      "Lobby\\UI\\": "src/Lobby/UI"
     }
   },
   "require": {
     "php": ">=5.3.0"
   },
-  "preferred-install": "dev",
-  "version": "0.1"
+  "version": "0.5.27"
 }
