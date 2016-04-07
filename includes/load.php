@@ -35,6 +35,7 @@ $loader->processLoadedClasses();
 require_once L_DIR . "/includes/extra.php";
 
 $loader->loadClass("Lobby\\UI\\Themes");
+$loader->loadClass("Lobby\\Require");
 
 /**
  * Run not on CDN files serving

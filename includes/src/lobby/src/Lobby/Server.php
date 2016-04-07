@@ -45,6 +45,7 @@ class Server {
     return $url;
   }
   
+  
   /**
    * Get updates
    */
@@ -79,35 +80,6 @@ class Server {
         }
       }
     }
-  }
-  
-  /**
-   * Check requirements
-   */
-  public static function checkRequirements($requires, $boolean = false){
-    $result = $requires;
-    /**
-     * How $requiredVersionInfo will look like :
-     * array(
-     *   ">=",
-     *   "5.1"
-     * )
-     */
-    foreach($requires as $dependency => $requiredVersionInfo){
-      if(isset(self::$requireInfo[$dependency])){
-        $currentVersion = self::getDependencyVersion($dependency);
-        
-        /**
-         * Compare the current version and required version
-         */
-        if(version_compare($currentVersion, $requiredVersionInfo[1], $requiredVersionInfo[0])){
-          $result[$dependency] = true;
-        }else{
-          $result[$dependency] = false;
-        }
-      }
-    }
-    return $boolean ? in_array(false, $result) : $result;
   }
   
 }

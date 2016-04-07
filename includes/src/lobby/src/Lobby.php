@@ -440,22 +440,4 @@ class Lobby {
     }
   }
   
-  /**
-   * Get Version of a component
-   */
-  public static function getDependencyVersion($dependency){
-    
-    switch($dependency){
-      case "lobby":
-        return \Lobby::$version;
-        break;
-      case "curl":
-        return function_exists("curl_version") ? curl_version() : 0;
-        break;
-      default:
-        return 0;
-    }
-    
-  }
-  
 }
