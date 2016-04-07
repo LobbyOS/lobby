@@ -62,7 +62,7 @@ if($AppID !== null){
                   /**
                    * Check whether Lobby version is compatible
                    */
-                  if(\Lobby\Server::checkRequirements($requires, true)){
+                  if(\Lobby\Need::checkRequirements($requires, true)){
                     echo "<a class='btn red disabled' title='The app requirements are not satisfied. See `Info` tab.'>Install</a>";
                   }else{
                     echo \Lobby::l("/admin/install-app.php?id={$_GET['id']}" . H::csrf("g"), "Install", "class='btn red'");
@@ -96,12 +96,12 @@ if($AppID !== null){
                   <div class="chip"><span>Requirements :</span></div>
                     <ul class="collection" style="margin-left: 20px;">
                       <?php
-                      $requirementsInSystemInfo = \Lobby\Server::checkRequirements($requires);
+                      $requirementsInSystemInfo = \Lobby\Need::checkRequirements($requires);
                       foreach($requires as $k => $v){
                         if($requirementsInSystemInfo[$k]){
-                          echo "<li class='collection-item'>$k {$v[0]} {$v[1]}</li>";
+                          echo "<li class='collection-item'>$k $v</li>";
                         }else{
-                          echo "<li class='collection-item red' title=''>$k {$v[0]} {$v[1]}</li>";
+                          echo "<li class='collection-item red' title=''>$k $v</li>";
                         }
                       }
                       ?>
