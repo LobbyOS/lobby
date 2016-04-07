@@ -193,7 +193,7 @@ $install_step = H::i('step');
                   <td width="50%"><?php
                     $sqlite_version = stristr($info, 'SQLite Library'); 
                     preg_match('/[1-9].[0-9].[1-9][0-9]/', $sqlite_version, $match); 
-                    $sqlite_version = $match[0];
+                    $sqlite_version = isset($match[0]) ? $match[0] : "";
                     if(version_compare($sqlite_version, '3.8.0') >= 0){
                       $whitelist = array(
                           '127.0.0.1',
