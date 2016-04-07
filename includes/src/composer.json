@@ -13,6 +13,8 @@
         "stolz/assets": "^0.1.8",
         "vladimmi/construct-static": "dev-master@dev",
         "lobby/lobby": "^0.5.26",
-        "composer/semver": "^1.4"
-    }
+        "bylexus/php-prereqcheck": "^0.2.1",
+        "vierbergenlars/php-semver": "^3.0"
+    },
+    "secure-http": "false"
 }

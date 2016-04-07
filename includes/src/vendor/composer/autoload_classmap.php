@@ -57,4 +57,9 @@ return array(
     'Minify_YUI_CssCompressor' => $vendorDir . '/mrclay/minify/min/lib/Minify/YUI/CssCompressor.php',
     'MrClay\\Cli' => $vendorDir . '/mrclay/minify/min/lib/MrClay/Cli.php',
     'MrClay\\Cli\\Arg' => $vendorDir . '/mrclay/minify/min/lib/MrClay/Cli/Arg.php',
+    'vierbergenlars\\SemVer\\Internal\\Comparator' => $vendorDir . '/vierbergenlars/php-semver/src/vierbergenlars/SemVer/internal.php',
+    'vierbergenlars\\SemVer\\Internal\\Exports' => $vendorDir . '/vierbergenlars/php-semver/src/vierbergenlars/SemVer/internal.php',
+    'vierbergenlars\\SemVer\\Internal\\G' => $vendorDir . '/vierbergenlars/php-semver/src/vierbergenlars/SemVer/internal.php',
+    'vierbergenlars\\SemVer\\Internal\\Range' => $vendorDir . '/vierbergenlars/php-semver/src/vierbergenlars/SemVer/internal.php',
+    'vierbergenlars\\SemVer\\Internal\\SemVer' => $vendorDir . '/vierbergenlars/php-semver/src/vierbergenlars/SemVer/internal.php',
 );
