@@ -162,7 +162,7 @@ class Apps extends \Lobby {
    */
   private function setInfo(){
     $manifest = file_exists($this->appDir . "/manifest.json") ?
-    file_get_contents($this->appDir . "/manifest.json") : false;
+      file_get_contents($this->appDir . "/manifest.json") : false;
     
     if($manifest){
       $details = json_decode($manifest, true);
@@ -264,7 +264,9 @@ class Apps extends \Lobby {
   }
   
   public function checkRequirements(){
-    $this->info
+    if($this->app && isset($this->info["requires"])){
+      
+    }
   }
  
   /**
