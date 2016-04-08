@@ -64,12 +64,24 @@ class hine extends \Lobby\UI\Theme {
       $html = '<li class="item ' . $extraClass . '" id="' . $id . '">';
         if($href == ""){
           $html .= $text;
+        }else if($href === "htmlContent"){
+          $html .=  $text;
         }else{
-          $html .= $href == "htmlContent" ? $text : \Lobby::l($href, $text);
+          $html .= \Lobby::l($href, $text);
         }
       $html .= '</li>';
     }
     return $html;
+  }
+  
+  /**
+   * Adds the notify button and box
+   */
+  public function addNotify(){
+    echo "<li class='item parent' id='notify'>";
+      echo "<span title='Notifications' id='notifyToggle'></span>";
+      echo "<div id='notifyBox'></div>";
+    echo "</li>";
   }
   
 }

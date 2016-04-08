@@ -1,15 +1,31 @@
 <?php
+namespace Lobby;
+
+use \Lobby\Need;
+use \Lobby\FS;
+
 /**
  * \Lobby\Apps
  * Associated with all kinds of operations with apps
  */
 
-namespace Lobby;
-
 class Apps extends \Lobby {
 
   private $app = false;
   public $appDir = false, $exists = false, $info = array(), $enabled = false;
+  
+  protected static $manifestConfig = array(
+    "name" => "",
+    "short_description" => "",
+    "category" => "",
+    "sub_category" => "",
+    "version" => "0",
+    "author" => "",
+    "author_page" => "",
+    "logo" => false,
+    "app_page" => "",
+    "require" => array()
+  );
   
   /**
    * Cache frequently used data
@@ -91,6 +107,14 @@ class Apps extends \Lobby {
   }
   
   /**
+   * Make App ID into Class Name
+   */
+  public static function normalizeID($appID){
+    $appID = str_replace("-", "_", $appID);
+    return $appID;
+  }
+  
+  /**
    * Check if App is valid and it meets criteria of Lobby
    */
   public static function valid($name = ""){
@@ -161,11 +185,13 @@ class Apps extends \Lobby {
    * Get the manifest info of app as array
    */
   private function setInfo(){
-    $manifest = file_exists($this->appDir . "/manifest.json") ?
+    $manifest = FS::exists($this->appDir . "/manifest.json") ?
       file_get_contents($this->appDir . "/manifest.json") : false;
     
     if($manifest){
       $details = json_decode($manifest, true);
+      $details = array_replace_recursive(self::$manifestConfig, $details);
+      
       /**
        * Add extra info with the manifest info
        */
@@ -178,8 +204,8 @@ class Apps extends \Lobby {
       /**
        * Prefer SVG over PNG
        */
-      $details['logo'] = isset($details['logo']) ?
-        (file_exists($this->appDir . "/src/image/logo.svg") ?
+      $details['logo'] = $details['logo'] !== false ?
+        (FS::exists($this->appDir . "/src/image/logo.svg") ?
           APPS_URL . "/{$this->app}/src/image/logo.svg" :
           APPS_URL . "/{$this->app}/src/image/logo.png"
         ) : null;
@@ -265,7 +291,7 @@ class Apps extends \Lobby {
   
   public function checkRequirements(){
     if($this->app && isset($this->info["requires"])){
-      
+      return Need::checkRequirements($this->info["requires"], true);
     }
   }
  
@@ -298,6 +324,7 @@ class Apps extends \Lobby {
        */
       define("APP_DIR", $this->appDir);
       define("APP_SRC", $this->info['srcURL']);
+      
       if(!defined("APP_URL")){
         /**
          * We specifically check if APP_URL is defined,
@@ -306,10 +333,10 @@ class Apps extends \Lobby {
         define("APP_URL", $this->info['URL']);
         define("APP_ADMIN_URL", $this->info['adminURL']);
       }
-     
+      
       /* Return the App Object */
       return $class;
     }
   }
+  
 }
-?>
