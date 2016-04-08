@@ -19,10 +19,11 @@ if(isset($GLOBALS['initError'])){
   exit;
 }
 \Lobby::curPage(true);
+
 /**
  * Add the <head> files if it's not the install page
  */
-if(\Lobby::curPage() != "/admin/install.php"){
+if(!\Lobby::status("lobby.install")){
   /**
    * Left Menu
    */
@@ -52,14 +53,6 @@ if(\Lobby::curPage() != "/admin/install.php"){
   );
   \Lobby\UI\Panel::addTopItem("lobbyAdmin", $adminArray);
   
-  /**
-   * If there is a update available either app or core, add an 
-   * "Update Available" icon on the right side of panel
-   */
-  $AppUpdates = json_decode(getOption("app_updates"), true);
-  $lobby_version = \Lobby::$version;
-  $latestVersion = getOption("lobby_latest_version");
-  
   if(\Lobby\FS::exists("/upgrade.lobby")){
     require_once L_DIR . "/includes/src/Update.php";
     $l_info = json_decode(\Lobby\FS::get("/lobby.json"));
@@ -69,13 +62,6 @@ if(\Lobby::curPage() != "/admin/install.php"){
       saveOption("lobby_latest_version_release", $l_info->released);
     }
     \Lobby\Update::finish_software_update();
-  }
-  
-  if((count($AppUpdates) != 0) || ($latestVersion && $lobby_version != $latestVersion)){
-    \Lobby\UI\Panel::addTopItem("updateNotify", array(
-      "html" => \Lobby::l("/admin/update.php", "<span id='update' title='Updates Are Available'></span>"),
-      "position" => "right"
-    ));
   }
 }
 
@@ -105,4 +91,3 @@ if(\Lobby::status("lobby.admin")){
     $_SESSION['checkedForLatestVersion'] = 1;
   }
 }
-?>

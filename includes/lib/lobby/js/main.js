@@ -55,22 +55,6 @@ $(function(){
  */
 lobby.curLoc = window.location.protocol + "//" + window.location.host + window.location.pathname;
 
-/**
- * A function that toggles display of an element from another element opC = OpenonClick
- */
-lobby.opC = function(trigger, elem, callback){
-  trigger.live("click", function(){
-    if(elem.is(":hidden")){
-      elem.show();
-    }else{
-      elem.hide();
-    }
-    if(typeof callback =="function"){
-      callback();
-    }
-  });
-};
-
 /* If an overlay element is visible and mouse clicks outside of it, hide that overlay element */
 $(document).mouseup(function (e){
   $(".c_c").each(function(i){
@@ -140,7 +124,7 @@ lobby.redirect = function(path){
 };
 
 /**
- * Show messages
+ * Show short messages as popup
  * From https://github.com/Dogfalo/materialize/blob/master/js/toasts.js
  */
 lobby.toast = function (message, displayLength, className, completeCallback) {
@@ -281,4 +265,21 @@ lobby.toast = function (message, displayLength, className, completeCallback) {
 
         return toast;
     }
+};
+
+lobby.notify = {
+  box: $("nav #notifyBox"),
+  
+  init: function(){
+    lobby.ajax("includes/lib/lobby/ajax/notify.php", {}, function(response){
+      nfs = JSON.parse(response); // Short for notifications
+      $.each(nfs, function(i, notification){
+        lobby.notify.push(notification);
+      });
+    });
+  },
+  
+  push: function(info){
+    $("<div class='notifyItem' id='notifyItem"+ info["id"] +"'>"+ info["contents"] +"</div>").prependTo(lobby.notify.box);
+  }
 };

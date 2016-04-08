@@ -12,8 +12,9 @@ class Panel {
   );
   
   private static $panel_item_format = array(
-    "text" => "",
-    "href" => "",
+    "text" => null,
+    "href" => null,
+    "html" => null,
     "subItems" => array(),
     "position" => "left"
   );

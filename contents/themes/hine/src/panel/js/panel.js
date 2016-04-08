@@ -5,4 +5,8 @@ lobby.load(function(){
   $('nav .left, nav .right').superfish({
     delay: 100
   });
+  
+  $("#notifyToggle").live("click", function(){
+    $("#notifyBox").toggle("show");
+  });
 });
