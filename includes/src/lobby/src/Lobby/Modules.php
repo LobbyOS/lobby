@@ -1,15 +1,17 @@
 <?php
 namespace Lobby;
 
+use \Lobby\Apps;
+
 class Modules extends \Lobby {
 
   private static $core_modules = array(), $custom_modules = array(), $app_modules = array(), $modules = array();
   
   public static function __constructStatic(){
     $apps = \Lobby\Apps::getApps();
-    foreach($apps as $app){
-      $module_name = 'app_' . str_replace("-", "_", $app);
-      $loc = APPS_DIR . "/$app/module";
+    foreach($apps as $appID){
+      $module_name = 'app_' . Apps::normalizeID($appID);
+      $loc = APPS_DIR . "/$appID/module";
       if(self::valid($module_name, $loc)){
         self::$app_modules[$module_name] = $loc;
       }
