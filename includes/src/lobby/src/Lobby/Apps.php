@@ -289,25 +289,26 @@ class Apps extends \Lobby {
     }
   }
   
+  /**
+   * Check requirements of app
+   */
   public function checkRequirements(){
     if($this->app && isset($this->info["requires"])){
       return Need::checkRequirements($this->info["requires"], true);
     }
   }
- 
+  
   /**
-   * Return the app class object
+   * Get the App object
    */
-  public function run(){
+  public function getInstance(){
     if($this->app){
+      /**
+       * Load the app class
+       */
       require_once $this->appDir . "/App.php";
       
-      \Lobby::addScript("app", "/includes/lib/lobby/js/app.js");
-      
-      $GLOBALS['AppID'] = $this->app;
-     
-      $appInfo = $this->info;
-      $className = "\\Lobby\App\\" . str_replace("-", "_", $this->app);
+      $className = "\\Lobby\App\\" . self::normalizeID($this->app);
      
       /**
        * Create the \Lobby\App Object
@@ -317,7 +318,20 @@ class Apps extends \Lobby {
       /**
        * Send app details to the App Object
        */
-      $class->setTheVars($appInfo);
+      $class->setTheVars($this->info);
+      
+      return $class;
+    }
+  }
+ 
+  /**
+   * Return the app class object
+   */
+  public function run(){
+    if($this->app){
+      \Lobby::addScript("app", "/includes/lib/lobby/js/app.js");
+      
+      $GLOBALS['AppID'] = $this->app;
       
       /**
        * Define the App Constants
@@ -334,8 +348,10 @@ class Apps extends \Lobby {
         define("APP_ADMIN_URL", $this->info['adminURL']);
       }
       
-      /* Return the App Object */
-      return $class;
+      /**
+       * Return the App Object
+       */
+      return $this->getInstance();
     }
   }
   
