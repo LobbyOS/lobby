@@ -12,8 +12,11 @@ if(csrf()){
   
   if((count($AppUpdates) != 0) || ($latestVersion && $lobby_version != $latestVersion)){
     $notifications[] = array(
+      "id" => "update",
       "contents" => "New Updates Are Available",
       "icon" => "update"
     );
   }
+  
+  echo json_encode($notifications);
 }

@@ -19,6 +19,8 @@ if($file != "" && H::csrf()){
   }else{
     if(\Lobby\FS::exists($file)){
       require_once \Lobby\FS::loc($file);
+    }else{
+      echo "fileNotFound";
     }
   }
 }

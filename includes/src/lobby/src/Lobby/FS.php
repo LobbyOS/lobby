@@ -27,14 +27,22 @@ class FS {
     $new = str_replace(L_DIR, "", $path);
     
     /**
-     * Make it absolute again
-     * :P
-     * If the below was done without doing above,
-     * path will be so idiotic
+     * For Windows
+     * Replace backslash with forward slash
      */
-    $new = L_DIR . $new;
+    $new = str_replace("\\", "/", $new);
     
-    return str_replace("\\", "/", $new);
+    /**
+     * Remove slash at the beginning
+     */
+    $new = ltrim($new, '/');
+    
+    /**
+     * Make path absolute
+     */
+    $new = L_DIR . "/" . $new;
+    
+    return $new;
   }
   
   /**

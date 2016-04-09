@@ -53,5 +53,17 @@ class Panel {
     }
     return $items[$side];
   }
+  
+  protected function getNotifyItems(){
+    getOption("notify_items");
+  }
+  
+  public function addNotificationItem($info){
+    
+  }
+  
+  public function removeNotificationItem($info){
+  
+  }
 
 }
