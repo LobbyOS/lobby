@@ -78,13 +78,6 @@ nav .right .item span{
   width:17px;
   display: inline-block;
 }
-nav .right #update{
-  background: url(<?THEME_URL?>/src/panel/image/update.svg) 0px -1px no-repeat;
-  background-size: 45px;
-  width: 50px;
-  display: block;
-  height: 40px;
-}
 nav .right #notifyToggle{
   background: url(<?THEME_URL?>/src/panel/image/notify.svg) 0px -1px no-repeat;
   background-size: 45px;
@@ -114,6 +107,8 @@ nav a.button-collapse i{
   border: 1px solid rgba(100,100,100,.2);
   -webkit-box-shadow: 0 3px 8px rgba(0,0,0,.2);
   background: #FFF;
+  color: #000;
+  line-height: 2rem;
   z-index: 3;
 }
 #notifyBox:before {
@@ -126,4 +121,21 @@ nav a.button-collapse i{
   border-color: transparent transparent #FFF;
   margin-top: -20px;
   margin-left: 260px;
+}
+
+#notifyBox .notifyItem{
+  margin: 0;
+  padding: 20px;
+}
+
+#notifyBox .notifyItem:hover{
+  background: #EEE;
+}
+
+#notifyBox #notifyItemupdate .m2 span{
+  background: url(<?THEME_URL?>/src/panel/image/update.svg) 0px -1px no-repeat;
+  background-size: 30px;
+  width: 30px;
+  display: block;
+  height: 30px;
 }
