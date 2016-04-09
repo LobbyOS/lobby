@@ -1,6 +1,6 @@
 <?php
 if(csrf()){
-  $notifications = array();
+  $notifications = getJSONOption("notify_items");
   
   /**
    * If there is a update available either app or core, add an 
@@ -11,8 +11,7 @@ if(csrf()){
   $latestVersion = getOption("lobby_latest_version");
   
   if((count($AppUpdates) != 0) || ($latestVersion && $lobby_version != $latestVersion)){
-    $notifications[] = array(
-      "id" => "update",
+    $notifications["update"] = array(
       "contents" => "New Updates Are Available",
       "icon" => "update"
     );
