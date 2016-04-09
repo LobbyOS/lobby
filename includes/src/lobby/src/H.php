@@ -98,9 +98,7 @@ class H {
    * To remove an item, set the value of it to (bool) FALSE
    */
   public static function saveJSONData($key, $values){
-    $a = getData($key);
-    $a = json_decode($a, true);
-    $a = is_array($a) ? $a : array();
+    $a = self::getJSONData($key);
     
     $new = array_replace_recursive($a, $values);    
     foreach($values as $k => $v){

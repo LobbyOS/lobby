@@ -278,7 +278,8 @@ lobby.notify = {
       if(nfs.length === 0){
         lobby.notify.box.html("<center><h4>No Notifications</h4></center>");
       }else{
-        $.each(nfs, function(i, notification){
+        $.each(nfs, function(id, notification){
+          notification["id"] = id;
           lobby.notify.push(notification);
         });
       }
@@ -286,7 +287,12 @@ lobby.notify = {
   },
   
   push: function(info){
-    $("<div class='notifyItem' id='notifyItem"+ info["id"] +"'>"+ info["contents"] +"</div>").prependTo(lobby.notify.box);
+    pushItem = $("<div class='notifyItem' id='notifyItem"+ info["id"] +"'>"+ info["contents"] +"</div>");
+    if(lobby.notify.box.find("#notifyItem" + info["id"]).length === 0){
+      pushItem.prependTo(lobby.notify.box);
+    }else{
+      lobby.notify.box.find("#notifyItem" + info["id"]).replaceWith(pushItem);
+    }
   }
 };
 
