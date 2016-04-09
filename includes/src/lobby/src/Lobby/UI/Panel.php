@@ -54,16 +54,22 @@ class Panel {
     return $items[$side];
   }
   
-  protected function getNotifyItems(){
-    getOption("notify_items");
+  /**
+   * Push an item to Notify
+   */
+  public function addNotifyItem($id, $info){
+    saveJSONOption("notify_items", array(
+      $id => $info
+    ));
   }
   
-  public function addNotificationItem($info){
-    
-  }
-  
-  public function removeNotificationItem($info){
-  
+  /**
+   * Remove an item from Notify
+   */
+  public function removeNotifyItem($id){
+    saveJSONOption("notify_items", array(
+      $id => false
+    ));
   }
 
 }
