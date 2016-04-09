@@ -27,6 +27,30 @@ class App {
     \Lobby::setTitle("$title | {$this->name}");
   }
   
+  /**
+   * Get Data
+   */
+  public function getData($key = "", $extra = false){
+    return \Lobby\DB::getData($this->id, $key, $extra);
+  }
+  
+  /**
+   * Push a notify item
+   */
+  public function addNotifyItem($id, $info){
+    if(!isset($info["href"])){
+      $info["href"] = $this->URL;
+    }
+    return \Lobby\UI\Panel::addNotifyItem("app_{$this->id}_$id" , $info);
+  }
+  
+  /**
+   * Remove a notify item
+   */
+  public function removeNotifyItem($id){
+    return \Lobby\UI\Panel::removeNotifyItem("app_{$this->id}_$id");
+  }
+  
   public static function u($path){
     return APP_URL . $path;
   }
