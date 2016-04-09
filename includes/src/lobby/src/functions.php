@@ -104,6 +104,9 @@ function getJSONOption($key){
   return is_array($a) ? $a : array();
 }
 
+/**
+ * Save JSON Data in options
+ */
 function saveJSONOption($key, $values){
   $a = getJSONOption($key);
   

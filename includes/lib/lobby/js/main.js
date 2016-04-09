@@ -269,10 +269,24 @@ lobby.toast = function (message, displayLength, className, completeCallback) {
 
 lobby.notify = {
   box: null,
+  
+  cehckInterval: null,
 
   init: function(){
     lobby.notify.box = $("nav #notifyBox");
-    
+    this.update();
+    this.checkInterval = setInterval(function(){
+      lobby.notify.update();
+    }, 5000);
+  },
+  
+  /**
+   * The theme should define these
+   */
+  push: function(){},
+  onNewItems: function(){},
+  
+  update: function(){
     lobby.ajax("includes/lib/lobby/ajax/notify.php", {}, function(response){
       nfs = JSON.parse(response); // Short for notifications
       if(nfs.length === 0){
@@ -282,17 +296,9 @@ lobby.notify = {
           notification["id"] = id;
           lobby.notify.push(notification);
         });
+        lobby.notify.onNewItems();
       }
     });
-  },
-  
-  push: function(info){
-    pushItem = $("<div class='notifyItem' id='notifyItem"+ info["id"] +"'>"+ info["contents"] +"</div>");
-    if(lobby.notify.box.find("#notifyItem" + info["id"]).length === 0){
-      pushItem.prependTo(lobby.notify.box);
-    }else{
-      lobby.notify.box.find("#notifyItem" + info["id"]).replaceWith(pushItem);
-    }
   }
 };
 
