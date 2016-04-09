@@ -85,7 +85,7 @@ lobby.ajax = function(fileName, options, callback, appID){
   if(appID != false){
     var options = $.param({"s7c8csw91": appID}) + "&" + options;
   }
-  var options = $.param({"cx74e9c6a45": fileName, "csrf_token": lobby.csrf_token}) + "&" + options;
+  var options = $.param({"cx74e9c6a45": fileName, "csrf_token": lobby.csrfToken}) + "&" + options;
 
   var requestURL = lobby.url + "/includes/lib/lobby/ajax/ajax.php";
   $.post(requestURL, options, function(data){
@@ -268,14 +268,20 @@ lobby.toast = function (message, displayLength, className, completeCallback) {
 };
 
 lobby.notify = {
-  box: $("nav #notifyBox"),
-  
+  box: null,
+
   init: function(){
+    lobby.notify.box = $("nav #notifyBox");
+    
     lobby.ajax("includes/lib/lobby/ajax/notify.php", {}, function(response){
       nfs = JSON.parse(response); // Short for notifications
-      $.each(nfs, function(i, notification){
-        lobby.notify.push(notification);
-      });
+      if(nfs.length === 0){
+        lobby.notify.box.html("<center><h4>No Notifications</h4></center>");
+      }else{
+        $.each(nfs, function(i, notification){
+          lobby.notify.push(notification);
+        });
+      }
     });
   },
   
@@ -283,3 +289,10 @@ lobby.notify = {
     $("<div class='notifyItem' id='notifyItem"+ info["id"] +"'>"+ info["contents"] +"</div>").prependTo(lobby.notify.box);
   }
 };
+
+/**
+ * On Lobby Init
+ */
+lobby.load(function(){
+  lobby.notify.init();
+});

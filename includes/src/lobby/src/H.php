@@ -67,10 +67,10 @@ class H {
     if($type === "s"){
       // Output as string
       return urlencode($_COOKIE['csrf_token']);
-    }elseif($type === "g"){
+    }else if($type === "g"){
       // Output as a GET parameter
       return "&csrf_token=" . urlencode($_COOKIE['csrf_token']);
-    }elseif($type !== false){
+    }else if($type !== false){
       // Output as an input field
       echo "<input type='hidden' name='csrf_token' value='{$_COOKIE['csrf_token']}' />";
     }else{
