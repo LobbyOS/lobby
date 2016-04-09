@@ -94,3 +94,26 @@ function saveJSONData($key, $values){
 function csrf($type = false){
   return \H::csrf($type);
 }
+
+/**
+ * Retrieve JSON Value stored as option as Array
+ */
+function getJSONOption($key){
+  $a = getOption($key);
+  $a = json_decode($a, true);
+  return is_array($a) ? $a : array();
+}
+
+function saveJSONOption($key, $values){
+  $a = getJSONOption($key);
+  
+  $new = array_replace_recursive($a, $values);    
+  foreach($values as $k => $v){
+    if($v === false){
+      unset($new[$k]);
+    }
+  }
+  $new = json_encode($new);
+  saveOption($key, $new);
+  return true;
+}
