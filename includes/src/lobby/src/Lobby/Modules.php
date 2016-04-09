@@ -13,7 +13,10 @@ class Modules extends \Lobby {
       $module_name = 'app_' . Apps::normalizeID($appID);
       $loc = APPS_DIR . "/$appID/module";
       if(self::valid($module_name, $loc)){
-        self::$app_modules[$module_name] = $loc;
+        self::$app_modules[$module_name] = array(
+          "appID" => $appID,
+          "location" => $loc
+        );
       }
     }
     
@@ -59,12 +62,34 @@ class Modules extends \Lobby {
   }
   
   public static function load(){
+    /**
+     * In case of App modules, $loc will be an array(
+     *   "appID" => "The App ID",
+     *   "loc" => "The path to Module.php folder"
+     * )
+     */
     foreach(self::$modules as $module => $loc){
-      require_once "$loc/Module.php";
-      $moduleIdentifier = "\Lobby\Module\\$module";
-      $Module = new $moduleIdentifier(array(
-        $loc, L_URL . "/contents/modules/$module"
-      ));
+      /**
+       * If $loc is an array, it's an App Module
+       */
+      if(is_array($loc)){
+        require_once "{$loc["location"]}/Module.php";
+        $moduleIdentifier = "\Lobby\Module\\$module";
+        
+        $App = new Apps($loc["appID"]);
+        
+        new $moduleIdentifier(array(
+          $loc["location"], L_URL . "/contents/modules/$module"
+        ), $App->getInstance());
+      }else{
+        require_once "$loc/Module.php";
+        $moduleIdentifier = "\Lobby\Module\\$module";
+        
+        new $moduleIdentifier(array(
+          $loc,
+          L_URL . "/contents/modules/$module"
+        ));
+      }
     }
   }
   

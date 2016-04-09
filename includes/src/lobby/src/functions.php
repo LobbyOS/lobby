@@ -91,6 +91,6 @@ function saveJSONData($key, $values){
   return \H::saveJSONData($key, $values);
 }
 
-function csrf($type){
+function csrf($type = false){
   return \H::csrf($type);
 }
