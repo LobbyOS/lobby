@@ -38,7 +38,7 @@ nav .left ul, nav .right ul{
   background: #000;
   line-height: 20px;
 }
-nav .left ul a, nav .right ul a{
+nav .parent ul .item a{
   display: block;
   margin: 0;
   padding: 5px 10px;
@@ -85,6 +85,10 @@ nav .right #notifyToggle{
   display: block;
   height: 40px;
 }
+nav .right #notifyToggle.active{
+  background: url(<?THEME_URL?>/src/panel/image/notify-active.svg) 0 -1px no-repeat;
+    background-size: 45px;
+}
 
 /**
  * Sidebar toggler
@@ -126,6 +130,7 @@ nav a.button-collapse i{
 #notifyBox .notifyItem{
   margin: 0;
   padding: 20px;
+  color: #000;
 }
 
 #notifyBox .notifyItem:hover{

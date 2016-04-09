@@ -13,7 +13,8 @@ if(csrf()){
   if((count($AppUpdates) != 0) || ($latestVersion && $lobby_version != $latestVersion)){
     $notifications["update"] = array(
       "contents" => "New Updates Are Available",
-      "icon" => "update"
+      "icon" => "update",
+      "href" => "/admin/update.php"
     );
   }
   
