@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9b891eb5806edac5278f149584688e06",
-    "content-hash": "ff484210dbd11ebf6d3f82a6ed602e15",
+    "hash": "538a9922bf1aa13f0c0bbba545c6422a",
+    "content-hash": "1ff09557c2934da0f9b7ebbdb76a7ebf",
     "packages": [
         {
             "name": "bylexus/php-prereqcheck",
@@ -119,16 +119,16 @@
         },
         {
             "name": "francium/process",
-            "version": "dev-master",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/subins2000/Francium-Process.git",
-                "reference": "8a66c12a5986396c0a34364620ed9306d0a9ccad"
+                "reference": "5d06c60751d410db598bf2ee26ed98a17ecec991"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/subins2000/Francium-Process/zipball/8a66c12a5986396c0a34364620ed9306d0a9ccad",
-                "reference": "8a66c12a5986396c0a34364620ed9306d0a9ccad",
+                "url": "https://api.github.com/repos/subins2000/Francium-Process/zipball/5d06c60751d410db598bf2ee26ed98a17ecec991",
+                "reference": "5d06c60751d410db598bf2ee26ed98a17ecec991",
                 "shasum": ""
             },
             "require": {
@@ -159,28 +159,28 @@
                 "platform",
                 "process"
             ],
-            "time": "2016-03-30 18:17:46"
+            "time": "2016-04-10 17:46:10"
         },
         {
             "name": "klein/klein",
-            "version": "dev-master",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/klein/klein.php.git",
-                "reference": "eb80e09d222aa1a6ca2a0ea48b386433d8c4d169"
+                "reference": "5dc073f05adb67ee09680545b4cc7b0590d2559e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/klein/klein.php/zipball/eb80e09d222aa1a6ca2a0ea48b386433d8c4d169",
-                "reference": "eb80e09d222aa1a6ca2a0ea48b386433d8c4d169",
+                "url": "https://api.github.com/repos/klein/klein.php/zipball/5dc073f05adb67ee09680545b4cc7b0590d2559e",
+                "reference": "5dc073f05adb67ee09680545b4cc7b0590d2559e",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
             "require-dev": {
-                "phpunit/php-code-coverage": "2.x",
-                "phpunit/phpunit": "4.1.x",
+                "phpunit/php-code-coverage": "1.2.x",
+                "phpunit/phpunit": "3.7.x",
                 "squizlabs/php_codesniffer": "1.4.8"
             },
             "type": "library",
@@ -215,7 +215,7 @@
                 "routing",
                 "sinatra"
             ],
-            "time": "2014-12-16 01:08:24"
+            "time": "2014-11-07 07:35:23"
         },
         {
             "name": "lobby/lobby",
@@ -548,8 +548,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "klein/klein": 20,
-        "francium/process": 20,
         "vladimmi/construct-static": 20
     },
     "prefer-stable": false,

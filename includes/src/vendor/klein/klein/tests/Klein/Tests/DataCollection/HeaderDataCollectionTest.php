@@ -50,7 +50,6 @@ class HeaderDataCollectionTest extends AbstractKleinTest
                 $this->prepareSampleData($data);
             }
         }
-        reset($sample_data);
     }
 
     /**
@@ -99,22 +98,6 @@ class HeaderDataCollectionTest extends AbstractKleinTest
         $this->assertNotSame($sample_data, $data_collection->all());
         $this->assertArrayNotHasKey('HOST', $data_collection->all());
         $this->assertContains('localhost:8000', $data_collection->all());
-    }
-
-    public function testGetSetNormalization()
-    {
-        $data_collection = new HeaderDataCollection();
-
-        $this->assertInternalType('int', $data_collection->getNormalization());
-
-        $data_collection->setNormalization(
-            HeaderDataCollection::NORMALIZE_TRIM & HeaderDataCollection::NORMALIZE_CASE
-        );
-
-        $this->assertSame(
-            HeaderDataCollection::NORMALIZE_TRIM & HeaderDataCollection::NORMALIZE_CASE,
-            $data_collection->getNormalization()
-        );
     }
 
     /**
@@ -171,47 +154,26 @@ class HeaderDataCollectionTest extends AbstractKleinTest
         $this->assertFalse($data_collection->exists('HOST'));
     }
 
-    public function testNormalizeKeyDelimiters()
-    {
-        // Test data
-        $header = 'Access_Control Allow-Origin';
-
-        $canonicalized_key = HeaderDataCollection::normalizeKeyDelimiters($header);
-
-        $this->assertNotSame($header, $canonicalized_key);
-
-        $this->assertSame('Access-Control-Allow-Origin', $canonicalized_key);
-    }
-
-    public function testCanonicalizeKey()
-    {
-        // Test data
-        $header = 'content-TYPE';
-
-        $canonicalized_key = HeaderDataCollection::canonicalizeKey($header);
-
-        $this->assertNotSame($header, $canonicalized_key);
-
-        $this->assertSame('Content-Type', $canonicalized_key);
-    }
-
     public function testNameNormalizing()
     {
         // Test data
-        $header = 'content_TYPE';
+        $data = array(
+            'DOG_NAME' => 'cooper',
+        );
 
-        // Ignore our deprecation error
-        $old_error_val = error_reporting();
-        error_reporting(E_ALL ^ E_USER_DEPRECATED);
+        // Create our collection with NO data
+        $normalized_key = HeaderDataCollection::normalizeName(key($data));
+        $normalized_val = HeaderDataCollection::normalizeName(current($data));
 
-        $normalized_key = HeaderDataCollection::normalizeName($header);
-        $normalized_key_without_canonicalization = HeaderDataCollection::normalizeName($header, false);
+        $this->assertNotSame(key($data), $normalized_key);
+        $this->assertSame(current($data), $normalized_val);
 
-        error_reporting($old_error_val);
+        $normalized_key_without_case_change = HeaderDataCollection::normalizeName(key($data), false);
 
-        $this->assertNotSame($header, $normalized_key);
+        $this->assertTrue(strpos($normalized_key_without_case_change, 'D') !== false);
+        $this->assertTrue(strpos($normalized_key_without_case_change, 'd') === false);
 
-        $this->assertSame('content-type', $normalized_key);
-        $this->assertSame('content-TYPE', $normalized_key_without_canonicalization);
+        $this->assertTrue(strpos($normalized_key, 'd') !== false);
+        $this->assertTrue(strpos($normalized_key, 'D') === false);
     }
 }

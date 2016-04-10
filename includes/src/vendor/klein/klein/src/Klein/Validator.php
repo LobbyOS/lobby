@@ -15,7 +15,7 @@ use BadMethodCallException;
 use Klein\Exceptions\ValidationException;
 
 /**
- * Validator
+ * Validator 
  */
 class Validator
 {
@@ -50,7 +50,7 @@ class Validator
      *
      * @type boolean
      */
-    protected static $default_added = false;
+    protected static $defaultAdded = false;
 
 
     /**
@@ -68,7 +68,7 @@ class Validator
         $this->str = $str;
         $this->err = $err;
 
-        if (!static::$default_added) {
+        if (!static::$defaultAdded) {
             static::addDefault();
         }
     }
@@ -121,7 +121,7 @@ class Validator
             return preg_match("/^[$chars]++$/i", $str);
         };
 
-        static::$default_added = true;
+        static::$defaultAdded = true;
     }
 
     /**
