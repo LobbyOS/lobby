@@ -6,15 +6,15 @@
         }
     ],
     "require": {
-        "klein/klein": "dev-master",
+        "klein/klein": "^2.0",
         "symfony/filesystem": "^3.0",
         "rmccue/requests": "^1.6",
-        "francium/process": "dev-master",
         "stolz/assets": "^0.1.8",
-        "vladimmi/construct-static": "dev-master@dev",
-        "lobby/lobby": "^0.5.26",
+        "lobby/lobby": "^0.5",
         "bylexus/php-prereqcheck": "^0.2.1",
-        "vierbergenlars/php-semver": "^3.0"
+        "vierbergenlars/php-semver": "^3.0",
+        "francium/process": "^0.1.1",
+        "vladimmi/construct-static": "dev-master@dev"
     },
     "secure-http": "false"
 }

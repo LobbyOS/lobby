@@ -137,19 +137,19 @@ class RoutingTest extends AbstractKleinTest
 
     public function testDispatchOutput()
     {
-        $expected_output = array(
+        $expectedOutput = array(
             'returned1' => 'alright!',
             'returned2' => 'woot!',
         );
 
         $this->klein_app->respond(
-            function () use ($expected_output) {
-                return $expected_output['returned1'];
+            function () use ($expectedOutput) {
+                return $expectedOutput['returned1'];
             }
         );
         $this->klein_app->respond(
-            function () use ($expected_output) {
-                return $expected_output['returned2'];
+            function () use ($expectedOutput) {
+                return $expectedOutput['returned2'];
             }
         );
 
@@ -157,12 +157,12 @@ class RoutingTest extends AbstractKleinTest
 
         // Expect our output to match our ECHO'd output
         $this->expectOutputString(
-            $expected_output['returned1'] . $expected_output['returned2']
+            $expectedOutput['returned1'] . $expectedOutput['returned2']
         );
 
         // Make sure our response body matches the concatenation of what we returned in each callback
         $this->assertSame(
-            $expected_output['returned1'] . $expected_output['returned2'],
+            $expectedOutput['returned1'] . $expectedOutput['returned2'],
             $this->klein_app->response()->body()
         );
     }
@@ -187,19 +187,19 @@ class RoutingTest extends AbstractKleinTest
 
     public function testDispatchOutputCaptured()
     {
-        $expected_output = array(
+        $expectedOutput = array(
             'echoed' => 'yup',
             'returned' => 'nope',
         );
 
         $this->klein_app->respond(
-            function () use ($expected_output) {
-                echo $expected_output['echoed'];
+            function () use ($expectedOutput) {
+                echo $expectedOutput['echoed'];
             }
         );
         $this->klein_app->respond(
-            function () use ($expected_output) {
-                return $expected_output['returned'];
+            function () use ($expectedOutput) {
+                return $expectedOutput['returned'];
             }
         );
 
@@ -209,27 +209,27 @@ class RoutingTest extends AbstractKleinTest
         $this->expectOutputString('');
 
         // Make sure our returned output matches what we ECHO'd
-        $this->assertSame($expected_output['echoed'], $output);
+        $this->assertSame($expectedOutput['echoed'], $output);
 
         // Make sure our response body matches what we returned
-        $this->assertSame($expected_output['returned'], $this->klein_app->response()->body());
+        $this->assertSame($expectedOutput['returned'], $this->klein_app->response()->body());
     }
 
     public function testDispatchOutputReplaced()
     {
-        $expected_output = array(
+        $expectedOutput = array(
             'echoed' => 'yup',
             'returned' => 'nope',
         );
 
         $this->klein_app->respond(
-            function () use ($expected_output) {
-                echo $expected_output['echoed'];
+            function () use ($expectedOutput) {
+                echo $expectedOutput['echoed'];
             }
         );
         $this->klein_app->respond(
-            function () use ($expected_output) {
-                return $expected_output['returned'];
+            function () use ($expectedOutput) {
+                return $expectedOutput['returned'];
             }
         );
 
@@ -239,30 +239,30 @@ class RoutingTest extends AbstractKleinTest
         $this->expectOutputString('');
 
         // Make sure our response body matches what we echoed
-        $this->assertSame($expected_output['echoed'], $this->klein_app->response()->body());
+        $this->assertSame($expectedOutput['echoed'], $this->klein_app->response()->body());
     }
 
     public function testDispatchOutputPrepended()
     {
-        $expected_output = array(
+        $expectedOutput = array(
             'echoed' => 'yup',
             'returned' => 'nope',
             'echoed2' => 'sure',
         );
 
         $this->klein_app->respond(
-            function () use ($expected_output) {
-                echo $expected_output['echoed'];
+            function () use ($expectedOutput) {
+                echo $expectedOutput['echoed'];
             }
         );
         $this->klein_app->respond(
-            function () use ($expected_output) {
-                return $expected_output['returned'];
+            function () use ($expectedOutput) {
+                return $expectedOutput['returned'];
             }
         );
         $this->klein_app->respond(
-            function () use ($expected_output) {
-                echo $expected_output['echoed2'];
+            function () use ($expectedOutput) {
+                echo $expectedOutput['echoed2'];
             }
         );
 
@@ -273,32 +273,32 @@ class RoutingTest extends AbstractKleinTest
 
         // Make sure our response body matches what we echoed
         $this->assertSame(
-            $expected_output['echoed'] . $expected_output['echoed2'] . $expected_output['returned'],
+            $expectedOutput['echoed'] . $expectedOutput['echoed2'] . $expectedOutput['returned'],
             $this->klein_app->response()->body()
         );
     }
 
     public function testDispatchOutputAppended()
     {
-        $expected_output = array(
+        $expectedOutput = array(
             'echoed' => 'yup',
             'returned' => 'nope',
             'echoed2' => 'sure',
         );
 
         $this->klein_app->respond(
-            function () use ($expected_output) {
-                echo $expected_output['echoed'];
+            function () use ($expectedOutput) {
+                echo $expectedOutput['echoed'];
             }
         );
         $this->klein_app->respond(
-            function () use ($expected_output) {
-                return $expected_output['returned'];
+            function () use ($expectedOutput) {
+                return $expectedOutput['returned'];
             }
         );
         $this->klein_app->respond(
-            function () use ($expected_output) {
-                echo $expected_output['echoed2'];
+            function () use ($expectedOutput) {
+                echo $expectedOutput['echoed2'];
             }
         );
 
@@ -309,7 +309,7 @@ class RoutingTest extends AbstractKleinTest
 
         // Make sure our response body matches what we echoed
         $this->assertSame(
-            $expected_output['returned'] . $expected_output['echoed'] . $expected_output['echoed2'],
+            $expectedOutput['returned'] . $expectedOutput['echoed'] . $expectedOutput['echoed2'],
             $this->klein_app->response()->body()
         );
     }
@@ -1267,7 +1267,7 @@ class RoutingTest extends AbstractKleinTest
 
     public function test405Routes()
     {
-        $result_array = array();
+        $resultArray = array();
 
         $this->expectOutputString('_');
 
@@ -1292,8 +1292,8 @@ class RoutingTest extends AbstractKleinTest
         );
         $this->klein_app->respond(
             405,
-            function ($a, $b, $c, $d, $e, $f, $methods) use (&$result_array) {
-                $result_array = $methods;
+            function ($a, $b, $c, $d, $e, $f, $methods) use (&$resultArray) {
+                $resultArray = $methods;
             }
         );
 
@@ -1307,15 +1307,15 @@ class RoutingTest extends AbstractKleinTest
 
         error_reporting($old_error_val);
 
-        $this->assertCount(2, $result_array);
-        $this->assertContains('GET', $result_array);
-        $this->assertContains('POST', $result_array);
+        $this->assertCount(2, $resultArray);
+        $this->assertContains('GET', $resultArray);
+        $this->assertContains('POST', $resultArray);
         $this->assertSame(405, $this->klein_app->response()->code());
     }
 
     public function test405ErrorHandler()
     {
-        $result_array = array();
+        $resultArray = array();
 
         $this->expectOutputString('_');
 
@@ -1339,8 +1339,8 @@ class RoutingTest extends AbstractKleinTest
             }
         );
         $this->klein_app->onHttpError(
-            function ($code, $klein, $matched, $methods, $exception) use (&$result_array) {
-                $result_array = $methods;
+            function ($code, $klein, $matched, $methods, $exception) use (&$resultArray) {
+                $resultArray = $methods;
             }
         );
 
@@ -1348,9 +1348,9 @@ class RoutingTest extends AbstractKleinTest
             MockRequestFactory::create('/sure', 'DELETE')
         );
 
-        $this->assertCount(2, $result_array);
-        $this->assertContains('GET', $result_array);
-        $this->assertContains('POST', $result_array);
+        $this->assertCount(2, $resultArray);
+        $this->assertContains('GET', $resultArray);
+        $this->assertContains('POST', $resultArray);
         $this->assertSame(405, $this->klein_app->response()->code());
     }
 
