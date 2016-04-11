@@ -20,7 +20,7 @@ nav .left{
   margin: 0px;
   padding: 0;
 }
-nav .left li.prnt, nav .right li.prnt{
+nav .left li.parent, nav .right li.parent{
   position: relative;
   cursor: pointer;
   margin-right: 15px;
@@ -63,10 +63,10 @@ nav .right ul{
 /**
  * Icons
  */
-nav .left .lobby a.prnt{
+nav .left #lobby a.parent{
   font-size: 30px;
 }
-nav .left .home a{
+nav .left #home a{
   display: block;
   height: 40px;
   width: 40px;
