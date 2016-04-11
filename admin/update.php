@@ -1,6 +1,5 @@
 <?php
 require "../load.php";
-require L_DIR . "/includes/src/Update.php";
 ?>
 <!DOCTYPE html>
 <html>
