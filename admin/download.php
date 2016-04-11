@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . "/../load.php";
-require_once L_DIR . "/includes/src/Update.php";
 
 header("Content-type: text/html");
 header('Cache-Control: no-cache');
