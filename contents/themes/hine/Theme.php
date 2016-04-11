@@ -39,7 +39,7 @@ class hine extends \Lobby\UI\Theme {
   }
   
   public function makePanelTree($id, $item){
-    $html = isset($item['html']) ? $item['html'] : substr($this->makePanelItem($item['text'], $item['href'], $id, "prnt"), 0, -5);
+    $html = isset($item['html']) ? $item['html'] : substr($this->makePanelItem($item['text'], $item['href'], $id, "parent"), 0, -5);
       $html .= "<ul>";
       foreach($item['subItems'] as $itemID => $subItem){
         $html .= $this->makePanelItem($subItem['text'], $subItem['href'], $itemID);
@@ -54,12 +54,12 @@ class hine extends \Lobby\UI\Theme {
       /**
        * Home button
        */
-      $html = "<li class='item home $extraClass'><a href='". L_URL ."'></a></li>";
+      $html = "<li class='item $extraClass' id='home'><a href='". L_URL ."'></a></li>";
     }else if($href == "/admin"){
       /**
        * Admin button
        */
-      $html = "<li class='item lobby $extraClass'><a href='". \Lobby::u($href) ."' class='prnt'>Lobby</a></li>";
+      $html = "<li class='item $extraClass' id='lobby'><a href='". \Lobby::u($href) ."' class='parent'>Lobby</a></li>";
     }else{
       $html = '<li class="item ' . $extraClass . '" id="' . $id . '">';
         if($href == ""){
