@@ -15,9 +15,9 @@ $panelLeftItems = \Lobby\UI\Panel::getPanelItems("left");
     foreach($panelLeftItems as $id => $item){
       if( !isset($item['subItems']) ){
         if( !isset($item['text']) && isset($item['html']) ){
-          $html .= $this->makePanelItem($item['html'], "htmlContent", $id, "prnt");
+          $html .= $this->makePanelItem($item['html'], "htmlContent", $id, "parent");
         }else{
-          $html .= $this->makePanelItem($item['text'], $item['href'], $id, "prnt");
+          $html .= $this->makePanelItem($item['text'], $item['href'], $id, "parent");
         }
      }else{
         $html .= $this->makePanelTree($id, $item);
@@ -33,9 +33,9 @@ $panelLeftItems = \Lobby\UI\Panel::getPanelItems("left");
     foreach($panelRightItems as $id => $item){
       if( !isset($item['subItems']) ){
         if( !isset($item['text']) && isset($item['html']) ){
-          $html .= $this->makePanelItem($item['html'], "htmlContent", $id, "prnt");
+          $html .= $this->makePanelItem($item['html'], "htmlContent", $id, "parent");
         }else{
-          $html .= $this->makePanelItem($item['text'], $item['href'], $id, "prnt");
+          $html .= $this->makePanelItem($item['text'], $item['href'], $id, "parent");
         }
      }else{
         $html .= $this->makePanelTree($id, $item);
