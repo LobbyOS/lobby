@@ -12,7 +12,7 @@ class hine extends \Lobby\UI\Theme {
      */
     $this->addStyle("/src/main/lib/jquery-ui/jquery-ui.css");
     
-    $this->addScript("/src/main/js/materialize-init.js");
+    $this->addScript("/src/main/js/init.js");
     $this->addStyle("/src/main/css/font.css");
   }
   
