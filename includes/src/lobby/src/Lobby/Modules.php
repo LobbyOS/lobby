@@ -2,24 +2,15 @@
 namespace Lobby;
 
 use \Lobby\Apps;
+use \Lobby\FS;
 
 class Modules extends \Lobby {
 
   private static $core_modules = array(), $custom_modules = array(), $app_modules = array(), $modules = array();
   
   public static function __constructStatic(){
-    $apps = \Lobby\Apps::getApps();
-    foreach($apps as $appID){
-      $module_name = 'app_' . Apps::normalizeID($appID);
-      $loc = APPS_DIR . "/$appID/module";
-      if(self::valid($module_name, $loc)){
-        self::$app_modules[$module_name] = array(
-          "appID" => $appID,
-          "location" => $loc
-        );
-      }
-    }
     
+    self::$app_modules = self::appModules();
     self::$core_modules = self::dirModules("/includes/lib/modules");
     self::$custom_modules = self::dirModules("/contents/modules");
 
@@ -47,6 +38,9 @@ class Modules extends \Lobby {
     }
   }
   
+  /**
+   * List modules in a directory
+   */
   public static function dirModules($location){
     $location = L_DIR . $location;
     $modules = array_diff(scandir($location), array('..', '.'));
@@ -55,39 +49,64 @@ class Modules extends \Lobby {
     foreach($modules as $module){
       $loc = "$location/$module";
       if(self::valid($module, $loc)){
-        $validModules[$module] = $loc;
+        $validModules[] = array(
+          "id" => $module,
+          "location" => $loc,
+          "url" => L_URL . "/" . FS::rel($loc)
+        );
       }
     }
     return $validModules;
   }
   
+  /**
+   * List App Modules
+   */
+  public static function appModules(){
+    $modules = array();
+    
+    $apps = \Lobby\Apps::getApps();
+    foreach($apps as $appID){
+      $module_name = 'app_' . Apps::normalizeID($appID);
+      $loc = APPS_DIR . "/$appID/module";
+      
+      if(self::valid($module_name, $loc)){
+        $modules[$module_name] = array(
+          "id" => $module_name,
+          "appID" => $appID,
+          "location" => $loc,
+          "url" => L_URL . "/" . FS::rel($loc)
+        );
+      }
+    }
+    return $modules;
+  }
+  
   public static function load(){
     /**
-     * In case of App modules, $loc will be an array(
-     *   "appID" => "The App ID",
-     *   "loc" => "The path to Module.php folder"
+     * $module = array(
+     *   "id" => "The Module ID",
+     *   "location" => "The absolute location to module",
+     *   "url" => "URL to Module"
      * )
      */
-    foreach(self::$modules as $module => $loc){
-      /**
-       * If $loc is an array, it's an App Module
-       */
-      if(is_array($loc)){
-        require_once "{$loc["location"]}/Module.php";
-        $moduleIdentifier = "\Lobby\Module\\$module";
-        
-        $App = new Apps($loc["appID"]);
+    foreach(self::$modules as $module){
+      require_once "{$module["location"]}/Module.php";
+      $moduleIdentifier = "\Lobby\Module\\{$module['id']}";
+      
+      if(isset($module["appID"])){
+        $App = new Apps($module["appID"]);
         
         new $moduleIdentifier(array(
-          $loc["location"], L_URL . "/contents/modules/$module"
+          $module["id"],
+          $module["location"],
+          $module["url"]
         ), $App->getInstance());
       }else{
-        require_once "$loc/Module.php";
-        $moduleIdentifier = "\Lobby\Module\\$module";
-        
         new $moduleIdentifier(array(
-          $loc,
-          L_URL . "/contents/modules/$module"
+          $module["id"],
+          $module["location"],
+          $module["url"]
         ));
       }
     }

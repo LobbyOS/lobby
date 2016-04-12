@@ -52,7 +52,7 @@ class Lobby {
       $urladdr = $_SERVER['HTTP_HOST'] . $subdir;
       $urladdr = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://" . $urladdr;
       
-      self::$url = rtrim($urladdr, "/");
+      self::$url = rtrim($urladdr, "/"); // Remove Trailing Slash
       self::$host_name = $_SERVER['HTTP_HOST'];
     }
   }
