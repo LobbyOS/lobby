@@ -4,6 +4,7 @@ namespace Lobby;
 /**
  * FileSystem of Lobby
  * Retreive, Modify & Write Files inside Lobby
+ * Important : Only works for paths INSIDE Lobby
  */
 
 class FS {
@@ -43,6 +44,25 @@ class FS {
     $new = L_DIR . "/" . $new;
     
     return $new;
+  }
+  
+  /**
+   * Make absolute path to relative path
+   */
+  public static function rel($path){
+    $path = self::loc($path);
+    
+    /**
+     * Replace Lobby Path inside $new to make relative path
+     */
+    $relativePath = str_replace(L_DIR, "", $path);
+    
+    /**
+     * Remove slash at the beginning
+     */
+    $relativePath = ltrim($relativePath, '/');
+    
+    return $relativePath;
   }
   
   /**
@@ -103,4 +123,5 @@ class FS {
       return unlink($path);
     }
   }
+  
 }
