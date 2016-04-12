@@ -21,14 +21,25 @@ class Module {
   public $app;
   
   public function __construct($vars, App $app = null){
-    $this->dir = $vars[0];
-    $this->url = $vars[1];
+    $this->id = $vars[0];
+    $this->dir = $vars[1];
+    $this->url = $vars[2];
     
     if($app !== null){
       $this->app = $app;
     }
     
     $this->init();
+  }
+  
+  public function addScript($fileName){
+    $url = "{$this->url}/js/$fileName";
+    \Lobby::addScript("{$this->id}-{$fileName}", $url);
+  }
+  
+  public function addStyle($fileName){
+    $url = "{$this->url}/css/$fileName";
+    \Lobby::addStyle("{$this->id}-{$fileName}", $url);
   }
   
   public function init(){}
