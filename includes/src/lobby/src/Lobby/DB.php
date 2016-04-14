@@ -70,7 +70,8 @@ class DB extends \Lobby {
         parent::$installed = false;
         $error = $e->getMessage();
         self::$error = $error;
-        $GLOBALS['initError'] = array("Couldn't Connect To Database", "Unable to connect to database server. Is the credentials given in <b>config.php</b> correct ? <blockquote>". $error ."</blockquote>");
+        
+        throw new \Exception("Unable to connect to database server. Is the credentials given in <b>config.php</b> correct ? <blockquote>". $error ."</blockquote>");
         self::log("Unable to connect to database server : ". $error);
       }
     }else{
