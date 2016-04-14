@@ -4,9 +4,11 @@
  * Other classes extend from this class
  */
  
+use \Logger;
+ 
 class Lobby {
 
-  public static $version, $versionReleased, $debug, $root, $url, $host_name, $title, $serverCheck, $db, $lid, $error = "";
+  public static $version, $versionReleased, $debug, $root, $url, $host_name, $title, $serverCheck, $db, $lid, $error = null;
   
   public static $installed = false;
   
@@ -55,6 +57,7 @@ class Lobby {
       self::$url = rtrim($urladdr, "/"); // Remove Trailing Slash
       self::$host_name = $_SERVER['HTTP_HOST'];
     }
+    
   }
   
   /**
@@ -159,12 +162,40 @@ class Lobby {
   /**
    * Add message to log files 
    */
-  public static function log($msg = "", $file = "lobby.log"){
-    $msg = !is_string($msg) ? serialize($msg) : $msg;
-    if($msg != "" && self::$debug === true){
+  public static function log($msg = null, $file = "lobby.log"){
+    /**
+     * If $msg is an array, it means the errors are SERIOUS
+     * Array(
+     *   0 => "Type of Error",
+     *   1 => "Message"
+     * )
+     */
+    if(is_array($msg)){
+      $type = $msg[0];
+      $msg = ucfirst($type) . " Error - " . $msg[1];
+      
+      /**
+       * If error is Fatal, Lobby can't work
+       * So register error in class
+       */
+      if($type === "fatal"){
+        self::$error = $msg;
+      }
+    }else if($msg != "" && self::$debug === true){
+      $msg = !is_string($msg) ? serialize($msg) : $msg;
+    }
+    
+    /**
+     * Write to Log File
+     */
+    if($msg != null){
       $logFile = "/contents/extra/logs/{$file}";
-      $message = "[" . date("Y-m-d H:i:s") . "] $msg";
-      \Lobby\FS::write($logFile, $message, "a");
+      
+      /**
+       * Format the log message 
+       */
+      $msg = "[" . date("Y-m-d H:i:s") . "] $msg";
+      \Lobby\FS::write($logFile, $msg, "a");
     }
   }
   
@@ -370,23 +401,26 @@ class Lobby {
   /**
    * Make a URL from Lobby Base. Eg: /hello to http://lobby.dev/lobby/hello
    */
-  public static function u($path = "", $relative = false){
+  public static function u($path = null, $relative = false){
     $orPath = $path; // The original path
-    $path = substr($path, 0, 1) == "/" ? substr($path, 1) : $path;
-    $url = $path;
-    $parts = parse_url($path);
     
-    /**
-     * Make host along with port:
-     * 127.0.0.1:9000
-     */
-    if(isset($parts['host'])){
-      $url_host = $parts['host'] . (isset($parts['port']) ? ":{$parts['port']}" : "");
-    }else{
-      $url_host = "";
+    if($path != null){
+      $path = substr($path, 0, 1) == "/" ? substr($path, 1) : $path;
+      $url = $path;
+      $parts = parse_url($path);
+      
+      /**
+       * Make host along with port:
+       * 127.0.0.1:9000
+       */
+      if(isset($parts['host'])){
+        $url_host = $parts['host'] . (isset($parts['port']) ? ":{$parts['port']}" : "");
+      }else{
+        $url_host = "";
+      }
     }
 
-    if($path === ""){
+    if($path == null){
       /**
        * If no path, give the current page URL
        */
