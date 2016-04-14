@@ -51,7 +51,7 @@ class App {
     return \Lobby\UI\Panel::removeNotifyItem("app_{$this->id}_$id");
   }
   
-  public static function u($path){
+  public static function u($path = null){
     return APP_URL . $path;
   }
   
