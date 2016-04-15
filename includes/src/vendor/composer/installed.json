@@ -1,112 +1,5 @@
 [
     {
-        "name": "mrclay/minify",
-        "version": "2.3.0",
-        "version_normalized": "2.3.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/mrclay/minify.git",
-            "reference": "f4cb31135d288f951bb0af1f23a03d4c00ba9446"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/mrclay/minify/zipball/f4cb31135d288f951bb0af1f23a03d4c00ba9446",
-            "reference": "f4cb31135d288f951bb0af1f23a03d4c00ba9446",
-            "shasum": ""
-        },
-        "require": {
-            "ext-pcre": "*",
-            "php": ">=5.2.1"
-        },
-        "require-dev": {
-            "tubalmartin/cssmin": "~2.4.8"
-        },
-        "suggest": {
-            "tubalmartin/cssmin": "Support minify with CSSMin (YUI PHP port)"
-        },
-        "time": "2016-03-08 11:49:57",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "min/lib/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Stephen Clay",
-                "email": "steve@mrclay.org",
-                "role": "Developer"
-            }
-        ],
-        "description": "Minify is a PHP5 app that helps you follow several rules for client-side performance. It combines multiple CSS or Javascript files, removes unnecessary whitespace and comments, and serves them with gzip encoding and optimal client-side cache headers",
-        "homepage": "http://code.google.com/p/minify/"
-    },
-    {
-        "name": "stolz/assets",
-        "version": "0.1.8",
-        "version_normalized": "0.1.8.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Stolz/Assets.git",
-            "reference": "4b36d2a5d362ee9702e8fb28dfa7f536dee18cc4"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Stolz/Assets/zipball/4b36d2a5d362ee9702e8fb28dfa7f536dee18cc4",
-            "reference": "4b36d2a5d362ee9702e8fb28dfa7f536dee18cc4",
-            "shasum": ""
-        },
-        "require": {
-            "mrclay/minify": "~2.1",
-            "php": ">=5.3.0"
-        },
-        "require-dev": {
-            "evert/phpdoc-md": "0.*",
-            "phpdocumentor/phpdocumentor": "2.*",
-            "phpunit/phpunit": "4.*",
-            "squizlabs/php_codesniffer": "2.*"
-        },
-        "suggest": {
-            "laravel/laravel": "Included ServiceProvider and Facade to work out of the box with Laravel"
-        },
-        "time": "2016-01-13 03:21:55",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Stolz\\Assets\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Stolz",
-                "homepage": "https://github.com/Stolz/Assets",
-                "role": "developer"
-            }
-        ],
-        "description": "An ultra-simple-to-use assets management library",
-        "keywords": [
-            "JS",
-            "agnostic",
-            "asset",
-            "assets",
-            "css",
-            "javascript",
-            "laravel",
-            "minify",
-            "pipeline"
-        ]
-    },
-    {
         "name": "composer/semver",
         "version": "1.4.0",
         "version_normalized": "1.4.0.0",
@@ -168,51 +61,6 @@
             "semver",
             "validation",
             "versioning"
-        ]
-    },
-    {
-        "name": "lobby/lobby",
-        "version": "0.5.29",
-        "version_normalized": "0.5.29.0",
-        "dist": {
-            "type": "path",
-            "url": "lobby/",
-            "reference": "88c0a7d1ff4bd7430d5ceed627f1284a61797c5f",
-            "shasum": null
-        },
-        "require": {
-            "composer/semver": ">=1.4.0",
-            "php": ">=5.3.0"
-        },
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "src/functions.php"
-            ],
-            "psr-0": {
-                "Lobby": "src/",
-                "H": "src/"
-            },
-            "psr-4": {
-                "Lobby\\": "src/Lobby",
-                "Lobby\\UI\\": "src/Lobby/UI"
-            }
-        },
-        "license": [
-            "Apache 2.0"
-        ],
-        "authors": [
-            {
-                "name": "Subin Siby",
-                "homepage": "http://subinsb.com",
-                "role": "Developer"
-            }
-        ],
-        "description": "Lobby Core",
-        "homepage": "http://lobby.subinsb.com",
-        "keywords": [
-            "lobby"
         ]
     },
     {
@@ -555,6 +403,52 @@
             "semantic",
             "semver",
             "versioning"
+        ]
+    },
+    {
+        "name": "lobby/lobby",
+        "version": "0.5.30",
+        "version_normalized": "0.5.30.0",
+        "dist": {
+            "type": "path",
+            "url": "lobby/",
+            "reference": "ccbeb943821df1220258bcb810618c886aa4fe80",
+            "shasum": null
+        },
+        "require": {
+            "composer/semver": ">=1.4.0",
+            "php": ">=5.3.0"
+        },
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "src/functions.php"
+            ],
+            "psr-0": {
+                "Lobby": "src/",
+                "H": "src/",
+                "Assets": "src/"
+            },
+            "psr-4": {
+                "Lobby\\": "src/Lobby",
+                "Lobby\\UI\\": "src/Lobby/UI"
+            }
+        },
+        "license": [
+            "Apache 2.0"
+        ],
+        "authors": [
+            {
+                "name": "Subin Siby",
+                "homepage": "http://subinsb.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "Lobby Core",
+        "homepage": "http://lobby.subinsb.com",
+        "keywords": [
+            "lobby"
         ]
     }
 ]

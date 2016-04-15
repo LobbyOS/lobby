@@ -11,4 +11,5 @@ return array(
     'Requests' => array($vendorDir . '/rmccue/requests/library'),
     'Lobby' => array($vendorDir . '/lobby/lobby/src'),
     'H' => array($vendorDir . '/lobby/lobby/src'),
+    'Assets' => array($vendorDir . '/lobby/lobby/src'),
 );

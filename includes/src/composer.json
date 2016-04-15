@@ -9,7 +9,6 @@
         "klein/klein": "^2.0",
         "symfony/filesystem": "^3.0",
         "rmccue/requests": "^1.6",
-        "stolz/assets": "^0.1.8",
         "lobby/lobby": "^0.5",
         "bylexus/php-prereqcheck": "^0.2.1",
         "vierbergenlars/php-semver": "^3.0",
