@@ -4,8 +4,6 @@
  * Other classes extend from this class
  */
  
-use \Logger;
- 
 class Lobby {
 
   public static $version, $versionReleased, $debug, $root, $url, $host_name, $title, $serverCheck, $db, $lid, $error = null;
@@ -58,6 +56,11 @@ class Lobby {
       self::$host_name = $_SERVER['HTTP_HOST'];
     }
     
+    \Assets::config(array(
+      "baseURL" => self::$url,
+      "serveFile" => "/includes/serve-assets.php"
+    ));
+    
   }
   
   /**
@@ -88,14 +91,6 @@ class Lobby {
       return false;
     }
     
-  }
- 
-  public static function addScript($name, $url){
-    self::$js[$name] = $url;
-  }
- 
-  public static function addStyle($name, $url){
-    self::$css[$name] = $url;
   }
  
   public static function head($title = ""){

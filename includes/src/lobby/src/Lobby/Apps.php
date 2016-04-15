@@ -329,7 +329,7 @@ class Apps extends \Lobby {
    */
   public function run(){
     if($this->app){
-      \Lobby::addScript("app", "/includes/lib/lobby/js/app.js");
+      \Assets::js("app", "/includes/lib/lobby/js/app.js");
       
       $GLOBALS['AppID'] = $this->app;
       

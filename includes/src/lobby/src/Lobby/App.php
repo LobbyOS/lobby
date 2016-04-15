@@ -15,12 +15,12 @@ class App {
   
   public function addStyle($fileName){
     $url = "/contents/apps/{$this->id}/src/css/$fileName";
-    \Lobby::addStyle("{$this->id}-{$fileName}", $url);
+    \Assets::css("{$this->id}-{$fileName}", $url);
   }
   
   public function addScript($fileName){
     $url = "/contents/apps/{$this->id}/src/js/$fileName";
-    \Lobby::addScript("{$this->id}-{$fileName}", $url);
+    \Assets::js("{$this->id}-{$fileName}", $url);
   }
   
   public function setTitle($title){

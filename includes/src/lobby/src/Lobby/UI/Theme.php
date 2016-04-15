@@ -8,7 +8,7 @@ class Theme {
    */
   public function addStyle($file_location){
     $url = "/contents/themes/". THEME_ID . $file_location;
-    \Lobby::addStyle("theme.". THEME_ID ."-{$file_location}", $url);
+    \Assets::css("theme.". THEME_ID ."-{$file_location}", $url);
   }
   
   /**
@@ -16,7 +16,7 @@ class Theme {
    */
   public function addScript($file_location){
     $url = "/contents/themes/". THEME_ID . $file_location;
-    \Lobby::addScript("theme.". THEME_ID ."-{$file_location}", $url);
+    \Assets::js("theme.". THEME_ID ."-{$file_location}", $url);
   }
   
   /**
