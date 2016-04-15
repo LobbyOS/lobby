@@ -16,7 +16,8 @@
     "files": ["src/functions.php"],
     "psr-0": {
       "Lobby": "src/",
-      "H": "src/"
+      "H": "src/",
+      "Assets": "src/"
     },
     "psr-4": {
       "Lobby\\": "src/Lobby",
@@ -27,5 +28,5 @@
     "php": ">=5.3.0",
     "composer/semver": ">=1.4.0"
   },
-  "version": "0.5.29"
+  "version": "0.5.30"
 }

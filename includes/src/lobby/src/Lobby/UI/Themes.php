@@ -55,9 +55,9 @@ class Themes extends \Lobby {
     /**
      * Scripts
      */
-    \Lobby::addScript("jquery", "/includes/lib/jquery/jquery.js");
-    \Lobby::addScript("jqueryui", "/includes/lib/jquery/jquery-ui.js"); // jQuery UI
-    \Lobby::addScript("main", "/includes/lib/lobby/js/main.js");
+    \Assets::js("jquery", "/includes/lib/jquery/jquery.js");
+    \Assets::js("jqueryui", "/includes/lib/jquery/jquery-ui.js"); // jQuery UI
+    \Assets::js("main", "/includes/lib/lobby/js/main.js");
   }
   
   /**
