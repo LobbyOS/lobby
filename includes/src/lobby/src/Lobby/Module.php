@@ -34,12 +34,12 @@ class Module {
   
   public function addScript($fileName){
     $url = "{$this->url}/js/$fileName";
-    \Lobby::addScript("{$this->id}-{$fileName}", $url);
+    \Assets::js("{$this->id}-{$fileName}", $url);
   }
   
   public function addStyle($fileName){
     $url = "{$this->url}/css/$fileName";
-    \Lobby::addStyle("{$this->id}-{$fileName}", $url);
+    \Assets::css("{$this->id}-{$fileName}", $url);
   }
   
   public function init(){}
