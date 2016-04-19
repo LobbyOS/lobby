@@ -2,6 +2,7 @@
 namespace Lobby;
 
 use \Lobby\App;
+use \Lobby\FS;
 
 class Module {
 
@@ -33,13 +34,13 @@ class Module {
   }
   
   public function addScript($fileName){
-    $url = "{$this->url}/js/$fileName";
-    \Assets::js("{$this->id}-{$fileName}", $url);
+    $filePath = FS::rel("{$this->dir}/js/$fileName");
+    \Assets::js("{$this->id}-{$fileName}", $filePath);
   }
   
   public function addStyle($fileName){
-    $url = "{$this->url}/css/$fileName";
-    \Assets::css("{$this->id}-{$fileName}", $url);
+    $filePath = FS::rel("{$this->dir}/js/$fileName");
+    \Assets::css("{$this->id}-{$fileName}", $filePath);
   }
   
   public function init(){}

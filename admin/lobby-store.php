@@ -16,8 +16,8 @@ if($AppID !== null){
 <html>
   <head>
     <?php
-    \Lobby::addStyle("lobby-store", "/admin/css/lobby-store.css");
-    \Lobby::addScript("lobby-store", "/admin/js/lobby-store.js");
+    \Assets::css("lobby-store", "/admin/css/lobby-store.css");
+    \Assets::js("lobby-store", "/admin/js/lobby-store.js");
     \Lobby::doHook("admin.head.begin");
     \Lobby::head($page_title);
     ?>
