@@ -11,8 +11,6 @@ class Lobby {
   public static $installed = false;
   
   public static $sysInfo, $hooks = array();
-
-  public static $js, $css = array();
   
   public static $valid_hooks = array(
     "init", "body.begin", "admin.body.begin", "head.begin", "admin.head.begin", "head.end", "router.finish",
@@ -57,6 +55,7 @@ class Lobby {
     }
     
     \Assets::config(array(
+      "basePath" => L_DIR,
       "baseURL" => self::$url,
       "serveFile" => "/includes/serve-assets.php"
     ));
@@ -100,32 +99,34 @@ class Lobby {
     }
     
     /**
-     * JS Files
+     * Load jQuery, jQuery UI, Lobby Main, App separately without async
      */
-    if(count(self::$js) != 0){
-      /**
-       * Load jQuery, jQuery UI, Lobby Main, App separately without async
-       */
-      $url = L_URL . "/includes/serve.php?file=" . implode(",", array(self::$js['jquery'], self::$js['jqueryui'], self::$js['main'], isset(self::$js['app']) ? self::$js['app'] : ""));
-      echo "<script src='{$url}'></script>";
-      unset(self::$js['jquery']);
-      unset(self::$js['jqueryui']);
-      unset(self::$js['main']);
-      
-      $url = L_URL . "/includes/serve.php?file=" . implode(",", self::$js);
-      echo "<script>lobby.load_script_url = '{$url}';</script>";
-    }
+    $url = L_URL . "/includes/serve-assets.php?type=js&assets=" . implode(",", array(
+      Assets::$js['jquery'],
+      Assets::$js['jqueryui'],
+      Assets::$js['main'],
+      isset(Assets::$js['app']) ? Assets::$js['app'] : ""
+    ));
+    echo "<script src='{$url}'></script>";
+    
+    Assets::removeJs("jquery");
+    Assets::removeJs("jqueryui");
+    Assets::removeJs("main");
+    
+    echo "<script>lobby.load_script_url = '". Assets::getServeURL("js") ."';</script>";
+    
     /**
      * CSS Files
      */
-    if(count(self::$css) != 0){
-      $url = L_URL . "/includes/serve.php?file=" . implode(",", self::$css);
-      if(defined("APP_URL")){
-        $url .= "&APP_URL=" . urlencode(APP_URL);
-        $url .= "&APP_SRC=" . urlencode(APP_SRC);
-      }
-      echo "<link async href='{$url}' rel='stylesheet'/>";
+    if(defined("APP_URL")){
+      echo Assets::getServeLinkTag(array(
+        "APP_URL" => urlencode(APP_URL),
+        "APP_SRC" => urlencode(APP_SRC)
+      ));
+    }else{
+      echo Assets::getServeLinkTag();
     }
+    
     echo "<link href='". L_URL ."/favicon.ico' sizes='16x16 32x32 64x64' rel='shortcut icon' />";
     
     /* Title */

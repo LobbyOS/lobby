@@ -1,29 +1,23 @@
 <?php
 require_once "../load.php";
 
-$f = rtrim($_GET['file'], ",");
-$content = "";
-$extraContent = "";
+Assets::$preProcess = function($data){
+  $to_replace = array(
+    "<?L_URL?>" => L_URL,
+    "<?THEME_URL?>" => THEME_URL
+  );
+  if(isset($_GET['APP_URL'])){
+    $to_replace["<?APP_URL?>"] = htmlspecialchars(urldecode($_GET['APP_URL']));
+    $to_replace["<?APP_SRC?>"] = htmlspecialchars(urldecode($_GET['APP_SRC']));
+  }
+  foreach($to_replace as $from => $to){
+    $data = str_replace($from, $to, $data);
+  }
+  return $data;
+};
+Assets::serve();
 
-if(preg_match("/\.css/", $f)){
-  header("Content-type: text/css");
-  $css = 1;
-}
-if(preg_match("/\.js/", $f) && !isset($css)){
-  header("Content-type: application/x-javascript");
-  $js = 1;
-}
-
-if(preg_match("/,/", $f)){
-  $files = explode(",", $f);
-}else{
-  /**
-   * Only 1 File is present
-   */
-  $files = array($f);
-}
-
-/* Loop through files and */
+/* Loop through files and
 foreach($files as $file){
   $file = str_replace(L_URL, "", $file);
   
@@ -68,12 +62,12 @@ header("Cache-Control: public");
 /**
  * Was it already cached before by the browser ? The old etag will be sent by
  * the browsers as HTTP_IF_NONE_MATCH. We interpret it 
- */
+
 $browserTag = isset($_SERVER["HTTP_IF_NONE_MATCH"]) ? $_SERVER["HTTP_IF_NONE_MATCH"] : 501;
 
 if($browserTag != $etag){
   echo $merged;
 }else{
   header("HTTP/1.1 304 Not Modified");
-}
+}*/
 ?>

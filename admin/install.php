@@ -13,8 +13,8 @@ $install_step = H::i('step');
     /**
      * Install Head
      */
-    \Lobby::addStyle("install", "/admin/css/install.css");
-    \Lobby::addScript("install", "/admin/js/install.js");
+    \Assets::css("install", "/admin/css/install.css");
+    \Assets::js("install", "/admin/js/install.js");
     \Lobby::head("Install");
    
     \Lobby::doHook("head.end");

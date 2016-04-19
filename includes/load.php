@@ -28,7 +28,12 @@ try{
    * Autoload and initialize classes
    */
   $composer = require_once L_DIR . "/includes/src/vendor/autoload.php";
-  $composer->loadClass("Lobby\\DB"); // Composer doesn't load it by default
+  
+  /**
+   * Load Classed that Composer doesn't load by default
+   */
+  $composer->loadClass("Assets");
+  $composer->loadClass("Lobby\\DB");
   
   /**
    * Static Class Constructor
