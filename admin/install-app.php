@@ -4,7 +4,7 @@
   <head>
     <?php 
     \Lobby::doHook("admin.head.begin");
-    \Lobby::addScript("admin.apps.js", "/admin/js/apps.js");
+    \Assets::js("admin.apps.js", "/admin/js/apps.js");
     \Lobby::head("Install App");
     ?>
   </head>
