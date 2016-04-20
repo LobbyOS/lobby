@@ -87,8 +87,8 @@ class H {
   /**
    * Get JSON decoded array from a value of App's Data Storage
    */
-  public static function getJSONData($key){
-    $a = getData($key);
+  public static function getJSONData($key, $appID = null){
+    $a = \Lobby\DB::getData($key, false, $appID);
     $a = json_decode($a, true);
     return is_array($a) ? $a : array();
   }
