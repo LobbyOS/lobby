@@ -10,6 +10,7 @@ class App {
     $this->name = $array['name'];
     $this->URL  = $array['URL'];
     $this->srcURL = $array['srcURL'];
+    $this->dir = $array['location'];
     $this->manifest = $array;
   }
   
@@ -32,6 +33,13 @@ class App {
    */
   public function getData($key = "", $extra = false){
     return \Lobby\DB::getData($this->id, $key, $extra);
+  }
+  
+  /**
+   * Get JSON Data
+   */
+  public function getJSONData($key = ""){
+    return \H::getJSONData($key, $this->id);
   }
   
   /**
@@ -75,7 +83,7 @@ class App {
    * Include a page from the app's source
    */
   public function inc($path, $vars = array()){
-    $app_file_location = APP_DIR . $path;
+    $app_file_location = $this->dir . "/" . $path;
 
     if(!file_exists($app_file_location)){
       return false;
@@ -108,4 +116,5 @@ class App {
   public function log($msg){
     \Lobby::log($msg, "app.". $this->id . ".log");
   }
+  
 }

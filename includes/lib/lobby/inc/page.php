@@ -9,13 +9,6 @@ $GLOBALS['AppID'] = $AppID;
     }else{
       \Lobby::doHook("head.begin");
     }
-    ?>
-    <script>
-      window.tmp = {};window.lobbyExtra = {url: "<?php echo L_URL;?>", csrfToken: "<?php echo csrf("s");?>", sysInfo: {os: "<?php echo \Lobby::$sysInfo['os'];?>"}};<?php if(isset($AppID)){
-        echo 'lobbyExtra["app"] = { id: "'. $AppID .'", url: "'. APP_URL .'", src: "'. \Lobby::u("/contents/apps/{$AppID}") .'" };';
-      }
-    ?></script>
-    <?php
     \Lobby::head();
     if(\Lobby::status("lobby.admin")){
       \Lobby::doHook("admin.head.end");

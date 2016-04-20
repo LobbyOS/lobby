@@ -46,11 +46,11 @@ function filt($string){
 }
 
 /* Simple function to get Data Value */
-function getData($key = "", $extra = false, $appID = ""){
+function getData($key = "", $extra = false, $appID = null){
   if( !\Lobby::$installed ){
     return false;
   }else{
-    $appID = $appID == "" ? $GLOBALS['AppID'] : $appID;
+    $appID = $appID === null ? $GLOBALS['AppID'] : $appID;
     return \Lobby\DB::getData($appID, $key, $extra);
   }
 }

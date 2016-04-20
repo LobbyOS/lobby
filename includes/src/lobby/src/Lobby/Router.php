@@ -63,7 +63,7 @@ class Router {
           "href" => APP_URL,
           "subItems" => array(
             "app_admin" => array(
-              "text" => "Admin Page",
+              "text" => "Admin",
               "href" => "/admin/app/$AppID"
             ),
             "app_disable" => array(
@@ -153,7 +153,7 @@ class Router {
         
         if($GLOBALS['workspaceHTML'] === false || $GLOBALS['workspaceHTML'] == null){
           ob_start();
-            ser("Error", "The app '<strong>{$AppID}</strong>' does not have an Admin Page");
+            ser("Error", "The app '<strong>{$AppID}</strong>' does not have an Admin Page. <a clear href='". \Lobby::u("/app/$AppID") ."' class='btn green'>Go To App</a>");
           $error = ob_get_contents();
           ob_end_clean();
           

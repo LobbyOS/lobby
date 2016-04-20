@@ -57,7 +57,7 @@ class Lobby {
     \Assets::config(array(
       "basePath" => L_DIR,
       "baseURL" => self::$url,
-      "serveFile" => "/includes/serve-assets.php"
+      "serveFile" => "includes/serve-assets.php"
     ));
     
   }
@@ -333,9 +333,21 @@ class Lobby {
     self::$sysInfo = $info;
   }
   
-  /* Hooks */
+  /**
+   * Hooks
+   */
   public static function hook($place, $function){
-    if(array_search($place, self::$valid_hooks) !== false){
+    /**
+     * Multiple hooks with same $function
+     */
+    if(preg_match("/\,/i", $place) !== 0){
+      $output = array();
+      $places = explode(",", $place);
+      foreach($places as $place){
+        $output[] = self::hook($place, $function);
+      }
+      return $output;
+    }else if(array_search($place, self::$valid_hooks) !== false){
       self::$hooks[$place][] = $function;
       return true;
     }else{

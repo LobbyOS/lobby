@@ -1,7 +1,7 @@
 <?php
 require_once "../load.php";
 
-Assets::$preProcess = function($data){
+Assets::$preProcess = function($data, $type){
   $to_replace = array(
     "<?L_URL?>" => L_URL,
     "<?THEME_URL?>" => THEME_URL
