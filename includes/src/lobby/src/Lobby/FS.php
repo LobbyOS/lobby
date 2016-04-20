@@ -36,7 +36,7 @@ class FS {
     /**
      * Remove slash at the beginning
      */
-    $new = ltrim($new, '/');
+    $new = ltrim($new, "/");
     
     /**
      * Make path absolute

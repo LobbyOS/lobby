@@ -42,8 +42,8 @@ window.lobby = {
   mod: {}
 };
 
-if(typeof lobbyExtra != "undefined"){
-  window.lobby = $.extend(lobbyExtra, lobby);
+if(typeof window.lobbyExtra != "undefined"){
+  window.lobby = $.extend(window.lobbyExtra, lobby);
 }
 
 $(function(){

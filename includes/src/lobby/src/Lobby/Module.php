@@ -39,7 +39,7 @@ class Module {
   }
   
   public function addStyle($fileName){
-    $filePath = FS::rel("{$this->dir}/js/$fileName");
+    $filePath = FS::rel("{$this->dir}/css/$fileName");
     \Assets::css("{$this->id}-{$fileName}", $filePath);
   }
   

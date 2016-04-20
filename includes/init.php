@@ -9,6 +9,7 @@ if(!is_writable(L_DIR) || !is_writable(APPS_DIR)){
     $GLOBALS['initError'][1] = $GLOBALS['initError'][1] . "<p clear>On Linux systems, do this in terminal : <blockquote>sudo chown \${USER}:www-data ". L_DIR ." -R && sudo chmod 0775 ". L_DIR ." -R</blockquote></p>";
   }
 }
+
 if(isset($GLOBALS['initError'])){
   echo "<html><head>";
     \Lobby::$js = array();
@@ -18,7 +19,6 @@ if(isset($GLOBALS['initError'])){
   echo "</div></div></body></html>";
   exit;
 }
-\Lobby::curPage(true);
 
 /**
  * Add the <head> files if it's not the install page
@@ -65,15 +65,10 @@ if(!\Lobby::status("lobby.install")){
   }
 }
 
-if(\Lobby::status("lobby.install")){
-  \Assets::css("admin", "/includes/lib/lobby/css/admin.css");
-}
-
 if(\Lobby::status("lobby.admin")){
   /**
    * Add Admin Pages' stylesheet, script
    */
-  \Assets::css("admin", "/admin/css/admin.css");
   \Assets::js("admin", "/admin/js/admin.js");
   
   /**
@@ -91,3 +86,29 @@ if(\Lobby::status("lobby.admin")){
     $_SESSION['checkedForLatestVersion'] = 1;
   }
 }
+
+/**
+ * Insert Lobby Info to JS Files
+ */
+\Lobby::hook("head.begin,admin.head.begin", function(){
+?>
+  <script>
+    window.tmp = {};
+    window.lobbyExtra = {
+      url: "<?php echo L_URL;?>",
+      csrfToken: "<?php echo csrf("s");?>",
+      sysInfo: {
+        os: "<?php echo \Lobby::$sysInfo['os'];?>"
+      }
+    };
+    <?php 
+    if(isset($GLOBALS['AppID'])){
+      echo 'window.lobbyExtra["app"] = {
+        id: "'. $GLOBALS['AppID'] .'",
+        url: "'. APP_URL .'",
+        src: "'. \Lobby::u("/contents/apps/{$GLOBALS['AppID']}") .'"
+      };';
+    }
+  ?></script>
+<?php
+});

@@ -22,7 +22,12 @@ class Assets {
     /**
      * The path to file where assets are printed
      */
-    "serveFile" => ""
+    "serveFile" => "",
+    
+    /**
+     * Enable/Disable Debugging
+     */
+    "debug" => false
   );
   
   /**
@@ -50,7 +55,7 @@ class Assets {
    */
   public static function getPath($path){
     $path = realpath(self::$config["basePath"] . "/" . $path);
-    if(file_exists($path) && self::startsWith($path, self::$config["basePath"])){
+    if($path !== false && self::startsWith($path, self::$config["basePath"])){
       return $path;
     }
     return false;
@@ -136,11 +141,11 @@ class Assets {
   /**
    * @param $data string - The Asset File Contents
    */
-  public static function preProcess($data){
+  public static function preProcess($data, $type){
     if(self::$preProcess === null){
       return $data;
     }else{
-      return call_user_func(self::$preProcess, $data);
+      return call_user_func_array(self::$preProcess, array($data, $type));
     }
   }
   
@@ -168,7 +173,9 @@ class Assets {
       $etag = "";
       foreach($assets as $assetLocation){
         $assetLocation = self::getPath($assetLocation);
-        $etag .= filemtime($assetLocation);
+        if($assetLocation !== false){
+          $etag .= filemtime($assetLocation);
+        }
       }
       
       $etag = hash("md5", $etag);
@@ -183,13 +190,18 @@ class Assets {
       if($browserTag === $etag){
         header("HTTP/1.1 304 Not Modified");
       }else{
-        foreach($assets as $assetLocation){
-          $assetLocation = self::getPath($assetLocation);
+        foreach($assets as $assetRelLocation){
+          $assetLocation = self::getPath($assetRelLocation);
           
           if($assetLocation === false){
-            echo "invalid_file";
+            /**
+             * If file doesn't exist or is not under base directory
+             */
+            if(self::$config["debug"] === true){
+              echo "invalid_file - $assetRelLocation";
+            }
           }else{
-            $data = self::preProcess(file_get_contents($assetLocation));
+            $data = self::preProcess(file_get_contents($assetLocation), $type);
             
             if($data !== null){
               echo $data;
