@@ -137,7 +137,10 @@ nav a.button-collapse i{
   background: #EEE;
 }
 
-#notifyBox #notifyItemupdate .m2 span{
+/**
+ * Notify Item Icons
+ */
+#notifyBox span.notifyItemIconupdate{
   background: url(<?THEME_URL?>/src/panel/image/update.svg) 0px -1px no-repeat;
   background-size: 30px;
   width: 30px;
