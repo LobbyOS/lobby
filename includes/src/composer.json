@@ -12,8 +12,8 @@
         "lobby/lobby": "^0.5",
         "bylexus/php-prereqcheck": "^0.2.1",
         "vierbergenlars/php-semver": "^3.0",
-        "francium/process": "^0.1.1",
-        "vladimmi/construct-static": "dev-master@dev"
+        "vladimmi/construct-static": "dev-master@dev",
+        "francium/process": "^0.2.0"
     },
     "secure-http": "false"
 }
