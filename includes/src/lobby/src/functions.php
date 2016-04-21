@@ -99,24 +99,24 @@ function csrf($type = false){
  * Retrieve JSON Value stored as option as Array
  */
 function getJSONOption($key){
-  $a = getOption($key);
-  $a = json_decode($a, true);
-  return is_array($a) ? $a : array();
+  $json = getOption($key);
+  $json = json_decode($json, true);
+  return is_array($json) ? $json : array();
 }
 
 /**
  * Save JSON Data in options
  */
 function saveJSONOption($key, $values){
-  $a = getJSONOption($key);
+  $old = getJSONOption($key);
   
-  $new = array_replace_recursive($a, $values);    
+  $new = array_replace_recursive($old, $values);
   foreach($values as $k => $v){
     if($v === false){
       unset($new[$k]);
     }
   }
-  $new = json_encode($new);
+  $new = json_encode($new, JSON_HEX_QUOT | JSON_HEX_TAG);
   saveOption($key, $new);
   return true;
 }
