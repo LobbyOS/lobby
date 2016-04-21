@@ -111,14 +111,14 @@ class DB extends \Lobby {
    */
   public static function saveOption($name, $value){
     if(self::$installed && $value != null){
-      $sql = self::$dbh->prepare("SELECT COUNT(`name`) FROM `". self::$prefix ."options` WHERE `name` = ?");
+      $sql = self::$dbh->prepare("SELECT COUNT(*) FROM `". self::$prefix ."options` WHERE `name` = ?");
       $sql->execute(array($name));
-      if($sql->fetchColumn() != 0){
-        $sql = self::$dbh->prepare("UPDATE `". self::$prefix ."options` SET `value` = ? WHERE `name` = ?");
-        return $sql->execute(array($value, $name));
-      }else{
+      if($sql->fetchColumn() === "0"){
         $sql = self::$dbh->prepare("INSERT INTO `". self::$prefix ."options` (`name`, `value`) VALUES (?, ?)");
         return $sql->execute(array($name, $value));
+      }else{
+        $sql = self::$dbh->prepare("UPDATE `". self::$prefix ."options` SET `value` = ? WHERE `name` = ?");
+        return $sql->execute(array($value, $name));
       }
     }else{
       return false;
