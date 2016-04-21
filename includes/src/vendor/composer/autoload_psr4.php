@@ -11,7 +11,7 @@ return array(
     'Lobby\\UI\\' => array($vendorDir . '/lobby/lobby/src/Lobby/UI'),
     'Lobby\\' => array($vendorDir . '/lobby/lobby/src/Lobby'),
     'Klein\\' => array($vendorDir . '/klein/klein/src/Klein'),
-    'Francium\\' => array($vendorDir . '/francium/process/src'),
+    'Fr\\' => array($vendorDir . '/francium/process/src'),
     'ConstructStatic\\' => array($vendorDir . '/vladimmi/construct-static/src'),
     'Composer\\Semver\\' => array($vendorDir . '/composer/semver/src'),
 );

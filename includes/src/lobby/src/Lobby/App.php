@@ -43,6 +43,20 @@ class App {
   }
   
   /**
+   * Save Data
+   */
+  public function saveData($key = "", $extra = false){
+    return \Lobby\DB::saveData($this->id, $key, $extra);
+  }
+  
+  /**
+   * Save JSON Data
+   */
+  public function saveJSONData($key, $values){
+    return \H::saveJSONData($key, $values, $this->id);
+  }
+  
+  /**
    * Push a notify item
    */
   public function addNotifyItem($id, $info){

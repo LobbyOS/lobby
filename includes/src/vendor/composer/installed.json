@@ -114,52 +114,6 @@
         ]
     },
     {
-        "name": "francium/process",
-        "version": "v0.1.1",
-        "version_normalized": "0.1.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/subins2000/Francium-Process.git",
-            "reference": "5d06c60751d410db598bf2ee26ed98a17ecec991"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/subins2000/Francium-Process/zipball/5d06c60751d410db598bf2ee26ed98a17ecec991",
-            "reference": "5d06c60751d410db598bf2ee26ed98a17ecec991",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "time": "2016-04-10 17:46:10",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Francium\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "Apache 2.0"
-        ],
-        "authors": [
-            {
-                "name": "Subin Siby",
-                "homepage": "http://subinsb.com",
-                "role": "Developer"
-            }
-        ],
-        "description": "Run Background Process with Cross Platform Support",
-        "homepage": "http://subinsb.com/francium/process",
-        "keywords": [
-            "background",
-            "cross",
-            "platform",
-            "process"
-        ]
-    },
-    {
         "name": "vladimmi/construct-static",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
@@ -449,6 +403,52 @@
         "homepage": "http://lobby.subinsb.com",
         "keywords": [
             "lobby"
+        ]
+    },
+    {
+        "name": "francium/process",
+        "version": "v0.2",
+        "version_normalized": "0.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/subins2000/Francium-Process.git",
+            "reference": "b1bd76347368a13b5b32e196f495da75fe4c918b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/subins2000/Francium-Process/zipball/b1bd76347368a13b5b32e196f495da75fe4c918b",
+            "reference": "b1bd76347368a13b5b32e196f495da75fe4c918b",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2016-04-21 06:04:23",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Fr\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache 2.0"
+        ],
+        "authors": [
+            {
+                "name": "Subin Siby",
+                "homepage": "http://subinsb.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "Run Background Process with Cross Platform Support",
+        "homepage": "http://subinsb.com/francium/process",
+        "keywords": [
+            "background",
+            "cross",
+            "platform",
+            "process"
         ]
     }
 ]
