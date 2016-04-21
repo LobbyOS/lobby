@@ -88,7 +88,7 @@ class H {
    * Get JSON decoded array from a value of App's Data Storage
    */
   public static function getJSONData($key, $appID = null){
-    $a = \Lobby\DB::getData($key, false, $appID);
+    $a = getData($key, false, $appID);
     $a = json_decode($a, true);
     return is_array($a) ? $a : array();
   }
@@ -100,7 +100,7 @@ class H {
   public static function saveJSONData($key, $values){
     $a = self::getJSONData($key);
     
-    $new = array_replace_recursive($a, $values);    
+    $new = array_replace_recursive($a, $values);
     foreach($values as $k => $v){
       if($v === false){
         unset($new[$k]);
