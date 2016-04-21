@@ -97,8 +97,8 @@ class H {
    * Save JSON as a value of App's Data Storage
    * To remove an item, set the value of it to (bool) FALSE
    */
-  public static function saveJSONData($key, $values){
-    $a = self::getJSONData($key);
+  public static function saveJSONData($key, $values, $appID = null){
+    $a = self::getJSONData($key, $appID);
     
     $new = array_replace_recursive($a, $values);
     foreach($values as $k => $v){
@@ -107,7 +107,7 @@ class H {
       }
     }
     $new = json_encode($new);
-    saveData($key, $new);
+    saveData($key, $new, $appID);
     return true;
   }
 }

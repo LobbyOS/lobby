@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b622b12c4e4aa5f2a01bec29ec4eca92",
-    "content-hash": "1c5c692e8d23dd2a613d590c466e30ed",
+    "hash": "ce076318101698ddb12afa1da8687483",
+    "content-hash": "35a13e536f7af9c9cff897d6a99ddb87",
     "packages": [
         {
             "name": "bylexus/php-prereqcheck",
@@ -119,16 +119,16 @@
         },
         {
             "name": "francium/process",
-            "version": "v0.1.1",
+            "version": "v0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/subins2000/Francium-Process.git",
-                "reference": "5d06c60751d410db598bf2ee26ed98a17ecec991"
+                "reference": "b1bd76347368a13b5b32e196f495da75fe4c918b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/subins2000/Francium-Process/zipball/5d06c60751d410db598bf2ee26ed98a17ecec991",
-                "reference": "5d06c60751d410db598bf2ee26ed98a17ecec991",
+                "url": "https://api.github.com/repos/subins2000/Francium-Process/zipball/b1bd76347368a13b5b32e196f495da75fe4c918b",
+                "reference": "b1bd76347368a13b5b32e196f495da75fe4c918b",
                 "shasum": ""
             },
             "require": {
@@ -137,7 +137,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Francium\\": "src"
+                    "Fr\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -159,7 +159,7 @@
                 "platform",
                 "process"
             ],
-            "time": "2016-04-10 17:46:10"
+            "time": "2016-04-21 06:04:23"
         },
         {
             "name": "klein/klein",
