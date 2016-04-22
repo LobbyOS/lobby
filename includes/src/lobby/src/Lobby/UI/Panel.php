@@ -19,6 +19,13 @@ class Panel {
     "position" => "left"
   );
   
+  public static $notifyItem = array(
+    "contents" => null,
+    "href" => null,
+    "icon" => null,
+    "iconURL" => null
+  );
+  
   public static function addTopItem($name, $array){
     $array = array_replace_recursive(self::$panel_item_format, $array);
     $loc = $array['position'];
@@ -57,16 +64,16 @@ class Panel {
   /**
    * Push an item to Notify
    */
-  public function addNotifyItem($id, $info){
+  public static function addNotifyItem($id, $info){
     saveJSONOption("notify_items", array(
-      $id => $info
+      $id => array_replace_recursive(self::$notifyItem, $info)
     ));
   }
   
   /**
    * Remove an item from Notify
    */
-  public function removeNotifyItem($id){
+  public static function removeNotifyItem($id){
     saveJSONOption("notify_items", array(
       $id => false
     ));
