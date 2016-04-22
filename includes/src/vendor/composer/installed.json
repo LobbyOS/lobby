@@ -407,23 +407,23 @@
     },
     {
         "name": "francium/process",
-        "version": "v0.2",
-        "version_normalized": "0.2.0.0",
+        "version": "v0.2.1",
+        "version_normalized": "0.2.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/subins2000/Francium-Process.git",
-            "reference": "b1bd76347368a13b5b32e196f495da75fe4c918b"
+            "reference": "7061613f1a6475708e9d2a936644c9fff49b98b3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/subins2000/Francium-Process/zipball/b1bd76347368a13b5b32e196f495da75fe4c918b",
-            "reference": "b1bd76347368a13b5b32e196f495da75fe4c918b",
+            "url": "https://api.github.com/repos/subins2000/Francium-Process/zipball/7061613f1a6475708e9d2a936644c9fff49b98b3",
+            "reference": "7061613f1a6475708e9d2a936644c9fff49b98b3",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2016-04-21 06:04:23",
+        "time": "2016-04-21 15:34:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {

@@ -39,6 +39,7 @@ if($AppID !== null){
             $sc = $app['sub_category'];
         ?>
             <h1><?php echo "<a href='". L_SERVER ."/../apps/{$app['id']}' target='_blank'>{$app['name']}</a>";?></h1>
+            <?php echo "<div class='chip'><a href='". L_SERVER ."/../apps?c={$c}' target='_blank'>" . ucfirst($c) . "</a> &gt; <a href='". L_SERVER ."/../apps?sc={$sc}' target='_blank' >" . ucfirst($sc) . "</a></div>";?>
             <p class="chip" style="margin: -5px 0 20px;"><?php echo $app['short_description'];?></p>
             <div class="row">
               <div class="col m3" id="leftpane" style="text-align: center;">
@@ -53,8 +54,6 @@ if($AppID !== null){
                     downloadingImage.src = "<?php echo $appImage;?>";
                   });
                 </script>
-                <a clear href="<?php echo $app['permalink'];?>" target="_blank" class="btn">App Page</a>
-                <cl/>
                 <?php
                 $App = new \Lobby\Apps($AppID);
                 $requires = $app['requires'];
@@ -81,6 +80,8 @@ if($AppID !== null){
                   echo \Lobby::l("/admin/apps.php?action=enable&redirect=1&app=" . $AppID . H::csrf("g"), "Enable App", "class='btn green'");
                 }
                 ?>
+                <div class="chip" clear>Developed By <a href="<?php echo $app['author_page'];?>" target="_blank"><?php echo $app['author'];?></a></div>
+                <div class="chip" clear><a href="<?php echo $app['app_page'];?>" target="_blank">App's Webpage</a></div>
                 <style>#leftpane .btn{width:100%;margin: 5px 0px;}</style>
               </div>
               <div class="col m9">
@@ -91,8 +92,8 @@ if($AppID !== null){
                   <li class="tab"><a href="#app-stats">Stats</a></li>
                 </ul>
                 <div id="app-info" class="tab-contents">
-                  <?php echo "<div class='chip'><a href='". L_SERVER ."/../apps?c={$c}' target='_blank'>" . ucfirst($c) . "</a></div>";?> > <?php echo "<div class='chip'><a href='". L_SERVER ."/../apps?sc={$sc}' target='_blank' >" . ucfirst($sc) . "</a></div>";?><cl/>
-                  <div class="chip">Version : <?php echo $app['version'];?></div><cl/>
+                  <div class="chip">Version : <?php echo $app['version'];?></div>
+                  <div class="chip">Last updated <?php echo $app['updated'];?></div><cl/>
                   <div class="chip"><span>Requirements :</span></div>
                     <ul class="collection" style="margin-left: 20px;">
                       <?php
@@ -106,10 +107,6 @@ if($AppID !== null){
                       }
                       ?>
                     </ul>
-                  <cl/>
-                  <div class="chip">Developed By : <a href="<?php echo $app['author_page'];?>" target="_blank"><?php echo $app['author'];?></a></div><cl/>
-                  <div class="chip">Last updated <?php echo $app['updated'];?></div><cl/>
-                  <div class="chip"><a href="<?php echo $app['app_page'];?>" target="_blank">App's Webpage</a></div>
                 </div>
                 <div id="app-description" class="tab-contents">
                   <div class="card-panel light-green">

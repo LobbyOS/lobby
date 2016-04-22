@@ -155,24 +155,28 @@ class Update extends \Lobby {
     self::zipFile($url, $zipFile);
  
     // Un Zip the file
-    $zip = new \ZipArchive;
-    if($zip->open($zipFile) != "true"){
-      \Lobby::log("Unable to open Downloaded App ($id) File : $zipFile");
-      ser("Error", "Unable to open Downloaded App File.");
-    }else{
-      /**
-       * Extract App
-       */
-      $appDir = APPS_DIR . "/$id";
-      if(!file_exists($appDir)){
-        mkdir($appDir);
+    if(class_exists("Zip_Archive")){
+      $zip = new \ZipArchive;
+      if($zip->open($zipFile) != "true"){
+        \Lobby::log("Unable to open Downloaded App ($id) File : $zipFile");
+        ser("Error", "Unable to open Downloaded App File.");
+      }else{
+        /**
+         * Extract App
+         */
+        $appDir = APPS_DIR . "/$id";
+        if(!file_exists($appDir)){
+          mkdir($appDir);
+        }
+        $zip->extractTo($appDir);
+        $zip->close();
+        
+        \Lobby\FS::remove($zipFile);
+        \Lobby::log("Installed App {$id}");
+        return true;
       }
-      $zip->extractTo($appDir);
-      $zip->close();
-      
-      \Lobby\FS::remove($zipFile);
-      \Lobby::log("Installed App {$id}");
-      return true;
+    }else{
+      throw new \Exception("Unable to Install App, because <a href='". L_SERVER ."/../docs/quick#section-requirements' target='_blank'>PHP Zip Extension</a> is not installed");
     }
   }
 }

@@ -14,6 +14,7 @@ if(csrf()){
     $notifications["update"] = array(
       "contents" => "New Updates Are Available",
       "icon" => "update",
+      "iconURL" => null,
       "href" => "/admin/update.php"
     );
   }

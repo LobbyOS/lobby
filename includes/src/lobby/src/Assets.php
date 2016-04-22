@@ -61,7 +61,7 @@ class Assets {
     return false;
   }
   
-  protected function startsWith($haystack, $needle){
+  protected static function startsWith($haystack, $needle){
     $length = strlen($needle);
     return (substr($haystack, 0, $length) === $needle);
   }
@@ -149,7 +149,7 @@ class Assets {
     }
   }
   
-  public function serve(){
+  public static function serve(){
     $assets = isset($_GET['assets']) ? $_GET['assets'] : null;
     $type = isset($_GET['type']) ? $_GET['type'] : null;
     
