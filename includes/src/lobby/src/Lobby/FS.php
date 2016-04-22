@@ -124,4 +124,14 @@ class FS {
     }
   }
   
+  /**
+   * Bytes to KiB, MB, GB converter
+   */
+  public function normalizeSize($size){
+    $base = log($size) / log(1000);
+    $suffix = array("", "KB", "MB", "GB", "TB");
+    $f_base = floor($base);
+    return round(pow(1000, $base - floor($base)), 1) . $suffix[$f_base];
+  }
+  
 }
