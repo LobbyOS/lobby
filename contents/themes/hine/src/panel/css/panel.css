@@ -137,13 +137,18 @@ nav a.button-collapse i{
   background: #EEE;
 }
 
+#notifyBox .notifyItem img{
+  max-height: 32px;
+  max-width: 32px;
+}
+
 /**
  * Notify Item Icons
  */
-#notifyBox span.notifyItemIconupdate{
+#notifyBox .notifyItemIconupdate{
+  display: block;
   background: url(<?THEME_URL?>/src/panel/image/update.svg) 0px -1px no-repeat;
   background-size: 30px;
   width: 30px;
-  display: block;
   height: 30px;
 }

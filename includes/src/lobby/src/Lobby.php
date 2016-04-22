@@ -80,7 +80,7 @@ class Lobby {
             ini_set("display_errors","on");
             self::$debug = true;
           }
-          self::$lid = self::$config['lobbyID'];// The Global Lobby installation ID
+          self::$lid = self::$config['lobbyID']; // The Global Lobby installation ID
         }
       }else{
         return false;

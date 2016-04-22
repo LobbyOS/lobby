@@ -14,7 +14,10 @@ lobby.load(function(){
     if(typeof info["removed"] !== "undefined"){
       lobby.notify.box.find("#notifyItem" + info["id"]).remove();
     }else{
-      pushItem = $("<a href='"+ info["href"] +"' class='notifyItem row' id='notifyItem"+ info["id"] +"'><div class='col m2'><span class='notifyItemIcon"+ info["icon"] +"'></span></div><div class='col m10'>"+ info["contents"] +"</div></a>");
+      iconURL = info["iconURL"] === null ? lobby.url +"/admin/image/clear.gif" : info["iconURL"];
+      
+      pushItem = $("<a href='"+ info["href"] +"' class='notifyItem row' id='notifyItem"+ info["id"] +"'><div class='col m2'><img class='notifyItemIcon"+ info["icon"] +"' src='"+ iconURL +"' /></div><div class='col m10'>"+ info["contents"] +"</div></a>");
+      
       if(lobby.notify.box.find("#notifyItem" + info["id"]).length === 0){
         pushItem.prependTo(lobby.notify.box);
       }else{
