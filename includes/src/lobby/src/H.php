@@ -7,10 +7,10 @@
 
 class H {
   
-  public static function init(){
+  public static function __constructStatic(){
     if(!isset($_COOKIE['csrf_token'])){
       $token = self::randStr(10);
-      setcookie("csrf_token", $token, 0);
+      setcookie("csrf_token", $token, 0, "/", \Lobby::$hostName);
       $_COOKIE['csrf_token'] = $token;
     }
   }
@@ -111,4 +111,3 @@ class H {
     return true;
   }
 }
-H::init();

@@ -6,7 +6,7 @@
  
 class Lobby {
 
-  public static $version, $versionReleased, $debug, $root, $url, $host_name, $title, $serverCheck, $db, $lid, $error = null;
+  public static $version, $versionReleased, $debug, $root, $url, $hostName, $title, $serverCheck, $db, $lid, $error = null;
   
   public static $installed = false;
   
@@ -42,7 +42,7 @@ class Lobby {
     
     if(isset(self::$config['lobby_url'])){
       $url_parts = parse_url(self::$config['lobby_url']);
-      self::$host_name = $url_parts['host'];
+      self::$hostName = $url_parts['host'];
       self::$url = self::$config['lobby_url'];
     }else{
       $docDir = str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT']);
@@ -51,7 +51,7 @@ class Lobby {
       $urladdr = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://" . $urladdr;
       
       self::$url = rtrim($urladdr, "/"); // Remove Trailing Slash
-      self::$host_name = $_SERVER['HTTP_HOST'];
+      self::$hostName = $_SERVER['HTTP_HOST'];
     }
     
     \Assets::config(array(
@@ -449,7 +449,7 @@ class Lobby {
       $url = $pageURL;
     }else if($path === L_URL){
       $url = L_URL;
-    }else if(!preg_match("/http/", $path) || $url_host != self::$host_name){
+    }else if(!preg_match("/http/", $path) || $url_host != self::$hostName){
       if(!defined("APP_DIR") || substr($orPath, 0, 1) == "/"){
         $url = L_URL . "/$path";
       }else{

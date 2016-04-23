@@ -43,16 +43,22 @@ require "../load.php";
         if($id != null && H::i("action") == null && H::csrf()){
         ?>
           <h1>Install App</h1>
-          <ul id="appInstallationProgress" class="collection"></ul>
-          <script>
-            lobby.load(function(){
-              lobby.installApp("<?php echo $id;?>", $("#appInstallationProgress"));
-            });
-          </script>
+          <p>The install progress will be displayed below. If this doesn't work, try the <?php echo \Lobby::l("/admin/install-app.php?id=$id&do=alternate-install".csrf("g"), "alternative install");?>.</p>
+          <?php
+          if(isset($_GET["do"]) && $_GET["do"] === "alternate-install" && csrf()){
+          ?>
+            <iframe src="<?php echo L_URL . "/admin/download.php?type=app&id={$id}". H::csrf("g");?>" style="border: 0;width: 100%;height: 300px;"></iframe>
         <?php
-          /**
-           * <iframe src="<?php echo L_URL . "/admin/download.php?type=app&id={$id}". H::csrf("g");?>" style="border: 0;width: 100%;height: 200px;"></iframe>
-           */
+          }else{
+        ?>
+            <ul id="appInstallationProgress" class="collection"></ul>
+            <script>
+              lobby.load(function(){
+                lobby.installApp("<?php echo $id;?>", $("#appInstallationProgress"));
+              });
+            </script>
+        <?php
+          }
         }
         ?>
       </div>

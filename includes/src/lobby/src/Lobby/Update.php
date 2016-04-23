@@ -155,7 +155,7 @@ class Update extends \Lobby {
     self::zipFile($url, $zipFile);
  
     // Un Zip the file
-    if(class_exists("Zip_Archive")){
+    if(class_exists("ZipArchive")){
       $zip = new \ZipArchive;
       if($zip->open($zipFile) != "true"){
         \Lobby::log("Unable to open Downloaded App ($id) File : $zipFile");
