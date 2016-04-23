@@ -15,6 +15,11 @@ lobby.dash = {
   init : function(adjust){
     lobby.dash.addTiles();
     lobby.dash.addTileEvents();
+    $(".tiles").shapeshift({
+      selector: ".tile",
+      minColumns: 1,
+      enableDrag: false
+    });
   },
   
   /**
@@ -43,43 +48,7 @@ lobby.dash = {
    */
   addTileEvents : function(){
     setTimeout(function(){
-      $(".workspace .tiles .tile").each(function(){
-        if(typeof $(this).data("ui-draggable") != "undefined" && typeof $(".workspace .tiles .tile").data("ui-droppable") != "undefined"){
-          $(this).draggable("destroy");
-          $(this).droppable("destroy");
-        }
-      });
       src = "";
-      $(".workspace .tiles .tile").draggable({
-        cursor: 'move',
-        revert: "invalid",
-        start: function(event, ui) {
-          if(!$(this).hasClass("taken")){
-            return false;
-          }
-          src = $(this);
-        },
-        stop: function(){
-          lobby.dash.addTileEvents();
-        }
-      });
-      $(".workspace .tiles .tile").droppable({
-        accept : ".workspace .tiles .tile.taken",
-        hoverClass: "tile-placeholder",
-        drop: function (event, ui) {
-          k = ui.draggable.attr("style", "");
-          if($(this).hasClass("taken")){
-            p = $(this).clone();
-            src.replaceWith(p);
-          }else{
-            src.after("<div class='tile'></div>");
-          }
-          $(this).replaceWith(k);
-          lobby.dash.addTileEvents();
-          lobby.dash.save();
-        },
-        zIndex: 2
-      });
       $( ".workspace .tiles" ).disableSelection();
       
       $.contextMenu({
