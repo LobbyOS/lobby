@@ -2,8 +2,8 @@
   "name" : "lEdit",
   "short_description" : "The Default Text Editor Of Lobby",
   "category" : "accessories",
-  "sub_catrgory" : "tools",
-  "version" : "0.1.1",
+  "sub_category" : "tools",
+  "version" : "0.1",
   "requires" : {
     "lobby" : [">=", "0.5"]
   },
