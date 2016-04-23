@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__ . "/../load.php";
 
+use \Lobby\FS;
+use \Lobby\Apps;
+
 header("Content-type: text/html");
 header('Cache-Control: no-cache');
 
@@ -70,10 +73,10 @@ $GLOBALS['last'] = 0;
   if($GLOBALS['last'] != $percent || isset($GLOBALS['non_percent'])){
     $GLOBALS['last'] = $percent;
     if($download_size > 0){
-      $rd_size = convertToReadableSize($download_size);
+      $rd_size = FS::normalizeSize($download_size);
       echo "<script>document.getElementById('downloadStatus').innerHTML = 'Downloaded $percent% of {$rd_size}';</script>";
     }else{
-      $downloaded = convertToReadableSize($downloaded);
+      $downloaded = FS::normalizeSize($downloaded);
       $GLOBALS['non_percent'] = 1;
       echo "<script>document.getElementById('downloadStatus').innerHTML = 'Downloaded {$downloaded}';</script>";
     }
@@ -87,7 +90,10 @@ $GLOBALS['last'] = 0;
 };
 
 if($type == "app" && \Lobby\Update::app($id)){
-  echo "Installed - The app has been installed. <a target='_parent' href='". L_URL ."/admin/install-app.php?action=enable&id={$_GET['id']}". H::csrf("g") ."'>Enable the app</a> to use it.";
+  $App = new Apps($id);
+  $App->enableApp();
+  
+  echo "Installed - The app has been installed. <a target='_parent' href='". $App->info["URL"] ."'>Open App</a>";
 }else if($type == "lobby" && $redirect = \Lobby\Update::software()){
   echo "<a target='_parent' href='$redirect'>Updated Lobby</a>";
 }
