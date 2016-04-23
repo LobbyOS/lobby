@@ -4,7 +4,7 @@ require "../../../../load.php";
 $file = \H::i('cx74e9c6a45', '', 'POST');
 $appID = \H::i('s7c8csw91', '', 'POST');
 
-if($file != "" && H::csrf()){
+if($file != "" && csrf()){
   if($appID !== ""){
     $App = new \Lobby\Apps($appID);
      
