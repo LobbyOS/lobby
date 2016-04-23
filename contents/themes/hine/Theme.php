@@ -33,7 +33,7 @@ class hine extends \Lobby\UI\Theme {
     $this->addStyle("/src/dashboard/css/scrollbar.css");
     $this->addScript("/src/dashboard/js/jquery.contextmenu.js");
     $this->addStyle("/src/dashboard/css/jquery.contextmenu.css");
-    $this->addScript("/src/dashboard/js/Packery.js");
+    $this->addScript("/src/dashboard/js/jquery.shapeshift.js");
     $this->addScript("/src/dashboard/js/dashboard.js");
     $this->addStyle("/src/dashboard/css/dashboard.css");
   }
