@@ -1,18 +1,17 @@
 .workspace{
   background: #fff;
+  overflow: hidden;
+  top: 12px;
 }
-.workspace .tiles{
-  position: absolute;
-  top: 50px;
-  bottom: 0;
-  left: 0;
-  right: 0;
+.workspace .tiles-wrapper{
+  margin: 0;
+  text-align: center;
 }
 .workspace .tiles .tile {
-  position: absolute;
+  display: inline-block;
+  position: relative;
   width: 200px;
   height: 200px;
-  margin: 5px 0;
 }
 .workspace .tiles .tile.taken:hover{
   box-shadow: inset 0px 0px 1px black;
@@ -56,11 +55,31 @@
 .workspace .tiles .tile:hover .title{
   color: #D54E21;
 }
+
 .scroll-element.scroll-y {
   display: none !important;
 }
-@media screen and (max-width: 1024px){
-  .workspace .tiles .tile{
-    width: 
-  }
+
+#dash-control{
+  position: fixed;
+  top: 50px;
+  left: 0;
+  right: 0;
+}
+#bx-pager{
+  height: 12px;
+}
+#bx-pager .indicator{
+  display: none;
+}
+#bx-pager .tab{
+  height: 12px;
+  cursor: pointer;
+}
+#bx-pager a{
+  background: rgba(0,0,0,0.6);
+}
+#bx-pager .active{
+  background: #000;
+  cursor: auto;
 }

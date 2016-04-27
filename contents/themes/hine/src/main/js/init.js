@@ -1,6 +1,6 @@
 lobby.load(function(){
   $(document).tooltip();
   
-  $(".workspace ul:not(.pagination,.tabs)").addClass("collection");
-  $(".workspace ul:not(.pagination,.tabs) li").addClass("collection-item");
+  $(".workspace ul[class='']").addClass("collection");
+  $(".workspace ul[class=''] li").addClass("collection-item");
 });

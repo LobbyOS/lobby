@@ -1,0 +1,73 @@
+/**
+ * BxSlider v4.1.2 - Fully loaded, responsive content slider
+ * http://bxslider.com
+ *
+ * Written by: Steven Wanderski, 2014
+ * http://stevenwanderski.com
+ * (while drinking Belgian ales and listening to jazz)
+ *
+ * CEO and founder of bxCreative, LTD
+ * http://bxcreative.com
+ * 
+ * Lobby Theme - Don't Replace the whole File
+ */
+
+/** THEME
+===================================*/
+
+.bx-wrapper .bx-viewport {
+	left: -5px;
+	
+	/*fix other elements on the page moving (on Chrome)*/
+	-webkit-transform: translatez(0);
+	-moz-transform: translatez(0);
+  -ms-transform: translatez(0);
+  -o-transform: translatez(0);
+  transform: translatez(0);
+}
+
+.bx-wrapper .bx-pager,
+.bx-wrapper .bx-controls-auto {
+	position: absolute;
+	bottom: -30px;
+	width: 100%;
+}
+
+/* DIRECTION CONTROLS (NEXT / PREV) */
+
+.bx-wrapper .bx-prev {
+	left: 0;
+  
+  width: 0; 
+	height: 0; 
+	border-top: 40px solid transparent;
+	border-bottom: 40px solid transparent; 
+	border-right:40px solid rgba(0,0,0,0.6); 
+}
+
+.bx-wrapper .bx-next {
+	right: 0;
+  
+  width: 0; 
+	height: 0; 
+	border-top: 40px solid transparent;
+	border-bottom: 40px solid transparent;
+	border-left: 40px solid rgba(0,0,0,0.6);
+}
+
+.bx-wrapper .bx-controls-direction a {
+	position: absolute;
+	top: 42%;
+  bottom: 0;
+	outline: 0;
+  width: 5rem;
+}
+
+.bx-wrapper .bx-controls-direction a:hover{
+  border-right-color: #000;
+  border-left-color: #000;
+}
+
+.bx-wrapper .bx-controls-direction a.disabled {
+	display: none;
+}
