@@ -29,11 +29,10 @@ class hine extends \Lobby\UI\Theme {
    * Include stuff for designing dashboard
    */
   public function dashboard(){
-    $this->addScript("/src/dashboard/js/scrollbar.js");
-    $this->addStyle("/src/dashboard/css/scrollbar.css");
+    $this->addScript("/src/dashboard/js/jquery.bxslider.js");
+    $this->addStyle("/src/dashboard/css/jquery.bxslider.css");
     $this->addScript("/src/dashboard/js/jquery.contextmenu.js");
     $this->addStyle("/src/dashboard/css/jquery.contextmenu.css");
-    $this->addScript("/src/dashboard/js/jquery.shapeshift.js");
     $this->addScript("/src/dashboard/js/dashboard.js");
     $this->addStyle("/src/dashboard/css/dashboard.css");
   }
