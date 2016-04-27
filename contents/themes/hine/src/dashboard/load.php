@@ -31,7 +31,25 @@ if(count($apps) == 0){
   foreach($appsSorted as $data){
     $app = $data['id'];
     $data['logo'] = $data['logo'] === null ? THEME_URL . "/src/dashboard/image/blank.png" : $data['logo'];
-    $jsCode .= "lobby.dash.addTile('app', {'id' : '{$app}', 'img' : '{$data['logo']}', 'name' : '{$data['name']}'});";
+    $jsCode .= "lobby.dash.addTile({'id' : '{$app}', 'img' : '{$data['logo']}', 'name' : '{$data['name']}'});";
+  }
+  
+  foreach($appsSorted as $data){
+    $app = $data['id'];
+    $data['logo'] = $data['logo'] === null ? THEME_URL . "/src/dashboard/image/blank.png" : $data['logo'];
+    $jsCode .= "lobby.dash.addTile({'id' : '{$app}', 'img' : '{$data['logo']}', 'name' : '{$data['name']}'});";
+  }
+  
+  foreach($appsSorted as $data){
+    $app = $data['id'];
+    $data['logo'] = $data['logo'] === null ? THEME_URL . "/src/dashboard/image/blank.png" : $data['logo'];
+    $jsCode .= "lobby.dash.addTile({'id' : '{$app}', 'img' : '{$data['logo']}', 'name' : '{$data['name']}'});";
+  }
+  
+  foreach($appsSorted as $data){
+    $app = $data['id'];
+    $data['logo'] = $data['logo'] === null ? THEME_URL . "/src/dashboard/image/blank.png" : $data['logo'];
+    $jsCode .= "lobby.dash.addTile({'id' : '{$app}', 'img' : '{$data['logo']}', 'name' : '{$data['name']}'});";
   }
   
   /**
@@ -39,5 +57,6 @@ if(count($apps) == 0){
    */
   $jsCode .= "lobby.dash.init();";
   echo "<script>lobby.load(function(){ $jsCode });</script>";
-  echo "<div class='tiles'></div>";
+  echo "<ul class='tiles-wrapper'><li class='tiles' data-page='0' active></li></ul>";
+  echo "<div id='dash-control'><ul class='tabs' id='bx-pager'></ul></div>";
 }
