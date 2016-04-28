@@ -4,7 +4,7 @@ namespace Lobby\Module;
 class admin extends \Lobby\Module {
   
   public function init(){
-    if(\Lobby::status("lobby.serve") === false){
+    if(\Lobby::status("lobby.assets-serve") === false){
       $this->install();
       
       require_once __DIR__ . "/inc/config.php";
