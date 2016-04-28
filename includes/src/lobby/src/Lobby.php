@@ -376,7 +376,7 @@ class Lobby {
           $status = "lobby.install";
         }elseif(substr($path, 0, 6) == "/admin"){
           $status = "lobby.admin";
-        }elseif($path == "/includes/serve.php"){
+        }elseif($path == "/includes/serve-assets.php"){
           $status = "lobby.serve";
         }
         return isset($status) ? $status : false;
