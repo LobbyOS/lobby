@@ -6,6 +6,12 @@
 namespace Lobby;
 
 class Server {
+
+  public static $apiURL = null;
+  
+  public static function __constructStatic(){
+    self::$apiURL = L_SERVER . "/api";
+  }
   
   /**
    * Lobby Store
@@ -14,7 +20,7 @@ class Server {
     /**
      * Response is in JSON
      */
-    $response = \Requests::post(L_SERVER . "/apps", array(), $data)->body;
+    $response = \Requests::post(self::$apiURL . "/apps", array(), $data)->body;
     if($response == "false"){
       return false;
     }else{
@@ -38,9 +44,9 @@ class Server {
   public static function download($type = "app", $id){
     $url = "";
     if($type === "app"){
-      $url = L_SERVER . "/app/{$id}/download";
+      $url = self::$apiURL . "/app/{$id}/download";
     }elseif($type === "lobby"){
-      $url = L_SERVER . "/lobby/download/{$id}";
+      $url = self::$apiURL . "/lobby/download/{$id}";
     }
     return $url;
   }
@@ -50,7 +56,7 @@ class Server {
    * Get updates
    */
   public static function check(){
-    $url = L_SERVER . "/lobby/updates";
+    $url = self::$apiURL . "/lobby/updates";
     $apps = \Lobby\Apps::getApps();
     try {
       $response = \Requests::post($url, array(), array(

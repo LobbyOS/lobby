@@ -176,7 +176,7 @@ class Update extends \Lobby {
         return true;
       }
     }else{
-      throw new \Exception("Unable to Install App, because <a href='". L_SERVER ."/../docs/quick#section-requirements' target='_blank'>PHP Zip Extension</a> is not installed");
+      throw new \Exception("Unable to Install App, because <a href='". L_SERVER ."/docs/quick#section-requirements' target='_blank'>PHP Zip Extension</a> is not installed");
     }
   }
 }
