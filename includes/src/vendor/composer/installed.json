@@ -360,52 +360,6 @@
         ]
     },
     {
-        "name": "lobby/lobby",
-        "version": "0.5.30",
-        "version_normalized": "0.5.30.0",
-        "dist": {
-            "type": "path",
-            "url": "lobby/",
-            "reference": "ccbeb943821df1220258bcb810618c886aa4fe80",
-            "shasum": null
-        },
-        "require": {
-            "composer/semver": ">=1.4.0",
-            "php": ">=5.3.0"
-        },
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "src/functions.php"
-            ],
-            "psr-0": {
-                "Lobby": "src/",
-                "H": "src/",
-                "Assets": "src/"
-            },
-            "psr-4": {
-                "Lobby\\": "src/Lobby",
-                "Lobby\\UI\\": "src/Lobby/UI"
-            }
-        },
-        "license": [
-            "Apache 2.0"
-        ],
-        "authors": [
-            {
-                "name": "Subin Siby",
-                "homepage": "http://subinsb.com",
-                "role": "Developer"
-            }
-        ],
-        "description": "Lobby Core",
-        "homepage": "http://lobby.subinsb.com",
-        "keywords": [
-            "lobby"
-        ]
-    },
-    {
         "name": "francium/process",
         "version": "v0.2.1",
         "version_normalized": "0.2.1.0",
@@ -449,6 +403,52 @@
             "cross",
             "platform",
             "process"
+        ]
+    },
+    {
+        "name": "lobby/lobby",
+        "version": "0.5.30",
+        "version_normalized": "0.5.30.0",
+        "dist": {
+            "type": "path",
+            "url": "lobby/",
+            "reference": "ccbeb943821df1220258bcb810618c886aa4fe80",
+            "shasum": null
+        },
+        "require": {
+            "composer/semver": ">=1.4.0",
+            "php": ">=5.3.0"
+        },
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "src/functions.php"
+            ],
+            "psr-0": {
+                "Lobby": "src/",
+                "H": "src/",
+                "Assets": "src/"
+            },
+            "psr-4": {
+                "Lobby\\": "src/Lobby",
+                "Lobby\\UI\\": "src/Lobby/UI"
+            }
+        },
+        "license": [
+            "Apache 2.0"
+        ],
+        "authors": [
+            {
+                "name": "Subin Siby",
+                "homepage": "http://subinsb.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "Lobby Core",
+        "homepage": "http://lobby.subinsb.com",
+        "keywords": [
+            "lobby"
         ]
     }
 ]
