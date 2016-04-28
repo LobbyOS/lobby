@@ -43,7 +43,7 @@ require "../load.php";
         if($id != null && H::i("action") == null && H::csrf()){
         ?>
           <h1>Install App</h1>
-          <p>The install progress will be displayed below. If this doesn't work, try the <?php echo \Lobby::l("/admin/install-app.php?id=$id&do=alternate-install".csrf("g"), "alternative install");?>.</p>
+          <p>The install progress will be displayed below. If this doesn't work, try the <?php echo \Lobby::l("/admin/install-app.php?id=$id&do=alternate-install".csrf("g"), "alternate install");?>.</p>
           <?php
           if(isset($_GET["do"]) && $_GET["do"] === "alternate-install" && csrf()){
           ?>

@@ -10,7 +10,7 @@ namespace Lobby\Module;
 class filepicker extends \Lobby\Module {
 
   public function init(){
-    if(!\Lobby::status("lobby.serve")){
+    if(!\Lobby::status("lobby.assets-serve")){
       $this->addScript("filepicker.js");
       $this->addStyle("filepicker.css");
     }

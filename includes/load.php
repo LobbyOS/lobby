@@ -61,7 +61,7 @@ try{
 /**
  * Run not on CDN files serving
  */
-if(!\Lobby::status("lobby.serve")){
+if(!\Lobby::status("lobby.assets-serve")){
   /**
    * Init the page setup
    */
