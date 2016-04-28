@@ -7,6 +7,8 @@ lobby.dash = {
    */
   tiles : [],
   
+  pages: 1,
+  
   /**
    * Add blank tiles and then replace empty tiles with registered tiles
    */
@@ -33,9 +35,9 @@ lobby.dash = {
     
     possibleTiles= rows * cols;
     
-    pages = Math.ceil(lobby.dash.tiles.length / possibleTiles);
-    if(pages > 1){
-      for(i = 0;i < pages;i++){
+    this.pages = Math.ceil(lobby.dash.tiles.length / possibleTiles);
+    if(this.pages > 1){
+      for(i = 0;i < this.pages;i++){
         if(i !== 0){
           $(".tiles-wrapper").append("<li class='tiles' data-page='"+ i +"'></li>");
         }
@@ -86,20 +88,22 @@ lobby.dash = {
       });
     }, 10);
     
-    /**
-     * Change Apps Tab on mouse wheel direction
-     */
-    $(window).bind('mousewheel DOMMouseScroll', function(event){
-      nextPage = parseInt($("#bx-pager a.active").data("slide-index"));
-      if (event.originalEvent.wheelDelta > 0 || event.originalEvent.detail < 0) {
-        // scroll up
-        nextPage--;
-      }else {
-        // scroll down
-        nextPage++;
-      }
-      $("#bx-pager a[data-slide-index="+ nextPage +"]").click();
-    });
+    if(this.pages > 1){
+      /**
+       * Change Apps Tab on mouse wheel direction
+       */
+      $(window).bind('mousewheel DOMMouseScroll', function(event){
+        nextPage = parseInt($("#bx-pager a.active").data("slide-index"));
+        if (event.originalEvent.wheelDelta > 0 || event.originalEvent.detail < 0) {
+          // scroll up
+          nextPage--;
+        }else {
+          // scroll down
+          nextPage++;
+        }
+        $("#bx-pager a[data-slide-index="+ nextPage +"]").click();
+      });
+    }
   },
   
   /**

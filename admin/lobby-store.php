@@ -38,8 +38,8 @@ if($AppID !== null){
             $c = $app['category'];
             $sc = $app['sub_category'];
         ?>
-            <h1><?php echo "<a href='". L_SERVER ."/../apps/{$app['id']}' target='_blank'>{$app['name']}</a>";?></h1>
-            <?php echo "<div class='chip'><a href='". L_SERVER ."/../apps?c={$c}' target='_blank'>" . ucfirst($c) . "</a> &gt; <a href='". L_SERVER ."/../apps?sc={$sc}' target='_blank' >" . ucfirst($sc) . "</a></div>";?>
+            <h1><?php echo "<a href='". L_SERVER ."/apps/{$app['id']}' target='_blank'>{$app['name']}</a>";?></h1>
+            <?php echo "<div class='chip'><a href='". L_SERVER ."/apps?c={$c}' target='_blank'>" . ucfirst($c) . "</a> &gt; <a href='". L_SERVER ."/apps?sc={$sc}' target='_blank' >" . ucfirst($sc) . "</a></div>";?>
             <p class="chip" style="margin: -5px 0 20px;"><?php echo $app['short_description'];?></p>
             <div class="row">
               <div class="col m3" id="leftpane" style="text-align: center;">
@@ -158,7 +158,7 @@ if($AppID !== null){
           }
         }else{
         ?>
-          <h1><a href='<?php echo L_SERVER . "/../apps?lobby_url=" . urlencode(L_URL);?>' target='_blank'>Lobby Store</a></h1>
+          <h1><a href='<?php echo L_SERVER . "/apps?lobby_url=" . urlencode(L_URL);?>' target='_blank'>Lobby Store</a></h1>
           <cl/>
           <form method="GET" action="<?php echo \Lobby::u("/admin/lobby-store.php");?>">
             <input type="text" placeholder="Type an app name" name="q" style="width:450px;"/>
