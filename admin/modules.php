@@ -14,7 +14,7 @@
     <div class="workspace">
       <div class="content">
         <h1>Modules</h1>
-        <p>Modules extend the functionality of Lobby. This page shows the modules that are installed in Lobby. <a target="_blank" href="<?php echo L_SERVER;?>/../mods">Read more about Modules</a></p>
+        <p>Modules extend the functionality of Lobby. This page shows the modules that are installed in Lobby. <a target="_blank" href="<?php echo L_SERVER;?>/mods">Read more about Modules</a></p>
         <?php
         $core_modules = \Lobby\Modules::get("core");
         $custom_modules = \Lobby\Modules::get("custom");

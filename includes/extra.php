@@ -1,13 +1,13 @@
 <?php
 /**
  * The online server of Lobby.
- * Default : http://lobby.subinsb.com/api
+ * Default : http://lobby.subinsb.com
  */
-define("L_SERVER", "http://server.lobby.sim/api");
+define("L_SERVER", "http://server.lobby.sim");
 
 /**
- * Make important locations and URLs as constants
- * to easily access them
+ * Make important locations and URLs as 
+ * constants to easily access them
  */
 define("L_URL", \Lobby::$url);
 define("APPS_DIR", L_DIR . "/contents/apps");
