@@ -6,8 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'vierbergenlars\\SemVer\\' => array($vendorDir . '/vierbergenlars/php-semver/src'),
-    'vierbergenlars\\LibJs\\' => array($vendorDir . '/vierbergenlars/php-semver/src'),
+    'vierbergenlars\\SemVer' => array($vendorDir . '/vierbergenlars/php-semver/src'),
     'Requests' => array($vendorDir . '/rmccue/requests/library'),
     'Lobby' => array($vendorDir . '/lobby/lobby/src'),
     'H' => array($vendorDir . '/lobby/lobby/src'),

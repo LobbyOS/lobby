@@ -14,6 +14,8 @@ class Apps extends \Lobby {
   private $app = false;
   public $appDir = false, $exists = false, $info = array(), $enabled = false;
   
+  public static $appID = false;
+  
   protected static $manifestConfig = array(
     "name" => "",
     "short_description" => "",
@@ -331,7 +333,7 @@ class Apps extends \Lobby {
     if($this->app){
       \Assets::js("app", "/includes/lib/lobby/js/app.js");
       
-      $GLOBALS['AppID'] = $this->app;
+      self::$appID = $this->app;
       
       /**
        * Define the App Constants

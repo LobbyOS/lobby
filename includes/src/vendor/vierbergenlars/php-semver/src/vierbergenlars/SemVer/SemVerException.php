@@ -2,18 +2,18 @@
 
 namespace vierbergenlars\SemVer;
 
-class SemVerException extends \RuntimeException
-{
-    protected $version = null;
+class SemVerException extends \Exception {
 
-    public function __construct($message, $version = null)
-    {
+    protected $version = NULL;
+
+    function __construct($message, $version = NULL) {
         $this->version = $version;
         parent::__construct($message . ' [[' . $version . ']]');
     }
 
-    public function getVersion()
-    {
+    function getVersion() {
         return $this->version;
     }
+
 }
+

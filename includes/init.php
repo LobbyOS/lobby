@@ -6,7 +6,7 @@ if(!is_writable(L_DIR) || !is_writable(APPS_DIR)){
   $GLOBALS['initError'] = array("Wrong Permissions", "The permission of Lobby is not correct. All you have to do is change the permission of <blockquote>". L_DIR ."</blockquote>to read and write (0775).");
   
   if(\Lobby::$sysinfo['os'] == "linux"){
-    $GLOBALS['initError'][1] = $GLOBALS['initError'][1] . "<p clear>On Linux systems, do this in terminal : <blockquote>sudo chown \${USER}:www-data ". L_DIR ." -R && sudo chmod 0775 ". L_DIR ." -R</blockquote></p>";
+    $GLOBALS['initError'][1] = $GLOBALS['initError'][1] . "<p clear>On Linux systems, do this in terminal : <blockquote>sudo chown \${USER}:www-data ". L_DIR ." -R && sudo chmod u+rwx,g+rw,o+r ". L_DIR ." -R</blockquote></p>";
   }
 }
 
@@ -101,12 +101,12 @@ if(\Lobby::status("lobby.admin")){
         os: "<?php echo \Lobby::$sysInfo['os'];?>"
       }
     };
-    <?php 
-    if(isset($GLOBALS['AppID'])){
+    <?php
+    if(\Lobby\Apps::$appID){
       echo 'window.lobbyExtra["app"] = {
-        id: "'. $GLOBALS['AppID'] .'",
+        id: "'. \Lobby\Apps::$appID .'",
         url: "'. APP_URL .'",
-        src: "'. \Lobby::u("/contents/apps/{$GLOBALS['AppID']}") .'"
+        src: "'. \Lobby::u("/contents/apps/{\Lobby\Apps::$appID}") .'"
       };';
     }
   ?></script>
