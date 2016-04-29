@@ -1,7 +1,8 @@
 .workspace{
   background: #fff;
   overflow: hidden;
-  top: 12px;
+  top: 50px;
+  padding-top: 12px;
 }
 .workspace .tiles-wrapper{
   margin: 0;

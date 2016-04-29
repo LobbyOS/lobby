@@ -1,7 +1,5 @@
 <?php
-require_once __DIR__ . "/composer/vendor/autoload.php";
-
-define("WEB_SERVER_DOCROOT", __DIR__ . "/../");
+define("WEB_SERVER_DOCROOT", realpath(__DIR__ . "/../"));
 
 /**
  * Start Server
