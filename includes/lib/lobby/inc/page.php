@@ -1,6 +1,3 @@
-<?php
-$GLOBALS['AppID'] = $AppID;
-?>
 <html>
   <head>
     <?php
