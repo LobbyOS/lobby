@@ -39,7 +39,6 @@ class Router {
      */
     self::route("/app/[:appID]?/[**:page]?", function($request){
       $AppID = $request->appID;
-      $GLOBALS['AppID'] = $AppID;
       $page = $request->page != "" ? "/{$request->page}" : "/";
       
       /**
@@ -110,7 +109,6 @@ class Router {
      */
     self::route("/admin/app/[:appID]?/[**:page]?", function($request){
       $AppID = $request->appID;
-      $GLOBALS['AppID'] = $AppID;
       $page = $request->page != "" ? "/admin/{$request->page}" : "/admin/index";
 
       /**

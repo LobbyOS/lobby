@@ -3,7 +3,7 @@
   <testsuites>
     <testsuite name="Lobby">
       <directory>./</directory>
-      <file>tests/LobbyInstall.php</file>
+      <file>LobbyInstall.php</file>
     </testsuite>
   </testsuites>
   <php>

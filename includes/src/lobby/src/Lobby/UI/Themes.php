@@ -8,22 +8,21 @@ class Themes extends \Lobby {
    */
   private static $cache = array();
   
-  private static $theme;
-  private static $theme_loc;
+  public static $themeID, $theme;
   
   /**
    * Initialization
    */
   public static function __constructStatic(){
-    self::$theme = getOption("active_theme");
-    if(self::$theme == null){
-      self::$theme = "hine";
-    }else if(self::validTheme(self::$theme) === false){
-      self::$theme = "hine";
+    self::$themeID = getOption("active_theme");
+    if(self::$themeID == null){
+      self::$themeID = "hine";
+    }else if(self::validTheme(self::$themeID) === false){
+      self::$themeID = "hine";
     }
-    define("THEME_ID", self::$theme);
-    define("THEME_DIR", THEMES_DIR . "/" . self::$theme);
-    define("THEME_URL", THEMES_URL . "/" . self::$theme);
+    define("THEME_ID", self::$themeID);
+    define("THEME_DIR", THEMES_DIR . "/" . self::$themeID);
+    define("THEME_URL", THEMES_URL . "/" . self::$themeID);
     
     if(!\Lobby::status("lobby.assets-serve")){
       self::loadDefaults();
@@ -58,6 +57,10 @@ class Themes extends \Lobby {
     \Assets::js("jquery", "/includes/lib/jquery/jquery.js");
     \Assets::js("jqueryui", "/includes/lib/jquery/jquery-ui.js"); // jQuery UI
     \Assets::js("main", "/includes/lib/lobby/js/main.js");
+    
+    if(\Lobby::$installed){
+      \Assets::js("notify", "/includes/lib/lobby/js/notify.js");
+    }
   }
   
   /**
@@ -67,29 +70,30 @@ class Themes extends \Lobby {
     
     require_once THEME_DIR . "/Theme.php";
     
-    $className = "\Lobby\UI\Themes\\" . self::$theme;
-    $GLOBALS["THEME_OBJ"] = new $className();
+    $className = "\Lobby\UI\Themes\\" . self::$themeID;
+    self::$theme = new $className();
     
-    $GLOBALS["THEME_OBJ"]->init();
+    self::$theme->init();
+    
     /**
      * Load Panel
      */
     if(\Lobby::status("lobby.admin")){
-      $GLOBALS["THEME_OBJ"]->addStyle("/src/main/css/style.css");
+      self::$theme->addStyle("/src/main/css/style.css");
       \Lobby::hook("admin.head.begin", function(){
-        $GLOBALS["THEME_OBJ"]->panel(true);
-        $GLOBALS["THEME_OBJ"]->addStyle("/src/main/css/admin.style.css");
+        self::$theme->panel(true);
+        self::$theme->addStyle("/src/main/css/admin.style.css");
       });
       \Lobby::hook("admin.body.begin", function() {
-        echo $GLOBALS["THEME_OBJ"]->inc("/src/panel/load.admin.php");
+        echo self::$theme->inc("/src/panel/load.admin.php");
       });
     }else{
-      $GLOBALS["THEME_OBJ"]->addStyle("/src/main/css/style.css");
+      self::$theme->addStyle("/src/main/css/style.css");
       \Lobby::hook("head.begin", function(){
-        $GLOBALS["THEME_OBJ"]->panel(false);
+        self::$theme->panel(false);
       });
       \Lobby::hook("body.begin", function() {
-        echo $GLOBALS["THEME_OBJ"]->inc("/src/panel/load.php");
+        echo self::$theme->inc("/src/panel/load.php");
       });
     }
     
@@ -100,9 +104,9 @@ class Themes extends \Lobby {
    */
   public static function loadDashboard($dashboard_items){
     if($dashboard_items == "head"){
-      $GLOBALS["THEME_OBJ"]->dashboard();
+      self::$theme->dashboard();
     }else{
-      echo $GLOBALS["THEME_OBJ"]->inc("/src/dashboard/load.php");
+      echo self::$theme->inc("/src/dashboard/load.php");
     }
   }
   
