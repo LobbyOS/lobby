@@ -33,6 +33,6 @@ if(count($apps) == 0){
    */
   $jsCode .= "lobby.dash.init();";
   echo "<script>lobby.load(function(){ $jsCode });</script>";
-  echo "<ul class='tiles-wrapper'><li class='tiles' data-page='0' active></li></ul>";
+  echo "<ul class='tiles-wrapper' data-intro='Your installed apps will be shown here in the Dashboard'><li class='tiles' data-page='0' active></li></ul>";
   echo "<div id='dash-control'><ul class='tabs' id='bx-pager'></ul></div>";
 }
