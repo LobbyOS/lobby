@@ -23,7 +23,7 @@ lobby.app.save = function(key, value, callback){
   if(key == "" || value == ""){
      callback("bad");
   }else{
-    $.post(requestURL, {"appId": appID, "key": key, "value": value, "csrf_token": lobby.csrf_token}, function(data){
+    $.post(requestURL, {"appID": appID, "csrf_token": lobby.csrf_token, "key": key, "value": value}, function(data){
       callback(data);
     }).error(function(){
       /* AJAX Request wasn't successful, so make sure the callback is alerted of the error. */
@@ -42,7 +42,7 @@ lobby.app.remove = function(key, callback){
    if(key == ""){
      callback("bad");
   }else{
-    $.post(requestURL, {"appId": appID, "key": key, "csrf_token": lobby.csrf_token}, function(data){
+    $.post(requestURL, {"appID": appID, "key": key, "csrf_token": lobby.csrf_token}, function(data){
      callback(data);
     }).error(function(){
      /* AJAX Request wasn't successful, so make sure the callback is alerted of the error. */
