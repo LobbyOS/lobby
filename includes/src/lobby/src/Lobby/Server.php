@@ -14,14 +14,27 @@ class Server {
   }
   
   /**
+   * Append Lobby Info to POST data
+   */
+  public static function makeData($data){
+    return array_replace_recursive(array(
+      "lobby" => array(
+        "lid" => \Lobby::$lid,
+        "version" => \Lobby::$version
+      )
+    ), $data);
+  }
+  
+  /**
    * Lobby Store
    */
   public static function store($data) {
+    $data = 
     /**
      * Response is in JSON
      */
-    $response = \Requests::post(self::$apiURL . "/apps", array(), $data)->body;
-    if($response == "false"){
+    $response = \Requests::post(self::$apiURL . "/apps", array(), self::makeData($data))->body;
+    if($response === "false"){
       return false;
     }else{
       $arr = json_decode($response, true);
@@ -59,9 +72,9 @@ class Server {
     $url = self::$apiURL . "/lobby/updates";
     $apps = \Lobby\Apps::getApps();
     try {
-      $response = \Requests::post($url, array(), array(
+      $response = \Requests::post($url, array(), self::makeData(array(
         "apps" => implode(",", $apps)
-      ))->body;
+      )))->body;
     }catch (\Requests_Exception $error){
       \Lobby::log("Checkup with server failed ($url) : $error");
       $response = false;
