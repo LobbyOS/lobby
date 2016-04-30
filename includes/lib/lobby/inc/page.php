@@ -22,7 +22,7 @@
       \Lobby::doHook("body.begin");
     }
     ?>
-    <div class="workspace" <?php if(isset($AppID)){ echo 'id="'.$AppID.'"'; } ?>>
+    <div class="workspace" <?php if(\Lobby\Apps::$appID){ echo 'id="'. \Lobby\Apps::$appID .'"'; } ?>>
       <?php
       if(is_array($GLOBALS['workspaceHTML'])){
         require_once L_DIR . $GLOBALS['workspaceHTML'][0];

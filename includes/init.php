@@ -96,7 +96,7 @@ if(\Lobby::status("lobby.admin")){
     window.tmp = {};
     window.lobbyExtra = {
       url: "<?php echo L_URL;?>",
-      csrfToken: "<?php echo csrf("s");?>",
+      csrf_token: "<?php echo csrf("s");?>",
       sysInfo: {
         os: "<?php echo \Lobby::$sysInfo['os'];?>"
       }
@@ -106,7 +106,7 @@ if(\Lobby::status("lobby.admin")){
       echo 'window.lobbyExtra["app"] = {
         id: "'. \Lobby\Apps::$appID .'",
         url: "'. APP_URL .'",
-        src: "'. \Lobby::u("/contents/apps/{\Lobby\Apps::$appID}") .'"
+        src: "'. \Lobby::u("/contents/apps/" . \Lobby\Apps::$appID) .'"
       };';
     }
   ?></script>

@@ -86,7 +86,7 @@ lobby.ajax = function(fileName, options, callback, appID){
   if(appID != false){
     var options = $.param({"s7c8csw91": appID}) + "&" + options;
   }
-  var options = $.param({"cx74e9c6a45": fileName, "csrf_token": lobby.csrfToken}) + "&" + options;
+  var options = $.param({"cx74e9c6a45": fileName, "csrf_token": lobby.csrf_token}) + "&" + options;
 
   var requestURL = lobby.url + "/includes/lib/lobby/ajax/ajax.php";
   $.post(requestURL, options, function(data){
