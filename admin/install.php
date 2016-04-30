@@ -309,7 +309,7 @@ $install_step = H::i('step');
                    * Enable app lEdit
                    */
                   \Lobby::$installed = true;
-                  \Lobby\DB::constructStatic();
+                  \Lobby\DB::__constructStatic();
 
                   $App = new \Lobby\Apps("ledit");
                   $App->enableApp();

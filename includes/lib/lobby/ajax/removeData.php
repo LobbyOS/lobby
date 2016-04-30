@@ -1,7 +1,7 @@
 <?php
 require "../../../../load.php";
-if( isset($_POST['appId']) && isset($_POST['key']) ){
-   $app = $_POST['appId'];
+if( isset($_POST['appID']) && isset($_POST['key']) ){
+   $app = $_POST['appID'];
    $key = $_POST['key'];
    
    if( !removeData($key, $app) ){

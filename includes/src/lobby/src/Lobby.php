@@ -51,7 +51,7 @@ class Lobby {
       $urladdr = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://" . $urladdr;
       
       self::$url = rtrim($urladdr, "/"); // Remove Trailing Slash
-      self::$hostName = $_SERVER['HTTP_HOST'];
+      self::$hostName = $_SERVER['SERVER_NAME'];
     }
     
     \Assets::config(array(
