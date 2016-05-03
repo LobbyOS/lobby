@@ -62,6 +62,7 @@ class Install extends \Lobby {
         return false;
       }
     }catch(\PDOException $Exception) {
+      \Lobby::log("Database Connection Failed : " . $Exception->getMessage());
       ser("Error", "Unable to connect. Make sure that the settings you entered are correct. <cl/><a class='btn orange' href='install.php?step=3&db_type=mysql". \H::csrf("g") ."'>Try Again</a>");
       return false;
     }

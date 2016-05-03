@@ -2,21 +2,17 @@
 use \Fr\Process;
 
 $appID = \H::i("id", null, "POST");
-$output = array(
-  "status" => null,
-  "statusID" => null
-);
 
 if(!csrf()){
-  $output = array(
+  echo json_encode(array(
     "statusID" => "error",
     "status" => "CSRF Token didn't match"
-  );
+  ));
 }else if($appID === null){
-  $output = array(
+  echo json_encode(array(
     "statusID" => "error",
     "status" => "Invalid App ID"
-  );
+  ));
 }else{
   /**
    * A queue of App downloads
@@ -28,10 +24,10 @@ if(!csrf()){
    * If the updated value is less than 20 seconds ago, then restart the download
    */
   if(isset($appInstallQueue[$appID]) && $appInstallQueue[$appID]["updated"] > strtotime("-20 seconds")){
-    $output = array(
+    echo json_encode(array(
       "statusID" => $appInstallQueue[$appID]["statusID"],
       "status" => $appInstallQueue[$appID]["status"]
-    );
+    ));
   }else{
     $appInfo = \Lobby\Server::store(array(
       "get" => "app",
@@ -42,10 +38,10 @@ if(!csrf()){
      * App doesn't exist on Lobby Store
      */
     if($appInfo === "false"){
-      $output = array(
+      echo json_encode(array(
         "status" => "error",
         "error" => "App Doesn't Exist"
-      );
+      ));
     }else{
       $appName = $appInfo["name"];
       
@@ -57,18 +53,22 @@ if(!csrf()){
           $appID
         )
       ));
+      
       /**
        * Get the command used to execute install-app-bg.php
        */
-      $command = $Process->start();
+      $command = $Process->start(function() use ($appID){
+        /**
+         * This callback will close the connection between browser and server,
+         * http://stackoverflow.com/q/36968552/1372424
+         */
+        echo json_encode(array(
+          "statusID" => "download_intro",
+          "status" => "Downloading <b>$appID</b>..."
+        ));
+      });
       
       \Lobby::log("To install app '$appID', this command was executed : $command");
-      
-      $output = array(
-        "statusID" => "download_intro",
-        "status" => "Downloading <b>$appID</b>..."
-      );
     }
   }
 }
-echo json_encode($output);
