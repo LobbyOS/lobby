@@ -5,7 +5,7 @@
 if(!is_writable(L_DIR) || !is_writable(APPS_DIR)){
   $GLOBALS['initError'] = array("Wrong Permissions", "The permission of Lobby is not correct. All you have to do is change the permission of <blockquote>". L_DIR ."</blockquote>to read and write (0775).");
   
-  if(\Lobby::$sysinfo['os'] == "linux"){
+  if(\Lobby::$sysInfo['os'] == "linux"){
     $GLOBALS['initError'][1] = $GLOBALS['initError'][1] . "<p clear>On Linux systems, do this in terminal : <blockquote>sudo chown \${USER}:www-data ". L_DIR ." -R && sudo chmod u+rwx,g+rw,o+r ". L_DIR ." -R</blockquote></p>";
   }
 }

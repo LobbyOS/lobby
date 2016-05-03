@@ -338,7 +338,7 @@ $install_step = H::i('step');
                       <tr>
                         <td>Database Host</td>
                         <td>
-                          <input type="text" name="dbhost" value="localhost">
+                          <input type="text" name="dbhost" value="127.0.0.1">
                         </td>
                         <td>The hostname of database</td>
                       </tr>

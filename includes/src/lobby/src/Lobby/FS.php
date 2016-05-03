@@ -127,7 +127,7 @@ class FS {
   /**
    * Bytes to KiB, MB, GB converter
    */
-  public function normalizeSize($size){
+  public static function normalizeSize($size){
     $base = log($size) / log(1000);
     $suffix = array("", "KB", "MB", "GB", "TB");
     $f_base = floor($base);
