@@ -1,7 +1,7 @@
 <?php
 /**
  * The online server of Lobby.
- * Default : http://lobby.subinsb.com
+ * Default : https://lobby.subinsb.com
  */
 define("L_SERVER", "http://server.lobby.sim");
 
