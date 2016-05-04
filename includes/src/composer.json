@@ -10,12 +10,9 @@
         "symfony/filesystem": "^3.0",
         "rmccue/requests": "^1.6",
         "lobby/lobby": "^0.5",
-        "bylexus/php-prereqcheck": "^0.2.1",
         "vladimmi/construct-static": "dev-master@dev",
         "vierbergenlars/php-semver": "=2.1",
         "francium/process": "^0"
     },
-    "secure-http": "false",
-    "require-dev": {
-    }
+    "secure-http": "false"
 }
