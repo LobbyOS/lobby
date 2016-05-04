@@ -14,7 +14,7 @@ if((count($AppUpdates) != 0) || ($latestVersion && $lobby_version != $latestVers
     "contents" => "New Updates Are Available",
     "icon" => "update",
     "iconURL" => null,
-    "href" => "/admin/update.php"
+    "href" => \Lobby::u("/admin/update.php")
   );
 }
 
