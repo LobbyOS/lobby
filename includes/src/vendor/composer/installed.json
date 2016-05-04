@@ -64,56 +64,6 @@
         ]
     },
     {
-        "name": "bylexus/php-prereqcheck",
-        "version": "0.2.1",
-        "version_normalized": "0.2.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/bylexus/php-prereqcheck.git",
-            "reference": "1be5b0c24f6ce1d8b5f8d3a7b6bc31fbc3dd08a8"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/bylexus/php-prereqcheck/zipball/1be5b0c24f6ce1d8b5f8d3a7b6bc31fbc3dd08a8",
-            "reference": "1be5b0c24f6ce1d8b5f8d3a7b6bc31fbc3dd08a8",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^4.7"
-        },
-        "time": "2015-07-14 19:17:20",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Prereq\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "copyright"
-        ],
-        "authors": [
-            {
-                "name": "Alexander Schenkel",
-                "email": "alex@alexi.ch",
-                "homepage": "http://www.alexi.ch/",
-                "role": "Developer"
-            }
-        ],
-        "description": "Helper class to create Prerequisite Check scripts for your software packages",
-        "homepage": "https://github.com/bylexus/php-prereqcheck",
-        "keywords": [
-            "check",
-            "prerequisite",
-            "requirements",
-            "system"
-        ]
-    },
-    {
         "name": "vladimmi/construct-static",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
@@ -412,7 +362,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/subins2000/Francium-Process/zipball/062a3ee0570b3f5f3eb265fe6196f59c6d18af54",
+            "url": "https://api.github.com/repos/subins2000/Francium-Process/zipball/1db4c032fc1861605cb5194340bd38f7b9a20846",
             "reference": "062a3ee0570b3f5f3eb265fe6196f59c6d18af54",
             "shasum": ""
         },

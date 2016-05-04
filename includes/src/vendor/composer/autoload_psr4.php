@@ -7,7 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Symfony\\Component\\Filesystem\\' => array($vendorDir . '/symfony/filesystem'),
-    'Prereq\\' => array($vendorDir . '/bylexus/php-prereqcheck/src'),
     'Lobby\\UI\\' => array($vendorDir . '/lobby/lobby/src/Lobby/UI'),
     'Lobby\\' => array($vendorDir . '/lobby/lobby/src/Lobby'),
     'Klein\\' => array($vendorDir . '/klein/klein/src/Klein'),

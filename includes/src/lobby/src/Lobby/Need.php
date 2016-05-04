@@ -21,11 +21,12 @@ class Need {
       case "lobby":
         return \Lobby::$version;
         break;
-      case "curl":
-        return function_exists("curl_version") ? curl_version() : 0;
-        break;
       default:
-        return 0;
+        /**
+         * phpversion() returns FALSE on failure
+         */
+        $v = phpversion($dependency);
+        return $v ? $v : 0;
     }
     
   }
