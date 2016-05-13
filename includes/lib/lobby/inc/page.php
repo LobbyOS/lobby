@@ -1,6 +1,3 @@
-<?php
-$GLOBALS['AppID'] = $AppID;
-?>
 <html>
   <head>
     <?php
@@ -9,13 +6,6 @@ $GLOBALS['AppID'] = $AppID;
     }else{
       \Lobby::doHook("head.begin");
     }
-    ?>
-    <script>
-      window.tmp = {};window.lobbyExtra = {sysInfo: {os: "<?php echo \Lobby::$sysInfo['os'];?>"}};<?php if(isset($AppID)){
-        echo 'lobbyExtra["app"] = { id: "'. $AppID .'", url: "'. APP_URL .'", src: "'. \Lobby::u("/contents/apps/{$AppID}") .'" };';
-      }
-    ?></script>
-    <?php
     \Lobby::head();
     if(\Lobby::status("lobby.admin")){
       \Lobby::doHook("admin.head.end");
@@ -32,7 +22,7 @@ $GLOBALS['AppID'] = $AppID;
       \Lobby::doHook("body.begin");
     }
     ?>
-    <div class="workspace" <?php if(isset($AppID)){ echo 'id="'.$AppID.'"'; } ?>>
+    <div class="workspace" <?php if(\Lobby\Apps::$appID){ echo 'id="'. \Lobby\Apps::$appID .'"'; } ?>>
       <?php
       if(is_array($GLOBALS['workspaceHTML'])){
         require_once L_DIR . $GLOBALS['workspaceHTML'][0];

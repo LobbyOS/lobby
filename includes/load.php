@@ -23,33 +23,45 @@ $lobbyBase = substr($lobbyBase, 0) == "/" ? substr_replace($lobbyBase, "", 0) : 
 $_SERVER['REQUEST_URI'] = str_replace($lobbyBase, "", $_SERVER['REQUEST_URI']);
 $_SERVER['REQUEST_URI'] = substr($_SERVER['REQUEST_URI'], -1) == "/" && $_SERVER['REQUEST_URI'] != "/" ? substr_replace($_SERVER['REQUEST_URI'], "", -1) : $_SERVER['REQUEST_URI'];
 
-require_once L_DIR . "/includes/src/l10n.php";
-require_once L_DIR . "/includes/src/Helpers.php";
-require_once L_DIR . "/includes/src/FileSystem.php"; // The FileSystem Class
-
-require_once L_DIR . "/includes/src/Lobby.php"; /* The Core */
-require_once L_DIR . "/includes/src/Database.php"; /* The Database Class */
-require_once L_DIR . "/includes/src/Apps.php"; /* The App Class */
-require_once L_DIR . "/includes/src/Router.php"; /* The Router Class */
-require_once L_DIR . "/includes/src/Server.php"; /* The File System Class */
-
-require_once L_DIR . "/includes/functions.php"; /* Non class functions */
-require_once L_DIR . "/includes/extra.php"; /* Define extra variables or constants */
-
-/**
- * Time
- */
-require_once L_DIR . "/includes/src/Time.php";
-
-/**
- * The UI Classes
- */
-require_once L_DIR . "/includes/src/ui/Themes.php";
+try{
+  /**
+   * Autoload and initialize classes
+   */
+  $composer = require_once L_DIR . "/includes/src/vendor/autoload.php";
+  
+  /**
+   * Load Classed that Composer doesn't load by default
+   */
+  $composer->loadClass("Assets");
+  $composer->loadClass("Lobby\\DB");
+  
+  /**
+   * Static Class Constructor
+   * ------------------------
+   * Call __constructStatic() on each classes
+   */
+  $loader = new ConstructStatic\Loader($composer);
+  $loader->processLoadedClasses();
+  
+  /**
+   * Get Lobby Defined Values & Load Modules
+   */
+  require_once L_DIR . "/includes/extra.php";
+  
+  /**
+   * These classes are not loaded by default by Composer
+   */
+  $loader->loadClass("Lobby\\UI\\Themes");
+  $loader->loadClass("Lobby\\Require");
+  
+}catch(\Exception $e){
+  \Lobby::log(array("fatal", $e->getMessage()));
+}
 
 /**
  * Run not on CDN files serving
  */
-if(!\Lobby::status("lobby.serve")){
+if(!\Lobby::status("lobby.assets-serve")){
   /**
    * Init the page setup
    */

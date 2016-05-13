@@ -3,7 +3,7 @@
   <head>
     <?php
     \Lobby::doHook("admin.head.begin");
-    \Lobby::addScript("admin.apps.js", "/admin/js/apps.js");
+    \Assets::js("admin.apps.js", "/admin/js/apps.js");
     \Lobby::head("App Manager");
     ?>
   </head>
@@ -96,7 +96,7 @@
                       </label>
                     </td>
                     <td>
-                      <a href="<?php echo \Lobby::u("/admin/app/$app");?>"><?php echo $data['name'];?></a>
+                      <a href="<?php echo \Lobby::u("/app/$app");?>"><?php echo $data['name'];?></a>
                     </td>
                     <td><?php echo $data['version'];?></td>
                     <td><?php echo $data['short_description'];?></td>

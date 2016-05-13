@@ -1,13 +1,13 @@
 <?php
 /**
  * The online server of Lobby.
- * Default : http://lobby.subinsb.com/api
+ * Default : https://lobby.subinsb.com
  */
-define("L_SERVER", "http://lobby.subinsb.com/api");
+define("L_SERVER", "https://lobby.subinsb.com");
 
 /**
- * Make important locations and URLs as constants
- * to easily access them
+ * Make important locations and URLs as 
+ * constants to easily access them
  */
 define("L_URL", \Lobby::$url);
 define("APPS_DIR", L_DIR . "/contents/apps");
@@ -21,6 +21,4 @@ define("THEMES_URL", L_URL . "/contents/themes");
  * It will first, load the core modules
  * Then the custom modules
  */
-require_once L_DIR . "/includes/src/Module.php";
-require_once L_DIR . "/includes/src/Modules.php";
 \Lobby\Modules::load();

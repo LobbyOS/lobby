@@ -5,24 +5,25 @@
 if(!is_writable(L_DIR) || !is_writable(APPS_DIR)){
   $GLOBALS['initError'] = array("Wrong Permissions", "The permission of Lobby is not correct. All you have to do is change the permission of <blockquote>". L_DIR ."</blockquote>to read and write (0775).");
   
-  if(\Lobby::$sysinfo['os'] == "linux"){
-    $GLOBALS['initError'][1] = $GLOBALS['initError'][1] . "<p clear>On Linux systems, do this in terminal : <blockquote>sudo chown \${USER}:www-data ". L_DIR ." -R && sudo chmod 0775 ". L_DIR ." -R</blockquote></p>";
+  if(\Lobby::$sysInfo['os'] === "linux"){
+    $GLOBALS['initError'][1] = $GLOBALS['initError'][1] . "<p clear>On Linux systems, do this in terminal : <blockquote>sudo chown \${USER}:www-data ". L_DIR ." -R && sudo chmod u+rwx,g+rw,o+r ". L_DIR ." -R</blockquote></p>";
   }
 }
+
 if(isset($GLOBALS['initError'])){
   echo "<html><head>";
-    \Lobby::$js = array();
+    \Assets::$js = array();
     \Lobby::head();
   echo "</head><body><div class='workspace'><div class='contents'>";
     ser($GLOBALS['initError'][0], $GLOBALS['initError'][1]);
   echo "</div></div></body></html>";
   exit;
 }
-\Lobby::curPage(true);
+
 /**
  * Add the <head> files if it's not the install page
  */
-if(\Lobby::curPage() != "/admin/install.php"){
+if(!\Lobby::status("lobby.install")){
   /**
    * Left Menu
    */
@@ -52,14 +53,6 @@ if(\Lobby::curPage() != "/admin/install.php"){
   );
   \Lobby\UI\Panel::addTopItem("lobbyAdmin", $adminArray);
   
-  /**
-   * If there is a update available either app or core, add an 
-   * "Update Available" icon on the right side of panel
-   */
-  $AppUpdates = json_decode(getOption("app_updates"), true);
-  $lobby_version = getOption("lobby_version");
-  $latestVersion = getOption("lobby_latest_version");
-  
   if(\Lobby\FS::exists("/upgrade.lobby")){
     require_once L_DIR . "/includes/src/Update.php";
     $l_info = json_decode(\Lobby\FS::get("/lobby.json"));
@@ -70,25 +63,13 @@ if(\Lobby::curPage() != "/admin/install.php"){
     }
     \Lobby\Update::finish_software_update();
   }
-  
-  if((count($AppUpdates) != 0) || ($latestVersion && $lobby_version != $latestVersion)){
-    \Lobby\UI\Panel::addTopItem("updateNotify", array(
-      "html" => \Lobby::l("/admin/update.php", "<span id='update' title='Updates Are Available'></span>"),
-      "position" => "right"
-    ));
-  }
-}
-
-if(\Lobby::status("lobby.install")){
-  \Lobby::addStyle("admin", "/includes/lib/lobby/css/admin.css");
 }
 
 if(\Lobby::status("lobby.admin")){
   /**
    * Add Admin Pages' stylesheet, script
    */
-  \Lobby::addStyle("admin", "/admin/css/admin.css");
-  \Lobby::addScript("admin", "/admin/js/admin.js");
+  \Assets::js("admin", "/admin/js/admin.js");
   
   /**
    * Add sidebar handler in panel
@@ -105,4 +86,29 @@ if(\Lobby::status("lobby.admin")){
     $_SESSION['checkedForLatestVersion'] = 1;
   }
 }
+
+/**
+ * Insert Lobby Info to JS Files
+ */
+\Lobby::hook("head.begin,admin.head.begin", function(){
 ?>
+  <script>
+    window.tmp = {};
+    window.lobbyExtra = {
+      url: "<?php echo L_URL;?>",
+      csrf_token: "<?php echo csrf("s");?>",
+      sysInfo: {
+        os: "<?php echo \Lobby::$sysInfo['os'];?>"
+      }
+    };
+    <?php
+    if(\Lobby\Apps::$appID){
+      echo 'window.lobbyExtra["app"] = {
+        id: "'. \Lobby\Apps::$appID .'",
+        url: "'. APP_URL .'",
+        src: "'. \Lobby::u("/contents/apps/" . \Lobby\Apps::$appID) .'"
+      };';
+    }
+  ?></script>
+<?php
+});

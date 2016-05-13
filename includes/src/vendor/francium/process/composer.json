@@ -1,0 +1,22 @@
+{
+  "name": "francium/process",
+  "type": "library",
+  "description": "Run Background Process with Cross Platform Support",
+  "keywords": ["background", "process", "cross", "platform"],
+  "homepage": "http://subinsb.com/francium/process",
+  "license": "Apache 2.0",
+  "authors": [
+    {
+      "name": "Subin Siby",
+      "homepage": "http://subinsb.com",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": { "Fr\\": "src" }
+  },
+  "require": {
+    "php": ">=5.3.0"
+  },
+  "preferred-install": "dev-master"
+}

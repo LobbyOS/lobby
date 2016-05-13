@@ -1,0 +1,32 @@
+{
+  "name": "lobby/lobby",
+  "type": "library",
+  "description": "Lobby Core",
+  "keywords": ["lobby"],
+  "homepage": "https://lobby.subinsb.com",
+  "license": "Apache 2.0",
+  "authors": [
+    {
+      "name": "Subin Siby",
+      "homepage": "http://subinsb.com",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "files": ["src/functions.php"],
+    "psr-0": {
+      "Lobby": "src/",
+      "H": "src/",
+      "Assets": "src/"
+    },
+    "psr-4": {
+      "Lobby\\": "src/Lobby",
+      "Lobby\\UI\\": "src/Lobby/UI"
+    }
+  },
+  "require": {
+    "php": ">=5.3.0",
+    "composer/semver": ">=1.4.0"
+  },
+  "version": "0.5.30"
+}

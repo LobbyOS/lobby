@@ -53,7 +53,7 @@ if(isset($_POST["username"]) && isset($_POST["password"])){
             <input type="checkbox" name="remember_me" checked="checked" />
             <span>Remember Me</span>
           </label>
-          <button clear>Log In</button>
+          <button class="btn" clear>Log In</button>
         </form>
         <?php
         if(isset($error)){
@@ -61,7 +61,7 @@ if(isset($_POST["username"]) && isset($_POST["password"])){
         }
         ?>
         <div>
-          &copy; <a target="_blank" href="http://lobby.subinsb.com">Lobby</a> <?php echo date("Y");?>
+          &copy; <a target="_blank" href="https://lobby.subinsb.com">Lobby</a> <?php echo date("Y");?>
         </div>
       </div>
     </div>

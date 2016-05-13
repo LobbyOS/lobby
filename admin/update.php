@@ -1,6 +1,5 @@
 <?php
 require "../load.php";
-require L_DIR . "/includes/src/Update.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,7 +17,7 @@ require L_DIR . "/includes/src/Update.php";
     <div class="workspace">
       <div class="content">
         <h1>Update</h1>
-        <p>Lobby and it's apps can be updated automatically. <a href="http://lobby.subinsb.com/docs/update" target="_blank" class="btn">More Info</a></p>
+        <p>Lobby and it's apps can be updated automatically. <a href="https://lobby.subinsb.com/docs/update" target="_blank" class="btn">More Info</a></p>
         <a class='btn blue' href='check-updates.php'>Check For Updates</a>
         <?php
         $AppUpdates = json_decode(getOption("app_updates"), true);
@@ -66,7 +65,7 @@ require L_DIR . "/includes/src/Update.php";
           </form>
         <?php
         }
-        if(getOption("lobby_version") == getOption("lobby_latest_version") && !\H::i("action", "", "POST") == "updateApps"){
+        if(\Lobby::$version == getOption("lobby_latest_version") && !\H::i("action", "", "POST") == "updateApps"){
           echo "<h2>Lobby</h2>";
           sss("Latest Version", "You are using the latest version of Lobby. There are no new releases yet.");
         }elseif(!isset($_GET['step']) && !\H::i("action", "", "POST") == "updateApps"){

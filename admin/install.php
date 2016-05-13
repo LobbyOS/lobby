@@ -1,6 +1,6 @@
 <?php
 require "../load.php";
-require L_DIR . "/includes/src/Install.php";
+
 $install_step = H::i('step');
 ?>
 <!DOCTYPE html>
@@ -13,8 +13,8 @@ $install_step = H::i('step');
     /**
      * Install Head
      */
-    \Lobby::addStyle("install", "/admin/css/install.css");
-    \Lobby::addScript("install", "/admin/js/install.js");
+    \Assets::css("install", "/admin/css/install.css");
+    \Assets::js("install", "/admin/js/install.js");
     \Lobby::head("Install");
    
     \Lobby::doHook("head.end");
@@ -38,7 +38,7 @@ $install_step = H::i('step');
         }else if($install_step === null){
         ?>
           <p>Welcome to the Lobby Installation process. Thank you for downloading Lobby.</p>
-          <p>For further help, see <a target='_blank' href='http://lobby.subinsb.com/docs/quick'>Quick Install</a>.</p>
+          <p>For further help, see <a target='_blank' href='https://lobby.subinsb.com/docs/quick'>Quick Install</a>.</p>
           <p>To start Installation, click the Install button</p>
           <center clear>
             <a href="?step=1<?php echo H::csrf("g");?>" class="btn red" style="font-size: 18px;width: 200px;">Install</a>
@@ -193,7 +193,7 @@ $install_step = H::i('step');
                   <td width="50%"><?php
                     $sqlite_version = stristr($info, 'SQLite Library'); 
                     preg_match('/[1-9].[0-9].[1-9][0-9]/', $sqlite_version, $match); 
-                    $sqlite_version = $match[0];
+                    $sqlite_version = isset($match[0]) ? $match[0] : "";
                     if(version_compare($sqlite_version, '3.8.0') >= 0){
                       $whitelist = array(
                           '127.0.0.1',
@@ -254,7 +254,7 @@ $install_step = H::i('step');
                    * Check if connection to database can be established using the credentials given by the user
                    */
                   if($prefix == "" || preg_match("/[^0-9,a-z,A-Z,\$,_]+/i", $prefix) != 0 || strlen($prefix) > 50){
-                    ser("Error", "A Prefix should only contain basic Latin letters, digits 0-9, dollar, underscore and shouldn't exceed 50 characters.<cl/>" . \Lobby::l("/admin/install.php?step=3&db_type=mysql" . H::csrf("g"), "Try Again", "class='btn orange'"));
+                    ser("Error", "The Prefix should only contain alphabets, digits (0-9), dollar or underscore and shouldn't exceed 50 characters.<cl/>" . \Lobby::l("/admin/install.php?step=3&db_type=mysql" . H::csrf("g"), "Try Again", "class='btn orange'"));
                   }else if(\Lobby\Install::checkDatabaseConnection() !== false){
                     /**
                      * Create Tables
@@ -265,11 +265,12 @@ $install_step = H::i('step');
                        */
                       \Lobby\Install::makeConfigFile();
                     
+                      \Lobby::$installed = true;
+                      \Lobby\DB::__constructStatic();
+                      
                       /**
                        * Enable app lEdit
                        */
-                      \Lobby::$installed = true;
-                      \Lobby\DB::init();
                       $App = new \Lobby\Apps("ledit");
                       $App->enableApp();
                       
@@ -308,7 +309,8 @@ $install_step = H::i('step');
                    * Enable app lEdit
                    */
                   \Lobby::$installed = true;
-                  \Lobby\DB::init();
+                  \Lobby\DB::__constructStatic();
+
                   $App = new \Lobby\Apps("ledit");
                   $App->enableApp();
                   
@@ -336,7 +338,7 @@ $install_step = H::i('step');
                       <tr>
                         <td>Database Host</td>
                         <td>
-                          <input type="text" name="dbhost" value="localhost">
+                          <input type="text" name="dbhost" value="127.0.0.1">
                         </td>
                         <td>The hostname of database</td>
                       </tr>

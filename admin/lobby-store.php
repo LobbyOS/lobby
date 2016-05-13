@@ -4,7 +4,7 @@ require "../load.php";
 $page_title = "Lobby Store";
 $AppID = \H::i('id');
 if($AppID !== null){
-  $app = \Lobby\Server::Store(array(
+  $app = \Lobby\Server::store(array(
     "get" => "app",
     "id" => $AppID
   ));
@@ -16,8 +16,8 @@ if($AppID !== null){
 <html>
   <head>
     <?php
-    \Lobby::addStyle("lobby-store", "/admin/css/lobby-store.css");
-    \Lobby::addScript("lobby-store", "/admin/js/lobby-store.js");
+    \Assets::css("lobby-store", "/admin/css/lobby-store.css");
+    \Assets::js("lobby-store", "/admin/js/lobby-store.js");
     \Lobby::doHook("admin.head.begin");
     \Lobby::head($page_title);
     ?>
@@ -38,10 +38,11 @@ if($AppID !== null){
             $c = $app['category'];
             $sc = $app['sub_category'];
         ?>
-            <h1><?php echo "<a href='". L_SERVER ."/../apps/{$app['id']}' target='_blank'>{$app['name']}</a>";?></h1>
+            <h1><?php echo "<a href='". L_SERVER ."/apps/{$app['id']}' target='_blank'>{$app['name']}</a>";?></h1>
+            <?php echo "<div class='chip'><a href='". L_SERVER ."/apps?c={$c}' target='_blank'>" . ucfirst($c) . "</a> &gt; <a href='". L_SERVER ."/apps?sc={$sc}' target='_blank' >" . ucfirst($sc) . "</a></div>";?>
             <p class="chip" style="margin: -5px 0 20px;"><?php echo $app['short_description'];?></p>
             <div class="row">
-              <div class="col s3" id="leftpane" style="text-align: center;">
+              <div class="col m3" id="leftpane" style="text-align: center;">
                 <img src='image/clear.gif' height="200" width="200" />
                 <script>
                   $(window).load(function(){
@@ -53,8 +54,6 @@ if($AppID !== null){
                     downloadingImage.src = "<?php echo $appImage;?>";
                   });
                 </script>
-                <a clear href="<?php echo $app['permalink'];?>" target="_blank" class="btn">App Page</a>
-                <cl/>
                 <?php
                 $App = new \Lobby\Apps($AppID);
                 $requires = $app['requires'];
@@ -62,10 +61,10 @@ if($AppID !== null){
                   /**
                    * Check whether Lobby version is compatible
                    */
-                  if(version_compare(getOption("lobby_version"), $requires['lobby'][1], $requires['lobby'][0])){
-                    echo \Lobby::l("/admin/install-app.php?id={$_GET['id']}" . H::csrf("g"), "Install", "class='btn red'");
+                  if(\Lobby\Need::checkRequirements($requires, true)){
+                    echo "<a class='btn red disabled' title='The app requirements are not satisfied. See `Info` tab.'>Install</a>";
                   }else{
-                    echo "<a class='btn red disabled' title='App requires Lobby version {$requires['lobby'][0]} {$requires['lobby'][1]}'>Install</a>";
+                    echo \Lobby::l("/admin/install-app.php?id={$_GET['id']}" . H::csrf("g"), "Install", "class='btn red'");
                   }
                 }else if(version_compare($app['version'], $App->info['version'], ">")){
                   /**
@@ -81,9 +80,11 @@ if($AppID !== null){
                   echo \Lobby::l("/admin/apps.php?action=enable&redirect=1&app=" . $AppID . H::csrf("g"), "Enable App", "class='btn green'");
                 }
                 ?>
+                <div class="chip" clear>Developed By <a href="<?php echo $app['author_page'];?>" target="_blank"><?php echo $app['author'];?></a></div>
+                <div class="chip" clear><a href="<?php echo $app['app_page'];?>" target="_blank">App's Webpage</a></div>
                 <style>#leftpane .btn{width:100%;margin: 5px 0px;}</style>
               </div>
-              <div class="col s9">
+              <div class="col m9">
                 <ul class="tabs">
                   <li class="tab"><a href="#app-info">Info</a></li>
                   <li class="tab"><a href="#app-description">Description</a></li>
@@ -91,20 +92,21 @@ if($AppID !== null){
                   <li class="tab"><a href="#app-stats">Stats</a></li>
                 </ul>
                 <div id="app-info" class="tab-contents">
-                  <?php echo "<div class='chip'><a href='". L_SERVER ."/../apps?c={$c}' target='_blank'>" . ucfirst($c) . "</a></div>";?> > <?php echo "<div class='chip'><a href='". L_SERVER ."/../apps?sc={$sc}' target='_blank' >" . ucfirst($sc) . "</a></div>";?><cl/>
-                  <div class="chip">Version : <?php echo $app['version'];?></div><cl/>
+                  <div class="chip">Version : <?php echo $app['version'];?></div>
+                  <div class="chip">Last updated <?php echo $app['updated'];?></div><cl/>
                   <div class="chip"><span>Requirements :</span></div>
                     <ul class="collection" style="margin-left: 20px;">
                       <?php
+                      $requirementsInSystemInfo = \Lobby\Need::checkRequirements($requires);
                       foreach($requires as $k => $v){
-                        echo "<li class='collection-item'>$k {$v[0]} {$v[1]}</li>";
+                        if($requirementsInSystemInfo[$k]){
+                          echo "<li class='collection-item'>$k $v</li>";
+                        }else{
+                          echo "<li class='collection-item red' title=''>$k $v</li>";
+                        }
                       }
                       ?>
                     </ul>
-                  <cl/>
-                  <div class="chip">Developed By : <a href="<?php echo $app['author_page'];?>" target="_blank"><?php echo $app['author'];?></a></div><cl/>
-                  <div class="chip">Last updated <?php echo $app['updated'];?></div><cl/>
-                  <div class="chip"><a href="<?php echo $app['app_page'];?>" target="_blank">App's Webpage</a></div>
                 </div>
                 <div id="app-description" class="tab-contents">
                   <div class="card-panel light-green">
@@ -156,7 +158,7 @@ if($AppID !== null){
           }
         }else{
         ?>
-          <h1><a href='<?php echo L_SERVER . "/../apps?lobby_url=" . urlencode(L_URL);?>' target='_blank'>Lobby Store</a></h1>
+          <h1><a href='<?php echo L_SERVER . "/apps?lobby_url=" . urlencode(L_URL);?>' target='_blank'>Lobby Store</a></h1>
           <cl/>
           <form method="GET" action="<?php echo \Lobby::u("/admin/lobby-store.php");?>">
             <input type="text" placeholder="Type an app name" name="q" style="width:450px;"/>
@@ -176,7 +178,7 @@ if($AppID !== null){
             $request_data['p'] = $_GET['p'];
           }
           
-          $server_response = \Lobby\Server::Store($request_data);
+          $server_response = \Lobby\Server::store($request_data);
           if($server_response == false){
             ser("Nothing Found", "Nothing was found that matches your criteria. Sorry...");
           }else{

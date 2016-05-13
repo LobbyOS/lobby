@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . "/../load.php";
-require_once L_DIR . "/includes/src/Update.php";
+
+use \Lobby\FS;
+use \Lobby\Apps;
 
 header("Content-type: text/html");
 header('Cache-Control: no-cache');
@@ -26,7 +28,7 @@ if($id == null || H::csrf() == false){
 }
 
 if($type == "app"){
-  $app = \Lobby\Server::Store(array(
+  $app = \Lobby\Server::store(array(
     "get" => "app",
     "id" => $id
   ));
@@ -51,13 +53,6 @@ $GLOBALS['name'] = $name;
 <?php
 flush();
 
-function convertToReadableSize($size){
-  $base = log($size) / log(1024);
-  $suffix = array("", "KB", "M", "G", "T");
-  $f_base = floor($base);
-  return round(pow(1024, $base - floor($base)), 1) . $suffix[$f_base];
-}
-
 $GLOBALS['last'] = 0;
 \Lobby\Update::$progress = function($resource, $download_size, $downloaded, $upload_size, $uploaded = ""){
   /**
@@ -78,10 +73,10 @@ $GLOBALS['last'] = 0;
   if($GLOBALS['last'] != $percent || isset($GLOBALS['non_percent'])){
     $GLOBALS['last'] = $percent;
     if($download_size > 0){
-      $rd_size = convertToReadableSize($download_size);
+      $rd_size = FS::normalizeSize($download_size);
       echo "<script>document.getElementById('downloadStatus').innerHTML = 'Downloaded $percent% of {$rd_size}';</script>";
     }else{
-      $downloaded = convertToReadableSize($downloaded);
+      $downloaded = FS::normalizeSize($downloaded);
       $GLOBALS['non_percent'] = 1;
       echo "<script>document.getElementById('downloadStatus').innerHTML = 'Downloaded {$downloaded}';</script>";
     }
@@ -95,7 +90,10 @@ $GLOBALS['last'] = 0;
 };
 
 if($type == "app" && \Lobby\Update::app($id)){
-  echo "Installed - The app has been installed. <a target='_parent' href='". L_URL ."/admin/install-app.php?action=enable&id={$_GET['id']}". H::csrf("g") ."'>Enable the app</a> to use it.";
+  $App = new Apps($id);
+  $App->enableApp();
+  
+  echo "Installed - The app has been installed. <a target='_parent' href='". $App->info["URL"] ."'>Open App</a>";
 }else if($type == "lobby" && $redirect = \Lobby\Update::software()){
   echo "<a target='_parent' href='$redirect'>Updated Lobby</a>";
 }

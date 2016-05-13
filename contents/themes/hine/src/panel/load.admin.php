@@ -1,8 +1,10 @@
 <?php
+use \Lobby\UI\Panel;
 /**
  * Panel UI
  */
-$panelLeftItems = \Lobby\UI\Panel::getPanelItems("left");
+$panelLeftItems = Panel::getPanelItems("left");
+$panelRightItems = Panel::getPanelItems("right");
 ?>
 <nav>
   <ul class="left">
@@ -13,14 +15,12 @@ $panelLeftItems = \Lobby\UI\Panel::getPanelItems("left");
     }
     $html = "";
     foreach($panelLeftItems as $id => $item){
-      if( !isset($item['subItems']) ){
-        if( !isset($item['text']) && isset($item['html']) ){
-          $html .= $this->makePanelItem($item['html'], "htmlContent", $id, "prnt");
-        }else{
-          $html .= $this->makePanelItem($item['text'], $item['href'], $id, "prnt");
-        }
-     }else{
+      if(count($item['subItems']) !== 0){
         $html .= $this->makePanelTree($id, $item);
+      }else if($item['html'] != null){
+        $html .= $this->makePanelItem($item['html'], "htmlContent", $id, "parent");
+      }else{
+        $html .= $this->makePanelItem($item['text'], $item['href'], $id, "parent");
       }
     }
     echo $html;
@@ -28,20 +28,18 @@ $panelLeftItems = \Lobby\UI\Panel::getPanelItems("left");
   </ul>
   <ul class="right">
     <?php
-    $panelRightItems = \Lobby\UI\Panel::getPanelItems("right");
     $html = "";
     foreach($panelRightItems as $id => $item){
-      if( !isset($item['subItems']) ){
-        if( !isset($item['text']) && isset($item['html']) ){
-          $html .= $this->makePanelItem($item['html'], "htmlContent", $id, "prnt");
-        }else{
-          $html .= $this->makePanelItem($item['text'], $item['href'], $id, "prnt");
-        }
-     }else{
+      if(count($item['subItems']) !== 0){
         $html .= $this->makePanelTree($id, $item);
+      }else if($item['html'] != null){
+        $html .= $this->makePanelItem($item['html'], "htmlContent", $id, "parent");
+      }else{
+        $html .= $this->makePanelItem($item['text'], $item['href'], $id, "parent");
       }
     }
     echo $html;
+    $this->addNotify();
     ?>
   </ul>
   <?php
