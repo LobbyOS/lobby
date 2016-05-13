@@ -6,7 +6,7 @@
  
 class Lobby {
 
-  public static $version, $versionReleased, $debug, $root, $url, $hostName, $title, $serverCheck, $db, $lid, $error = null;
+  public static $version, $versionReleased, $debug, $root, $url, $host, $hostName, $title, $serverCheck, $db, $lid, $error = null;
   
   public static $installed = false;
   
@@ -51,6 +51,10 @@ class Lobby {
       $urladdr = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://" . $urladdr;
       
       self::$url = rtrim($urladdr, "/"); // Remove Trailing Slash
+      /**
+       * Host with Port
+       */
+      self::$host = $_SERVER['SERVER_NAME'] . (isset($_SERVER["SERVER_PORT"]) && $_SERVER["SERVER_PORT"] != "80" ? ":{$_SERVER['SERVER_PORT']}" : "");
       self::$hostName = $_SERVER['SERVER_NAME'];
     }
     
@@ -98,20 +102,22 @@ class Lobby {
       self::setTitle($title);
     }
     
-    /**
-     * Load jQuery, jQuery UI, Lobby Main, App separately without async
-     */
-    $url = L_URL . "/includes/serve-assets.php?type=js&assets=" . implode(",", array(
-      Assets::$js['jquery'],
-      Assets::$js['jqueryui'],
-      Assets::$js['main'],
-      isset(Assets::$js['app']) ? Assets::$js['app'] : ""
-    ));
-    echo "<script src='{$url}'></script>";
-    
-    Assets::removeJs("jquery");
-    Assets::removeJs("jqueryui");
-    Assets::removeJs("main");
+    if(isset(Assets::$js['jquery'])){
+      /**
+       * Load jQuery, jQuery UI, Lobby Main, App separately without async
+       */
+      $url = L_URL . "/includes/serve-assets.php?type=js&assets=" . implode(",", array(
+        Assets::$js['jquery'],
+        Assets::$js['jqueryui'],
+        Assets::$js['main'],
+        isset(Assets::$js['app']) ? Assets::$js['app'] : ""
+      ));
+      echo "<script src='{$url}'></script>";
+      
+      Assets::removeJs("jquery");
+      Assets::removeJs("jqueryui");
+      Assets::removeJs("main");
+    }
     
     echo "<script>lobby.load_script_url = '". Assets::getServeURL("js") ."';</script>";
     
@@ -407,14 +413,27 @@ class Lobby {
   }
 
   /**
-   * Make a URL from Lobby Base. Eg: /hello to http://lobby.dev/lobby/hello
+   * Make a URL from Lobby Base Path.
+   * Eg: /hello to http://lobby.dev/hello
    */
   public static function u($path = null, $relative = false){
-    $orPath = $path; // The original path
+    /**
+     * The $path var is changed during the process
+     * So, original path is stored separately
+     */
+    $origPath = $path;
     
-    if($path != null){
-      $path = substr($path, 0, 1) == "/" ? substr($path, 1) : $path;
-      $url = $path;
+    /**
+     * The return URL
+     */
+    $url = $path;
+    
+    /**
+     * Prettyify $path
+     */
+    if($path !== null){
+      $path = ltrim($path, "/");
+      
       $parts = parse_url($path);
       
       /**
@@ -422,16 +441,16 @@ class Lobby {
        * 127.0.0.1:9000
        */
       if(isset($parts['host'])){
-        $url_host = $parts['host'] . (isset($parts['port']) ? ":{$parts['port']}" : "");
+        $urlHost = $parts['host'] . (isset($parts['port']) ? ":{$parts['port']}" : "");
       }else{
-        $url_host = "";
+        $urlHost = "";
       }
     }
-
+    
+    /**
+     * If no path, give the current page URL
+     */
     if($path == null){
-      /**
-       * If no path, give the current page URL
-       */
       $pageURL = 'http';
       if(isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on"){
         $pageURL .= "s";
@@ -449,11 +468,14 @@ class Lobby {
       $url = $pageURL;
     }else if($path === L_URL){
       $url = L_URL;
-    }else if(!preg_match("/http/", $path) || $url_host != self::$hostName){
-      if(!defined("APP_DIR") || substr($orPath, 0, 1) == "/"){
+    }else if(!preg_match("/http/", $path) || $urlHost !== self::$host){
+      /**
+       * If $origPath is a relative URI
+       */
+      if(!defined("APP_DIR") || substr($origPath, 0, 1) === "/"){
         $url = L_URL . "/$path";
       }else{
-        $url = \Lobby\App::u($orPath);
+        $url = \Lobby\App::u($origPath);
       }
     }
     return $url;
@@ -466,7 +488,7 @@ class Lobby {
    * To get the last part only ("install" in "/folder/subfolder/admin/install), pass TRUE to $page
    */
   public static function curPage($page = false, $full = false){
-    $url = self::u("", true);
+    $url = self::u(null, true);
     $parts = parse_url($url);
     
     if($page){

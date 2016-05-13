@@ -96,7 +96,7 @@
                       </label>
                     </td>
                     <td>
-                      <a href="<?php echo \Lobby::u("/admin/app/$app");?>"><?php echo $data['name'];?></a>
+                      <a href="<?php echo \Lobby::u("/app/$app");?>"><?php echo $data['name'];?></a>
                     </td>
                     <td><?php echo $data['version'];?></td>
                     <td><?php echo $data['short_description'];?></td>

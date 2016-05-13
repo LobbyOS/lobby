@@ -127,9 +127,9 @@ class Apps extends \Lobby {
       $valid = false;
     
       /**
-       * Initial checking
+       * Check if app directory exist and that manifest file has valid JSON
        */
-      if( is_dir($appDir) && file_exists("$appDir/manifest.json") ){
+      if( is_dir($appDir) && is_array(json_decode(file_get_contents("$appDir/manifest.json"), true)) ){
         $valid = true;
       }
       
@@ -160,16 +160,15 @@ class Apps extends \Lobby {
   /**
    * Make an object of App
    */
-  public function __construct($id = ""){
-    if($id != ""){
+  public function __construct($id = null){
+    if($id !== null){
       if(self::valid($id)){
         $this->exists = true;
-        $appDir = APPS_DIR . "/$id";
         $this->app = $id;
-        $this->appDir = $appDir;
+        $this->appDir = APPS_DIR . "/$id";
         
         /**
-         * App Manifest Info as a object variable
+         * App Manifest Info as a object property
          */
         $this->setInfo();
         return true;
