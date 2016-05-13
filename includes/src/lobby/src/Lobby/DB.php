@@ -54,6 +54,11 @@ class DB extends \Lobby {
           self::$dbh = new \PDO("sqlite:" . \Lobby\FS::loc($config['path']), "", "", $options);
           
           /**
+           * Enable Multithreading Read/Write
+           */
+          self::$dbh->exec("PRAGMA journal_mode=WAL;");
+          
+          /**
            * Check if Lobby tables exist
            */
           $sql = self::$dbh->query("SELECT COUNT(1) FROM `sqlite_master` WHERE `type` = 'table' AND (`name` = 'l_data' OR `name` = 'l_options')");

@@ -185,7 +185,10 @@ class Router {
    * http://php.net/manual/en/features.commandline.webserver.php#example-430
    */
   public static function pathExists(){
-    return file_exists(L_DIR . $_SERVER['PHP_SELF']);
+    if(\Lobby\FS::rel($_SERVER['PHP_SELF']) !== "index.php"){
+      return file_exists(L_DIR . $_SERVER['PHP_SELF']);
+    }
+    return false;
   }
   
 }

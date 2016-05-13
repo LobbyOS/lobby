@@ -49,7 +49,7 @@ class Modules extends \Lobby {
     foreach($modules as $module){
       $loc = "$location/$module";
       if(self::valid($module, $loc)){
-        $validModules[] = array(
+        $validModules[$module] = array(
           "id" => $module,
           "location" => $loc,
           "url" => L_URL . "/" . FS::rel($loc)
