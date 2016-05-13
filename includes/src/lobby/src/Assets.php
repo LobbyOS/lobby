@@ -37,6 +37,7 @@ class Assets {
 
   public static function config($config){
     self::$config = array_replace_recursive(self::$config, $config);
+    self::$config["basePath"] = realpath(self::$config["basePath"]);
   }
   
   /**
@@ -82,13 +83,25 @@ class Assets {
     }
   }
   
-  public static function removeCss($name){
-    unset(self::$css[$name]);
+  public static function removeCSS($name){
+    if(is_array($name)){
+      foreach($name as $v){
+        unset(self::$css[$v]);
+      }
+    }else{
+      unset(self::$css[$name]);
+    }
     return true;
   }
   
-  public static function removeJs($name){
-    unset(self::$js[$name]);
+  public static function removeJS($name){
+    if(is_array($name)){
+      foreach($name as $v){
+        unset(self::$js[$v]);
+      }
+    }else{
+      unset(self::$js[$name]);
+    }
     return true;
   }
   

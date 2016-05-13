@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0a9a956cccef889fbb38a294f710b2ba",
-    "content-hash": "74ba1078010a6a6f867af47d3fe9e0ac",
+    "hash": "908308d765db24e1c4f24457d32ab046",
+    "content-hash": "800f54e9c03af0a460caa6e9ecd71ca5",
     "packages": [
         {
             "name": "composer/semver",
@@ -71,16 +71,16 @@
         },
         {
             "name": "francium/process",
-            "version": "v0.3",
+            "version": "v0.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/subins2000/Francium-Process.git",
-                "reference": "062a3ee0570b3f5f3eb265fe6196f59c6d18af54"
+                "reference": "8a6f533585f0ae807fb7f7bbfb09d408f5a0ce97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/subins2000/Francium-Process/zipball/1db4c032fc1861605cb5194340bd38f7b9a20846",
-                "reference": "062a3ee0570b3f5f3eb265fe6196f59c6d18af54",
+                "url": "https://api.github.com/repos/subins2000/Francium-Process/zipball/8a6f533585f0ae807fb7f7bbfb09d408f5a0ce97",
+                "reference": "8a6f533585f0ae807fb7f7bbfb09d408f5a0ce97",
                 "shasum": ""
             },
             "require": {
@@ -111,7 +111,7 @@
                 "platform",
                 "process"
             ],
-            "time": "2016-05-02 17:43:28"
+            "time": "2016-05-07 17:11:38"
         },
         {
             "name": "klein/klein",
@@ -264,16 +264,16 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v3.0.4",
+            "version": "v3.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "f82499a459dcade2ea56df94cc58b19c8bde3d20"
+                "reference": "74fec3511b62cb934b64bce1d96f06fffa4beafd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/f82499a459dcade2ea56df94cc58b19c8bde3d20",
-                "reference": "f82499a459dcade2ea56df94cc58b19c8bde3d20",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/74fec3511b62cb934b64bce1d96f06fffa4beafd",
+                "reference": "74fec3511b62cb934b64bce1d96f06fffa4beafd",
                 "shasum": ""
             },
             "require": {
@@ -309,7 +309,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-27 10:24:39"
+            "time": "2016-04-12 18:09:53"
         },
         {
             "name": "vierbergenlars/php-semver",

@@ -12,9 +12,11 @@ if(count($apps) == 0){
   $appsSorted = array();
   foreach($apps as $app){
     $App = new \Lobby\Apps($app);
-    $data = $App->info;
-    $lowercased_name = strtolower($data['name']);
-    $appsSorted[$lowercased_name] = $data;
+    if($App->exists){
+      $data = $App->info;
+      $lowercased_name = strtolower($data['name']);
+      $appsSorted[$lowercased_name] = $data;
+    }
   }
   
   /**
