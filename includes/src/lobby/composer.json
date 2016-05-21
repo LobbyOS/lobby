@@ -17,7 +17,9 @@
     "psr-0": {
       "Lobby": "src/",
       "H": "src/",
-      "Assets": "src/"
+      "Assets": "src/",
+      "Request": "src/",
+      "Response": "src/"
     },
     "psr-4": {
       "Lobby\\": "src/Lobby",
@@ -28,5 +30,5 @@
     "php": ">=5.3.0",
     "composer/semver": ">=1.4.0"
   },
-  "version": "0.5.30"
+  "version": "0.5.32"
 }

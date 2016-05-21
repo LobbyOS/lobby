@@ -13,17 +13,17 @@
  */
 
 require_once __DIR__ . "/load.php";
-$GLOBALS['workspaceHTML'] = "";
+use \Lobby\Router;
 
 /**
  * Dispatch the Routes
  */
-\Lobby\Router::dispatch();
+Router::dispatch();
 
-if(!isset($GLOBALS['route_active'])){
-  if($GLOBALS['workspaceHTML'] != "" || is_array($GLOBALS['workspaceHTML'])){
-    require_once L_DIR . "/includes/lib/lobby/inc/page.php";
-  }else if(\Lobby\Router::pathExists()){
+if(!Router::$routeActive){
+  if(Response::hasContent()){
+    Response::send();
+  }else if(Router::pathExists()){
     return false;
   }else{
     ser();

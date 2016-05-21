@@ -16,10 +16,13 @@ class Need {
    * Get Version of a component
    */
   public static function getDependencyVersion($dependency){
-    
     switch($dependency){
       case "lobby":
         return \Lobby::$version;
+        break;
+      case "curl":
+        $curl = curl_version();
+        return $curl["version"];
         break;
       default:
         /**
