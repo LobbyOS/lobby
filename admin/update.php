@@ -20,55 +20,10 @@ require "../load.php";
         <p>Lobby and it's apps can be updated automatically. <a href="http://lobby.subinsb.com/docs/update" target="_blank" class="btn">More Info</a></p>
         <a class='btn blue' href='check-updates.php'>Check For Updates</a>
         <?php
-        $AppUpdates = json_decode(getOption("app_updates"), true);
-        if(\H::i("action", "", "POST") == "updateApps" && H::csrf()){
-          foreach($AppUpdates as $appID => $neverMindThisVariable){
-            if(isset($_POST[$appID])){
-              echo '<iframe src="'. L_URL . "/admin/download.php?type=app&id={$appID}". H::csrf("g") .'" style="border: 0;width: 100%;height: 200px;"></iframe>';
-              unset($AppUpdates[$appID]);
-            }
-          }
-          saveOption("app_updates", json_encode($AppUpdates));
-          $AppUpdates = json_decode(getOption("app_updates"), true);
-        }
-        if(!isset($_GET['step']) && isset($AppUpdates) && count($AppUpdates) != 0){
-        ?>
-          <h2>Apps</h2>
-          <p>App updates are available. Choose which apps to update from the following :</p>
-          <form method="POST" clear>
-            <?php H::csrf(1);?>
-            <table>
-              <thead>
-                <tr>
-                  <td style='width: 2%;'>Update ?</td>
-                  <td style='width: 20%;'>App</td>
-                  <td style='width: 5%;'>Current Version</td>
-                  <td style='width: 20%;'>Latest Version</td>
-                </tr>
-              </thead>
-              <?php              
-              echo "<tbody>";
-              foreach($AppUpdates as $appID => $latest_version){
-                $App = new \Lobby\Apps($appID);
-                $AppInfo = $App->info;
-                echo '<tr>';
-                  echo '<td><label><input style="vertical-align:top;display:inline-block;" checked="checked" type="checkbox" name="'. $appID .'" /><span></span></label></td>';
-                  echo '<td><span style="vertical-align:middle;display:inline-block;margin-left:5px;">'. $AppInfo['name'] .'</span></td>';
-                  echo '<td>'. $AppInfo['version'] .'</td>';
-                  echo '<td>'. $latest_version .'</td>';
-                echo '</tr>';
-              }
-              ?>
-            </tbody></table>
-            <input type="hidden" name="action" value="updateApps" />
-            <button class="btn red" clear>Update Selected Apps</button>
-          </form>
-        <?php
-        }
         if(\Lobby::$version == getOption("lobby_latest_version") && !\H::i("action", "", "POST") == "updateApps"){
           echo "<h2>Lobby</h2>";
           sss("Latest Version", "You are using the latest version of Lobby. There are no new releases yet.");
-        }elseif(!isset($_GET['step']) && !\H::i("action", "", "POST") == "updateApps"){
+        }else if(!isset($_GET['step']) && !\H::i("action", "", "POST") == "updateApps"){
         ?>
           <h2>Lobby</h2>
           <p>
@@ -111,6 +66,52 @@ require "../load.php";
             $version = getOption("lobby_latest_version");
             echo '<iframe src="'. L_URL . "/admin/download.php?type=lobby&id=$version". H::csrf("g") .'" style="border: 0;width: 100%;height: 200px;"></iframe>';
           }
+        }
+        
+        $AppUpdates = json_decode(getOption("app_updates"), true);
+        if(\H::i("action", "", "POST") == "updateApps" && H::csrf()){
+          foreach($AppUpdates as $appID => $neverMindThisVariable){
+            if(isset($_POST[$appID])){
+              echo '<iframe src="'. L_URL . "/admin/download.php?type=app&id={$appID}". H::csrf("g") .'" style="border: 0;width: 100%;height: 200px;"></iframe>';
+              unset($AppUpdates[$appID]);
+            }
+          }
+          saveOption("app_updates", json_encode($AppUpdates));
+          $AppUpdates = json_decode(getOption("app_updates"), true);
+        }
+        if(!isset($_GET['step']) && isset($AppUpdates) && count($AppUpdates) != 0){
+        ?>
+          <h2>Apps</h2>
+          <p>New versions of apps are available. Choose which apps to update from the following :</p>
+          <form method="POST" clear>
+            <?php H::csrf(1);?>
+            <table>
+              <thead>
+                <tr>
+                  <td style='width: 2%;'>Update ?</td>
+                  <td style='width: 20%;'>App</td>
+                  <td style='width: 5%;'>Current Version</td>
+                  <td style='width: 20%;'>Latest Version</td>
+                </tr>
+              </thead>
+              <?php              
+              echo "<tbody>";
+              foreach($AppUpdates as $appID => $latest_version){
+                $App = new \Lobby\Apps($appID);
+                $AppInfo = $App->info;
+                echo '<tr>';
+                  echo '<td><label><input style="vertical-align:top;display:inline-block;" checked="checked" type="checkbox" name="'. $appID .'" /><span></span></label></td>';
+                  echo '<td><span style="vertical-align:middle;display:inline-block;margin-left:5px;">'. $AppInfo['name'] .'</span></td>';
+                  echo '<td>'. $AppInfo['version'] .'</td>';
+                  echo '<td>'. $latest_version .'</td>';
+                echo '</tr>';
+              }
+              ?>
+            </tbody></table>
+            <input type="hidden" name="action" value="updateApps" />
+            <button class="btn red" clear>Update Selected Apps</button>
+          </form>
+        <?php
         }
         ?>
       </div>

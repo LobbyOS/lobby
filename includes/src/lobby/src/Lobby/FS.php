@@ -1,5 +1,7 @@
 <?php
 namespace Lobby;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 /**
  * FileSystem of Lobby
@@ -9,6 +11,11 @@ namespace Lobby;
 
 class FS {
 
+  /**
+   * symfony/filesystem object
+   */
+  public static $fs;
+
   public static function __constructStatic(){
     $lobbyInfo = self::get("/lobby.json");
     if($lobbyInfo !== false){
@@ -16,6 +23,7 @@ class FS {
       \Lobby::$version = $lobbyInfo->version;
       \Lobby::$versionReleased = $lobbyInfo->released;
     }
+    self::$fs = new Filesystem();
   }
   
   /**
@@ -50,19 +58,7 @@ class FS {
    * Make absolute path to relative path
    */
   public static function rel($path){
-    $path = self::loc($path);
-    
-    /**
-     * Replace Lobby Path inside $new to make relative path
-     */
-    $relativePath = str_replace(L_DIR, "", $path);
-    
-    /**
-     * Remove slash at the beginning
-     */
-    $relativePath = ltrim($relativePath, '/');
-    
-    return $relativePath;
+    return self::$fs->makePathRelative($path, L_DIR);
   }
   
   /**
@@ -79,22 +75,19 @@ class FS {
   
   /**
    * Write Contents to a file. There are 2 types of writing :
-   * w - Write
+   * w - Write (Overwrite if exists)
    * a - Append
    */
   public static function write($path, $content, $type = "w"){
-    $file = self::loc($path, false);
-    if($type === "w"){
-      $fh = fopen($file, 'w');
-      $status = fwrite($fh, $content);
-      fclose($fh);
-      return $status === false || $status == 0 ? false : true;
-    }elseif($type === "a"){
-      $fh = fopen($file, 'a');
-      $status = fwrite($fh, "$content\n");
-      fclose($fh);
-      return $status === false || $status == 0 ? false : true;
+    $path = self::loc($path, false);
+    
+    if($type === "a"){
+      /**
+       * Append newline at EOF
+       */
+      $content = file_get_contents($path) . $content . "\n";
     }
+    self::$fs->dumpFile($path, $content);
   }
   
   public static function remove($path, $exclude = array(), $remove_parent = true){
@@ -125,13 +118,51 @@ class FS {
   }
   
   /**
-   * Bytes to KiB, MB, GB converter
+   * Bytes to KB, MB, GB converter
+   * Base is 1000
+   * @param int $size The size in bytes
    */
   public static function normalizeSize($size){
-    $base = log($size) / log(1000);
-    $suffix = array("", "KB", "MB", "GB", "TB");
-    $f_base = floor($base);
-    return round(pow(1000, $base - floor($base)), 1) . $suffix[$f_base];
+    $base = 1000;
+    
+    $sizeBase = log($size) / log($base);
+    $suffixes = array("", "KB", "MB", "GB", "TB");
+    $flooredBase = floor($sizeBase);
+    
+    if($flooredBase == 0){
+      return round(round(pow($base, $sizeBase - $flooredBase), 1) / $base, 1) . "KB";
+    }else{
+      return round(pow($base, $sizeBase - $flooredBase), 1) . $suffixes[$flooredBase];
+    }
+  }
+  
+  /**
+   * Get the size
+   * @param $path The path
+   * @param $normalizeSize Whether to run self::normalizeSize() on return
+   * @return integer
+   */
+  function getSize($path, $normalizeSize = false) {
+    $path = self::loc($path);
+    $size = 0;
+    
+    if(is_dir($path)){
+      foreach(new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path)) as $file){
+        $size += $file->getSize();
+      }
+      return $normalizeSize ? self::normalizeSize($size, true) : $size;
+    }else{
+      $size = filesize($path);
+      return $normalizeSize ? self::normalizeSize($size, true) : $size;
+    }
+  }
+  
+  /**
+   * Create a temporary file
+   * Dir : contents/extra
+   */
+  public static function getTempFile(){
+    return self::$fs->tempnam(L_DIR . "/contents/extra", "lobby_temp");
   }
   
 }

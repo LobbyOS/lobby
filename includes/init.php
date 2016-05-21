@@ -38,15 +38,15 @@ if(!\Lobby::status("lobby.install")){
     "position" => "left"
   );
   $adminArray["subItems"] = array(
-    "AppManager" => array(
+    "app_manager" => array(
       "text" => "Apps",
       "href" => "/admin/apps.php"
     ),
-    "LobbyStore" => array(
+    "lobby_store" => array(
       "text" => "Lobby Store",
       "href" => "/admin/lobby-store.php",
     ),
-    "About" => array(
+    "about" => array(
       "text" => "Settings",
       "href" => "/admin/settings.php"
     )

@@ -83,29 +83,32 @@
               <td>Release Date</td>
               <td><?php echo \Lobby::$versionReleased;?></td>
             </tr>
-               <tr>
+            <tr>
+              <th><h4 style="margin: 0;"><?php echo \Lobby::l("/admin/update.php", "Updates", "");?></h4></th>
+              <th></th>
+            </tr>
+            <tr>
               <td>Latest Version</td>
               <td><?php echo getOption("lobby_latest_version");?></td>
-               </tr>
-               <tr>
+            </tr>
+            <tr>
               <td>Latest Version Release Date</td>
               <td><?php echo getOption("lobby_latest_version_release");?></td>
-               </tr>
-            </tbody>
-          </table>
-          <div clear=""></div>
-          <a class="btn" href="<?php echo L_URL; ?>/admin/update.php">Updates</a>
-          <a class='btn blue' href='<?php echo L_URL;?>/admin/check-updates.php'>Check For Updates</a>
-          <?php
-          /* Check if the current version is not the latest version */
-          if(\Lobby::$version != getOption("lobby_latest_version")){
-          ?>
-            <div clear></div>
-            <a class="btn red" href="update.php">Update To Version <?php echo getOption("lobby_latest_version");?></a>
-          <?php
-          }
-          ?>
-         </div>
+            </tr>
+          </tbody>
+        </table>
+        <?php echo \Lobby::l("/admin/update.php", "Updates", "class='btn green'");?>
+        <cl/>
+        <?php
+        /* Check if the current version is not the latest version */
+        if(\Lobby::$version != getOption("lobby_latest_version")){
+        ?>
+          <div clear></div>
+          <a class="btn red" href="update.php">Update To Version <?php echo getOption("lobby_latest_version");?></a>
+        <?php
+        }
+        ?>
       </div>
-   </body>
+    </div>
+  </body>
 </html>

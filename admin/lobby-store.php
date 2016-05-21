@@ -17,7 +17,9 @@ if($AppID !== null){
   <head>
     <?php
     \Assets::css("lobby-store", "/admin/css/lobby-store.css");
+    \Assets::css("view-app", "/admin/css/view-app.css");
     \Assets::js("lobby-store", "/admin/js/lobby-store.js");
+    
     \Lobby::doHook("admin.head.begin");
     \Lobby::head($page_title);
     ?>
@@ -56,12 +58,13 @@ if($AppID !== null){
                 </script>
                 <?php
                 $App = new \Lobby\Apps($AppID);
-                $requires = $app['requires'];
+                $require = $app['require'];
+                
                 if(!$App->exists){
                   /**
                    * Check whether Lobby version is compatible
                    */
-                  if(\Lobby\Need::checkRequirements($requires, true)){
+                  if(\Lobby\Need::checkRequirements($require, true)){
                     echo "<a class='btn red disabled' title='The app requirements are not satisfied. See `Info` tab.'>Install</a>";
                   }else{
                     echo \Lobby::l("/admin/install-app.php?id={$_GET['id']}" . H::csrf("g"), "Install", "class='btn red'");
@@ -82,7 +85,6 @@ if($AppID !== null){
                 ?>
                 <div class="chip" clear>Developed By <a href="<?php echo $app['author_page'];?>" target="_blank"><?php echo $app['author'];?></a></div>
                 <div class="chip" clear><a href="<?php echo $app['app_page'];?>" target="_blank">App's Webpage</a></div>
-                <style>#leftpane .btn{width:100%;margin: 5px 0px;}</style>
               </div>
               <div class="col m9">
                 <ul class="tabs">
@@ -97,8 +99,8 @@ if($AppID !== null){
                   <div class="chip"><span>Requirements :</span></div>
                     <ul class="collection" style="margin-left: 20px;">
                       <?php
-                      $requirementsInSystemInfo = \Lobby\Need::checkRequirements($requires);
-                      foreach($requires as $k => $v){
+                      $requirementsInSystemInfo = \Lobby\Need::checkRequirements($require);
+                      foreach($require as $k => $v){
                         if($requirementsInSystemInfo[$k]){
                           echo "<li class='collection-item'>$k $v</li>";
                         }else{

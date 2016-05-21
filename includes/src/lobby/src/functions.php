@@ -120,3 +120,33 @@ function saveJSONOption($key, $values){
   saveOption($key, $new);
   return true;
 }
+
+/**
+ * Get value from $_GET and $_POST according to request
+ * returns null if it doesn't exist
+ * @param $name string - The key
+ * @param $default string - The default value returned
+ * @param $type string - Explicitly mention where to get value from ("GET" or "POST")
+ */
+function input($name, $default = null, $type = null){
+  $post_count = count($_POST);
+  $get_count = count($_GET);
+  
+  if($post_count !== 0 && $get_count !== 0){
+    /**
+     * Both $_GET and $_POST are present
+     */
+    $arr = $_GET + $_POST;
+  }else{
+    if($type === "GET" || ($type !== "POST" && $get_count !== 0 && $post_count === 0)){
+      $arr = $_GET;
+    }else if($type == "POST" || $post_count != 0){
+      $arr = $_POST;
+    }
+  }
+  if(isset($arr[$name])){
+    return urldecode($arr[$name]);
+  }else{
+    return $default;
+  }
+}
