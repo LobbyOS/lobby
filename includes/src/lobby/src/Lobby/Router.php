@@ -1,6 +1,8 @@
 <?php
 namespace Lobby;
 
+use Response;
+
 /**
  * The Router class for Routing paths coming to Lobby accordingly
  * Klein is used as the Routing Library, so Route names and others
@@ -9,6 +11,7 @@ namespace Lobby;
 class Router {
   
   public static $router;
+  public static $routeActive = false;
   
   public static function __constructStatic(){
     self::$router = new \Klein\Klein();
@@ -17,8 +20,8 @@ class Router {
   public static function route($route, $callback) {
     self::$router->respond($route, function($request, $response) use($callback) {
       $return = $callback($request, $response);
-      if($return !== false && $GLOBALS['workspaceHTML'] == ""){
-        $GLOBALS['route_active'] = 1;
+      if($return !== false && !Response::hasContent()){
+        self::$routeActive = true;
       }
     });
   }
@@ -76,17 +79,17 @@ class Router {
           ),
           "position" => "left"
         ));
-        $page_response = $class->page($page);
+        $pageResponse = $class->page($page);
         
-        if($page_response == "auto"){
-          if($page == "/"){
+        if($pageResponse === "auto"){
+          if($page === "/"){
             $page = "/index";
           }
-          $GLOBALS['workspaceHTML'] = $class->inc("/src/page{$page}.php");
+          Response::setPage($class->inc("/src/page{$page}.php"));
         }else{
-          $GLOBALS['workspaceHTML'] = $page_response;
+          Response::setPage($pageResponse);
         }
-        if($GLOBALS['workspaceHTML'] == null){
+        if(!Response::hasContent()){
           ser();
         }
       }else{
@@ -101,7 +104,7 @@ class Router {
     self::route("/", function() {
       \Lobby::setTitle("Dashboard");
       \Lobby\UI\Themes::loadDashboard("head");
-      $GLOBALS['workspaceHTML'] = array("/includes/lib/lobby/inc/dashboard.php");
+      Response::loadPage("/includes/lib/lobby/inc/dashboard.php");
     });
     
     /**

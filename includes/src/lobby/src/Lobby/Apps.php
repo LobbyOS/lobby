@@ -1,8 +1,8 @@
 <?php
 namespace Lobby;
 
-use \Lobby\Need;
-use \Lobby\FS;
+use Lobby\Need;
+use Lobby\FS;
 
 /**
  * \Lobby\Apps
@@ -297,6 +297,28 @@ class Apps extends \Lobby {
     if($this->app && isset($this->info["requires"])){
       return Need::checkRequirements($this->info["requires"], true);
     }
+  }
+  
+  /**
+   * Get size used in database
+   */
+  public function getDBSize($normalizeSize = false){
+    $sql = \Lobby\DB::$dbh->prepare("SELECT * FROM `". \Lobby\DB::$prefix ."data` WHERE `app` = ?");
+    $sql->execute(array($this->app));
+    $result = $sql->fetchAll(\PDO::FETCH_ASSOC);
+    
+    /**
+     * Convert array values to string
+     */
+    $result = json_encode($result);
+    $result = str_replace("[roeEcvv,]", null, $result);
+    
+    $tmpFile = FS::getTempFile();
+    FS::write($tmpFile, $result);
+    $size = FS::getSize($tmpFile, $normalizeSize);
+    FS::remove($tmpFile);
+    
+    return $size;
   }
   
   /**

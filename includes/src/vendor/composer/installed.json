@@ -64,38 +64,6 @@
         ]
     },
     {
-        "name": "vladimmi/construct-static",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/vladimmi/construct-static.git",
-            "reference": "4a78a22ce740cda840909d4af01f42b7ff140c08"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/vladimmi/construct-static/zipball/4a78a22ce740cda840909d4af01f42b7ff140c08",
-            "reference": "4a78a22ce740cda840909d4af01f42b7ff140c08",
-            "shasum": ""
-        },
-        "time": "2016-03-28 15:28:30",
-        "type": "library",
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "ConstructStatic\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "authors": [
-            {
-                "name": "vladimmi",
-                "email": "vladimmi@gmail.com"
-            }
-        ],
-        "description": "Small Composer wrapper to implement static class constructors"
-    },
-    {
         "name": "klein/klein",
         "version": "v2.1.0",
         "version_normalized": "2.1.0.0",
@@ -205,52 +173,6 @@
         ]
     },
     {
-        "name": "lobby/lobby",
-        "version": "0.5.30",
-        "version_normalized": "0.5.30.0",
-        "dist": {
-            "type": "path",
-            "url": "lobby/",
-            "reference": "ccbeb943821df1220258bcb810618c886aa4fe80",
-            "shasum": null
-        },
-        "require": {
-            "composer/semver": ">=1.4.0",
-            "php": ">=5.3.0"
-        },
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "src/functions.php"
-            ],
-            "psr-0": {
-                "Lobby": "src/",
-                "H": "src/",
-                "Assets": "src/"
-            },
-            "psr-4": {
-                "Lobby\\": "src/Lobby",
-                "Lobby\\UI\\": "src/Lobby/UI"
-            }
-        },
-        "license": [
-            "Apache 2.0"
-        ],
-        "authors": [
-            {
-                "name": "Subin Siby",
-                "homepage": "http://subinsb.com",
-                "role": "Developer"
-            }
-        ],
-        "description": "Lobby Core",
-        "homepage": "http://lobby.subinsb.com",
-        "keywords": [
-            "lobby"
-        ]
-    },
-    {
         "name": "vierbergenlars/php-semver",
         "version": "v2.1.0",
         "version_normalized": "2.1.0.0",
@@ -301,9 +223,55 @@
         ]
     },
     {
+        "name": "francium/process",
+        "version": "v0.3.1",
+        "version_normalized": "0.3.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/subins2000/Francium-Process.git",
+            "reference": "8a6f533585f0ae807fb7f7bbfb09d408f5a0ce97"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/subins2000/Francium-Process/zipball/8a6f533585f0ae807fb7f7bbfb09d408f5a0ce97",
+            "reference": "8a6f533585f0ae807fb7f7bbfb09d408f5a0ce97",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2016-05-07 17:11:38",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Fr\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache 2.0"
+        ],
+        "authors": [
+            {
+                "name": "Subin Siby",
+                "homepage": "http://subinsb.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "Run Background Process with Cross Platform Support",
+        "homepage": "http://subinsb.com/francium/process",
+        "keywords": [
+            "background",
+            "cross",
+            "platform",
+            "process"
+        ]
+    },
+    {
         "name": "symfony/filesystem",
-        "version": "v3.0.5",
-        "version_normalized": "3.0.5.0",
+        "version": "v3.0.6",
+        "version_normalized": "3.0.6.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/filesystem.git",
@@ -352,32 +320,185 @@
         "homepage": "https://symfony.com"
     },
     {
-        "name": "francium/process",
-        "version": "v0.3.1",
-        "version_normalized": "0.3.1.0",
+        "name": "vladimmi/construct-static",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
         "source": {
             "type": "git",
-            "url": "https://github.com/subins2000/Francium-Process.git",
-            "reference": "8a6f533585f0ae807fb7f7bbfb09d408f5a0ce97"
+            "url": "https://github.com/vladimmi/construct-static.git",
+            "reference": "4a78a22ce740cda840909d4af01f42b7ff140c08"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/subins2000/Francium-Process/zipball/8a6f533585f0ae807fb7f7bbfb09d408f5a0ce97",
-            "reference": "8a6f533585f0ae807fb7f7bbfb09d408f5a0ce97",
+            "url": "https://api.github.com/repos/vladimmi/construct-static/zipball/4a78a22ce740cda840909d4af01f42b7ff140c08",
+            "reference": "4a78a22ce740cda840909d4af01f42b7ff140c08",
             "shasum": ""
         },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "time": "2016-05-07 17:11:38",
+        "time": "2016-03-28 15:28:30",
         "type": "library",
-        "installation-source": "dist",
+        "installation-source": "source",
         "autoload": {
             "psr-4": {
-                "Fr\\": "src"
+                "ConstructStatic\\": "src"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
+        "authors": [
+            {
+                "name": "vladimmi",
+                "email": "vladimmi@gmail.com"
+            }
+        ],
+        "description": "Small Composer wrapper to implement static class constructors"
+    },
+    {
+        "name": "symfony/polyfill-mbstring",
+        "version": "v1.2.0",
+        "version_normalized": "1.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/polyfill-mbstring.git",
+            "reference": "dff51f72b0706335131b00a7f49606168c582594"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/dff51f72b0706335131b00a7f49606168c582594",
+            "reference": "dff51f72b0706335131b00a7f49606168c582594",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "suggest": {
+            "ext-mbstring": "For best performance"
+        },
+        "time": "2016-05-18 14:26:46",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.2-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Polyfill\\Mbstring\\": ""
+            },
+            "files": [
+                "bootstrap.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nicolas Grekas",
+                "email": "p@tchwork.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony polyfill for the Mbstring extension",
+        "homepage": "https://symfony.com",
+        "keywords": [
+            "compatibility",
+            "mbstring",
+            "polyfill",
+            "portable",
+            "shim"
+        ]
+    },
+    {
+        "name": "symfony/http-foundation",
+        "version": "v3.0.6",
+        "version_normalized": "3.0.6.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/http-foundation.git",
+            "reference": "18b24bc32d2495ae79d76e777368786a6536fe31"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/http-foundation/zipball/18b24bc32d2495ae79d76e777368786a6536fe31",
+            "reference": "18b24bc32d2495ae79d76e777368786a6536fe31",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.5.9",
+            "symfony/polyfill-mbstring": "~1.1"
+        },
+        "require-dev": {
+            "symfony/expression-language": "~2.8|~3.0"
+        },
+        "time": "2016-04-12 18:09:53",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\HttpFoundation\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony HttpFoundation Component",
+        "homepage": "https://symfony.com"
+    },
+    {
+        "name": "lobby/lobby",
+        "version": "0.5.32",
+        "version_normalized": "0.5.32.0",
+        "dist": {
+            "type": "path",
+            "url": "lobby/",
+            "reference": "6d9407e9b93f19f25110cabb5f08082fa0dbd740",
+            "shasum": null
+        },
+        "require": {
+            "composer/semver": ">=1.4.0",
+            "php": ">=5.3.0"
+        },
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "src/functions.php"
+            ],
+            "psr-0": {
+                "Lobby": "src/",
+                "H": "src/",
+                "Assets": "src/",
+                "Request": "src/",
+                "Response": "src/"
+            },
+            "psr-4": {
+                "Lobby\\": "src/Lobby",
+                "Lobby\\UI\\": "src/Lobby/UI"
+            }
+        },
         "license": [
             "Apache 2.0"
         ],
@@ -388,13 +509,10 @@
                 "role": "Developer"
             }
         ],
-        "description": "Run Background Process with Cross Platform Support",
-        "homepage": "http://subinsb.com/francium/process",
+        "description": "Lobby Core",
+        "homepage": "http://lobby.subinsb.com",
         "keywords": [
-            "background",
-            "cross",
-            "platform",
-            "process"
+            "lobby"
         ]
     }
 ]

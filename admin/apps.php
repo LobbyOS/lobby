@@ -1,9 +1,17 @@
-<?php require "../load.php";?>
+<?php
+require "../load.php";
+use \Lobby\Apps;
+use \Lobby\FS;
+use \Lobby\Need;
+?>
 <html>
   <head>
     <?php
-    \Lobby::doHook("admin.head.begin");
     \Assets::js("admin.apps.js", "/admin/js/apps.js");
+    \Assets::css("lobby-store", "/admin/css/lobby-store.css");
+    \Assets::css("view-app", "/admin/css/view-app.css");
+    
+    \Lobby::doHook("admin.head.begin");
     \Lobby::head("App Manager");
     ?>
   </head>
@@ -14,39 +22,123 @@
     ?>
     <div class="workspace">
       <div class="content">
-        <h1>Apps</h1>
-        <p>Disable or Remove installed apps. You can find and install more Apps from <a href="<?php echo L_URL;?>/admin/lobby-store.php">Lobby Store</a>.</p>
         <?php
-        if(isset($_GET['action']) && isset($_GET['app']) && H::csrf()){
-          $action = $_GET['action'];
-          $apps = $_GET['app'];
+        $appID = input("app");
+        if($appID !== null){
+          $App = new Apps($appID);
           
-          /**
-           * If only a single app, make it as a value of array
-           */
-          if(!is_array($apps)){
-            $apps = array($apps);
+          if( !$App->exists ){
+            ser("Error", "I checked all over, but App does not Exist");
           }
-          
-          foreach($apps as $app){
-            $App = new \Lobby\Apps($app);
-            if( !$App->exists ){
-              ser("Error", "I checked all over, but App does not Exist");
-            }
-            if($action == "disable"){
+        ?>
+          <h2><?php echo "<a href='". L_SERVER ."/apps/". $App->info['id'] ."' target='_blank'>". $App->info['name'] ."</a>";?></h2>
+          <p class="chip" style="margin: -5px 0 20px;"><?php echo $App->info['short_description'];?></p>
+          <div class="row">
+            <div class="col m3" id="leftpane" style="text-align: center;">
+              <img src="<?php echo \Lobby::u("admin/image/clear.gif");?>" height="200" width="200" />
+              <script>
+                $(window).load(function(){
+                  var image = $("#leftpane img");
+                  var downloadingImage = new Image();
+                  downloadingImage.onload = function(){
+                    image.attr("src", this.src);
+                  };
+                  downloadingImage.src = "<?php echo $App->info["logo"];?>";
+                });
+              </script>
+              <?php
+              $App = new Apps($appID);
+              $requires = $App->info['require'];
+              
+              if(version_compare($App->info['version'], $App->info['version'], ">")){
+                /**
+                 * New version of app is available
+                 */
+                echo \Lobby::l("/admin/check-updates.php", "Update App", "class='btn red'");
+              }else if($App->enabled){
+                echo \Lobby::l($App->info['URL'], "Open App", "class='btn green'");
+                echo \Lobby::l("/admin/apps.php?app=$appID&action=disable" . csrf('g'), "Disable", "class='btn'");
+              }else{
+                /**
+                 * App is Disabled. Show button to enable it
+                 */
+                echo \Lobby::l("/admin/apps.php?action=enable&redirect=1&app=". $appID . H::csrf("g"), "Enable App", "class='btn green'");
+              }
+              echo \Lobby::l("/admin/apps.php?app=$appID&action=remove" . csrf('g'), "Remove", "class='btn red'");
+              ?>
+            </div>
+            <div class="col m9">
+              <ul class="tabs">
+                <li class="tab"><a href="#app-info">Info</a></li>
+                <li class="tab"><a href="#app-data">Data</a></li>
+              </ul>
+              <div id="app-info" class="tab-contents">
+                <div class="chip">Version : <?php echo $App->info['version'];?></div><cl/>
+                <div class="chip">Developed By <a href="<?php echo $App->info['author_page'];?>" target="_blank"><?php echo $App->info['author'];?></a></div><cl/>
+                <div class="chip"><a href="<?php echo $App->info['app_page'];?>" target="_blank">App's Webpage</a></div><cl/>
+                <?php
+                if(!empty($App->info["require"])){
+                  $requirementsInSystemInfo = Need::checkRequirements($App->info["require"]);
+                  echo "<div class='chip'>Requirements :</div><ul>";
+                  foreach($App->info["require"] as $k => $v){
+                    if($requirementsInSystemInfo[$k]){
+                      echo "<li class='collection-item'>$k $v</li>";
+                    }else{
+                      echo "<li class='collection-item red'>$k $v</li>";
+                    }
+                  }
+                  echo "</ul>";
+                }
+                ?>
+            </div>
+            <div id="app-data" class="tab-contents">
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Installed in</td>
+                    <td><?php echo $App->appDir;?></td>
+                  </tr>
+                  <tr>
+                    <td>Folder size</td>
+                    <td><h6><?php $folderSize = FS::getSize($App->appDir);echo FS::normalizeSize($folderSize);?></h6></td>
+                  </tr>
+                  <tr>
+                    <td>Size occupied in database</td>
+                    <td><h6><?php $dbSize = $App->getDBSize();echo FS::normalizeSize($dbSize);?></h6></td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td>Total size</td>
+                    <td><h5><?php echo FS::normalizeSize($folderSize + $dbSize);?></h5></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+          <style>
+          .tab-contents{
+            padding: 10px 0;
+          }
+          </style>
+          <?php
+          if(isset($_GET['action']) && H::csrf()){
+            $action = $_GET['action'];
+            
+            if($action === "disable"){
               if($App->disableApp()){
                 sss("Disabled", "The App <strong>$app</strong> has been disabled.");
               }else{
                 ser("Error", "The App <strong>$app</strong> couldn't be disabled. Try again.", false);
               }
-            }else if($action == "remove"){
-          ?>
-              <h2>Confirm</h2>
-              <p>Are you sure you want to remove the app <b><?php echo $app;?></b> ?</p>
-              <div clear></div>
-              <a class="btn green" href="<?php echo L_URL ."/admin/install-app.php?action=remove&id={$app}&".H::csrf("g");?>">Yes, I'm Sure</a>
-              <a class="btn red" href="<?php echo L_URL ."/admin/apps.php";?>">No, I'm Not</a>
-          <?php
+            }else if($action === "remove"){
+            ?>
+                <h2>Confirm</h2>
+                <p>Are you sure you want to remove the app <b><?php echo $app;?></b> ?</p>
+                <div clear></div>
+                <a class="btn green" href="<?php echo L_URL ."/admin/install-app.php?action=remove&id={$app}&".H::csrf("g");?>">Yes, I'm Sure</a>
+                <a class="btn red" href="<?php echo L_URL ."/admin/apps.php";?>">No, I'm Not</a>
+            <?php
               exit;
             }else if($action == "enable"){
               if($App->enableApp()){
@@ -59,82 +151,47 @@
               }
             }
           }
-        }
-        $Apps = \Lobby\Apps::getApps();
-    
-        if(count($Apps) == 0){
-          ser("No Enabled Apps", "Lobby didn't find any apps", false);
-        }
-        if(count($Apps) != 0){
+        }else{
         ?>
-          <form>
-            <table style="width: 100%;margin-top:5px" id="apps_table">
-              <thead>
-                <tr>
-                  <td width="5%">
-                    <label><input type="checkbox" id="select_all_apps" /><span></span></label>
-                  </td>
-                  <td width="15%">Name</td>
-                  <td width="10%">Version</td>
-                  <td width="40%">Description</td>
-                  <td width="30%">Actions</td>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                foreach($Apps as $app){
-                  $App = new \Lobby\Apps($app);
-                  $data = $App->info;
-                  $appImage = !isset($data['image']) ? L_URL . "/includes/lib/lobby/image/blank.png" : $data['image'];
-                  $enabled = $App->enabled;
-                ?>
-                  <tr <?php if(!$enabled){echo 'style="background: #EEE;"';}?>>
-                    <td>
-                      <label>
-                        <input type="checkbox" name="app[]" value="<?php echo $app;?>" id="checkbox-app" />
-                        <span></span>
-                      </label>
-                    </td>
-                    <td>
-                      <a href="<?php echo \Lobby::u("/app/$app");?>"><?php echo $data['name'];?></a>
-                    </td>
-                    <td><?php echo $data['version'];?></td>
-                    <td><?php echo $data['short_description'];?></td>
-                    <td style="text-align:center;">
-                      <?php
-                      if($enabled){
-                        echo '<a class="btn" href="?action=disable&app='. $app . H::csrf('g') .'">Disable</a>';
-                      }else{
-                        echo '<a class="btn" href="?action=enable&app='. $app . H::csrf('g') .'">Enable</a>';
-                      }
-                      ?>
-                      <a class="btn red" href="?action=remove&app=<?php echo $app . H::csrf('g');?>">Remove</a>
-                    </td>
-                  </tr>
-                <?php
-                }
-                ?>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td width="5%">
-                    <label><input type="checkbox" id="select_all_apps" /><span></span></label>
-                  </td>
-                  <td width="15%">Name</td>
-                  <td width="10%">Version</td>
-                  <td width="40%">Description</td>
-                  <td width="30%">Actions</td>
-                </tr>
-              </tfoot>
-            </table>
-            <div id="combined_actions" clear>
-              <span style="padding-left: 15px;">^</span>
-              <button class="btn green" name="action" value="enable">Enable</button>
-              <button class="btn blue" name="action" value="disable">Disable</button>
-            </div>
-            <?php echo H::csrf('i');?>
-          </form>
+          <h2>Apps</h2>
+          <p>Disable or Remove installed apps. You can find and install more Apps from <a href="<?php echo L_URL;?>/admin/lobby-store.php">Lobby Store</a>.</p>
         <?php
+          $apps = Apps::getApps();
+          
+          if(empty($apps)){
+            ser("No Apps", "You haven't installed any apps. <br/>Get great Apps from " . \Lobby::l("/admin/lobby-store.php", "Lobby Store"));
+          }else{
+            echo '<div class="apps">';
+            foreach($apps as $app){
+              $App = new Apps($app);
+              $appLogo = isset($data['logo']) ? L_URL . "/includes/lib/lobby/image/blank.png" : (
+                file_exists($App->appDir . "/src/image/logo.svg") ? $App->info["srcURL"] . "/src/image/logo.svg" :
+                $App->info["srcURL"] . "/src/image/logo.png"
+              );
+            ?>
+              <div class="app card">
+                <div class="app-inner">
+                  <div class="lpane">
+                    <a href="<?php echo \Lobby::u("/admin/apps.php?app=$app");?>">
+                      <img src="<?php echo $appLogo;?>" />
+                    </a>
+                  </div>
+                  <div class="rpane">
+                    <a href="<?php echo \Lobby::u("/admin/apps.php?app=$app");?>" class="name"><?php echo $App->info["name"];?></a>
+                    <p><a class="chip">Version <?php echo $App->info["version"];?></a></p>
+                    <div style="margin-top: 10px;">
+                      <?php
+                      echo \Lobby::l("/admin/apps.php?app=$app&action=disable", "Disable", "class='btn'");
+                      echo \Lobby::l("/admin/apps.php?app=$app&action=remove", "Remove", "class='btn red'");
+                      ?>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <?php
+            }
+            echo '</div>';
+          }
         }
         ?>
       </div>

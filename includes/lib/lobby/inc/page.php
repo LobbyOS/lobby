@@ -24,11 +24,7 @@
     ?>
     <div class="workspace" <?php if(\Lobby\Apps::$appID){ echo 'id="'. \Lobby\Apps::$appID .'"'; } ?>>
       <?php
-      if(is_array($GLOBALS['workspaceHTML'])){
-        require_once L_DIR . $GLOBALS['workspaceHTML'][0];
-      }else{
-        echo $GLOBALS['workspaceHTML'];
-      }
+      echo Response::getPageContent();
       ?>
     </div>
   </body>

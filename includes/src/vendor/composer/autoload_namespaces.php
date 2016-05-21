@@ -7,7 +7,9 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'vierbergenlars\\SemVer' => array($vendorDir . '/vierbergenlars/php-semver/src'),
+    'Response' => array($vendorDir . '/lobby/lobby/src'),
     'Requests' => array($vendorDir . '/rmccue/requests/library'),
+    'Request' => array($vendorDir . '/lobby/lobby/src'),
     'Lobby' => array($vendorDir . '/lobby/lobby/src'),
     'H' => array($vendorDir . '/lobby/lobby/src'),
     'Assets' => array($vendorDir . '/lobby/lobby/src'),
