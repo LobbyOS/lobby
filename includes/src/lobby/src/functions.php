@@ -25,19 +25,54 @@ function saveOption($key, $value){
    }
 }
 
-/* Show Error Messages */
-function ser($title = "", $description="", $exit = false){
-  \Lobby::ser($title, $description, $exit);
+/**
+ * Show Error Messages
+ */
+function ser($title = null, $description = ""){
+  $html = "";
+  if($title === null){
+    Response::showError();
+  }else{
+    $html .= "<div class='message'>";
+      $html .= "<div style='color:red;' class='title'>$title</div>";
+      if($description != ""){
+        $html .= "<div style='color:red;'>$description</div>";
+      }
+    $html .= "</div>";
+  }
+  return $html;
 }
 
-/* Show Success Messages */
+/**
+ * Show Success Messages
+ */
 function sss($title, $description){
-  \Lobby::sss($title, $description);
+  $html = "<div class='message'>";
+  if($title == ""){
+    $html .= "<div style='color:green;' class='title'>Success</div>";
+  }else{
+    $html .= "<div style='color:green;' class='title'>$title</div>";
+  }
+  if($description != ""){
+    $html .= "<div style='color:green;'>$description</div>";
+  }
+  $html .= "</div>";
+  return $html;
 }
 
 /* Show Messages */
 function sme($title, $description){
-  \Lobby::sme($title, $description);
+  $html = "<div class='message'>";
+  if($title == ""){
+    $html .= "<div style='color:black;' class='title'>Message</div>";
+  }else{
+    $html .= "<div style='color:black;' class='title'>$title</div>";
+  }
+  if($description != ""){
+    $html .= "<div style='color:black;'>$description</div>";
+  }
+  $html .= "</div>";
+  return $html;
 }
 
 /* A map of $db->filt() that strips out HTML content */

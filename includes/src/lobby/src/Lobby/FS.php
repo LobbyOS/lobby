@@ -58,7 +58,8 @@ class FS {
    * Make absolute path to relative path
    */
   public static function rel($path){
-    return self::$fs->makePathRelative($path, L_DIR);
+    $path = self::loc($path);
+    return rtrim(self::$fs->makePathRelative($path, L_DIR), '/');
   }
   
   /**

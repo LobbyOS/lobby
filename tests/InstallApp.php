@@ -10,7 +10,7 @@ class InstallApp extends PHPUnit_Extensions_Selenium2TestCase {
     $this->setHost("localhost");
     $this->setPort(4444);
     $this->setBrowserUrl("http://". WEB_SERVER_HOST .":". WEB_SERVER_PORT . "/admin/install-app.php?id=");
-    $this->setBrowser('firefox');
+    $this->setBrowecho ser('firefox');
     
     $this->root = vfsStream::setup(WEB_SERVER_DOCROOT, null);
     

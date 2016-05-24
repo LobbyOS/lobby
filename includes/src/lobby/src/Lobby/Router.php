@@ -90,10 +90,10 @@ class Router {
           Response::setPage($pageResponse);
         }
         if(!Response::hasContent()){
-          ser();
+          echo ser();
         }
       }else{
-        ser();
+        echo ser();
       }
     });
     
@@ -154,7 +154,7 @@ class Router {
         
         if($GLOBALS['workspaceHTML'] === false || $GLOBALS['workspaceHTML'] == null){
           ob_start();
-            ser("Error", "The app '<strong>{$AppID}</strong>' does not have an Admin Page. <a clear href='". \Lobby::u("/app/$AppID") ."' class='btn green'>Go To App</a>");
+            echo ser("Error", "The app '<strong>{$AppID}</strong>' does not have an Admin Page. <a clear href='". \Lobby::u("/app/$AppID") ."' class='btn green'>Go To App</a>");
           $error = ob_get_contents();
           ob_end_clean();
           
@@ -173,7 +173,7 @@ class Router {
         if(self::pathExists()){
           $router->response()->code(200);
         }else{
-          ser();
+          echo ser();
         }
       }
     });

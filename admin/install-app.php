@@ -22,23 +22,23 @@ require "../load.php";
         $displayID = htmlspecialchars($id);
         
         if($id == null){
-          ser("Error", "No App is mentioned. Install Apps from <a href='lobby-store.php'>Lobby Store</a>");
+          echo ser("Error", "No App is mentioned. Install Apps from <a href='lobby-store.php'>Lobby Store</a>");
         }
         if(H::i("action") == "enable" && H::csrf()){
           $App = new \Lobby\Apps($id);
           if(!$App->exists){
-            ser("Error", "App is not installed");
+            echo ser("Error", "App is not installed");
           }
           $App->enableApp();
-          sss("Enabled", "The App <b>{$displayID}</b> is enabled. The author says thanks. <cl/><a href='".$App->info['URL']."' class='btn green'>Open App</a>");
+          echo sss("Enabled", "The App <b>{$displayID}</b> is enabled. The author says thanks. <cl/><a href='".$App->info['URL']."' class='btn green'>Open App</a>");
         }
         if(H::i("action") == "remove" && H::csrf()){
           $App = new \Lobby\Apps($id);
           if(!$App->exists){
-            ser("Error", "App is not installed");
+            echo ser("Error", "App is not installed");
           }
           $App->removeApp();
-          sss("Removed", "The App <b>{$displayID}</b> was successfully removed.");
+          echo sss("Removed", "The App <b>{$displayID}</b> was successfully removed.");
         }
         if($id != null && H::i("action") == null && H::csrf()){
         ?>

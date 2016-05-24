@@ -21,10 +21,10 @@ class Install extends \Lobby {
    */
   public static function step1(){
     if(!is_writable(L_DIR)){
-      ser("Error", "Lobby Directory is not Writable. Please set <blockquote>" . L_DIR . "</blockquote> directory's permission to writable.<cl/><a href='install.php?step=1' class='btn'>Check Again</a>");
+      echo ser("Error", "Lobby Directory is not Writable. Please set <blockquote>" . L_DIR . "</blockquote> directory's permission to writable.<cl/><a href='install.php?step=1' class='btn'>Check Again</a>");
       return false;
     }elseif(\Lobby\FS::exists("/config.php")){
-      ser("config.php File Exists", "A config.php file already exitsts in <blockquote>". L_DIR ."</blockquote> directory. Remove it and try again. <cl/><a href='". self::u("admin/install.php?step=1" . csrf("g")) ."' class='btn'>Check Again</a>");
+      echo ser("config.php File Exists", "A config.php file already exitsts in <blockquote>". L_DIR ."</blockquote> directory. Remove it and try again. <cl/><a href='". self::u("admin/install.php?step=1" . csrf("g")) ."' class='btn'>Check Again</a>");
       return false;
     }else{
       return true;
@@ -58,12 +58,12 @@ class Install extends \Lobby {
         /**
          * Database tables exist
          */
-        ser("Error", "Lobby Tables with prefix <b>". self::$database['prefix'] ."</b> exists. Delete (DROP) those tables and <cl/><a class='btn orange' href='install.php?step=3&db_type=mysql". \H::csrf("g") ."'>Try Again</a>");
+        echo ser("Error", "Lobby Tables with prefix <b>". self::$database['prefix'] ."</b> exists. Delete (DROP) those tables and <cl/><a class='btn orange' href='install.php?step=3&db_type=mysql". \H::csrf("g") ."'>Try Again</a>");
         return false;
       }
     }catch(\PDOException $Exception) {
       \Lobby::log("Database Connection Failed : " . $Exception->getMessage());
-      ser("Error", "Unable to connect. Make sure that the settings you entered are correct. <cl/><a class='btn orange' href='install.php?step=3&db_type=mysql". \H::csrf("g") ."'>Try Again</a>");
+      echo ser("Error", "Unable to connect. Make sure that the settings you entered are correct. <cl/><a class='btn orange' href='install.php?step=3&db_type=mysql". \H::csrf("g") ."'>Try Again</a>");
       return false;
     }
   }
@@ -105,7 +105,7 @@ class Install extends \Lobby {
      * Create the config.php file
      */
     if(\Lobby\FS::write($configFileLoc, $config_file) === false){
-      ser("Failed Creating Config File", "Something happened while creating the file. Perhaps it was something that you did ?");
+      echo ser("Failed Creating Config File", "Something happened while creating the file. Perhaps it was something that you did ?");
     }else{
       chmod(L_DIR . "/config.php", 0550);
     }

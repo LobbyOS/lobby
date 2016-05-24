@@ -30,16 +30,20 @@ class Response {
     self::$pageContent = $content;
     
     ob_start();
-      require_once L_DIR . "/includes/lib/lobby/inc/page.php";
+      require_once L_DIR . "/includes/lib/lobby/inc/view.page.php";
     $html = ob_get_clean();
     self::setContent($html);
   }
   
-  public static function loadPage($location){
+  public static function getFile($location, $vars = array()){
+    extract($vars);
     ob_start();
       require_once FS::loc($location);
-    $html = ob_get_clean();
-    self::setPage($html);
+    return ob_get_clean();
+  }
+  
+  public static function loadPage($location){
+    self::setPage(self::getFile($location));
   }
   
   public static function getContent(){
@@ -52,6 +56,28 @@ class Response {
   
   public static function hasContent(){
     return self::$response->getContent() !== null;
+  }
+  
+  /**
+   * Display a plain error page
+   * Default: 400, If $title & $content is passed, 500
+   */
+  public static function showError($title = null, $description = null){
+    if($title === null){
+      self::setStatusCode(400);
+      $title = "404 Not Found";
+      $description = "The requested path was not found in Lobby";
+    }else{
+      self::setStatusCode(500);
+    }
+    
+    self::setContent(self::getFile("includes/lib/lobby/inc/view.error.php", array(
+      "title" => $title,
+      "description" => $description
+    )));
+    
+    self::send();
+    exit;
   }
   
   public static function send(){
