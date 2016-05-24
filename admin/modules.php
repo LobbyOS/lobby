@@ -23,7 +23,7 @@
         echo "<h3>Custom Modules</h3>";
         echo "Manually installed modules are 'custom modules'";
         if(count($custom_modules) == 0){
-          ser("No Custom Modules", "No custom modules are enabled or installed", false);
+          echo ser("No Custom Modules", "No custom modules are enabled or installed", false);
         }else{
           echo "<ul>";
           foreach($custom_modules as $module => $loc){
@@ -35,7 +35,7 @@
         echo "<h3>App Modules</h3>";
         echo "<p>The modules loaded by Apps</p>";
         if(count($app_modules) == 0){
-          ser("No App Modules", "No app's modules are enabled or installed", false);
+          echo ser("No App Modules", "No app's modules are enabled or installed", false);
         }else{
           echo "<ul>";
           foreach($app_modules as $module){

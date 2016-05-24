@@ -26,6 +26,6 @@ if(!Router::$routeActive){
   }else if(Router::pathExists()){
     return false;
   }else{
-    ser();
+    Response::showError();
   }
 }
