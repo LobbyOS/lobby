@@ -3,21 +3,12 @@
  * Some checking to make sure Lobby works fine
  */
 if(!is_writable(L_DIR) || !is_writable(APPS_DIR)){
-  $GLOBALS['initError'] = array("Wrong Permissions", "The permission of Lobby is not correct. All you have to do is change the permission of <blockquote>". L_DIR ."</blockquote>to read and write (0755).");
+  $error = array("Wrong Permissions", "The permission of Lobby is not correct. All you have to do is change the permission of <blockquote>". L_DIR ."</blockquote>to read and write (0755).");
   
   if(\Lobby::$sysInfo['os'] === "linux"){
-    $GLOBALS['initError'][1] = $GLOBALS['initError'][1] . "<p clear>On Linux systems, do this in terminal : <blockquote>sudo chown \${USER}:www-data ". L_DIR ." -R && sudo chmod u+rwx,g+rw,o+r ". L_DIR ." -R</blockquote></p>";
+    $error[1] .= "<p clear>On Linux systems, do this in terminal : <blockquote>sudo chown \${USER}:www-data ". L_DIR ." -R && sudo chmod u+rwx,g+rw,o+r ". L_DIR ." -R</blockquote></p>";
   }
-}
-
-if(isset($GLOBALS['initError'])){
-  echo "<html><head>";
-    \Assets::$js = array();
-    \Lobby::head();
-  echo "</head><body><div class='workspace'><div class='contents'>";
-    ser($GLOBALS['initError'][0], $GLOBALS['initError'][1]);
-  echo "</div></div></body></html>";
-  exit;
+  Response::showError($error[0], $error[1]);
 }
 
 /**

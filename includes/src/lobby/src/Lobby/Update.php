@@ -18,7 +18,7 @@ class Update extends \Lobby {
   public static function zipFile($url, $zipFile){
     if( !extension_loaded('zip') ){
       \Lobby::log("Dependency Missing, Please install PHP Zip Extension");
-      ser("PHP Zip Extension", "I can't find the Zip PHP Extension. Please Install It & Try again");
+      echo ser("PHP Zip Extension", "I can't find the Zip PHP Extension. Please Install It & Try again");
     }
     \Lobby::log("Started Downloading Zip File from {$url} to {$zipFile}");
     
@@ -45,7 +45,7 @@ class Update extends \Lobby {
       ));
     }catch(\Requests_Exception $error){
       \Lobby::log("HTTP Requests Error ($url) : $error");
-      ser("Error", "HTTP Requests Error : " . $error);
+      echo ser("Error", "HTTP Requests Error : " . $error);
       return false;
     }
     \Lobby::log("Downloaded Zip File from {$url} to {$zipFile}");
@@ -72,7 +72,7 @@ class Update extends \Lobby {
     $zip = new \ZipArchive;
     if($zip->open($zipFile) != "true"){
       \Lobby::log("Unable to open downloaded Zip File.");
-      ser("Error", "Unable to open Zip File.  <a href='update.php'>Try again</a>");
+      echo ser("Error", "Unable to open Zip File.  <a href='update.php'>Try again</a>");
     }
     
     \Lobby::log("Upgrading Lobby Software From {$zipFile}");
@@ -129,7 +129,7 @@ class Update extends \Lobby {
       $sql = \Lobby\DB::prepare($sqlCode);
       
       if(!$sql->execute()){
-        ser("Error", "Database Update Couldn't be made. <a href='update.php'>Try again</a>");
+        echo ser("Error", "Database Update Couldn't be made. <a href='update.php'>Try again</a>");
       }else{
         \Lobby\FS::remove("/update/sqlExecute.sql");
       }
@@ -146,7 +146,7 @@ class Update extends \Lobby {
    */
   public static function app($id){
     if($id == ""){
-      ser("Error", "No App Mentioned to update.");
+      echo ser("Error", "No App Mentioned to update.");
     }
     \Lobby::log("Installing Latest Version of App {$id}");
     
@@ -159,7 +159,7 @@ class Update extends \Lobby {
       $zip = new \ZipArchive;
       if($zip->open($zipFile) != "true"){
         \Lobby::log("Unable to open Downloaded App ($id) File : $zipFile");
-        ser("Error", "Unable to open Downloaded App File.");
+        echo ser("Error", "Unable to open Downloaded App File.");
       }else{
         /**
          * Extract App

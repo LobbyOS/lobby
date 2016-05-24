@@ -325,7 +325,7 @@ class LS {
             );
           }else{
             // remove the block, because the time limit is over
-            self::updateUser(array(
+            self::updateUecho ser(array(
               "attempt" => "" // No tries at all
             ), $us_id);
           }
@@ -350,7 +350,7 @@ class LS {
             self::$loggedIn = true;
             
             // Update the attempt status
-            self::updateUser(array(
+            self::updateUecho ser(array(
               "attempt" => "" // No tries
             ), $us_id);
             
@@ -366,11 +366,11 @@ class LS {
             // Checking for brute force is enabled
             if($status == ""){
               // User was not logged in before
-              self::updateUser(array(
+              self::updateUecho ser(array(
                 "attempt" => "1" // Tried 1 time
               ), $us_id);
             }else if($status == 5){
-              self::updateUser(array(
+              self::updateUecho ser(array(
                 /**
                  * Account Blocked. User only able to
                  * re-login at the time in UNIX timestamp
@@ -381,7 +381,7 @@ class LS {
               // Account blocked
             }else if($status < 5){
               // If the attempts are less than 5 and not 5
-              self::updateUser(array(
+              self::updateUecho ser(array(
                 "attempt" => $status + 1 // Increase the no of tries by +1.
               ), $us_id);
             }
@@ -618,7 +618,7 @@ class LS {
    * Fetches data of user in database. Returns a single value or an
    * array of value according to parameteres given to the function
    */
-  public static function getUser($what = "*", $user = null){
+  public static function getUecho ser($what = "*", $user = null){
     self::construct();
     if($user == null){
       $user = self::$user;
@@ -643,7 +643,7 @@ class LS {
   /**
    * Updates the info of user in DB
    */
-  public static function updateUser($toUpdate = array(), $user = null){
+  public static function updateUecho ser($toUpdate = array(), $user = null){
     self::construct();
     if( is_array($toUpdate) && !isset($toUpdate['id']) ){
       if($user == null){
@@ -676,7 +676,7 @@ class LS {
     if($user == null){
       $user = self::$user;
     }
-    $created = self::getUser("created");
+    $created = self::getUecho ser("created");
     $timeFirst  = strtotime($created);
     $timeSecond = strtotime("now");
     $memsince   = $timeSecond - strtotime($created);

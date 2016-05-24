@@ -22,7 +22,7 @@ require "../load.php";
         <?php
         if(\Lobby::$version == getOption("lobby_latest_version") && !\H::i("action", "", "POST") == "updateApps"){
           echo "<h2>Lobby</h2>";
-          sss("Latest Version", "You are using the latest version of Lobby. There are no new releases yet.");
+          echo sss("Latest Version", "You are using the latest version of Lobby. There are no new releases yet.");
         }else if(!isset($_GET['step']) && !\H::i("action", "", "POST") == "updateApps"){
         ?>
           <h2>Lobby</h2>
@@ -52,7 +52,7 @@ require "../load.php";
           $step = $_GET['step'];
           if($step === "1"){
             if(!is_writable(L_DIR)){
-              ser("Lobby Directory Not Writable", "The Lobby directory (". L_DIR .") is not writable. Make the folder writable to update Lobby.");
+              echo ser("Lobby Directory Not Writable", "The Lobby directory (". L_DIR .") is not writable. Make the folder writable to update Lobby.");
             }
           ?>
             <p>

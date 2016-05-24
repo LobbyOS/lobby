@@ -34,7 +34,7 @@ if($AppID !== null){
         <?php
         if($AppID !== null){
           if($app === false){
-            ser("404 - App Not Found", "App was not found in Lobby Store.");
+            echo ser("404 - App Not Found", "App was not found in Lobby Store.");
           }else{
             $appImage = $app['image'] != "" ? $app['image'] : L_URL . "/includes/lib/lobby/image/blank.png";
             $c = $app['category'];
@@ -141,7 +141,7 @@ if($AppID !== null){
                     </script>
                     <?php
                   }else{
-                    ser("No Screenshots", "This app has no screenshots");
+                    echo ser("No Screenshots", "This app has no screenshots");
                   }
                   ?>
                 </div>
@@ -182,7 +182,7 @@ if($AppID !== null){
           
           $server_response = \Lobby\Server::store($request_data);
           if($server_response == false){
-            ser("Nothing Found", "Nothing was found that matches your criteria. Sorry...");
+            echo ser("Nothing Found", "Nothing was found that matches your criteria. Sorry...");
           }else{
             echo "<div class='apps'>";
               foreach($server_response['apps'] as $app){

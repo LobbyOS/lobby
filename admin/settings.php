@@ -15,7 +15,7 @@
       <div class="content">
         <?php
         if(isset($_GET['updated']) && H::csrf()){
-          sss("Updated", "Lobby was successfully updated to Version <b>". \Lobby::$version ."</b> from the old ". htmlspecialchars($_GET['oldver']) ." version.");
+          echo sss("Updated", "Lobby was successfully updated to Version <b>". \Lobby::$version ."</b> from the old ". htmlspecialchars($_GET['oldver']) ." version.");
         }
         if(isset($_POST['update_settings']) && \H::csrf()){
           /**
@@ -29,7 +29,7 @@
             saveOption("lobby_timezone", $time_zone);
             \Lobby\Time::loadConfig();
           }else{
-            ser("Invalid Timezone", "Your PHP server doesn't support the timezone ".htmlspecialchars($time_zone));
+            echo ser("Invalid Timezone", "Your PHP server doesn't support the timezone ".htmlspecialchars($time_zone));
           }
         }
         ?>

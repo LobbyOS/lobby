@@ -34,7 +34,7 @@ $install_step = H::i('step');
         </h1>
         <?php
         if(\Lobby::$installed && H::i("step") !== "4"){
-          sss("<a href='". L_URL ."'>Lobby Installed</a>", "Lobby Is Installed. If you want to reinstall, delete the database tables and remove <b>config.php</b> file.<cl/>If you want to just remake the <b>config.php</b> file, don't delete the database tables, delete the existing <b>config.php</b> file and do ". \Lobby::l("/admin/install.php?step=1", "this installation") ." until Step 3 where \"Database Tables Exist\" error occur");
+          echo sss("<a href='". L_URL ."'>Lobby Installed</a>", "Lobby Is Installed. If you want to reinstall, delete the database tables and remove <b>config.php</b> file.<cl/>If you want to just remake the <b>config.php</b> file, don't delete the database tables, delete the existing <b>config.php</b> file and do ". \Lobby::l("/admin/install.php?step=1", "this installation") ." until Step 3 where \"Database Tables Exist\" error occur");
         }else if($install_step === null){
         ?>
           <p>Welcome to the Lobby Installation process. Thank you for downloading Lobby.</p>
@@ -60,30 +60,30 @@ $install_step = H::i('step');
                   <tr>
                     <td>PHP 5.3</td>
                     <td><?php if(version_compare(PHP_VERSION, '5.3') >= 0){
-                      sss("Ok", "Your PHP version is compatible with Lobby");
+                      echo sss("Ok", "Your PHP version is compatible with Lobby");
                     }else{
                       $error = 1;
-                      ser("Not Ok", "Lobby requires atleast PHP version 5.3");
+                      echo ser("Not Ok", "Lobby requires atleast PHP version 5.3");
                     }
                     ?></td>
                   </tr>
                   <tr>
                     <td>PHP Output Buffering</td>
                     <td><?php if(ini_get('output_buffering') != "Off"){
-                      sss("Ok", "Ouput Buffering is enabled");
+                      echo sss("Ok", "Ouput Buffering is enabled");
                     }else{
                       $error = 1;
-                      ser("Not Ok", "Lobby needs Output Buffering to be turned on.");
+                      echo ser("Not Ok", "Lobby needs Output Buffering to be turned on.");
                     }
                     ?></td>
                   </tr>
                   <tr>
                     <td>PHP PDO Extension</td>
                     <td><?php if (extension_loaded('pdo')){
-                      sss("Ok", "PDO extension is enabled");
+                      echo sss("Ok", "PDO extension is enabled");
                     }else{
                       $error = 1;
-                      ser("Not Ok", "PDO extension seems to be missing");
+                      echo ser("Not Ok", "PDO extension seems to be missing");
                     }
                     ?></td>
                   </tr>
@@ -97,20 +97,20 @@ $install_step = H::i('step');
                     <tr>
                       <td>PHP JSON Extension</td>
                       <td><?php if (extension_loaded('json')){
-                        sss("Ok", "JSON extension is enabled");
+                        echo sss("Ok", "JSON extension is enabled");
                       }else{
                         $error = 1;
-                        ser("Not Ok", "JSON extension seems to be missing");
+                        echo ser("Not Ok", "JSON extension seems to be missing");
                       }
                       ?></td>
                     </tr>
                     <tr>
                       <td>PHP Zip Extension</td>
                       <td><?php if (extension_loaded('zip')){
-                        sss("Ok", "Zip extension is enabled");
+                        echo sss("Ok", "Zip extension is enabled");
                       }else{
                         $error = 1;
-                        ser("Not Ok", "Zip extension seems to be missing");
+                        echo ser("Not Ok", "Zip extension seems to be missing");
                       }
                       ?></td>
                     </tr>
@@ -125,10 +125,10 @@ $install_step = H::i('step');
                       <tr>
                         <td>Apache mod_rewrite Module</td>
                         <td><?php if (preg_match("/mod_rewrite/", $info)){
-                          sss("Ok", "Apache mod_rewrite module is enabled");
+                          echo sss("Ok", "Apache mod_rewrite module is enabled");
                         }else{
                           $error = 1;
-                          ser("Not Ok", "Apache mod_rewrite module is not enabled");
+                          echo ser("Not Ok", "Apache mod_rewrite module is not enabled");
                         }
                         ?></td>
                       </tr>
@@ -138,10 +138,10 @@ $install_step = H::i('step');
                     <tr>
                       <td>Permissions</td>
                       <td><?php if (is_writable(L_DIR)){
-                        sss("Ok", "Lobby directory is writable.");
+                        echo sss("Ok", "Lobby directory is writable.");
                       }else{
                         $error = 1;
-                        ser("Not Ok", "Lobby directory is not writable. Please make it writable. Here's the location : <blockquote>". L_DIR ."</blockquote>");
+                        echo ser("Not Ok", "Lobby directory is not writable. Please make it writable. Here's the location : <blockquote>". L_DIR ."</blockquote>");
                       }
                       ?></td>
                     </tr>
@@ -163,7 +163,7 @@ $install_step = H::i('step');
             echo "<h2>Safety</h2>";
             $safe = \Lobby\Install::safe();
             if($safe === "configFile"){
-              ser("Permission Error", "The <b>config.php</b> file still has write permission. Change the permission to Read Only.");
+              echo ser("Permission Error", "The <b>config.php</b> file still has write permission. Change the permission to Read Only.");
             }
             if($safe !== true){
               echo "<a class='btn' href='javascript:;' onclick='window.location = window.location;'>Check Again</a>";
@@ -235,7 +235,7 @@ $install_step = H::i('step');
                 $prefix = \H::i('prefix', "", "POST");
                 
                 if($dbhost === "" || $dbport === "" || $dbname === "" || $username === ""){
-                  ser("Empty Fields", "Buddy, you left out some details.<cl/>" . \Lobby::l("/admin/install.php?step=3&db_type=mysql" . H::csrf("g"), "Try Again", "class='btn orange'"));
+                  echo ser("Empty Fields", "Buddy, you left out some details.<cl/>" . \Lobby::l("/admin/install.php?step=3&db_type=mysql" . H::csrf("g"), "Try Again", "class='btn orange'"));
                   }else{
                   /**
                    * We give the database config to the Install Class
@@ -254,7 +254,7 @@ $install_step = H::i('step');
                    * Check if connection to database can be established using the credentials given by the user
                    */
                   if($prefix == "" || preg_match("/[^0-9,a-z,A-Z,\$,_]+/i", $prefix) != 0 || strlen($prefix) > 50){
-                    ser("Error", "The Prefix should only contain alphabets, digits (0-9), dollar or underscore and shouldn't exceed 50 characters.<cl/>" . \Lobby::l("/admin/install.php?step=3&db_type=mysql" . H::csrf("g"), "Try Again", "class='btn orange'"));
+                    echo ser("Error", "The Prefix should only contain alphabets, digits (0-9), dollar or underscore and shouldn't exceed 50 characters.<cl/>" . \Lobby::l("/admin/install.php?step=3&db_type=mysql" . H::csrf("g"), "Try Again", "class='btn orange'"));
                   }else if(\Lobby\Install::checkDatabaseConnection() !== false){
                     /**
                      * Create Tables
@@ -274,10 +274,10 @@ $install_step = H::i('step');
                       $App = new \Lobby\Apps("ledit");
                       $App->enableApp();
                       
-                      sss("Success", "Database Tables and <b>config.php</b> file was successfully created.");
+                      echo sss("Success", "Database Tables and <b>config.php</b> file was successfully created.");
                       echo '<cl/><a href="?step=4'. H::csrf("g") .'" class="btn">Proceed</a>';
                     }else{
-                      ser("Unable To Create Database Tables", "Are there any tables with the same name ? Or Does the user have the permissions to create tables ? Error :<blockquote>". \Lobby\Install::$error ."</blockquote>" . \Lobby::l("/admin/install.php?step=2" . H::csrf("g"), "Try Again", "class='btn'"));
+                      echo ser("Unable To Create Database Tables", "Are there any tables with the same name ? Or Does the user have the permissions to create tables ? Error :<blockquote>". \Lobby\Install::$error ."</blockquote>" . \Lobby::l("/admin/install.php?step=2" . H::csrf("g"), "Try Again", "class='btn'"));
                     }
                   }
                 }
@@ -314,10 +314,10 @@ $install_step = H::i('step');
                   $App = new \Lobby\Apps("ledit");
                   $App->enableApp();
                   
-                  sss("Success", "Database and <b>config.php</b> file was successfully created.");
+                  echo sss("Success", "Database and <b>config.php</b> file was successfully created.");
                   echo '<cl/><a href="?step=4'. H::csrf("g") .'" class="btn">Proceed</a>';
                 }else{
-                  ser("Couldn't Make SQLite Database", "I was unable to make the database. Error :<blockquote>". \Lobby\Install::$error ."</blockquote> <cl/>" . \Lobby::l("/admin/install.php?step=3&db_type=sqlite" . H::csrf("g"), "Try Again", "class='btn'"));
+                  echo ser("Couldn't Make SQLite Database", "I was unable to make the database. Error :<blockquote>". \Lobby\Install::$error ."</blockquote> <cl/>" . \Lobby::l("/admin/install.php?step=3&db_type=sqlite" . H::csrf("g"), "Try Again", "class='btn'"));
                 }
               }
             }else{
@@ -404,7 +404,7 @@ $install_step = H::i('step');
                 </form>
               <?php
               }else{
-                ser("Error", "Uh... You didn't mention the DBMS to use");
+                echo ser("Error", "Uh... You didn't mention the DBMS to use");
               }
             }
           }
