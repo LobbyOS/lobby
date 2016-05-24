@@ -28,7 +28,7 @@ use \Lobby\Need;
           $App = new Apps($appID);
           
           if( !$App->exists ){
-            ser("Error", "I checked all over, but App does not Exist");
+            echo ser("Error", "I checked all over, but App does not Exist");
           }
         ?>
           <h2><?php echo "<a href='". L_SERVER ."/apps/". $App->info['id'] ."' target='_blank'>". $App->info['name'] ."</a>";?></h2>
@@ -127,9 +127,9 @@ use \Lobby\Need;
             
             if($action === "disable"){
               if($App->disableApp()){
-                sss("Disabled", "The App <strong>$app</strong> has been disabled.");
+                echo sss("Disabled", "The App <strong>$app</strong> has been disabled.");
               }else{
-                ser("Error", "The App <strong>$app</strong> couldn't be disabled. Try again.", false);
+                echo ser("Error", "The App <strong>$app</strong> couldn't be disabled. Try again.", false);
               }
             }else if($action === "remove"){
             ?>
@@ -145,9 +145,9 @@ use \Lobby\Need;
                 if(isset($_GET['redirect'])){
                   \Lobby::redirect("/app/$app");
                 }
-                sss("Enabled", "The App <strong>$app</strong> has been enabled.");
+                echo sss("Enabled", "The App <strong>$app</strong> has been enabled.");
               }else{
-                ser("Error", "The App couldn't be enabled. Try again.", false);
+                echo ser("Error", "The App couldn't be enabled. Try again.", false);
               }
             }
           }
@@ -159,7 +159,7 @@ use \Lobby\Need;
           $apps = Apps::getApps();
           
           if(empty($apps)){
-            ser("No Apps", "You haven't installed any apps. <br/>Get great Apps from " . \Lobby::l("/admin/lobby-store.php", "Lobby Store"));
+            echo ser("No Apps", "You haven't installed any apps. <br/>Get great Apps from " . \Lobby::l("/admin/lobby-store.php", "Lobby Store"));
           }else{
             echo '<div class="apps">';
             foreach($apps as $app){

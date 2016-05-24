@@ -57,7 +57,7 @@ if(isset($_POST["username"]) && isset($_POST["password"])){
         </form>
         <?php
         if(isset($error)){
-          \Lobby::ser($error[0], $error[1], false);
+          \Lobby::echo ser($error[0], $error[1], false);
         }
         ?>
         <div>

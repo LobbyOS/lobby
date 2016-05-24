@@ -12,6 +12,7 @@ html, body{
   padding:0px;
   line-height: 20px;
   font-size: 14px;
+  background: #fbfbfc;
 }
 form{
   margin-bottom:0.5em;
@@ -28,7 +29,6 @@ form{
   left: 0;
   right: 0;
   overflow: auto;
-  background: #fbfbfc;
 }
 .workspace .contents{
   margin: 0px auto 40px;

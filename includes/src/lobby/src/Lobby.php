@@ -262,66 +262,6 @@ class Lobby {
     return $output;
   }
   
-  /**
-   * Show Error Messages
-   */
-  public static function ser($title = "", $description = "", $exit = false){
-    $html = "";
-    if($title == ''){
-      /**
-       * If no Title, give a 404 Page
-       */
-      header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found', true, 404);
-      include(L_DIR . "/includes/lib/lobby/inc/error.php");
-      exit;
-    }else{
-      $html .= "<div class='message'>";
-        $html .= "<div style='color:red;' class='title'>$title</div>";
-        if($description != ""){
-          $html .= "<div style='color:red;'>$description</div>";
-        }
-      $html .= "</div>";
-    }
-    echo $html;
-    if($exit){
-      exit;
-    }
-  }
-
-  /**
-   * Show Success Messages
-   */
-  public static function sss($title, $description){
-    $html = "<div class='message'>";
-    if($title == ""){
-      $html .= "<div style='color:green;' class='title'>Success</div>";
-    }else{
-      $html .= "<div style='color:green;' class='title'>$title</div>";
-    }
-    if($description != ""){
-      $html .= "<div style='color:green;'>$description</div>";
-    }
-    $html .= "</div>";
-    echo $html;
-  }
-  
-  /**
-   * Show Neutral Messages
-   */
-  public static function sme($title, $description = ""){
-    $html = "<div class='message'>";
-    if($title == ""){
-      $html .= "<div style='color:black;' class='title'>Message</div>";
-    }else{
-      $html .= "<div style='color:black;' class='title'>$title</div>";
-    }
-    if($description != ""){
-      $html .= "<div style='color:black;'>$description</div>";
-    }
-    $html .= "</div>";
-    echo $html;
-  }
-  
   /* Identify System Info */
   private static function sysinfo(){
     self::$root = L_DIR;

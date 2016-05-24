@@ -5,7 +5,7 @@
 $apps = \Lobby\Apps::getEnabledApps();
 
 if(count($apps) == 0){
-  ser("No Apps", "You haven't enabled or installed any apps. <br/>Get great Apps from " . \Lobby::l("/admin/lobby-store.php", "Lobby Store"));
+  echo ser("No Apps", "You haven't enabled or installed any apps. <br/>Get great Apps from " . \Lobby::l("/admin/lobby-store.php", "Lobby Store"));
 }else{
   $jsCode = "";
   

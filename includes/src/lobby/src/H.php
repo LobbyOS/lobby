@@ -59,7 +59,7 @@ class H {
       if($_COOKIE['csrf_token'] == self::i('csrf_token')){
         return true;
       }else{
-        ser("Error", "CSRF Token doesn't match. Try again.");
+        echo ser("Error", "CSRF Token doesn't match. Try again.");
         return false;
       }
     }

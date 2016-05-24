@@ -29,7 +29,7 @@ $this->addScript("main.js");
        * Show error if a save of the ID is not present
        */
       if($content === ""){
-        ser("No Such Save Found");
+        echo ser("No Such Save Found");
       }
     }
     ?>

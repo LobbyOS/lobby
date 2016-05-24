@@ -21,13 +21,13 @@
           $app = $_GET['app'];
           $App = new \Lobby\Apps($app);
           if( !$App->exists ){
-            ser("Error", "I checked all over, but App does not Exist");
+            echo ser("Error", "I checked all over, but App does not Exist");
           }
           if($action == "disable"){
             if($App->disableApp()){
-              sss("Disabled", "The App <strong>$app</strong> has been disabled.");
+              echo sss("Disabled", "The App <strong>$app</strong> has been disabled.");
             }else{
-              ser("Error", "The App <strong>$app</strong> couldn't be disabled. Try again.", false);
+              echo ser("Error", "The App <strong>$app</strong> couldn't be disabled. Try again.", false);
             }
           }else if($action == "remove"){
         ?>
@@ -40,16 +40,16 @@
             exit;
           }else if($action == "enable"){
             if($App->enableApp()){
-              sss("Enabled", "App has been enabled.");
+              echo sss("Enabled", "App has been enabled.");
             }else{
-              ser("Error", "The App couldn't be enabled. Try again.", false);
+              echo ser("Error", "The App couldn't be enabled. Try again.", false);
             }
           }
         }
         $Apps = \Lobby\Apps::getApps();
     
         if(count($Apps) == 0){
-          ser("No Enabled Apps", "Lobby didn't find any apps that has been enabled", false);
+          echo ser("No Enabled Apps", "Lobby didn't find any apps that has been enabled", false);
         }
         if(count($Apps) != 0){
         ?>
