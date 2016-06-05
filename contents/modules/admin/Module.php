@@ -42,11 +42,11 @@ class admin extends \Lobby\Module {
          */
         if(\Lobby\Modules::exists("indi") === false){
           if(\Lobby::curPage() != "/admin/login" && !\Lobby::status("lobby.install")){
-            \Lobby::redirect("/admin/login");
+            Response::redirect("/admin/login");
           }
         }else{
           if(\Lobby::curPage() != "/admin/login" && \Lobby::curPage() != "/admin/install.php" && substr(\Lobby::curPage(), 0, 6) == "/admin"){
-            \Lobby::redirect("/admin/login");
+            Response::redirect("/admin/login");
           }
         }
         \Lobby::hook("init", function(){
