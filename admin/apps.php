@@ -55,7 +55,7 @@ use \Lobby\Need;
             }else if($action === "enable"){
               if($App->enableApp()){
                 if(isset($_GET['redirect'])){
-                  \Lobby::redirect("/app/$appID");
+                  Response::redirect("/app/$appID");
                 }
                 echo sss("Enabled", "The App <strong>$appID</strong> has been enabled.");
               }else{

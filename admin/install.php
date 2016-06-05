@@ -168,7 +168,7 @@ $install_step = H::i('step');
             if($safe !== true){
               echo "<a class='btn' href='javascript:;' onclick='window.location = window.location;'>Check Again</a>";
             }else{
-              \Lobby::redirect("/#");
+              Response::redirect("/#");
             }
           }else if($install_step === "2" && H::csrf()){
             ob_start(); 
