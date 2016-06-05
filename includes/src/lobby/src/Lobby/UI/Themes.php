@@ -8,7 +8,7 @@ class Themes extends \Lobby {
    */
   private static $cache = array();
   
-  public static $themeID, $theme;
+  public static $themeID, $theme, $dir, $url;
   
   /**
    * Initialization
@@ -20,9 +20,13 @@ class Themes extends \Lobby {
     }else if(self::validTheme(self::$themeID) === false){
       self::$themeID = "hine";
     }
+    
+    self::$url = THEMES_URL . "/" . self::$themeID;
+    self::$dir = THEMES_DIR . "/" . self::$themeID;
+    
     define("THEME_ID", self::$themeID);
-    define("THEME_DIR", THEMES_DIR . "/" . self::$themeID);
-    define("THEME_URL", THEMES_URL . "/" . self::$themeID);
+    define("THEME_DIR", self::$dir);
+    define("THEME_URL", self::$url);
     
     if(!\Lobby::status("lobby.assets-serve")){
       self::loadDefaults();

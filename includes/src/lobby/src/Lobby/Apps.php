@@ -3,6 +3,7 @@ namespace Lobby;
 
 use Lobby\Need;
 use Lobby\FS;
+use Lobby\UI\Themes;
 
 /**
  * \Lobby\Apps
@@ -209,7 +210,7 @@ class Apps extends \Lobby {
         (FS::exists($this->appDir . "/src/image/logo.svg") ?
           APPS_URL . "/{$this->app}/src/image/logo.svg" :
           APPS_URL . "/{$this->app}/src/image/logo.png"
-        ) : null;
+        ) : Themes::$url . "/src/main/image/app-logo.png";
        
       /**
        * Insert the info as a property
