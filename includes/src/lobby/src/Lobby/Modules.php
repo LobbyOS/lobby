@@ -122,7 +122,7 @@ class Modules extends \Lobby {
   
   public static function disableModule($module){
     if(self::exists($module)){
-      \Lobby\FS::write(self::$modules[$module] . "/disabled.txt", "1");
+      \Lobby\FS::write(self::$modules[$module]["location"] . "/disabled.txt", "1");
       return true;
     }else{
       return false;
