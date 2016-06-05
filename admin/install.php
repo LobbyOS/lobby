@@ -15,7 +15,7 @@ $install_step = H::i('step');
      */
     \Assets::css("install", "/admin/css/install.css");
     \Assets::js("install", "/admin/js/install.js");
-    \Lobby::head("Install");
+    Response::head("Install");
    
     \Lobby::doHook("head.end");
     ?>

@@ -55,7 +55,7 @@ class Router {
         /**
          * Set the title
          */
-        \Lobby::setTitle($AppInfo['name']);
+        Response::setTitle($AppInfo['name']);
           
         /**
          * Add the App item to the navbar
@@ -107,7 +107,7 @@ class Router {
      * The main Page. Add CSS & JS accordingly
      */
     self::route("/", function() {
-      \Lobby::setTitle("Dashboard");
+      Response::setTitle("Dashboard");
       \Lobby\UI\Themes::loadDashboard("head");
       Response::loadPage("/includes/lib/lobby/inc/dashboard.php");
     });
@@ -130,7 +130,7 @@ class Router {
         /**
          * Set the title
          */
-        \Lobby::setTitle($AppInfo['name']);
+        Response::setTitle($AppInfo['name']);
         
         /**
          * Add the App item to the navbar

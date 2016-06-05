@@ -6,7 +6,7 @@
     }else{
       \Lobby::doHook("head.begin");
     }
-    \Lobby::head();
+    Response::head();
     if(\Lobby::status("lobby.admin")){
       \Lobby::doHook("admin.head.end");
     }else{

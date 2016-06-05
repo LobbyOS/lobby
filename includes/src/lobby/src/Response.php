@@ -9,6 +9,7 @@ class Response {
 
   private static $response = null;
   private static $pageContent = null;
+  protected static $title = null;
 
   public static function __constructStatic(){
     /**
@@ -83,6 +84,89 @@ class Response {
   public static function send(){
     self::$response->prepare(Request::getRequestObject());
     self::$response->send();
+  }
+  
+  /**
+   * Print the <head> tag
+   */
+  public static function head($title = ""){
+    header('Content-type: text/html; charset=utf-8');
+    if($title != ""){
+      self::setTitle($title);
+    }
+    
+    if(isset(Assets::$js['jquery'])){
+      /**
+       * Load jQuery, jQuery UI, Lobby Main, App separately without async
+       */
+      $url = L_URL . "/includes/serve-assets.php?type=js&assets=" . implode(",", array(
+        Assets::$js['jquery'],
+        Assets::$js['jqueryui'],
+        Assets::$js['main'],
+        isset(Assets::$js['app']) ? Assets::$js['app'] : ""
+      ));
+      echo "<script src='{$url}'></script>";
+      
+      Assets::removeJs("jquery");
+      Assets::removeJs("jqueryui");
+      Assets::removeJs("main");
+    }
+    
+    $jsURLParams = array(
+      "THEME_URL" => THEME_URL
+    );
+    
+    if(defined("APP_URL")){
+      $jsURLParams["APP_URL"] = urlencode(APP_URL);
+      $jsURLParams["APP_SRC"] = urlencode(APP_SRC);
+    }
+    
+    $jsURL = Assets::getServeURL("js", $jsURLParams);
+    
+    echo "<script>lobby.load_script_url = '". $jsURL ."';</script>";
+    
+    $cssServeParams = array(
+      "THEME_URL" => THEME_URL
+    );
+    
+    /**
+     * CSS Files
+     */
+    if(defined("APP_URL")){
+      $cssParams["APP_URL"] = urlencode(APP_URL);
+      $cssParams["APP_SRC"] = urlencode(APP_SRC);
+    }
+    echo Assets::getServeLinkTag($cssServeParams);
+    
+    echo "<link href='". L_URL ."/favicon.ico' sizes='16x16 32x32 64x64' rel='shortcut icon' />";
+    
+    /* Title */
+    echo "<title>" . self::$title . "</title>";
+  }
+ 
+  /**
+   * Set the Page title
+   */
+  public static function setTitle($title = ""){
+    if($title != ""){
+      self::$title = $title;
+      if(self::$title == ""){
+        self::$title = "Lobby";
+      }else{
+        self::$title .= " - Lobby";
+      }
+    }
+  }
+  
+  /**
+   * A redirect function that support HTTP status code for redirection 
+   * 302 = Moved Temporarily
+   */
+  public static function redirect($url, $status = 302){
+    $url = self::u($url);
+    header("Location: $url", true, $status);
+    exit;
+    return true;
   }
 
 }
