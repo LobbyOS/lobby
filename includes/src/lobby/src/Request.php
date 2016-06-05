@@ -20,7 +20,7 @@ class Request {
   }
   
   public static function get($key){
-    return $request->query->get($key);
+    return self::$request->get($key);
   }
   
   public static function getRequestObject(){

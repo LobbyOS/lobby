@@ -1,12 +1,12 @@
 $(document).ready(function(){
     tinymce.init({
-      selector: ".workspace#ledit #editor",
+      selector: "#workspace#ledit #editor",
       plugins: "autoresize"
     });
    /**
     * The App Parent Element URI
     */
-   var app = ".workspace#ledit";
+   var app = "#workspace#ledit";
    
    $(app + " #save.btn").live("click", function(){
       if(tinyMCE.activeEditor.getContent() === ""){

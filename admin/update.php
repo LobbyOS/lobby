@@ -14,7 +14,7 @@ require "../load.php";
     \Lobby::doHook("admin.body.begin");
     require "$docRoot/admin/inc/sidebar.php";
     ?>
-    <div class="workspace">
+    <div id="workspace">
       <div class="content">
         <h1>Update</h1>
         <p>Lobby and it's apps can be updated automatically. <a href="http://lobby.subinsb.com/docs/update" target="_blank" class="btn">More Info</a></p>

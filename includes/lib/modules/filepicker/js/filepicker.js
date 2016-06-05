@@ -508,8 +508,8 @@ lobby.mod.filepicker = {
     
     lobby.ajax(access_url, {}, function(r){
       o = JSON.parse(r);
-      $("<div></div>").attr("class", "Lobby-FS-filepicker").html(o.html).appendTo(".workspace");
-      $(".workspace .Lobby-FS-filepicker").dialog({
+      $("<div></div>").attr("class", "Lobby-FS-filepicker").html(o.html).appendTo("#workspace");
+      $("#workspace .Lobby-FS-filepicker").dialog({
         width: "875",
         height: "572",
         close: function(){
@@ -536,7 +536,7 @@ lobby.mod.filepicker = {
   }
 };
 lobby.mod.FilePicker = function(path, cb){
-  if($(".workspace .Lobby-FS-filepicker").length == 0){
+  if($("#workspace .Lobby-FS-filepicker").length == 0){
     lobby.mod.filepicker.dialog(path, cb);
   }else{
     this.close();

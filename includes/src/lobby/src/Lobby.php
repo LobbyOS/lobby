@@ -119,7 +119,15 @@ class Lobby {
       Assets::removeJs("main");
     }
     
-    echo "<script>lobby.load_script_url = '". Assets::getServeURL("js") ."';</script>";
+    if(defined("APP_URL"))
+      $jsURL = Assets::getServeURL("js", array(
+        "APP_URL" => urlencode(APP_URL),
+        "APP_SRC" => urlencode(APP_SRC)
+      ));
+    else
+      $jsURL = Assets::getServeURL("js");
+    
+    echo "<script>lobby.load_script_url = '". $jsURL ."';</script>";
     
     /**
      * CSS Files

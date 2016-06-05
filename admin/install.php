@@ -20,7 +20,7 @@ $install_step = H::i('step');
     \Lobby::doHook("head.end");
     ?>
   </head>
-  <body class="workspace">
+  <body id="workspace">
      <div class="contents" id="<?php
       $steps = array(
         "1", "2", "3", "4"
