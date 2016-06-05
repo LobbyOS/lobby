@@ -44,8 +44,9 @@
           echo "</ul>";
         }
         
-        echo "<h3>Core Modules</h3><ul>";
+        echo "<h3>Core Modules</h3>";
         echo "<p>These modules can't be removed and is part of the Lobby Core.</p>";
+        echo "<ul>";
         foreach($core_modules as $module){
           echo "<li data-loc='{$module['location']}'>{$module['id']}</li>";
         }
