@@ -90,7 +90,7 @@ class App {
   }
   
   public static function redirect($path){
-    return \Lobby::redirect(self::u($path));
+    return Response::redirect(self::u($path));
   }
   
   /**
