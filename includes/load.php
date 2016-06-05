@@ -70,7 +70,7 @@ if(!\Lobby::status("lobby.assets-serve")){
    * Is Lobby Installed ?
    */
   if(!\Lobby::$installed && !\Lobby::status("lobby.install")){
-    \Lobby::redirect("/admin/install.php");
+    Response::redirect("/admin/install.php");
   }
 }
 
