@@ -2,7 +2,7 @@
   <head>
     <?php
     \Lobby::doHook("admin.head.begin");
-    \Lobby::head("Change Password");
+    Response::head("Change Password");
     ?>
   </head>
   <body>
