@@ -31,7 +31,7 @@ if(isset($_POST["username"]) && isset($_POST["password"])){
   <head>
     <?php
     \Lobby::doHook("admin.head.begin");
-    \Lobby::head("Admin Login");
+    Response::head("Admin Login");
     ?>
   </head>
   <body>
