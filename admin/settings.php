@@ -11,7 +11,7 @@
     \Lobby::doHook("admin.body.begin");
     require "$docRoot/admin/inc/sidebar.php";
     ?>
-    <div class="workspace">
+    <div id="workspace">
       <div class="content">
         <?php
         if(isset($_GET['updated']) && H::csrf()){

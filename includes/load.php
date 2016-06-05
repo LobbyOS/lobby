@@ -51,7 +51,6 @@ try{
   /**
    * These classes are not loaded by default by Composer
    */
-  $loader->loadClass("Lobby\\UI\\Themes");
   $loader->loadClass("Lobby\\Require");
   
 }catch(\Exception $e){

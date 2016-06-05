@@ -11,7 +11,7 @@
     \Lobby::doHook("admin.body.begin");
     require "$docRoot/admin/inc/sidebar.php";
     ?>
-    <div class="workspace">
+    <div id="workspace">
       <div class="content">
         <h1>Admin</h1>
         <p>Here, you can manage your Lobby installation :</p>

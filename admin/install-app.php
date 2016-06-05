@@ -15,7 +15,7 @@ require "../load.php";
     \Lobby::doHook("admin.body.begin");
     require "$docRoot/admin/inc/sidebar.php";
     ?>
-    <div class="workspace">
+    <div id="workspace">
       <div class="content">
         <?php
         $id = H::i("id");

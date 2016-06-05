@@ -30,8 +30,8 @@ lobby.dash = {
    * Add all the tiles registered
    */
   addTiles : function(){
-    rows = Math.floor($(".workspace").height() / 200);
-    cols = Math.floor($(".workspace").width() / 200);
+    rows = Math.floor($("#workspace").height() / 200);
+    cols = Math.floor($("#workspace").width() / 200);
     
     possibleTiles= rows * cols;
     
@@ -58,7 +58,7 @@ lobby.dash = {
       i++;
     });
     
-    $('.workspace .tiles-wrapper').bxSlider({
+    $('#workspace .tiles-wrapper').bxSlider({
       slideMargin: 0,
       speed: 200,
       infiniteLoop: false,
@@ -75,7 +75,7 @@ lobby.dash = {
   addTileEvents : function(){
     setTimeout(function(){
       src = "";
-      $( ".workspace .tiles" ).disableSelection();
+      $( "#workspace .tiles" ).disableSelection();
       
       $.contextMenu({
         selector: ".tiles .tile .app",
@@ -111,7 +111,7 @@ lobby.dash = {
    */
   save : function(){
     var e = {};
-    $(".workspace .tiles .tile.taken").each(function(i, elem){
+    $("#workspace .tiles .tile.taken").each(function(i, elem){
       e[$(this).find(".app").attr("id")] = $(this).index();
     });
     lobby.saveOption("dashItems", JSON.stringify(e));

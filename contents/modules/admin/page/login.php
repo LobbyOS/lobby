@@ -36,7 +36,7 @@ if(isset($_POST["username"]) && isset($_POST["password"])){
   </head>
   <body>
     <?php \Lobby::doHook("admin.body.begin");?>
-    <div class="workspace">
+    <div id="workspace">
       <div class="contents">
         <h2>Log In</h2>
         <form method="POST" action="<?php echo \Lobby::u("/admin/login");?>">
@@ -57,7 +57,7 @@ if(isset($_POST["username"]) && isset($_POST["password"])){
         </form>
         <?php
         if(isset($error)){
-          \Lobby::echo ser($error[0], $error[1], false);
+          echo ser($error[0], $error[1], false);
         }
         ?>
         <div>

@@ -200,7 +200,6 @@ class DB extends \Lobby {
         $sql->execute(array($value, $key, $appID));
         return true;
       }else{
-        
         $sql = self::$dbh->prepare("INSERT INTO `". self::$prefix ."data` (`app`, `name`, `value`, `created`, `updated`) VALUES (?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
         return $sql->execute(array($appID, $key, $value));
       }

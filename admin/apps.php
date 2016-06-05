@@ -20,7 +20,7 @@ use \Lobby\Need;
     \Lobby::doHook("admin.body.begin");
     require "$docRoot/admin/inc/sidebar.php";
     ?>
-    <div class="workspace">
+    <div id="workspace">
       <div class="content">
         <?php
         $appID = input("app");
@@ -33,6 +33,37 @@ use \Lobby\Need;
         ?>
           <h2><?php echo "<a href='". L_SERVER ."/apps/". $App->info['id'] ."' target='_blank'>". $App->info['name'] ."</a>";?></h2>
           <p class="chip" style="margin: -5px 0 20px;"><?php echo $App->info['short_description'];?></p>
+          <?php
+          if(isset($_GET['action']) && H::csrf()){
+            $action = $_GET['action'];
+            
+            if($action === "disable"){
+              if($App->disableApp()){
+                echo sss("Disabled", "The App <strong>$app</strong> has been disabled.");
+              }else{
+                echo ser("Error", "The App <strong>$app</strong> couldn't be disabled. Try again.", false);
+              }
+            }else if($action === "remove"){
+            ?>
+                <h2>Confirm</h2>
+                <p>Are you sure you want to remove the app <b><?php echo $app;?></b> ?</p>
+                <div clear></div>
+                <a class="btn green" href="<?php echo L_URL ."/admin/install-app.php?action=remove&id={$app}&".H::csrf("g");?>">Yes, I'm Sure</a>
+                <a class="btn red" href="<?php echo L_URL ."/admin/apps.php";?>">No, I'm Not</a>
+            <?php
+              exit;
+            }else if($action === "enable"){
+              if($App->enableApp()){
+                if(isset($_GET['redirect'])){
+                  \Lobby::redirect("/app/$appID");
+                }
+                echo sss("Enabled", "The App <strong>$appID</strong> has been enabled.");
+              }else{
+                echo ser("Error", "The App couldn't be enabled. Try again.", false);
+              }
+            }
+          }
+          ?>
           <div class="row">
             <div class="col m3" id="leftpane" style="text-align: center;">
               <img src="<?php echo \Lobby::u("admin/image/clear.gif");?>" height="200" width="200" />
@@ -62,7 +93,7 @@ use \Lobby\Need;
                 /**
                  * App is Disabled. Show button to enable it
                  */
-                echo \Lobby::l("/admin/apps.php?action=enable&redirect=1&app=". $appID . H::csrf("g"), "Enable App", "class='btn green'");
+                echo \Lobby::l("/admin/apps.php?action=enable&redirect=1&app=". $appID . H::csrf("g"), "Enable", "class='btn green'");
               }
               echo \Lobby::l("/admin/apps.php?app=$appID&action=remove" . csrf('g'), "Remove", "class='btn red'");
               ?>
@@ -121,36 +152,7 @@ use \Lobby\Need;
             padding: 10px 0;
           }
           </style>
-          <?php
-          if(isset($_GET['action']) && H::csrf()){
-            $action = $_GET['action'];
-            
-            if($action === "disable"){
-              if($App->disableApp()){
-                echo sss("Disabled", "The App <strong>$app</strong> has been disabled.");
-              }else{
-                echo ser("Error", "The App <strong>$app</strong> couldn't be disabled. Try again.", false);
-              }
-            }else if($action === "remove"){
-            ?>
-                <h2>Confirm</h2>
-                <p>Are you sure you want to remove the app <b><?php echo $app;?></b> ?</p>
-                <div clear></div>
-                <a class="btn green" href="<?php echo L_URL ."/admin/install-app.php?action=remove&id={$app}&".H::csrf("g");?>">Yes, I'm Sure</a>
-                <a class="btn red" href="<?php echo L_URL ."/admin/apps.php";?>">No, I'm Not</a>
-            <?php
-              exit;
-            }else if($action == "enable"){
-              if($App->enableApp()){
-                if(isset($_GET['redirect'])){
-                  \Lobby::redirect("/app/$app");
-                }
-                echo sss("Enabled", "The App <strong>$app</strong> has been enabled.");
-              }else{
-                echo ser("Error", "The App couldn't be enabled. Try again.", false);
-              }
-            }
-          }
+        <?php
         }else{
         ?>
           <h2>Apps</h2>
@@ -164,16 +166,12 @@ use \Lobby\Need;
             echo '<div class="apps">';
             foreach($apps as $app){
               $App = new Apps($app);
-              $appLogo = isset($data['logo']) ? L_URL . "/includes/lib/lobby/image/blank.png" : (
-                file_exists($App->appDir . "/src/image/logo.svg") ? $App->info["srcURL"] . "/src/image/logo.svg" :
-                $App->info["srcURL"] . "/src/image/logo.png"
-              );
             ?>
               <div class="app card">
                 <div class="app-inner">
                   <div class="lpane">
                     <a href="<?php echo \Lobby::u("/admin/apps.php?app=$app");?>">
-                      <img src="<?php echo $appLogo;?>" />
+                      <img src="<?php echo $App->info["logo"];?>" />
                     </a>
                   </div>
                   <div class="rpane">
@@ -181,8 +179,11 @@ use \Lobby\Need;
                     <p><a class="chip">Version <?php echo $App->info["version"];?></a></p>
                     <div style="margin-top: 10px;">
                       <?php
-                      echo \Lobby::l("/admin/apps.php?app=$app&action=disable", "Disable", "class='btn'");
-                      echo \Lobby::l("/admin/apps.php?app=$app&action=remove", "Remove", "class='btn red'");
+                      if($App->enabled)
+                        echo \Lobby::l("/admin/apps.php?app=$app&action=disable" . csrf("g"), "Disable", "class='btn'");
+                      else
+                        echo \Lobby::l("/admin/apps.php?app=$app&action=enable" . csrf("g"), "Enable", "class='btn green'");
+                      echo \Lobby::l("/admin/apps.php?app=$app&action=remove" . csrf("g"), "Remove", "class='btn red'");
                       ?>
                     </div>
                   </div>
