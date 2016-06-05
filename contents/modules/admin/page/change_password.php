@@ -7,7 +7,7 @@
   </head>
   <body>
     <?php \Lobby::doHook("admin.body.begin");?>
-    <div class="workspace">
+    <div id="workspace">
       <div class="contents">
         <h2>Change Password</h2>
         <?php

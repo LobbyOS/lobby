@@ -9,7 +9,7 @@
     <title><?php echo $title;?> - Lobby</title>
   </head>
   <body>
-    <div class="workspace">
+    <div id="workspace">
       <div class="contents">
         <h1><?php echo $title;?></h1>
         <p><?php echo $description;?></p>

@@ -11,7 +11,7 @@
     \Lobby::doHook("admin.body.begin");
     require "$docRoot/admin/inc/sidebar.php";
     ?>
-    <div class="workspace">
+    <div id="workspace">
       <div class="content">
         <h1>Apps</h1>
         <p>Disable or Remove installed apps. You can find and install more Apps from <a href="<?php echo L_URL;?>/admin/lobby-store.php">Lobby Store</a>.</p>

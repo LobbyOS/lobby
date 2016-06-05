@@ -1,4 +1,4 @@
-.workspace .content {
+#workspace .content {
   padding: 0px 10px 20px 220px;
   width: auto;
   overflow: auto;
@@ -35,7 +35,7 @@
   padding: 0;
 }
 @media screen and (max-width: 992px){
-  .workspace .content {
+  #workspace .content {
     padding: 0 10px;
     width: fallback;
   }

@@ -22,7 +22,7 @@ form{
 /**
  * Workspace
  */
-.workspace{
+#workspace{
   position: absolute;
   top: 50px;
   bottom: 0;
@@ -30,7 +30,7 @@ form{
   right: 0;
   overflow: auto;
 }
-.workspace .contents{
+#workspace .contents{
   margin: 0px auto 40px;
   width: 700px;
   overflow: auto;

@@ -22,7 +22,7 @@
       \Lobby::doHook("body.begin");
     }
     ?>
-    <div class="workspace" <?php if(\Lobby\Apps::$appID){ echo 'id="'. \Lobby\Apps::$appID .'"'; } ?>>
+    <div id="workspace" <?php if(\Lobby\Apps::$appID){ echo 'id="'. \Lobby\Apps::$appID .'"'; } ?>>
       <?php
       echo Response::getPageContent();
       ?>

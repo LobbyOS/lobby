@@ -66,7 +66,7 @@ class Router {
           "subItems" => array(
             "app_admin" => array(
               "text" => "Admin",
-              "href" => "/admin/app/$AppID"
+              "href" => "/admin/apps.php?app=$AppID"
             ),
             "app_disable" => array(
               "text" => "Disable",
@@ -85,12 +85,17 @@ class Router {
           if($page === "/"){
             $page = "/index";
           }
-          Response::setPage($class->inc("/src/page{$page}.php"));
+          $html = $class->inc("/src/page{$page}.php");
+          if($html)
+            Response::setPage($html);
+          else
+            ser();
         }else{
-          Response::setPage($pageResponse);
-        }
-        if(!Response::hasContent()){
-          echo ser();
+          if($pageResponse === null){
+            ser();
+          }else{
+            Response::setPage($pageResponse);
+          }
         }
       }else{
         echo ser();
