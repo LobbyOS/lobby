@@ -6,7 +6,7 @@ require "../load.php";
   <head>
     <?php
     \Lobby::doHook("admin.head.begin");
-    \Lobby::head("Update");
+    Response::head("Update");
     ?>
   </head>
   <body>

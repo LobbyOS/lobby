@@ -25,7 +25,7 @@ class App {
   }
   
   public function setTitle($title){
-    \Lobby::setTitle("$title | {$this->name}");
+    Response::setTitle("$title | {$this->name}");
   }
   
   /**
@@ -74,7 +74,7 @@ class App {
   }
   
   public static function u($path = null){
-    return APP_URL . $path;
+    return $path === null ? \Lobby::u() : APP_URL . $path;
   }
   
   public static function l($path, $text = "", $extra = ""){

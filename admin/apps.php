@@ -12,7 +12,7 @@ use \Lobby\Need;
     \Assets::css("view-app", "/admin/css/view-app.css");
     
     \Lobby::doHook("admin.head.begin");
-    \Lobby::head("App Manager");
+    Response::head("App Manager");
     ?>
   </head>
   <body>

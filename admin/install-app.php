@@ -7,7 +7,7 @@ require "../load.php";
     <?php 
     \Lobby::doHook("admin.head.begin");
     \Assets::js("admin.apps.js", "/admin/js/install-app.js");
-    \Lobby::head("Install App");
+    Response::head("Install App");
     ?>
   </head>
   <body>
