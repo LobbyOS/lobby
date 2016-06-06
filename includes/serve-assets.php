@@ -4,7 +4,7 @@ require_once "../load.php";
 Assets::$preProcess = function($data, $type){
   $to_replace = array(
     "<?L_URL?>" => L_URL,
-    "<?THEME_URL?>" => THEME_URL
+    "<?THEME_URL?>" => Request::get("THEME_URL")
   );
   if(isset($_GET['APP_URL'])){
     $to_replace["<?APP_URL?>"] = htmlspecialchars(urldecode($_GET['APP_URL']));

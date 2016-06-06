@@ -52,7 +52,6 @@ try{
    * These classes are not loaded by default by Composer
    */
   $loader->loadClass("Lobby\\Require");
-  
 }catch(\Exception $e){
   \Lobby::log(array("fatal", $e->getMessage()));
 }
