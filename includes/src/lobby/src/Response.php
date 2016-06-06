@@ -163,10 +163,9 @@ class Response {
    * 302 = Moved Temporarily
    */
   public static function redirect($url, $status = 302){
-    $url = self::u($url);
+    $url = \Lobby::u($url);
     header("Location: $url", true, $status);
     exit;
-    return true;
   }
 
 }
