@@ -75,7 +75,7 @@ class admin extends \Lobby\Module {
       /**
        * Create `users` TABLE
        */
-      $sql = \Lobby\DB::$dbh->prepare("CREATE TABLE IF NOT EXISTS `{$prefix}users` (
+      $sql = \Lobby\DB::getDBH()->prepare("CREATE TABLE IF NOT EXISTS `{$prefix}users` (
         `id` int(11) NOT NULL AUTO_INCREMENT,
         `username` varchar(10) NOT NULL,
         `email` tinytext NOT NULL,

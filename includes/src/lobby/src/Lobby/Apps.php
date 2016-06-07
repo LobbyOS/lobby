@@ -10,10 +10,12 @@ use Lobby\UI\Themes;
  * Associated with all kinds of operations with apps
  */
 
-class Apps extends \Lobby {
-
-  private $app = false;
-  public $appDir = false, $exists = false, $info = array(), $enabled = false;
+class Apps {
+  
+  /**
+   * Location of apps directory
+   */
+  private static $appsDir = null;
   
   public static $appID = false;
   
@@ -37,6 +39,17 @@ class Apps extends \Lobby {
     "valid_apps" => array()
   );
   
+  /**
+   * The App ID
+   */
+  private $app = false;
+  
+  public $appDir = false, $exists = false, $info = array(), $enabled = false;
+  
+  public static function __constructStatic($appsDir){
+    self::$appsDir = $appsDir;
+  }
+  
   public static function clearCache(){
     self::$cache = array(
       "valid_apps" => array()
@@ -50,7 +63,7 @@ class Apps extends \Lobby {
     if(isset(self::$cache["apps"])){
       $apps = self::$cache["apps"];
     }else{
-      $appFolders = array_diff(scandir(APPS_DIR), array('..', '.'));
+      $appFolders = array_diff(scandir(self::$appsDir), array('..', '.'));
       $apps = array();
     
       foreach($appFolders as $appFolderName){
@@ -101,6 +114,10 @@ class Apps extends \Lobby {
     return $disabled_apps;
   }
   
+  public static function getAppsDir(){
+    return self::$appsDir;
+  }
+  
   /**
    * Check if an app exists
    */
@@ -124,7 +141,7 @@ class Apps extends \Lobby {
     if(isset(self::$cache["valid_apps"][$name])){
       $valid = self::$cache["valid_apps"][$name];
     }else{
-      $appDir = APPS_DIR . "/$name";
+      $appDir = self::$appsDir . "/$name";
       $valid = false;
     
       /**
@@ -166,7 +183,7 @@ class Apps extends \Lobby {
       if(self::valid($id)){
         $this->exists = true;
         $this->app = $id;
-        $this->appDir = APPS_DIR . "/$id";
+        $this->appDir = self::$appsDir . "/$id";
         
         /**
          * App Manifest Info as a object property
@@ -304,7 +321,7 @@ class Apps extends \Lobby {
    * Get size used in database
    */
   public function getDBSize($normalizeSize = false){
-    $sql = \Lobby\DB::$dbh->prepare("SELECT * FROM `". \Lobby\DB::$prefix ."data` WHERE `app` = ?");
+    $sql = \Lobby\DB::getDBH()->prepare("SELECT * FROM `". \Lobby\DB::$prefix ."data` WHERE `app` = ?");
     $sql->execute(array($this->app));
     $result = $sql->fetchAll(\PDO::FETCH_ASSOC);
     

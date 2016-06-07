@@ -5,6 +5,8 @@
  */
 namespace Lobby;
 
+use Lobby\Apps;
+
 class Server {
 
   public static $apiURL = null;
@@ -19,7 +21,7 @@ class Server {
   public static function makeData($data){
     return array_replace_recursive(array(
       "lobby" => array(
-        "lid" => \Lobby::$lid,
+        "lid" => \Lobby::getLID(),
         "version" => \Lobby::$version
       )
     ), $data);
@@ -70,7 +72,7 @@ class Server {
    */
   public static function check(){
     $url = self::$apiURL . "/lobby/updates";
-    $apps = \Lobby\Apps::getApps();
+    $apps = Apps::getApps();
     try {
       $response = \Requests::post($url, array(), self::makeData(array(
         "apps" => implode(",", $apps)
