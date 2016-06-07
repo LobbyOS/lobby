@@ -1,6 +1,8 @@
 <?php
 namespace Lobby;
 
+use Lobby\DB;
+
 class Time {
   
   private static $tz = "UTC";
@@ -10,15 +12,15 @@ class Time {
      * Default timezone of Lobby is UTC
      */
     date_default_timezone_set("UTC");
-    if(\Lobby\DB::$type === "mysql"){
-      $sql = \Lobby\DB::$dbh->prepare("SET time_zone = ?;");
+    if(DB::$type === "mysql"){
+      $sql = DB::getDBH()->prepare("SET time_zone = ?;");
       $sql->execute(array('+00:00'));
     }
     self::loadConfig();
   }
   
   public static function loadConfig(){
-    $tz = \Lobby\DB::getOption("lobby_timezone");
+    $tz = DB::getOption("lobby_timezone");
     if($tz !== null){
       self::$tz = $tz;
     }

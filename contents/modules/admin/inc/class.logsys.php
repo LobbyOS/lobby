@@ -216,7 +216,7 @@ class LS {
         */
         array_push(self::$config['pages']['no_login'], self::$config['pages']['login_page']);
         
-        self::$dbh = new \logSysLobbyDB;
+        self::getDBH() = new \logSysLobbyDB;
         self::$db = true;
         
         self::$cookie = isset($_COOKIE['logSyslogin']) ? $_COOKIE['logSyslogin'] : false;
@@ -296,7 +296,7 @@ class LS {
         $query = "SELECT `id`, `password`, `password_salt`, `attempt` FROM `". self::$config['db']['table'] ."` WHERE `username`=:login ORDER BY `id` LIMIT 1";
       }
       
-      $sql = self::$dbh->prepare($query);
+      $sql = self::getDBH()->prepare($query);
       $sql->bindValue(":login", $username);
       $sql->execute();
       
@@ -406,13 +406,13 @@ class LS {
       
       if( count($other) == 0 ){
         /* If there is no other fields mentioned, make the default query */
-        $sql = self::$dbh->prepare("INSERT INTO `". self::$config['db']['table'] ."` (`username`, `password`, `password_salt`) VALUES(:username, :password, :passwordSalt)");
+        $sql = self::getDBH()->prepare("INSERT INTO `". self::$config['db']['table'] ."` (`username`, `password`, `password_salt`) VALUES(:username, :password, :passwordSalt)");
       }else{
         /* if there are other fields to add value to, make the query and bind values according to it */
         $keys   = array_keys($other);
         $columns = implode(",", $keys);
         $colVals = implode(",:", $keys);
-        $sql   = self::$dbh->prepare("INSERT INTO `". self::$config['db']['table'] ."` (`username`, `password`, `password_salt`, $columns) VALUES(:username, :password, :passwordSalt, :$colVals)");
+        $sql   = self::getDBH()->prepare("INSERT INTO `". self::$config['db']['table'] ."` (`username`, `password`, `password_salt`, $columns) VALUES(:username, :password, :passwordSalt, :$colVals)");
         foreach($other as $key => $value){
           $value = htmlspecialchars($value);
           $sql->bindValue(":$key", $value);
@@ -465,7 +465,7 @@ class LS {
        * The user gave the password reset token. Check if the token is valid.
        */
       $reset_pass_token = urldecode($_GET['resetPassToken']);
-      $sql = self::$dbh->prepare("SELECT `uid` FROM `resetTokens` WHERE `token` = ?");
+      $sql = self::getDBH()->prepare("SELECT `uid` FROM `resetTokens` WHERE `token` = ?");
       $sql->execute(array($reset_pass_token));
       
       if($sql->rowCount() == 0 || $reset_pass_token == ""){
@@ -496,7 +496,7 @@ class LS {
       }
     }elseif(isset($_POST['logSysForgotPassChange']) && isset($_POST['logSysForgotPassNewPassword']) && isset($_POST['logSysForgotPassRetypedPassword'])){
       $reset_pass_token = urldecode($_POST['token']);
-      $sql = self::$dbh->prepare("SELECT `uid` FROM `resetTokens` WHERE `token` = ?");
+      $sql = self::getDBH()->prepare("SELECT `uid` FROM `resetTokens` WHERE `token` = ?");
       $sql->execute(array($reset_pass_token));
       
       if( $sql->rowCount() == 0 || $reset_pass_token == "" ){
@@ -525,7 +525,7 @@ class LS {
             /**
              * The token shall not be used again, so remove it.
              */
-            $sql = self::$dbh->prepare("DELETE FROM `resetTokens` WHERE `token` = ?");
+            $sql = self::getDBH()->prepare("DELETE FROM `resetTokens` WHERE `token` = ?");
             $sql->execute(array($reset_pass_token));
             
             echo "<h3>Success : Password Reset Successful</h3><p>You may now login with your new password.</p>";
@@ -542,7 +542,7 @@ class LS {
         echo "<h3>Error : {$identName} not provided</h3>";
         $curStatus = "identityNotProvided"; // The identity was not given
       }else{
-        $sql = self::$dbh->prepare("SELECT `email`, `id` FROM `". self::$config['db']['table'] ."` WHERE `username`=:login OR `email`=:login");
+        $sql = self::getDBH()->prepare("SELECT `email`, `id` FROM `". self::$config['db']['table'] ."` WHERE `username`=:login OR `email`=:login");
         $sql->bindValue(":login", $identification);
         $sql->execute();
         if($sql->rowCount() == 0){
@@ -557,7 +557,7 @@ class LS {
            * Make token and insert into the table
            */
           $token = self::rand_string(40);
-          $sql = self::$dbh->prepare("INSERT INTO `resetTokens` (`token`, `uid`, `requested`) VALUES (?, ?, NOW())");
+          $sql = self::getDBH()->prepare("INSERT INTO `resetTokens` (`token`, `uid`, `requested`) VALUES (?, ?, NOW())");
           $sql->execute(array($token, $uid));
           $encodedToken = urlencode($token);
           
@@ -587,7 +587,7 @@ class LS {
     if(self::$loggedIn){
       $randomSalt = self::rand_string(20);
       $saltedPass = hash('sha256', $newpass . self::$config['keys']['salt'] . $randomSalt);
-      $sql = self::$dbh->prepare("UPDATE `". self::$config['db']['table'] ."` SET `password` = ?, `password_salt` = ? WHERE `id` = ?");
+      $sql = self::getDBH()->prepare("UPDATE `". self::$config['db']['table'] ."` SET `password` = ?, `password_salt` = ? WHERE `id` = ?");
       $sql->execute(array($saltedPass, $randomSalt, self::$user));
       return true;
     }else{
@@ -607,7 +607,7 @@ class LS {
     }else{
       $query = "SELECT `id` FROM `". self::$config['db']['table'] ."` WHERE `username`=:login";
     }
-    $sql = self::$dbh->prepare($query);
+    $sql = self::getDBH()->prepare($query);
     $sql->execute(array(
       ":login" => $identification
     ));
@@ -630,7 +630,7 @@ class LS {
       $columns = $what != "*" ? "`$what`" : "*";
     }
     
-    $sql = self::$dbh->prepare("SELECT {$columns} FROM `". self::$config['db']['table'] ."` WHERE `id` = ? ORDER BY `id` LIMIT 1");
+    $sql = self::getDBH()->prepare("SELECT {$columns} FROM `". self::$config['db']['table'] ."` WHERE `id` = ? ORDER BY `id` LIMIT 1");
     $sql->execute(array($user));
     
     $data = $sql->fetch(\PDO::FETCH_ASSOC);
@@ -655,7 +655,7 @@ class LS {
       }
       $columns = substr($columns, 0, -2); // Remove last ","
     
-      $sql = self::$dbh->prepare("UPDATE `". self::$config['db']['table'] ."` SET {$columns} WHERE `id`=:id");
+      $sql = self::getDBH()->prepare("UPDATE `". self::$config['db']['table'] ."` SET {$columns} WHERE `id`=:id");
       $sql->bindValue(":id", $user);
       foreach($toUpdate as $key => $value){
         $value = htmlspecialchars($value);

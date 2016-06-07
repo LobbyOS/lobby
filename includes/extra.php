@@ -1,18 +1,11 @@
 <?php
 /**
- * The online server of Lobby.
- * Default : https://lobby.subinsb.com
- */
-define("L_SERVER", "http://server.lobby.sim");
-
-/**
  * Make important locations and URLs as 
  * constants to easily access them
  */
-define("L_URL", \Lobby::$url);
-define("APPS_DIR", L_DIR . "/contents/apps");
+define("L_URL", \Lobby::getURL());
+
 define("APPS_URL", L_URL . "/contents/apps");
-define("THEMES_DIR", L_DIR . "/contents/themes");
 define("THEMES_URL", L_URL . "/contents/themes");
 
 /**

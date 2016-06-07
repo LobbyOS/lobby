@@ -9,7 +9,6 @@ use vierbergenlars\SemVer\SemVerException;
  * A class for satisying depenedencies of an App
  * "Need" is a synonym of Require
  */
-
 class Need {
 
   /**

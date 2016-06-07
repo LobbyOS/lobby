@@ -30,6 +30,11 @@ try{
   $composer = require_once L_DIR . "/includes/src/vendor/autoload.php";
   
   /**
+   * Get Lobby Defined Values
+   */
+  require_once L_DIR . "/includes/config.php";
+  
+  /**
    * Load Classed that Composer doesn't load by default
    */
   $composer->loadClass("Assets");
@@ -38,13 +43,17 @@ try{
   /**
    * Static Class Constructor
    * ------------------------
-   * Call __constructStatic() on each classes
+   * Call __constructStatic() on each classes with params for some classes
    */
   $loader = new ConstructStatic\Loader($composer);
+  
+  $loader->setClassParameters(\Lobby\UI\Themes::class, THEMES_DIR);
+  $loader->setClassParameters(\Lobby\Apps::class, APPS_DIR);
+  
   $loader->processLoadedClasses();
   
   /**
-   * Get Lobby Defined Values & Load Modules
+   * Set constants & Load Modules
    */
   require_once L_DIR . "/includes/extra.php";
   

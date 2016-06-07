@@ -1,5 +1,6 @@
 <?php
 namespace Lobby;
+
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 

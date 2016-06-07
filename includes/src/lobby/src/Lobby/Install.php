@@ -1,6 +1,8 @@
 <?php
 namespace Lobby;
 
+use Lobby\FS;
+
 /**
  * The class for installing Lobby
  * Contains Database & Software Creation
@@ -9,6 +11,7 @@ class Install extends \Lobby {
 
   private static $database = array();
   private static $dbh;
+  
   public static $error;
 
   /**
@@ -23,7 +26,7 @@ class Install extends \Lobby {
     if(!is_writable(L_DIR)){
       echo ser("Error", "Lobby Directory is not Writable. Please set <blockquote>" . L_DIR . "</blockquote> directory's permission to writable.<cl/><a href='install.php?step=1' class='btn'>Check Again</a>");
       return false;
-    }elseif(\Lobby\FS::exists("/config.php")){
+    }else if(FS::exists("/config.php")){
       echo ser("config.php File Exists", "A config.php file already exitsts in <blockquote>". L_DIR ."</blockquote> directory. Remove it and try again. <cl/><a href='". self::u("admin/install.php?step=1" . csrf("g")) ."' class='btn'>Check Again</a>");
       return false;
     }else{
@@ -62,7 +65,7 @@ class Install extends \Lobby {
         return false;
       }
     }catch(\PDOException $Exception) {
-      \Lobby::log("Database Connection Failed : " . $Exception->getMessage());
+      self::log("Database Connection Failed : " . $Exception->getMessage());
       echo ser("Error", "Unable to connect. Make sure that the settings you entered are correct. <cl/><a class='btn orange' href='install.php?step=3&db_type=mysql". \H::csrf("g") ."'>Try Again</a>");
       return false;
     }
@@ -80,7 +83,7 @@ class Install extends \Lobby {
     /**
      * Make the configuration file
      */
-    $config_sample = \Lobby\FS::get("/includes/lib/lobby/inc/config-sample.php");
+    $config_sample = FS::get("/includes/lib/lobby/inc/config-sample.php");
     $config_file   = $config_sample;
     if($db_type === "mysql"){
       $config_file = preg_replace("/host'(.*?)'(.*?)'/", "host'$1'{$cfg['host']}'", $config_file);
@@ -104,7 +107,7 @@ class Install extends \Lobby {
     /**
      * Create the config.php file
      */
-    if(\Lobby\FS::write($configFileLoc, $config_file) === false){
+    if(FS::write($configFileLoc, $config_file) === false){
       echo ser("Failed Creating Config File", "Something happened while creating the file. Perhaps it was something that you did ?");
     }else{
       chmod(L_DIR . "/config.php", 0550);
@@ -164,7 +167,7 @@ class Install extends \Lobby {
       }
 
       /* Insert The Default Data In To Tables */
-      $lobby_info = \Lobby\FS::get("/lobby.json");
+      $lobby_info = FS::get("/lobby.json");
       $lobby_info = json_decode($lobby_info, true);
       $sql = self::$dbh->prepare("
         INSERT INTO `{$prefix}options`
@@ -206,7 +209,7 @@ class Install extends \Lobby {
       return true;
     }catch(\PDOException $e){
       self::$error = $e->getMessage();
-      \Lobby::log("Unable to make SQLite database : ". self::$error);
+      self::log("Unable to make SQLite database : ". self::$error);
       return false;
     }
   }
