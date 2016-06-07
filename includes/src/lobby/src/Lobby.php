@@ -1,22 +1,57 @@
 <?php
 /**
  * The Heart of Lobby
- * Other classes extend from this class
  */
  
 class Lobby {
 
-  public static $version, $versionReleased, $debug, $root, $url, $host, $hostName, $title, $serverCheck, $db, $lid, $error = null;
+  /**
+   * Version & Release date
+   */
+  public static $version, $versionReleased;
+  
+  /**
+   * Debugging Mode
+   */
+  public static $debug = false;
+  
+  /**
+   * Base URL
+   */
+  protected static $url = null;
+  
+  /**
+   * Host
+   * 127.0.0.1:8000, localhost:9000
+   */
+  protected static $host;
+  
+  /**
+   * hostname = Host without port
+   * 127.0.0.1, localhost
+   */
+  protected static $hostname;
+  
+  /**
+   * The Lobby Public ID
+   */
+  protected static $lid;
   
   public static $installed = false;
   
-  public static $sysInfo, $hooks = array();
-  
-  public static $valid_hooks = array(
-    "init", "body.begin", "admin.body.begin", "head.begin", "admin.head.begin", "head.end", "router.finish",
-    "panel.end"
+  /**
+   * Hooks available in Lobby
+   */
+  protected static $validHooks = array(
+    "init", "body.begin", "admin.body.begin", "head.begin", "admin.head.begin", "head.end", "router.finish", "panel.end"
   );
-  public static $config = array(
+  
+  protected static $sysInfo, $hooks = array();
+  
+  /**
+   * Default Config
+   */
+  protected static $config = array(
     "db" => array(
       "type" => "mysql"
     ),
@@ -24,12 +59,19 @@ class Lobby {
     "server_check" => true
   );
   
+  /**
+   * $statues Array that hold the functions to determine status
+   * $status Property that stores the current state of Lobby
+   */
   public static $statuses = array();
-  
   private static $status = null;
+  
+  /**
+   * The base directory of Lobby
+   */
+  private static $lDir = null;
  
   public static function __constructStatic(){
-    
     /**
      * Callback on fatal errors
      */
@@ -37,40 +79,20 @@ class Lobby {
       return \Lobby::fatalErrorHandler();
     });
     
-    self::sysinfo();
+    self::sysInfo();
     self::config();
-    
-    if(isset(self::$config['lobby_url'])){
-      $url_parts = parse_url(self::$config['lobby_url']);
-      self::$hostName = $url_parts['host'];
-      self::$url = self::$config['lobby_url'];
-    }else{
-      $docDir = str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT']);
-      $subdir = str_replace($docDir, '', L_DIR);
-      $urladdr = $_SERVER['HTTP_HOST'] . $subdir;
-      $urladdr = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://" . $urladdr;
-      
-      self::$url = rtrim($urladdr, "/"); // Remove Trailing Slash
-      /**
-       * Host with Port
-       */
-      self::$host = $_SERVER['SERVER_NAME'] . (isset($_SERVER["SERVER_PORT"]) && $_SERVER["SERVER_PORT"] != "80" ? ":{$_SERVER['SERVER_PORT']}" : "");
-      self::$hostName = $_SERVER['SERVER_NAME'];
-    }
     
     \Assets::config(array(
       "basePath" => L_DIR,
-      "baseURL" => self::$url,
+      "baseURL" => self::getURL(),
       "serveFile" => "includes/serve-assets.php"
     ));
-    
   }
   
   /**
    * Reads configuration & set Lobby according to it
    */
   public static function config($db = false){
-    
     if(file_exists(L_DIR . "/config.php")){
       $config = include(L_DIR . "/config.php");
       
@@ -93,7 +115,6 @@ class Lobby {
     }else{
       return false;
     }
-    
   }
   
   /**
@@ -136,7 +157,41 @@ class Lobby {
     }
   }
   
-  /* A handler for Fatal Errors occured in PHP */
+  /**
+   * Get/Make the Lobby base URL
+   */
+  public static function getURL(){
+    if(self::$url !== null)
+      return self::$url;
+      
+    if(isset(self::$config['lobby_url'])){
+      $url_parts = parse_url(self::$config['lobby_url']);
+      self::$hostname = $url_parts['host'];
+      self::$url = self::$config['lobby_url'];
+    }else{
+      $docDir = str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT']);
+      $subdir = str_replace($docDir, '', L_DIR);
+      $urladdr = $_SERVER['HTTP_HOST'] . $subdir;
+      $urladdr = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://" . $urladdr;
+      
+      self::$url = rtrim($urladdr, "/");
+      self::$host = $_SERVER['SERVER_NAME'] . (isset($_SERVER["SERVER_PORT"]) && $_SERVER["SERVER_PORT"] != "80" ? ":{$_SERVER['SERVER_PORT']}" : "");
+      self::$hostname = $_SERVER['SERVER_NAME'];
+    }
+    return self::$url;
+  }
+  
+  public static function getHost(){
+    return self::$host;
+  }
+  
+  public static function getHostname(){
+    return self::$hostname;
+  }
+  
+  /**
+   * A handler for Fatal Errors occured in PHP
+   */
   public static function fatalErrorHandler(){
     $error = error_get_last();
 
@@ -152,54 +207,9 @@ class Lobby {
   }
   
   /**
-   * A HTTP Request Function
+   * Load System Info into self::$sysInfo
    */
-  public static function loadURL($url, $params = array(), $type="GET"){
-    $ch = curl_init();
-    
-    $fields_string = "";
-    if(count($params) != 0){
-      /**
-       * Add Lobby ID
-       */
-      $params["lobbyID"] = self::$lid;
-      
-      foreach($params as $key => $value){
-        $fields_string .= "{$key}={$value}&";
-      }
-      /**
-       * Remove Last & char
-       */
-      rtrim($fields_string, '&');
-    }
-    
-    if($type == "GET" && count($params) != 0){
-      /* Append Query String Parameters */
-      $url .= "?{$fields_string}";
-    }
-    
-    /**
-     * Set options of cURL request
-     */
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_CAINFO, __DIR__ . "/ca_bundle.crt");
-    
-    if($type == "POST"){
-      curl_setopt($ch, CURLOPT_POST, count($params));
-      curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
-    }
-    
-    /**
-     * Give back the response
-     */
-    $output = curl_exec($ch);
-    return $output;
-  }
-  
-  /* Identify System Info */
-  private static function sysinfo(){
-    self::$root = L_DIR;
+  private static function sysInfo(){
     $info = array();
 
     /* Get the OS */
@@ -212,6 +222,10 @@ class Lobby {
       $info['os'] = "mac";
     }
     self::$sysInfo = $info;
+  }
+  
+  public static function getSysInfo($key = null){
+    return self::$sysInfo[$key];
   }
   
   /**
@@ -228,7 +242,7 @@ class Lobby {
         $output[] = self::hook($place, $function);
       }
       return $output;
-    }else if(array_search($place, self::$valid_hooks) !== false){
+    }else if(array_search($place, self::$validHooks) !== false){
       self::$hooks[$place][] = $function;
       return true;
     }else{
@@ -341,14 +355,14 @@ class Lobby {
       }
       
       $url = $pageURL;
-    }else if($path === L_URL){
-      $url = L_URL;
+    }else if($path === self::$url){
+      $url = self::$url;
     }else if(!preg_match("/http/", $path) || $urlHost !== self::$host){
       /**
        * If $origPath is a relative URI
        */
       if(!defined("APP_DIR") || substr($origPath, 0, 1) === "/"){
-        $url = L_URL . "/$path";
+        $url = self::$url . "/$path";
       }else{
         $url = \Lobby\App::u($origPath);
       }
@@ -377,6 +391,13 @@ class Lobby {
     }else{
       return $full === false ? $parts['path'] : $_SERVER["REQUEST_URI"];
     }
+  }
+  
+  /**
+   * Get the public Lobby ID
+   */
+  public static function getLID(){
+    return self::$lid;
   }
   
 }

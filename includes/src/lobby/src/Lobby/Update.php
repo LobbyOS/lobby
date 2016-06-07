@@ -1,15 +1,19 @@
 <?php
 namespace Lobby;
 
+use Lobby\FS;
+use Lobby\Server;
+
 /**
  * The Update class.
  * For updating Lobby Core & Apps
- * The script execution time is set to unlimited
  */
-set_time_limit(0);
 
 class Update extends \Lobby {
 
+  /**
+   * cURL Progress callback should be inserted to here
+   */
   public static $progress = null;
   
   /**
@@ -63,7 +67,7 @@ class Update extends \Lobby {
     
     $oldVer = \Lobby::$version;
     $latest_version = getOption("lobby_latest_version");
-    $url = \Lobby\Server::download("lobby", $latest_version);
+    $url = Server::download("lobby", $latest_version);
       
     $zipFile = L_DIR . "/contents/update/" . $latest_version . ".zip";
     self::zipFile($url, $zipFile);
@@ -81,7 +85,7 @@ class Update extends \Lobby {
      */
     $zip->extractTo(L_DIR);
     $zip->close();
-    \Lobby\FS::remove($zipFile);
+    FS::remove($zipFile);
     
     self::finish_software_update(isset($admin_previously_installed));
     
@@ -89,9 +93,9 @@ class Update extends \Lobby {
   }
   
   public static function finish_software_update($admin_previously_installed = false){
-    \Lobby\FS::write("/upgrade.lobby", "1", "w");
+    FS::write("/upgrade.lobby", "1", "w");
     if($admin_previously_installed){
-      \Lobby\FS::remove("/contents/modules/admin/disabled.txt");
+      FS::remove("/contents/modules/admin/disabled.txt");
     }
     
     $latest_version = getOption("lobby_latest_version");
@@ -101,8 +105,8 @@ class Update extends \Lobby {
      * Remove Depreciated Files
      */
     $deprecatedFilesInfoLoc = "/contents/update/removeFiles.php";
-    if( \Lobby\FS::exists($deprecatedFilesInfoLoc) ){
-      $files = \Lobby\FS::get($deprecatedFilesInfoLoc);
+    if( FS::exists($deprecatedFilesInfoLoc) ){
+      $files = FS::get($deprecatedFilesInfoLoc);
       $files = explode("\n", $files);
       
       if(count($files) !== 0){
@@ -110,12 +114,12 @@ class Update extends \Lobby {
         foreach($files as $file){
           $fileLoc = L_DIR . "/$file";
           if(file_exists($fileLoc) && $fileLoc != L_DIR){
-            \Lobby\FS::remove($fileLoc);
+            FS::remove($fileLoc);
             \Lobby::log("Removed Deprecated File: $fileLoc");
           }
         }
-        copy(\Lobby\FS::loc($deprecatedFilesInfoLoc), \Lobby\FS::loc("$deprecatedFilesInfoLoc.txt"));
-        \Lobby\FS::remove($deprecatedFilesInfoLoc);
+        copy(FS::loc($deprecatedFilesInfoLoc), FS::loc("$deprecatedFilesInfoLoc.txt"));
+        FS::remove($deprecatedFilesInfoLoc);
         \Lobby::log("Finished Removing Deprecated Files");
       }
     }
@@ -123,20 +127,20 @@ class Update extends \Lobby {
     /**
      * Database Update
      */
-    if(\Lobby\FS::exists("/update/sqlExecute.sql")){
+    if(FS::exists("/update/sqlExecute.sql")){
       \Lobby::log("Upgrading Lobby Database");
-      $sqlCode = \Lobby\FS::get("/update/sqlExecute.sql");
+      $sqlCode = FS::get("/update/sqlExecute.sql");
       $sql = \Lobby\DB::prepare($sqlCode);
       
       if(!$sql->execute()){
         echo ser("Error", "Database Update Couldn't be made. <a href='update.php'>Try again</a>");
       }else{
-        \Lobby\FS::remove("/update/sqlExecute.sql");
+        FS::remove("/update/sqlExecute.sql");
       }
       \Lobby::log("Updated Lobby Database");
     }
     
-    \Lobby\FS::remove("/upgrade.lobby");
+    FS::remove("/upgrade.lobby");
     
     \Lobby::log("Lobby is successfully Updated.");
   }
@@ -150,7 +154,7 @@ class Update extends \Lobby {
     }
     \Lobby::log("Installing Latest Version of App {$id}");
     
-    $url = \Lobby\Server::download("app", $id);
+    $url = Server::download("app", $id);
     $zipFile = L_DIR . "/contents/update/{$id}.zip";
     self::zipFile($url, $zipFile);
  
@@ -171,7 +175,7 @@ class Update extends \Lobby {
         $zip->extractTo($appDir);
         $zip->close();
         
-        \Lobby\FS::remove($zipFile);
+        FS::remove($zipFile);
         \Lobby::log("Installed App {$id}");
         return true;
       }

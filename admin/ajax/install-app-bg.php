@@ -16,7 +16,7 @@ use \Lobby\Apps;
 use \Lobby\FS;
 use \Lobby\Update;
 
-if($argv[1] === \Lobby::$lid && isset($argv[3])){
+if($argv[1] === \Lobby::getLID() && isset($argv[3])){
   $appID = $argv[3];
   
   function sendStatusToLobby($statusID, $status){

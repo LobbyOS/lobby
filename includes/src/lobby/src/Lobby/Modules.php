@@ -1,15 +1,15 @@
 <?php
 namespace Lobby;
 
-use \Lobby\Apps;
-use \Lobby\FS;
+use Lobby;
+use Lobby\Apps;
+use Lobby\FS;
 
 class Modules extends \Lobby {
 
   private static $core_modules = array(), $custom_modules = array(), $app_modules = array(), $modules = array();
   
   public static function __constructStatic(){
-    
     self::$app_modules = self::appModules();
     self::$core_modules = self::dirModules("/includes/lib/modules");
     self::$custom_modules = self::dirModules("/contents/modules");
@@ -42,7 +42,7 @@ class Modules extends \Lobby {
    * List modules in a directory
    */
   public static function dirModules($location){
-    $location = L_DIR . $location;
+    $location = FS::loc($location);
     $modules = array_diff(scandir($location), array('..', '.'));
     $validModules = array();
     
@@ -52,7 +52,7 @@ class Modules extends \Lobby {
         $validModules[$module] = array(
           "id" => $module,
           "location" => $loc,
-          "url" => L_URL . "/" . FS::rel($loc)
+          "url" => Lobby::getURL() . "/" . FS::rel($loc)
         );
       }
     }
@@ -65,17 +65,17 @@ class Modules extends \Lobby {
   public static function appModules(){
     $modules = array();
     
-    $apps = \Lobby\Apps::getApps();
+    $apps = Apps::getApps();
     foreach($apps as $appID){
       $module_name = 'app_' . Apps::normalizeID($appID);
-      $loc = APPS_DIR . "/$appID/module";
+      $loc = Apps::getAppsDir() . "/$appID/module";
       
       if(self::valid($module_name, $loc)){
         $modules[$module_name] = array(
           "id" => $module_name,
           "appID" => $appID,
           "location" => $loc,
-          "url" => L_URL . "/" . FS::rel($loc)
+          "url" => Lobby::getURL() . "/" . FS::rel($loc)
         );
       }
     }
