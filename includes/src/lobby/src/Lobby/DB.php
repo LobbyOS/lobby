@@ -8,16 +8,14 @@ namespace Lobby;
 
 class DB extends \Lobby {
   
-  public static $prefix = "", $dbh;
+  protected static $prefix = "", $dbh;
   
   /**
    * The DBMS begin used - MySQL or SQLite
    */
-  public static $type;
+  protected static $type;
  
   public static function __constructStatic(){
-    $root = L_DIR;
-    
     /**
      * Get DB config
      */
@@ -219,6 +217,13 @@ class DB extends \Lobby {
        return true;
      }
     }
+  }
+  
+  /**
+   * Get database handler
+   */
+  public static function getDBH(){
+    return self::$dbh;
   }
   
 }

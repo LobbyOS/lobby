@@ -1,28 +1,32 @@
 <?php
 namespace Lobby\UI;
 
-class Themes extends \Lobby {
+use Lobby\FS;
+
+class Themes {
   
   /**
    * Cache results
    */
   private static $cache = array();
   
-  public static $themeID, $theme, $dir, $url;
+  public static $themesDir, $themeID, $theme, $dir, $url;
   
   /**
    * Initialization
    */
-  public static function __constructStatic(){
+  public static function __constructStatic($themesDir){
+    self::$themesDir = $themesDir;
     self::$themeID = getOption("active_theme");
+    
     if(self::$themeID == null){
       self::$themeID = "hine";
     }else if(self::validTheme(self::$themeID) === false){
       self::$themeID = "hine";
     }
     
-    self::$url = THEMES_URL . "/" . self::$themeID;
-    self::$dir = THEMES_DIR . "/" . self::$themeID;
+    self::$url = \Lobby::u(FS::rel(self::$themesDir . "/" . self::$themeID));
+    self::$dir = \Lobby\FS::loc(self::$themesDir . "/" . self::$themeID);
     
     define("THEME_ID", self::$themeID);
     define("THEME_DIR", self::$dir);
@@ -119,7 +123,7 @@ class Themes extends \Lobby {
    */
   public static function validTheme($theme){
     $valid = false;
-    $loc = THEMES_DIR . "/$theme";
+    $loc = self::$themesDir . "/$theme";
     
     /**
      * Does the "Theme.php" file in theme directory exist ?
