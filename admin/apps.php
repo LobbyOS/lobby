@@ -101,7 +101,7 @@ use \Lobby\Need;
             <div class="col m9">
               <ul class="tabs">
                 <li class="tab"><a href="#app-info">Info</a></li>
-                <li class="tab"><a href="#app-data">Data</a></li>
+                <li class="tab"><a href="#app-data">Memory</a></li>
               </ul>
               <div id="app-info" class="tab-contents">
                 <div class="chip">Version : <?php echo $App->info['version'];?></div><cl/>
@@ -130,11 +130,11 @@ use \Lobby\Need;
                     <td><?php echo $App->appDir;?></td>
                   </tr>
                   <tr>
-                    <td>Folder size</td>
+                    <td>Folder</td>
                     <td><h6><?php $folderSize = FS::getSize($App->appDir);echo FS::normalizeSize($folderSize);?></h6></td>
                   </tr>
                   <tr>
-                    <td>Size occupied in database</td>
+                    <td title="Size occupied in database">App Data</td>
                     <td><h6><?php $dbSize = $App->getDBSize();echo FS::normalizeSize($dbSize);?></h6></td>
                   </tr>
                 </tbody>
@@ -156,7 +156,7 @@ use \Lobby\Need;
         }else{
         ?>
           <h2>Apps</h2>
-          <p>Disable or Remove installed apps. You can find and install more Apps from <a href="<?php echo L_URL;?>/admin/lobby-store.php">Lobby Store</a>.</p>
+          <p>Manage <b>installed apps</b>. You can find and install more Apps from <a href="<?php echo L_URL;?>/admin/lobby-store.php">Lobby Store</a>.</p>
         <?php
           $apps = Apps::getApps();
           

@@ -39,6 +39,7 @@ try{
    */
   $composer->loadClass("Assets");
   $composer->loadClass("Lobby\\DB");
+  $composer->loadClass("Lobby\\UI\\Themes");
   
   /**
    * Static Class Constructor

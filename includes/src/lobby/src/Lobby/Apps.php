@@ -227,7 +227,7 @@ class Apps {
         (FS::exists($this->appDir . "/src/image/logo.svg") ?
           APPS_URL . "/{$this->app}/src/image/logo.svg" :
           APPS_URL . "/{$this->app}/src/image/logo.png"
-        ) : Themes::$url . "/src/main/image/app-logo.png";
+        ) : Themes::getURL() . "/src/main/image/app-logo.png";
        
       /**
        * Insert the info as a property
@@ -321,7 +321,7 @@ class Apps {
    * Get size used in database
    */
   public function getDBSize($normalizeSize = false){
-    $sql = \Lobby\DB::getDBH()->prepare("SELECT * FROM `". \Lobby\DB::$prefix ."data` WHERE `app` = ?");
+    $sql = \Lobby\DB::getDBH()->prepare("SELECT * FROM `". \Lobby\DB::getPrefix() ."data` WHERE `app` = ?");
     $sql->execute(array($this->app));
     $result = $sql->fetchAll(\PDO::FETCH_ASSOC);
     

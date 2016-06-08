@@ -6,9 +6,9 @@
  
 class Assets {
 
-  public static $css, $js = array();
+  protected static $css, $js = array();
   
-  public static $config = array(
+  protected static $config = array(
     /**
      * Base Directory (path) of application
      */
@@ -225,6 +225,22 @@ class Assets {
     }else{
       echo "incompatible_type";
     }
+  }
+  
+  public static function issetJS($asset){
+    return isset(self::$js[$asset]);
+  }
+  
+  public static function issetCSS($asset){
+    return isset(self::$css[$asset]);
+  }
+  
+  public static function getJS($asset){
+    return self::$js[$asset];
+  }
+  
+  public static function getCSS($asset){
+    return self::$css[$asset];
   }
 
 }

@@ -3,7 +3,8 @@
  * SymResponse = Symphony Response
  */
 use Symfony\Component\HttpFoundation\Response as SymResponse;
-use \Lobby\FS;
+use Lobby\FS;
+use Lobby\UI\Themes;
 
 class Response {
 
@@ -95,15 +96,15 @@ class Response {
       self::setTitle($title);
     }
     
-    if(isset(Assets::$js['jquery'])){
+    if(Assets::issetJS('jquery')){
       /**
        * Load jQuery, jQuery UI, Lobby Main, App separately without async
        */
       $url = L_URL . "/includes/serve-assets.php?type=js&assets=" . implode(",", array(
-        Assets::$js['jquery'],
-        Assets::$js['jqueryui'],
-        Assets::$js['main'],
-        isset(Assets::$js['app']) ? Assets::$js['app'] : ""
+        Assets::getJS('jquery'),
+        Assets::getJS('jqueryui'),
+        Assets::getJS('main'),
+        Assets::issetJS('app') ? Assets::getJS('app') : ""
       ));
       echo "<script src='{$url}'></script>";
       
@@ -113,7 +114,7 @@ class Response {
     }
     
     $jsURLParams = array(
-      "THEME_URL" => THEME_URL
+      "THEME_URL" => Themes::getURL()
     );
     
     if(defined("APP_URL")){

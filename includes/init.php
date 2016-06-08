@@ -72,7 +72,7 @@ if(\Lobby::status("lobby.admin")){
   /**
    * Check For New Versions (Apps & Core)
    */
-  if(\Lobby::$config['server_check'] === true && !isset($_SESSION['checkedForLatestVersion'])){
+  if(\Lobby::getConfig('server_check') === true && !isset($_SESSION['checkedForLatestVersion'])){
     \Lobby\Server::check();
     $_SESSION['checkedForLatestVersion'] = 1;
   }
