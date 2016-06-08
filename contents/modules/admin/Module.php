@@ -71,7 +71,7 @@ class admin extends \Lobby\Module {
       saveOption("admin_secure_salt", $salt);
       saveOption("admin_secure_cookie", $cookie);
       
-      $prefix = \Lobby\DB::$prefix;
+      $prefix = \Lobby\DB::getPrefix();
       /**
        * Create `users` TABLE
        */

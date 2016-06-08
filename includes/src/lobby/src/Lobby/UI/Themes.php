@@ -8,9 +8,9 @@ class Themes {
   /**
    * Cache results
    */
-  private static $cache = array();
+  protected static $cache = array();
   
-  public static $themesDir, $themeID, $theme, $dir, $url;
+  protected static $themesDir, $themeID, $theme, $dir, $url;
   
   /**
    * Initialization
@@ -132,6 +132,10 @@ class Themes {
       $valid = true;
     }
     return $valid;
+  }
+  
+  public static function getURL(){
+    return self::$url;
   }
   
 }

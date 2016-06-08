@@ -83,10 +83,11 @@
               <td>Release Date</td>
               <td><?php echo \Lobby::$versionReleased;?></td>
             </tr>
-            <tr>
-              <th><h4 style="margin: 0;"><?php echo \Lobby::l("/admin/update.php", "Updates", "");?></h4></th>
-              <th></th>
-            </tr>
+          </tbody>
+        </table>
+        <h4 style="margin: 0;"><?php echo \Lobby::l("/admin/update.php", "Updates", "");?></h4>
+        <table>
+          <tbody>
             <tr>
               <td>Latest Version</td>
               <td><?php echo getOption("lobby_latest_version");?></td>
@@ -97,7 +98,6 @@
             </tr>
           </tbody>
         </table>
-        <?php echo \Lobby::l("/admin/update.php", "Updates", "class='btn green'");?>
         <cl/>
         <?php
         /* Check if the current version is not the latest version */

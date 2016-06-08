@@ -83,11 +83,14 @@ class FS {
   public static function write($path, $content, $type = "w"){
     $path = self::loc($path, false);
     
+    /**
+     * Append newline at EOF
+     */
     if($type === "a"){
-      /**
-       * Append newline at EOF
-       */
-      $content = file_get_contents($path) . $content . "\n";
+      if(file_exists($path))
+        $content = file_get_contents($path) . $content . "\n";
+      else
+        $content .= "\n";
     }
     self::$fs->dumpFile($path, $content);
   }
