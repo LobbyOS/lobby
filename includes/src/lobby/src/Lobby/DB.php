@@ -226,4 +226,15 @@ class DB extends \Lobby {
     return self::$dbh;
   }
   
+  /**
+   * DBMS used
+   */
+  public static function getType(){
+    return self::$type;
+  }
+  
+  public static function getPrefix(){
+    return self::$prefix;
+  }
+  
 }
