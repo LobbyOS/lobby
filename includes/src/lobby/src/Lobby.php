@@ -117,6 +117,10 @@ class Lobby {
     }
   }
   
+  public static function getConfig($key){
+    return isset($config[$key]) ? self::$config[$key] : false;
+  }
+  
   /**
    * Add message to log files 
    */
@@ -361,7 +365,7 @@ class Lobby {
       /**
        * If $origPath is a relative URI
        */
-      if(!defined("APP_DIR") || substr($origPath, 0, 1) === "/"){
+      if(!defined("APP_DIR") || $urlHost == null){
         $url = self::$url . "/$path";
       }else{
         $url = \Lobby\App::u($origPath);

@@ -21,10 +21,10 @@ class Update extends \Lobby {
    */
   public static function zipFile($url, $zipFile){
     if( !extension_loaded('zip') ){
-      \Lobby::log("Dependency Missing, Please install PHP Zip Extension");
+      self::log("Dependency Missing, Please install PHP Zip Extension");
       echo ser("PHP Zip Extension", "I can't find the Zip PHP Extension. Please Install It & Try again");
     }
-    \Lobby::log("Started Downloading Zip File from {$url} to {$zipFile}");
+    self::log("Started Downloading Zip File from {$url} to {$zipFile}");
     
     $userAgent = 'LobbyBot/0.1 (' . L_SERVER . ')';
     
@@ -48,11 +48,11 @@ class Update extends \Lobby {
         'timeout' => time()
       ));
     }catch(\Requests_Exception $error){
-      \Lobby::log("HTTP Requests Error ($url) : $error");
+      self::log("HTTP Requests Error ($url) : $error");
       echo ser("Error", "HTTP Requests Error : " . $error);
       return false;
     }
-    \Lobby::log("Downloaded Zip File from {$url} to {$zipFile}");
+    self::log("Downloaded Zip File from {$url} to {$zipFile}");
     
     return $zipFile;
   }
@@ -65,7 +65,7 @@ class Update extends \Lobby {
       $admin_previously_installed = true;
     }
     
-    $oldVer = \Lobby::$version;
+    $oldVer = self::$version;
     $latest_version = getOption("lobby_latest_version");
     $url = Server::download("lobby", $latest_version);
       
@@ -75,11 +75,11 @@ class Update extends \Lobby {
     // Make the Zip Object
     $zip = new \ZipArchive;
     if($zip->open($zipFile) != "true"){
-      \Lobby::log("Unable to open downloaded Zip File.");
+      self::log("Unable to open downloaded Zip File.");
       echo ser("Error", "Unable to open Zip File.  <a href='update.php'>Try again</a>");
     }
     
-    \Lobby::log("Upgrading Lobby Software From {$zipFile}");
+    self::log("Upgrading Lobby Software From {$zipFile}");
     /**
      * Extract New Version
      */
@@ -99,7 +99,7 @@ class Update extends \Lobby {
     }
     
     $latest_version = getOption("lobby_latest_version");
-    \Lobby::log("Updated Lobby to version {$latest_version}");
+    self::log("Updated Lobby to version {$latest_version}");
  
     /**
      * Remove Depreciated Files
@@ -115,12 +115,12 @@ class Update extends \Lobby {
           $fileLoc = L_DIR . "/$file";
           if(file_exists($fileLoc) && $fileLoc != L_DIR){
             FS::remove($fileLoc);
-            \Lobby::log("Removed Deprecated File: $fileLoc");
+            self::log("Removed Deprecated File: $fileLoc");
           }
         }
         copy(FS::loc($deprecatedFilesInfoLoc), FS::loc("$deprecatedFilesInfoLoc.txt"));
         FS::remove($deprecatedFilesInfoLoc);
-        \Lobby::log("Finished Removing Deprecated Files");
+        self::log("Finished Removing Deprecated Files");
       }
     }
  
@@ -128,7 +128,7 @@ class Update extends \Lobby {
      * Database Update
      */
     if(FS::exists("/update/sqlExecute.sql")){
-      \Lobby::log("Upgrading Lobby Database");
+      self::log("Upgrading Lobby Database");
       $sqlCode = FS::get("/update/sqlExecute.sql");
       $sql = \Lobby\DB::prepare($sqlCode);
       
@@ -137,12 +137,12 @@ class Update extends \Lobby {
       }else{
         FS::remove("/update/sqlExecute.sql");
       }
-      \Lobby::log("Updated Lobby Database");
+      self::log("Updated Lobby Database");
     }
     
     FS::remove("/upgrade.lobby");
     
-    \Lobby::log("Lobby is successfully Updated.");
+    self::log("Lobby is successfully Updated.");
   }
   
   /**
@@ -152,7 +152,7 @@ class Update extends \Lobby {
     if($id == ""){
       echo ser("Error", "No App Mentioned to update.");
     }
-    \Lobby::log("Installing Latest Version of App {$id}");
+    self::log("Installing Latest Version of App {$id}");
     
     $url = Server::download("app", $id);
     $zipFile = L_DIR . "/contents/update/{$id}.zip";
@@ -162,7 +162,7 @@ class Update extends \Lobby {
     if(class_exists("ZipArchive")){
       $zip = new \ZipArchive;
       if($zip->open($zipFile) != "true"){
-        \Lobby::log("Unable to open Downloaded App ($id) File : $zipFile");
+        self::log("Unable to open Downloaded App ($id) File : $zipFile");
         echo ser("Error", "Unable to open Downloaded App File.");
       }else{
         /**
@@ -176,7 +176,7 @@ class Update extends \Lobby {
         $zip->close();
         
         FS::remove($zipFile);
-        \Lobby::log("Installed App {$id}");
+        self::log("Installed App {$id}");
         return true;
       }
     }else{

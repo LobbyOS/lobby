@@ -12,7 +12,7 @@ class Time {
      * Default timezone of Lobby is UTC
      */
     date_default_timezone_set("UTC");
-    if(DB::$type === "mysql"){
+    if(DB::getType() === "mysql"){
       $sql = DB::getDBH()->prepare("SET time_zone = ?;");
       $sql->execute(array('+00:00'));
     }
