@@ -3,6 +3,8 @@
  * The Heart of Lobby
  */
  
+use Lobby\Apps;
+ 
 class Lobby {
 
   /**
@@ -365,7 +367,7 @@ class Lobby {
       /**
        * If $origPath is a relative URI
        */
-      if(!defined("APP_DIR") || $urlHost == null){
+      if(Apps::isAppRunning() || $urlHost == null){
         $url = self::$url . "/$path";
       }else{
         $url = \Lobby\App::u($origPath);

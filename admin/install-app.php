@@ -30,7 +30,7 @@ require "../load.php";
             echo ser("Error", "App is not installed");
           }
           $App->enableApp();
-          echo sss("Enabled", "The App <b>{$displayID}</b> is enabled. The author says thanks. <cl/><a href='".$App->info['URL']."' class='btn green'>Open App</a>");
+          echo sss("Enabled", "The App <b>{$displayID}</b> is enabled. The author says thanks. <cl/><a href='".$App->info['url']."' class='btn green'>Open App</a>");
         }
         if(H::i("action") == "remove" && H::csrf()){
           $App = new \Lobby\Apps($id);

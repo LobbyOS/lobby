@@ -1,6 +1,6 @@
 $(document).ready(function(){
     tinymce.init({
-      selector: "#workspace#ledit #editor",
+      selector: "#workspace #editor",
       plugins: "autoresize"
     });
    /**

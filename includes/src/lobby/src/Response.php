@@ -3,6 +3,7 @@
  * SymResponse = Symphony Response
  */
 use Symfony\Component\HttpFoundation\Response as SymResponse;
+use Lobby\Apps;
 use Lobby\FS;
 use Lobby\UI\Themes;
 
@@ -117,9 +118,9 @@ class Response {
       "THEME_URL" => Themes::getURL()
     );
     
-    if(defined("APP_URL")){
-      $jsURLParams["APP_URL"] = urlencode(APP_URL);
-      $jsURLParams["APP_SRC"] = urlencode(APP_SRC);
+    if(Apps::isAppRunning()){
+      $jsURLParams["APP_URL"] = urlencode(Apps::getInfo("url"));
+      $jsURLParams["APP_SRC"] = urlencode(Apps::getInfo("srcURL"));
     }
     
     $jsURL = Assets::getServeURL("js", $jsURLParams);
@@ -133,9 +134,9 @@ class Response {
     /**
      * CSS Files
      */
-    if(defined("APP_URL")){
-      $cssParams["APP_URL"] = urlencode(APP_URL);
-      $cssParams["APP_SRC"] = urlencode(APP_SRC);
+    if(Apps::isAppRunning()){
+      $cssServeParams["APP_URL"] = urlencode(Apps::getInfo("url"));
+      $cssServeParams["APP_SRC"] = urlencode(Apps::getInfo("srcURL"));
     }
     echo Assets::getServeLinkTag($cssServeParams);
     
