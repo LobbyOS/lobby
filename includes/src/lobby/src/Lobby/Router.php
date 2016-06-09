@@ -62,7 +62,7 @@ class Router {
          */
         \Lobby\UI\Panel::addTopItem("lobbyApp{$AppID}", array(
           "text" => $AppInfo['name'],
-          "href" => APP_URL,
+          "href" => $AppInfo['url'],
           "subItems" => array(
             "app_admin" => array(
               "text" => "Admin",
@@ -147,23 +147,27 @@ class Router {
           )
         ));
         
-        $page_response = $class->page($page);
-        if($page_response == "auto"){
+        $pageResponse = $class->page($page);
+        
+        if($pageResponse === "auto"){
           if($page === "/"){
             $page = "/index";
           }
-          $GLOBALS['workspaceHTML'] = $class->inc("/src/page{$page}.php");
+          $html = $class->inc("/src/page{$page}.php");
+          if($html)
+            Response::setPage($html);
+          else
+            ser();
         }else{
-          $GLOBALS['workspaceHTML'] = $page_response;
-        }
-        
-        if($GLOBALS['workspaceHTML'] === false || $GLOBALS['workspaceHTML'] == null){
-          ob_start();
-            echo ser("Error", "The app '<strong>{$AppID}</strong>' does not have an Admin Page. <a clear href='". \Lobby::u("/app/$AppID") ."' class='btn green'>Go To App</a>");
-          $error = ob_get_contents();
-          ob_end_clean();
-          
-          $GLOBALS['workspaceHTML'] = "<div class='contents'>". $error ."</div>";
+          if($pageResponse === null){
+            ob_start();
+              echo ser("Error", "The app '<strong>{$AppID}</strong>' does not have an Admin Page. <a clear href='". \Lobby::u("/app/$AppID") ."' class='btn green'>Go To App</a>");
+            $error = ob_get_contents();
+            ob_end_clean();
+            Response::setPage($error);
+          }else{
+            Response::setPage($pageResponse);
+          }
         }
       }
     });

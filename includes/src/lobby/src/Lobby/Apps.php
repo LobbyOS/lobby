@@ -17,7 +17,10 @@ class Apps {
    */
   private static $appsDir = null;
   
-  public static $appID = false;
+  /**
+   * This will contain the App object when app is running
+   */
+  private static $activeApp = false;
   
   protected static $manifestConfig = array(
     "name" => "",
@@ -183,7 +186,7 @@ class Apps {
       if(self::valid($id)){
         $this->exists = true;
         $this->app = $id;
-        $this->appDir = self::$appsDir . "/$id";
+        $this->dir = self::$appsDir . "/$id";
         
         /**
          * App Manifest Info as a object property
@@ -204,8 +207,8 @@ class Apps {
    * Get the manifest info of app as array
    */
   private function setInfo(){
-    $manifest = FS::exists($this->appDir . "/manifest.json") ?
-      file_get_contents($this->appDir . "/manifest.json") : false;
+    $manifest = FS::exists($this->dir . "/manifest.json") ?
+      file_get_contents($this->dir . "/manifest.json") : false;
     
     if($manifest){
       $details = json_decode($manifest, true);
@@ -215,8 +218,8 @@ class Apps {
        * Add extra info with the manifest info
        */
       $details['id'] = $this->app;
-      $details['location'] = $this->appDir;
-      $details['URL'] = L_URL . "/app/{$this->app}";
+      $details['location'] = $this->dir;
+      $details['url'] = L_URL . "/app/{$this->app}";
       $details['srcURL'] = L_URL . "/contents/apps/{$this->app}";
       $details['adminURL'] = L_URL . "/admin/app/{$this->app}";
       
@@ -224,7 +227,7 @@ class Apps {
        * Prefer SVG over PNG
        */
       $details['logo'] = $details['logo'] !== false ?
-        (FS::exists($this->appDir . "/src/image/logo.svg") ?
+        (FS::exists($this->dir . "/src/image/logo.svg") ?
           APPS_URL . "/{$this->app}/src/image/logo.svg" :
           APPS_URL . "/{$this->app}/src/image/logo.png"
         ) : Themes::getURL() . "/src/main/image/app-logo.png";
@@ -293,7 +296,7 @@ class Apps {
   public function removeApp(){
     if($this->app){
       if(self::exists($this->app) !== false){
-        $dir = $this->appDir;
+        $dir = $this->dir;
         if(file_exists("$dir/uninstall.php")){
           include_once "$dir/uninstall.php";
         }
@@ -347,7 +350,7 @@ class Apps {
       /**
        * Load the app class
        */
-      require_once $this->appDir . "/App.php";
+      require_once $this->dir . "/App.php";
       
       $className = "\\Lobby\App\\" . self::normalizeID($this->app);
      
@@ -372,28 +375,30 @@ class Apps {
     if($this->app){
       \Assets::js("app", "/includes/lib/lobby/js/app.js");
       
-      self::$appID = $this->app;
-      
-      /**
-       * Define the App Constants
-       */
-      define("APP_DIR", $this->appDir);
-      define("APP_SRC", $this->info['srcURL']);
-      
-      if(!defined("APP_URL")){
-        /**
-         * We specifically check if APP_URL is defined,
-         * because it may be already defined by `singleapp` module.
-         */
-        define("APP_URL", $this->info['URL']);
-        define("APP_ADMIN_URL", $this->info['adminURL']);
-      }
+      self::$activeApp = $this;
       
       /**
        * Return the App Object
        */
       return $this->getInstance();
     }
+  }
+  
+  /**
+   * Get config value of currently running app
+   */
+  public static function getInfo($key){
+    if(self::$activeApp)
+      return self::$activeApp->info[$key];
+    else
+      return null;
+  }
+  
+  /**
+   * Whether Lobby is in app-mode
+   */
+  public static function isAppRunning(){
+    return self::$activeApp;
   }
   
 }

@@ -93,11 +93,11 @@ if(\Lobby::status("lobby.admin")){
       }
     };
     <?php
-    if(\Lobby\Apps::$appID){
+    if(\Lobby\Apps::isAppRunning()){
       echo 'window.lobbyExtra["app"] = {
-        id: "'. \Lobby\Apps::$appID .'",
-        url: "'. APP_URL .'",
-        src: "'. \Lobby::u("/contents/apps/" . \Lobby\Apps::$appID) .'"
+        id: "'. \Lobby\Apps::getInfo("id") .'",
+        url: "'. \Lobby\Apps::getInfo("url") .'",
+        src: "'. \Lobby\Apps::getInfo("srcURL") .'"
       };';
     }
   ?></script>

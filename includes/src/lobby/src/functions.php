@@ -85,7 +85,7 @@ function getData($key = "", $extra = false, $appID = null){
   if( !\Lobby::$installed ){
     return false;
   }else{
-    $appID = $appID === null ? \Lobby\Apps::$appID : $appID;
+    $appID = $appID === null ? \Lobby\Apps::getInfo("id") : $appID;
     return \Lobby\DB::getData($appID, $key, $extra);
   }
 }
@@ -95,7 +95,7 @@ function saveData($key = "", $value = "", $appID = ""){
   if(!\Lobby::$installed){
     return false;
   }else{
-    $appID = $appID == "" ? \Lobby\Apps::$appID : $appID;
+    $appID = $appID == "" ? \Lobby\Apps::getInfo("id") : $appID;
     return \Lobby\DB::saveData($appID, $key, $value);
   }
 }
@@ -105,7 +105,7 @@ function removeData($key = "", $appID = ""){
   if( !\Lobby::$installed ){
     return false;
   }else{
-    $appID = $appID == "" ? \Lobby\Apps::$appID : $appID;
+    $appID = $appID == "" ? \Lobby\Apps::getInfo("id") : $appID;
     return \Lobby\DB::removeData($appID, $key);
   }
 }
