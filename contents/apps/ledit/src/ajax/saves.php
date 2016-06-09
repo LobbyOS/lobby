@@ -1,5 +1,5 @@
 <?php
-$saves = getData("", "ledit");
+$saves = $this->getData("", "ledit");
 if( !$saves ){
   echo '<div class="saveItem">You haven\'t saved anything.</div>';
 }else{
@@ -8,7 +8,7 @@ if( !$saves ){
   }
   usort($saves, "cmp");
   foreach($saves as $save){
-    $url = APP_URL . "?id=" . urlencode($save['name']);
+    $url = $this->url . "?id=" . urlencode($save['name']);
 ?>
     <a href="<?php echo $url;?>">
       <div class="saveItem">

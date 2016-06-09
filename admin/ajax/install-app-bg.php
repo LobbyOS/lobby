@@ -93,7 +93,7 @@ if($argv[1] === \Lobby::getLID() && isset($argv[3])){
       $App = new Apps($appID);
       $App->enableApp();
       
-      sendStatusToLobby("install_finished", "Installed <b>$appID</b>.<cl/><a href='". $App->info["URL"] ."' class='btn green'>Open App</a>");
+      sendStatusToLobby("install_finished", "Installed <b>$appID</b>.<cl/><a href='". $App->info["url"] ."' class='btn green'>Open App</a>");
     }
   }catch(\Exception $e){
     sendStatusToLobby("error", $e->getMessage());

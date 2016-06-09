@@ -75,7 +75,7 @@ if($AppID !== null){
                    */
                   echo \Lobby::l("/admin/check-updates.php", "Update App", "class='btn red'");
                 }else if($App->enabled){
-                  echo \Lobby::l($App->info['URL'], "Open App", "class='btn green'");
+                  echo \Lobby::l($App->info['url'], "Open App", "class='btn green'");
                 }else{
                   /**
                    * App is Disabled. Show button to enable it

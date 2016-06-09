@@ -1,14 +1,17 @@
 <?php
 namespace Lobby;
 
+use Response;
+use Lobby\DB;
+
 class App {
 
   public $dir, $url, $id, $srcURL;
   
   public function setTheVars($array){
-    $this->id   = $array['id'];
+    $this->id = $array['id'];
     $this->name = $array['name'];
-    $this->URL  = $array['URL'];
+    $this->url = $array['url'];
     $this->srcURL = $array['srcURL'];
     $this->dir = $array['location'];
     $this->manifest = $array;
@@ -32,7 +35,7 @@ class App {
    * Get Data
    */
   public function getData($key = "", $extra = false){
-    return \Lobby\DB::getData($this->id, $key, $extra);
+    return DB::getData($this->id, $key, $extra);
   }
   
   /**
@@ -46,7 +49,11 @@ class App {
    * Save Data
    */
   public function saveData($key = "", $extra = false){
-    return \Lobby\DB::saveData($this->id, $key, $extra);
+    return DB::saveData($this->id, $key, $extra);
+  }
+  
+  public function removeData($key){
+    return DB::removeData($this->id, $key);
   }
   
   /**
@@ -61,7 +68,7 @@ class App {
    */
   public function addNotifyItem($id, $info){
     if(!isset($info["href"])){
-      $info["href"] = $this->URL;
+      $info["href"] = $this->url;
     }
     return \Lobby\UI\Panel::addNotifyItem("app_{$this->id}_$id" , $info);
   }
@@ -73,23 +80,23 @@ class App {
     return \Lobby\UI\Panel::removeNotifyItem("app_{$this->id}_$id");
   }
   
-  public static function u($path = null){
-    return $path === null ? \Lobby::u() : APP_URL . $path;
+  public function u($path = null){
+    return $path === null ? \Lobby::u() : $this->url . $path;
   }
   
-  public static function l($path, $text = "", $extra = ""){
-    return \Lobby::l(APP_URL . $path, $text, $extra);
+  public function l($path, $text = "", $extra = ""){
+    return \Lobby::l($this->url . $path, $text, $extra);
   }
   
-  public static function get($path){
-    return \Lobby\FS::get(APP_DIR . $path);
+  public function get($path){
+    return \Lobby\FS::get($this->dir . $path);
   }
   
-  public static function write($path, $content, $type = "w"){
-    return \Lobby\FS::write(APP_DIR . $path, $content, $type);
+  public function write($path, $content, $type = "w"){
+    return \Lobby\FS::write($this->dir . $path, $content, $type);
   }
   
-  public static function redirect($path){
+  public function redirect($path){
     return Response::redirect(self::u($path));
   }
   
