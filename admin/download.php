@@ -93,7 +93,7 @@ if($type == "app" && \Lobby\Update::app($id)){
   $App = new Apps($id);
   $App->enableApp();
   
-  echo "Installed - The app has been installed. <a target='_parent' href='". $App->info["URL"] ."'>Open App</a>";
+  echo "Installed - The app has been installed. <a target='_parent' href='". $App->info["url"] ."'>Open App</a>";
 }else if($type == "lobby" && $redirect = \Lobby\Update::software()){
   echo "<a target='_parent' href='$redirect'>Updated Lobby</a>";
 }
