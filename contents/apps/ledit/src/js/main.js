@@ -6,7 +6,7 @@ $(document).ready(function(){
    /**
     * The App Parent Element URI
     */
-   var app = "#workspace#ledit";
+   var app = "#workspace";
    
    $(app + " #save.btn").live("click", function(){
       if(tinyMCE.activeEditor.getContent() === ""){
@@ -14,6 +14,7 @@ $(document).ready(function(){
       }else{
         key = $(app + " #saveName").val(); // The key Name
         value = tinyMCE.activeEditor.getContent(); // The Content
+        
         if(key == ""){
           key = Date.today().toString("MMMM dS, yyyy");
         }

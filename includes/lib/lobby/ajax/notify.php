@@ -1,13 +1,13 @@
 <?php
-$notifications = getJSONOption("notify_items");
+$notifications = Lobby\DB::getJSONOption("notify_items");
 
 /**
  * If there is a update available either app or core, add an 
  * "Update Available" icon on the right side of panel
  */
-$AppUpdates = json_decode(getOption("app_updates"), true);
+$AppUpdates = json_decode(Lobby\DB::getOption("app_updates"), true);
 $lobby_version = \Lobby::$version;
-$latestVersion = getOption("lobby_latest_version");
+$latestVersion = Lobby\DB::getOption("lobby_latest_version");
 
 if((count($AppUpdates) != 0) || ($latestVersion && $lobby_version != $latestVersion)){
   $notifications["update"] = array(

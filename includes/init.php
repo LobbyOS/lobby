@@ -49,8 +49,8 @@ if(!\Lobby::status("lobby.install")){
     $l_info = json_decode(\Lobby\FS::get("/lobby.json"));
     
     if($lobby_version != $l_info->version){
-      saveOption("lobby_latest_version", $l_info->version);
-      saveOption("lobby_latest_version_release", $l_info->released);
+      Lobby\DB::saveOption("lobby_latest_version", $l_info->version);
+      Lobby\DB::saveOption("lobby_latest_version_release", $l_info->released);
     }
     \Lobby\Update::finish_software_update();
   }
@@ -87,7 +87,7 @@ if(\Lobby::status("lobby.admin")){
     window.tmp = {};
     window.lobbyExtra = {
       url: "<?php echo L_URL;?>",
-      csrf_token: "<?php echo csrf("s");?>",
+      csrfToken: "<?php echo CSRF::get();?>",
       sysInfo: {
         os: "<?php echo \Lobby::getSysInfo("os");?>"
       }

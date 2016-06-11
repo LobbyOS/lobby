@@ -1,10 +1,10 @@
 <?php
 require "../../../../load.php";
 
-$file = \H::i('cx74e9c6a45', '', 'POST');
-$appID = \H::i('s7c8csw91', '', 'POST');
+$file = \Request::postParam('cx74e9c6a45', '');
+$appID = \Request::postParam('s7c8csw91', '');
 
-if($file != "" && csrf()){
+if($file != "" && CSRF::check()){
   if($appID !== ""){
     $App = new \Lobby\Apps($appID);
      

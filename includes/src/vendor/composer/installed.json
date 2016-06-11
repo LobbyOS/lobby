@@ -255,54 +255,6 @@
         "description": "Small Composer wrapper to implement static class constructors"
     },
     {
-        "name": "lobby/lobby",
-        "version": "0.5.32",
-        "version_normalized": "0.5.32.0",
-        "dist": {
-            "type": "path",
-            "url": "lobby/",
-            "reference": "6d9407e9b93f19f25110cabb5f08082fa0dbd740",
-            "shasum": null
-        },
-        "require": {
-            "composer/semver": ">=1.4.0",
-            "php": ">=5.3.0"
-        },
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "src/functions.php"
-            ],
-            "psr-0": {
-                "Lobby": "src/",
-                "H": "src/",
-                "Assets": "src/",
-                "Request": "src/",
-                "Response": "src/"
-            },
-            "psr-4": {
-                "Lobby\\": "src/Lobby",
-                "Lobby\\UI\\": "src/Lobby/UI"
-            }
-        },
-        "license": [
-            "Apache 2.0"
-        ],
-        "authors": [
-            {
-                "name": "Subin Siby",
-                "homepage": "http://subinsb.com",
-                "role": "Developer"
-            }
-        ],
-        "description": "Lobby Core",
-        "homepage": "http://lobby.subinsb.com",
-        "keywords": [
-            "lobby"
-        ]
-    },
-    {
         "name": "symfony/filesystem",
         "version": "v3.0.6",
         "version_normalized": "3.0.6.0",
@@ -513,6 +465,55 @@
             "cross",
             "platform",
             "process"
+        ]
+    },
+    {
+        "name": "lobby/lobby",
+        "version": "0.5.33",
+        "version_normalized": "0.5.33.0",
+        "dist": {
+            "type": "path",
+            "url": "lobby/",
+            "reference": "8b2cb99b8e853c85eb442a09979602a0260e981a",
+            "shasum": null
+        },
+        "require": {
+            "composer/semver": ">=1.4.0",
+            "php": ">=5.3.0"
+        },
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "src/functions.php"
+            ],
+            "psr-0": {
+                "Lobby": "src/",
+                "Assets": "src/",
+                "CSRF": "src/",
+                "Helper": "src/",
+                "Request": "src/",
+                "Response": "src/"
+            },
+            "psr-4": {
+                "Lobby\\": "src/Lobby",
+                "Lobby\\UI\\": "src/Lobby/UI"
+            }
+        },
+        "license": [
+            "Apache 2.0"
+        ],
+        "authors": [
+            {
+                "name": "Subin Siby",
+                "homepage": "http://subinsb.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "Lobby Core",
+        "homepage": "http://lobby.subinsb.com",
+        "keywords": [
+            "lobby"
         ]
     }
 ]

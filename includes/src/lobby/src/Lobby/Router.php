@@ -70,11 +70,11 @@ class Router {
             ),
             "app_disable" => array(
               "text" => "Disable",
-              "href" => "/admin/apps.php?action=disable&app=$AppID" . \H::csrf("g")
+              "href" => "/admin/apps.php?action=disable&app=$AppID" . \CSRF::getParam()
             ),
             "app_remove" => array(
               "text" => "Remove",
-              "href" => "/admin/apps.php?action=remove&app=$AppID" . \H::csrf("g")
+              "href" => "/admin/apps.php?action=remove&app=$AppID" . \CSRF::getParam()
             )
           ),
           "position" => "left"

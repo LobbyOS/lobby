@@ -1,9 +1,9 @@
 <?php
 use \Fr\Process;
 
-$appID = \H::i("id", null, "POST");
+$appID = \Request::postParam("id");
 
-if(!csrf()){
+if(!CSRF::check()){
   echo json_encode(array(
     "statusID" => "error",
     "status" => "CSRF Token didn't match"
@@ -17,7 +17,7 @@ if(!csrf()){
   /**
    * A queue of App downloads
    */
-  $appInstallQueue = getJSONOption("lobby_app_downloads");
+  $appInstallQueue = Lobby\DB::getJSONOption("lobby_app_downloads");
   
   /**
    * If the $appID is in the queue, then give the download status of it
