@@ -16,8 +16,9 @@
     "files": ["src/functions.php"],
     "psr-0": {
       "Lobby": "src/",
-      "H": "src/",
       "Assets": "src/",
+      "CSRF": "src/",
+      "Helper": "src/",
       "Request": "src/",
       "Response": "src/"
     },
@@ -30,5 +31,5 @@
     "php": ">=5.3.0",
     "composer/semver": ">=1.4.0"
   },
-  "version": "0.5.32"
+  "version": "0.5.33"
 }

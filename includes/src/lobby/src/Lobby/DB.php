@@ -129,6 +129,32 @@ class DB extends \Lobby {
   }
   
   /**
+   * Retrieve JSON Value stored as option as Array
+   */
+  public static function getJSONOption($key){
+    $json = self::getOption($key);
+    $json = json_decode($json, true);
+    return is_array($json) ? $json : array();
+  }
+  
+  /**
+   * Save JSON Data in options
+   */
+  public static function saveJSONOption($key, $values){
+    $old = self::getJSONOption($key);
+    
+    $new = array_replace_recursive($old, $values);
+    foreach($values as $k => $v){
+      if($v === false){
+        unset($new[$k]);
+      }
+    }
+    $new = json_encode($new, JSON_HEX_QUOT | JSON_HEX_TAG);
+    self::saveOption($key, $new);
+    return true;
+  }
+  
+  /**
    * Get App Data
    */
   public static function getData($id, $name = "", $extra = false, $safe = true){

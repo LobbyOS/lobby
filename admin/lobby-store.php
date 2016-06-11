@@ -2,7 +2,7 @@
 require "../load.php";
 
 $page_title = "Lobby Store";
-$AppID = \H::i('id');
+$AppID = \Request::get('id');
 if($AppID !== null){
   $app = \Lobby\Server::store(array(
     "get" => "app",
@@ -67,7 +67,7 @@ if($AppID !== null){
                   if(\Lobby\Need::checkRequirements($require, true)){
                     echo "<a class='btn red disabled' title='The app requirements are not satisfied. See `Info` tab.'>Install</a>";
                   }else{
-                    echo \Lobby::l("/admin/install-app.php?id={$_GET['id']}" . H::csrf("g"), "Install", "class='btn red'");
+                    echo \Lobby::l("/admin/install-app.php?id={$_GET['id']}" . CSRF::getParam(), "Install", "class='btn red'");
                   }
                 }else if(version_compare($app['version'], $App->info['version'], ">")){
                   /**
@@ -80,7 +80,7 @@ if($AppID !== null){
                   /**
                    * App is Disabled. Show button to enable it
                    */
-                  echo \Lobby::l("/admin/apps.php?action=enable&redirect=1&app=" . $AppID . H::csrf("g"), "Enable App", "class='btn green'");
+                  echo \Lobby::l("/admin/apps.php?action=enable&redirect=1&app=" . $AppID . CSRF::getParam(), "Enable App", "class='btn green'");
                 }
                 ?>
                 <div class="chip" clear>Developed By <a href="<?php echo $app['author_page'];?>" target="_blank"><?php echo $app['author'];?></a></div>
@@ -219,7 +219,7 @@ if($AppID !== null){
               }
             echo '</div>';
             $apps_pages = (ceil($server_response['apps_count'] / 6)) + 1;
-            $cur_page = \H::i("p", "1");
+            $cur_page = \Request::get("p", "1");
             echo "<ul class='pagination'>";
               for($i = 1;$i < $apps_pages;$i++){
                 echo "<li class='waves-effect ". ($cur_page == $i ? "active" : "") ."'>";

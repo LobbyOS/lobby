@@ -86,7 +86,7 @@ lobby.ajax = function(fileName, options, callback, appID){
   if(appID != false){
     var options = $.param({"s7c8csw91": appID}) + "&" + options;
   }
-  var options = $.param({"cx74e9c6a45": fileName, "csrf_token": lobby.csrf_token}) + "&" + options;
+  var options = $.param({"cx74e9c6a45": fileName, "csrfToken": lobby.csrfToken}) + "&" + options;
 
   var requestURL = lobby.url + "/includes/lib/lobby/ajax/ajax.php";
   $.post(requestURL, options, function(data){
@@ -106,7 +106,7 @@ lobby.saveOption = function(key, value, callback){
    if(key == "" || value == ""){
       callback("bad");
    }else{
-    $.post(requestURL, {"key": key, "value": value, "csrf_token": lobby.csrf_token}, function(data){
+    $.post(requestURL, {"key": key, "value": value, "csrfToken": lobby.csrfToken}, function(data){
       callback(data);
     }).error(function(){
       /**

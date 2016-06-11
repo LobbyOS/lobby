@@ -1,6 +1,7 @@
 <?php
 namespace Lobby\UI;
 
+use Lobby\DB;
 use Lobby\FS;
 
 class Themes {
@@ -17,7 +18,7 @@ class Themes {
    */
   public static function __constructStatic($themesDir){
     self::$themesDir = $themesDir;
-    self::$themeID = getOption("active_theme");
+    self::$themeID = DB::getOption("active_theme");
     
     if(self::$themeID == null){
       self::$themeID = "hine";
