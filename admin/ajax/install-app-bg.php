@@ -22,7 +22,7 @@ if($argv[1] === \Lobby::getLID() && isset($argv[3])){
   function sendStatusToLobby($statusID, $status){
     global $appID;
     
-    saveJSONOption("lobby_app_downloads", array(
+    Lobby\DB::saveJSONOption("lobby_app_downloads", array(
       $appID => array(
         "statusID" => $statusID,
         "status" => $status,

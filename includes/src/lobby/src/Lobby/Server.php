@@ -85,9 +85,9 @@ class Server {
       
       $response = json_decode($response, true);
       if(is_array($response)){
-        saveOption("lobby_latest_version", $response['version']);
-        saveOption("lobby_latest_version_release", $response['released']);
-        saveOption("lobby_latest_version_release_notes", $response['release_notes']);
+        DB::saveOption("lobby_latest_version", $response['version']);
+        DB::saveOption("lobby_latest_version_release", $response['released']);
+        DB::saveOption("lobby_latest_version_release_notes", $response['release_notes']);
     
         if(isset($response['apps']) && count($response['apps']) != 0){
           $AppUpdates = array();
@@ -97,7 +97,7 @@ class Server {
               $AppUpdates[$appID] = $version;
             }
           }
-          saveOption("app_updates", json_encode($AppUpdates));
+          DB::saveOption("app_updates", json_encode($AppUpdates));
         }
       }
     }

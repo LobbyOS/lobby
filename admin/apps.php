@@ -34,7 +34,7 @@ use \Lobby\Need;
           <h2><?php echo "<a href='". L_SERVER ."/apps/". $App->info['id'] ."' target='_blank'>". $App->info['name'] ."</a>";?></h2>
           <p class="chip" style="margin: -5px 0 20px;"><?php echo $App->info['short_description'];?></p>
           <?php
-          if(isset($_GET['action']) && H::csrf()){
+          if(isset($_GET['action']) && CSRF::check()){
             $action = $_GET['action'];
             
             if($action === "disable"){
@@ -48,7 +48,7 @@ use \Lobby\Need;
                 <h2>Confirm</h2>
                 <p>Are you sure you want to remove the app <b><?php echo $app;?></b> ?</p>
                 <div clear></div>
-                <a class="btn green" href="<?php echo L_URL ."/admin/install-app.php?action=remove&id={$app}&".H::csrf("g");?>">Yes, I'm Sure</a>
+                <a class="btn green" href="<?php echo L_URL ."/admin/install-app.php?action=remove&id={$app}&".CSRF::getParam();?>">Yes, I'm Sure</a>
                 <a class="btn red" href="<?php echo L_URL ."/admin/apps.php";?>">No, I'm Not</a>
             <?php
               exit;
@@ -88,14 +88,14 @@ use \Lobby\Need;
                 echo \Lobby::l("/admin/check-updates.php", "Update App", "class='btn red'");
               }else if($App->enabled){
                 echo \Lobby::l($App->info['url'], "Open App", "class='btn green'");
-                echo \Lobby::l("/admin/apps.php?app=$appID&action=disable" . csrf('g'), "Disable", "class='btn'");
+                echo \Lobby::l("/admin/apps.php?app=$appID&action=disable" . CSRF::getParam(), "Disable", "class='btn'");
               }else{
                 /**
                  * App is Disabled. Show button to enable it
                  */
-                echo \Lobby::l("/admin/apps.php?action=enable&redirect=1&app=". $appID . H::csrf("g"), "Enable", "class='btn green'");
+                echo \Lobby::l("/admin/apps.php?action=enable&redirect=1&app=". $appID . CSRF::getParam(), "Enable", "class='btn green'");
               }
-              echo \Lobby::l("/admin/apps.php?app=$appID&action=remove" . csrf('g'), "Remove", "class='btn red'");
+              echo \Lobby::l("/admin/apps.php?app=$appID&action=remove" . CSRF::getParam(), "Remove", "class='btn red'");
               ?>
             </div>
             <div class="col m9">
@@ -180,10 +180,10 @@ use \Lobby\Need;
                     <div style="margin-top: 10px;">
                       <?php
                       if($App->enabled)
-                        echo \Lobby::l("/admin/apps.php?app=$app&action=disable" . csrf("g"), "Disable", "class='btn'");
+                        echo \Lobby::l("/admin/apps.php?app=$app&action=disable" . CSRF::getParam(), "Disable", "class='btn'");
                       else
-                        echo \Lobby::l("/admin/apps.php?app=$app&action=enable" . csrf("g"), "Enable", "class='btn green'");
-                      echo \Lobby::l("/admin/apps.php?app=$app&action=remove" . csrf("g"), "Remove", "class='btn red'");
+                        echo \Lobby::l("/admin/apps.php?app=$app&action=enable" . CSRF::getParam(), "Enable", "class='btn green'");
+                      echo \Lobby::l("/admin/apps.php?app=$app&action=remove" . CSRF::getParam(), "Remove", "class='btn red'");
                       ?>
                     </div>
                   </div>

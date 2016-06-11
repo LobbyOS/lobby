@@ -62,20 +62,20 @@ class admin extends \Lobby\Module {
    * Create the `users` table
    */
   public function install(){
-    if(getOption("admin_installed") == null && \Lobby::$installed){
+    if(Lobby\DB::getOption("admin_installed") == null && \Lobby::$installed){
       /**
        * Install Module
        */
-      $salt = \H::randStr(15);
-      $cookie = \H::randStr(15);
-      saveOption("admin_secure_salt", $salt);
-      saveOption("admin_secure_cookie", $cookie);
+      $salt = \Helper::randStr(15);
+      $cookie = \Helper::randStr(15);
+      Lobby\DB::saveOption("admin_secure_salt", $salt);
+      Lobby\DB::saveOption("admin_secure_cookie", $cookie);
       
-      $prefix = \Lobby\DB::getPrefix();
+      $prefix = \Lobby\Lobby\DB::getPrefix();
       /**
        * Create `users` TABLE
        */
-      $sql = \Lobby\DB::getDBH()->prepare("CREATE TABLE IF NOT EXISTS `{$prefix}users` (
+      $sql = \Lobby\Lobby\DB::getDBH()->prepare("CREATE TABLE IF NOT EXISTS `{$prefix}users` (
         `id` int(11) NOT NULL AUTO_INCREMENT,
         `username` varchar(10) NOT NULL,
         `email` tinytext NOT NULL,
@@ -87,7 +87,7 @@ class admin extends \Lobby\Module {
         PRIMARY KEY (`id`)
       ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;");
       if($sql->execute() != 0){
-        saveOption("admin_installed", "true");
+        Lobby\DB::saveOption("admin_installed", "true");
       }
     }
   }

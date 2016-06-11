@@ -38,6 +38,7 @@ try{
    * Load Classed that Composer doesn't load by default
    */
   $composer->loadClass("Assets");
+  $composer->loadClass("CSRF");
   $composer->loadClass("Lobby\\DB");
   $composer->loadClass("Lobby\\UI\\Themes");
   

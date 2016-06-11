@@ -1,8 +1,9 @@
 <?php
 namespace Lobby;
 
-use Lobby\Need;
+use Lobby\DB;
 use Lobby\FS;
+use Lobby\Need;
 use Lobby\UI\Themes;
 
 /**
@@ -86,7 +87,7 @@ class Apps {
     if(isset(self::$cache["enabled_apps"])){
       $enabled_apps = self::$cache["enabled_apps"];
     }else{
-      $enabled_apps = getOption("enabled_apps");
+      $enabled_apps = DB::getOption("enabled_apps");
       $enabled_apps = json_decode($enabled_apps, true);
       
       if(!is_array($enabled_apps) || count($enabled_apps) == 0){
@@ -257,7 +258,7 @@ class Apps {
       if(!in_array($this->app, $apps, true)){
         $apps[] = $this->app;
         
-        saveOption("enabled_apps", json_encode($apps));
+        DB::saveOption("enabled_apps", json_encode($apps));
         self::clearCache();
         return true;
       }else{
@@ -279,7 +280,7 @@ class Apps {
         $key = array_search($this->app, $apps);
         unset($apps[$key]);
         
-        saveOption("enabled_apps", json_encode($apps));
+        DB::saveOption("enabled_apps", json_encode($apps));
         self::clearCache();
         return true;
       }else{

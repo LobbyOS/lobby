@@ -39,28 +39,41 @@ class App {
   }
   
   /**
-   * Get JSON Data
+   * Save data
    */
-  public function getJSONData($key = ""){
-    return \H::getJSONData($key, $this->id);
+  public function saveData($key, $value){
+    return DB::saveData($this->id, $key, $value);
   }
   
   /**
-   * Save Data
+   * Get JSON decoded array from a value of App's Data Storage
    */
-  public function saveData($key = "", $extra = false){
-    return DB::saveData($this->id, $key, $extra);
+  public function getJSONData($key = ""){
+    $data = $this->getData($key, false);
+    $data = json_decode($data, true);
+    return is_array($data) ? $data : array();
+  }
+  
+  /**
+   * Save JSON as a value of App's Data Storage
+   * To remove an item, set the value of it to (bool) FALSE
+   */
+  public function saveJSONData($key, $values){
+    $data = $this->getJSONData($key);
+    
+    $new = array_replace_recursive($data, $values);
+    foreach($values as $k => $v){
+      if($v === false){
+        unset($new[$k]);
+      }
+    }
+    $new = json_encode($new);
+    $this->saveData($key, $new, $appID);
+    return true;
   }
   
   public function removeData($key){
     return DB::removeData($this->id, $key);
-  }
-  
-  /**
-   * Save JSON Data
-   */
-  public function saveJSONData($key, $values){
-    return \H::saveJSONData($key, $values, $this->id);
   }
   
   /**

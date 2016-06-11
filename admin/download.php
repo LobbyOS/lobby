@@ -7,8 +7,8 @@ use \Lobby\Apps;
 header("Content-type: text/html");
 header('Cache-Control: no-cache');
 
-$id = H::i("id");
-$type = H::i("type");
+$id = Helper::i("id");
+$type = Helper::i("type");
 
 // Turn off output buffering
 ini_set('output_buffering', 'off');
@@ -23,7 +23,7 @@ while (@ob_end_flush());
 ini_set('implicit_flush', true);
 ob_implicit_flush(true);
 
-if($id == null || H::csrf() == false){
+if($id == null || CSRF::check() == false){
   exit;
 }
 
