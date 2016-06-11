@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a48d9293f81c86a780545e13f447f87b",
-    "content-hash": "558be07cb13be543271acfce9ff37bc9",
+    "hash": "95f592b8f4caa90111146d4ce5d9abf5",
+    "content-hash": "acca514a181e4a7d997846fc6734e9b6",
     "packages": [
         {
             "name": "composer/semver",
@@ -171,11 +171,11 @@
         },
         {
             "name": "lobby/lobby",
-            "version": "0.5.32",
+            "version": "0.5.33",
             "dist": {
                 "type": "path",
                 "url": "lobby/",
-                "reference": "6d9407e9b93f19f25110cabb5f08082fa0dbd740",
+                "reference": "8b2cb99b8e853c85eb442a09979602a0260e981a",
                 "shasum": null
             },
             "require": {
@@ -189,8 +189,9 @@
                 ],
                 "psr-0": {
                     "Lobby": "src/",
-                    "H": "src/",
                     "Assets": "src/",
+                    "CSRF": "src/",
+                    "Helper": "src/",
                     "Request": "src/",
                     "Response": "src/"
                 },

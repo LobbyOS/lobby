@@ -66,7 +66,7 @@ class Update extends \Lobby {
     }
     
     $oldVer = self::$version;
-    $latest_version = getOption("lobby_latest_version");
+    $latest_version = DB::getOption("lobby_latest_version");
     $url = Server::download("lobby", $latest_version);
       
     $zipFile = L_DIR . "/contents/update/" . $latest_version . ".zip";
@@ -89,7 +89,7 @@ class Update extends \Lobby {
     
     self::finish_software_update(isset($admin_previously_installed));
     
-    return L_URL . "/admin/settings.php?updated=1&oldver={$oldVer}" . \H::csrf("g");
+    return L_URL . "/admin/settings.php?updated=1&oldver={$oldVer}" . \CSRF::getParam();
   }
   
   public static function finish_software_update($admin_previously_installed = false){
@@ -98,7 +98,7 @@ class Update extends \Lobby {
       FS::remove("/contents/modules/admin/disabled.txt");
     }
     
-    $latest_version = getOption("lobby_latest_version");
+    $latest_version = DB::getOption("lobby_latest_version");
     self::log("Updated Lobby to version {$latest_version}");
  
     /**

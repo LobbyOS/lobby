@@ -1,9 +1,11 @@
 <?php
 namespace Lobby\UI;
+
+use Lobby\DB;
+
 /**
  * Makes the Top Panel
  */
-
 class Panel {
 
   public static $top_items = array(
@@ -65,7 +67,7 @@ class Panel {
    * Push an item to Notify
    */
   public static function addNotifyItem($id, $info){
-    saveJSONOption("notify_items", array(
+    DB::saveJSONOption("notify_items", array(
       $id => array_replace_recursive(self::$notifyItem, $info)
     ));
   }
@@ -74,7 +76,7 @@ class Panel {
    * Remove an item from Notify
    */
   public static function removeNotifyItem($id){
-    saveJSONOption("notify_items", array(
+    DB::saveJSONOption("notify_items", array(
       $id => false
     ));
   }
