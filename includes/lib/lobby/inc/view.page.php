@@ -6,7 +6,7 @@
     }else{
       \Lobby::doHook("head.begin");
     }
-    Response::head();
+    \Response::head();
     if(\Lobby::status("lobby.admin")){
       \Lobby::doHook("admin.head.end");
     }else{
@@ -24,7 +24,7 @@
     ?>
     <div id="workspace">
       <?php
-      echo Response::getPageContent();
+      echo \Response::getPageContent();
       ?>
     </div>
   </body>

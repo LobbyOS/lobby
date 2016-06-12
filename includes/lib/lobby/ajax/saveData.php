@@ -10,7 +10,8 @@ if($app !== null && $key !== null && $val !== null && CSRF::check()){
   if(!$App->exists)
     die("bad");
   
-  if(!$App->getInstance()->saveData($app, $key, $val))
+  var_dump($key);
+  if(!$App->getInstance()->saveData($key, $val))
     die("bad");
 }else{
   echo "fieldsMissing";

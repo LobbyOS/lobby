@@ -7,7 +7,7 @@ require "../load.php";
     <?php 
     \Lobby::doHook("admin.head.begin");
     \Assets::js("admin.apps.js", "/admin/js/install-app.js");
-    Response::head("Install App");
+    \Response::head("Install App");
     ?>
   </head>
   <body>
@@ -18,13 +18,13 @@ require "../load.php";
     <div id="workspace">
       <div class="content">
         <?php
-        $id = Helper::i("id");
+        $id = Request::get("id");
         $displayID = htmlspecialchars($id);
         
         if($id == null){
           echo ser("Error", "No App is mentioned. Install Apps from <a href='lobby-store.php'>Lobby Store</a>");
         }
-        if(Helper::i("action") == "enable" && CSRF::check()){
+        if(Request::get("action") == "enable" && CSRF::check()){
           $App = new \Lobby\Apps($id);
           if(!$App->exists){
             echo ser("Error", "App is not installed");
@@ -32,7 +32,7 @@ require "../load.php";
           $App->enableApp();
           echo sss("Enabled", "The App <b>{$displayID}</b> is enabled. The author says thanks. <cl/><a href='".$App->info['url']."' class='btn green'>Open App</a>");
         }
-        if(Helper::i("action") == "remove" && CSRF::check()){
+        if(Request::get("action") == "remove" && CSRF::check()){
           $App = new \Lobby\Apps($id);
           if(!$App->exists){
             echo ser("Error", "App is not installed");
@@ -40,7 +40,7 @@ require "../load.php";
           $App->removeApp();
           echo sss("Removed", "The App <b>{$displayID}</b> was successfully removed.");
         }
-        if($id != null && Helper::i("action") == null && CSRF::check()){
+        if($id != null && Request::get("action") == null && CSRF::check()){
         ?>
           <h1>Install App</h1>
           <p>The install progress will be displayed below. If this doesn't work, try the <?php echo \Lobby::l("/admin/install-app.php?id=$id&do=alternate-install".CSRF::getParam(), "alternate install");?>.</p>

@@ -1,7 +1,7 @@
 <?php
-require "../load.php";
+require __DIR__ . "/../load.php";
 unset($_SESSION['checkedForLatestVersion']);
-\Lobby::$serverCheck = true;
-require L_DIR . "/includes/init.php";
-Response::redirect("/admin/update.php");
+
+\Lobby\Server::check();
+\Response::redirect("/admin/update.php");
 ?>

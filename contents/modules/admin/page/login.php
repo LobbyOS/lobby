@@ -1,13 +1,13 @@
 <?php
 if(isset($_GET['logout'])){
   \Fr\LS::logout();
-  Response::redirect("/#");
+  \Response::redirect("/#");
 }else{
   /**
    * User is logged in, so redirect to Admin main page
    */
   if(\Fr\LS::$loggedIn){
-    Response::redirect("/admin");
+    \Response::redirect("/admin");
   }
 }
 if(isset($_POST["username"]) && isset($_POST["password"])){
@@ -22,7 +22,7 @@ if(isset($_POST["username"]) && isset($_POST["password"])){
     }else if(is_array($login) && $login['status'] == "blocked"){
       $error = array("Account Blocked", "Too many login attempts. You can attempt login again after ". $login['minutes'] ." minutes (". $login['seconds'] ." seconds)");
     }else{
-      Response::redirect("/admin");
+      \Response::redirect("/admin");
     }
   }
 }
@@ -31,7 +31,7 @@ if(isset($_POST["username"]) && isset($_POST["password"])){
   <head>
     <?php
     \Lobby::doHook("admin.head.begin");
-    Response::head("Admin Login");
+    \Response::head("Admin Login");
     ?>
   </head>
   <body>

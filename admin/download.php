@@ -7,8 +7,8 @@ use \Lobby\Apps;
 header("Content-type: text/html");
 header('Cache-Control: no-cache');
 
-$id = Helper::i("id");
-$type = Helper::i("type");
+$id = Request::get("id");
+$type = Request::get("type");
 
 // Turn off output buffering
 ini_set('output_buffering', 'off');
