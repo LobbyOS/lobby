@@ -3,7 +3,7 @@
   <head>
     <?php
     \Lobby::doHook("admin.head.begin");
-    Response::head("Change Settings");
+    \Response::head("Change Settings");
     ?>
   </head>
   <body>
@@ -73,7 +73,9 @@
           <button clear class="btn green">Save Settings</button>
         </form>
         <h2>About</h2>
-        <table border="1" style="margin-top:5px">
+        <table>
+          <col width="100">
+          <col width="120">
           <tbody>
             <tr>
               <td>Version</td>
@@ -87,6 +89,8 @@
         </table>
         <h4 style="margin: 0;"><?php echo \Lobby::l("/admin/update.php", "Updates", "");?></h4>
         <table>
+          <col width="100">
+          <col width="120">
           <tbody>
             <tr>
               <td>Latest Version</td>
@@ -100,8 +104,10 @@
         </table>
         <cl/>
         <?php
-        /* Check if the current version is not the latest version */
-        if(\Lobby::$version != Lobby\DB::getOption("lobby_latest_version")){
+        /**
+         * Check if the current version is not the latest version
+         */
+        if(\Lobby::$version < \Lobby\DB::getOption("lobby_latest_version")){
         ?>
           <div clear></div>
           <a class="btn red" href="update.php">Update To Version <?php echo Lobby\DB::getOption("lobby_latest_version");?></a>

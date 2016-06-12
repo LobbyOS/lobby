@@ -93,8 +93,9 @@ class App {
     return \Lobby\UI\Panel::removeNotifyItem("app_{$this->id}_$id");
   }
   
-  public function u($path = null){
-    return $path === null ? \Lobby::u() : $this->url . $path;
+  public function u($path = null, $src = false){
+    $path = ltrim($path, "/");
+    return $path === null ? \Lobby::u() : ($src ? $this->srcURL : $this->url) . "/$path";
   }
   
   public function l($path, $text = "", $extra = ""){

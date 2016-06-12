@@ -8,7 +8,7 @@ if(!is_writable(L_DIR) || !is_writable(APPS_DIR)){
   if(\Lobby::getSysInfo("os") === "linux"){
     $error[1] .= "<p clear>On Linux systems, do this in terminal : <blockquote>sudo chown \${USER}:www-data ". L_DIR ." -R && sudo chmod u+rwx,g+rw,o+r ". L_DIR ." -R</blockquote></p>";
   }
-  Response::showError($error[0], $error[1]);
+  \Response::showError($error[0], $error[1]);
 }
 
 /**

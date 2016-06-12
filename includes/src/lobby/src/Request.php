@@ -26,20 +26,15 @@ class Request {
    * @param $default string - The default value that should be returned
    * @param $type string - Explicitly mention where to get value from ("GET" or "POST")
    */
-  public static function get($key, $default = null, $type = null){
-    if($type === null)
-      return self::$request->get($key, $default);
-    else if($type === "get")
-      return self::$request->query->get($key, $default);
-    else
-      return self::$request->request->get($key, $default);
+  public static function get($key, $default = null){
+    return self::$request->get($key, $default);
   }
   
-  public static function getParam($key, $default){
+  public static function getParam($key, $default = null){
     return self::$request->query->get($key, $default);
   }
   
-  public static function postParam($key, $default){
+  public static function postParam($key, $default = null){
     return self::$request->request->get($key, $default);
   }
   
