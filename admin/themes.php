@@ -3,7 +3,7 @@
   <head>
     <?php
     \Lobby::doHook("admin.head.begin");
-    Response::head("App Manager");
+    \Response::head("App Manager");
     ?>
   </head>
   <body>

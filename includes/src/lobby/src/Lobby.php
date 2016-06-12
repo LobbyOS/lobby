@@ -53,7 +53,7 @@ class Lobby {
   /**
    * Default Config
    */
-  protected static $config = array(
+  private static $config = array(
     "db" => array(
       "type" => "mysql"
     ),
@@ -120,7 +120,7 @@ class Lobby {
   }
   
   public static function getConfig($key){
-    return isset($config[$key]) ? self::$config[$key] : false;
+    return isset(self::$config[$key]) ? self::$config[$key] : false;
   }
   
   /**
@@ -137,14 +137,6 @@ class Lobby {
     if(is_array($msg)){
       $type = $msg[0];
       $msg = ucfirst($type) . " Error - " . $msg[1];
-      
-      /**
-       * If error is Fatal, Lobby can't work
-       * So register error in class
-       */
-      if($type === "fatal"){
-        self::$error = $msg;
-      }
     }else if($msg != "" && self::$debug === true){
       $msg = !is_string($msg) ? serialize($msg) : $msg;
     }
@@ -160,6 +152,14 @@ class Lobby {
        */
       $msg = "[" . date("Y-m-d H:i:s") . "] $msg";
       \Lobby\FS::write($logFile, $msg, "a");
+    }
+    
+    /**
+     * If error is Fatal, Lobby can't work
+     * So register error in class
+     */
+    if(isset($type) && $type === "fatal"){
+      Response::showError($msg);
     }
   }
   

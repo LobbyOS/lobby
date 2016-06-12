@@ -225,7 +225,7 @@ class ServiceProviderTest extends AbstractKleinTest
         $_SESSION = array();
     }
 
-    public function testMarkdownParecho ser()
+    public function testMarkdownParser()
     {
         // Test basic markdown conversion
         $this->assertSame(

@@ -27,7 +27,7 @@ class Install extends \Lobby {
       echo ser("Error", "Lobby Directory is not Writable. Please set <blockquote>" . L_DIR . "</blockquote> directory's permission to writable.<cl/><a href='install.php?step=1' class='btn'>Check Again</a>");
       return false;
     }else if(FS::exists("/config.php")){
-      echo ser("config.php File Exists", "A config.php file already exitsts in <blockquote>". L_DIR ."</blockquote> directory. Remove it and try again. <cl/><a href='". self::u("admin/install.php?step=1" . CSRF::getParam()) ."' class='btn'>Check Again</a>");
+      echo ser("config.php File Exists", "A config.php file already exitsts in <blockquote>". L_DIR ."</blockquote> directory. Remove it and try again. <cl/><a href='". self::u("admin/install.php?step=1" . \CSRF::getParam()) ."' class='btn'>Check Again</a>");
       return false;
     }else{
       return true;

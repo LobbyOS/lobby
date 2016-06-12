@@ -21,7 +21,7 @@ if($AppID !== null){
     \Assets::js("lobby-store", "/admin/js/lobby-store.js");
     
     \Lobby::doHook("admin.head.begin");
-    Response::head($page_title);
+    \Response::head($page_title);
     ?>
   </head>
   <body>

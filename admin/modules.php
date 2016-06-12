@@ -3,7 +3,7 @@
   <head>
     <?php
     \Lobby::doHook("admin.head.begin");
-    Response::head("Modules");
+    \Response::head("Modules");
     ?>
   </head>
   <body>

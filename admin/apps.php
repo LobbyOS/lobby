@@ -12,7 +12,7 @@ use \Lobby\Need;
     \Assets::css("view-app", "/admin/css/view-app.css");
     
     \Lobby::doHook("admin.head.begin");
-    Response::head("App Manager");
+    \Response::head("App Manager");
     ?>
   </head>
   <body>
@@ -23,7 +23,7 @@ use \Lobby\Need;
     <div id="workspace">
       <div class="content">
         <?php
-        $appID = input("app");
+        $appID = Request::get("app");
         if($appID !== null){
           $App = new Apps($appID);
           
@@ -55,7 +55,7 @@ use \Lobby\Need;
             }else if($action === "enable"){
               if($App->enableApp()){
                 if(isset($_GET['redirect'])){
-                  Response::redirect("/app/$appID");
+                  \Response::redirect("/app/$appID");
                 }
                 echo sss("Enabled", "The App <strong>$appID</strong> has been enabled.");
               }else{

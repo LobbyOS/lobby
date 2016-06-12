@@ -21,11 +21,11 @@ use \Lobby\Router;
 Router::dispatch();
 
 if(!Router::$routeActive){
-  if(Response::hasContent()){
-    Response::send();
+  if(\Response::hasContent()){
+    \Response::send();
   }else if(Router::pathExists()){
     return false;
   }else{
-    Response::showError();
+    \Response::showError();
   }
 }

@@ -66,8 +66,10 @@ class DB extends \Lobby {
         if($notable === false){ /* There are database tables */
           parent::$installed = true;
         }else{
-          self::$error = "Lobby Tables Not Found";
-          self::log("Lobby Tables not found in database. Install Again.");
+          parent::log(array(
+            "fatal",
+            "Tables required by Lobby was not found in the database. Check your config.php and database to fix the error. Or Install again."
+          ));
         }
       }catch(\PDOException $e){
         parent::$installed = false;

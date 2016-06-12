@@ -1,7 +1,7 @@
 <?php
 require "../load.php";
 
-$install_step = Helper::i('step');
+$install_step = Request::get('step');
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,7 +15,7 @@ $install_step = Helper::i('step');
      */
     \Assets::css("install", "/admin/css/install.css");
     \Assets::js("install", "/admin/js/install.js");
-    Response::head("Install");
+    \Response::head("Install");
    
     \Lobby::doHook("head.end");
     ?>
@@ -33,7 +33,7 @@ $install_step = Helper::i('step');
           <?php echo \Lobby::l(L_URL, "Install Lobby");?>
         </h1>
         <?php
-        if(\Lobby::$installed && Helper::i("step") !== "4"){
+        if(\Lobby::$installed && Request::get("step") !== "4"){
           echo sss("<a href='". L_URL ."'>Lobby Installed</a>", "Lobby Is Installed. If you want to reinstall, delete the database tables and remove <b>config.php</b> file.<cl/>If you want to just remake the <b>config.php</b> file, don't delete the database tables, delete the existing <b>config.php</b> file and do ". \Lobby::l("/admin/install.php?step=1", "this installation") ." until Step 3 where \"Database Tables Exist\" error occur");
         }else if($install_step === null){
         ?>
@@ -168,7 +168,7 @@ $install_step = Helper::i('step');
             if($safe !== true){
               echo "<a class='btn' href='javascript:;' onclick='window.location = window.location;'>Check Again</a>";
             }else{
-              Response::redirect("/#");
+              \Response::redirect("/#");
             }
           }else if($install_step === "2" && CSRF::check()){
             ob_start(); 
@@ -219,7 +219,7 @@ $install_step = Helper::i('step');
             </table>
           <?php
           }else if($install_step === "3" && CSRF::check()){
-            $db_type = Helper::i("db_type");
+            $db_type = Request::get("db_type");
             /**
              * We call it again, so that the user had already went through the First Step
              */
@@ -266,7 +266,7 @@ $install_step = Helper::i('step');
                       \Lobby\Install::makeConfigFile();
                     
                       \Lobby::$installed = true;
-                      \Lobby\Lobby\DB::__constructStatic();
+                      \Lobby\DB::__constructStatic();
                       
                       /**
                        * Enable app lEdit
@@ -309,7 +309,7 @@ $install_step = Helper::i('step');
                    * Enable app lEdit
                    */
                   \Lobby::$installed = true;
-                  \Lobby\Lobby\DB::__constructStatic();
+                  \Lobby\DB::__constructStatic();
 
                   $App = new \Lobby\Apps("ledit");
                   $App->enableApp();
@@ -408,6 +408,20 @@ $install_step = Helper::i('step');
               }
             }
           }
+        }
+        if($install_step === "3"){
+        ?>
+          <script>
+          $(document).ready(function(){
+            clog("ccc");
+            function getTimeZone() {
+                var offset = new Date().getTimezoneOffset(), o = Math.abs(offset);
+                return (offset < 0 ? "+" : "-") + ("00" + Math.floor(o / 60)).slice(-2) + ":" + ("00" + (o % 60)).slice(-2);
+            }
+            lobby.ajax("admin/ajax/set-timezone.php", {offset: getTimeZone()});
+          });
+          </script>
+        <?php
         }
         ?>
      </div>

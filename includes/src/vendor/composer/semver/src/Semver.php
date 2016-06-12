@@ -32,7 +32,7 @@ class Semver
     public static function satisfies($version, $constraints)
     {
         if (null === self::$versionParser) {
-            self::$versionParser = new VersionParecho ser();
+            self::$versionParser = new VersionParser();
         }
 
         $versionParser = self::$versionParser;
@@ -92,7 +92,7 @@ class Semver
     private static function usort(array $versions, $direction)
     {
         if (null === self::$versionParser) {
-            self::$versionParser = new VersionParecho ser();
+            self::$versionParser = new VersionParser();
         }
 
         $versionParser = self::$versionParser;
