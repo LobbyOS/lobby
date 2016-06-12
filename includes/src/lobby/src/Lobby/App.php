@@ -68,7 +68,7 @@ class App {
       }
     }
     $new = json_encode($new);
-    $this->saveData($key, $new, $appID);
+    $this->saveData($key, $new);
     return true;
   }
   
