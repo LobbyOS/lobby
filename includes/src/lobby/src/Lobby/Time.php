@@ -39,5 +39,16 @@ class Time {
     $date->setTimeZone(new \DateTimeZone(self::$tz));
     return $date->format($format);
   }
+  
+  public static function getTimezone($offset){
+    foreach (\DateTimeZone::listIdentifiers(\DateTimeZone::ALL) as $timezone) {
+      $datetime = new \DateTime("now", new \DateTimeZone($timezone));
+  
+      // find a timezone matching the offset and abbreviation
+      if ($offset == $datetime->format('P')) {
+        return $timezone;
+      }
+    }
+  }
 
 }

@@ -6,7 +6,7 @@ require "../load.php";
   <head>
     <?php
     \Lobby::doHook("admin.head.begin");
-    Response::head("Update");
+    \Response::head("Update");
     ?>
   </head>
   <body>
@@ -20,32 +20,35 @@ require "../load.php";
         <p>Lobby and it's apps can be updated automatically. <a href="http://lobby.subinsb.com/docs/update" target="_blank" class="btn">More Info</a></p>
         <a class='btn blue' href='check-updates.php'>Check For Updates</a>
         <?php
-        if(\Lobby::$version == Lobby\DB::getOption("lobby_latest_version") && !\Request::postParam("action", "") == "updateApps"){
-          echo "<h2>Lobby</h2>";
-          echo sss("Latest Version", "You are using the latest version of Lobby. There are no new releases yet.");
-        }else if(!isset($_GET['step']) && !\Request::postParam("action", "") == "updateApps"){
+        if(\Request::postParam("action") === null){
+          if(\Lobby::$version < Lobby\DB::getOption("lobby_latest_version") && !isset($_GET['step'])){
         ?>
-          <h2>Lobby</h2>
-          <p>
-            Welcome To The Lobby Update Page. A latest version is available for you to upgrade.
-          </p>
-          <blockquote>
-            Latest Version is <?php echo Lobby\DB::getOption("lobby_latest_version");?> released on <?php echo date( "jS F Y", strtotime(Lobby\DB::getOption("lobby_latest_version_release")) );?>
-          </blockquote>
-          <h4>Release Notes</h4>
-          <blockquote>
-            <?php echo htmlspecialchars_decode(Lobby\DB::getOption("lobby_latest_version_release_notes"));?>
-          </blockquote>
-          <p style="margin: 10px 0;">
-            Lobby will automatically download the latest version and install. In case something happens, Lobby will not be accessible anymore. So backup your database and Lobby installation before you do anything.
-          </p>
-          <div clear></div>
-          <a class="btn green" href="backup-db.php">Export Lobby Database</a>
-          <a class="btn blue" href="backup-dir.php">Export Lobby Folder</a>
-        <?php
-          if(is_writable(L_DIR)){
-            echo '<div clear style="margin-top: 10px;"></div>';
-            echo \Lobby::l("/admin/update.php?step=1" . CSRF::getParam(), "Setup Lobby Update", "class='btn btn-large red'");
+            <h2>Lobby</h2>
+            <p>
+              Welcome To The Lobby Update Page. A latest version is available for you to upgrade.
+            </p>
+            <blockquote>
+              Latest Version is <?php echo Lobby\DB::getOption("lobby_latest_version");?> released on <?php echo date( "jS F Y", strtotime(Lobby\DB::getOption("lobby_latest_version_release")) );?>
+            </blockquote>
+            <h4>Backup</h4>
+            <p style="margin: 10px 0;">
+              Lobby will automatically download the latest version and install. In case something happens, Lobby will not be accessible anymore.<cl/>
+              So backup your database and Lobby installation before you do anything.
+            </p>
+            <div clear></div>
+            <a class="btn green" href="backup-db.php">Export Lobby Database</a>
+            <a class="btn blue" href="backup-dir.php">Export Lobby Folder</a>
+            <h4>Release Notes</h4>
+            <blockquote>
+              <?php echo htmlspecialchars_decode(Lobby\DB::getOption("lobby_latest_version_release_notes"));?>
+            </blockquote>
+          <?php
+            echo '<div style="margin-top: 10px;">';
+              echo \Lobby::l("/admin/update.php?step=1" . CSRF::getParam(), "Start Lobby Update", "class='btn btn-large red'");
+            echo '</div>';
+          }else{
+            echo "<h2>Lobby</h2>";
+            echo sss("Latest Version", "You are using the latest version of Lobby. There are no new releases yet.");
           }
         }
         if(isset($_GET['step']) && $_GET['step'] != "" && CSRF::check()){

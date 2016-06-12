@@ -7,7 +7,7 @@ if(\Lobby::$installed){
   system($command);
   sleep(5);
   if( file_exists($backupFileLoc) ){
-    Response::redirect("/contents/extra/$backupFile");
+    \Response::redirect("/contents/extra/$backupFile");
   }else{
     echo "It didn't work. Try using phpMyAdmin to export Database. or direclty use the terminal command : <blockquote>$command</blockquote>";
   }
