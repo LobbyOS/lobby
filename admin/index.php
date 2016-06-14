@@ -12,7 +12,7 @@
     require "$docRoot/admin/inc/sidebar.php";
     ?>
     <div id="workspace">
-      <div class="content">
+      <div class="contents">
         <h1>Admin</h1>
         <p>Here, you can manage your Lobby installation :</p>
         <?php

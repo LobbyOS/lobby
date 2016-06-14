@@ -12,7 +12,7 @@
     require "$docRoot/admin/inc/sidebar.php";
     ?>
     <div id="workspace">
-      <div class="content">
+      <div class="contents">
         <?php
         if(isset($_GET['updated']) && CSRF::check()){
           echo sss("Updated", "Lobby was successfully updated to Version <b>". \Lobby::$version ."</b> from the old ". htmlspecialchars($_GET['oldver']) ." version.");
