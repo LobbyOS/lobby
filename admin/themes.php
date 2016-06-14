@@ -12,7 +12,7 @@
     require "$docRoot/admin/inc/sidebar.php";
     ?>
     <div id="workspace">
-      <div class="content">
+      <div class="contents">
         <h1>Apps</h1>
         <p>Disable or Remove installed apps. You can find and install more Apps from <a href="<?php echo L_URL;?>/admin/lobby-store.php">Lobby Store</a>.</p>
         <?php

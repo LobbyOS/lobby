@@ -16,7 +16,7 @@ require "../load.php";
     require "$docRoot/admin/inc/sidebar.php";
     ?>
     <div id="workspace">
-      <div class="content">
+      <div class="contents">
         <?php
         $id = Request::get("id");
         $displayID = htmlspecialchars($id);
