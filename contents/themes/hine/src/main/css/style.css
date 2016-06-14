@@ -35,13 +35,6 @@ form{
   width: 700px;
   overflow: auto;
 }
-.content{
-  position: relative;
-  display: block;
-  width: auto;
-  padding: 0px 14px 15px 14px;
-  background: white;
-}
 
 /* Useful Attributes */
 [hide]{

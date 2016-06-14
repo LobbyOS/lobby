@@ -217,6 +217,8 @@ class Assets {
             $data = self::preProcess(file_get_contents($assetLocation), $type);
             
             if($data !== null){
+              if(self::$config["debug"] === true)
+                echo "\n/** Asset - $assetRelLocation */\n";
               echo $data;
             }
           }
