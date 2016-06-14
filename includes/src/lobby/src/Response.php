@@ -58,7 +58,7 @@ class Response {
   }
   
   public static function hasContent(){
-    return self::$response->getContent() !== null;
+    return self::$response->getContent() != null;
   }
   
   /**

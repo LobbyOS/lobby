@@ -19,6 +19,12 @@ class Apps {
   private static $appsDir = null;
   
   /**
+   * App Updates
+   * App => $latestVersion
+   */
+  private static $appUpdates = array();
+  
+  /**
    * This will contain the App object when app is running
    */
   private static $activeApp = false;
@@ -52,6 +58,7 @@ class Apps {
   
   public static function __constructStatic($appsDir){
     self::$appsDir = $appsDir;
+    self::$appUpdates = array_replace_recursive(array_flip(self::getApps()), DB::getJSONOption("app_updates"));
   }
   
   public static function clearCache(){
@@ -232,6 +239,8 @@ class Apps {
           APPS_URL . "/{$this->app}/src/image/logo.svg" :
           APPS_URL . "/{$this->app}/src/image/logo.png"
         ) : Themes::getURL() . "/src/main/image/app-logo.png";
+      
+      $details["latestVersion"] = self::$appUpdates[$this->app];
        
       /**
        * Insert the info as a property
@@ -341,6 +350,10 @@ class Apps {
     FS::remove($tmpFile);
     
     return $size;
+  }
+  
+  public function hasUpdate(){
+    return version_compare($this->info['version'], $this->info['latestVersion'], "<");
   }
   
   /**
