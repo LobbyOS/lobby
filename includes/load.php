@@ -49,8 +49,8 @@ try{
    */
   $loader = new ConstructStatic\Loader($composer);
   
-  $loader->setClassParameters(\Lobby\UI\Themes::class, THEMES_DIR);
-  $loader->setClassParameters(\Lobby\Apps::class, APPS_DIR);
+  $loader->setClassParameters("Lobby\UI\Themes", THEMES_DIR);
+  $loader->setClassParameters("Lobby\Apps", APPS_DIR);
   
   $loader->processLoadedClasses();
   
