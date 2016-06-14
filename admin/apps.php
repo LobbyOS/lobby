@@ -21,7 +21,7 @@ use \Lobby\Need;
     require "$docRoot/admin/inc/sidebar.php";
     ?>
     <div id="workspace">
-      <div class="content">
+      <div class="contents">
         <?php
         $appID = Request::get("app");
         if($appID !== null){
@@ -81,7 +81,7 @@ use \Lobby\Need;
               $App = new Apps($appID);
               $requires = $App->info['require'];
               
-              if(version_compare($App->info['version'], $App->info['version'], ">")){
+              if($App->hasUpdate()){
                 /**
                  * New version of app is available
                  */
@@ -179,7 +179,9 @@ use \Lobby\Need;
                     <p><a class="chip">Version <?php echo $App->info["version"];?></a></p>
                     <div style="margin-top: 10px;">
                       <?php
-                      if($App->enabled)
+                      if($App->hasUpdate())
+                        echo "<cl/>" . \Lobby::l("/admin/check-updates.php", "Update", "class='btn orange'");
+                      else if($App->enabled)
                         echo \Lobby::l("/admin/apps.php?app=$app&action=disable" . CSRF::getParam(), "Disable", "class='btn'");
                       else
                         echo \Lobby::l("/admin/apps.php?app=$app&action=enable" . CSRF::getParam(), "Enable", "class='btn green'");

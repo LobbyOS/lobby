@@ -15,7 +15,7 @@ require "../load.php";
     require "$docRoot/admin/inc/sidebar.php";
     ?>
     <div id="workspace">
-      <div class="content">
+      <div class="contents">
         <h1>Update</h1>
         <p>Lobby and it's apps can be updated automatically. <a href="http://lobby.subinsb.com/docs/update" target="_blank" class="btn">More Info</a></p>
         <a class='btn blue' href='check-updates.php'>Check For Updates</a>

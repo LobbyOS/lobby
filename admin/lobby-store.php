@@ -30,7 +30,7 @@ if($AppID !== null){
     require "$docRoot/admin/inc/sidebar.php";
     ?>
     <div id="workspace">
-      <div class="content">
+      <div class="contents">
         <?php
         if($AppID !== null){
           if($app === false){

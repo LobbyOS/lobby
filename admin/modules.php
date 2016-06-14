@@ -12,7 +12,7 @@
     require "$docRoot/admin/inc/sidebar.php";
     ?>
     <div id="workspace">
-      <div class="content">
+      <div class="contents">
         <h1>Modules</h1>
         <p>Modules extend the functionality of Lobby. This page shows the modules that are installed in Lobby. <a target="_blank" href="<?php echo L_SERVER;?>/mods">Read more about Modules</a></p>
         <?php
