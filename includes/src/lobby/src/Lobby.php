@@ -87,7 +87,8 @@ class Lobby {
     \Assets::config(array(
       "basePath" => L_DIR,
       "baseURL" => self::getURL(),
-      "serveFile" => "includes/serve-assets.php"
+      "serveFile" => "includes/serve-assets.php",
+      "debug" => self::getConfig("debug")
     ));
   }
   
