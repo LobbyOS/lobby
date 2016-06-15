@@ -58,7 +58,17 @@ class Apps {
   
   public static function __constructStatic($appsDir){
     self::$appsDir = $appsDir;
-    self::$appUpdates = array_replace_recursive(array_flip(self::getApps()), DB::getJSONOption("app_updates"));
+    
+    /**
+     * Make array like this :
+     * "AppID" => 0
+     */
+    $appsAsKeys = array_flip(self::getApps());
+    array_walk($appsAsKeys, function(&$val){
+      $val = 0;
+    });
+    
+    self::$appUpdates = array_replace_recursive($appsAsKeys, DB::getJSONOption("app_updates"));
   }
   
   public static function clearCache(){
@@ -352,8 +362,15 @@ class Apps {
     return $size;
   }
   
-  public function hasUpdate(){
-    return version_compare($this->info['version'], $this->info['latestVersion'], "<");
+  /**
+   * Whether app update is available
+   * Provide $latestVersion to check if it's a latest version
+   */
+  public function hasUpdate($latestVersion = null){
+    if($latestVersion !== null)
+      return version_compare($this->info['version'], $latestVersion, "<");
+    else
+      return version_compare($this->info['version'], $this->info['latestVersion'], "<");
   }
   
   /**

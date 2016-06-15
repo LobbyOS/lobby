@@ -93,7 +93,7 @@ class Server {
           $AppUpdates = array();
           foreach($response['apps'] as $appID => $version){
             $App = new \Lobby\Apps($appID);
-            if($App->info['version'] != $version){
+            if($App->hasUpdate($version)){
               $AppUpdates[$appID] = $version;
             }
           }

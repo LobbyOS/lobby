@@ -9,6 +9,7 @@ header('Cache-Control: no-cache');
 
 $id = Request::get("id");
 $type = Request::get("type");
+$isUpdate = Request::get("isUpdate") !== null;
 
 // Turn off output buffering
 ini_set('output_buffering', 'off');
@@ -89,11 +90,17 @@ $GLOBALS['last'] = 0;
   }
 };
 
-if($type == "app" && \Lobby\Update::app($id)){
+if($type === "app" && \Lobby\Update::app($id)){
   $App = new Apps($id);
   $App->enableApp();
   
-  echo "Installed - The app has been installed. <a target='_parent' href='". $App->info["url"] ."'>Open App</a>";
-}else if($type == "lobby" && $redirect = \Lobby\Update::software()){
+  if($isUpdate){
+    $appUpdates = Lobby\DB::getJSONOption("app_updates");
+    @unset($appUpdates[$id]);
+    Lobby\DB::saveOption("app_updates", json_encode($AppUpdates));
+  }
+  
+  echo "Installed - The app has been " . ($isUpdate ? "updated." : "installed. <a target='_parent' href='". $App->info["url"] ."'>Open App</a>");
+}else if($type === "lobby" && $redirect = \Lobby\Update::software()){
   echo "<a target='_parent' href='$redirect'>Updated Lobby</a>";
 }

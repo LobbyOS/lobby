@@ -20,7 +20,8 @@ require "../load.php";
         <p>Lobby and it's apps can be updated automatically. <a href="http://lobby.subinsb.com/docs/update" target="_blank" class="btn">More Info</a></p>
         <a class='btn blue' href='check-updates.php'>Check For Updates</a>
         <?php
-        if(\Request::postParam("action") === null){
+        $action = Request::postParam("action");
+        if($action === null){
           if(\Lobby::$version < Lobby\DB::getOption("lobby_latest_version") && !isset($_GET['step'])){
         ?>
             <h2>Lobby</h2>
@@ -71,18 +72,15 @@ require "../load.php";
           }
         }
         
-        $AppUpdates = json_decode(Lobby\DB::getOption("app_updates"), true);
-        if(\Request::postParam("action", "") == "updateApps" && CSRF::check()){
-          foreach($AppUpdates as $appID => $neverMindThisVariable){
-            if(isset($_POST[$appID])){
-              echo '<iframe src="'. L_URL . "/admin/download.php?type=app&id={$appID}". CSRF::getParam() .'" style="border: 0;width: 100%;height: 200px;"></iframe>';
-              unset($AppUpdates[$appID]);
-            }
+        $appUpdates = Lobby\DB::getJSONOption("app_updates");
+        $shouldUpdate = Request::postParam("updateApp");
+        
+        if($action === "updateApps" && is_array($shouldUpdate) && CSRF::check()){
+          foreach($shouldUpdate as $appID){
+            echo '<iframe src="'. L_URL . "/admin/download.php?type=app&id={$appID}&isUpdate=1". CSRF::getParam() .'" style="border: 0;width: 100%;height: 200px;"></iframe>';
           }
-          Lobby\DB::saveOption("app_updates", json_encode($AppUpdates));
-          $AppUpdates = json_decode(Lobby\DB::getOption("app_updates"), true);
         }
-        if(!isset($_GET['step']) && isset($AppUpdates) && count($AppUpdates) != 0){
+        if(!isset($_GET['step']) && isset($appUpdates) && count($appUpdates) !== 0){
         ?>
           <h2>Apps</h2>
           <p>New versions of apps are available. Choose which apps to update from the following :</p>
@@ -99,11 +97,11 @@ require "../load.php";
               </thead>
               <?php              
               echo "<tbody>";
-              foreach($AppUpdates as $appID => $latest_version){
+              foreach($appUpdates as $appID => $latest_version){
                 $App = new \Lobby\Apps($appID);
                 $AppInfo = $App->info;
                 echo '<tr>';
-                  echo '<td><label><input style="vertical-align:top;display:inline-block;" checked="checked" type="checkbox" name="'. $appID .'" /><span></span></label></td>';
+                  echo '<td><label><input style="vertical-align:top;display:inline-block;" checked="checked" type="checkbox" name="updateApp[]" value="'. $appID .'" /><span></span></label></td>';
                   echo '<td><span style="vertical-align:middle;display:inline-block;margin-left:5px;">'. $AppInfo['name'] .'</span></td>';
                   echo '<td>'. $AppInfo['version'] .'</td>';
                   echo '<td>'. $latest_version .'</td>';
