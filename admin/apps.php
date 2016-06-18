@@ -127,11 +127,11 @@ use \Lobby\Need;
                 <tbody>
                   <tr>
                     <td>Installed in</td>
-                    <td><?php echo $App->appDir;?></td>
+                    <td><?php echo $App->dir;?></td>
                   </tr>
                   <tr>
                     <td>Folder</td>
-                    <td><h6><?php $folderSize = FS::getSize($App->appDir);echo FS::normalizeSize($folderSize);?></h6></td>
+                    <td><h6><?php $folderSize = FS::getSize($App->dir);echo FS::normalizeSize($folderSize);?></h6></td>
                   </tr>
                   <tr>
                     <td title="Size occupied in database">App Data</td>
