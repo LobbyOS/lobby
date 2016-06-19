@@ -3,11 +3,14 @@
   <testsuites>
     <testsuite name="Lobby">
       <directory>./</directory>
-      <file>LobbyInstall.php</file>
+      <file>Install.php</file>
     </testsuite>
   </testsuites>
   <php>
-    <const name="WEB_SERVER_HOST" value="localhost" />
+    <const name="WEB_SERVER_HOST" value="127.0.0.1" />
     <const name="WEB_SERVER_PORT" value="8000" />
+    <const name="DB_USERNAME" value="root" />
+    <const name="DB_PASSWORD" value="backstreetboys" />
+    <const name="DB_NAME" value="tests" />
   </php>
 </phpunit>
