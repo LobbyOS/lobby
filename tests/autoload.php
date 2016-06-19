@@ -1,11 +1,19 @@
 <?php
-define("WEB_SERVER_DOCROOT", realpath(__DIR__ . "/../"));
+use Neutron\TemporaryFilesystem\TemporaryFilesystem;
+
+$GLOBALS["FS"] = TemporaryFilesystem::create();
+
+define("WEB_SERVER_DOCROOT", $GLOBALS["FS"]->createTemporaryDirectory($mode = 0755));
+
+exec("cp -R '". realpath(__DIR__ . "/../") . "/.' '". WEB_SERVER_DOCROOT ."'");
+
+echo "Mocking filesytem at " . WEB_SERVER_DOCROOT . PHP_EOL;
+
+unlink(WEB_SERVER_DOCROOT . "/config.php");
 
 /**
  * Start Server
  */
- 
-// Command that starts the built-in web server
 $command = sprintf(
     'php -S %s:%d -t %s >/dev/null 2>&1 & echo $!',
     WEB_SERVER_HOST,
@@ -15,16 +23,14 @@ $command = sprintf(
 
 // Execute the command and store the process ID
 $output = array(); 
-system($command, $output);
+exec($command, $output);
 $pid = (int) $output[0];
-
-sleep(1);
  
 echo sprintf(
     '%s - Web server started on %s:%d with PID %d', 
     date('r'),
-    WEB_SERVER_HOST, 
-    WEB_SERVER_PORT, 
+    WEB_SERVER_HOST,
+    WEB_SERVER_PORT,
     $pid
 ) . PHP_EOL;
  
