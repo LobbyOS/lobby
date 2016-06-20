@@ -6,7 +6,7 @@
  
 class Assets {
 
-  protected static $css, $js = array();
+  protected static $css = array(), $js = array();
   
   protected static $config = array(
     /**
