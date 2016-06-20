@@ -68,7 +68,7 @@ class DB extends \Lobby {
         }else{
           parent::log(array(
             "fatal",
-            "Tables required by Lobby was not found in the database. Check your config.php and database to fix the error. Or Install again."
+            "Tables required by Lobby was not found in the database. Check your <b>config.php</b> and database to fix the error. Or Install again by removing <b>config.php</b>."
           ));
         }
       }catch(\PDOException $e){
