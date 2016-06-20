@@ -137,9 +137,9 @@ class Lobby {
      */
     if(is_array($msg)){
       $type = $msg[0];
-      $msg = ucfirst($type) . " Error - " . $msg[1];
+      $logMSG = ucfirst($type) . " Error - " . $msg[1];
     }else if($msg != "" && self::$debug === true){
-      $msg = !is_string($msg) ? serialize($msg) : $msg;
+      $logMSG = !is_string($msg) ? serialize($msg) : $msg;
     }
     
     /**
@@ -151,8 +151,8 @@ class Lobby {
       /**
        * Format the log message 
        */
-      $msg = "[" . date("Y-m-d H:i:s") . "] $msg";
-      \Lobby\FS::write($logFile, $msg, "a");
+      $logMSG = "[" . date("Y-m-d H:i:s") . "] $logMSG";
+      \Lobby\FS::write($logFile, $logMSG, "a");
     }
     
     /**
@@ -160,7 +160,7 @@ class Lobby {
      * So register error in class
      */
     if(isset($type) && $type === "fatal"){
-      Response::showError($msg);
+      Response::showError(ucfirst($msg[0]) . " Error", $msg[1]);
     }
   }
   
