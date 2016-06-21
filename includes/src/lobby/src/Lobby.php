@@ -138,7 +138,10 @@ class Lobby {
     if(is_array($msg)){
       $type = $msg[0];
       $logMSG = ucfirst($type) . " Error - " . $msg[1];
-    }else if($msg != "" && self::$debug === true){
+    }else if(self::$debug === false)
+      return false;
+    
+    if($msg != null){
       $logMSG = !is_string($msg) ? serialize($msg) : $msg;
     }
     
