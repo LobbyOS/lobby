@@ -237,12 +237,12 @@ class Assets {
     return isset(self::$css[$asset]);
   }
   
-  public static function getJS($asset){
-    return self::$js[$asset];
+  public static function getJS($asset = null){
+    return $asset === null ? self::$js : self::$js[$asset];
   }
   
-  public static function getCSS($asset){
-    return self::$css[$asset];
+  public static function getCSS($asset = null){
+    return $asset === null ? self::$css : self::$css[$asset];
   }
 
 }
