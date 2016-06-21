@@ -50,7 +50,7 @@ class Response {
   }
   
   public static function getContent(){
-    return self::$content;
+    return self::$response->getContent();
   }
   
   public static function getPageContent(){
