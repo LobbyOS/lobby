@@ -10,7 +10,7 @@ class Lobby {
   /**
    * Version & Release date
    */
-  public static $version, $versionReleased;
+  public static $version, $versionName, $versionReleased;
   
   /**
    * Debugging Mode
@@ -122,6 +122,10 @@ class Lobby {
   
   public static function getConfig($key){
     return isset(self::$config[$key]) ? self::$config[$key] : false;
+  }
+  
+  public static function getVersion(){
+    return self::$version . " " . self::$versionName;
   }
   
   /**
