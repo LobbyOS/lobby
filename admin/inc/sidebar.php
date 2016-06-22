@@ -1,5 +1,5 @@
 <div class="side-nav fixed" id="slide-out">
-  <a target="_blank" href="http://lobby.subinsb.com" class="lobby-link">Lobby <?php echo \Lobby::$version;?></a>
+  <a target="_blank" href="http://lobby.subinsb.com" class="lobby-link">Lobby <?php echo \Lobby::getVersion();?></a>
   <?php
   $links = array(
     "/admin" => "Dashboard",

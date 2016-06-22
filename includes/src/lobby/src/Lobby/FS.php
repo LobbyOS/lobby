@@ -22,6 +22,7 @@ class FS {
     if($lobbyInfo !== false){
       $lobbyInfo = json_decode($lobbyInfo);
       \Lobby::$version = $lobbyInfo->version;
+      \Lobby::$versionName = $lobbyInfo->codename;
       \Lobby::$versionReleased = $lobbyInfo->released;
     }
     self::$fs = new Filesystem();
