@@ -135,14 +135,28 @@ class Assets {
   /**
    * @param $type string - Either "js" or "css"
    * @param $params array - List of extra GET parameters to include in URL
+   * @param $customAssets array - Only include some assets
    */
-  public static function getServeURL($type, $params = array()){
+  public static function getServeURL($type, $params = array(), $customAssets = array()){
     $url = self::getURL(self::$config["serveFile"]);
     
     if($type === "css"){
-      $url .= "?assets=" . implode(",", self::$css) . "&type=css";
+      $assets = self::$css;
     }else{
-      $url .= "?assets=" . implode(",", self::$js) . "&type=js";
+      $assets = self::$js;
+    }
+    
+    if(!empty($customAssets)){
+      foreach($assets as $asset => $assetLocation){
+        if(!in_array($asset, $customAssets))
+          unset($assets[$asset]);
+      }
+    }
+    
+    if($type === "css"){
+      $url .= "?assets=" . implode(",", $assets) . "&type=css";
+    }else{
+      $url .= "?assets=" . implode(",", $assets) . "&type=js";
     }
     
     if(count($params) !== 0){
