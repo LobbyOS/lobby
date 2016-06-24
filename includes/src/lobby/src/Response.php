@@ -26,22 +26,19 @@ class Response {
   }
   
   public static function setContent($content){
+    if(self::$pageContent !== null)
+      self::$pageContent = null;
     self::$response->setContent($content);
   }
   
   public static function setPage($content){
     self::$pageContent = $content;
-    
-    ob_start();
-      require_once L_DIR . "/includes/lib/lobby/inc/view.page.php";
-    $html = ob_get_clean();
-    self::setContent($html);
   }
   
   public static function getFile($location, $vars = array()){
     extract($vars);
     ob_start();
-      require_once FS::loc($location);
+      require FS::loc($location);
     return ob_get_clean();
   }
   
@@ -58,7 +55,7 @@ class Response {
   }
   
   public static function hasContent(){
-    return self::$response->getContent() != null;
+    return (self::$pageContent != null || self::$response->getContent() != null);
   }
   
   /**
@@ -84,6 +81,13 @@ class Response {
   }
   
   public static function send(){
+    if(self::$pageContent !== null){
+      ob_start();
+        require L_DIR . "/includes/lib/lobby/inc/view.page.php";
+      $html = ob_get_clean();
+      self::setContent($html);
+    }
+    
     self::$response->prepare(Request::getRequestObject());
     self::$response->send();
   }
