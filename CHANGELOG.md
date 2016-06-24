@@ -1,6 +1,8 @@
 ## 0.8
+* Fixed bugs
 * Apps page updated
 * Lobby\Apps - New `->info["latestVersion"]` & `->hasUpdate()` function
+* Lobby\Update - New functions for checking updates
 
 ## 0.7
 

@@ -1,6 +1,7 @@
 <?php
 namespace Lobby;
 
+use Lobby\DB;
 use Lobby\FS;
 use Lobby\Server;
 
@@ -15,6 +16,27 @@ class Update extends \Lobby {
    * cURL Progress callback should be inserted to here
    */
   public static $progress = null;
+  
+  /**
+   * Check if updates are available
+   */
+  public static function isAvailable(){
+    if(self::isCoreAvailable() || self::isAppsAvailable()){
+      return true;
+    }
+  }
+  
+  public static function isCoreAvailable(){
+    return version_compare(DB::getOption("lobby_latest_version"), \Lobby::getVersion(), ">");
+  }
+  
+  public static function isAppsAvailable(){
+    return !empty(self::getApps());
+  }
+  
+  public static function getApps(){
+    return DB::getJSONOption("app_updates");
+  }
   
   /**
    * Get the Zip File from Server & return back the downloaded file location
