@@ -1,5 +1,6 @@
 <?php
 require "../load.php";
+use Lobby\Update;
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,12 +18,15 @@ require "../load.php";
     <div id="workspace">
       <div class="contents">
         <h1>Update</h1>
-        <p>Lobby and it's apps can be updated automatically. <a href="http://lobby.subinsb.com/docs/update" target="_blank" class="btn">More Info</a></p>
+        <p>Lobby and apps can be updated automatically.</p>
         <a class='btn blue' href='check-updates.php'>Check For Updates</a>
+        <a href="<?php echo L_SERVER;?>/docs/update" target="_blank" class="btn pink">Help</a>
         <?php
         $action = Request::postParam("action");
+        $step = Request::get("step");
+        
         if($action === null){
-          if(\Lobby::$version < Lobby\DB::getOption("lobby_latest_version") && !isset($_GET['step'])){
+          if(Update::isCoreAvailable() && $step === null){
         ?>
             <h2>Lobby</h2>
             <p>
@@ -52,8 +56,8 @@ require "../load.php";
             echo sss("Latest Version", "You are using the latest version of Lobby. There are no new releases yet.");
           }
         }
-        if(isset($_GET['step']) && $_GET['step'] != "" && CSRF::check()){
-          $step = $_GET['step'];
+        if($step !== null && CSRF::check()){
+          $step = $step;
           if($step === "1"){
             if(!is_writable(L_DIR)){
               echo ser("Lobby Directory Not Writable", "The Lobby directory (". L_DIR .") is not writable. Make the folder writable to update Lobby.");
@@ -71,8 +75,6 @@ require "../load.php";
             echo '<iframe src="'. L_URL . "/admin/download.php?type=lobby&id=$version". CSRF::getParam() .'" style="border: 0;width: 100%;height: 200px;"></iframe>';
           }
         }
-        
-        $appUpdates = Lobby\DB::getJSONOption("app_updates");
         $shouldUpdate = Request::postParam("updateApp");
         
         if($action === "updateApps" && is_array($shouldUpdate) && CSRF::check()){
@@ -80,9 +82,14 @@ require "../load.php";
             echo '<iframe src="'. L_URL . "/admin/download.php?type=app&id={$appID}&isUpdate=1". CSRF::getParam() .'" style="border: 0;width: 100%;height: 200px;"></iframe>';
           }
         }
-        if(!isset($_GET['step']) && isset($appUpdates) && count($appUpdates) !== 0){
         ?>
-          <h2>Apps</h2>
+        <h2>Apps</h2>
+        <?php
+        $appUpdates = Update::getApps();
+        if($step === null && empty($appUpdates)){
+          echo "<p>All apps are up to date.</p>";
+        }else if($step === null && isset($appUpdates) && count($appUpdates)){
+        ?>
           <p>New versions of apps are available. Choose which apps to update from the following :</p>
           <form method="POST" clear>
             <?php CSRF::getInput();?>
