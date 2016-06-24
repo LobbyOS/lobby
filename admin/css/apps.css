@@ -1,0 +1,10 @@
+#workspace .app .rpane .btn:nth-child(2){
+  margin-left: 10px;
+}
+#workspace #leftpane .btn{
+  width:100%;
+  margin: 5px 0px;
+}
+#workspace #app-info ul{
+  margin-left: 20px;
+}

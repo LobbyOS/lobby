@@ -9,7 +9,7 @@ use \Lobby\Need;
     <?php
     \Assets::js("admin.apps.js", "/admin/js/apps.js");
     \Assets::css("lobby-store", "/admin/css/lobby-store.css");
-    \Assets::css("view-app", "/admin/css/view-app.css");
+    \Assets::css("apps", "/admin/css/apps.css");
     
     \Lobby::doHook("admin.head.begin");
     \Response::head("App Manager");
@@ -180,7 +180,7 @@ use \Lobby\Need;
                     <div style="margin-top: 10px;">
                       <?php
                       if($App->hasUpdate())
-                        echo "<cl/>" . \Lobby::l("/admin/check-updates.php", "Update", "class='btn orange'");
+                        echo "<cl/>" . \Lobby::l("/admin/update.php", "Update", "class='btn orange'");
                       else if($App->enabled)
                         echo \Lobby::l("/admin/apps.php?app=$app&action=disable" . CSRF::getParam(), "Disable", "class='btn'");
                       else
