@@ -225,7 +225,7 @@ class Assets {
              * If file doesn't exist or is not under base directory
              */
             if(self::$config["debug"] === true){
-              echo "invalid_file - $assetRelLocation";
+              echo "\n /** Invalid File - $assetRelLocation */\n";
             }
           }else{
             $data = self::preProcess(file_get_contents($assetLocation), $type);
