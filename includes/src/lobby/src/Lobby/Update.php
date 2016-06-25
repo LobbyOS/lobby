@@ -31,7 +31,8 @@ class Update extends \Lobby {
   }
   
   public static function isAppsAvailable(){
-    return !empty(self::getApps());
+    $apps = self::getApps();
+    return !empty($apps);
   }
   
   public static function getApps(){
