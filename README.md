@@ -31,3 +31,26 @@ WARNING (Unstable) - This repo is for testing and may contain additional compone
 
 * The git repo has apps along with **ledit** that is in development. No guarantee that it will work.
 * The docs are not complete and I will be glad if you help. :-)
+
+# Make a version
+
+* Modify `lobby.json`
+* Remove logs, apps except **ledit**
+* Get the list of files removed :
+  ```bash
+  git diff --name-status oldVersionCommitHash latestVersionCommitHash
+  ```
+  You can get the hashes from `git log`
+  
+  Extract only deleted files `D <file>` and paste it in `contents/update/removeFiles.php`
+* Change Lobby server inside `includes/config.php`
+* Zip the folder
+
+## Blog
+
+New page in lobby/version-0-
+
+## Server
+
+Update version, release notes in App.php of lobby-server app
+Add download url in api.php in src/Page of lobby-server app
