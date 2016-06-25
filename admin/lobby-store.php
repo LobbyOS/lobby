@@ -2,11 +2,11 @@
 require "../load.php";
 
 $page_title = "Lobby Store";
-$AppID = \Request::get('id');
-if($AppID !== null){
+$appID = \Request::get('app');
+if($appID !== null){
   $app = \Lobby\Server::store(array(
     "get" => "app",
-    "id" => $AppID
+    "id" => $appID
   ));
   if($app){
     $page_title = $app['name'] . " | Lobby Store";
@@ -17,7 +17,7 @@ if($AppID !== null){
   <head>
     <?php
     \Assets::css("lobby-store", "/admin/css/lobby-store.css");
-    \Assets::css("view-app", "/admin/css/view-app.css");
+    \Assets::css("apps", "/admin/css/apps.css");
     \Assets::js("lobby-store", "/admin/js/lobby-store.js");
     
     \Lobby::doHook("admin.head.begin");
@@ -32,7 +32,7 @@ if($AppID !== null){
     <div id="workspace">
       <div class="contents">
         <?php
-        if($AppID !== null){
+        if($appID !== null){
           if($app === false){
             echo ser("404 - App Not Found", "App was not found in Lobby Store.");
           }else{
@@ -57,7 +57,7 @@ if($AppID !== null){
                   });
                 </script>
                 <?php
-                $App = new \Lobby\Apps($AppID);
+                $App = new \Lobby\Apps($appID);
                 $require = $app['require'];
                 
                 if(!$App->exists){
@@ -67,7 +67,7 @@ if($AppID !== null){
                   if(\Lobby\Need::checkRequirements($require, true)){
                     echo "<a class='btn red disabled' title='The app requirements are not satisfied. See `Info` tab.'>Install</a>";
                   }else{
-                    echo \Lobby::l("/admin/install-app.php?id={$_GET['id']}" . CSRF::getParam(), "Install", "class='btn red'");
+                    echo \Lobby::l("/admin/install-app.php?app={$appID}" . CSRF::getParam(), "Install", "class='btn red'");
                   }
                 }else if(version_compare($app['version'], $App->info['version'], ">")){
                   /**
@@ -80,7 +80,7 @@ if($AppID !== null){
                   /**
                    * App is Disabled. Show button to enable it
                    */
-                  echo \Lobby::l("/admin/apps.php?action=enable&redirect=1&app=" . $AppID . CSRF::getParam(), "Enable App", "class='btn green'");
+                  echo \Lobby::l("/admin/apps.php?action=enable&redirect=1&app=" . $appID . CSRF::getParam(), "Enable App", "class='btn green'");
                 }
                 ?>
                 <div class="chip" clear>Developed By <a href="<?php echo $app['author_page'];?>" target="_blank"><?php echo $app['author'];?></a></div>
@@ -187,7 +187,7 @@ if($AppID !== null){
             echo "<div class='apps'>";
               foreach($server_response['apps'] as $app){
                 $appImage = $app['image'] != "" ? $app['image'] : L_URL."/includes/lib/lobby/image/blank.png";
-                $url = \Lobby::u("/admin/lobby-store.php?id={$app['id']}");
+                $url = \Lobby::u("/admin/lobby-store.php?app={$app['id']}");
             ?>
                 <div class="app card">
                   <div class="app-inner">

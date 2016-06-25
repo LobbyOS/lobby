@@ -72,14 +72,14 @@ use Lobby\Update;
             echo \Lobby::l("/admin/update.php?step=2" . CSRF::getParam(), "Start Update", "clear class='btn green'");
           }elseif($step == 2){
             $version = Lobby\DB::getOption("lobby_latest_version");
-            echo '<iframe src="'. L_URL . "/admin/download.php?type=lobby&id=$version". CSRF::getParam() .'" style="border: 0;width: 100%;height: 200px;"></iframe>';
+            echo '<iframe src="'. L_URL . "/admin/download.php?type=lobby". CSRF::getParam() .'" style="border: 0;width: 100%;height: 200px;"></iframe>';
           }
         }
         $shouldUpdate = Request::postParam("updateApp");
         
         if($action === "updateApps" && is_array($shouldUpdate) && CSRF::check()){
           foreach($shouldUpdate as $appID){
-            echo '<iframe src="'. L_URL . "/admin/download.php?type=app&id={$appID}&isUpdate=1". CSRF::getParam() .'" style="border: 0;width: 100%;height: 200px;"></iframe>';
+            echo '<iframe src="'. L_URL . "/admin/download.php?type=app&app={$appID}&isUpdate=1". CSRF::getParam() .'" style="border: 0;width: 100%;height: 200px;"></iframe>';
           }
         }
         ?>

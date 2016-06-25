@@ -48,7 +48,7 @@ use \Lobby\Need;
                 <h2>Confirm</h2>
                 <p>Are you sure you want to remove the app <b><?php echo $app;?></b> ?</p>
                 <div clear></div>
-                <a class="btn green" href="<?php echo L_URL ."/admin/install-app.php?action=remove&id={$app}&".CSRF::getParam();?>">Yes, I'm Sure</a>
+                <a class="btn green" href="<?php echo L_URL ."/admin/install-app.php?action=remove&app={$app}&".CSRF::getParam();?>">Yes, I'm Sure</a>
                 <a class="btn red" href="<?php echo L_URL ."/admin/apps.php";?>">No, I'm Not</a>
             <?php
               exit;
