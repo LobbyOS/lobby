@@ -124,8 +124,8 @@ class Lobby {
     return isset(self::$config[$key]) ? self::$config[$key] : false;
   }
   
-  public static function getVersion(){
-    return self::$version . " " . self::$versionName;
+  public static function getVersion($codename = false){
+    return self::$version . ($codename ? " " . self::$versionName : "");
   }
   
   /**
