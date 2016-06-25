@@ -96,7 +96,8 @@ if($type === "app" && \Lobby\Update::app($appID)){
   
   if($isUpdate){
     $appUpdates = Lobby\DB::getJSONOption("app_updates");
-    @unset($appUpdates[$appID]);
+    if(isset($appUpdates[$appID]))
+      unset($appUpdates[$appID]);
     Lobby\DB::saveOption("app_updates", json_encode($AppUpdates));
   }
   

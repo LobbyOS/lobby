@@ -48,9 +48,9 @@ WARNING (Unstable) - This repo is for testing and may contain additional compone
 
 ## Blog
 
-New page in lobby/version-0-
+New page in `lobby/version-0-`
 
 ## Server
 
-Update version, release notes in App.php of lobby-server app
-Add download url in api.php in src/Page of lobby-server app
+* Update version, release notes, blog post URL in App.php of lobby-server app
+* Add download url in api.php in src/Page of lobby-server app

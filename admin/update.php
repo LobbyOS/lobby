@@ -25,8 +25,8 @@ use Lobby\Update;
         $action = Request::postParam("action");
         $step = Request::get("step");
         
-        if($action === null){
-          if(Update::isCoreAvailable() && $step === null){
+        if($action === null && $step === null){
+          if(Update::isCoreAvailable()){
         ?>
             <h2>Lobby</h2>
             <p>
@@ -82,9 +82,9 @@ use Lobby\Update;
             echo '<iframe src="'. L_URL . "/admin/download.php?type=app&app={$appID}&isUpdate=1". CSRF::getParam() .'" style="border: 0;width: 100%;height: 200px;"></iframe>';
           }
         }
-        ?>
-        <h2>Apps</h2>
-        <?php
+        if($step === null){
+          echo "<h2>Apps</h2>";
+        }
         $appUpdates = Update::getApps();
         if($step === null && empty($appUpdates)){
           echo "<p>All apps are up to date.</p>";

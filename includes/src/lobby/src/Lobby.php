@@ -120,8 +120,10 @@ class Lobby {
     }
   }
   
-  public static function getConfig($key){
-    return isset(self::$config[$key]) ? self::$config[$key] : false;
+  public static function getConfig($key, $subKey = null){
+    return isset(self::$config[$key]) ? (
+      isset(self::$config[$key][$subKey]) ? self::$config[$key][$subKey] : false
+    ) : false;
   }
   
   public static function getVersion($codename = false){
