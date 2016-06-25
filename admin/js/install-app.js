@@ -24,7 +24,7 @@ lobby.installApp = function(id, area){
       r = JSON.parse(r);
       
       if(r.statusID == "error"){
-        html = "<li class='collection-item' style='color: red;' data-status-id='error'>"+ r.status +"<br/>Will try again in <span id='retryInstallCountdown'>20</span> seconds.<cl/><a id='#retryInstallNow' class='btn green'>Try Again Now</a><a href='"+ lobby.url +"/admin/lobby-store.php?id="+ id +"' class='btn red'>Cancel</a></li>";
+        html = "<li class='collection-item' style='color: red;' data-status-id='error'>"+ r.status +"<br/>Will try again in <span id='retryInstallCountdown'>20</span> seconds.<cl/><a id='#retryInstallNow' class='btn green'>Try Again Now</a><a href='"+ lobby.url +"/admin/lobby-store.php?app="+ id +"' class='btn red'>Cancel</a></li>";
         startRetryCountdown();
       }else{
         html = "<li class='collection-item' data-status-id='"+ r.statusID +"'>"+ r.status +"</li>";
