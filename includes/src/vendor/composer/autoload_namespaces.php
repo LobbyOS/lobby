@@ -11,6 +11,7 @@ return array(
     'Requests' => array($vendorDir . '/rmccue/requests/library'),
     'Request' => array($vendorDir . '/lobby/lobby/src'),
     'Lobby' => array($vendorDir . '/lobby/lobby/src'),
+    'Hooks' => array($vendorDir . '/lobby/lobby/src'),
     'Helper' => array($vendorDir . '/lobby/lobby/src'),
     'CSRF' => array($vendorDir . '/lobby/lobby/src'),
     'Assets' => array($vendorDir . '/lobby/lobby/src'),
