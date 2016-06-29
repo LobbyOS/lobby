@@ -11,19 +11,20 @@ use \Lobby\Need;
     \Assets::css("lobby-store", "/admin/css/lobby-store.css");
     \Assets::css("apps", "/admin/css/apps.css");
     
-    \Lobby::doHook("admin.head.begin");
+    \Hooks::doAction("admin.head.begin");
     \Response::head("App Manager");
     ?>
   </head>
   <body>
     <?php
-    \Lobby::doHook("admin.body.begin");
+    \Hooks::doAction("admin.body.begin");
     require "$docRoot/admin/inc/sidebar.php";
     ?>
     <div id="workspace">
       <div class="contents">
         <?php
         $appID = Request::get("app");
+        $appIDEscaped = htmlspecialchars($appID);
         if($appID !== null){
           $App = new Apps($appID);
           
@@ -32,35 +33,41 @@ use \Lobby\Need;
           }
         ?>
           <h2><?php echo "<a href='". L_SERVER ."/apps/". $App->info['id'] ."' target='_blank'>". $App->info['name'] ."</a>";?></h2>
-          <p class="chip" style="margin: -5px 0 20px;"><?php echo $App->info['short_description'];?></p>
+          <p class="chip" style="margin: -5px 0 0;"><?php echo $App->info['short_description'];?></p>
           <?php
-          if(isset($_GET['action']) && CSRF::check()){
-            $action = $_GET['action'];
-            
+          $action = Request::get("action");
+          if($action !== null && CSRF::check()){
             if($action === "disable"){
               if($App->disableApp()){
-                echo sss("Disabled", "The App <strong>$app</strong> has been disabled.");
+                echo sss("Disabled", "The App <strong>$appIDEscaped</strong> has been disabled.");
               }else{
-                echo ser("Error", "The App <strong>$app</strong> couldn't be disabled. Try again.", false);
+                echo ser("Error", "The App <strong>$appIDEscaped</strong> couldn't be disabled. Try again.", false);
               }
             }else if($action === "remove"){
             ?>
-                <h2>Confirm</h2>
-                <p>Are you sure you want to remove the app <b><?php echo $app;?></b> ?</p>
-                <div clear></div>
-                <a class="btn green" href="<?php echo L_URL ."/admin/install-app.php?action=remove&app={$app}&".CSRF::getParam();?>">Yes, I'm Sure</a>
-                <a class="btn red" href="<?php echo L_URL ."/admin/apps.php";?>">No, I'm Not</a>
+              <h2>Confirm</h2>
+              <p>Are you sure you want to remove the app <b><?php echo $appIDEscaped;?></b> ?</p>
+              <div clear></div>
+              <a class="btn green" href="<?php echo L_URL ."/admin/install-app.php?action=remove&app={$appID}&".CSRF::getParam();?>">Yes, I'm Sure</a>
+              <a class="btn red" href="<?php echo L_URL ."/admin/apps.php?app=$appID";?>">No, I'm Not</a>
             <?php
-              exit;
             }else if($action === "enable"){
               if($App->enableApp()){
                 if(isset($_GET['redirect'])){
                   \Response::redirect("/app/$appID");
                 }
-                echo sss("Enabled", "The App <strong>$appID</strong> has been enabled.");
+                echo sss("Enabled", "The App <strong>$appIDEscaped</strong> has been enabled.");
               }else{
                 echo ser("Error", "The App couldn't be enabled. Try again.", false);
               }
+            }else if($action === "clear-data"){
+            ?>
+              <h2>Confirm</h2>
+              <p>Are you sure you want to clear the data of app <b><?php echo $appIDEscaped;?></b> ? This is not <b>revertable</b></p>
+              <div clear></div>
+              <a class="btn green" href="<?php echo L_URL ."/admin/install-app.php?action=clear-data&app={$appID}&".CSRF::getParam();?>">Yes, I'm Sure</a>
+              <a class="btn red" href="<?php echo L_URL ."/admin/apps.php?app=$appID";?>">No, I'm Not</a>
+            <?php
             }
           }
           ?>
@@ -135,7 +142,12 @@ use \Lobby\Need;
                   </tr>
                   <tr>
                     <td title="Size occupied in database">App Data</td>
-                    <td><h6><?php $dbSize = $App->getDBSize();echo FS::normalizeSize($dbSize);?></h6></td>
+                    <td>
+                      <h6>
+                      <?php $dbSize = $App->getDBSize();echo FS::normalizeSize($dbSize);?>
+                      <a class="btn red" href="<?php echo \Lobby::u("/admin/apps.php?app=$appID&action=clear-data" . CSRF::getParam());?>">Clear Data</a>
+                      </h6>
+                    </td>
                   </tr>
                 </tbody>
                 <tfoot>

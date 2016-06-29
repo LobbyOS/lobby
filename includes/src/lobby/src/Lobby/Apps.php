@@ -28,7 +28,11 @@ class Apps {
    * This will contain the App object when app is running
    */
   private static $activeApp = false;
+  private static $activeAppInstance = false;
   
+  /**
+   * Default values in manifest.json
+   */
   protected static $manifestConfig = array(
     "name" => "",
     "short_description" => "",
@@ -168,7 +172,7 @@ class Apps {
       /**
        * Check if app directory exist and that manifest file has valid JSON
        */
-      if( is_dir($appDir) && is_array(json_decode(file_get_contents("$appDir/manifest.json"), true)) ){
+      if( is_dir($appDir) && is_array(json_decode(@file_get_contents("$appDir/manifest.json"), true)) ){
         $valid = true;
       }
       
@@ -251,6 +255,8 @@ class Apps {
         ) : Themes::getURL() . "/src/main/image/app-logo.png";
       
       $details["latestVersion"] = self::$appUpdates[$this->app];
+      
+      \Hooks::doAction("app.manifest.load");
        
       /**
        * Insert the info as a property
@@ -350,16 +356,12 @@ class Apps {
     
     /**
      * Convert array values to string
+     * Also remove JSON syntax
      */
     $result = json_encode($result);
     $result = str_replace("[roeEcvv,]", null, $result);
     
-    $tmpFile = FS::getTempFile();
-    FS::write($tmpFile, $result);
-    $size = FS::getSize($tmpFile, $normalizeSize);
-    FS::remove($tmpFile);
-    
-    return $size;
+    return mb_strlen($result);
   }
   
   /**
@@ -371,6 +373,12 @@ class Apps {
       return version_compare($this->info['version'], $latestVersion, "<");
     else
       return version_compare($this->info['version'], $this->info['latestVersion'], "<");
+  }
+  
+  public function clearData(){
+    $sql = \Lobby\DB::getDBH()->prepare("DELETE FROM `". \Lobby\DB::getPrefix() ."data` WHERE `app` = ?");
+    $sql->execute(array($this->app));
+    return true;
   }
   
   /**
@@ -407,11 +415,12 @@ class Apps {
       \Assets::js("app", "/includes/lib/lobby/js/app.js");
       
       self::$activeApp = $this;
+      self::$activeAppInstance = $this->getInstance();
       
       /**
        * Return the App Object
        */
-      return $this->getInstance();
+      return self::$activeAppInstance;
     }
   }
   
@@ -430,6 +439,10 @@ class Apps {
    */
   public static function isAppRunning(){
     return self::$activeApp;
+  }
+  
+  public static function getRunningInstance(){
+    return self::$activeAppInstance;
   }
   
 }
