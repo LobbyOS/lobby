@@ -5,42 +5,40 @@ require "../load.php";
 <html>
   <head>
     <?php 
-    \Lobby::doHook("admin.head.begin");
+    \Hooks::doAction("admin.head.begin");
     \Assets::js("admin.apps.js", "/admin/js/install-app.js");
     \Response::head("Install App");
     ?>
   </head>
   <body>
     <?php
-    \Lobby::doHook("admin.body.begin");
+    \Hooks::doAction("admin.body.begin");
     require "$docRoot/admin/inc/sidebar.php";
     ?>
     <div id="workspace">
       <div class="contents">
         <?php
         $appID = Request::get("app");
-        $displayID = htmlspecialchars($appID);
+        $action = Request::get("action");
         
-        if($appID == null){
+        $displayID = htmlspecialchars($appID);
+        $App = new \Lobby\Apps($appID);
+        
+        if($appID === null){
           echo ser("Error", "No App is mentioned. Install Apps from <a href='lobby-store.php'>Lobby Store</a>");
-        }
-        if(Request::get("action") == "enable" && CSRF::check()){
-          $App = new \Lobby\Apps($appID);
-          if(!$App->exists){
-            echo ser("Error", "App is not installed");
-          }
+        }else if(!$App->exists){
+          echo ser("Error", "App is not installed");
+        }else if($action === "enable" && CSRF::check()){
           $App->enableApp();
           echo sss("Enabled", "The App <b>{$displayID}</b> is enabled. The author says thanks. <cl/><a href='".$App->info['url']."' class='btn green'>Open App</a>");
-        }
-        if(Request::get("action") == "remove" && CSRF::check()){
-          $App = new \Lobby\Apps($appID);
-          if(!$App->exists){
-            echo ser("Error", "App is not installed");
-          }
+        }else if($action === "remove" && CSRF::check()){
           $App->removeApp();
           echo sss("Removed", "The App <b>{$displayID}</b> was successfully removed.");
-        }
-        if($appID != null && Request::get("action") == null && CSRF::check()){
+        }else if($action === "clear-data" && CSRF::check()){
+          if($App->clearData()){
+            echo sss("Cleared Data", "The data of <b>{$displayID}</b> was successfully cleared from the database.");
+          }
+        }else if($appID != null && $action == null && CSRF::check()){
         ?>
           <h1>Install App</h1>
           <p>The install progress will be displayed below. If this doesn't work, try the <?php echo \Lobby::l("/admin/install-app.php?app=$appID&do=alternate-install".CSRF::getParam(), "alternate install");?>.</p>
