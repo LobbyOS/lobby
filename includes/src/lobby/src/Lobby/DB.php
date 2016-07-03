@@ -74,10 +74,11 @@ class DB extends \Lobby {
       }catch(\PDOException $e){
         parent::$installed = false;
         $error = $e->getMessage();
-        self::$error = $error;
-        
-        throw new \Exception("Unable to connect to database server. Is the credentials given in <b>config.php</b> correct ? <blockquote>". $error ."</blockquote>");
-        self::log("Unable to connect to database server : ". $error);
+
+        parent::log(array(
+          "fatal",
+          "Unable to connect to database server. Is the database credentials given in <b>config.php</b> correct ? <blockquote>$error</blockquote>"
+        ));
       }
     }else{
       self::$installed = false;
