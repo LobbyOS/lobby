@@ -1,6 +1,7 @@
 <?php
 namespace Lobby\UI;
 
+use Hooks;
 use Lobby\DB;
 use Lobby\FS;
 
@@ -89,19 +90,19 @@ class Themes {
      */
     if(\Lobby::status("lobby.admin")){
       self::$theme->addStyle("/src/main/css/style.css");
-      \Lobby::hook("admin.head.begin", function(){
+      Hooks::addAction("admin.head.begin", function(){
         self::$theme->panel(true);
         self::$theme->addStyle("/src/main/css/admin.style.css");
       });
-      \Lobby::hook("admin.body.begin", function() {
+      \Hooks::addAction("admin.body.begin", function() {
         echo self::$theme->inc("/src/panel/load.admin.php");
       });
     }else{
       self::$theme->addStyle("/src/main/css/style.css");
-      \Lobby::hook("head.begin", function(){
+      \Hooks::addAction("head.begin", function(){
         self::$theme->panel(false);
       });
-      \Lobby::hook("body.begin", function() {
+      \Hooks::addAction("body.begin", function() {
         echo self::$theme->inc("/src/panel/load.php");
       });
     }

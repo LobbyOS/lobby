@@ -1,17 +1,5 @@
 <?php
 /**
- * Some checking to make sure Lobby works fine
- */
-if(!is_writable(L_DIR) || !is_writable(APPS_DIR)){
-  $error = array("Wrong Permissions", "The permission of Lobby is not correct. All you have to do is change the permission of <blockquote>". L_DIR ."</blockquote>to read and write (0755).");
-  
-  if(\Lobby::getSysInfo("os") === "linux"){
-    $error[1] .= "<p clear>On Linux systems, do this in terminal : <blockquote>sudo chown \${USER}:www-data ". L_DIR ." -R && sudo chmod u+rwx,g+rw,o+r ". L_DIR ." -R</blockquote></p>";
-  }
-  \Response::showError($error[0], $error[1]);
-}
-
-/**
  * Add the <head> files if it's not the install page
  */
 if(!\Lobby::status("lobby.install")){
@@ -63,9 +51,16 @@ if(\Lobby::status("lobby.admin")){
   \Assets::js("admin", "/admin/js/admin.js");
   
   /**
+   * Add sidebar
+   */
+  Hooks::addAction("admin.body.begin", function(){
+    require L_DIR . "/admin/inc/sidebar.php";
+  });
+  
+  /**
    * Add sidebar handler in panel
    */
-  \Lobby::hook("panel.end", function(){
+  \Hooks::addAction("panel.end", function(){
     echo '<a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>';
   });
   
@@ -81,7 +76,7 @@ if(\Lobby::status("lobby.admin")){
 /**
  * Insert Lobby Info to JS Files
  */
-\Lobby::hook("head.begin,admin.head.begin", function(){
+\Hooks::addAction("head.begin,admin.head.begin", function(){
 ?>
   <script>
     window.tmp = {};

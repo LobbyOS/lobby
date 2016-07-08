@@ -28,7 +28,7 @@ class Router {
   
   public static function dispatch(){
     self::defaults();
-    \Lobby::doHook("router.finish");
+    \Hooks::doAction("router.finish");
     self::statusRoutes();
     self::$router->dispatch();
   }
@@ -110,66 +110,6 @@ class Router {
       Response::setTitle("Dashboard");
       \Lobby\UI\Themes::loadDashboard("head");
       Response::loadPage("/includes/lib/lobby/inc/dashboard.php");
-    });
-    
-    /**
-     * App Admin Page
-     */
-    self::route("/admin/app/[:appID]?/[**:page]?", function($request){
-      $AppID = $request->appID;
-      $page = $request->page != "" ? "/admin/{$request->page}" : "/admin/index";
-
-      /**
-       * Check if App exists
-       */
-      $App = new \Lobby\Apps($AppID);
-      if($App->exists && $App->enabled){
-        $class = $App->run();
-        $AppInfo = $App->info;
-      
-        /**
-         * Set the title
-         */
-        Response::setTitle($AppInfo['name']);
-        
-        /**
-         * Add the App item to the navbar
-         */
-        \Lobby\UI\Panel::addTopItem("lobbyApp{$AppID}", array(
-          "text" => "Admin > " . $AppInfo['name'],
-          "href" => "/admin/app/$AppID",
-          "position" => "left",
-          "subItems" => array(
-            "gotoapp" => array(
-              "text" => "Go To App",
-              "href" => "/app/$AppID"
-            )
-          )
-        ));
-        
-        $pageResponse = $class->page($page);
-        
-        if($pageResponse === "auto"){
-          if($page === "/"){
-            $page = "/index";
-          }
-          $html = $class->inc("/src/page{$page}.php");
-          if($html)
-            Response::setPage($html);
-          else
-            ser();
-        }else{
-          if($pageResponse === null){
-            ob_start();
-              echo ser("Error", "The app '<strong>{$AppID}</strong>' does not have an Admin Page. <a clear href='". \Lobby::u("/app/$AppID") ."' class='btn green'>Go To App</a>");
-            $error = ob_get_contents();
-            ob_end_clean();
-            Response::setPage($error);
-          }else{
-            Response::setPage($pageResponse);
-          }
-        }
-      }
     });
   }
   

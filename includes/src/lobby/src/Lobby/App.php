@@ -3,18 +3,21 @@ namespace Lobby;
 
 use Response;
 use Lobby\DB;
+use Lobby\FS;
 
 class App {
 
-  public $dir, $url, $id, $srcURL;
+  /**
+   * Lobby\FS Object with App Dir as base
+   */
+  public $fs = null;
   
-  public function setTheVars($array){
-    $this->id = $array['id'];
-    $this->name = $array['name'];
-    $this->url = $array['url'];
-    $this->srcURL = $array['srcURL'];
-    $this->dir = $array['location'];
+  public function setTheVars(array $array){
+    foreach($array as $key => $value){
+      $this->{$key} = $value;
+    }
     $this->manifest = $array;
+    $this->fs = new FSObj($this->dir);
   }
   
   public function addStyle($fileName){
@@ -103,7 +106,7 @@ class App {
   }
   
   public function get($path){
-    return \Lobby\FS::get($this->dir . $path);
+    return $this->fs->get($path);
   }
   
   public function write($path, $content, $type = "w"){

@@ -6,14 +6,13 @@ use Lobby\Update;
 <html>
   <head>
     <?php
-    \Lobby::doHook("admin.head.begin");
+    \Hooks::doAction("admin.head.begin");
     \Response::head("Update");
     ?>
   </head>
   <body>
     <?php
-    \Lobby::doHook("admin.body.begin");
-    require "$docRoot/admin/inc/sidebar.php";
+    \Hooks::doAction("admin.body.begin");
     ?>
     <div id="workspace">
       <div class="contents">
@@ -92,7 +91,7 @@ use Lobby\Update;
         ?>
           <p>New versions of apps are available. Choose which apps to update from the following :</p>
           <form method="POST" clear>
-            <?php CSRF::getInput();?>
+            <?php echo CSRF::getInput();?>
             <table>
               <thead>
                 <tr>

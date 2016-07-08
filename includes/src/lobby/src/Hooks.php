@@ -516,7 +516,7 @@ class Hooks{
    *                            if any action is currently being run.
    * @return bool Whether the action is currently in the stack.
    */
-  function doingAction( $action = null ) {
+  public static function doingAction( $action = null ) {
     return self::$doingFilter( $action );
   }
   
@@ -527,7 +527,7 @@ class Hooks{
    * @param int|bool $priority Used in counting how many hooks were applied. If === false and $function is an object reference, we return the unique id only if it already has one, false otherwise.
    * @return string|bool Unique ID for usage as array key or false if $priority === false and $function is an object reference, and it does not already have a unique id.
    */
-  private function _filterBuildUniqueID($tag, $function, $priority) {
+  private static function _filterBuildUniqueID($tag, $function, $priority) {
     static $filter_id_count = 0;
 
     if ( is_string($function) )

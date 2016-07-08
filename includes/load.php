@@ -84,4 +84,4 @@ if(!\Lobby::status("lobby.assets-serve")){
   }
 }
 
-\Lobby::doHook("init");
+\Hooks::doAction("init");

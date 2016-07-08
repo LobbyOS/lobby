@@ -44,7 +44,7 @@ class CSRF {
   }
   
   public static function getInput(){
-    echo "<input type='hidden' name='csrfToken' value='". self::$token ."' />";
+    return "<input type='hidden' name='csrfToken' value='". self::$token ."' />";
   }
 
 }

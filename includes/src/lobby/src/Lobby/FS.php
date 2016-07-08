@@ -31,8 +31,8 @@ class FS {
     /**
      * Some checking to make sure Lobby works fine
      */
-    if(!is_writable(L_DIR) || !is_writable(APPS_DIR)){
-      $error = array("Wrong Permissions", "The permissions of the Lobby folder is invalid. You should change the permission of <blockquote>". L_DIR ."</blockquote>to read and write (0755).");
+    if(!is_writable(L_DIR)){
+      $error = array("Fatal Error", "The permissions of the Lobby folder is invalid. You should change the permission of <blockquote>". L_DIR ."</blockquote>to read and write (0755).");
       
       if(\Lobby::getSysInfo("os") === "linux"){
         $error[1] .= "<p clear>On Linux systems, do this in terminal : <blockquote>sudo chown \${USER}:www-data ". L_DIR ." -R && sudo chmod u+rwx,g+rw,o+r ". L_DIR ." -R</blockquote></p>";
@@ -109,7 +109,7 @@ class FS {
     self::$fs->dumpFile($path, $content);
   }
   
-  public static function remove($path, $exclude = array(), $remove_parent = true){
+  public static function remove($path, $exclude = array(), $removeParent = true){
     $path = self::loc($path);
     
     if(is_dir($path)){
@@ -127,7 +127,7 @@ class FS {
           unlink($file_path);
         }
       }
-      if($remove_parent){
+      if($removeParent){
         rmdir($path);
       }
       return true;
@@ -161,7 +161,7 @@ class FS {
    * @param $normalizeSize Whether to run self::normalizeSize() on return
    * @return integer
    */
-  function getSize($path, $normalizeSize = false) {
+  public static function getSize($path, $normalizeSize = false) {
     $path = self::loc($path);
     $size = 0;
     

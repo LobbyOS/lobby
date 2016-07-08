@@ -13,7 +13,6 @@ require "../load.php";
   <body>
     <?php
     \Hooks::doAction("admin.body.begin");
-    require "$docRoot/admin/inc/sidebar.php";
     ?>
     <div id="workspace">
       <div class="contents">

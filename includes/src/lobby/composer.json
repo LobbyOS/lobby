@@ -19,6 +19,7 @@
       "Assets": "src/",
       "CSRF": "src/",
       "Helper": "src/",
+      "Hooks": "src/",
       "Request": "src/",
       "Response": "src/"
     },
@@ -31,5 +32,5 @@
     "php": ">=5.3.0",
     "composer/semver": ">=1.4.0"
   },
-  "version": "0.5.33"
+  "version": "0.8.0"
 }
