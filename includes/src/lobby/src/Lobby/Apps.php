@@ -1,6 +1,7 @@
 <?php
 namespace Lobby;
 
+use Lobby;
 use Lobby\DB;
 use Lobby\FS;
 use Lobby\Need;
@@ -92,7 +93,7 @@ class Apps {
       $apps = array();
     
       foreach($appFolders as $appFolderName){
-        if(self::valid($appFolderName)){
+        if(self::valid($appFolderName, false)){
           $apps[] = $appFolderName;
         }
       }
@@ -161,28 +162,30 @@ class Apps {
   
   /**
    * Check if App is valid and it meets criteria of Lobby
+   * @param string $appID The Apps' ID
+   * @param bool $basicCheck Whether it should be a simple/basic check
    */
-  public static function valid($name = ""){
-    if(isset(self::$cache["valid_apps"][$name])){
-      $valid = self::$cache["valid_apps"][$name];
+  public static function valid($appID = "", $basicCheck = true){
+    if(isset(self::$cache["valid_apps"][$appID]) && $basicCheck){
+      $valid = self::$cache["valid_apps"][$appID];
     }else{
-      $appDir = self::$appsDir . "/$name";
+      $appDir = self::$appsDir . "/$appID";
       $valid = false;
     
       /**
-       * Check if app directory exist and that manifest file has valid JSON
+       * Check if App.php and manifest file exist
        */
-      if( is_dir($appDir) && is_array(json_decode(@file_get_contents("$appDir/manifest.json"), true)) ){
+      if( FS::exists("$appDir/manifest.json") && FS::exists("$appDir/App.php") ){
         $valid = true;
       }
       
-      if( $valid === true && file_exists("$appDir/App.php") ){
+      if($valid && !$basicCheck){
         /**
          * Make sure the App class exists
          */
         require_once "$appDir/App.php";
-      
-        $className = "\\Lobby\App\\" . str_replace("-", "_", $name);
+        
+        $className = "\\Lobby\App\\" . self::normalizeID($appID);
         if( !class_exists($className) ){
           $valid = false; // The class doesn't exist, so app's not valid
         }else{
@@ -191,11 +194,14 @@ class Apps {
             $valid = false;
           }
         }
-      }else{
-        $valid = false; // The App.php file is not found
+        
+        $manifest = json_decode(FS::get("$appDir/manifest.json"), true);
+        if(!is_array($manifest) || (isset($manifest["require"]) && !Need::checkRequirements($manifest["require"], true))){
+          $valid = false;
+        }
       }
       
-      self::$cache["valid_apps"][$name] = $valid;
+      self::$cache["valid_apps"][$appID] = $valid;
     }
     return $valid;
   }
@@ -203,25 +209,23 @@ class Apps {
   /**
    * Make an object of App
    */
-  public function __construct($id = null){
-    if($id !== null){
-      if(self::valid($id)){
-        $this->exists = true;
-        $this->app = $id;
-        $this->dir = self::$appsDir . "/$id";
-        
-        /**
-         * App Manifest Info as a object property
-         */
-        $this->setInfo();
-        return true;
-      }else{
-        $this->exists = false;
-        if($this->disableApp()){
-          $this->log("App $name was disabled because it was not a valid App.");
-        }
-        return false;
-      }
+  public function __construct($id){
+    $this->app = $id;
+    
+    if(self::valid($id, false)){
+      $this->exists = true;
+      $this->dir = self::$appsDir . "/$id";
+      
+      /**
+       * App Manifest Info as a object property
+       */
+      $this->setInfo();
+      return true;
+    }else{
+      if($this->disableApp())
+        Lobby::log("'$name' is not a valid app.");
+      $this->app = false;
+      return false;
     }
   }
  
@@ -230,7 +234,7 @@ class Apps {
    */
   private function setInfo(){
     $manifest = FS::exists($this->dir . "/manifest.json") ?
-      file_get_contents($this->dir . "/manifest.json") : false;
+      FS::get($this->dir . "/manifest.json") : false;
     
     if($manifest){
       $details = json_decode($manifest, true);
@@ -240,7 +244,7 @@ class Apps {
        * Add extra info with the manifest info
        */
       $details['id'] = $this->app;
-      $details['location'] = $this->dir;
+      $details['dir'] = $this->dir;
       $details['url'] = L_URL . "/app/{$this->app}";
       $details['srcURL'] = L_URL . "/contents/apps/{$this->app}";
       $details['adminURL'] = L_URL . "/admin/app/{$this->app}";
@@ -256,7 +260,7 @@ class Apps {
       
       $details["latestVersion"] = self::$appUpdates[$this->app];
       
-      \Hooks::doAction("app.manifest.load");
+      $details = \Hooks::applyFilters("app.manifest", $details);
        
       /**
        * Insert the info as a property
@@ -298,9 +302,8 @@ class Apps {
    * Disable the app
    */
   public function disableApp(){
-    if($this->app && $this->enabled){
+    if($this->app){
       $apps = self::getEnabledApps();
-
       if(in_array($this->app, $apps, true)){
         $key = array_search($this->app, $apps);
         unset($apps[$key]);

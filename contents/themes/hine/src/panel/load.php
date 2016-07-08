@@ -43,6 +43,6 @@ $panelRightItems = Panel::getPanelItems("right");
     ?>
   </ul>
   <?php
-  \Lobby::doHook("panel.end");
+  \Hooks::doAction("panel.end");
   ?>
 </nav>

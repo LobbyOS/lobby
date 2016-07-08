@@ -20,8 +20,8 @@ class Need {
         return \Lobby::$version;
         break;
       case "curl":
-        $curl = curl_version();
-        return $curl["version"];
+        $curl = function_exists("curl_version") ? curl_version() : 0;
+        return $curl === 0 ? 0 : $curl["version"];
         break;
       default:
         /**
@@ -35,8 +35,8 @@ class Need {
   
   /**
    * Check requirements
-   * $requires is array()
-   * $boolean - To tell whether the return value must be a boolean or not
+   * @param array $requires The array containing the requirements
+   * @param bool $boolean Whether the return value must be a boolean
    */
   public static function checkRequirements($requires, $boolean = false){
     $result = $requires;
@@ -56,7 +56,7 @@ class Need {
         $result[$dependency] = false;
       }
     }
-    return $boolean ? in_array(false, $result) : $result;
+    return $boolean ? !in_array(false, $result) : $result;
   }
 
 }

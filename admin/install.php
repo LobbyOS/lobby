@@ -8,7 +8,7 @@ $install_step = Request::get('step');
   <head>
     <?php
     \Lobby\UI\Themes::loadTheme();
-    \Lobby::doHook("head.begin");
+    \Hooks::doAction("head.begin");
    
     /**
      * Install Head
@@ -17,7 +17,7 @@ $install_step = Request::get('step');
     \Assets::js("install", "/admin/js/install.js");
     \Response::head("Install");
    
-    \Lobby::doHook("head.end");
+    \Hooks::doAction("head.end");
     ?>
   </head>
   <body id="workspace">
@@ -386,7 +386,7 @@ $install_step = Request::get('step');
                       </tr>
                     </tbody>
                   </table>
-                  <?php CSRF::getInput();?>
+                  <?php echo CSRF::getInput();?>
                 </form>
             <?php
               }else if($db_type === "sqlite"){
@@ -400,7 +400,7 @@ $install_step = Request::get('step');
                   
                   <button name="submit" style="width:200px;font-size:15px;" class="btn green">Install Lobby</button>
                   <input type="hidden" name="db_type" value="sqlite" />
-                  <?php CSRF::getInput();?>
+                  <?php echo CSRF::getInput();?>
                 </form>
               <?php
               }else{

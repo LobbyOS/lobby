@@ -41,14 +41,7 @@ class Lobby {
   
   public static $installed = false;
   
-  /**
-   * Hooks available in Lobby
-   */
-  protected static $validHooks = array(
-    "init", "body.begin", "admin.body.begin", "head.begin", "admin.head.begin", "head.end", "router.finish", "panel.end"
-  );
-  
-  protected static $sysInfo, $hooks = array();
+  protected static $sysInfo = array();
   
   /**
    * Default Config
@@ -121,9 +114,14 @@ class Lobby {
   }
   
   public static function getConfig($key, $subKey = null){
-    return isset(self::$config[$key]) ? (
-      isset(self::$config[$key][$subKey]) ? self::$config[$key][$subKey] : false
-    ) : false;
+    if(isset(self::$config[$key])){
+      if($subKey === null)
+        return self::$config[$key];
+      else
+        return isset(self::$config[$key][$subKey]) ? self::$config[$key][$subKey] : false;
+    }else{
+      return false;
+    }
   }
   
   public static function getVersion($codename = false){
@@ -245,36 +243,6 @@ class Lobby {
   }
   
   /**
-   * Hooks
-   */
-  public static function hook($place, $function){
-    /**
-     * Multiple hooks with same $function
-     */
-    if(preg_match("/\,/i", $place) !== 0){
-      $output = array();
-      $places = explode(",", $place);
-      foreach($places as $place){
-        $output[] = self::hook($place, $function);
-      }
-      return $output;
-    }else if(array_search($place, self::$validHooks) !== false){
-      self::$hooks[$place][] = $function;
-      return true;
-    }else{
-      return false;
-    }
-  }
-  
-  public static function doHook($place){
-    if(isset(self::$hooks[$place])){
-      foreach(self::$hooks[$place] as $hook){
-        $hook();
-      }
-    }
-  }
-  
-  /**
    * Get status
    */
   public static function status($val){
@@ -312,7 +280,7 @@ class Lobby {
   /**
    * Make a hyperlink
    */
-  public static function l($url = "", $text = "", $extra = "") {
+  public static function l($url = null, $text = null, $extra = null) {
     $url = self::u($url);
     return '<a href="'. $url .'" '. $extra .'>'. $text .'</a>';
   }
@@ -348,7 +316,7 @@ class Lobby {
       if(isset($parts['host'])){
         $urlHost = $parts['host'] . (isset($parts['port']) ? ":{$parts['port']}" : "");
       }else{
-        $urlHost = "";
+        $urlHost = null;
       }
     }
     
@@ -377,10 +345,10 @@ class Lobby {
       /**
        * If $origPath is a relative URI
        */
-      if(Apps::isAppRunning() || $urlHost == null){
+      if($urlHost == null){
         $url = self::$url . "/$path";
-      }else{
-        $url = \Lobby\App::u($origPath);
+      }else if(Apps::isAppRunning()){
+        $url = Apps::getRunningInstance()->u($origPath);
       }
     }
     return $url;

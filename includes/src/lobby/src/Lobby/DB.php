@@ -85,7 +85,9 @@ class DB extends \Lobby {
     }
   }
   
-  /* A HTML Filter function */
+  /**
+   * A HTML Filter function
+   */
   public static function filt(&$value) {
     if($value != strip_tags($value)){
       $value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');

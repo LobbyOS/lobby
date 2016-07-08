@@ -65,7 +65,7 @@ class Modules extends \Lobby {
   public static function appModules(){
     $mods = array();
     
-    $apps = Apps::getApps();
+    $apps = Apps::getEnabledApps();
     foreach($apps as $appID){
       $module_name = 'app_' . Apps::normalizeID($appID);
       $loc = Apps::getAppsDir() . "/$appID/module";
@@ -96,7 +96,6 @@ class Modules extends \Lobby {
       
       if(isset($module["appID"])){
         $App = new Apps($module["appID"]);
-        
         new $moduleIdentifier(array(
           $module["id"],
           $module["location"],

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "95f592b8f4caa90111146d4ce5d9abf5",
-    "content-hash": "acca514a181e4a7d997846fc6734e9b6",
+    "hash": "58e34c11e8caa9a5bcdc99357d34a7f2",
+    "content-hash": "95b0b8399e9aada9d1eb9755dd895d3c",
     "packages": [
         {
             "name": "composer/semver",
@@ -171,11 +171,11 @@
         },
         {
             "name": "lobby/lobby",
-            "version": "0.5.33",
+            "version": "0.8.0",
             "dist": {
                 "type": "path",
                 "url": "lobby/",
-                "reference": "8b2cb99b8e853c85eb442a09979602a0260e981a",
+                "reference": "a05a0955b31bc35702dbeec9478883908bda4ba6",
                 "shasum": null
             },
             "require": {
@@ -192,6 +192,7 @@
                     "Assets": "src/",
                     "CSRF": "src/",
                     "Helper": "src/",
+                    "Hooks": "src/",
                     "Request": "src/",
                     "Response": "src/"
                 },
@@ -267,7 +268,7 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v3.1.0",
+            "version": "v3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
@@ -316,16 +317,16 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v3.1.0",
+            "version": "v3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "83c47b60cdcc0a79651c4e68a3420a54d1eba6e1"
+                "reference": "5fa10139fe520561e313cc2a6cea1e44a71f36ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/83c47b60cdcc0a79651c4e68a3420a54d1eba6e1",
-                "reference": "83c47b60cdcc0a79651c4e68a3420a54d1eba6e1",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/5fa10139fe520561e313cc2a6cea1e44a71f36ce",
+                "reference": "5fa10139fe520561e313cc2a6cea1e44a71f36ce",
                 "shasum": ""
             },
             "require": {
@@ -365,7 +366,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2016-05-13 18:06:41"
+            "time": "2016-06-14 11:18:07"
         },
         {
             "name": "symfony/polyfill-mbstring",

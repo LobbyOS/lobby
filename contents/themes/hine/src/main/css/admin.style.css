@@ -35,7 +35,7 @@
   padding: 0;
 }
 @media screen and (max-width: 992px){
-  #workspace .content {
+  #workspace .contents {
     padding: 0 10px;
     width: fallback;
   }

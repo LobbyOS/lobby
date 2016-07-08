@@ -20,14 +20,13 @@ if($appID !== null){
     \Assets::css("apps", "/admin/css/apps.css");
     \Assets::js("lobby-store", "/admin/js/lobby-store.js");
     
-    \Lobby::doHook("admin.head.begin");
+    \Hooks::doAction("admin.head.begin");
     \Response::head($page_title);
     ?>
   </head>
   <body>
     <?php
-    \Lobby::doHook("admin.body.begin");
-    require "$docRoot/admin/inc/sidebar.php";
+    \Hooks::doAction("admin.body.begin");
     ?>
     <div id="workspace">
       <div class="contents">

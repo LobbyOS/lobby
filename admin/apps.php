@@ -3,6 +3,15 @@ require "../load.php";
 use \Lobby\Apps;
 use \Lobby\FS;
 use \Lobby\Need;
+
+$appID = Request::get("app");
+
+if($appID != null){
+  $App = new Apps($appID);
+  if(!$App->exists)
+    Response::showError("Error", "I checked all over, but the app does not exist");
+  $appIDEscaped = htmlspecialchars($appID);
+}
 ?>
 <html>
   <head>
@@ -18,19 +27,11 @@ use \Lobby\Need;
   <body>
     <?php
     \Hooks::doAction("admin.body.begin");
-    require "$docRoot/admin/inc/sidebar.php";
     ?>
     <div id="workspace">
       <div class="contents">
         <?php
-        $appID = Request::get("app");
-        $appIDEscaped = htmlspecialchars($appID);
         if($appID !== null){
-          $App = new Apps($appID);
-          
-          if( !$App->exists ){
-            echo ser("Error", "I checked all over, but App does not Exist");
-          }
         ?>
           <h2><?php echo "<a href='". L_SERVER ."/apps/". $App->info['id'] ."' target='_blank'>". $App->info['name'] ."</a>";?></h2>
           <p class="chip" style="margin: -5px 0 0;"><?php echo $App->info['short_description'];?></p>
