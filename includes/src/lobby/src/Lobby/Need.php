@@ -4,6 +4,7 @@ namespace Lobby;
 use vierbergenlars\SemVer\version;
 use vierbergenlars\SemVer\expression;
 use vierbergenlars\SemVer\SemVerException;
+use Lobby\Apps;
 
 /**
  * A class for satisying depenedencies of an App
@@ -15,9 +16,19 @@ class Need {
    * Get Version of a component
    */
   public static function getDependencyVersion($dependency){
+    /**
+     * If dependency is 'app/admin' etc.
+     */
+    if(strpos($dependency, "/") !== false){
+      list($dependency, $subDependency) = explode("/", $dependency);
+    }
     switch($dependency){
       case "lobby":
         return \Lobby::$version;
+        break;
+      case "app":
+        $App = new Apps($subDependency);
+        return $App->exists ? $App->info["version"] : 0;
         break;
       case "curl":
         $curl = function_exists("curl_version") ? curl_version() : 0;
