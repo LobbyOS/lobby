@@ -70,102 +70,103 @@ if($appID != null){
               <a class="btn red" href="<?php echo L_URL ."/admin/apps.php?app=$appID";?>">No, I'm Not</a>
             <?php
             }
-          }
+          }else{
           ?>
-          <div class="row">
-            <div class="col m3" id="leftpane" style="text-align: center;">
-              <img src="<?php echo \Lobby::u("admin/image/clear.gif");?>" height="200" width="200" />
-              <script>
-                $(window).load(function(){
-                  var image = $("#leftpane img");
-                  var downloadingImage = new Image();
-                  downloadingImage.onload = function(){
-                    image.attr("src", this.src);
-                  };
-                  downloadingImage.src = "<?php echo $App->info["logo"];?>";
-                });
-              </script>
-              <?php
-              $App = new Apps($appID);
-              $requires = $App->info['require'];
-              
-              if($App->hasUpdate()){
-                /**
-                 * New version of app is available
-                 */
-                echo \Lobby::l("/admin/check-updates.php", "Update App", "class='btn red'");
-              }else if($App->enabled){
-                echo \Lobby::l($App->info['url'], "Open App", "class='btn green'");
-                echo \Lobby::l("/admin/apps.php?app=$appID&action=disable" . CSRF::getParam(), "Disable", "class='btn'");
-              }else{
-                /**
-                 * App is Disabled. Show button to enable it
-                 */
-                echo \Lobby::l("/admin/apps.php?action=enable&redirect=1&app=". $appID . CSRF::getParam(), "Enable", "class='btn green'");
-              }
-              echo \Lobby::l("/admin/apps.php?app=$appID&action=remove" . CSRF::getParam(), "Remove", "class='btn red'");
-              ?>
-            </div>
-            <div class="col m9">
-              <ul class="tabs">
-                <li class="tab"><a href="#app-info">Info</a></li>
-                <li class="tab"><a href="#app-data">Memory</a></li>
-              </ul>
-              <div id="app-info" class="tab-contents">
-                <div class="chip">Version : <?php echo $App->info['version'];?></div><cl/>
-                <div class="chip">Developed By <a href="<?php echo $App->info['author_page'];?>" target="_blank"><?php echo $App->info['author'];?></a></div><cl/>
-                <div class="chip"><a href="<?php echo $App->info['app_page'];?>" target="_blank">App's Webpage</a></div><cl/>
+            <div class="row">
+              <div class="col m3" id="leftpane" style="text-align: center;">
+                <img src="<?php echo \Lobby::u("admin/image/clear.gif");?>" height="200" width="200" />
+                <script>
+                  $(window).load(function(){
+                    var image = $("#leftpane img");
+                    var downloadingImage = new Image();
+                    downloadingImage.onload = function(){
+                      image.attr("src", this.src);
+                    };
+                    downloadingImage.src = "<?php echo $App->info["logo"];?>";
+                  });
+                </script>
                 <?php
-                if(!empty($App->info["require"])){
-                  $requirementsInSystemInfo = Need::checkRequirements($App->info["require"]);
-                  echo "<div class='chip'>Requirements :</div><ul>";
-                  foreach($App->info["require"] as $k => $v){
-                    if($requirementsInSystemInfo[$k]){
-                      echo "<li class='collection-item'>$k $v</li>";
-                    }else{
-                      echo "<li class='collection-item red'>$k $v</li>";
-                    }
-                  }
-                  echo "</ul>";
+                $App = new Apps($appID);
+                $requires = $App->info['require'];
+                
+                if($App->hasUpdate()){
+                  /**
+                   * New version of app is available
+                   */
+                  echo \Lobby::l("/admin/check-updates.php", "Update App", "class='btn red'");
+                }else if($App->enabled){
+                  echo \Lobby::l($App->info['url'], "Open App", "class='btn green'");
+                  echo \Lobby::l("/admin/apps.php?app=$appID&action=disable" . CSRF::getParam(), "Disable", "class='btn'");
+                }else{
+                  /**
+                   * App is Disabled. Show button to enable it
+                   */
+                  echo \Lobby::l("/admin/apps.php?action=enable&redirect=1&app=". $appID . CSRF::getParam(), "Enable", "class='btn green'");
                 }
+                echo \Lobby::l("/admin/apps.php?app=$appID&action=remove" . CSRF::getParam(), "Remove", "class='btn red'");
                 ?>
+              </div>
+              <div class="col m9">
+                <ul class="tabs">
+                  <li class="tab"><a href="#app-info">Info</a></li>
+                  <li class="tab"><a href="#app-data">Memory</a></li>
+                </ul>
+                <div id="app-info" class="tab-contents">
+                  <div class="chip">Version : <?php echo $App->info['version'];?></div><cl/>
+                  <div class="chip">Developed By <a href="<?php echo $App->info['author_page'];?>" target="_blank"><?php echo $App->info['author'];?></a></div><cl/>
+                  <div class="chip"><a href="<?php echo $App->info['app_page'];?>" target="_blank">App's Webpage</a></div><cl/>
+                  <?php
+                  if(!empty($App->info["require"])){
+                    $requirementsInSystemInfo = Need::checkRequirements($App->info["require"]);
+                    echo "<div class='chip'>Requirements :</div><ul>";
+                    foreach($App->info["require"] as $k => $v){
+                      if($requirementsInSystemInfo[$k]){
+                        echo "<li class='collection-item'>$k $v</li>";
+                      }else{
+                        echo "<li class='collection-item red'>$k $v</li>";
+                      }
+                    }
+                    echo "</ul>";
+                  }
+                  ?>
+              </div>
+              <div id="app-data" class="tab-contents">
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>Installed in</td>
+                      <td><?php echo $App->dir;?></td>
+                    </tr>
+                    <tr>
+                      <td>Folder</td>
+                      <td><h6><?php $folderSize = FS::getSize($App->dir);echo FS::normalizeSize($folderSize);?></h6></td>
+                    </tr>
+                    <tr>
+                      <td title="Size occupied in database">App Data</td>
+                      <td>
+                        <h6>
+                        <?php $dbSize = $App->getDBSize();echo FS::normalizeSize($dbSize);?>
+                        <a class="btn red" href="<?php echo \Lobby::u("/admin/apps.php?app=$appID&action=clear-data" . CSRF::getParam());?>">Clear Data</a>
+                        </h6>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td>Total size</td>
+                      <td><h5><?php echo FS::normalizeSize($folderSize + $dbSize);?></h5></td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
             </div>
-            <div id="app-data" class="tab-contents">
-              <table>
-                <tbody>
-                  <tr>
-                    <td>Installed in</td>
-                    <td><?php echo $App->dir;?></td>
-                  </tr>
-                  <tr>
-                    <td>Folder</td>
-                    <td><h6><?php $folderSize = FS::getSize($App->dir);echo FS::normalizeSize($folderSize);?></h6></td>
-                  </tr>
-                  <tr>
-                    <td title="Size occupied in database">App Data</td>
-                    <td>
-                      <h6>
-                      <?php $dbSize = $App->getDBSize();echo FS::normalizeSize($dbSize);?>
-                      <a class="btn red" href="<?php echo \Lobby::u("/admin/apps.php?app=$appID&action=clear-data" . CSRF::getParam());?>">Clear Data</a>
-                      </h6>
-                    </td>
-                  </tr>
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <td>Total size</td>
-                    <td><h5><?php echo FS::normalizeSize($folderSize + $dbSize);?></h5></td>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-          </div>
-          <style>
-          .tab-contents{
-            padding: 10px 0;
-          }
-          </style>
+            <style>
+            .tab-contents{
+              padding: 10px 0;
+            }
+            </style>
         <?php
+          }
         }else{
         ?>
           <h2>Apps</h2>
