@@ -62,9 +62,9 @@ class Lobby {
   private static $status = null;
   
   /**
-   * The base directory of Lobby
+   * Whether Lobby is in CLI (Command Line Interface) mode
    */
-  private static $lDir = null;
+  public static $cli = false;
  
   public static function __constructStatic(){
     /**
@@ -73,6 +73,15 @@ class Lobby {
     register_shutdown_function(function(){
       return \Lobby::fatalErrorHandler();
     });
+    
+    if(!isset($_SERVER["SERVER_NAME"])){
+      /**
+       * Lobby is not loaded by browser request, but by a script
+       * so $_SERVER vars won't exist. This will cause problems
+       * for URL making, hence we must define it's CLI
+       */
+      self::$cli = true;
+    }
     
     self::sysInfo();
     self::config();
@@ -174,10 +183,13 @@ class Lobby {
   /**
    * Get/Make the Lobby base URL
    */
-  public static function getURL(){
+  public static function getURL(){    
     if(self::$url !== null)
       return self::$url;
-      
+    
+    if(self::$cli)
+      return null;
+    
     if(isset(self::$config['lobby_url'])){
       $url_parts = parse_url(self::$config['lobby_url']);
       self::$hostname = $url_parts['host'];
@@ -290,6 +302,9 @@ class Lobby {
    * Eg: /hello to http://lobby.dev/hello
    */
   public static function u($path = null, $relative = false){
+    if(self::$cli)
+      return null;
+    
     /**
      * The $path var is changed during the process
      * So, original path is stored separately
@@ -330,12 +345,12 @@ class Lobby {
       }
       
       $pageURL .= "://";
-      $request_uri = $relative === false ? $_SERVER["ORIG_REQUEST_URI"] : $_SERVER["REQUEST_URI"];
+      $requestURI = $relative === false ? Request::getRequestURI() : $_SERVER["REQUEST_URI"];
       
       if(isset($_SERVER["SERVER_PORT"]) && $_SERVER["SERVER_PORT"] != "80") {
-        $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $request_uri;
+        $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $requestURI;
       }else{
-        $pageURL .= $_SERVER["SERVER_NAME"] . $request_uri;
+        $pageURL .= $_SERVER["SERVER_NAME"] . $requestURI;
       }
       
       $url = $pageURL;
