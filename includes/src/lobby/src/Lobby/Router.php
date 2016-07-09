@@ -48,7 +48,7 @@ class Router {
        * Check if App exists
        */
       $App = new \Lobby\Apps($AppID);
-      if($App->exists && $App->enabled && substr($page, 0, 7) != "/Admin/"){
+      if($App->exists && $App->enabled){
         $class = $App->run();
         $AppInfo = $App->info;
       
@@ -82,9 +82,12 @@ class Router {
         $pageResponse = $class->page($page);
         
         if($pageResponse === "auto"){
-          if($page === "/"){
+          if($page === "/")
             $page = "/index";
-          }
+          
+          if(is_dir($class->fs->loc("src/page{$page}")))
+            $page = "$page/index";
+          
           $html = $class->inc("/src/page{$page}.php");
           if($html)
             Response::setPage($html);
