@@ -46,7 +46,10 @@ class Request {
    * @param $type string - Explicitly mention where to get value from ("GET" or "POST")
    */
   public static function get($key, $default = null){
-    return self::$request->get($key, $default);
+    $val = self::$request->get($key, $default);
+    if($val !== null)
+      $val = urldecode($val);
+    return $val;
   }
   
   public static function getParam($key, $default = null){
