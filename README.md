@@ -3,7 +3,7 @@ Lobby
 
 [![Join the chat at https://gitter.im/subins2000/lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/subins2000/lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](https://travis-ci.org/LobbyOS/lobby.svg?branch=dev)](https://travis-ci.org/LobbyOS/lobby)
-[![Facebook Group](https://searchengineland.com/figz/wp-content/seloads/2011/02/facebook-logo-rectangle.gif =80x30)](https://www.facebook.com/groups/LobbyOS)
+[<img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Facebook.svg" width="80">](https://www.facebook.com/groups/LobbyOS)
 
 The default branch is `dev` which means, most stuff are in development mode and can't be guaranteed to work.
 
