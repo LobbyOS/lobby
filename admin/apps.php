@@ -17,7 +17,7 @@ if($appID != null){
   <head>
     <?php
     \Assets::js("admin.apps.js", "/admin/js/apps.js");
-    \Assets::css("lobby-store", "/admin/css/lobby-store.css");
+    \Assets::css("apps-grid", "/admin/css/apps-grid.css");
     \Assets::css("apps", "/admin/css/apps.css");
     
     \Hooks::doAction("admin.head.begin");
@@ -33,8 +33,10 @@ if($appID != null){
         <?php
         if($appID !== null){
         ?>
-          <h2><?php echo "<a href='". L_SERVER ."/apps/". $App->info['id'] ."' target='_blank'>". $App->info['name'] ."</a>";?></h2>
-          <p class="chip" style="margin: -5px 0 0;"><?php echo $App->info['short_description'];?></p>
+          <h2><?php echo "<a href='". Lobby::u("/admin/apps.php?app={$App->info['id']}") ."'>". $App->info['name'] ."</a>";?></h2>
+          <div id="appNav">
+            <p class="chip"><?php echo $App->info['short_description'];?></p>
+          </div>
           <?php
           $action = Request::get("action");
           if($action !== null && CSRF::check()){
@@ -117,13 +119,13 @@ if($appID != null){
                   <div class="chip"><a href="<?php echo $App->info['app_page'];?>" target="_blank">App's Webpage</a></div><cl/>
                   <?php
                   if(!empty($App->info["require"])){
-                    $requirementsInSystemInfo = Need::checkRequirements($App->info["require"]);
+                    $requirements = Need::checkRequirements($App->info["require"], false, true);
                     echo "<div class='chip'>Requirements :</div><ul>";
-                    foreach($App->info["require"] as $k => $v){
-                      if($requirementsInSystemInfo[$k]){
-                        echo "<li class='collection-item'>$k $v</li>";
+                    foreach($requirements as $dependency => $depInfo){
+                      if($depInfo["satisfy"]){
+                        echo "<li class='collection-item'>$dependency {$depInfo['require']}</li>";
                       }else{
-                        echo "<li class='collection-item red'>$k $v</li>";
+                        echo "<li class='collection-item red'>$dependency {$depInfo['require']}</li>";
                       }
                     }
                     echo "</ul>";
@@ -177,20 +179,19 @@ if($appID != null){
           if(empty($apps)){
             echo ser("No Apps", "You haven't installed any apps. <br/>Get great Apps from " . \Lobby::l("/admin/lobby-store.php", "Lobby Store"));
           }else{
-            echo '<div class="apps">';
+            echo '<div class="apps row">';
             foreach($apps as $app){
               $App = new Apps($app);
             ?>
-              <div class="app card">
-                <div class="app-inner">
-                  <div class="lpane">
+              <div class="app card col s12 m6 l4">
+                <div class="app-inner row">
+                  <div class="lpane col s4 m5 l5">
                     <a href="<?php echo \Lobby::u("/admin/apps.php?app=$app");?>">
                       <img src="<?php echo $App->info["logo"];?>" />
                     </a>
                   </div>
-                  <div class="rpane">
-                    <a href="<?php echo \Lobby::u("/admin/apps.php?app=$app");?>" class="name"><?php echo $App->info["name"];?></a>
-                    <p><a class="chip">Version <?php echo $App->info["version"];?></a></p>
+                  <div class="rpane col s8 m6 l7">
+                    <a href="<?php echo \Lobby::u("/admin/apps.php?app=$app");?>" class="name truncate" title="<?php echo $App->info["name"];?>"><?php echo $App->info["name"];?></a>
                     <div style="margin-top: 10px;">
                       <?php
                       if($App->hasUpdate())
@@ -199,7 +200,7 @@ if($appID != null){
                         echo \Lobby::l("/admin/apps.php?app=$app&action=disable" . CSRF::getParam(), "Disable", "class='btn'");
                       else
                         echo \Lobby::l("/admin/apps.php?app=$app&action=enable" . CSRF::getParam(), "Enable", "class='btn green'");
-                      echo \Lobby::l("/admin/apps.php?app=$app&action=remove" . CSRF::getParam(), "Remove", "class='btn red'");
+                      echo "<cl/>" . \Lobby::l("/admin/apps.php?app=$app&action=remove" . CSRF::getParam(), "Remove", "class='btn red'");
                       ?>
                     </div>
                   </div>
