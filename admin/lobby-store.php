@@ -1,6 +1,10 @@
 <?php
 require "../load.php";
 
+use Lobby\Apps;
+use Lobby\Need;
+use Lobby\Time;
+
 $page_title = "Lobby Store";
 $appID = \Request::get('app');
 if($appID !== null){
@@ -16,8 +20,8 @@ if($appID !== null){
 <html>
   <head>
     <?php
+    \Assets::css("apps-grid", "/admin/css/apps-grid.css");
     \Assets::css("lobby-store", "/admin/css/lobby-store.css");
-    \Assets::css("apps", "/admin/css/apps.css");
     \Assets::js("lobby-store", "/admin/js/lobby-store.js");
     
     \Hooks::doAction("admin.head.begin");
@@ -40,8 +44,10 @@ if($appID !== null){
             $sc = $app['sub_category'];
         ?>
             <h1><?php echo "<a href='". L_SERVER ."/apps/{$app['id']}' target='_blank'>{$app['name']}</a>";?></h1>
-            <?php echo "<div class='chip'><a href='". L_SERVER ."/apps?c={$c}' target='_blank'>" . ucfirst($c) . "</a> &gt; <a href='". L_SERVER ."/apps?sc={$sc}' target='_blank' >" . ucfirst($sc) . "</a></div>";?>
-            <p class="chip" style="margin: -5px 0 20px;"><?php echo $app['short_description'];?></p>
+            <div id="appNav">
+              <?php echo "<div class='chip'><a href='". L_SERVER ."/apps?c={$c}' target='_blank'>" . ucfirst($c) . "</a> &gt; <a href='". L_SERVER ."/apps?sc={$sc}' target='_blank' >" . ucfirst($sc) . "</a></div>";?>
+              <p class="chip"><?php echo $app['short_description'];?></p>
+            </div>
             <div class="row">
               <div class="col m3" id="leftpane" style="text-align: center;">
                 <img src='image/clear.gif' height="200" width="200" />
@@ -56,14 +62,14 @@ if($appID !== null){
                   });
                 </script>
                 <?php
-                $App = new \Lobby\Apps($appID);
+                $App = new \Apps($appID);
                 $require = $app['require'];
                 
                 if(!$App->exists){
                   /**
                    * Check whether Lobby version is compatible
                    */
-                  if(\Lobby\Need::checkRequirements($require, true)){
+                  if(Need::checkRequirements($require, true)){
                     echo "<a class='btn red disabled' title='The app requirements are not satisfied. See `Info` tab.'>Install</a>";
                   }else{
                     echo \Lobby::l("/admin/install-app.php?app={$appID}" . CSRF::getParam(), "Install", "class='btn red'");
@@ -94,11 +100,11 @@ if($appID !== null){
                 </ul>
                 <div id="app-info" class="tab-contents">
                   <div class="chip">Version : <?php echo $app['version'];?></div>
-                  <div class="chip">Last updated <?php echo $app['updated'];?></div><cl/>
+                  <div class="chip">Last updated <?php echo Time::getTimeago($app['updated']);?></div><cl/>
                   <div class="chip"><span>Requirements :</span></div>
                     <ul class="collection" style="margin-left: 20px;">
                       <?php
-                      $requirementsInSystemInfo = \Lobby\Need::checkRequirements($require);
+                      $requirementsInSystemInfo = Need::checkRequirements($require);
                       foreach($require as $k => $v){
                         if($requirementsInSystemInfo[$k]){
                           echo "<li class='collection-item'>$k $v</li>";
@@ -183,34 +189,34 @@ if($appID !== null){
           if($server_response == false){
             echo ser("Nothing Found", "Nothing was found that matches your criteria. Sorry...");
           }else{
-            echo "<div class='apps'>";
+            echo "<div class='apps row'>";
               foreach($server_response['apps'] as $app){
                 $appImage = $app['image'] != "" ? $app['image'] : L_URL."/includes/lib/lobby/image/blank.png";
                 $url = \Lobby::u("/admin/lobby-store.php?app={$app['id']}");
             ?>
-                <div class="app card">
-                  <div class="app-inner">
-                    <div class="lpane">
+                <div class="app card col s12 m6 l6">
+                  <div class="app-inner row">
+                    <div class="lpane col s4 m5 l4">
                       <a href="<?php echo $url;?>">
                         <img src="<?php echo $appImage;?>" />
                       </a>
                     </div>
-                    <div class="rpane">
+                    <div class="rpane col s8 m6 l8">
                       <a href="<?php echo $url;?>" class="name"><?php echo $app['name'];?></a>
-                      <p class="description"><?php echo $app['short_description'];?></p>
+                      <p class="description truncate" title="<?php echo $app['short_description'];?>"><?php echo $app['short_description'];?></p>
+                      <div class="chip">Version : <?php echo $app['version'];?></div>
                       <p style='font-style: italic;'>By <a href="<?php echo $app['author_page'];?>"><?php echo $app['author'];?></a></p>
                     </div>
                   </div>
-                  <div class="bpane">
-                    <div class="lside">
+                  <div class="bpane row">
+                    <div class="lside col s6 l6">
                       <?php
                       echo "<div>Rating: " . $app['rating'] . "</div>";
                       echo "<div class='downloads'>" . $app['downloads'] . " downloads</div>";
                       ?>
                     </div>
-                    <div class="rside">
-                      <div>Updated <?php echo $app['updated'];?></div>
-                      <div>Version : <?php echo $app['version'];?></div>
+                    <div class="rside col s6 l6">
+                      <div>Updated <?php echo Time::getTimeago($app['updated']);?></div>
                     </div>
                   </div>
                 </div>

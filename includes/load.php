@@ -19,12 +19,15 @@ try{
   require_once L_DIR . "/includes/config.php";
   
   /**
-   * Load Classed that Composer doesn't load by default
+   * Load Classes that has __constructStatic()
    */
   $composer->loadClass("Assets");
   $composer->loadClass("CSRF");
   $composer->loadClass("Lobby\\DB");
+  $composer->loadClass("Lobby\\Time");
   $composer->loadClass("Lobby\\UI\\Themes");
+  $composer->loadClass("Request");
+  $composer->loadClass("Response");
   
   /**
    * Static Class Constructor
