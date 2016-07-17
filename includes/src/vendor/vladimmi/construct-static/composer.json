@@ -1,0 +1,17 @@
+{
+    "name": "vladimmi/construct-static",
+    "description": "Small Composer wrapper to implement static class constructors",
+    "type": "library",
+    "authors": [
+        {
+            "name": "vladimmi",
+            "email": "vladimmi@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "ConstructStatic\\": "src"
+        }
+    }
+}
