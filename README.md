@@ -42,9 +42,16 @@ WARNING (Unstable) - This repo is for testing and may contain additional compone
 * Remove logs, apps except **ledit**
 * Get the list of files removed :
   ```bash
-  git diff --name-status oldVersionCommitHash latestVersionCommitHash
+  git diff --name-status master dev > c.txt
   ```
-  You can get the hashes from `git log`
+  You can get the hashes from `git log` too.
+  
+  Then replace contents of c.txt :
+  
+  ```regex
+  [M|A|T]	(.*?)\n  ->  ""
+  D	  ->  ""
+  ```
   
   Extract only deleted files `D <file>` and paste it in `contents/update/removeFiles.php`
 * Change Lobby server inside `includes/config.php`
