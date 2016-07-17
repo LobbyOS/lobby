@@ -12,7 +12,6 @@ class Install extends PHPUnit_Framework_TestCase {
     $this->driver = RemoteWebDriver::create("http://localhost:4444/wd/hub", DesiredCapabilities::firefox());
   }
   
-  /**
   public function testCSSLoad(){
     $this->driver->get("http://". WEB_SERVER_HOST .":". WEB_SERVER_PORT . "/");
     $src = $this->driver->getPageSource();
@@ -20,7 +19,7 @@ class Install extends PHPUnit_Framework_TestCase {
     
     $this->driver->get($cssURL);
     $this->assertContains("#workspace", $this->driver->getPageSource());
-  }*/
+  }
 
 	public function testSteps(){
     /**
@@ -54,10 +53,6 @@ class Install extends PHPUnit_Framework_TestCase {
   
   public function tearDown(){
     $this->driver->close();
-  }
-  
-  public static function tearDownAfterClass(){
-    system('rm -rf ' . escapeshellarg(WEB_SERVER_DOCROOT), $retval);
   }
   
 }
