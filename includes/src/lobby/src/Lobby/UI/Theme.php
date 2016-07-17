@@ -1,31 +1,40 @@
 <?php
 namespace Lobby\UI;
 
+use Lobby\UI\Themes;
+
 class Theme {
+  
+  protected $id, $dir;
+
+  public function __construct($themeID, $themeDir){
+    $this->id = $themeID;
+    $this->dir = $themeDir;
+  }
 
   /**
    * Tell Lobby to load a stylesheet
    */
   public function addStyle($file_location){
-    $url = "/contents/themes/". THEME_ID . $file_location;
-    \Assets::css("theme.". THEME_ID ."-{$file_location}", $url);
+    $url = "/contents/themes/". $this->id . $file_location;
+    \Assets::css("theme.". $this->id ."-{$file_location}", $url);
   }
   
   /**
    * Tell Lobby to load a script
    */
   public function addScript($file_location){
-    $url = "/contents/themes/". THEME_ID . $file_location;
-    \Assets::js("theme.". THEME_ID ."-{$file_location}", $url);
+    $url = "/contents/themes/". $this->id . $file_location;
+    \Assets::js("theme.". $this->id ."-{$file_location}", $url);
   }
   
   /**
    * Include a page from the theme's source
    */
   public function inc($path, $vars = array()){
-    $theme_file_location = THEME_DIR . $path;
+    $themeFileLocation = $this->dir . $path;
 
-    if(!file_exists($theme_file_location)){
+    if(!file_exists($themeFileLocation)){
       return false;
     }else{    
       /**
@@ -39,7 +48,7 @@ class Theme {
        * Get the output of the file in a variable
        */
       ob_start();
-        include $theme_file_location;
+        include $themeFileLocation;
       $html = ob_get_clean();
     
       return $html;

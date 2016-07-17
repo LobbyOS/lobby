@@ -10,3 +10,9 @@ define("L_SERVER", "http://server.lobby.sim");
  */
 define("APPS_DIR", L_DIR . "/contents/apps");
 define("THEMES_DIR", L_DIR . "/contents/themes");
+
+/**
+ * Relative URLs
+ */
+define("APPS_URL", "/contents/apps");
+define("THEMES_URL", "/contents/themes");

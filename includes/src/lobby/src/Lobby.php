@@ -3,7 +3,6 @@
  * The Heart of Lobby
  */
 
-use Request;
 use Lobby\Apps;
  
 class Lobby {

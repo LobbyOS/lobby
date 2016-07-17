@@ -119,7 +119,7 @@ class Response {
     }
     
     $jsURLParams = array(
-      "THEME_URL" => Themes::getURL()
+      "THEME_URL" => Themes::getThemeURL()
     );
     
     if(Apps::isAppRunning()){

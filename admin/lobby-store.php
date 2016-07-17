@@ -43,7 +43,12 @@ if($appID !== null){
             $c = $app['category'];
             $sc = $app['sub_category'];
         ?>
-            <h1><?php echo "<a href='". L_SERVER ."/apps/{$app['id']}' target='_blank'>{$app['name']}</a>";?></h1>
+            <h1>
+              <?php
+              echo Lobby::l("/admin/lobby-store.php?id={$app['id']}", $app['name']);
+              echo Lobby::l(L_SERVER . "/apps/{$app['id']}?lobby_url=" . urlencode(L_URL), "<i id='open-in-new' class='small'></i>", "target='_blank'");
+              ?>
+            </h1>
             <div id="appNav">
               <?php echo "<div class='chip'><a href='". L_SERVER ."/apps?c={$c}' target='_blank'>" . ucfirst($c) . "</a> &gt; <a href='". L_SERVER ."/apps?sc={$sc}' target='_blank' >" . ucfirst($sc) . "</a></div>";?>
               <p class="chip"><?php echo $app['short_description'];?></p>
@@ -62,7 +67,7 @@ if($appID !== null){
                   });
                 </script>
                 <?php
-                $App = new \Apps($appID);
+                $App = new Apps($appID);
                 $require = $app['require'];
                 
                 if(!$App->exists){
@@ -70,9 +75,9 @@ if($appID !== null){
                    * Check whether Lobby version is compatible
                    */
                   if(Need::checkRequirements($require, true)){
-                    echo "<a class='btn red disabled' title='The app requirements are not satisfied. See `Info` tab.'>Install</a>";
-                  }else{
                     echo \Lobby::l("/admin/install-app.php?app={$appID}" . CSRF::getParam(), "Install", "class='btn red'");
+                  }else{
+                    echo "<a class='btn red disabled' title='The app requirements are not satisfied. See 'Info' tab.'>Install</a>";
                   }
                 }else if(version_compare($app['version'], $App->info['version'], ">")){
                   /**
@@ -164,28 +169,38 @@ if($appID !== null){
         <?php
           }
         }else{
+          $q = Request::get("q");
+          $p = Request::get("p");
+          $section = Request::get("section");
         ?>
-          <h1><a href='<?php echo L_SERVER . "/apps?lobby_url=" . urlencode(L_URL);?>' target='_blank'>Lobby Store</a></h1>
-          <cl/>
-          <form method="GET" action="<?php echo \Lobby::u("/admin/lobby-store.php");?>">
-            <input type="text" placeholder="Type an app name" name="q" style="width:450px;"/>
-            <button class="btn red">Search</button>
-          </form>
+          <h1>
+            <a href="<?php echo Lobby::u("/admin/lobby-store.php");?>">Lobby Store</a>
+            <a href="<?php echo L_SERVER . "/apps?lobby_url=" . urlencode(L_URL);?>'" target="_blank"><i id="open-in-new" class="small"></i></a>
+          </h1>
+          <div id="storeNav" class="card">
+            <form method="GET" action="<?php echo \Lobby::u("/admin/lobby-store.php");?>">
+              <input type="text" placeholder="Search for an app" name="q" value="<?php echo htmlspecialchars($q);?>" />
+              <button class="hide"></button>
+            </form>
+            <?php
+            echo Lobby::l("/admin/lobby-store.php", "New", "class='btn ". ($section === null ? "green" : "") ."'");
+            echo Lobby::l("/admin/lobby-store.php?section=popular", "Popular", "class='btn ". ($section === "popular" ? "green" : "") ."'");
+            ?>
+          </div>
           <?php
-          if(isset($_GET['q'])){
-            $request_data = array(
+          if($q !== null)
+            $params = array(
               "q" => $_GET['q']
             );
-          }else{
-            $request_data = array(
-              "get" => "newApps"
+          else
+            $params = array(
+              "get" => "popular"
             );
-          }
-          if(isset($_GET['p'])){
-            $request_data['p'] = $_GET['p'];
-          }
           
-          $server_response = \Lobby\Server::store($request_data);
+          if($p !== null)
+            $params["p"] = $p;
+          
+          $server_response = \Lobby\Server::store($params);
           if($server_response == false){
             echo ser("Nothing Found", "Nothing was found that matches your criteria. Sorry...");
           }else{
@@ -205,7 +220,7 @@ if($appID !== null){
                       <a href="<?php echo $url;?>" class="name"><?php echo $app['name'];?></a>
                       <p class="description truncate" title="<?php echo $app['short_description'];?>"><?php echo $app['short_description'];?></p>
                       <div class="chip">Version : <?php echo $app['version'];?></div>
-                      <p style='font-style: italic;'>By <a href="<?php echo $app['author_page'];?>"><?php echo $app['author'];?></a></p>
+                      <div class="chip">By <a href="<?php echo $app['author_page'];?>"><?php echo $app['author'];?></a></div>
                     </div>
                   </div>
                   <div class="bpane row">

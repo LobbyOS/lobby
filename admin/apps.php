@@ -5,12 +5,37 @@ use \Lobby\FS;
 use \Lobby\Need;
 
 $appID = Request::get("app");
+$action = Request::get("action");
+
+/**
+* Whether the app info should be shown
+*/
+$showAppInfo = true;
+
+/**
+* Whether this is a request to show a message
+*/
+$show = Request::get("show") !== null;
 
 if($appID != null){
   $App = new Apps($appID);
   if(!$App->exists)
     Response::showError("Error", "I checked all over, but the app does not exist");
   $appIDEscaped = htmlspecialchars($appID);
+}
+
+if(!$show && $action !== null && CSRF::check()){
+  if($action === "disable"){
+    if($App->disableApp())
+      Response::redirect("/admin/apps.php?app=$appID&action=disable&show=1" . CSRF::getParam());
+    else
+      Response::redirect("/admin/apps.php?app=$appID&action=disable-fail&show=1" . CSRF::getParam());
+  }else if($action === "enable"){
+    if($App->enableApp())
+      Response::redirect("/admin/apps.php?app=$appID&action=enable&show=1" . CSRF::getParam());
+    else
+      Response::redirect("/admin/apps.php?app=$appID&action=enable-fail&show=1" . CSRF::getParam());
+  }
 }
 ?>
 <html>
@@ -38,41 +63,36 @@ if($appID != null){
             <p class="chip"><?php echo $App->info['short_description'];?></p>
           </div>
           <?php
-          $action = Request::get("action");
-          if($action !== null && CSRF::check()){
-            if($action === "disable"){
-              if($App->disableApp()){
+          if($action !== null && $show && CSRF::check()){
+            switch($action){
+              case "disable":
                 echo sss("Disabled", "The App <strong>$appIDEscaped</strong> has been disabled.");
-              }else{
-                echo ser("Error", "The App <strong>$appIDEscaped</strong> couldn't be disabled. Try again.", false);
-              }
-            }else if($action === "remove"){
-            ?>
-              <h2>Confirm</h2>
-              <p>Are you sure you want to remove the app <b><?php echo $appIDEscaped;?></b> ?</p>
-              <div clear></div>
-              <a class="btn green" href="<?php echo L_URL ."/admin/install-app.php?action=remove&app={$appID}&".CSRF::getParam();?>">Yes, I'm Sure</a>
-              <a class="btn red" href="<?php echo L_URL ."/admin/apps.php?app=$appID";?>">No, I'm Not</a>
-            <?php
-            }else if($action === "enable"){
-              if($App->enableApp()){
-                if(isset($_GET['redirect'])){
-                  \Response::redirect("/app/$appID");
-                }
+                break;
+              case "disable-fail":
+                echo ser("Error", "The App <strong>$appIDEscaped</strong> couldn't be disabled. Try again.");
+                break;
+              case "enable":
                 echo sss("Enabled", "The App <strong>$appIDEscaped</strong> has been enabled.");
-              }else{
+                break;
+              case "enable-fail":
                 echo ser("Error", "The App couldn't be enabled. Try again.", false);
-              }
-            }else if($action === "clear-data"){
-            ?>
-              <h2>Confirm</h2>
-              <p>Are you sure you want to clear the data of app <b><?php echo $appIDEscaped;?></b> ? This is not <b>revertable</b></p>
-              <div clear></div>
-              <a class="btn green" href="<?php echo L_URL ."/admin/install-app.php?action=clear-data&app={$appID}&".CSRF::getParam();?>">Yes, I'm Sure</a>
-              <a class="btn red" href="<?php echo L_URL ."/admin/apps.php?app=$appID";?>">No, I'm Not</a>
-            <?php
+                break;
             }
-          }else{
+          }else if($action !== null && CSRF::check()){
+            if($action === "remove"){
+              /**
+               * Do not show app info during confirmation
+               */
+              $showAppInfo = false;
+              
+              echo sme("Confirm", "<p>Are you sure you want to remove the app <b>$appIDEscaped</b> ? This cannot be undone.</p>" . Lobby::l("/admin/install-app.php?action=remove&app=$appID" . CSRF::getParam(), "Yes, I'm sure", "class='btn red'") . Lobby::l("/admin/apps.php?app=$appID" . CSRF::getParam(), "No, I'm not", "class='btn blue' id='cancel'"));
+            }else if($action === "clear-data"){
+              $showAppInfo = false;
+              
+              echo sme("Confirm", "<p>Are you sure you want to clear the data of app <b>$appIDEscaped</b> ? This cannot be undone.</p>" . Lobby::l("/admin/install-app.php?action=clear-data&app=$appID" . CSRF::getParam(), "Yes, I'm sure", "class='btn red'") . Lobby::l("/admin/apps.php?app=$appID" . CSRF::getParam(), "No, I'm not", "class='btn blue' id='cancel'"));
+            }
+          }
+          if($showAppInfo){
           ?>
             <div class="row">
               <div class="col m3" id="leftpane" style="text-align: center;">
@@ -183,8 +203,8 @@ if($appID != null){
             foreach($apps as $app){
               $App = new Apps($app);
             ?>
-              <div class="app card col s12 m6 l4">
-                <div class="app-inner row">
+              <div class="app col s12 m6 l4">
+                <div class="app-inner card row">
                   <div class="lpane col s4 m5 l5">
                     <a href="<?php echo \Lobby::u("/admin/apps.php?app=$app");?>">
                       <img src="<?php echo $App->info["logo"];?>" />
@@ -192,7 +212,7 @@ if($appID != null){
                   </div>
                   <div class="rpane col s8 m6 l7">
                     <a href="<?php echo \Lobby::u("/admin/apps.php?app=$app");?>" class="name truncate" title="<?php echo $App->info["name"];?>"><?php echo $App->info["name"];?></a>
-                    <div style="margin-top: 10px;">
+                    <div class="actions">
                       <?php
                       if($App->hasUpdate())
                         echo "<cl/>" . \Lobby::l("/admin/update.php", "Update", "class='btn orange'");

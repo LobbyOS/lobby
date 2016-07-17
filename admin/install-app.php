@@ -20,6 +20,11 @@ require "../load.php";
         $appID = Request::get("app");
         $action = Request::get("action");
         
+        /**
+         * Whether this is a request to show a message
+         */
+        $show = Request::get("show") !== null;
+        
         $displayID = htmlspecialchars($appID);
         $App = new \Lobby\Apps($appID);
         

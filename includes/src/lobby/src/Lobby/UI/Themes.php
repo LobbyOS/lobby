@@ -2,6 +2,7 @@
 namespace Lobby\UI;
 
 use Hooks;
+use Lobby;
 use Lobby\DB;
 use Lobby\FS;
 
@@ -12,27 +13,43 @@ class Themes {
    */
   protected static $cache = array();
   
-  protected static $themesDir, $themeID, $theme, $dir, $url;
+  /**
+   * Path & URL to `themes` folder
+   */
+  protected static $themesDir;
+  protected static $themesURL;
+  
+  /**
+   * Active theme's Info
+   */
+  private static $themeID = null, $dir, $url;
+  
+  /**
+   * Active theme's \Lobby\UI\Theme object
+   */
+  private static $theme;
   
   /**
    * Initialization
+   * @param array $themeVARS Contains directory and URL to `themes` folder
    */
-  public static function __constructStatic($themesDir){
-    self::$themesDir = $themesDir;
+  public static function __constructStatic($themesVARS){
+    self::$themesDir = $themesVARS[0];
+    self::$themesURL = Lobby::u($themesVARS[1]);
+    
     self::$themeID = DB::getOption("active_theme");
     
-    if(self::$themeID == null){
+    /**
+     * Default theme is `hine`
+     */
+    if(self::$themeID === null){
       self::$themeID = "hine";
     }else if(self::validTheme(self::$themeID) === false){
       self::$themeID = "hine";
     }
     
-    self::$url = \Lobby::u(FS::rel(self::$themesDir . "/" . self::$themeID));
-    self::$dir = \Lobby\FS::loc(self::$themesDir . "/" . self::$themeID);
-    
-    define("THEME_ID", self::$themeID);
-    define("THEME_DIR", self::$dir);
-    define("THEME_URL", self::$url);
+    self::$url = self::$themesURL . "/" . self::$themeID;
+    self::$dir = self::$themesDir . "/" . self::$themeID;
     
     if(!\Lobby::status("lobby.assets-serve")){
       self::loadDefaults();
@@ -57,6 +74,18 @@ class Themes {
     return self::$cache['themes'];
   }
   
+  public static function getThemeID(){
+    return self::$themeID;
+  }
+  
+  public static function getThemeDir(){
+    return self::$dir;
+  }
+  
+  public static function getThemeURL(){
+    return self::$url;
+  }
+  
   /**
    * Load Default CSS & JS
    */
@@ -78,18 +107,20 @@ class Themes {
    */
   public static function loadTheme(){
     
-    require_once THEME_DIR . "/Theme.php";
+    require_once self::$dir . "/Theme.php";
     
     $className = "\Lobby\UI\Themes\\" . self::$themeID;
-    self::$theme = new $className();
+    self::$theme = new $className(self::$themeID, self::$dir);
     
     self::$theme->init();
+    
+    self::$theme->addStyle("/src/main/css/style.css");
+    self::$theme->addStyle("/src/main/css/icons.css");
     
     /**
      * Load Panel
      */
     if(\Lobby::status("lobby.admin")){
-      self::$theme->addStyle("/src/main/css/style.css");
       Hooks::addAction("admin.head.begin", function(){
         self::$theme->panel(true);
         self::$theme->addStyle("/src/main/css/admin.style.css");
@@ -98,7 +129,6 @@ class Themes {
         echo self::$theme->inc("/src/panel/load.admin.php");
       });
     }else{
-      self::$theme->addStyle("/src/main/css/style.css");
       \Hooks::addAction("head.begin", function(){
         self::$theme->panel(false);
       });
@@ -134,10 +164,6 @@ class Themes {
       $valid = true;
     }
     return $valid;
-  }
-  
-  public static function getURL(){
-    return self::$url;
   }
   
 }

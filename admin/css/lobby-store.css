@@ -1,20 +1,26 @@
 /**
  * Lobby Store
  */
-.apps .app .bpane{
+#workspace #storeNav{
+  padding: 20px;
+}
+#workspace #storeNav .btn{
+  margin-right: 10px;
+}
+#workspace .apps .app .bpane{
   padding: 10px 20px;
-  margin: 0 -10px;
+  margin: 0;
   height: 65px;
   background: #fafafa;
   border-top: 1px solid #dedede;
 }
-.apps .app .bpane .rside{
+#workspace .apps .app .bpane .rside{
   text-align: right;
 }
-.apps .app .bpane .lside .downloads{
+#workspace .apps .app .bpane .lside .downloads{
   margin: 5px 0 0;
 }
-.pagination {
+#workspace .pagination {
   display: table;
   margin: 20px;
 }
