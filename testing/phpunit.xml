@@ -3,6 +3,7 @@
   <testsuites>
     <testsuite name="Lobby">
       <file>./tests/Install.php</file>
+      <file>./tests/InstallApp.php</file>
     </testsuite>
   </testsuites>
   <php>
