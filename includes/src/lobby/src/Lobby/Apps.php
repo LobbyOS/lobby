@@ -20,6 +20,11 @@ class Apps {
   private static $appsDir = null;
   
   /**
+   * URL to apps directory
+   */
+  private static $appsURL = null;
+  
+  /**
    * App Updates
    * App => $latestVersion
    */
@@ -61,8 +66,12 @@ class Apps {
   
   public $appDir = false, $exists = false, $info = array(), $enabled = false;
   
-  public static function __constructStatic($appsDir){
-    self::$appsDir = $appsDir;
+  /**
+   * @param array $appsVARS Contains path and URL to `apps` folder
+   */
+  public static function __constructStatic($appsVARS){
+    self::$appsDir = $appsVARS[0];
+    self::$appsURL = Lobby::u($appsVARS[1]);
     
     /**
      * Make array like this :
@@ -245,18 +254,18 @@ class Apps {
        */
       $details['id'] = $this->app;
       $details['dir'] = $this->dir;
-      $details['url'] = L_URL . "/app/{$this->app}";
-      $details['srcURL'] = L_URL . "/contents/apps/{$this->app}";
-      $details['adminURL'] = L_URL . "/admin/app/{$this->app}";
+      $details['url'] = Lobby::getURL() . "/app/{$this->app}";
+      $details['srcURL'] = Lobby::getURL() . "/contents/apps/{$this->app}";
+      $details['adminURL'] = Lobby::getURL() . "/admin/app/{$this->app}";
       
       /**
        * Prefer SVG over PNG
        */
       $details['logo'] = $details['logo'] !== false ?
         (FS::exists($this->dir . "/src/image/logo.svg") ?
-          APPS_URL . "/{$this->app}/src/image/logo.svg" :
-          APPS_URL . "/{$this->app}/src/image/logo.png"
-        ) : Themes::getURL() . "/src/main/image/app-logo.png";
+          self::$appsURL . "/{$this->app}/src/image/logo.svg" :
+          self::$appsURL . "/{$this->app}/src/image/logo.png"
+        ) : Themes::getThemeURL() . "/src/main/image/app-logo.png";
       
       $details["latestVersion"] = isset(self::$appUpdates[$this->app]) ? self::$appUpdates[$this->app] : null;
       

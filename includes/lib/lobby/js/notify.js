@@ -7,9 +7,10 @@ lobby.notify = {
   init: function(){
     lobby.notify.box = $("nav #notifyBox");
     this.update();
+    this.events();
     this.checkInterval = setInterval(function(){
       lobby.notify.update();
-    }, 5000);
+    }, 10000);
   },
   
   /**
@@ -47,7 +48,12 @@ lobby.notify = {
         lobby.notify.onNewItems();
       }
     });
+  },
+  
+  events: function(){
+    
   }
+  
 };
 
 /**

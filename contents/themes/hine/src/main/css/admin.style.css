@@ -40,3 +40,9 @@
     width: fallback;
   }
 }
+@media screen and (max-width: 600px){
+  #workspace .contents {
+    padding: 0;
+    width: fallback;
+  }
+}

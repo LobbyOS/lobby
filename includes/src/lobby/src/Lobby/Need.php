@@ -24,7 +24,7 @@ class Need {
     }
     switch($dependency){
       case "lobby":
-        return \Lobby::$version;
+        return \Lobby::getVersion();
         break;
       case "app":
         $App = new Apps($subDependency);
@@ -52,6 +52,7 @@ class Need {
    */
   public static function checkRequirements($requires, $boolean = false, $multi = false){
     $result = $requires;
+    
     /**
      * $requiredVersion will look like ">=5.0"
      */

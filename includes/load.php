@@ -23,11 +23,15 @@ try{
    */
   $composer->loadClass("Assets");
   $composer->loadClass("CSRF");
-  $composer->loadClass("Lobby\\DB");
-  $composer->loadClass("Lobby\\Time");
-  $composer->loadClass("Lobby\\UI\\Themes");
   $composer->loadClass("Request");
   $composer->loadClass("Response");
+  $composer->loadClass("Lobby\\FS");
+  $composer->loadClass("Lobby\\DB");
+  $composer->loadClass("Lobby\\Apps");
+  $composer->loadClass("Lobby\\Modules");
+  $composer->loadClass("Lobby\\Router");
+  $composer->loadClass("Lobby\\Time");
+  $composer->loadClass("Lobby\\UI\\Themes");
   
   /**
    * Static Class Constructor
@@ -36,8 +40,8 @@ try{
    */
   $loader = new ConstructStatic\Loader($composer);
   
-  $loader->setClassParameters("Lobby\Apps", APPS_DIR);
-  $loader->setClassParameters("Lobby\UI\Themes", THEMES_DIR);
+  $loader->setClassParameters("Lobby\\Apps", array(APPS_DIR, APPS_URL));
+  $loader->setClassParameters("Lobby\UI\Themes", array(THEMES_DIR, THEMES_URL));
   
   $loader->processLoadedClasses();
   

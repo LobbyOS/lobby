@@ -5,3 +5,6 @@
 #workspace #appNav{
   margin: -5px 0 10px;
 }
+#workspace #cancel.btn{
+  margin-left: 5px;
+}

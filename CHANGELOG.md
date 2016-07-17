@@ -1,3 +1,11 @@
+## 0.9 Berly
+
+* Fixed Bugs
+* UI updated
+  * New Theme Icons
+  
+* Updated dependencies
+
 ## 0.8
 * Fixed bugs
 * Apps page updated

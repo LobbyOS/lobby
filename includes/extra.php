@@ -5,8 +5,9 @@
  */
 define("L_URL", \Lobby::getURL());
 
-define("APPS_URL", L_URL . "/contents/apps");
-define("THEMES_URL", L_URL . "/contents/themes");
+define("THEME_ID", Lobby\UI\Themes::getThemeID());
+define("THEME_DIR", Lobby\UI\Themes::getThemeDir());
+define("THEME_URL", Lobby\UI\Themes::getThemeURL());
 
 /**
  * LOAD MODULES
