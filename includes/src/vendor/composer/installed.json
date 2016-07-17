@@ -64,6 +64,56 @@
         ]
     },
     {
+        "name": "lobby/lobby",
+        "version": "0.8.0",
+        "version_normalized": "0.8.0.0",
+        "dist": {
+            "type": "path",
+            "url": "lobby/",
+            "reference": "a05a0955b31bc35702dbeec9478883908bda4ba6",
+            "shasum": null
+        },
+        "require": {
+            "composer/semver": ">=1.4.0",
+            "php": ">=5.3.0"
+        },
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "src/functions.php"
+            ],
+            "psr-0": {
+                "Lobby": "src/",
+                "Assets": "src/",
+                "CSRF": "src/",
+                "Helper": "src/",
+                "Hooks": "src/",
+                "Request": "src/",
+                "Response": "src/"
+            },
+            "psr-4": {
+                "Lobby\\": "src/Lobby",
+                "Lobby\\UI\\": "src/Lobby/UI"
+            }
+        },
+        "license": [
+            "Apache 2.0"
+        ],
+        "authors": [
+            {
+                "name": "Subin Siby",
+                "homepage": "http://subinsb.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "Lobby Core",
+        "homepage": "http://lobby.subinsb.com",
+        "keywords": [
+            "lobby"
+        ]
+    },
+    {
         "name": "vierbergenlars/php-semver",
         "version": "v2.1.0",
         "version_normalized": "2.1.0.0",
@@ -202,6 +252,57 @@
             "routing",
             "sinatra"
         ]
+    },
+    {
+        "name": "symfony/filesystem",
+        "version": "v3.1.2",
+        "version_normalized": "3.1.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/filesystem.git",
+            "reference": "322da5f0910d8aa0b25fa65ffccaba68dbddb890"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/filesystem/zipball/322da5f0910d8aa0b25fa65ffccaba68dbddb890",
+            "reference": "322da5f0910d8aa0b25fa65ffccaba68dbddb890",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.5.9"
+        },
+        "time": "2016-06-29 05:41:56",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.1-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\Filesystem\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Filesystem Component",
+        "homepage": "https://symfony.com"
     },
     {
         "name": "rmccue/requests",
@@ -362,119 +463,18 @@
         ]
     },
     {
-        "name": "lobby/lobby",
-        "version": "0.8.0",
-        "version_normalized": "0.8.0.0",
-        "dist": {
-            "type": "path",
-            "url": "lobby/",
-            "reference": "a05a0955b31bc35702dbeec9478883908bda4ba6",
-            "shasum": null
-        },
-        "require": {
-            "composer/semver": ">=1.4.0",
-            "php": ">=5.3.0"
-        },
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "src/functions.php"
-            ],
-            "psr-0": {
-                "Lobby": "src/",
-                "Assets": "src/",
-                "CSRF": "src/",
-                "Helper": "src/",
-                "Hooks": "src/",
-                "Request": "src/",
-                "Response": "src/"
-            },
-            "psr-4": {
-                "Lobby\\": "src/Lobby",
-                "Lobby\\UI\\": "src/Lobby/UI"
-            }
-        },
-        "license": [
-            "Apache 2.0"
-        ],
-        "authors": [
-            {
-                "name": "Subin Siby",
-                "homepage": "http://subinsb.com",
-                "role": "Developer"
-            }
-        ],
-        "description": "Lobby Core",
-        "homepage": "http://lobby.subinsb.com",
-        "keywords": [
-            "lobby"
-        ]
-    },
-    {
-        "name": "symfony/filesystem",
-        "version": "v3.1.1",
-        "version_normalized": "3.1.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/filesystem.git",
-            "reference": "5751e80d6f94b7c018f338a4a7be0b700d6f3058"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/filesystem/zipball/5751e80d6f94b7c018f338a4a7be0b700d6f3058",
-            "reference": "5751e80d6f94b7c018f338a4a7be0b700d6f3058",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.5.9"
-        },
-        "time": "2016-04-12 18:27:47",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.1-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Component\\Filesystem\\": ""
-            },
-            "exclude-from-classmap": [
-                "/Tests/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony Filesystem Component",
-        "homepage": "https://symfony.com"
-    },
-    {
         "name": "symfony/http-foundation",
-        "version": "v3.1.1",
-        "version_normalized": "3.1.1.0",
+        "version": "v3.1.2",
+        "version_normalized": "3.1.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/http-foundation.git",
-            "reference": "5fa10139fe520561e313cc2a6cea1e44a71f36ce"
+            "reference": "6b5a3764c5b0ce1f0ec3b8be5bba969122a78cfc"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/http-foundation/zipball/5fa10139fe520561e313cc2a6cea1e44a71f36ce",
-            "reference": "5fa10139fe520561e313cc2a6cea1e44a71f36ce",
+            "url": "https://api.github.com/repos/symfony/http-foundation/zipball/6b5a3764c5b0ce1f0ec3b8be5bba969122a78cfc",
+            "reference": "6b5a3764c5b0ce1f0ec3b8be5bba969122a78cfc",
             "shasum": ""
         },
         "require": {
@@ -484,7 +484,7 @@
         "require-dev": {
             "symfony/expression-language": "~2.8|~3.0"
         },
-        "time": "2016-06-14 11:18:07",
+        "time": "2016-06-29 07:02:31",
         "type": "library",
         "extra": {
             "branch-alias": {

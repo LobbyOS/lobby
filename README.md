@@ -42,11 +42,11 @@ WARNING (Unstable) - This repo is for testing and may contain additional compone
 * Remove logs, apps except **ledit**
 * Get the list of files removed :
   ```bash
-  git diff --name-status master dev > c.txt
+  git diff --name-status master dev > removeFiles.txt
   ```
   You can get the hashes from `git log` too.
   
-  Then replace contents of c.txt :
+  Then replace contents of removeFiles.txt :
   
   ```regex
   [M|A|T]	(.*?)\n  ->  ""

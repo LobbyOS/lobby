@@ -232,7 +232,7 @@ class Apps {
       return true;
     }else{
       if($this->disableApp())
-        Lobby::log("'$name' is not a valid app.");
+        Lobby::log("'". $this->info["name"] ."' is not a valid app.");
       $this->app = false;
       return false;
     }
