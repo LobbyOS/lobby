@@ -113,9 +113,9 @@ class Response {
       ));
       echo "<script src='{$url}'></script>";
       
-      Assets::removeJs("jquery");
-      Assets::removeJs("jqueryui");
-      Assets::removeJs("main");
+      Assets::removeJS("jquery");
+      Assets::removeJS("jqueryui");
+      Assets::removeJS("main");
     }
     
     $jsURLParams = array(
