@@ -30,7 +30,7 @@ class Router {
     self::defaults();
     \Hooks::doAction("router.finish");
     self::statusRoutes();
-    self::$router->dispatch();
+    self::$router->dispatch(null, null, false);
   }
   
   /**
