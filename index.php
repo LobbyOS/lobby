@@ -13,19 +13,8 @@
  */
 
 require_once __DIR__ . "/load.php";
-use \Lobby\Router;
 
 /**
  * Dispatch the Routes
  */
-Router::dispatch();
-
-if(!Router::$routeActive){
-  if(\Response::hasContent()){
-    \Response::send();
-  }else if(Router::pathExists()){
-    return false;
-  }else{
-    \Response::showError();
-  }
-}
+return \Lobby\Router::dispatch();
