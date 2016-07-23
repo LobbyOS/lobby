@@ -3371,13 +3371,6 @@ nav ul a span.badge {
 }
 
 @font-face {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Material Icons'), local('MaterialIcons-Regular'), url(http://fonts.gstatic.com/s/materialicons/v12/2fcrYFNaTjcS6g4U3t-Y5ZjZjT5FdEJ140U2DJYC3mY.woff2) format('woff2');
-}
-
-@font-face {
   font-family: "Material-Design-Icons";
   src: url("<?THEME_URL?>/src/main/lib/material-design/font/Material-Design-Icons.eot?#iefix") format("embedded-opentype"), url("<?THEME_URL?>/src/main/lib/material-design/font/Material-Design-Icons.woff2") format("woff2"), url("<?THEME_URL?>/src/main/lib/material-design/font/Material-Design-Icons.woff") format("woff"), url("<?THEME_URL?>/src/main/lib/material-design/font/Material-Design-Icons.ttf") format("truetype"), url("<?THEME_URL?>/src/main/lib/material-design/font/Material-Design-Icons.svg#Material-Design-Icons") format("svg");
   font-weight: normal;
