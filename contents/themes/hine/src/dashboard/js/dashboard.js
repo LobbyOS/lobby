@@ -61,7 +61,7 @@ lobby.dash = {
     /**
      * Add "Get It On Lobby Store" logo
      */
-    $(".tiles[data-page="+ curPage +"]").append('<div class="tile"><div class="extra" id="lobby-store" data-mode="none" data-initdelay="50"><a href="'+ lobby.url +'/admin/lobby-store.php"><div class="inner"><div class="image"><img src="<?THEME_URL?>/src/dashboard/image/get-it.png" height="100%" width="100%"/></div><div class="title">Get More Apps From<br/>Lobby Store</div></div></a></div></div>');
+    $(".tiles[data-page="+ curPage +"]").append('<div class="tile"><div class="extra" id="lobby-store" data-mode="none" data-initdelay="50"><a href="'+ lobby.url +'/admin/lobby-store.php"><div class="inner"><div class="image valign-wrapper"><img src="<?THEME_URL?>/src/dashboard/image/get-it.png" class="valign" width="100%"/></div><div class="title">Get More Apps From<br/>Lobby Store</div></div></a></div></div>');
     
     $('#workspace .tiles-wrapper').bxSlider({
       slideMargin: 0,
