@@ -77,7 +77,9 @@ class Need {
         if($mainDependency === "app"){
           $App = new Apps($subDependency);
           
-          if($multi){
+          if(!$App->exists){
+            $result[$dependency] = false;
+          }else if($multi){
             $result = $result + self::checkRequirements($App->info["require"], false, true);
           }else if($boolean){
             $result[$dependency] = self::checkRequirements($App->info["require"], true);
