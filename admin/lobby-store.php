@@ -194,8 +194,11 @@ if($appID !== null){
             );
           else
             $params = array(
-              "get" => "popular"
+              "get" => "newApps"
             );
+          
+          if($section !== null)
+            $params["get"] = "popular";
           
           if($p !== null)
             $params["p"] = $p;
