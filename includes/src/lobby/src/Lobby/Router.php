@@ -11,19 +11,13 @@ use Response;
 class Router {
   
   public static $router;
-  public static $routeActive = false;
   
   public static function __constructStatic(){
     self::$router = new \Klein\Klein();
   }
   
   public static function route($route, $callback) {
-    self::$router->respond($route, function($request, $response) use($callback) {
-      $return = $callback($request, $response);
-      if($return !== false && !Response::hasContent()){
-        self::$routeActive = true;
-      }
-    });
+    self::$router->respond($route, $callback);
   }
   
   public static function dispatch(){
@@ -31,6 +25,14 @@ class Router {
     \Hooks::doAction("router.finish");
     self::statusRoutes();
     self::$router->dispatch(null, null, false);
+    
+    if(Response::hasContent()){
+      Response::send();
+    }else if(self::pathExists()){
+      return false;
+    }else{
+      Response::showError();
+    }
   }
   
   /**
