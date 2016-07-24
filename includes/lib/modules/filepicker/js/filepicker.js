@@ -469,7 +469,7 @@ window.FilePicker = {
         self.get_list(true);
       });
       $('#btn_refresh').live('click', function(){self.get_list(false);});
-      $('#btn_up').bind('click', function(){
+      $('#btn_up').live('click', function(){
         self.do_up();
       });
       $('#btn_complete').live('click', self.do_complete);
