@@ -30,19 +30,7 @@ require "../load.php";
         
         if($appID === null){
           echo ser("Error", "No App is mentioned. Install Apps from <a href='lobby-store.php'>Lobby Store</a>");
-        }else if(!$App->exists){
-          echo ser("Error", "App is not installed");
-        }else if($action === "enable" && CSRF::check()){
-          $App->enableApp();
-          echo sss("Enabled", "The App <b>{$displayID}</b> is enabled. The author says thanks. <cl/><a href='".$App->info['url']."' class='btn green'>Open App</a>");
-        }else if($action === "remove" && CSRF::check()){
-          $App->removeApp();
-          echo sss("Removed", "The App <b>{$displayID}</b> was successfully removed.");
-        }else if($action === "clear-data" && CSRF::check()){
-          if($App->clearData()){
-            echo sss("Cleared Data", "The data of <b>{$displayID}</b> was successfully cleared from the database.");
-          }
-        }else if($appID != null && $action == null && CSRF::check()){
+        }else if($appID !== null && $action === null && CSRF::check()){
         ?>
           <h1>Install App</h1>
           <p>The install progress will be displayed below. If this doesn't work, try the <?php echo \Lobby::l("/admin/install-app.php?app=$appID&do=alternate-install".CSRF::getParam(), "alternate install");?>.</p>
@@ -60,6 +48,18 @@ require "../load.php";
               });
             </script>
         <?php
+          }
+        }else if(!$App->exists){
+          echo ser("Error", "App is not installed");
+        }else if($action === "enable" && CSRF::check()){
+          $App->enableApp();
+          echo sss("Enabled", "The App <b>{$displayID}</b> is enabled. The author says thanks. <cl/><a href='".$App->info['url']."' class='btn green'>Open App</a>");
+        }else if($action === "remove" && CSRF::check()){
+          $App->removeApp();
+          echo sss("Removed", "The App <b>{$displayID}</b> was successfully removed.");
+        }else if($action === "clear-data" && CSRF::check()){
+          if($App->clearData()){
+            echo sss("Cleared Data", "The data of <b>{$displayID}</b> was successfully cleared from the database.");
           }
         }
         ?>
