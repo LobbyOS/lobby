@@ -2,6 +2,7 @@
 namespace Lobby;
 
 use Response;
+use Lobby\AppRouter;
 use Lobby\DB;
 use Lobby\FS;
 
@@ -12,13 +13,59 @@ class App {
    */
   public $fs = null;
   
-  public function setTheVars(array $array){
-    foreach($array as $key => $value){
+  /**
+   * Klein router object
+   */
+  public $router = null;
+  
+  public function __construct(){
+    $this->router = new AppRouter($this);
+  }
+  
+  /**
+   * @param array $appInfo Array containing object properties to be set
+   */
+  public function setAppInfo(array $appInfo){
+    foreach($appInfo as $key => $value){
       $this->{$key} = $value;
     }
-    $this->manifest = $array;
+    $this->manifest = $appInfo;
     $this->fs = new FSObj($this->dir);
   }
+  
+  /**
+   * @param string $page Path of requested page
+   */
+  public function getPageContent($page){
+    /**
+     * Set routes
+     */
+    foreach($this->routes() as $route => $callback)
+      $this->router->route($route, $callback);
+    
+    $pageResponse = $this->router->dispatch();
+    
+    /**
+     * If no routes are matched, ask $this->page() for response
+     */
+    if($pageResponse == null){
+      $pageResponse = $this->page($page);
+      if($pageResponse === "auto"){
+        if($page === "/")
+          $page = "/index";
+        
+        /**
+         * Directory index
+         */
+        if(is_dir($this->fs->loc("src/page{$page}")))
+          $page = "$page/index";
+        
+        $pageResponse = $this->inc("src/page{$page}.php");
+      }
+    }
+    return $pageResponse;
+  }
+  
   
   public function addStyle($fileName){
     $url = "/contents/apps/{$this->id}/src/css/$fileName";
@@ -142,6 +189,10 @@ class App {
     
       return $html;
     }
+  }
+  
+  public function routes(){
+    return array();
   }
   
   public function page($page){
