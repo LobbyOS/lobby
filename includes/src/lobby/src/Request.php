@@ -8,6 +8,12 @@ class Request {
 
   private static $request = null;
   private static $requestURI = null;
+  
+  /**
+   * Whether request is GET or POST
+   */
+  private static $isGET = false;
+  private static $isPOST = false;
 
   public static function __constructStatic(){
     if(!Lobby::$cli){
@@ -36,6 +42,9 @@ class Request {
       $_FILES,
       $_SERVER
     );
+    
+    self::$isGET = !empty($_GET);
+    self::$isPOST = !empty($_POST);
   }
   
   /**
@@ -66,6 +75,14 @@ class Request {
   
   public static function getRequestURI(){
     return self::$requestURI;
+  }
+  
+  public static function isGET(){
+    return self::$isGET;
+  }
+  
+  public function isPOST(){
+    return self::$isPOST;
   }
 
 }
