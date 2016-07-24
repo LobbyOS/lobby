@@ -1,6 +1,7 @@
 <?php
 namespace Lobby;
 
+use Klein\Klein;
 use Response;
 
 /**
@@ -13,7 +14,7 @@ class Router {
   public static $router;
   
   public static function __constructStatic(){
-    self::$router = new \Klein\Klein();
+    self::$router = new Klein();
   }
   
   public static function route($route, $callback) {
@@ -81,27 +82,9 @@ class Router {
           ),
           "position" => "left"
         ));
-        $pageResponse = $class->page($page);
-        
-        if($pageResponse === "auto"){
-          if($page === "/")
-            $page = "/index";
-          
-          if(is_dir($class->fs->loc("src/page{$page}")))
-            $page = "$page/index";
-          
-          $html = $class->inc("/src/page{$page}.php");
-          if($html)
-            Response::setPage($html);
-          else
-            ser();
-        }else{
-          if($pageResponse === null){
-            ser();
-          }else{
-            Response::setPage($pageResponse);
-          }
-        }
+        $pageContent = $class->getPageContent($page);
+        if($pageContent !== null)
+          Response::setPage($pageContent);
       }else{
         echo ser();
       }
