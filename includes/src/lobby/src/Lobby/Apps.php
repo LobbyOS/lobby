@@ -413,7 +413,7 @@ class Apps {
       /**
        * Send app details to the App Object
        */
-      $class->setTheVars($this->info);
+      $class->setAppInfo($this->info);
       
       return $class;
     }
