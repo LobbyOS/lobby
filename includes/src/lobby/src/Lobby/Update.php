@@ -68,11 +68,11 @@ class Update extends \Lobby {
       ), array(
         'filename' => $zipFile,
         'hooks' => $hooks,
-        'timeout' => time()
+        'timeout' => '30'
       ));
     }catch(\Requests_Exception $error){
-      self::log("HTTP Requests Error ($url) : $error");
-      echo ser("Error", "HTTP Requests Error : " . $error);
+      self::log("HTTP Request Failed ($url) : $error");
+      echo ser("HTTP Request Failed", $error);
       return false;
     }
     self::log("Downloaded Zip File from {$url} to {$zipFile}");

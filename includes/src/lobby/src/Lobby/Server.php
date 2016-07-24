@@ -32,11 +32,17 @@ class Server {
    * Lobby Store
    */
   public static function store($data) {
-    $data = 
     /**
      * Response is in JSON
      */
-    $response = \Requests::post(self::$apiURL . "/apps", array(), self::makeData($data))->body;
+    try{
+      $response = \Requests::post(self::$apiURL . "/apps", array(), self::makeData($data))->body;
+    }catch(\Requests_Exception $error){
+      self::log("HTTP Request Failed ($url) : $error");
+      echo ser("HTTP Request Failed", $error);
+      return false;
+    }
+    
     if($response === "false"){
       return false;
     }else{
