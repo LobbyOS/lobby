@@ -9,12 +9,8 @@ if($file != "" && CSRF::check()){
     $App = new \Lobby\Apps($appID);
      
     if($App->exists && $App->enabled){
-      $AppClass = $App->run();
-      $html = $AppClass->page("/ajax/$file");
-      if($html === "auto"){
-        $html = $AppClass->inc("/src/ajax/$file");
-      }
-      echo $html;
+      $AppObj = $App->getInstance();
+      echo $AppObj->getAJAXResponse($file);
     }
   }else{
     if(\Lobby\FS::exists($file)){

@@ -143,7 +143,7 @@ class Install extends \Lobby {
       }else{
         /**
          * SQLite
-         * Multiple commands separated by ';' cannot be don in SQLite
+         * Multiple commands separated by ';' cannot be done in SQLite
          * Weird, :P
          */
         $sql_code = "

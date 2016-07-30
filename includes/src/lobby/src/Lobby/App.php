@@ -57,15 +57,31 @@ class App {
         /**
          * Directory index
          */
-        if(is_dir($this->fs->loc("src/page{$page}")))
+        if(is_dir($this->fs->loc("src/page/$page")))
           $page = "$page/index";
         
-        $pageResponse = $this->inc("src/page{$page}.php");
+        $pageResponse = $this->inc("src/page/$page.php");
       }
     }
     return $pageResponse;
   }
   
+  /**
+   * @param string $handler Name of the AJAX handler
+   */
+  public function getAJAXResponse($handler){
+    $ajaxResponse = $this->ajax($handler);
+    if($ajaxResponse === "auto"){
+      /**
+       * Directory index
+       */
+      if(is_dir($this->fs->loc("src/ajax/$handler")))
+        $handler = "$handler/index";
+      
+      $ajaxResponse = $this->inc("src/ajax/$handler.php");
+    }
+    return $ajaxResponse;
+  }
   
   public function addStyle($fileName){
     $url = "/contents/apps/{$this->id}/src/css/$fileName";
@@ -196,6 +212,10 @@ class App {
   }
   
   public function page($page){
+    return "auto";
+  }
+  
+  public function ajax($ajax){
     return "auto";
   }
   

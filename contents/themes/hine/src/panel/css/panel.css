@@ -7,7 +7,7 @@ nav{
   padding: 5px;
   background: #4280EC;
   color: white;
-  z-index: 1000;
+  z-index: 100;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, .5);
 }
 nav a{
