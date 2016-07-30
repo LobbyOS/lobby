@@ -68,6 +68,7 @@ class Update extends \Lobby {
       ), array(
         'filename' => $zipFile,
         'hooks' => $hooks,
+        'follow_redirects' => true,
         'timeout' => '30'
       ));
     }catch(\Requests_Exception $error){

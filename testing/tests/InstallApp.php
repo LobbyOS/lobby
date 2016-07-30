@@ -37,7 +37,7 @@ class InstallApp extends PHPUnit_Framework_TestCase {
     
     new WebDriverWait($this->driver, 5);
     
-    $this->assertContains($this->driver->getPageSource();
+    $this->assertContains($this->driver->getPageSource(), "installed");
   }
   
   public function tearDown(){

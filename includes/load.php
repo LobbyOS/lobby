@@ -23,6 +23,7 @@ try{
    */
   $composer->loadClass("Assets");
   $composer->loadClass("CSRF");
+  $composer->loadClass("Lobby");
   $composer->loadClass("Request");
   $composer->loadClass("Response");
   $composer->loadClass("Lobby\\FS");

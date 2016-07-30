@@ -29,10 +29,12 @@ class Router {
     
     if(Response::hasContent()){
       Response::send();
+      return true;
     }else if(self::pathExists()){
       return false;
     }else{
       Response::showError();
+      return true;
     }
   }
   
@@ -126,7 +128,10 @@ class Router {
    */
   public static function pathExists(){
     if(\Lobby\FS::rel($_SERVER['PHP_SELF']) !== "index.php"){
-      return file_exists(L_DIR . $_SERVER['PHP_SELF']);
+      /**
+       * The path should point to a file and not directory index
+       */
+      return file_exists(L_DIR . $_SERVER['PHP_SELF']) && !is_dir(L_DIR . $_SERVER['PHP_SELF']);
     }
     return false;
   }
