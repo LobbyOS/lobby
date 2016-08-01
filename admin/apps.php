@@ -6,6 +6,7 @@ use \Lobby\Need;
 
 $appID = Request::get("app");
 $action = Request::get("action");
+$quick = Request::get("quick") !== null;
 
 /**
 * Whether the app info should be shown
@@ -27,14 +28,14 @@ if($appID != null){
 if(!$show && $action !== null && CSRF::check()){
   if($action === "disable"){
     if($App->disableApp())
-      Response::redirect("/admin/apps.php?app=$appID&action=disable&show=1" . CSRF::getParam());
+      Response::redirect("/admin/apps.php?app=$appID&action=disable&quick=1&show=1" . CSRF::getParam());
     else
-      Response::redirect("/admin/apps.php?app=$appID&action=disable-fail&show=1" . CSRF::getParam());
+      Response::redirect("/admin/apps.php?app=$appID&action=disable-fail&quick&show=1" . CSRF::getParam());
   }else if($action === "enable"){
     if($App->enableApp())
-      Response::redirect("/admin/apps.php?app=$appID&action=enable&show=1" . CSRF::getParam());
+      Response::redirect("/admin/apps.php?app=$appID&action=enable&quick&show=1" . CSRF::getParam());
     else
-      Response::redirect("/admin/apps.php?app=$appID&action=enable-fail&show=1" . CSRF::getParam());
+      Response::redirect("/admin/apps.php?app=$appID&action=enable-fail&quick&show=1" . CSRF::getParam());
   }
 }
 ?>
@@ -56,7 +57,7 @@ if(!$show && $action !== null && CSRF::check()){
     <div id="workspace">
       <div class="contents">
         <?php
-        if($appID !== null){
+        if($appID !== null && !$quick){
         ?>
           <h2><?php echo "<a href='". Lobby::u("/admin/apps.php?app={$App->info['id']}") ."'>". $App->info['name'] ."</a>";?></h2>
           <div id="appNav">
@@ -194,6 +195,23 @@ if(!$show && $action !== null && CSRF::check()){
           <h2>Apps</h2>
           <p>Manage <b>installed apps</b>. You can find and install more Apps from <a href="<?php echo L_URL;?>/admin/lobby-store.php">Lobby Store</a>.</p>
         <?php
+          if($action !== null){
+            switch($action){
+              case "disable":
+                echo sss("Disabled", "The App <strong>$appIDEscaped</strong> has been disabled.");
+                break;
+              case "disable-fail":
+                echo ser("Error", "The App <strong>$appIDEscaped</strong> couldn't be disabled. Try again.");
+                break;
+              case "enable":
+                echo sss("Enabled", "The App <strong>$appIDEscaped</strong> has been enabled.");
+                break;
+              case "enable-fail":
+                echo ser("Error", "The App couldn't be enabled. Try again.", false);
+                break;
+            }
+          }
+          
           $apps = Apps::getApps();
           
           if(empty($apps)){
