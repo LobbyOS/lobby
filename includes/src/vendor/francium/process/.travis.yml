@@ -1,23 +1,31 @@
-language: php
- 
-php:
-  - 5.3
-  - 5.4
-  - 5.5
-  - 5.6
-  - 7.0
-
-os:
-  - linux
-
 matrix:
   include:
+    # Linux
+    - os: linux
+      language: php
+      php: '5.5'
+    
+    - os: linux
+      language: php
+      php: '5.6'
+  
+    - os: linux
+      language: php
+      php: '7.0'
+  
+    - os: linux
+      language: php
+      php: 'nightly'
+    
+    # OSX
     - os: osx
-      language: generic
-      install:
-        # Updating PHP to 5.6.x
-        - curl -s http://php-osx.liip.ch/install.sh | bash -s 5.6
-        - export PATH=/usr/local/php5/bin:$PATH
+      env: OSX_PHP_VERSION=php55
+    
+    - os: osx
+      env: OSX_PHP_VERSION=php56
+
+    - os: osx
+      env: OSX_PHP_VERSION=php70
         
 before_script:
   - if [[ $TRAVIS_OS_NAME == 'osx' ]] ; then brew update ; fi; # travis image is quite old, update to have latest dependecies available
@@ -30,6 +38,8 @@ before_script:
   - if [[ $TRAVIS_OS_NAME == 'osx' ]] ; then export PATH="$(brew --prefix homebrew/php/${OSX_PHP_VERSION})/bin:$PATH" ; fi; # app php to path
   - if [[ $TRAVIS_OS_NAME == 'osx' ]] ; then brew install coreutils ; fi; # truncate command:
   - composer self-update
-  - composer install --prefer-source --no-interaction --dev
+  - composer install --prefer-dist --no-interaction --dev
+  - composer update
  
-script: phpunit
+script:
+  - vendor/bin/phpunit

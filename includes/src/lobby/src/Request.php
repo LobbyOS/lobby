@@ -81,7 +81,7 @@ class Request {
     return self::$isGET;
   }
   
-  public function isPOST(){
+  public static function isPOST(){
     return self::$isPOST;
   }
 

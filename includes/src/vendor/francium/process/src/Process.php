@@ -158,7 +158,7 @@ class Process{
       if(is_numeric($option)){
         $arguments .= " " . escapeshellarg($value);
       }else{
-        $arguments .= " $option " . escapeshellarg($value);
+        $arguments .= " $option=" . escapeshellarg($value);
       }
     }
     
@@ -197,7 +197,7 @@ class Process{
   
   public function stop(){
     if(self::$os === "linux" || self::$os === "mac"){
-      return exec("kill $(pstree -pn $(ps -ef | awk '/[". substr($this->uniqueID, 0, 1) ."]". substr($this->uniqueID, 1) ."/{print $2}') | grep -o '([[:digit:]]*)' |grep -o '[[:digit:]]*')");
+      return exec("pid=$(ps -ef | awk '/[". substr($this->uniqueID, 0, 1) ."]". substr($this->uniqueID, 1) ."/{print $2}');if [ -z \"\$pid\" ]; then echo 1; else kill $(pstree -pn \$pid | grep -o '([[:digit:]]*)' |grep -o '[[:digit:]]*'); fi");
     }else if(self::$os === "windows"){
       return exec("wmic Path win32_process Where \"CommandLine Like '%". $this->uniqueID ."%'\" Call Terminate");
     }

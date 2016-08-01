@@ -3,8 +3,9 @@
  * The Heart of Lobby
  */
 
-use Lobby\FS;
 use Lobby\Apps;
+use Lobby\CLI;
+use Lobby\FS;
  
 class Lobby {
 
@@ -238,7 +239,9 @@ class Lobby {
       
       $error = "$errType caused by $errFile on line $errLine : $errStr";
       self::log($error);
-      Response::showError("Fatal Error", $error);
+      
+      if(!self::$cli)
+        Response::showError("Fatal Error", $error);
     }
   }
   
