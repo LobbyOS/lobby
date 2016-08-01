@@ -31,7 +31,13 @@ class App {
     }
     $this->manifest = $appInfo;
     $this->fs = new FSObj($this->dir);
+    $this->init();
   }
+  
+  /**
+   * Initialize callback
+   */
+  public function init(){}
   
   /**
    * @param string $page Path of requested page
