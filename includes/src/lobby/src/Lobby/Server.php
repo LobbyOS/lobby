@@ -38,7 +38,7 @@ class Server {
     try{
       $response = \Requests::post(self::$apiURL . "/apps", array(), self::makeData($data))->body;
     }catch(\Requests_Exception $error){
-      self::log("HTTP Request Failed ($url) : $error");
+      \Lobby::log("HTTP Request Failed ($url) : $error");
       echo ser("HTTP Request Failed", $error);
       return false;
     }
