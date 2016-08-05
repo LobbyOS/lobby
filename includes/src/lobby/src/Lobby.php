@@ -76,6 +76,10 @@ class Lobby {
       return \Lobby::fatalErrorHandler();
     });
     
+    set_error_handler(function(){
+      return \Lobby::fatalErrorHandler();
+    });
+    
     if(!isset($_SERVER["SERVER_NAME"])){
       /**
        * Lobby is not loaded by browser request, but by a script
