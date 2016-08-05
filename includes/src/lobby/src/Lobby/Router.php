@@ -24,7 +24,6 @@ class Router {
   public static function dispatch(){
     self::defaults();
     \Hooks::doAction("router.finish");
-    self::statusRoutes();
     self::$router->dispatch(null, null, false);
     
     if(Response::hasContent()){
@@ -100,21 +99,6 @@ class Router {
       Response::setTitle("Dashboard");
       \Lobby\UI\Themes::loadDashboard("head");
       Response::loadPage("/includes/lib/lobby/inc/dashboard.php");
-    });
-  }
-  
-  public static function statusRoutes(){
-    /**
-     * The default 404 page
-     */
-    self::$router->onHttpError(function ($code, $router) {
-      if($code === 404){
-        if(self::pathExists()){
-          $router->response()->code(200);
-        }else{
-          echo ser();
-        }
-      }
     });
   }
   
