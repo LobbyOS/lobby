@@ -90,6 +90,12 @@ class FS {
     self::$fs->dumpFile($path, $content);
   }
   
+  /**
+   * Recursively remove a directory or remove a file
+   * @param string $path Path to delete
+   * @param array $exclude Files (relative paths) to exclude from deletion
+   * @param bool $removeParent Whether the main directory along with it's contents should be removed 
+   */
   public static function remove($path, $exclude = array(), $removeParent = true){
     $path = self::loc($path);
     
