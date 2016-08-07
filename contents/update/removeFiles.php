@@ -5,3 +5,4 @@ contents/themes/hine/src/dashboard/js/scrollbar.js
 contents/themes/hine/src/main/js/materialize-init.js
 includes/lib/lobby/inc/error.php
 includes/src/vendor/lobby/lobby/src/H.php
+includes/lib/modules/filepicker/disabled.txt
