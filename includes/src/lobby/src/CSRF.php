@@ -8,6 +8,9 @@ class CSRF {
   protected static $token = null;
 
   public static function __constructStatic(){
+    if(Lobby::$cli)
+      return false;
+    
     if(!isset($_COOKIE['csrfToken'])){
       self::$token = Helper::randStr(10);
       setcookie("csrfToken", self::$token, 0, "/", Lobby::getHostname());

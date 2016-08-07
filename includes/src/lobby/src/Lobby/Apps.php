@@ -442,6 +442,8 @@ class Apps {
   public static function getInfo($key){
     if(self::$activeApp)
       return self::$activeApp->info[$key];
+    else if(isset($this))
+      return $this->info[$key];
     else
       return null;
   }

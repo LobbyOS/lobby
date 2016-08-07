@@ -87,6 +87,8 @@ class Lobby {
        * for URL making, hence we must define it's CLI
        */
       self::$cli = true;
+    }else{
+      session_start();
     }
     
     self::sysInfo();
@@ -356,21 +358,8 @@ class Lobby {
      * If no path, give the current page URL
      */
     if($path == null){
-      $pageURL = 'http';
-      if(isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on"){
-        $pageURL .= "s";
-      }
-      
-      $pageURL .= "://";
       $requestURI = $relative === false ? Request::getRequestURI() : $_SERVER["REQUEST_URI"];
-      
-      if(isset($_SERVER["SERVER_PORT"]) && $_SERVER["SERVER_PORT"] != "80") {
-        $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $requestURI;
-      }else{
-        $pageURL .= $_SERVER["SERVER_NAME"] . $requestURI;
-      }
-      
-      $url = $pageURL;
+      $url .= self::getURL() . $requestURI;
     }else if($path === self::$url){
       $url = self::$url;
     }else if(!preg_match("/http/", $path) || $urlHost !== self::$host){

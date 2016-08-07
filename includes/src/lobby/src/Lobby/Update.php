@@ -1,6 +1,7 @@
 <?php
 namespace Lobby;
 
+use Lobby\Apps;
 use Lobby\DB;
 use Lobby\FS;
 use Lobby\Server;
@@ -176,35 +177,66 @@ class Update extends \Lobby {
     if($id == ""){
       echo ser("Error", "No App Mentioned to update.");
     }
-    self::log("Installing Latest Version of App {$id}");
+    
+    if(!class_exists("ZipArchive"))
+      throw new \Exception("Unable to Install App, because <a href='". L_SERVER ."/docs/quick#section-requirements' target='_blank'>PHP Zip Extension</a> is not installed");
+    
+    $update = false;
+    if(Apps::exists($id)){
+      /**
+       * This is an update of an existing app
+       */
+      $update = true;
+      
+      $App = new Apps($id);
+      $oldVersion = $App->getInfo("version");
+      
+      self::log("Updating app '$id' to the latest version.");
+    }else{
+      self::log("Downloading and installing latest version of app '$id'");
+    }
     
     $url = Server::download("app", $id);
     $zipFile = L_DIR . "/contents/update/{$id}.zip";
     self::zipFile($url, $zipFile);
  
-    // Un Zip the file
-    if(class_exists("ZipArchive")){
-      $zip = new \ZipArchive;
-      if($zip->open($zipFile) != "true"){
-        self::log("Unable to open Downloaded App ($id) File : $zipFile");
-        echo ser("Error", "Unable to open Downloaded App File.");
-      }else{
-        /**
-         * Extract App
-         */
-        $appDir = APPS_DIR . "/$id";
-        if(!file_exists($appDir)){
-          mkdir($appDir);
-        }
-        $zip->extractTo($appDir);
-        $zip->close();
-        
-        FS::remove($zipFile);
-        self::log("Installed App {$id}");
-        return true;
-      }
+    
+    $zip = new \ZipArchive;
+    if($zip->open($zipFile) != "true"){
+      self::log("Unable to open downloaded app '$id' file : $zipFile");
+      echo ser("Error", "Unable to open downloaded app file.");
     }else{
-      throw new \Exception("Unable to Install App, because <a href='". L_SERVER ."/docs/quick#section-requirements' target='_blank'>PHP Zip Extension</a> is not installed");
+      /**
+       * Extract App
+       */
+      $appDir = APPS_DIR . "/$id";
+      if(FS::exists($appDir)){
+        /**
+         * Remove the contents of app directory
+         */
+        FS::remove($appDir, array(), false);
+      }else{
+        mkdir($appDir);
+      }
+      
+      $zip->extractTo($appDir);
+      $zip->close();
+      
+      /**
+       * Do callback on app update
+       */
+      $App = new Apps($id);
+      $AppObj = $App->getInstance();
+      
+      if($update)
+        $AppObj->onUpdate($App->getInfo("version"), $oldVersion);
+      else
+        $AppObj->onUpdate($App->getInfo("version"));
+      
+      FS::remove($zipFile);
+      
+      self::log("Installed app {$id}");
+      return true;
     }
   }
 }

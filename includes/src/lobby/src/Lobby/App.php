@@ -226,6 +226,13 @@ class App {
   }
   
   /**
+   * Callback on app install/update
+   * @param string $newVersion The version to which the app is updated
+   * @param string $oldVersion The version from which the app is updated
+   */
+  public function onUpdate($newVersion, $oldVersion = null){}
+  
+  /**
    * Write messages to log file
    */
   public function log($msg){

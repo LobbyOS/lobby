@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 /**
  * Define the Lobby Location
  * $docRoot would be set by /load.php

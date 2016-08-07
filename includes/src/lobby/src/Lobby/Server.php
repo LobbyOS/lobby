@@ -52,7 +52,7 @@ class Server {
        * Make sure the response was valid.
        */
       if(!is_array($arr)){
-        \Lobby::log("Lobby Server Replied : {$response}");
+        \Lobby::log("HTTP Request Failed ($url) : Lobby server replied stupid data - $response");
         return false;
       }else{
         return $arr;
