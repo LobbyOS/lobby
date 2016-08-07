@@ -1,3 +1,12 @@
+## 0.9.1
+
+`Berly`
+
+* Fixed bugs
+  * App install bug
+* Apps can now do routing
+* `onUpdate()` callback for apps
+
 ## 0.9
 
 `Berly`
