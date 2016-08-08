@@ -57,11 +57,11 @@ WARNING (Unstable) - This repo is for testing and may contain additional compone
 * Change Lobby server inside `includes/config.php`
 * Zip the folder
 
-## Blog
+### Blog
 
 New page in `lobby/version-0-`
 
-## Server
+### Server
 
 * Update version, release notes, blog post URL in App.php of lobby-server app
 * Add download url in api.php in src/Page of lobby-server app
