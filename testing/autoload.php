@@ -1,20 +1,13 @@
 <?php
 require_once __DIR__ . "/vendor/autoload.php";
 
-use Neutron\TemporaryFilesystem\TemporaryFilesystem;
-
 if(file_exists(sys_get_temp_dir() . "/lobby-tmp-loc.txt")){
   define("WEB_SERVER_DOCROOT", file_get_contents(sys_get_temp_dir() . "/lobby-tmp-loc.txt"));
 }else{
-  $GLOBALS["FS"] = TemporaryFilesystem::create();
-  define("WEB_SERVER_DOCROOT", $GLOBALS["FS"]->createTemporaryDirectory($mode = 0755));
-  
-  exec("cp -R '". realpath(__DIR__ . "/../") . "/.' '". WEB_SERVER_DOCROOT ."'");
-  unlink(WEB_SERVER_DOCROOT . "/config.php");
-  file_put_contents(sys_get_temp_dir() . "/lobby-tmp-loc.txt", WEB_SERVER_DOCROOT);
+  die("Move Lobby to a temporary directory first by running test-setup.php");
 }
 
-echo "Mocking filesytem at " . WEB_SERVER_DOCROOT . PHP_EOL;
+echo "Lobby installed at " . WEB_SERVER_DOCROOT . PHP_EOL;
 
 /**
  * Start Server
