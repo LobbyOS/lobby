@@ -1,0 +1,4 @@
+[2016-08-07 12:17:11] Command executed for compression : '/usr/bin/php' '/home/simsu/Other/projects/Web/Lobby/local/lobby.php' 'app' --a='site-compressor' --i='src/ajax/compress-bg.php' --data='siteID=lobby' > '/dev/null'
+[2016-08-07 13:01:34] Command executed for compression : '/usr/bin/php' '/home/simsu/Other/projects/Web/Lobby/local/lobby.php' 'app' --a='site-compressor' --i='src/ajax/compress-bg.php' --data='siteID=lobby' > '/dev/null'
+[2016-08-07 13:04:14] Command executed for compression : '/usr/bin/php' '/home/simsu/Other/projects/Web/Lobby/local/lobby.php' 'app' --a='site-compressor' --i='src/ajax/compress-bg.php' --data='siteID=lobby' > '/dev/null'
+[2016-08-07 13:13:06] Command executed for compression : '/usr/bin/php' '/home/simsu/Other/projects/Web/Lobby/local/lobby.php' 'app' --a='site-compressor' --i='src/ajax/compress-bg.php' --data='siteID=lobby' > '/dev/null'
