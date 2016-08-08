@@ -1,13 +1,22 @@
 <?php
 /**
- * Francium Assets Manager
- * For CSS, JS
+ * Manage and serve assets
+ * Contains an independent class
  */
- 
+
+/**
+ * Assets Manager
+ */
 class Assets {
 
+  /**
+   * The CSS & JS assets
+   */
   protected static $css = array(), $js = array();
   
+  /**
+   * The configuration
+   */
   protected static $config = array(
     /**
      * Base Directory (path) of application
@@ -35,6 +44,10 @@ class Assets {
    */
   public static $preProcess = null;
 
+  /**
+   * Set the configuration
+   * @param array $config Array containg the configuration
+   */
   public static function config($config){
     self::$config = array_replace_recursive(self::$config, $config);
     self::$config["basePath"] = realpath(self::$config["basePath"]);
@@ -42,6 +55,7 @@ class Assets {
   
   /**
    * Make URL from path
+   * @param string $path Relative path
    */
   public static function getURL($path){
     if(filter_var($path, FILTER_VALIDATE_URL)){
@@ -53,6 +67,7 @@ class Assets {
   
   /**
    * Make Absolute Path from relative path
+   * @param string $path Get absolute location to a file. Returns false if path is outside the base directory
    */
   public static function getPath($path){
     $path = realpath(self::$config["basePath"] . "/" . $path);
@@ -62,11 +77,21 @@ class Assets {
     return false;
   }
   
-  protected static function startsWith($haystack, $needle){
+  /**
+   * Whether a string starts with a particular string
+   * @param string $string The string where the check should be done
+   * @param string $needle The string to match
+   */
+  protected static function startsWith($string, $needle){
     $length = strlen($needle);
-    return (substr($haystack, 0, $length) === $needle);
+    return (substr($string, 0, $length) === $needle);
   }
   
+  /**
+   * Add a CSS asset or return the <link> tag
+   * @param string $name Asset's name. If this is null, <link href='... tag is returned
+   * @param $url $url Path to the CSS file
+   */
   public static function css($name = null, $url = null){
     if($name === null){
       self::getLinkTag();
@@ -75,6 +100,11 @@ class Assets {
     }
   }
   
+  /**
+   * Add a JS asset or return the <script> tag
+   * @param string $name Asset's name. If this is null, <script src='... tag is returned
+   * @param $url $url Path to the JS file
+   */
   public static function js($name, $url){
     if($name === null){
       self::getScriptTag();
@@ -83,6 +113,10 @@ class Assets {
     }
   }
   
+  /**
+   * Remove a CSS asset
+   * @param string $name The name of asset to remove
+   */
   public static function removeCSS($name){
     if(is_array($name)){
       foreach($name as $v){
@@ -94,6 +128,10 @@ class Assets {
     return true;
   }
   
+  /**
+   * Remove a JS asset
+   * @param string $name The name of asset to remove
+   */
   public static function removeJS($name){
     if(is_array($name)){
       foreach($name as $v){
@@ -105,6 +143,9 @@ class Assets {
     return true;
   }
   
+  /**
+   * Get the <link href> tag of all assets
+   */
   public static function getLinkTag(){
     $html = "";
     foreach(self::$css as $url){
@@ -113,6 +154,9 @@ class Assets {
     return $html;
   }
   
+  /**
+   * Get the <script src> tag of all assets
+   */
   public static function getScriptTag(){
     $html = "";
     foreach(self::$js as $url){
@@ -122,17 +166,23 @@ class Assets {
   }
   
   /**
-   * Get the <link tag of combined CSS files
+   * Get the <link src> tag of combined CSS files
+   * @param array $params Extra GET data to include in URL
    */
   public static function getServeLinkTag($params = array()){
     return "<link rel='stylesheet' href='". self::getServeURL("css", $params) ."' async='async' defer='defer' />";
   }
   
+  /**
+   * Get the <script src> tag of combined JS files
+   * @param array $params Extra GET data to include in URL
+   */
   public static function getServeScriptTag($params = array()){
     return "<script src='". self::getServeURL("js", $params) ."'></script>";
   }
   
   /**
+   * Get the URL to the file that serves the assets
    * @param $type string - Either "js" or "css"
    * @param $params array - List of extra GET parameters to include in URL
    * @param $customAssets array - Only include some assets
@@ -166,7 +216,9 @@ class Assets {
   }
   
   /**
-   * @param $data string - The Asset File Contents
+   * Pre process the code inside asset
+   * @param string $data Code inside asset
+   * @param string $type The asset type (js/css)
    */
   public static function preProcess($data, $type){
     if(self::$preProcess === null){
@@ -176,6 +228,9 @@ class Assets {
     }
   }
   
+  /**
+   * Handle the request to serve assets and respond with assets
+   */
   public static function serve(){
     $assets = isset($_GET['assets']) ? $_GET['assets'] : null;
     $type = isset($_GET['type']) ? $_GET['type'] : null;
@@ -243,18 +298,37 @@ class Assets {
     }
   }
   
+  /**
+   * Whether a JS asset is added
+   * @param string $asset Name of asset to check
+   */
   public static function issetJS($asset){
     return isset(self::$js[$asset]);
   }
   
+  /**
+   * Whether a CSS asset is added
+   * @param string $asset Name of asset to check
+   * @return bool
+   */
   public static function issetCSS($asset){
     return isset(self::$css[$asset]);
   }
   
+  /**
+   * Get the path to a JS asset or return all JS assets
+   * @param string $asset Name of asset to check. 
+   * @return string|array Path to asset if $asset is mentioned or all JS assets
+   */
   public static function getJS($asset = null){
     return $asset === null ? self::$js : self::$js[$asset];
   }
   
+  /**
+   * Get the path to a CSS asset or return all CSS assets
+   * @param string $asset Name of asset to check. 
+   * @return string|array Path to asset if $asset is mentioned or all CSS assets
+   */
   public static function getCSS($asset = null){
     return $asset === null ? self::$css : self::$css[$asset];
   }
