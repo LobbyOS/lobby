@@ -1,9 +1,9 @@
 <?php
 use \Fr\Process;
 
-$appID = \H::i("id", null, "POST");
+$appID = \Request::postParam("id");
 
-if(!csrf()){
+if(!CSRF::check()){
   echo json_encode(array(
     "statusID" => "error",
     "status" => "CSRF Token didn't match"
@@ -17,13 +17,13 @@ if(!csrf()){
   /**
    * A queue of App downloads
    */
-  $appInstallQueue = getJSONOption("lobby_app_downloads");
+  $appInstallQueue = Lobby\DB::getJSONOption("lobby_app_downloads");
   
   /**
    * If the $appID is in the queue, then give the download status of it
    * If the updated value is less than 20 seconds ago, then restart the download
    */
-  if(isset($appInstallQueue[$appID]) && $appInstallQueue[$appID]["updated"] > strtotime("-20 seconds")){
+  if(isset($appInstallQueue[$appID]) && $appInstallQueue[$appID]["updated"] > strtotime("-35 seconds")){
     echo json_encode(array(
       "statusID" => $appInstallQueue[$appID]["statusID"],
       "status" => $appInstallQueue[$appID]["status"]
@@ -48,7 +48,7 @@ if(!csrf()){
       $Process = new Process(Process::getPHPExecutable(), array(
         "arguments" => array(
           L_DIR . "/admin/ajax/install-app-bg.php",
-          \Lobby::$lid,
+          \Lobby::getLID(),
           base64_encode(serialize($_SERVER)),
           $appID
         )

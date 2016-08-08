@@ -1,21 +1,44 @@
 <?php
 namespace Lobby;
 
-use \Lobby\Need;
-use \Lobby\FS;
+use Lobby;
+use Lobby\DB;
+use Lobby\FS;
+use Lobby\Need;
+use Lobby\UI\Themes;
 
 /**
  * \Lobby\Apps
  * Associated with all kinds of operations with apps
  */
 
-class Apps extends \Lobby {
-
-  private $app = false;
-  public $appDir = false, $exists = false, $info = array(), $enabled = false;
+class Apps {
   
-  public static $appID = false;
+  /**
+   * Location of apps directory
+   */
+  private static $appsDir = null;
   
+  /**
+   * URL to apps directory
+   */
+  private static $appsURL = null;
+  
+  /**
+   * App Updates
+   * App => $latestVersion
+   */
+  private static $appUpdates = array();
+  
+  /**
+   * This will contain the App object when app is running
+   */
+  private static $activeApp = false;
+  private static $activeAppInstance = false;
+  
+  /**
+   * Default values in manifest.json
+   */
   protected static $manifestConfig = array(
     "name" => "",
     "short_description" => "",
@@ -36,6 +59,32 @@ class Apps extends \Lobby {
     "valid_apps" => array()
   );
   
+  /**
+   * The App ID
+   */
+  private $app = false;
+  
+  public $appDir = false, $exists = false, $info = array(), $enabled = false;
+  
+  /**
+   * @param array $appsVARS Contains path and URL to `apps` folder
+   */
+  public static function __constructStatic($appsVARS){
+    self::$appsDir = $appsVARS[0];
+    self::$appsURL = Lobby::u($appsVARS[1]);
+    
+    /**
+     * Make array like this :
+     * "AppID" => 0
+     */
+    $appsAsKeys = array_flip(self::getApps());
+    array_walk($appsAsKeys, function(&$val){
+      $val = 0;
+    });
+    
+    self::$appUpdates = array_replace_recursive($appsAsKeys, DB::getJSONOption("app_updates"));
+  }
+  
   public static function clearCache(){
     self::$cache = array(
       "valid_apps" => array()
@@ -49,11 +98,11 @@ class Apps extends \Lobby {
     if(isset(self::$cache["apps"])){
       $apps = self::$cache["apps"];
     }else{
-      $appFolders = array_diff(scandir(APPS_DIR), array('..', '.'));
+      $appFolders = array_diff(scandir(self::$appsDir), array('..', '.'));
       $apps = array();
     
       foreach($appFolders as $appFolderName){
-        if(self::valid($appFolderName)){
+        if(self::valid($appFolderName, false)){
           $apps[] = $appFolderName;
         }
       }
@@ -69,7 +118,7 @@ class Apps extends \Lobby {
     if(isset(self::$cache["enabled_apps"])){
       $enabled_apps = self::$cache["enabled_apps"];
     }else{
-      $enabled_apps = getOption("enabled_apps");
+      $enabled_apps = DB::getOption("enabled_apps");
       $enabled_apps = json_decode($enabled_apps, true);
       
       if(!is_array($enabled_apps) || count($enabled_apps) == 0){
@@ -100,6 +149,10 @@ class Apps extends \Lobby {
     return $disabled_apps;
   }
   
+  public static function getAppsDir(){
+    return self::$appsDir;
+  }
+  
   /**
    * Check if an app exists
    */
@@ -118,28 +171,30 @@ class Apps extends \Lobby {
   
   /**
    * Check if App is valid and it meets criteria of Lobby
+   * @param string $appID The Apps' ID
+   * @param bool $basicCheck Whether it should be a simple/basic check
    */
-  public static function valid($name = ""){
-    if(isset(self::$cache["valid_apps"][$name])){
-      $valid = self::$cache["valid_apps"][$name];
+  public static function valid($appID = "", $basicCheck = true){
+    if(isset(self::$cache["valid_apps"][$appID]) && $basicCheck){
+      $valid = self::$cache["valid_apps"][$appID];
     }else{
-      $appDir = APPS_DIR . "/$name";
+      $appDir = self::$appsDir . "/$appID";
       $valid = false;
     
       /**
-       * Initial checking
+       * Check if App.php and manifest file exist
        */
-      if( is_dir($appDir) && file_exists("$appDir/manifest.json") ){
+      if( FS::exists("$appDir/manifest.json") && FS::exists("$appDir/App.php") ){
         $valid = true;
       }
       
-      if( $valid === true && file_exists("$appDir/App.php") ){
+      if($valid && !$basicCheck){
         /**
          * Make sure the App class exists
          */
         require_once "$appDir/App.php";
-      
-        $className = "\\Lobby\App\\" . str_replace("-", "_", $name);
+        
+        $className = "\\Lobby\App\\" . self::normalizeID($appID);
         if( !class_exists($className) ){
           $valid = false; // The class doesn't exist, so app's not valid
         }else{
@@ -148,11 +203,14 @@ class Apps extends \Lobby {
             $valid = false;
           }
         }
-      }else{
-        $valid = false; // The App.php file is not found
+        
+        $manifest = json_decode(FS::get("$appDir/manifest.json"), true);
+        if(!is_array($manifest) || (isset($manifest["require"]) && !Need::checkRequirements($manifest["require"], true))){
+          $valid = false;
+        }
       }
       
-      self::$cache["valid_apps"][$name] = $valid;
+      self::$cache["valid_apps"][$appID] = $valid;
     }
     return $valid;
   }
@@ -160,26 +218,23 @@ class Apps extends \Lobby {
   /**
    * Make an object of App
    */
-  public function __construct($id = ""){
-    if($id != ""){
-      if(self::valid($id)){
-        $this->exists = true;
-        $appDir = APPS_DIR . "/$id";
-        $this->app = $id;
-        $this->appDir = $appDir;
-        
-        /**
-         * App Manifest Info as a object variable
-         */
-        $this->setInfo();
-        return true;
-      }else{
-        $this->exists = false;
-        if($this->disableApp()){
-          $this->log("App $name was disabled because it was not a valid App.");
-        }
-        return false;
-      }
+  public function __construct($id){
+    $this->app = $id;
+    
+    if(self::valid($id, false)){
+      $this->exists = true;
+      $this->dir = self::$appsDir . "/$id";
+      
+      /**
+       * App Manifest Info as a object property
+       */
+      $this->setInfo();
+      return true;
+    }else{
+      if($this->disableApp())
+        Lobby::log("'". $this->info["name"] ."' is not a valid app.");
+      $this->app = false;
+      return false;
     }
   }
  
@@ -187,8 +242,8 @@ class Apps extends \Lobby {
    * Get the manifest info of app as array
    */
   private function setInfo(){
-    $manifest = FS::exists($this->appDir . "/manifest.json") ?
-      file_get_contents($this->appDir . "/manifest.json") : false;
+    $manifest = FS::exists($this->dir . "/manifest.json") ?
+      FS::get($this->dir . "/manifest.json") : false;
     
     if($manifest){
       $details = json_decode($manifest, true);
@@ -198,19 +253,23 @@ class Apps extends \Lobby {
        * Add extra info with the manifest info
        */
       $details['id'] = $this->app;
-      $details['location'] = $this->appDir;
-      $details['URL'] = L_URL . "/app/{$this->app}";
-      $details['srcURL'] = L_URL . "/contents/apps/{$this->app}";
-      $details['adminURL'] = L_URL . "/admin/app/{$this->app}";
+      $details['dir'] = $this->dir;
+      $details['url'] = Lobby::getURL() . "/app/{$this->app}";
+      $details['srcURL'] = Lobby::getURL() . "/contents/apps/{$this->app}";
+      $details['adminURL'] = Lobby::getURL() . "/admin/app/{$this->app}";
       
       /**
        * Prefer SVG over PNG
        */
       $details['logo'] = $details['logo'] !== false ?
-        (FS::exists($this->appDir . "/src/image/logo.svg") ?
-          APPS_URL . "/{$this->app}/src/image/logo.svg" :
-          APPS_URL . "/{$this->app}/src/image/logo.png"
-        ) : null;
+        (FS::exists($this->dir . "/src/image/logo.svg") ?
+          self::$appsURL . "/{$this->app}/src/image/logo.svg" :
+          self::$appsURL . "/{$this->app}/src/image/logo.png"
+        ) : Themes::getThemeURL() . "/src/main/image/app-logo.png";
+      
+      $details["latestVersion"] = isset(self::$appUpdates[$this->app]) ? self::$appUpdates[$this->app] : null;
+      
+      $details = \Hooks::applyFilters("app.manifest", $details);
        
       /**
        * Insert the info as a property
@@ -237,7 +296,7 @@ class Apps extends \Lobby {
       if(!in_array($this->app, $apps, true)){
         $apps[] = $this->app;
         
-        saveOption("enabled_apps", json_encode($apps));
+        DB::saveOption("enabled_apps", json_encode($apps));
         self::clearCache();
         return true;
       }else{
@@ -252,14 +311,13 @@ class Apps extends \Lobby {
    * Disable the app
    */
   public function disableApp(){
-    if($this->app && $this->enabled){
+    if($this->app){
       $apps = self::getEnabledApps();
-
       if(in_array($this->app, $apps, true)){
         $key = array_search($this->app, $apps);
         unset($apps[$key]);
         
-        saveOption("enabled_apps", json_encode($apps));
+        DB::saveOption("enabled_apps", json_encode($apps));
         self::clearCache();
         return true;
       }else{
@@ -276,7 +334,7 @@ class Apps extends \Lobby {
   public function removeApp(){
     if($this->app){
       if(self::exists($this->app) !== false){
-        $dir = $this->appDir;
+        $dir = $this->dir;
         if(file_exists("$dir/uninstall.php")){
           include_once "$dir/uninstall.php";
         }
@@ -301,6 +359,41 @@ class Apps extends \Lobby {
   }
   
   /**
+   * Get size used in database
+   */
+  public function getDBSize($normalizeSize = false){
+    $sql = \Lobby\DB::getDBH()->prepare("SELECT * FROM `". \Lobby\DB::getPrefix() ."data` WHERE `app` = ?");
+    $sql->execute(array($this->app));
+    $result = $sql->fetchAll(\PDO::FETCH_ASSOC);
+    
+    /**
+     * Convert array values to string
+     * Also remove JSON syntax
+     */
+    $result = json_encode($result);
+    $result = str_replace("[roeEcvv,]", null, $result);
+    
+    return mb_strlen($result);
+  }
+  
+  /**
+   * Whether app update is available
+   * Provide $latestVersion to check if it's a latest version
+   */
+  public function hasUpdate($latestVersion = null){
+    if($latestVersion !== null)
+      return version_compare($this->info['version'], $latestVersion, "<");
+    else
+      return version_compare($this->info['version'], $this->info['latestVersion'], "<");
+  }
+  
+  public function clearData(){
+    $sql = \Lobby\DB::getDBH()->prepare("DELETE FROM `". \Lobby\DB::getPrefix() ."data` WHERE `app` = ?");
+    $sql->execute(array($this->app));
+    return true;
+  }
+  
+  /**
    * Get the App object
    */
   public function getInstance(){
@@ -308,7 +401,7 @@ class Apps extends \Lobby {
       /**
        * Load the app class
        */
-      require_once $this->appDir . "/App.php";
+      require_once $this->dir . "/App.php";
       
       $className = "\\Lobby\App\\" . self::normalizeID($this->app);
      
@@ -320,7 +413,7 @@ class Apps extends \Lobby {
       /**
        * Send app details to the App Object
        */
-      $class->setTheVars($this->info);
+      $class->setAppInfo($this->info);
       
       return $class;
     }
@@ -333,28 +426,37 @@ class Apps extends \Lobby {
     if($this->app){
       \Assets::js("app", "/includes/lib/lobby/js/app.js");
       
-      self::$appID = $this->app;
-      
-      /**
-       * Define the App Constants
-       */
-      define("APP_DIR", $this->appDir);
-      define("APP_SRC", $this->info['srcURL']);
-      
-      if(!defined("APP_URL")){
-        /**
-         * We specifically check if APP_URL is defined,
-         * because it may be already defined by `singleapp` module.
-         */
-        define("APP_URL", $this->info['URL']);
-        define("APP_ADMIN_URL", $this->info['adminURL']);
-      }
+      self::$activeApp = $this;
+      self::$activeAppInstance = $this->getInstance();
       
       /**
        * Return the App Object
        */
-      return $this->getInstance();
+      return self::$activeAppInstance;
     }
+  }
+  
+  /**
+   * Get config value of currently running app
+   */
+  public static function getInfo($key){
+    if(self::$activeApp)
+      return self::$activeApp->info[$key];
+    else if(isset($this))
+      return $this->info[$key];
+    else
+      return null;
+  }
+  
+  /**
+   * Whether Lobby is in app-mode
+   */
+  public static function isAppRunning(){
+    return self::$activeApp;
+  }
+  
+  public static function getRunningInstance(){
+    return self::$activeAppInstance;
   }
   
 }

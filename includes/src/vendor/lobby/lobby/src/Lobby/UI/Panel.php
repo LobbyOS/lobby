@@ -1,17 +1,20 @@
 <?php
 namespace Lobby\UI;
+
+use Hooks;
+use Lobby\DB;
+
 /**
  * Makes the Top Panel
  */
-
 class Panel {
 
-  public static $top_items = array(
+  public static $topItems = array(
     "left" => array(),
     "right" => array()
   );
   
-  private static $panel_item_format = array(
+  private static $panelItemFormat = array(
     "text" => null,
     "href" => null,
     "html" => null,
@@ -27,7 +30,7 @@ class Panel {
   );
   
   public static function addTopItem($name, $array){
-    $array = array_replace_recursive(self::$panel_item_format, $array);
+    $array = array_replace_recursive(self::$panelItemFormat, $array);
     $loc = $array['position'];
     
     if($loc === "right"){
@@ -40,24 +43,29 @@ class Panel {
      * If the item is already registered, then replace it
      * else, register new one
      */
-    if(isset(self::$top_items[$loc][$name])){
-      $merged = array_merge(self::$top_items[$loc][$name], $array);
-      self::$top_items[$loc][$name] = $merged;
+    if(isset(self::$topItems[$loc][$name])){
+      $merged = array_merge(self::$topItems[$loc][$name], $array);
+      self::$topItems[$loc][$name] = $merged;
     }else{
-      $originalArr = isset(self::$top_items[$loc]) ? self::$top_items[$loc] : array();
+      $originalArr = isset(self::$topItems[$loc]) ? self::$topItems[$loc] : array();
       $merged = array_merge($originalArr, array(
         $name => $array
       ));
-      self::$top_items[$loc] = $merged;
+      self::$topItems[$loc] = $merged;
     }
   }
   
+  public static function removeTopItem($name, $position){
+    if(isset(self::$topItems[$position][$name]))
+      unset(self::$topItems[$position][$name]);
+  }
+  
   public static function getPanelItems($side = "left"){
-    $items = self::$top_items;
-    $html = "";
-    if($side == "right"){
+    $items = self::$topItems;
+    if($side === "right"){
       ksort($items['right']);
     }
+    $items[$side] = Hooks::applyFilters("panel.{$side}.items", $items[$side]);
     return $items[$side];
   }
   
@@ -65,7 +73,7 @@ class Panel {
    * Push an item to Notify
    */
   public static function addNotifyItem($id, $info){
-    saveJSONOption("notify_items", array(
+    DB::saveJSONOption("notify_items", array(
       $id => array_replace_recursive(self::$notifyItem, $info)
     ));
   }
@@ -74,7 +82,7 @@ class Panel {
    * Remove an item from Notify
    */
   public static function removeNotifyItem($id){
-    saveJSONOption("notify_items", array(
+    DB::saveJSONOption("notify_items", array(
       $id => false
     ));
   }

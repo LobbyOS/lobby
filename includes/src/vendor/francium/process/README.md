@@ -1,5 +1,7 @@
 # Francium-Process
 
+[![Build Status](https://travis-ci.org/subins2000/Francium-Process.svg?branch=dev-master)](https://travis-ci.org/subins2000/Francium-Process)
+
 Run **Non Blocking Background Processes** in PHP. Works for Unix (Linux, Mac) and Windows Systems
 
 ## Install

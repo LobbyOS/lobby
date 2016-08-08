@@ -1,17 +1,17 @@
 [
     {
         "name": "composer/semver",
-        "version": "1.4.0",
-        "version_normalized": "1.4.0.0",
+        "version": "1.4.1",
+        "version_normalized": "1.4.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/composer/semver.git",
-            "reference": "84c47f3d8901440403217afc120683c7385aecb8"
+            "reference": "03c9de5aa25e7672c4ad251eeaba0c47a06c8b98"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/composer/semver/zipball/84c47f3d8901440403217afc120683c7385aecb8",
-            "reference": "84c47f3d8901440403217afc120683c7385aecb8",
+            "url": "https://api.github.com/repos/composer/semver/zipball/03c9de5aa25e7672c4ad251eeaba0c47a06c8b98",
+            "reference": "03c9de5aa25e7672c4ad251eeaba0c47a06c8b98",
             "shasum": ""
         },
         "require": {
@@ -21,7 +21,7 @@
             "phpunit/phpunit": "^4.5 || ^5.0.5",
             "phpunit/phpunit-mock-objects": "2.3.0 || ^3.0"
         },
-        "time": "2016-03-30 13:16:03",
+        "time": "2016-06-02 09:04:51",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -60,6 +60,106 @@
             "semantic",
             "semver",
             "validation",
+            "versioning"
+        ]
+    },
+    {
+        "name": "lobby/lobby",
+        "version": "0.8.0",
+        "version_normalized": "0.8.0.0",
+        "dist": {
+            "type": "path",
+            "url": "lobby/",
+            "reference": "a05a0955b31bc35702dbeec9478883908bda4ba6",
+            "shasum": null
+        },
+        "require": {
+            "composer/semver": ">=1.4.0",
+            "php": ">=5.3.0"
+        },
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "src/functions.php"
+            ],
+            "psr-0": {
+                "Lobby": "src/",
+                "Assets": "src/",
+                "CSRF": "src/",
+                "Helper": "src/",
+                "Hooks": "src/",
+                "Request": "src/",
+                "Response": "src/"
+            },
+            "psr-4": {
+                "Lobby\\": "src/Lobby",
+                "Lobby\\UI\\": "src/Lobby/UI"
+            }
+        },
+        "license": [
+            "Apache 2.0"
+        ],
+        "authors": [
+            {
+                "name": "Subin Siby",
+                "homepage": "http://subinsb.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "Lobby Core",
+        "homepage": "http://lobby.subinsb.com",
+        "keywords": [
+            "lobby"
+        ]
+    },
+    {
+        "name": "vierbergenlars/php-semver",
+        "version": "v2.1.0",
+        "version_normalized": "2.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/vierbergenlars/php-semver.git",
+            "reference": "6b16f72b8c2d3aa00368f9fa612b2218a96245fc"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/vierbergenlars/php-semver/zipball/6b16f72b8c2d3aa00368f9fa612b2218a96245fc",
+            "reference": "6b16f72b8c2d3aa00368f9fa612b2218a96245fc",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "vierbergenlars/simpletest": "1.1.*"
+        },
+        "time": "2013-09-20 10:41:27",
+        "bin": [
+            "bin/semver",
+            "bin/update-versions"
+        ],
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "vierbergenlars\\SemVer": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Lars Vierbergen",
+                "email": "vierbergenlars@gmail.com"
+            }
+        ],
+        "description": "The Semantic Versioner for PHP",
+        "keywords": [
+            "semantic",
+            "semver",
             "versioning"
         ]
     },
@@ -205,83 +305,41 @@
         ]
     },
     {
-        "name": "lobby/lobby",
-        "version": "0.5.30",
-        "version_normalized": "0.5.30.0",
-        "dist": {
-            "type": "path",
-            "url": "lobby/",
-            "reference": "ccbeb943821df1220258bcb810618c886aa4fe80",
-            "shasum": null
-        },
-        "require": {
-            "composer/semver": ">=1.4.0",
-            "php": ">=5.3.0"
-        },
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "src/functions.php"
-            ],
-            "psr-0": {
-                "Lobby": "src/",
-                "H": "src/",
-                "Assets": "src/"
-            },
-            "psr-4": {
-                "Lobby\\": "src/Lobby",
-                "Lobby\\UI\\": "src/Lobby/UI"
-            }
-        },
-        "license": [
-            "Apache 2.0"
-        ],
-        "authors": [
-            {
-                "name": "Subin Siby",
-                "homepage": "http://subinsb.com",
-                "role": "Developer"
-            }
-        ],
-        "description": "Lobby Core",
-        "homepage": "https://lobby.subinsb.com",
-        "keywords": [
-            "lobby"
-        ]
-    },
-    {
-        "name": "vierbergenlars/php-semver",
-        "version": "v2.1.0",
-        "version_normalized": "2.1.0.0",
+        "name": "symfony/polyfill-mbstring",
+        "version": "v1.2.0",
+        "version_normalized": "1.2.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/vierbergenlars/php-semver.git",
-            "reference": "6b16f72b8c2d3aa00368f9fa612b2218a96245fc"
+            "url": "https://github.com/symfony/polyfill-mbstring.git",
+            "reference": "dff51f72b0706335131b00a7f49606168c582594"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/vierbergenlars/php-semver/zipball/6b16f72b8c2d3aa00368f9fa612b2218a96245fc",
-            "reference": "6b16f72b8c2d3aa00368f9fa612b2218a96245fc",
+            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/dff51f72b0706335131b00a7f49606168c582594",
+            "reference": "dff51f72b0706335131b00a7f49606168c582594",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.0"
+            "php": ">=5.3.3"
         },
-        "require-dev": {
-            "vierbergenlars/simpletest": "1.1.*"
+        "suggest": {
+            "ext-mbstring": "For best performance"
         },
-        "time": "2013-09-20 10:41:27",
-        "bin": [
-            "bin/semver",
-            "bin/update-versions"
-        ],
+        "time": "2016-05-18 14:26:46",
         "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.2-dev"
+            }
+        },
         "installation-source": "dist",
         "autoload": {
-            "psr-0": {
-                "vierbergenlars\\SemVer": "src/"
-            }
+            "psr-4": {
+                "Symfony\\Polyfill\\Mbstring\\": ""
+            },
+            "files": [
+                "bootstrap.php"
+            ]
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -289,40 +347,47 @@
         ],
         "authors": [
             {
-                "name": "Lars Vierbergen",
-                "email": "vierbergenlars@gmail.com"
+                "name": "Nicolas Grekas",
+                "email": "p@tchwork.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
             }
         ],
-        "description": "The Semantic Versioner for PHP",
+        "description": "Symfony polyfill for the Mbstring extension",
+        "homepage": "https://symfony.com",
         "keywords": [
-            "semantic",
-            "semver",
-            "versioning"
+            "compatibility",
+            "mbstring",
+            "polyfill",
+            "portable",
+            "shim"
         ]
     },
     {
         "name": "symfony/filesystem",
-        "version": "v3.0.5",
-        "version_normalized": "3.0.5.0",
+        "version": "v3.1.3",
+        "version_normalized": "3.1.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/filesystem.git",
-            "reference": "74fec3511b62cb934b64bce1d96f06fffa4beafd"
+            "reference": "bb29adceb552d202b6416ede373529338136e84f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/filesystem/zipball/74fec3511b62cb934b64bce1d96f06fffa4beafd",
-            "reference": "74fec3511b62cb934b64bce1d96f06fffa4beafd",
+            "url": "https://api.github.com/repos/symfony/filesystem/zipball/bb29adceb552d202b6416ede373529338136e84f",
+            "reference": "bb29adceb552d202b6416ede373529338136e84f",
             "shasum": ""
         },
         "require": {
             "php": ">=5.5.9"
         },
-        "time": "2016-04-12 18:09:53",
+        "time": "2016-07-20 05:44:26",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "3.0-dev"
+                "dev-master": "3.1-dev"
             }
         },
         "installation-source": "dist",
@@ -352,24 +417,82 @@
         "homepage": "https://symfony.com"
     },
     {
-        "name": "francium/process",
-        "version": "v0.3.1",
-        "version_normalized": "0.3.1.0",
+        "name": "symfony/http-foundation",
+        "version": "v3.1.3",
+        "version_normalized": "3.1.3.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/subins2000/Francium-Process.git",
-            "reference": "8a6f533585f0ae807fb7f7bbfb09d408f5a0ce97"
+            "url": "https://github.com/symfony/http-foundation.git",
+            "reference": "399a44b73f6c176de40fb063dcdaa578bcfb94d6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/subins2000/Francium-Process/zipball/8a6f533585f0ae807fb7f7bbfb09d408f5a0ce97",
-            "reference": "8a6f533585f0ae807fb7f7bbfb09d408f5a0ce97",
+            "url": "https://api.github.com/repos/symfony/http-foundation/zipball/399a44b73f6c176de40fb063dcdaa578bcfb94d6",
+            "reference": "399a44b73f6c176de40fb063dcdaa578bcfb94d6",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.5.9",
+            "symfony/polyfill-mbstring": "~1.1"
+        },
+        "require-dev": {
+            "symfony/expression-language": "~2.8|~3.0"
+        },
+        "time": "2016-07-17 14:02:08",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.1-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\HttpFoundation\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony HttpFoundation Component",
+        "homepage": "https://symfony.com"
+    },
+    {
+        "name": "francium/process",
+        "version": "v0.3.3",
+        "version_normalized": "0.3.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/subins2000/Francium-Process.git",
+            "reference": "e38a55541679374d2658dede74e6535533184d65"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/subins2000/Francium-Process/zipball/e38a55541679374d2658dede74e6535533184d65",
+            "reference": "e38a55541679374d2658dede74e6535533184d65",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2016-05-07 17:11:38",
+        "require-dev": {
+            "phpunit/phpunit": ">=3.7"
+        },
+        "time": "2016-07-30 18:11:56",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -396,5 +519,67 @@
             "platform",
             "process"
         ]
+    },
+    {
+        "name": "symfony/console",
+        "version": "v3.1.3",
+        "version_normalized": "3.1.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/console.git",
+            "reference": "f9e638e8149e9e41b570ff092f8007c477ef0ce5"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/console/zipball/f9e638e8149e9e41b570ff092f8007c477ef0ce5",
+            "reference": "f9e638e8149e9e41b570ff092f8007c477ef0ce5",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.5.9",
+            "symfony/polyfill-mbstring": "~1.0"
+        },
+        "require-dev": {
+            "psr/log": "~1.0",
+            "symfony/event-dispatcher": "~2.8|~3.0",
+            "symfony/process": "~2.8|~3.0"
+        },
+        "suggest": {
+            "psr/log": "For using the console logger",
+            "symfony/event-dispatcher": "",
+            "symfony/process": ""
+        },
+        "time": "2016-07-26 08:04:17",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.1-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\Console\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Console Component",
+        "homepage": "https://symfony.com"
     }
 ]

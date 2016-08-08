@@ -96,17 +96,17 @@ if(isset($_GET['img'])){
     }
     exit;
   });
-  $action = \H::i('action');
+  $action = \Request::get('action');
   
   switch ($action){
     case 'list':
-      $dir = base64_encode(makeOSPath(\H::i("dir", "/", "POST")));
+      $dir = base64_encode(makeOSPath(\Request::postParam("dir", "/")));
       $filter = isset($_POST['filter']) ? $_POST['filter'] : 0;
       echo $fp->get_list($dir, $filter);
       break;
     case 'info':
-      $dir = base64_encode(makeOSPath(\H::i("dir", "/", "POST")));
-      $file = \H::i("file", "", "POST");
+      $dir = base64_encode(makeOSPath(\Request::postParam("dir", "/")));
+      $file = \Request::postParam("file", "");
       echo $fp->get_info($dir, $file);
       break;
   /*
@@ -117,11 +117,11 @@ if(isset($_GET['img'])){
       break;
   */
     default :
-      $filter = \H::i('filter');
+      $filter = \Request::get('filter');
       $filters = '';
       $filters = $fp->get_filters($filter);
       
-      $dir = makeOSPath(\H::i("dir", "/", "POST"));
+      $dir = makeOSPath(\Request::postParam("dir", "/"));
       $dir_b64 = base64_encode($dir);
       ob_start();
   ?>

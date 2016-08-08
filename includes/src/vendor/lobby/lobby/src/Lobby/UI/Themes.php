@@ -1,28 +1,55 @@
 <?php
 namespace Lobby\UI;
 
-class Themes extends \Lobby {
+use Hooks;
+use Lobby;
+use Lobby\DB;
+use Lobby\FS;
+
+class Themes {
   
   /**
    * Cache results
    */
-  private static $cache = array();
+  protected static $cache = array();
   
-  public static $themeID, $theme;
+  /**
+   * Path & URL to `themes` folder
+   */
+  protected static $themesDir;
+  protected static $themesURL;
+  
+  /**
+   * Active theme's Info
+   */
+  private static $themeID = null, $dir, $url;
+  
+  /**
+   * Active theme's \Lobby\UI\Theme object
+   */
+  private static $theme;
   
   /**
    * Initialization
+   * @param array $themeVARS Contains directory and URL to `themes` folder
    */
-  public static function __constructStatic(){
-    self::$themeID = getOption("active_theme");
-    if(self::$themeID == null){
+  public static function __constructStatic($themesVARS){
+    self::$themesDir = $themesVARS[0];
+    self::$themesURL = Lobby::u($themesVARS[1]);
+    
+    self::$themeID = DB::getOption("active_theme");
+    
+    /**
+     * Default theme is `hine`
+     */
+    if(self::$themeID === null){
       self::$themeID = "hine";
     }else if(self::validTheme(self::$themeID) === false){
       self::$themeID = "hine";
     }
-    define("THEME_ID", self::$themeID);
-    define("THEME_DIR", THEMES_DIR . "/" . self::$themeID);
-    define("THEME_URL", THEMES_URL . "/" . self::$themeID);
+    
+    self::$url = self::$themesURL . "/" . self::$themeID;
+    self::$dir = self::$themesDir . "/" . self::$themeID;
     
     if(!\Lobby::status("lobby.assets-serve")){
       self::loadDefaults();
@@ -47,6 +74,18 @@ class Themes extends \Lobby {
     return self::$cache['themes'];
   }
   
+  public static function getThemeID(){
+    return self::$themeID;
+  }
+  
+  public static function getThemeDir(){
+    return self::$dir;
+  }
+  
+  public static function getThemeURL(){
+    return self::$url;
+  }
+  
   /**
    * Load Default CSS & JS
    */
@@ -68,31 +107,32 @@ class Themes extends \Lobby {
    */
   public static function loadTheme(){
     
-    require_once THEME_DIR . "/Theme.php";
+    require_once self::$dir . "/Theme.php";
     
     $className = "\Lobby\UI\Themes\\" . self::$themeID;
-    self::$theme = new $className();
+    self::$theme = new $className(self::$themeID, self::$dir);
     
     self::$theme->init();
+    
+    self::$theme->addStyle("/src/main/css/style.css");
+    self::$theme->addStyle("/src/main/css/icons.css");
     
     /**
      * Load Panel
      */
     if(\Lobby::status("lobby.admin")){
-      self::$theme->addStyle("/src/main/css/style.css");
-      \Lobby::hook("admin.head.begin", function(){
+      Hooks::addAction("admin.head.begin", function(){
         self::$theme->panel(true);
         self::$theme->addStyle("/src/main/css/admin.style.css");
       });
-      \Lobby::hook("admin.body.begin", function() {
+      \Hooks::addAction("admin.body.begin", function() {
         echo self::$theme->inc("/src/panel/load.admin.php");
       });
     }else{
-      self::$theme->addStyle("/src/main/css/style.css");
-      \Lobby::hook("head.begin", function(){
+      \Hooks::addAction("head.begin", function(){
         self::$theme->panel(false);
       });
-      \Lobby::hook("body.begin", function() {
+      \Hooks::addAction("body.begin", function() {
         echo self::$theme->inc("/src/panel/load.php");
       });
     }
@@ -115,7 +155,7 @@ class Themes extends \Lobby {
    */
   public static function validTheme($theme){
     $valid = false;
-    $loc = THEMES_DIR . "/$theme";
+    $loc = self::$themesDir . "/$theme";
     
     /**
      * Does the "Theme.php" file in theme directory exist ?

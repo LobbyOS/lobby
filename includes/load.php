@@ -1,27 +1,9 @@
 <?php
-session_start();
-
 /**
  * Define the Lobby Location
  * $docRoot would be set by /load.php
  */
 define("L_DIR", str_replace("\\", "/", $docRoot));
-
-$_SERVER['ORIG_REQUEST_URI'] = $_SERVER['REQUEST_URI'];
-
-/**
- * Make the request URL relative to the base URL of Lobby installation.
- * http://localhost/lobby will be changed to "/"
- * and http://lobby.local to "/"
- * ---------------------
- * We do this directly to $_SERVER['REQUEST_URI'] because, Klein (router)
- * obtains the value from it. Hence we keep the original value in ORIG_REQUEST_URI
- */
-$lobbyBase = str_replace(str_replace("\\", "/", $_SERVER['DOCUMENT_ROOT']), "", L_DIR);
-$lobbyBase = substr($lobbyBase, 0) == "/" ? substr_replace($lobbyBase, "", 0) : $lobbyBase;
-
-$_SERVER['REQUEST_URI'] = str_replace($lobbyBase, "", $_SERVER['REQUEST_URI']);
-$_SERVER['REQUEST_URI'] = substr($_SERVER['REQUEST_URI'], -1) == "/" && $_SERVER['REQUEST_URI'] != "/" ? substr_replace($_SERVER['REQUEST_URI'], "", -1) : $_SERVER['REQUEST_URI'];
 
 try{
   /**
@@ -30,30 +12,47 @@ try{
   $composer = require_once L_DIR . "/includes/src/vendor/autoload.php";
   
   /**
-   * Load Classed that Composer doesn't load by default
+   * Get Lobby Defined Values
+   */
+  require_once L_DIR . "/includes/config.php";
+  
+  /**
+   * Load Classes that has __constructStatic()
    */
   $composer->loadClass("Assets");
+  $composer->loadClass("CSRF");
+  $composer->loadClass("Lobby");
+  $composer->loadClass("Request");
+  $composer->loadClass("Response");
+  $composer->loadClass("Lobby\\FS");
   $composer->loadClass("Lobby\\DB");
+  $composer->loadClass("Lobby\\Apps");
+  $composer->loadClass("Lobby\\Modules");
+  $composer->loadClass("Lobby\\Router");
+  $composer->loadClass("Lobby\\Time");
+  $composer->loadClass("Lobby\\UI\\Themes");
   
   /**
    * Static Class Constructor
    * ------------------------
-   * Call __constructStatic() on each classes
+   * Call __constructStatic() on each classes with params for some classes
    */
   $loader = new ConstructStatic\Loader($composer);
+  
+  $loader->setClassParameters("Lobby\\Apps", array(APPS_DIR, APPS_URL));
+  $loader->setClassParameters("Lobby\UI\Themes", array(THEMES_DIR, THEMES_URL));
+  
   $loader->processLoadedClasses();
   
   /**
-   * Get Lobby Defined Values & Load Modules
+   * Set constants & Load Modules
    */
   require_once L_DIR . "/includes/extra.php";
   
   /**
    * These classes are not loaded by default by Composer
    */
-  $loader->loadClass("Lobby\\UI\\Themes");
   $loader->loadClass("Lobby\\Require");
-  
 }catch(\Exception $e){
   \Lobby::log(array("fatal", $e->getMessage()));
 }
@@ -71,8 +70,8 @@ if(!\Lobby::status("lobby.assets-serve")){
    * Is Lobby Installed ?
    */
   if(!\Lobby::$installed && !\Lobby::status("lobby.install")){
-    \Lobby::redirect("/admin/install.php");
+    \Response::redirect("/admin/install.php");
   }
 }
 
-\Lobby::doHook("init");
+\Hooks::doAction("init");

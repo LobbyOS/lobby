@@ -1,31 +1,31 @@
 <?php
 namespace Lobby;
 
-use \Lobby\Apps;
-use \Lobby\FS;
+use Lobby;
+use Lobby\Apps;
+use Lobby\FS;
 
 class Modules extends \Lobby {
 
-  private static $core_modules = array(), $custom_modules = array(), $app_modules = array(), $modules = array();
+  private static $coreMods = array(), $customMods = array(), $appMods = array(), $mods = array();
   
   public static function __constructStatic(){
-    
-    self::$app_modules = self::appModules();
-    self::$core_modules = self::dirModules("/includes/lib/modules");
-    self::$custom_modules = self::dirModules("/contents/modules");
+    self::$appMods = self::appModules();
+    self::$coreMods = self::dirModules("/includes/lib/modules");
+    self::$customMods = self::dirModules("/contents/modules");
 
-    self::$modules = array_merge(self::$core_modules, self::$custom_modules, self::$app_modules);
+    self::$mods = array_merge(self::$coreMods, self::$customMods, self::$appMods);
   }
   
   public static function get($type = "all"){
     if($type == "all"){
-      return self::$modules;
+      return self::$mods;
     }elseif($type == "core"){
-      return self::$core_modules;
+      return self::$coreMods;
     }elseif($type == "custom"){
-      return self::$custom_modules;
+      return self::$customMods;
     }elseif($type == "app"){
-      return self::$app_modules;
+      return self::$appMods;
     }
   }
   
@@ -42,17 +42,17 @@ class Modules extends \Lobby {
    * List modules in a directory
    */
   public static function dirModules($location){
-    $location = L_DIR . $location;
-    $modules = array_diff(scandir($location), array('..', '.'));
+    $location = FS::loc($location);
+    $mods = array_diff(scandir($location), array('..', '.'));
     $validModules = array();
     
-    foreach($modules as $module){
+    foreach($mods as $module){
       $loc = "$location/$module";
       if(self::valid($module, $loc)){
         $validModules[$module] = array(
           "id" => $module,
           "location" => $loc,
-          "url" => L_URL . "/" . FS::rel($loc)
+          "url" => Lobby::getURL() . "/" . FS::rel($loc)
         );
       }
     }
@@ -63,23 +63,23 @@ class Modules extends \Lobby {
    * List App Modules
    */
   public static function appModules(){
-    $modules = array();
+    $mods = array();
     
-    $apps = \Lobby\Apps::getApps();
+    $apps = Apps::getEnabledApps();
     foreach($apps as $appID){
       $module_name = 'app_' . Apps::normalizeID($appID);
-      $loc = APPS_DIR . "/$appID/module";
+      $loc = Apps::getAppsDir() . "/$appID/module";
       
       if(self::valid($module_name, $loc)){
-        $modules[$module_name] = array(
+        $mods[$module_name] = array(
           "id" => $module_name,
           "appID" => $appID,
           "location" => $loc,
-          "url" => L_URL . "/" . FS::rel($loc)
+          "url" => Lobby::getURL() . "/" . FS::rel($loc)
         );
       }
     }
-    return $modules;
+    return $mods;
   }
   
   public static function load(){
@@ -90,13 +90,12 @@ class Modules extends \Lobby {
      *   "url" => "URL to Module"
      * )
      */
-    foreach(self::$modules as $module){
+    foreach(self::$mods as $module){
       require_once "{$module["location"]}/Module.php";
       $moduleIdentifier = "\Lobby\Module\\{$module['id']}";
       
       if(isset($module["appID"])){
         $App = new Apps($module["appID"]);
-        
         new $moduleIdentifier(array(
           $module["id"],
           $module["location"],
@@ -113,7 +112,7 @@ class Modules extends \Lobby {
   }
   
   public static function exists($module){
-    if(isset(self::$modules[$module]) !== false){
+    if(isset(self::$mods[$module]) !== false){
       return true;
     }else{
       return false;
@@ -122,7 +121,7 @@ class Modules extends \Lobby {
   
   public static function disableModule($module){
     if(self::exists($module)){
-      \Lobby\FS::write(self::$modules[$module] . "/disabled.txt", "1");
+      \Lobby\FS::write(self::$mods[$module]["location"] . "/disabled.txt", "1");
       return true;
     }else{
       return false;

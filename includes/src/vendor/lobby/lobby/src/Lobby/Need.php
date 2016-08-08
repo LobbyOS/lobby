@@ -4,22 +4,35 @@ namespace Lobby;
 use vierbergenlars\SemVer\version;
 use vierbergenlars\SemVer\expression;
 use vierbergenlars\SemVer\SemVerException;
+use Lobby\Apps;
 
 /**
  * A class for satisying depenedencies of an App
  * "Need" is a synonym of Require
  */
-
 class Need {
 
   /**
    * Get Version of a component
    */
   public static function getDependencyVersion($dependency){
-    
+    /**
+     * If dependency is 'app/admin' etc.
+     */
+    if(strpos($dependency, "/") !== false){
+      list($dependency, $subDependency) = explode("/", $dependency);
+    }
     switch($dependency){
       case "lobby":
-        return \Lobby::$version;
+        return \Lobby::getVersion();
+        break;
+      case "app":
+        $App = new Apps($subDependency);
+        return $App->exists ? $App->info["version"] : 0;
+        break;
+      case "curl":
+        $curl = function_exists("curl_version") ? curl_version() : 0;
+        return $curl === 0 ? 0 : $curl["version"];
         break;
       default:
         /**
@@ -33,11 +46,13 @@ class Need {
   
   /**
    * Check requirements
-   * $requires is array()
-   * $boolean - To tell whether the return value must be a boolean or not
+   * @param array $requires The array containing the requirements
+   * @param bool $boolean Whether the return value must be a boolean
+   * @param bool $multi Whether return value contain both satisfy boolean and requirement version
    */
-  public static function checkRequirements($requires, $boolean = false){
+  public static function checkRequirements($requires, $boolean = false, $multi = false){
     $result = $requires;
+    
     /**
      * $requiredVersion will look like ">=5.0"
      */
@@ -53,8 +68,40 @@ class Need {
       }else{
         $result[$dependency] = false;
       }
+      
+      /**
+       * If dependency is an app
+       */
+      if(strpos($dependency, "/") !== false){
+        list($mainDependency, $subDependency) = explode("/", $dependency);
+        if($mainDependency === "app"){
+          $App = new Apps($subDependency);
+          
+          if(!$App->exists){
+            $result[$dependency] = false;
+          }else if($multi){
+            $result = $result + self::checkRequirements($App->info["require"], false, true);
+          }else if($boolean){
+            $result[$dependency] = self::checkRequirements($App->info["require"], true);
+          }else{
+            $result = $result + self::checkRequirements($App->info["require"]);
+          }
+        }
+      }
     }
-    return $boolean ? in_array(false, $result) : $result;
+    
+    if($multi){
+      foreach($result as $dependency => $satisfy){
+        if(!is_array($satisfy)){
+          $result[$dependency] = array(
+            "require" => $requires[$dependency],
+            "satisfy" => $satisfy
+          );
+        }
+      }
+      return $result;
+    }
+    return $boolean ? !in_array(false, $result) : $result;
   }
 
 }

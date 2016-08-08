@@ -16,13 +16,13 @@ use \Lobby\Apps;
 use \Lobby\FS;
 use \Lobby\Update;
 
-if($argv[1] === \Lobby::$lid && isset($argv[3])){
+if($argv[1] === \Lobby::getLID() && isset($argv[3])){
   $appID = $argv[3];
   
   function sendStatusToLobby($statusID, $status){
     global $appID;
     
-    saveJSONOption("lobby_app_downloads", array(
+    Lobby\DB::saveJSONOption("lobby_app_downloads", array(
       $appID => array(
         "statusID" => $statusID,
         "status" => $status,
@@ -93,7 +93,7 @@ if($argv[1] === \Lobby::$lid && isset($argv[3])){
       $App = new Apps($appID);
       $App->enableApp();
       
-      sendStatusToLobby("install_finished", "Installed <b>$appID</b>.<cl/><a href='". $App->info["URL"] ."' class='btn green'>Open App</a>");
+      sendStatusToLobby("install_finished", "Installed <b>$appID</b>.<cl/><a href='". $App->info["url"] ."' class='btn green'>Open App</a>");
     }
   }catch(\Exception $e){
     sendStatusToLobby("error", $e->getMessage());

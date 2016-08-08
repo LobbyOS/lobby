@@ -10,7 +10,7 @@ $this->addStyle("main.css");
 $this->addScript("date.js");
 $this->addScript("main.js");
 ?>
-<script src="<?php echo APP_SRC;?>/src/lib/tinymce/tinymce.min.js"></script>
+<script src="<?php echo $this->srcURL;?>/src/lib/tinymce/tinymce.min.js"></script>
 <div class="contents">
   <ul class="tabs">
     <li class="tab active"><a href="#editor-wrapper">Editor</a></li>
@@ -20,7 +20,7 @@ $this->addScript("main.js");
     <?php
     if(isset($_GET['id'])){
       $id = urldecode(htmlspecialchars_decode($_GET['id']));
-      $appData = getData($id, true);
+      $appData = $this->getData($id, true);
       $content = $appData['value'];
       $created = $appData['created'];
       $updated = $appData['updated'];
@@ -29,7 +29,7 @@ $this->addScript("main.js");
        * Show error if a save of the ID is not present
        */
       if($content === ""){
-        ser("No Such Save Found");
+        echo ser("No Such Save Found");
       }
     }
     ?>
@@ -68,6 +68,6 @@ $this->addScript("main.js");
     <div id="error"></div>
   </div>
   <div id="saves">
-    <?php include(APP_DIR . "/src/ajax/saves.php");?>
+    <?php include($this->dir . "/src/ajax/saves.php");?>
   </div>
 </div>

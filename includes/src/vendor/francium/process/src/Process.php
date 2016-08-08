@@ -37,6 +37,8 @@ class Process{
     "arguments" => array()
   );
   
+  private $uniqueID = null;
+  
   private static function setOS(){
     if(self::$os === null){
       /**
@@ -53,13 +55,25 @@ class Process{
     }
   }
   
+  private static function randStr($length){
+    $str="";
+    $chars = "subinsblogabcdefghijklmanopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    $size = strlen($chars);
+    for($i = 0;$i < $length;$i++) {
+      $str .= $chars[rand(0,$size-1)];
+    }
+    return $str;
+  }
+  
   /**
-   * 
+   * @param string $cmd The command to run
+   * @param array $options Configuration array
    */
   public function __construct($cmd, $options){
     $this->cmd = $cmd;
     $this->options = array_replace_recursive($this->options, $options);
     self::setOS();
+    $this->uniqueID = self::randStr(10);
   }
   
   /**
@@ -102,7 +116,7 @@ class Process{
     
     $cmd = escapeshellarg($this->cmd) . $arguments . $output;
     
-    $bgCmd = "start /B " . escapeshellcmd(self::getPHPExecutable()) . " " . escapeshellarg(self::getBGPath()) . " " . escapeshellarg(base64_encode($cmd)) . " > nul 2>&1";
+    $bgCmd = "start /B " . escapeshellcmd(self::getPHPExecutable()) . " " . escapeshellarg(self::getBGPath()) . " " . escapeshellarg(base64_encode($cmd)) . " ". escapeshellarg($this->uniqueID) ." > nul 2>&1";
     pclose(popen($bgCmd, "r"));
     
     /**
@@ -144,7 +158,7 @@ class Process{
       if(is_numeric($option)){
         $arguments .= " " . escapeshellarg($value);
       }else{
-        $arguments .= " $option " . escapeshellarg($value);
+        $arguments .= " $option=" . escapeshellarg($value);
       }
     }
     
@@ -160,7 +174,7 @@ class Process{
     
     $cmd = escapeshellarg($this->cmd) . $arguments . $output;
     
-    $bgCmd = escapeshellcmd(self::getPHPExecutable()) . " " . escapeshellarg(self::getBGPath()) . " " . escapeshellarg(base64_encode($cmd)) . " > /dev/null &";
+    $bgCmd = escapeshellcmd(self::getPHPExecutable()) . " " . escapeshellarg(self::getBGPath()) . " " . escapeshellarg(base64_encode($cmd)) . " ". escapeshellarg($this->uniqueID) ." > /dev/null &";
     exec($bgCmd);
     
     /**
@@ -179,6 +193,14 @@ class Process{
     }
     
     return $cmd;
+  }
+  
+  public function stop(){
+    if(self::$os === "linux" || self::$os === "mac"){
+      return exec("pid=$(ps -ef | awk '/[". substr($this->uniqueID, 0, 1) ."]". substr($this->uniqueID, 1) ."/{print $2}');if [ -z \"\$pid\" ]; then echo 1; else kill $(pstree -pn \$pid | grep -o '([[:digit:]]*)' |grep -o '[[:digit:]]*'); fi");
+    }else if(self::$os === "windows"){
+      return exec("wmic Path win32_process Where \"CommandLine Like '%". $this->uniqueID ."%'\" Call Terminate");
+    }
   }
   
   /**

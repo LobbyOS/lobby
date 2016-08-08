@@ -1,17 +1,92 @@
 <?php
 namespace Lobby;
 
+use Response;
+use Lobby\AppRouter;
+use Lobby\DB;
+use Lobby\FS;
+
 class App {
 
-  public $dir, $url, $id, $srcURL;
+  /**
+   * Lobby\FS Object with App Dir as base
+   */
+  public $fs = null;
   
-  public function setTheVars($array){
-    $this->id   = $array['id'];
-    $this->name = $array['name'];
-    $this->URL  = $array['URL'];
-    $this->srcURL = $array['srcURL'];
-    $this->dir = $array['location'];
-    $this->manifest = $array;
+  /**
+   * Klein router object
+   */
+  public $router = null;
+  
+  public function __construct(){
+    $this->router = new AppRouter($this);
+  }
+  
+  /**
+   * @param array $appInfo Array containing object properties to be set
+   */
+  public function setAppInfo(array $appInfo){
+    foreach($appInfo as $key => $value){
+      $this->{$key} = $value;
+    }
+    $this->manifest = $appInfo;
+    $this->fs = new FSObj($this->dir);
+    $this->init();
+  }
+  
+  /**
+   * Initialize callback
+   */
+  public function init(){}
+  
+  /**
+   * @param string $page Path of requested page
+   */
+  public function getPageContent($page){
+    /**
+     * Set routes
+     */
+    foreach($this->routes() as $route => $callback)
+      $this->router->route($route, $callback);
+    
+    $pageResponse = $this->router->dispatch();
+    
+    /**
+     * If no routes are matched, ask $this->page() for response
+     */
+    if($pageResponse == null){
+      $pageResponse = $this->page($page);
+      if($pageResponse === "auto"){
+        if($page === "/")
+          $page = "/index";
+        
+        /**
+         * Directory index
+         */
+        if(is_dir($this->fs->loc("src/page/$page")))
+          $page = "$page/index";
+        
+        $pageResponse = $this->inc("src/page/$page.php");
+      }
+    }
+    return $pageResponse;
+  }
+  
+  /**
+   * @param string $handler Name of the AJAX handler
+   */
+  public function getAJAXResponse($handler){
+    $ajaxResponse = $this->ajax($handler);
+    if($ajaxResponse === "auto"){
+      /**
+       * Directory index
+       */
+      if(is_dir($this->fs->loc("src/ajax/$handler")))
+        $handler = "$handler/index";
+      
+      $ajaxResponse = $this->inc("src/ajax/$handler.php");
+    }
+    return $ajaxResponse;
   }
   
   public function addStyle($fileName){
@@ -25,35 +100,52 @@ class App {
   }
   
   public function setTitle($title){
-    \Lobby::setTitle("$title | {$this->name}");
+    Response::setTitle("$title | {$this->name}");
   }
   
   /**
    * Get Data
    */
   public function getData($key = "", $extra = false){
-    return \Lobby\DB::getData($this->id, $key, $extra);
+    return DB::getData($this->id, $key, $extra);
   }
   
   /**
-   * Get JSON Data
+   * Save data
+   */
+  public function saveData($key, $value){
+    return DB::saveData($this->id, $key, $value);
+  }
+  
+  /**
+   * Get JSON decoded array from a value of App's Data Storage
    */
   public function getJSONData($key = ""){
-    return \H::getJSONData($key, $this->id);
+    $data = $this->getData($key, false);
+    $data = json_decode($data, true);
+    return is_array($data) ? $data : array();
   }
   
   /**
-   * Save Data
-   */
-  public function saveData($key = "", $extra = false){
-    return \Lobby\DB::saveData($this->id, $key, $extra);
-  }
-  
-  /**
-   * Save JSON Data
+   * Save JSON as a value of App's Data Storage
+   * To remove an item, set the value of it to (bool) FALSE
    */
   public function saveJSONData($key, $values){
-    return \H::saveJSONData($key, $values, $this->id);
+    $data = $this->getJSONData($key);
+    
+    $new = array_replace_recursive($data, $values);
+    foreach($values as $k => $v){
+      if($v === false){
+        unset($new[$k]);
+      }
+    }
+    $new = json_encode($new);
+    $this->saveData($key, $new);
+    return true;
+  }
+  
+  public function removeData($key){
+    return DB::removeData($this->id, $key);
   }
   
   /**
@@ -61,7 +153,7 @@ class App {
    */
   public function addNotifyItem($id, $info){
     if(!isset($info["href"])){
-      $info["href"] = $this->URL;
+      $info["href"] = $this->url;
     }
     return \Lobby\UI\Panel::addNotifyItem("app_{$this->id}_$id" , $info);
   }
@@ -73,24 +165,25 @@ class App {
     return \Lobby\UI\Panel::removeNotifyItem("app_{$this->id}_$id");
   }
   
-  public static function u($path = null){
-    return APP_URL . $path;
+  public function u($path = null, $src = false){
+    $path = ltrim($path, "/");
+    return $path === null ? \Lobby::u() : ($src ? $this->srcURL : $this->url) . "/$path";
   }
   
-  public static function l($path, $text = "", $extra = ""){
-    return \Lobby::l(APP_URL . $path, $text, $extra);
+  public function l($path, $text = "", $extra = ""){
+    return \Lobby::l($this->url . $path, $text, $extra);
   }
   
-  public static function get($path){
-    return \Lobby\FS::get(APP_DIR . $path);
+  public function get($path){
+    return $this->fs->get($path);
   }
   
-  public static function write($path, $content, $type = "w"){
-    return \Lobby\FS::write(APP_DIR . $path, $content, $type);
+  public function write($path, $content, $type = "w"){
+    return \Lobby\FS::write($this->dir . $path, $content, $type);
   }
   
-  public static function redirect($path){
-    return \Lobby::redirect(self::u($path));
+  public function redirect($path){
+    return Response::redirect(self::u($path));
   }
   
   /**
@@ -120,9 +213,24 @@ class App {
     }
   }
   
+  public function routes(){
+    return array();
+  }
+  
   public function page($page){
     return "auto";
   }
+  
+  public function ajax($ajax){
+    return "auto";
+  }
+  
+  /**
+   * Callback on app install/update
+   * @param string $newVersion The version to which the app is updated
+   * @param string $oldVersion The version from which the app is updated
+   */
+  public function onUpdate($newVersion, $oldVersion = null){}
   
   /**
    * Write messages to log file

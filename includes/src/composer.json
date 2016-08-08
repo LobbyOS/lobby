@@ -9,10 +9,12 @@
         "klein/klein": "^2.0",
         "symfony/filesystem": "^3.0",
         "rmccue/requests": "^1.6",
-        "lobby/lobby": "^0.5",
-        "vladimmi/construct-static": "dev-master@dev",
+        "lobby/lobby": "^0.8.0",
         "vierbergenlars/php-semver": "=2.1",
-        "francium/process": "^0.3.0"
+        "francium/process": ">=0.3.0",
+        "vladimmi/construct-static": "dev-master@dev",
+        "symfony/http-foundation": "^3.0",
+        "symfony/console": "^3.1"
     },
     "secure-http": "false"
 }

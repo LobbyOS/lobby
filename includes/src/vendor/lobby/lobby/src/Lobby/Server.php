@@ -5,6 +5,9 @@
  */
 namespace Lobby;
 
+use Lobby\Apps;
+use Lobby\UI\Panel;
+
 class Server {
 
   public static $apiURL = null;
@@ -19,7 +22,7 @@ class Server {
   public static function makeData($data){
     return array_replace_recursive(array(
       "lobby" => array(
-        "lid" => \Lobby::$lid,
+        "lid" => \Lobby::getLID(),
         "version" => \Lobby::$version
       )
     ), $data);
@@ -29,11 +32,17 @@ class Server {
    * Lobby Store
    */
   public static function store($data) {
-    $data = 
     /**
      * Response is in JSON
      */
-    $response = \Requests::post(self::$apiURL . "/apps", array(), self::makeData($data))->body;
+    try{
+      $response = \Requests::post(self::$apiURL . "/apps", array(), self::makeData($data))->body;
+    }catch(\Requests_Exception $error){
+      \Lobby::log("HTTP Request Failed ($url) : $error");
+      echo ser("HTTP Request Failed", $error);
+      return false;
+    }
+    
     if($response === "false"){
       return false;
     }else{
@@ -43,7 +52,7 @@ class Server {
        * Make sure the response was valid.
        */
       if(!is_array($arr)){
-        \Lobby::log("Lobby Server Replied : {$response}");
+        \Lobby::log("HTTP Request Failed ($url) : Lobby server replied stupid data - $response");
         return false;
       }else{
         return $arr;
@@ -70,7 +79,7 @@ class Server {
    */
   public static function check(){
     $url = self::$apiURL . "/lobby/updates";
-    $apps = \Lobby\Apps::getApps();
+    $apps = Apps::getApps();
     try {
       $response = \Requests::post($url, array(), self::makeData(array(
         "apps" => implode(",", $apps)
@@ -79,23 +88,36 @@ class Server {
       \Lobby::log("Checkup with server failed ($url) : $error");
       $response = false;
     }
+    
     if($response){
-      
       $response = json_decode($response, true);
       if(is_array($response)){
-        saveOption("lobby_latest_version", $response['version']);
-        saveOption("lobby_latest_version_release", $response['released']);
-        saveOption("lobby_latest_version_release_notes", $response['release_notes']);
+        DB::saveOption("lobby_latest_version", $response['version']);
+        DB::saveOption("lobby_latest_version_release", $response['released']);
+        DB::saveOption("lobby_latest_version_release_notes", $response['release_notes']);
     
         if(isset($response['apps']) && count($response['apps']) != 0){
           $AppUpdates = array();
           foreach($response['apps'] as $appID => $version){
             $App = new \Lobby\Apps($appID);
-            if($App->info['version'] != $version){
+            if($App->hasUpdate($version)){
               $AppUpdates[$appID] = $version;
             }
           }
-          saveOption("app_updates", json_encode($AppUpdates));
+          DB::saveOption("app_updates", json_encode($AppUpdates));
+        }
+        
+        if(isset($response["notify"])){
+          foreach($response["notify"]["items"] as $itemID => $item){
+            if(isset($item["href"])){
+              $item["href"] = \Lobby::u($item["href"]);
+            }
+            Panel::addNotifyItem("lobby_server_msg_" . $itemID, $item);
+          }
+          
+          foreach($response["notify"]["remove_items"] as $itemID){
+            Panel::removeNotifyItem("lobby_server_msg_" . $itemID);
+          }
         }
       }
     }

@@ -8,16 +8,14 @@ namespace Lobby;
 
 class DB extends \Lobby {
   
-  public static $prefix = "", $dbh;
+  protected static $prefix = "", $dbh;
   
   /**
    * The DBMS begin used - MySQL or SQLite
    */
-  public static $type;
+  protected static $type;
  
   public static function __constructStatic(){
-    $root = L_DIR;
-    
     /**
      * Get DB config
      */
@@ -68,23 +66,28 @@ class DB extends \Lobby {
         if($notable === false){ /* There are database tables */
           parent::$installed = true;
         }else{
-          self::$error = "Lobby Tables Not Found";
-          self::log("Lobby Tables not found in database. Install Again.");
+          parent::log(array(
+            "fatal",
+            "Tables required by Lobby was not found in the database. Check your <b>config.php</b> and database to fix the error. Or Install again by removing <b>config.php</b>."
+          ));
         }
       }catch(\PDOException $e){
         parent::$installed = false;
         $error = $e->getMessage();
-        self::$error = $error;
-        
-        throw new \Exception("Unable to connect to database server. Is the credentials given in <b>config.php</b> correct ? <blockquote>". $error ."</blockquote>");
-        self::log("Unable to connect to database server : ". $error);
+
+        parent::log(array(
+          "fatal",
+          "Unable to connect to database server. Is the database credentials given in <b>config.php</b> correct ? <blockquote>$error</blockquote>"
+        ));
       }
     }else{
       self::$installed = false;
     }
   }
   
-  /* A HTML Filter function */
+  /**
+   * A HTML Filter function
+   */
   public static function filt(&$value) {
     if($value != strip_tags($value)){
       $value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
@@ -128,6 +131,32 @@ class DB extends \Lobby {
     }else{
       return false;
     }
+  }
+  
+  /**
+   * Retrieve JSON Value stored as option as Array
+   */
+  public static function getJSONOption($key){
+    $json = self::getOption($key);
+    $json = json_decode($json, true);
+    return is_array($json) ? $json : array();
+  }
+  
+  /**
+   * Save JSON Data in options
+   */
+  public static function saveJSONOption($key, $values){
+    $old = self::getJSONOption($key);
+    
+    $new = array_replace_recursive($old, $values);
+    foreach($values as $k => $v){
+      if($v === false){
+        unset($new[$k]);
+      }
+    }
+    $new = json_encode($new, JSON_HEX_QUOT | JSON_HEX_TAG);
+    self::saveOption($key, $new);
+    return true;
   }
   
   /**
@@ -200,7 +229,6 @@ class DB extends \Lobby {
         $sql->execute(array($value, $key, $appID));
         return true;
       }else{
-        
         $sql = self::$dbh->prepare("INSERT INTO `". self::$prefix ."data` (`app`, `name`, `value`, `created`, `updated`) VALUES (?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
         return $sql->execute(array($appID, $key, $value));
       }
@@ -220,6 +248,24 @@ class DB extends \Lobby {
        return true;
      }
     }
+  }
+  
+  /**
+   * Get database handler
+   */
+  public static function getDBH(){
+    return self::$dbh;
+  }
+  
+  /**
+   * DBMS used
+   */
+  public static function getType(){
+    return self::$type;
+  }
+  
+  public static function getPrefix(){
+    return self::$prefix;
   }
   
 }

@@ -3,7 +3,7 @@
   "type": "library",
   "description": "Lobby Core",
   "keywords": ["lobby"],
-  "homepage": "https://lobby.subinsb.com",
+  "homepage": "http://lobby.subinsb.com",
   "license": "Apache 2.0",
   "authors": [
     {
@@ -16,8 +16,12 @@
     "files": ["src/functions.php"],
     "psr-0": {
       "Lobby": "src/",
-      "H": "src/",
-      "Assets": "src/"
+      "Assets": "src/",
+      "CSRF": "src/",
+      "Helper": "src/",
+      "Hooks": "src/",
+      "Request": "src/",
+      "Response": "src/"
     },
     "psr-4": {
       "Lobby\\": "src/Lobby",
@@ -28,5 +32,5 @@
     "php": ">=5.3.0",
     "composer/semver": ">=1.4.0"
   },
-  "version": "0.5.30"
+  "version": "0.8.0"
 }
