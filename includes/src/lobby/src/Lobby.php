@@ -6,7 +6,10 @@
 use Lobby\Apps;
 use Lobby\CLI;
 use Lobby\FS;
- 
+
+/**
+ * The main class that sets up everything
+ */
 class Lobby {
 
   /**
@@ -278,28 +281,28 @@ class Lobby {
    */
   public static function status($val){
     $status = "";
-    if(self::$status != null){
+    if(self::$status !== null){
       $status = self::$status;
     }else{
       self::$statuses[] = function($path){
-        if($path == "/admin/install.php"){
+        if($path === "/admin/install.php"){
           $status = "lobby.install";
-        }elseif(substr($path, 0, 6) == "/admin"){
+        }else if(substr($path, 0, 6) === "/admin"){
           $status = "lobby.admin";
-        }elseif($path == "/includes/serve-assets.php"){
+        }else if($path === "/includes/serve-assets.php"){
           $status = "lobby.assets-serve";
         }
         return isset($status) ? $status : false;
       };
       foreach(self::$statuses as $func){
         $return = $func(self::curPage());
-        if($return != false){
+        if($return !== false){
           $status = $return;
         }
       }
       self::$status = $status;
     }
-    return $status == $val;
+    return $status === $val;
   }
 
   /**
@@ -382,8 +385,7 @@ class Lobby {
    * To get the last part only ("install" in "/folder/subfolder/admin/install), pass TRUE to $page
    */
   public static function curPage($page = false, $full = false){
-    $url = self::u(null, true);
-    $parts = parse_url($url);
+    $parts = parse_url($_SERVER["REQUEST_URI"]);
     
     if($page){
       $pathParts = explode("/", $parts['path']);
