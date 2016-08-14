@@ -77,6 +77,11 @@ use Lobby\Update;
         $shouldUpdate = Request::postParam("updateApp");
         
         if($action === "updateApps" && is_array($shouldUpdate) && CSRF::check()){
+          /**
+           * Prevent display of Apps' Update List
+           */
+          $step = 1;
+          
           foreach($shouldUpdate as $appID){
             echo '<iframe src="'. L_URL . "/admin/download.php?type=app&app={$appID}&isUpdate=1". CSRF::getParam() .'" style="border: 0;width: 100%;height: 200px;"></iframe>';
           }
