@@ -1,3 +1,10 @@
+## 0.9.2
+
+`Berly`
+
+* Fixed bugs
+  * Redirection loop on sub-directory installation
+
 ## 0.9.1
 
 `Berly`
