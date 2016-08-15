@@ -7,7 +7,7 @@ nav{
   padding: 5px;
   background: #4280EC;
   color: white;
-  z-index: 100;
+  z-index: 1000;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, .5);
 }
 nav a{
@@ -41,6 +41,7 @@ nav .left ul, nav .right ul{
   max-width: 150px;
   background: #000;
   line-height: 20px;
+  z-index: 1000;
 }
 nav .parent ul .item a{
   display: block;
