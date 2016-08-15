@@ -58,12 +58,12 @@ $install_step = Request::get('step');
                     <td>Status</td>
                   </tr>
                   <tr>
-                    <td>PHP 5.3</td>
-                    <td><?php if(version_compare(PHP_VERSION, '5.3') >= 0){
+                    <td>PHP 5.6</td>
+                    <td><?php if(version_compare(PHP_VERSION, '5.6') >= 0){
                       echo sss("Ok", "Your PHP version is compatible with Lobby");
                     }else{
                       $error = 1;
-                      echo ser("Not Ok", "Lobby requires atleast PHP version 5.3");
+                      echo ser("Not Ok", "Lobby requires atleast PHP version 5.6");
                     }
                     ?></td>
                   </tr>
@@ -217,6 +217,7 @@ $install_step = Request::get('step');
                 </tr>
               </tbody>
             </table>
+            <p>Using SQLite is easy. <a href="<?php echo L_SERVER;?>/docs/quick#section-database" class="btn" target="_blank">Read More</a></p>
           <?php
           }else if($install_step === "3" && CSRF::check()){
             $db_type = Request::get("db_type");
