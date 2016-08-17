@@ -1,18 +1,35 @@
 <?php
 /**
- * SymResponse = Symphony Response
+ * SymResponse = Symfony Response
  */
 use Symfony\Component\HttpFoundation\Response as SymResponse;
 use Lobby\Apps;
 use Lobby\FS;
 use Lobby\UI\Themes;
 
+/**
+ * Respond
+ */
 class Response {
 
+  /**
+   * The Symfony Response object
+   */
   private static $response = null;
+  
+  /**
+   * Page's content
+   */
   private static $pageContent = null;
+  
+  /**
+   * The <title> tag's content
+   */
   protected static $title = null;
 
+  /**
+   * Set up class
+   */
   public static function __constructStatic(){
     /**
      * Default response header
@@ -21,20 +38,41 @@ class Response {
     self::$response->setCharset("UTF-8");
   }
   
+  /**
+   * Set the status code of response
+   * @param int $status The status code
+   */
   public static function setStatusCode($status){
     self::$response->setStatusCode($status);
   }
   
+  /**
+   * Set the response body
+   * @param string $content The response body to set
+   */
   public static function setContent($content){
     if(self::$pageContent !== null)
       self::$pageContent = null;
     self::$response->setContent($content);
   }
   
+  /**
+   * Set the page content.
+   * 
+   * Pass the contents that should be inserted in #workspace tag inside <body>.
+   * 
+   * @param string $content The page's HTML
+   */
   public static function setPage($content){
     self::$pageContent = $content;
   }
   
+  /**
+   * Run a (PHP) file and get the response of it.
+   * @param string $location Path to file
+   * @param string $vars Variables that need to be passed to file
+   * @return string The response of executed script
+   */
   public static function getFile($location, $vars = array()){
     extract($vars);
     ob_start();
@@ -42,25 +80,47 @@ class Response {
     return ob_get_clean();
   }
   
+  /**
+   * Set the page content by loading a file
+   * @param string $location Path to file
+   */
   public static function loadPage($location){
     self::setPage(self::getFile($location));
   }
   
+  /**
+   * Get the response body
+   * @return string|null The response body
+   */
   public static function getContent(){
     return self::$response->getContent();
   }
   
+  /**
+   * Get the page response
+   * @return string|null The page's HTML 
+   */
   public static function getPageContent(){
     return self::$pageContent;
   }
   
+  /**
+   * Whether response body is set
+   * @return bool
+   */
   public static function hasContent(){
     return (self::$pageContent != null || self::$response->getContent() != null);
   }
   
   /**
-   * Display a plain error page
-   * Default: 400, If $title & $content is passed, 500
+   * Display a plain error page.
+   * 
+   * If $title and $content is not null, status code will be 500, else 404
+   * 
+   * The respons will be sent and script execution will be stopped if this function is called.
+   * 
+   * @param string $title Error name
+   * @param string $description Error description
    */
   public static function showError($title = null, $description = null){
     if($title === null){
@@ -80,6 +140,9 @@ class Response {
     exit;
   }
   
+  /**
+   * Send response
+   */
   public static function send(){
     if(self::$pageContent !== null){
       ob_start();
@@ -93,7 +156,8 @@ class Response {
   }
   
   /**
-   * Print the <head> tag
+   * Make and print the <head> tag
+   * @param string $title The content of <title> tag
    */
   public static function head($title = ""){
     header('Content-type: text/html; charset=utf-8');
@@ -151,7 +215,9 @@ class Response {
   }
  
   /**
-   * Set the Page title
+   * Set the content of <title> tag
+   * @param string $title 
+   * @return string 
    */
   public static function setTitle($title = ""){
     if($title != ""){
@@ -165,8 +231,9 @@ class Response {
   }
   
   /**
-   * A redirect function that support HTTP status code for redirection 
-   * 302 = Moved Temporarily
+   * Do a redirect
+   * @param string $url URL to redirect to. Can be relative to Lobby
+   * @param string $status Status code to use. 302 means moved temporarily
    */
   public static function redirect($url, $status = 302){
     $url = \Lobby::u($url);

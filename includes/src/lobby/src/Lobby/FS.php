@@ -1,4 +1,9 @@
 <?php
+/**
+ * Lobby\FS
+ * @link https://github.com/LobbyOS/lobby/tree/dev/includes/src/lobby/src/Lobby/FS.php
+ */
+
 namespace Lobby;
 
 use Lobby\Response;
@@ -7,10 +12,9 @@ use Symfony\Component\Filesystem\Exception\IOException;
 
 /**
  * FileSystem of Lobby
- * Retreive, Modify & Write Files inside Lobby
- * Important : Only works for paths INSIDE Lobby
+ * Retreive, modify & write files inside Lobby
+ * It only works for paths inside Lobby
  */
-
 class FS {
 
   /**
@@ -18,12 +22,17 @@ class FS {
    */
   public static $fs;
 
+  /**
+   * Set up class
+   */
   public static function __constructStatic(){
     self::$fs = new Filesystem();
   }
   
   /**
-   * Make relative path of Lobby to Absolute Path
+   * Make relative path of Lobby to absolute path
+   * @param string $path Relative or absolute path
+   * @return string Absolute path to file
    */
   public static function loc($path){
     /**
@@ -52,6 +61,8 @@ class FS {
   
   /**
    * Make absolute path to relative path
+   * @param string $path Absolute path to file
+   * @return string Relative path to file
    */
   public static function rel($path){
     $path = self::loc($path);
@@ -59,12 +70,19 @@ class FS {
   }
   
   /**
-   * Check if a File/Dir exists
+   * Check if a file or directory exists
+   * @param string $path Path to file/folder
+   * @return bool Whether the location exists
    */
   public static function exists($path){
     return file_exists(self::loc($path));
   }
   
+  /**
+   * Get the file contents
+   * @param string $file Path to file
+   * @return string Contents of file
+   */
   public static function get($file){
     $contents = file_get_contents(self::loc($file));
     return $contents == false ? false : $contents;
@@ -72,8 +90,13 @@ class FS {
   
   /**
    * Write Contents to a file. There are 2 types of writing :
-   * w - Write (Overwrite if exists)
-   * a - Append
+   * @param string $path Path to file
+   * @param string $content What to write in file
+   * @param string $type How should it be written ?
+   * 
+   *     "a" for append
+   *     "w" for overwrite
+   * @return string 
    */
   public static function write($path, $content, $type = "w"){
     $path = self::loc($path, false);
@@ -124,8 +147,8 @@ class FS {
   }
   
   /**
-   * Bytes to KB, MB, GB converter
-   * Base is 1000
+   * Human Readable Size Convertor.
+   * Convert bytes to KB, MB, GB or TB. Base used to calculate size is 1000
    * @param int $size The size in bytes
    */
   public static function normalizeSize($size){
@@ -143,10 +166,10 @@ class FS {
   }
   
   /**
-   * Get the size
-   * @param $path The path
-   * @param $normalizeSize Whether to run self::normalizeSize() on return
-   * @return integer
+   * Get the size of a file
+   * @param $path Path to file
+   * @param $normalizeSize Whether to run self::normalizeSize() on return value
+   * @return integer Filesize
    */
   public static function getSize($path, $normalizeSize = false) {
     $path = self::loc($path);
@@ -164,8 +187,8 @@ class FS {
   }
   
   /**
-   * Create a temporary file
-   * Dir : contents/extra
+   * Create a temporary file in contents/extra
+   * @return string Path to temporary file
    */
   public static function getTempFile(){
     return self::$fs->tempnam(L_DIR . "/contents/extra", "lobby_temp");

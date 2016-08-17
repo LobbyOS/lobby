@@ -44,8 +44,14 @@ class Lobby {
    */
   protected static $lid;
   
+  /**
+   * Whether Lobby is installed
+   */
   public static $installed = false;
   
+  /**
+   * Information about system Lobby is installed in
+   */
   protected static $sysInfo = array();
   
   /**
@@ -71,6 +77,9 @@ class Lobby {
    */
   public static $cli = false;
  
+  /**
+   * Set up
+   */
   public static function __constructStatic(){
     /**
      * Callback on fatal errors
@@ -115,6 +124,7 @@ class Lobby {
   
   /**
    * Reads configuration & set Lobby according to it
+   * @param bool $db Whether database config should only be returned
    */
   public static function config($db = false){
     if(file_exists(L_DIR . "/config.php")){
@@ -141,6 +151,12 @@ class Lobby {
     }
   }
   
+  /**
+   * Get the config value of a key
+   * @param string $key The config key
+   * @param string $subKey The sub config key
+   * @return mixed The config value
+   */
   public static function getConfig($key, $subKey = null){
     if(isset(self::$config[$key])){
       if($subKey === null)
@@ -152,12 +168,20 @@ class Lobby {
     }
   }
   
+  /**
+   * Return the version string of Lobby
+   * @param bool $codename Whether release name (Berly) should also be included
+   * @return string Lobby version
+   */
   public static function getVersion($codename = false){
     return self::$version . ($codename ? " " . self::$versionName : "");
   }
   
   /**
-   * Add message to log files 
+   * Log messages to a log file
+   * @param string $msg The message to log
+   * @param string $file Log file path relative to 'contents/extra'
+   * @return bool Returns false if debugging is disabled
    */
   public static function log($msg = null, $file = "lobby.log"){
     /**
@@ -226,10 +250,19 @@ class Lobby {
     return self::$url;
   }
   
+  /**
+   * Get the host with the port (127.0.0.1:2020, localhost).
+   * If the port is '80', it won't be included in the return value
+   * @return string Host where Lobby is running
+   */
   public static function getHost(){
     return self::$host;
   }
   
+  /**
+   * Get the hostname (without the port)
+   * @return string Hostname
+   */
   public static function getHostname(){
     return self::$hostname;
   }
@@ -272,12 +305,21 @@ class Lobby {
     self::$sysInfo = $info;
   }
   
+  /**
+   * Get info about the system Lobby is running in
+   * @param string $key
+   * @return string The config value
+   */
   public static function getSysInfo($key = null){
     return self::$sysInfo[$key];
   }
   
   /**
-   * Get status
+   * Check the status of Lobby
+   * 
+   * @param string $val The status to match against
+   * 
+   * @return bool Whether $val matches the current Lobby status
    */
   public static function status($val){
     $status = "";
@@ -313,6 +355,12 @@ class Lobby {
 
   /**
    * Make a hyperlink
+   * 
+   * @param string $url   The URL
+   * @param string $text  Inner content of hyperlink
+   * @param string $extra Extra code to be inserted before <a is closed
+   * 
+   * @return string The hyperlink code
    */
   public static function l($url = null, $text = null, $extra = null) {
     $url = self::u($url);
@@ -320,8 +368,12 @@ class Lobby {
   }
 
   /**
-   * Make a URL from Lobby Base Path.
-   * Eg: /hello to http://lobby.dev/hello
+   * Make a Lobby URL from relative path
+   * 
+   * @param string $path The relative path
+   * @param string $relative 
+   * 
+   * @return Type Description
    */
   public static function u($path = null, $relative = false){
     if(self::$cli)
@@ -379,10 +431,12 @@ class Lobby {
   }
   
   /**
-   * Get the current page
-   * --------------------
-   * To get the query part of the URL too, pass TRUE to $full
+   * Get the path of current URL.
    * To get the last part only ("install" in "/folder/subfolder/admin/install), pass TRUE to $page
+   * 
+   * @param bool $page Whether only the last pagename of URL should be returned.
+   * @param bool $full Whether query part of URL should be included
+   * @return string Pathname
    */
   public static function curPage($page = false, $full = false){
     $parts = parse_url($_SERVER["REQUEST_URI"]);
