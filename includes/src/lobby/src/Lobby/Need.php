@@ -1,4 +1,9 @@
 <?php
+/**
+ * Lobby\Need
+ * @link https://github.com/LobbyOS/lobby/tree/dev/includes/src/lobby/src/Lobby/Module.php
+ */
+
 namespace Lobby;
 
 use vierbergenlars\SemVer\version;
@@ -13,7 +18,8 @@ use Lobby\Apps;
 class Need {
 
   /**
-   * Get Version of a component
+   * Get version of a dependency
+   * @param string $dependency The dependency
    */
   public static function getDependencyVersion($dependency){
     /**

@@ -1,18 +1,31 @@
 <?php
+/**
+ * Lobby\CLI
+ * @link https://github.com/LobbyOS/lobby/tree/dev/includes/src/lobby/src/Lobby/CLI.php
+ */
 namespace Lobby;
 
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Command Line Interface for Lobby
+ */
 class CLI extends Application {
-
-  private static $cli;
   
+  /**
+   * Configure
+   */
   protected function configure(){
     $this->addArgument("command");
   }
   
+  /**
+   * Return command name based on input
+   * @param InputInterface $input CLI input
+   * @return string Command name
+   */
   protected function getCommandName(InputInterface $input) {
     if($input->getFirstArgument())
       return "lobby " . $input->getFirstArgument();
