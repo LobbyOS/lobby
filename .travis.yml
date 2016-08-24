@@ -1,7 +1,10 @@
 # Travis CI
-
 language: php
 
+## Container-based machine
+sudo: required
+
+## Choosing PHP versions to test against
 php:
 - 5.3
 - 5.4
@@ -10,4 +13,23 @@ php:
 - hhvm
 - nightly
 
-script: phpunit tests/LobbyInstall.php
+## Apache + PHP
+before_install:
+  - ".travis/update.sh"
+  - ".travis/apache.sh"
+  - ".travis/curl.sh"
+  - ".travis/json.sh"
+  - ".travis/pdo.sh"
+  - ".travis/zip.sh"
+
+## Install the dependencies
+install:
+  - "cd testing"
+  - "composer install"
+
+## Default Test Script
+script: "phpunit tests/LobbyInstall.php"
+
+## Notifications
+notifications:
+  email: false
