@@ -1,7 +1,7 @@
 i{
   display: inline-block;
-  height: 24px;
-  width: 24px;
+  min-height: 24px;
+  min-width: 24px;
 }
 i.small{
   height: 2rem;
