@@ -212,6 +212,11 @@ class Response {
     
     /* Title */
     echo "<title>" . self::$title . "</title>";
+    
+    /**
+     * Mobile view
+     */
+    echo "<meta name='viewport' content='width=device-width, initial-scale=1' />";
   }
  
   /**
