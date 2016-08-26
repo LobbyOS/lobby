@@ -1,4 +1,9 @@
 <?php
+/**
+ * Lobby\Router
+ * @link https://github.com/LobbyOS/lobby/tree/dev/includes/src/lobby/src/Lobby/Router.php
+ */
+
 namespace Lobby;
 
 use Klein\Klein;
@@ -13,14 +18,31 @@ class Router {
   
   public static $router;
   
+  /**
+   * Set up
+   */
   public static function __constructStatic(){
     self::$router = new Klein();
   }
   
+  /**
+   * Set a route
+   * @param string $route The route path
+   * @param string $callback Function to handle the route
+   */
   public static function route($route, $callback) {
     self::$router->respond($route, $callback);
   }
   
+  /**
+   * Dispatch all routes and send response.
+   * 
+   * All routes are ran and if there is content, a response is sent.
+   * 
+   * If it's a request to a native file, FALSE is returned.
+   * 
+   * @return bool Whether a route is set to handle this request
+   */
   public static function dispatch(){
     self::defaults();
     \Hooks::doAction("router.finish");
@@ -38,7 +60,7 @@ class Router {
   }
   
   /**
-   * Define some pages by default
+   * Default routes and settings
    */
   public static function defaults(){
     /**
@@ -109,6 +131,8 @@ class Router {
    * this, we check if the file exist and return false to the PHP
    * Built in Server to make it serve the file normally
    * http://php.net/manual/en/features.commandline.webserver.php#example-430
+   * 
+   * @return bool Whether the request points to a file
    */
   public static function pathExists(){
     if(\Lobby\FS::rel($_SERVER['PHP_SELF']) !== "index.php"){
