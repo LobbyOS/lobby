@@ -66,10 +66,13 @@ class Lobby {
   );
   
   /**
-   * $statues Array that hold the functions to determine status
-   * $status Property that stores the current state of Lobby
+   * Array that hold the functions to determine state of Lobby
    */
   public static $statuses = array();
+  
+  /**
+   * Store the current state of Lobby
+   */
   private static $status = null;
   
   /**
