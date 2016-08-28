@@ -55,4 +55,4 @@ See [this](subinsb.com/lobby/version-0-3)
 
 ## Old
 
-Old versions` changelog is not available
+Old versions changelog is not available
