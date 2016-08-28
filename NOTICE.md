@@ -120,13 +120,13 @@ http://jquery.org/license
 
 ### Composer
 
-See includes/src/vendor/composer/LICENSE
+See `includes/src/vendor/composer/LICENSE`
 
 ### The Francium Project
 
 Copyright Subin Siby
 
-Released Under Apache License - LICENSE.md
+Released Under Apache License - `LICENSE.md`
 
 ### Requests
 
