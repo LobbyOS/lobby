@@ -70,7 +70,8 @@ class Update extends \Lobby {
         'filename' => $zipFile,
         'hooks' => $hooks,
         'follow_redirects' => true,
-        'timeout' => '30'
+        'connect_timeout' => '20',
+        'timeout' => '0'
       ));
     }catch(\Requests_Exception $error){
       self::log("HTTP Request Failed ($url) : $error");
