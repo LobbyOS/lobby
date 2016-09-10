@@ -13,14 +13,14 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Command Line Interface for Lobby
  */
 class CLI extends Application {
-  
+
   /**
    * Configure
    */
   protected function configure(){
     $this->addArgument("command");
   }
-  
+
   /**
    * Return command name based on input
    * @param InputInterface $input CLI input
@@ -31,7 +31,7 @@ class CLI extends Application {
       return "lobby " . $input->getFirstArgument();
     return "lobby";
   }
-  
+
   /**
    * Gets the default commands that should always be available.
    *
@@ -43,7 +43,9 @@ class CLI extends Application {
     $defaultCommands = parent::getDefaultCommands();
 
     $defaultCommands[] = new CLI\App();
+    $defaultCommands[] = new CLI\Install();
     $defaultCommands[] = new CLI\Lobby();
+    $defaultCommands[] = new CLI\Notify();
 
     return $defaultCommands;
   }

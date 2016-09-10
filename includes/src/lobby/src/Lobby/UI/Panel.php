@@ -13,7 +13,7 @@ class Panel {
     "left" => array(),
     "right" => array()
   );
-  
+
   private static $panelItemFormat = array(
     "text" => null,
     "href" => null,
@@ -21,18 +21,18 @@ class Panel {
     "subItems" => array(),
     "position" => "left"
   );
-  
+
   public static $notifyItem = array(
     "contents" => null,
     "href" => null,
     "icon" => null,
     "iconURL" => null
   );
-  
+
   public static function addTopItem($name, $array){
     $array = array_replace_recursive(self::$panelItemFormat, $array);
     $loc = $array['position'];
-    
+
     if($loc === "right"){
       array_reverse($array);
     }
@@ -54,12 +54,12 @@ class Panel {
       self::$topItems[$loc] = $merged;
     }
   }
-  
+
   public static function removeTopItem($name, $position){
     if(isset(self::$topItems[$position][$name]))
       unset(self::$topItems[$position][$name]);
   }
-  
+
   public static function getPanelItems($side = "left"){
     $items = self::$topItems;
     if($side === "right"){
@@ -68,7 +68,7 @@ class Panel {
     $items[$side] = Hooks::applyFilters("panel.{$side}.items", $items[$side]);
     return $items[$side];
   }
-  
+
   /**
    * Push an item to Notify
    */
@@ -77,7 +77,7 @@ class Panel {
       $id => array_replace_recursive(self::$notifyItem, $info)
     ));
   }
-  
+
   /**
    * Remove an item from Notify
    */

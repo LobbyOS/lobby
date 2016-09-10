@@ -36,8 +36,8 @@
   z-index: -1;
 }
 #workspace .tiles .tile .image{
-  max-height: 165px;
-  max-width: 165px;
+  max-height: 82.5%;
+  max-width: 82.5%;
   margin: 0 auto;
 }
 #workspace .tiles .tile .title{
@@ -47,6 +47,7 @@
   padding: 0px 6px;
   font-size: 14px;
   font-weight: 500;
+  height: 17.5%;
   width: 100%;
   text-align: center;
   overflow: hidden;
@@ -86,4 +87,11 @@
 #bx-pager .active{
   background: #000;
   cursor: auto;
+}
+
+@media screen and (max-width: 850px){
+  #workspace .tiles .tile{
+    height: 25vw;
+    width: 25vw;
+  }
 }

@@ -18,7 +18,7 @@ if(!CSRF::check()){
    * A queue of App downloads
    */
   $appInstallQueue = Lobby\DB::getJSONOption("lobby_app_downloads");
-  
+
   /**
    * If the $appID is in the queue, then give the download status of it
    * If the updated value is less than 20 seconds ago, then restart the download
@@ -33,7 +33,7 @@ if(!CSRF::check()){
       "get" => "app",
       "id" => $appID
     ));
-    
+
     /**
      * App doesn't exist on Lobby Store
      */
@@ -44,7 +44,7 @@ if(!CSRF::check()){
       ));
     }else{
       $appName = $appInfo["name"];
-      
+
       $Process = new Process(Process::getPHPExecutable(), array(
         "arguments" => array(
           L_DIR . "/admin/ajax/install-app-bg.php",
@@ -53,7 +53,7 @@ if(!CSRF::check()){
           $appID
         )
       ));
-      
+
       /**
        * Get the command used to execute install-app-bg.php
        */
@@ -67,7 +67,7 @@ if(!CSRF::check()){
           "status" => "Downloading <b>$appID</b>..."
         ));
       });
-      
+
       \Lobby::log("To install app '$appID', this command was executed : $command");
     }
   }

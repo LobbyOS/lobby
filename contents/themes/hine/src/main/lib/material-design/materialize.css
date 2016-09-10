@@ -3,14 +3,14 @@
  * Copyright 2014-2015 Materialize
  * MIT License (https://raw.githubusercontent.com/Dogfalo/materialize/master/LICENSE)
  */
- 
+
 /**
  * Lobby Modifications
  * -------------------
  * <label> should be parent of <input/> not the elem comging after
  * <select> is not hidden. Use native with color: #000;
  */
- 
+
 .materialize-red.lighten-5 {
   background-color: #fdeaeb !important;
 }
@@ -9334,6 +9334,10 @@ form p:last-child {
   opacity: 0;
   width: 0;
   height: 0;
+}
+
+.switch label input[type=checkbox] + .lever:before{
+  display: none;
 }
 
 .switch label input[type=checkbox]:checked + .lever {

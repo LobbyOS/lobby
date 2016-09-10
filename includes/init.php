@@ -31,11 +31,11 @@ if(!\Lobby::status("lobby.install")){
     )
   );
   \Lobby\UI\Panel::addTopItem("lobbyAdmin", $adminArray);
-  
+
   if(\Lobby\FS::exists("/upgrade.lobby")){
     require_once L_DIR . "/includes/src/Update.php";
     $l_info = json_decode(\Lobby\FS::get("/lobby.json"));
-    
+
     if($lobby_version != $l_info->version){
       Lobby\DB::saveOption("lobby_latest_version", $l_info->version);
       Lobby\DB::saveOption("lobby_latest_version_release", $l_info->released);
@@ -49,21 +49,21 @@ if(\Lobby::status("lobby.admin")){
    * Add Admin Pages' stylesheet, script
    */
   \Assets::js("admin", "/admin/js/admin.js");
-  
+
   /**
    * Add sidebar
    */
   Hooks::addAction("admin.body.begin", function(){
     require L_DIR . "/admin/inc/sidebar.php";
   });
-  
+
   /**
    * Add sidebar handler in panel
    */
-  \Hooks::addAction("panel.end", function(){
+  \Hooks::addAction("panel.begin", function(){
     echo '<a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>';
   });
-  
+
   /**
    * Check For New Versions (Apps & Core)
    */

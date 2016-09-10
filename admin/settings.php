@@ -55,7 +55,7 @@
                 "Pacific" => DateTimeZone::PACIFIC,
                 "UTC" => DateTimeZone::UTC
               );
-              
+
               $ctz = Lobby\DB::getOption("lobby_timezone");
               foreach($regions as $region => $id){
                 $tzs = \DateTimeZone::listIdentifiers($id);

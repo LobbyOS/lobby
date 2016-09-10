@@ -18,25 +18,25 @@ class Modules extends \Lobby {
    * Core modules
    */
   private static $coreMods = array();
-  
+
   /**
    * Custom modules
    */
   private static $customMods = array();
-  
+
   /**
    * App modules
    */
   private static $appMods = array();
-  
+
   /**
    * All modules combined into one array
    */
   private static $mods = array();
-  
+
   /**
    * Get the list of modules and merge them.
-   * 
+   *
    * There are 3 types of modules :
    * App Modules - Modules included in apps
    * Core Modules - Modules that comes preloaded with Lobby
@@ -49,7 +49,7 @@ class Modules extends \Lobby {
 
     self::$mods = array_merge(self::$coreMods, self::$customMods, self::$appMods);
   }
-  
+
   /**
    * Get the list of modules
    * @param string $type Type of modules to get
@@ -66,7 +66,7 @@ class Modules extends \Lobby {
       return self::$appMods;
     }
   }
-  
+
   /**
    * Check whether a module is valid
    * @param string $module Module's ID
@@ -81,7 +81,7 @@ class Modules extends \Lobby {
       return true;
     }
   }
-  
+
   /**
    * List modules in a directory
    * @param string $location Path to directory
@@ -91,7 +91,7 @@ class Modules extends \Lobby {
     $location = FS::loc($location);
     $mods = array_diff(scandir($location), array('..', '.'));
     $validModules = array();
-    
+
     foreach($mods as $module){
       $loc = "$location/$module";
       if(self::valid($module, $loc)){
@@ -104,18 +104,18 @@ class Modules extends \Lobby {
     }
     return $validModules;
   }
-  
+
   /**
    * List App Modules
    */
   public static function appModules(){
     $mods = array();
-    
+
     $apps = Apps::getEnabledApps();
     foreach($apps as $appID){
       $module_name = 'app_' . Apps::normalizeID($appID);
       $loc = Apps::getAppsDir() . "/$appID/module";
-      
+
       if(self::valid($module_name, $loc)){
         $mods[$module_name] = array(
           "id" => $module_name,
@@ -127,7 +127,7 @@ class Modules extends \Lobby {
     }
     return $mods;
   }
-  
+
   /**
    * Run all loaded modules
    */
@@ -142,7 +142,7 @@ class Modules extends \Lobby {
     foreach(self::$mods as $module){
       require_once "{$module["location"]}/Module.php";
       $moduleIdentifier = "\Lobby\Module\\{$module['id']}";
-      
+
       if(isset($module["appID"])){
         $App = new Apps($module["appID"]);
         new $moduleIdentifier(array(
@@ -159,7 +159,7 @@ class Modules extends \Lobby {
       }
     }
   }
-  
+
   /**
    * Whether a module exists
    * @param string $module Module's ID
@@ -171,7 +171,7 @@ class Modules extends \Lobby {
       return false;
     }
   }
-  
+
   /**
    * Disable a module by making a "disabled.txt" file in the location
    * @param string $module Module's ID
@@ -184,5 +184,5 @@ class Modules extends \Lobby {
       return false;
     }
   }
-  
+
 }

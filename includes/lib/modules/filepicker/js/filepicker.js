@@ -1,10 +1,10 @@
 /*
 @desc
-	Base64 encoder and decoder write by JavaScript. This code was a plugin of 
+	Base64 encoder and decoder write by JavaScript. This code was a plugin of
 	jQeury, you must load jQuery library first if you want to use this code.
 	 - After encode, you can decode it with PHP, and vice versa
 	 - Support Unicode library
-	This code was collected from the network, I just rewrite it as the plugin 
+	This code was collected from the network, I just rewrite it as the plugin
 	of jQuery, the copyright belongs to original work(s).
 
 @Version	1.0 build 20080908
@@ -25,7 +25,7 @@ jQuery.base64={is_unicode:false,encode:function(C){if(this.is_unicode){C=this._u
  * Description: This program will let you browse server-side folders and files
  * 				like a Windows Explorer, and you can pick several files that you
  * 				want to process in somewhere.
- * 
+ *
  * Copyright (c) 2008-2009 Hpyer (coolhpy[at]163.com)
  * Dual licensed under the MIT (MIT-LICENSE.txt)
  * and GPL (GPL-LICENSE.txt) licenses.
@@ -34,7 +34,7 @@ jQuery.base64={is_unicode:false,encode:function(C){if(this.is_unicode){C=this._u
 window.FilePicker = {
 
 	/**
-	 * @desc	
+	 * @desc
 	 * @access	public
 	 */
 	params: {
@@ -64,7 +64,7 @@ window.FilePicker = {
 		 */
 		unicode: true,
 		/**
-		 * @desc	It means double-click if the time click twice quickly 
+		 * @desc	It means double-click if the time click twice quickly
 		 * 			is less than the following seconds. (Unit: millisecond)
 		 * @var		int
 		 */
@@ -108,14 +108,14 @@ window.FilePicker = {
 	 */
 	do_complete: function() {
 		var self = FilePicker;
-    
+
     /**
      * If folder is selected, then open that folder
      */
     if($("li.folder.selected").length != 0){
       $("li.folder.selected").trigger("dblclick");
     }
-    
+
 		var obj = {
 			dir: self.get_path(),
       files: [
@@ -150,7 +150,7 @@ window.FilePicker = {
 		uri = uri == '/' ? '' : uri;
 		return this.params.uri + uri;
 	},
-  
+
   /**
 	 * @desc	Get the path of current folder
 	 * @return	string
@@ -208,7 +208,7 @@ window.FilePicker = {
 			box.html('');
 		}
 	},
-  
+
   /**
 	 * @desc	Get JSON string that be translated with all the selected file(s)
 	 * @return	string
@@ -381,7 +381,7 @@ window.FilePicker = {
               item.value = $.base64.decode(item.value);
             }
             $('#info_box').append(
-              '<strong>' + item.trans + '</strong>:<br />' + 
+              '<strong>' + item.trans + '</strong>:<br />' +
               ' &nbsp; ' + item.value + '<br />'
             );
           }
@@ -415,7 +415,7 @@ window.FilePicker = {
         }else{
           json = JSON.parse(r);
           var self = FilePicker;
-          
+
           // To store filename(s) that be used for Auto-Complete
           var files = [];
           $.each(json, function(i,item){
@@ -440,8 +440,8 @@ window.FilePicker = {
                   if ($(this).html() == $('#filename_box').val()){
                     self.do_select($(this), true);
                     $('#viewbox').scrollTop(
-                      $('#viewbox').scrollTop() + 
-                      $(this).position().top - 
+                      $('#viewbox').scrollTop() +
+                      $(this).position().top -
                       $('#viewbox').position().top
                     );
                     return false;
@@ -496,16 +496,16 @@ window.FilePicker = {
  * Path and Callback
  */
 lobby.mod.filepicker = {
-  
+
   u: "/includes/lib/modules/filepicker/ajax",
-  
+
   /**
    * Show the dialog
    */
   dialog: function(path, cb){
     cb = typeof cb !== "function" ? function(){} : cb;
     access_url = this.u + "/filepicker.php";
-    
+
     lobby.ajax(access_url, {}, function(r){
       o = JSON.parse(r);
       $("<div></div>").attr("class", "Lobby-FS-filepicker").html(o.html).appendTo("#workspace");
@@ -530,7 +530,7 @@ lobby.mod.filepicker = {
       });
     });
   },
-  
+
   close: function(){
     $(".Lobby-FS-filepicker").dialog("close").remove();
   }

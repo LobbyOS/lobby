@@ -17,12 +17,11 @@
         if(\Lobby\Update::isAvailable()){
           echo sss("Updates Available", "Some updates are available for you to update. Yay!<cl/><a class='btn blue' href='". \Lobby::u("/admin/update.php") ."'>See Updates</a>");
         }
-        ?>
-        <p>Manage your Lobby installation.</p>
-        <?php
-        echo \Lobby::l("admin/settings.php", "Settings", "class='btn red'") . "&nbsp;";
-        echo \Lobby::l("admin/apps.php", "Apps", "class='btn green'") . "&nbsp;";
-        echo \Lobby::l("admin/lobby-store.php", "Lobby Store", "class='btn pink'") . "&nbsp;";
+        echo \Lobby::l("admin/apps.php", "Apps") . " will help you to disable or remove apps.<cl/>";
+        echo \Lobby::l("admin/lobby-store.php", "Lobby Store") . " will help you to find & install new apps.<cl/>";
+        echo \Lobby::l("admin/settings.php", "Settings") . " will help you configure your Lobby installation.<cl/>";
+        echo \Lobby::l("admin/update.php", "Updates") . " will allow you to update apps & Lobby itself.<cl/>";
+
         if(\Lobby\Modules::exists("admin")){
           echo \Lobby::l("admin/login?logout=true", "Log Out", "class='btn'");
         }

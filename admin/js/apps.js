@@ -7,5 +7,11 @@ lobby.load(function(){
       $("#combined_actions").show();
     }
   });
-});
 
+  $("#workspace .app .switch input[type=checkbox]").on("change", function(){
+    lobby.ajax("admin/ajax/toggle-app.php", {enable: $(this).is(":checked"), appID: $(this).attr("data-appID")}, function(r){
+      if(r === "enable-fail" || r === "disable-fail")
+        lobby.redirect("/admin/apps.php?app=$appID&action="+ r +"&quick&show=1" + lobby.csrfToken);
+    });
+  });
+});

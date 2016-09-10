@@ -4,7 +4,7 @@ require "../load.php";
 <!DOCTYPE html>
 <html>
   <head>
-    <?php 
+    <?php
     \Hooks::doAction("admin.head.begin");
     \Assets::js("admin.apps.js", "/admin/js/install-app.js");
     \Response::head("Install App");
@@ -19,15 +19,15 @@ require "../load.php";
         <?php
         $appID = Request::get("app");
         $action = Request::get("action");
-        
+
         /**
          * Whether this is a request to show a message
          */
         $show = Request::get("show") !== null;
-        
+
         $displayID = htmlspecialchars($appID);
         $App = new \Lobby\Apps($appID);
-        
+
         if($appID === null){
           echo ser("Error", "No App is mentioned. Install Apps from <a href='lobby-store.php'>Lobby Store</a>");
         }else if($appID !== null && $action === null && CSRF::check()){

@@ -24,7 +24,7 @@ $this->addScript("main.js");
       $content = $appData['value'];
       $created = $appData['created'];
       $updated = $appData['updated'];
-    
+
       /**
        * Show error if a save of the ID is not present
        */

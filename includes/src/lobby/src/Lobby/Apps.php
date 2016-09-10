@@ -13,29 +13,29 @@ use Lobby\UI\Themes;
  */
 
 class Apps {
-  
+
   /**
    * Location of apps directory
    */
   private static $appsDir = null;
-  
+
   /**
    * URL to apps directory
    */
   private static $appsURL = null;
-  
+
   /**
    * App Updates
    * App => $latestVersion
    */
   private static $appUpdates = array();
-  
+
   /**
    * This will contain the App object when app is running
    */
   private static $activeApp = false;
   private static $activeAppInstance = false;
-  
+
   /**
    * Default values in manifest.json
    */
@@ -51,28 +51,28 @@ class Apps {
     "app_page" => "",
     "require" => array()
   );
-  
+
   /**
    * Cache frequently used data
    */
   public static $cache = array(
     "valid_apps" => array()
   );
-  
+
   /**
    * The App ID
    */
   private $app = false;
-  
+
   public $appDir = false, $exists = false, $info = array(), $enabled = false;
-  
+
   /**
    * @param array $appsVARS Contains path and URL to `apps` folder
    */
   public static function __constructStatic($appsVARS){
     self::$appsDir = $appsVARS[0];
     self::$appsURL = Lobby::u($appsVARS[1]);
-    
+
     /**
      * Make array like this :
      * "AppID" => 0
@@ -81,10 +81,10 @@ class Apps {
     array_walk($appsAsKeys, function(&$val){
       $val = 0;
     });
-    
+
     self::$appUpdates = array_replace_recursive($appsAsKeys, DB::getJSONOption("app_updates"));
   }
-  
+
   public static function clearCache(){
     self::$cache = array(
       "valid_apps" => array()
@@ -100,7 +100,7 @@ class Apps {
     }else{
       $appFolders = array_diff(scandir(self::$appsDir), array('..', '.'));
       $apps = array();
-    
+
       foreach($appFolders as $appFolderName){
         if(self::valid($appFolderName, false)){
           $apps[] = $appFolderName;
@@ -110,7 +110,7 @@ class Apps {
     }
     return $apps;
   }
-  
+
   /**
    * Returns enabled apps as an array
    */
@@ -120,7 +120,7 @@ class Apps {
     }else{
       $enabled_apps = DB::getOption("enabled_apps");
       $enabled_apps = json_decode($enabled_apps, true);
-      
+
       if(!is_array($enabled_apps) || count($enabled_apps) == 0){
         $enabled_apps = array();
       }
@@ -128,7 +128,7 @@ class Apps {
     }
     return $enabled_apps;
   }
- 
+
   /**
    * Returns disabled apps as an array
    */
@@ -148,11 +148,11 @@ class Apps {
     }
     return $disabled_apps;
   }
-  
+
   public static function getAppsDir(){
     return self::$appsDir;
   }
-  
+
   /**
    * Check if an app exists
    */
@@ -160,7 +160,7 @@ class Apps {
     $apps = self::getApps();
     return in_array($app, $apps, true);
   }
-  
+
   /**
    * Make App ID into Class Name
    */
@@ -168,7 +168,7 @@ class Apps {
     $appID = str_replace("-", "_", $appID);
     return $appID;
   }
-  
+
   /**
    * Check if App is valid and it meets criteria of Lobby
    * @param string $appID The Apps' ID
@@ -180,20 +180,20 @@ class Apps {
     }else{
       $appDir = self::$appsDir . "/$appID";
       $valid = false;
-    
+
       /**
        * Check if App.php and manifest file exist
        */
       if( FS::exists("$appDir/manifest.json") && FS::exists("$appDir/App.php") ){
         $valid = true;
       }
-      
+
       if($valid && !$basicCheck){
         /**
          * Make sure the App class exists
          */
         require_once "$appDir/App.php";
-        
+
         $className = "\\Lobby\App\\" . self::normalizeID($appID);
         if( !class_exists($className) ){
           $valid = false; // The class doesn't exist, so app's not valid
@@ -203,28 +203,28 @@ class Apps {
             $valid = false;
           }
         }
-        
+
         $manifest = json_decode(FS::get("$appDir/manifest.json"), true);
         if(!is_array($manifest) || (isset($manifest["require"]) && !Need::checkRequirements($manifest["require"], true))){
           $valid = false;
         }
       }
-      
+
       self::$cache["valid_apps"][$appID] = $valid;
     }
     return $valid;
   }
-  
+
   /**
    * Make an object of App
    */
   public function __construct($id){
     $this->app = $id;
-    
+
     if(self::valid($id, false)){
       $this->exists = true;
       $this->dir = self::$appsDir . "/$id";
-      
+
       /**
        * App Manifest Info as a object property
        */
@@ -237,18 +237,18 @@ class Apps {
       return false;
     }
   }
- 
+
   /**
    * Get the manifest info of app as array
    */
   private function setInfo(){
     $manifest = FS::exists($this->dir . "/manifest.json") ?
       FS::get($this->dir . "/manifest.json") : false;
-    
+
     if($manifest){
       $details = json_decode($manifest, true);
       $details = array_replace_recursive(self::$manifestConfig, $details);
-      
+
       /**
        * Add extra info with the manifest info
        */
@@ -257,7 +257,7 @@ class Apps {
       $details['url'] = Lobby::getURL() . "/app/{$this->app}";
       $details['srcURL'] = Lobby::getURL() . "/contents/apps/{$this->app}";
       $details['adminURL'] = Lobby::getURL() . "/admin/app/{$this->app}";
-      
+
       /**
        * Prefer SVG over PNG
        */
@@ -266,27 +266,27 @@ class Apps {
           self::$appsURL . "/{$this->app}/src/image/logo.svg" :
           self::$appsURL . "/{$this->app}/src/image/logo.png"
         ) : Themes::getThemeURL() . "/src/main/image/app-logo.png";
-      
+
       $details["latestVersion"] = isset(self::$appUpdates[$this->app]) ? self::$appUpdates[$this->app] : null;
-      
+
       $details = \Hooks::applyFilters("app.manifest", $details);
-       
+
       /**
        * Insert the info as a property
        */
       $this->info = $details;
-      
+
       /**
        * Whether app is enabled
        */
       $this->enabled = in_array($this->app, self::getEnabledApps(), true);
-      
+
       return $details;
     }else{
       return false;
     }
   }
- 
+
   /**
    * Enable the app
    */
@@ -295,7 +295,7 @@ class Apps {
       $apps = self::getEnabledApps();
       if(!in_array($this->app, $apps, true)){
         $apps[] = $this->app;
-        
+
         DB::saveOption("enabled_apps", json_encode($apps));
         self::clearCache();
         return true;
@@ -306,7 +306,7 @@ class Apps {
       return false;
     }
   }
- 
+
   /**
    * Disable the app
    */
@@ -316,7 +316,7 @@ class Apps {
       if(in_array($this->app, $apps, true)){
         $key = array_search($this->app, $apps);
         unset($apps[$key]);
-        
+
         DB::saveOption("enabled_apps", json_encode($apps));
         self::clearCache();
         return true;
@@ -327,7 +327,7 @@ class Apps {
       return false;
     }
   }
- 
+
   /**
    * Disable app and remove the app files recursilvely from the directory
    */
@@ -338,7 +338,7 @@ class Apps {
         if(file_exists("$dir/uninstall.php")){
           include_once "$dir/uninstall.php";
         }
-        
+
         $this->disableApp();
         return \Lobby\FS::remove($dir);
       }else{
@@ -348,7 +348,7 @@ class Apps {
       return false;
     }
   }
-  
+
   /**
    * Check requirements of app
    */
@@ -357,7 +357,7 @@ class Apps {
       return Need::checkRequirements($this->info["requires"], true);
     }
   }
-  
+
   /**
    * Get size used in database
    */
@@ -365,17 +365,17 @@ class Apps {
     $sql = \Lobby\DB::getDBH()->prepare("SELECT * FROM `". \Lobby\DB::getPrefix() ."data` WHERE `app` = ?");
     $sql->execute(array($this->app));
     $result = $sql->fetchAll(\PDO::FETCH_ASSOC);
-    
+
     /**
      * Convert array values to string
      * Also remove JSON syntax
      */
     $result = json_encode($result);
     $result = str_replace("[roeEcvv,]", null, $result);
-    
+
     return mb_strlen($result);
   }
-  
+
   /**
    * Whether app update is available
    * Provide $latestVersion to check if it's a latest version
@@ -386,13 +386,13 @@ class Apps {
     else
       return version_compare($this->info['version'], $this->info['latestVersion'], "<");
   }
-  
+
   public function clearData(){
     $sql = \Lobby\DB::getDBH()->prepare("DELETE FROM `". \Lobby\DB::getPrefix() ."data` WHERE `app` = ?");
     $sql->execute(array($this->app));
     return true;
   }
-  
+
   /**
    * Get the App object
    */
@@ -402,40 +402,40 @@ class Apps {
        * Load the app class
        */
       require_once $this->dir . "/App.php";
-      
+
       $className = "\\Lobby\App\\" . self::normalizeID($this->app);
-     
+
       /**
        * Create the \Lobby\App Object
        */
       $class = new $className;
-     
+
       /**
        * Send app details to the App Object
        */
       $class->setAppInfo($this->info);
-      
+
       return $class;
     }
   }
- 
+
   /**
    * Return the app class object
    */
   public function run(){
     if($this->app){
       \Assets::js("app", "/includes/lib/lobby/js/app.js");
-      
+
       self::$activeApp = $this;
       self::$activeAppInstance = $this->getInstance();
-      
+
       /**
        * Return the App Object
        */
       return self::$activeAppInstance;
     }
   }
-  
+
   /**
    * Get config value of currently running app
    */
@@ -447,16 +447,16 @@ class Apps {
     else
       return null;
   }
-  
+
   /**
    * Whether Lobby is in app-mode
    */
   public static function isAppRunning(){
     return self::$activeApp;
   }
-  
+
   public static function getRunningInstance(){
     return self::$activeAppInstance;
   }
-  
+
 }

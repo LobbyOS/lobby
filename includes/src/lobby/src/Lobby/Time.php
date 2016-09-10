@@ -11,12 +11,12 @@ use Lobby\DB;
  * Handle time conversions and date outputs
  */
 class Time {
-  
+
   /**
    * The user's timezone
    */
   private static $tz = "UTC";
-  
+
   /**
    * Sets the PHP & database timezone as UTC
    */
@@ -31,7 +31,7 @@ class Time {
     }
     self::loadConfig();
   }
-  
+
   /**
    * Load the user's timezone config
    */
@@ -41,7 +41,7 @@ class Time {
       self::$tz = $tz;
     }
   }
-  
+
   /**
    * Return the current instant's timestamp
    * @param string $format The format of timestamp to be returned
@@ -51,7 +51,7 @@ class Time {
     $date = new \DateTime("now", new \DateTimeZone(self::$tz));
     return $date->format($format);
   }
-  
+
   /**
    * Convert a UTC date to user's timezone
    * @param string $date UTC date that is compatible with \DateTime()
@@ -63,7 +63,7 @@ class Time {
     $date->setTimeZone(new \DateTimeZone(self::$tz));
     return $date->format($format);
   }
-  
+
   /**
    * Convert offsets to timezone
    * @param string $offset Offset like "GMT+5:30" etc.
@@ -72,14 +72,14 @@ class Time {
   public static function getTimezone($offset){
     foreach (\DateTimeZone::listIdentifiers(\DateTimeZone::ALL) as $timezone) {
       $datetime = new \DateTime("now", new \DateTimeZone($timezone));
-  
+
       // find a timezone matching the offset and abbreviation
       if ($offset == $datetime->format('P')) {
         return $timezone;
       }
     }
   }
-  
+
   /**
    * Get timeago value from timestamp
    * @param int $time Timestamp
@@ -90,8 +90,8 @@ class Time {
     if( $estimate_time < 1 ){
         return 'less than 1 second ago';
     }
-    
-    $condition = array( 
+
+    $condition = array(
       12 * 30 * 24 * 60 * 60  =>  'year',
       30 * 24 * 60 * 60       =>  'month',
       24 * 60 * 60            =>  'day',
@@ -99,7 +99,7 @@ class Time {
       60                      =>  'minute',
       1                       =>  'second'
     );
-    
+
     foreach( $condition as $secs => $str ){
       $d = $estimate_time / $secs;
       if( $d >= 1 ){

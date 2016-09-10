@@ -15,16 +15,16 @@ use Response;
  * will be as Klein's : https://github.com/chriso/klein.php
  */
 class Router {
-  
+
   public static $router;
-  
+
   /**
    * Set up
    */
   public static function __constructStatic(){
     self::$router = new Klein();
   }
-  
+
   /**
    * Set a route
    * @param string $route The route path
@@ -33,21 +33,21 @@ class Router {
   public static function route($route, $callback) {
     self::$router->respond($route, $callback);
   }
-  
+
   /**
    * Dispatch all routes and send response.
-   * 
+   *
    * All routes are ran and if there is content, a response is sent.
-   * 
+   *
    * If it's a request to a native file, FALSE is returned.
-   * 
+   *
    * @return bool Whether a route is set to handle this request
    */
   public static function dispatch(){
     self::defaults();
     \Hooks::doAction("router.finish");
     self::$router->dispatch(null, null, false);
-    
+
     if(Response::hasContent()){
       Response::send();
       return true;
@@ -58,7 +58,7 @@ class Router {
       return true;
     }
   }
-  
+
   /**
    * Default routes and settings
    */
@@ -69,7 +69,7 @@ class Router {
     self::route("/app/[:appID]?/[**:page]?", function($request){
       $AppID = $request->appID;
       $page = $request->page != "" ? "/{$request->page}" : "/";
-      
+
       /**
        * Check if App exists
        */
@@ -77,12 +77,12 @@ class Router {
       if($App->exists && $App->enabled){
         $class = $App->run();
         $AppInfo = $App->info;
-      
+
         /**
          * Set the title
          */
         Response::setTitle($AppInfo['name']);
-          
+
         /**
          * Add the App item to the navbar
          */
@@ -112,7 +112,7 @@ class Router {
         echo ser();
       }
     });
-    
+
     /**
      * Dashboard Page
      * The main Page. Add CSS & JS accordingly
@@ -123,7 +123,7 @@ class Router {
       Response::loadPage("/includes/lib/lobby/inc/dashboard.php");
     });
   }
-  
+
   /**
    * This is useful when Lobby is run using PHP Built In Server
    * When no routes are matched, by default a 404 is inited,
@@ -131,7 +131,7 @@ class Router {
    * this, we check if the file exist and return false to the PHP
    * Built in Server to make it serve the file normally
    * http://php.net/manual/en/features.commandline.webserver.php#example-430
-   * 
+   *
    * @return bool Whether the request points to a file
    */
   public static function pathExists(){
@@ -143,5 +143,5 @@ class Router {
     }
     return false;
   }
-  
+
 }

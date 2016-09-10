@@ -20,7 +20,7 @@ class CSRF {
   public static function __constructStatic(){
     if(Lobby::$cli)
       return false;
-    
+
     if(!isset($_COOKIE['csrfToken'])){
       self::$token = Helper::randStr(10);
       setcookie("csrfToken", self::$token, 0, "/", Lobby::getHostname());
@@ -28,7 +28,7 @@ class CSRF {
       self::$token = $_COOKIE['csrfToken'];
     }
   }
-  
+
   /**
    * Check if CSRF token matches form data's token
    * @param bool $echo Should error message be printed if it doesn't match
@@ -43,7 +43,7 @@ class CSRF {
       return false;
     }
   }
-  
+
   /**
    * Get the CSRF token
    * @return string Token
@@ -51,7 +51,7 @@ class CSRF {
   public static function get(){
     return self::$token;
   }
-  
+
   /**
    * Get as a query paramter
    * @return string "&csrfToken=..."
@@ -59,7 +59,7 @@ class CSRF {
   public static function getParam(){
     return "&csrfToken=" . self::$token;
   }
-  
+
   /**
    * Get as an <input> field tag
    * @return string HTML of <input> tag

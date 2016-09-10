@@ -45,14 +45,14 @@ WARNING (Unstable) - This repo is for testing and may contain additional compone
   git diff --name-status master dev > removeFiles.txt
   ```
   You can get the hashes from `git log` too.
-  
+
   Then replace contents of removeFiles.txt :
-  
+
   ```regex
   [M|A|T]	(.*?)\n  ->  ""
   D	  ->  ""
   ```
-  
+
   Extract only deleted files `D <file>` and paste it in `contents/update/removeFiles.php`
 * Change Lobby server inside `includes/config.php`
 * Zip the folder

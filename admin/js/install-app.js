@@ -18,11 +18,11 @@ lobby.installApp = function(id, area){
       retryIntervalStarted = 1;
     }
   };
-  
+
   var check = function(){
     lobby.ajax("/admin/ajax/install-app.php", {"id": id}, function(r){
       r = JSON.parse(r);
-      
+
       if(r.statusID == "error"){
         html = "<li class='collection-item' style='color: red;' data-status-id='error'>"+ r.status +"<br/>Will try again in <span id='retryInstallCountdown'>20</span> seconds.<cl/><a id='#retryInstallNow' class='btn green'>Try Again Now</a><a href='"+ lobby.url +"/admin/lobby-store.php?app="+ id +"' class='btn red'>Cancel</a></li>";
         startRetryCountdown();
@@ -40,7 +40,7 @@ lobby.installApp = function(id, area){
     });
   };
   check();
-  
+
   $("#retryInstallNow").live("click", function(){
     check();
   });

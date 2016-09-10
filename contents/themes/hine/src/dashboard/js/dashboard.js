@@ -1,14 +1,14 @@
 /**
  * The Dashboard Object. For Managing the Tiles
  */
-lobby.dash = {  
+lobby.dash = {
   /**
    * The registered tiles data
    */
   tiles : [],
-  
+
   pages: 1,
-  
+
   /**
    * Add blank tiles and then replace empty tiles with registered tiles
    */
@@ -16,7 +16,7 @@ lobby.dash = {
     lobby.dash.addTiles();
     lobby.dash.addTileEvents();
   },
-  
+
   /**
    * Register a tile to be added
    */
@@ -25,16 +25,16 @@ lobby.dash = {
       lobby.dash.tiles.push(data);
     }
   },
-  
+
   /**
    * Add all the tiles registered
    */
   addTiles : function(){
-    rows = Math.floor($("#workspace").height() / 200);
-    cols = Math.floor($("#workspace").width() / 200);
-    
+    rows = Math.floor($("#workspace").height() / $("#workspace .tile.hide").width());
+    cols = Math.floor($("#workspace").width() / $("#workspace .tile.hide").width());
+
     possibleTiles= rows * cols;
-    
+
     this.pages = Math.ceil(lobby.dash.tiles.length / possibleTiles);
     if(this.pages > 1){
       for(i = 0;i < this.pages;i++){
@@ -44,7 +44,7 @@ lobby.dash = {
         $("#bx-pager").append("<li class='tab'><a data-slide-index='"+ i +"'></a></li>");
       }
     }
-    
+
     i = 0;
     curPage = 0;
     $.each(lobby.dash.tiles, function(ignore, data){
@@ -57,12 +57,12 @@ lobby.dash = {
       $(".tiles[data-page="+ curPage +"]").append(html);
       i++;
     });
-    
+
     /**
      * Add "Get It On Lobby Store" logo
      */
     $(".tiles[data-page="+ curPage +"]").append('<div class="tile"><div class="extra" id="lobby-store" data-mode="none" data-initdelay="50"><a href="'+ lobby.url +'/admin/lobby-store.php"><div class="inner"><div class="image valign-wrapper"><img src="<?THEME_URL?>/src/dashboard/image/get-it.png" class="valign" width="100%"/></div><div class="title">Get More Apps From<br/>Lobby Store</div></div></a></div></div>');
-    
+
     $('#workspace .tiles-wrapper').bxSlider({
       slideMargin: 0,
       speed: 200,
@@ -73,7 +73,7 @@ lobby.dash = {
       pagerCustom: "#bx-pager"
     });
   },
-  
+
   /**
    * Align the tiles
    */
@@ -81,7 +81,7 @@ lobby.dash = {
     setTimeout(function(){
       src = "";
       $( "#workspace .tiles" ).disableSelection();
-      
+
       $.contextMenu({
         selector: ".tiles .tile .app",
         items: {
@@ -92,7 +92,7 @@ lobby.dash = {
         }
       });
     }, 10);
-    
+
     if(this.pages > 1){
       /**
        * Change Apps Tab on mouse wheel direction
@@ -110,7 +110,7 @@ lobby.dash = {
       });
     }
   },
-  
+
   /**
    * Save the position of a tile after being dragged and dropped
    */

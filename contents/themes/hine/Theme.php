@@ -2,20 +2,20 @@
 namespace Lobby\UI\Themes;
 
 class hine extends \Lobby\UI\Theme {
-  
+
   public function init(){
     $this->addScript("/src/main/lib/material-design/materialize.js");
     $this->addStyle("/src/main/lib/material-design/materialize.css");
-    
+
     /**
      * jQuery UI
      */
     $this->addStyle("/src/main/lib/jquery-ui/jquery-ui.css");
-    
+
     $this->addScript("/src/main/js/init.js");
     $this->addStyle("/src/main/css/font.css");
   }
-  
+
   /**
    * Called before panel is made
    */
@@ -24,7 +24,7 @@ class hine extends \Lobby\UI\Theme {
     $this->addScript("/src/panel/js/superfish.js");
     $this->addScript("/src/panel/js/panel.js");
   }
-  
+
   /**
    * Include stuff for designing dashboard
    */
@@ -36,7 +36,7 @@ class hine extends \Lobby\UI\Theme {
     $this->addScript("/src/dashboard/js/dashboard.js");
     $this->addStyle("/src/dashboard/css/dashboard.css");
   }
-  
+
   public function makePanelTree($id, $item){
     $html = isset($item['html']) ? $item['html'] : substr($this->makePanelItem($item['text'], $item['href'], $id, "parent"), 0, -5);
       $html .= "<ul>";
@@ -47,7 +47,7 @@ class hine extends \Lobby\UI\Theme {
     $html .= "</li>";
     return $html;
   }
-  
+
   public function makePanelItem($text, $href, $id, $extraClass = ""){
     if($href == L_URL){
       /**
@@ -72,7 +72,7 @@ class hine extends \Lobby\UI\Theme {
     }
     return $html;
   }
-  
+
   /**
    * Adds the notify button and box
    */
@@ -82,5 +82,5 @@ class hine extends \Lobby\UI\Theme {
       echo "<div id='notifyBox'></div>";
     echo "</li>";
   }
-  
+
 }

@@ -8,7 +8,7 @@
  *
  * CEO and founder of bxCreative, LTD
  * http://bxcreative.com
- * 
+ *
  * Lobby Theme - Don't Replace the whole File
  */
 
@@ -17,7 +17,7 @@
 
 .bx-wrapper .bx-viewport {
 	left: -5px;
-	
+
 	/*fix other elements on the page moving (on Chrome)*/
 	-webkit-transform: translatez(0);
 	-moz-transform: translatez(0);
@@ -37,19 +37,19 @@
 
 .bx-wrapper .bx-prev {
 	left: 0;
-  
-  width: 0; 
-	height: 0; 
+
+  width: 0;
+	height: 0;
 	border-top: 40px solid transparent;
-	border-bottom: 40px solid transparent; 
-	border-right:40px solid rgba(0,0,0,0.6); 
+	border-bottom: 40px solid transparent;
+	border-right:40px solid rgba(0,0,0,0.6);
 }
 
 .bx-wrapper .bx-next {
 	right: 0;
-  
-  width: 0; 
-	height: 0; 
+
+  width: 0;
+	height: 0;
 	border-top: 40px solid transparent;
 	border-bottom: 40px solid transparent;
 	border-left: 40px solid rgba(0,0,0,0.6);

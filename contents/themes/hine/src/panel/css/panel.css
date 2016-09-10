@@ -17,14 +17,15 @@ nav li img{
   height: 40px;
   width: 40px;
 }
-nav .left{
-  position:absolute;
-  left:60px;
+nav .panel-left, nav .panel-right{
+  display: inline-block;
   list-style: none;
-  margin: 0px;
+}
+nav .panel-left{
+  margin: 0 0 0 60px;
   padding: 0;
 }
-nav .left li.parent, nav .right li.parent{
+nav .panel-left li.parent, nav .panel-right li.parent{
   position: relative;
   cursor: pointer;
   margin-right: 15px;
@@ -32,7 +33,7 @@ nav .left li.parent, nav .right li.parent{
   min-height: 40px;
   max-height: 40px;
 }
-nav .left ul, nav .right ul{
+nav .panel-left ul, nav .panel-right ul{
   display:none;
   position:absolute;
   top: 46px;
@@ -55,42 +56,40 @@ nav .li.item{
   position: relative;
   margin-right: 20px;
 }
-nav .right{
-  position:absolute;
-  right: 60px;
-  list-style: none;
-  margin: 0px;
+nav .panel-right{
+  margin: 0 60px 0 0;
+  float: right;
 }
-nav .right ul{
+nav .panel-right ul{
   text-align: right;
   right: 0;
 }
 /**
  * Icons
  */
-nav .left #lobby a.parent{
+nav .panel-left #lobby a.parent{
   font-size: 30px;
 }
-nav .left #home a{
+nav .panel-left #home a{
   display: block;
   height: 40px;
   width: 40px;
   background: url(<?THEME_URL?>/src/panel/image/home.svg);
   background-size: contain;
 }
-nav .right .item span{
+nav .panel-right .item span{
   height:22px;
   width:17px;
   display: inline-block;
 }
-nav .right #notifyToggle{
+nav .panel-right #notifyToggle{
   background: url(<?THEME_URL?>/src/panel/image/notify.svg) 0px -1px no-repeat;
   background-size: 45px;
   width: 50px;
   display: block;
   height: 40px;
 }
-nav .right #notifyToggle.active{
+nav .panel-right #notifyToggle.active{
   background: url(<?THEME_URL?>/src/panel/image/notify-active.svg) 0 -1px no-repeat;
     background-size: 45px;
 }
@@ -98,6 +97,10 @@ nav .right #notifyToggle.active{
 /**
  * Sidebar toggler
  */
+nav .button-collapse{
+  display: inline-block;
+  float: none;
+}
 nav a.button-collapse i{
   font-size: 3rem;
   height: 43px;
@@ -157,4 +160,18 @@ nav a.button-collapse i{
   background-size: 30px;
   width: 30px;
   height: 30px;
+}
+@media screen and (max-width: 600px){
+  nav .panel-left{
+    margin-left: 0;
+  }
+  nav .panel-right{
+    margin-right: 0;
+  }
+  nav ul a{
+    padding: 0 5px;
+  }
+  nav .panel-left li.parent, nav .panel-right li.parent{
+    margin-right: 5px;
+  }
 }

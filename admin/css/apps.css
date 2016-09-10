@@ -1,10 +1,14 @@
-#workspace .app .lpane img{
-  height: 100px;
-  width: 100px;
-}
 #workspace #appNav{
   margin: -5px 0 10px;
 }
 #workspace #cancel.btn{
   margin-left: 5px;
+}
+#workspace .app .actions .col{
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
+#workspace .app .actions .col i{
+  margin-left: 10px;
 }

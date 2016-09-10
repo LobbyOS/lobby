@@ -28,7 +28,7 @@ class FS {
   public static function __constructStatic(){
     self::$fs = new Filesystem();
   }
-  
+
   /**
    * Make relative path of Lobby to absolute path
    * @param string $path Relative or absolute path
@@ -39,26 +39,26 @@ class FS {
      * If path is absolute, make it relative
      */
     $new = str_replace(L_DIR, "", $path);
-    
+
     /**
      * For Windows
      * Replace backslash with forward slash
      */
     $new = str_replace("\\", "/", $new);
-    
+
     /**
      * Remove slash at the beginning
      */
     $new = ltrim($new, "/");
-    
+
     /**
      * Make path absolute
      */
     $new = L_DIR . "/" . $new;
-    
+
     return $new;
   }
-  
+
   /**
    * Make absolute path to relative path
    * @param string $path Absolute path to file
@@ -68,7 +68,7 @@ class FS {
     $path = self::loc($path);
     return rtrim(self::$fs->makePathRelative($path, L_DIR), '/');
   }
-  
+
   /**
    * Check if a file or directory exists
    * @param string $path Path to file/folder
@@ -77,7 +77,7 @@ class FS {
   public static function exists($path){
     return file_exists(self::loc($path));
   }
-  
+
   /**
    * Get the file contents
    * @param string $file Path to file
@@ -87,20 +87,20 @@ class FS {
     $contents = file_get_contents(self::loc($file));
     return $contents == false ? false : $contents;
   }
-  
+
   /**
    * Write Contents to a file. There are 2 types of writing :
    * @param string $path Path to file
    * @param string $content What to write in file
    * @param string $type How should it be written ?
-   * 
+   *
    *     "a" for append
    *     "w" for overwrite
-   * @return string 
+   * @return string
    */
   public static function write($path, $content, $type = "w"){
     $path = self::loc($path, false);
-    
+
     /**
      * Append newline at EOF
      */
@@ -112,16 +112,16 @@ class FS {
     }
     self::$fs->dumpFile($path, $content);
   }
-  
+
   /**
    * Recursively remove a directory or remove a file
    * @param string $path Path to delete
    * @param array $exclude Files (relative paths) to exclude from deletion
-   * @param bool $removeParent Whether the main directory along with it's contents should be removed 
+   * @param bool $removeParent Whether the main directory along with it's contents should be removed
    */
   public static function remove($path, $exclude = array(), $removeParent = true){
     $path = self::loc($path);
-    
+
     if(is_dir($path)){
       $it = new \RecursiveDirectoryIterator($path, \RecursiveDirectoryIterator::SKIP_DOTS);
       $files = new \RecursiveIteratorIterator($it, \RecursiveIteratorIterator::CHILD_FIRST);
@@ -145,7 +145,7 @@ class FS {
       return unlink($path);
     }
   }
-  
+
   /**
    * Human Readable Size Convertor.
    * Convert bytes to KB, MB, GB or TB. Base used to calculate size is 1000
@@ -153,18 +153,18 @@ class FS {
    */
   public static function normalizeSize($size){
     $base = 1000;
-    
+
     $sizeBase = log($size) / log($base);
     $suffixes = array("", "KB", "MB", "GB", "TB");
     $flooredBase = floor($sizeBase);
-    
+
     if($flooredBase == 0){
       return round(round(pow($base, $sizeBase - $flooredBase), 1) / $base, 1) . "KB";
     }else{
       return round(pow($base, $sizeBase - $flooredBase), 1) . $suffixes[$flooredBase];
     }
   }
-  
+
   /**
    * Get the size of a file
    * @param $path Path to file
@@ -174,7 +174,7 @@ class FS {
   public static function getSize($path, $normalizeSize = false) {
     $path = self::loc($path);
     $size = 0;
-    
+
     if(is_dir($path)){
       foreach(new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path)) as $file){
         $size += $file->getSize();
@@ -185,7 +185,7 @@ class FS {
       return $normalizeSize ? self::normalizeSize($size, true) : $size;
     }
   }
-  
+
   /**
    * Create a temporary file in contents/extra
    * @return string Path to temporary file
@@ -193,5 +193,5 @@ class FS {
   public static function getTempFile(){
     return self::$fs->tempnam(L_DIR . "/contents/extra", "lobby_temp");
   }
-  
+
 }

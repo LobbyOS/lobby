@@ -10,17 +10,17 @@
 /**
  * PHP Hooks Class
  *
- * The PHP Hooks Class is a fork of the WordPress filters hook system rolled in to a class to be ported 
+ * The PHP Hooks Class is a fork of the WordPress filters hook system rolled in to a class to be ported
  * into any php based system
  *
  * This class is heavily based on the WordPress plugin API and most (if not all) of the code comes from there.
- * 
- * 
+ *
+ *
  * @version 0.1.3
  * @copyright 2012 - 2014
  * @author Ohad Raz (email: admin@bainternet.info)
  * @link http://en.bainternet.info
- * 
+ *
  * @license GNU General Public LIcense v3.0 - license.txt
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -45,19 +45,19 @@ class Hooks{
    * @var array
    */
   private static $filters = array();
-  
+
   /**
    * $mergedFilters
    * @var array
    */
   private static $mergedFilters = array();
-  
+
   /**
-   * $actions 
+   * $actions
    * @var array
    */
   private static $actions = array();
-  
+
   /**
    * $currentFilter  holds the name of the current filter
    * @access public
@@ -86,7 +86,7 @@ class Hooks{
     unset( self::$mergedFilters[ $tag ] );
     return true;
   }
-  
+
   /**
    * removeFilter Removes a function from a specified filter hook.
    * @access public
@@ -110,7 +110,7 @@ class Hooks{
     }
     return $r;
   }
-  
+
   /**
    * removeAllFilters Remove all of the hooks from a filter.
    * @access public
@@ -132,7 +132,7 @@ class Hooks{
 
     return true;
   }
-  
+
   /**
    * hasFilter  Check if any filter has been registered for a hook.
    * @access public
@@ -281,7 +281,7 @@ class Hooks{
       }
       return $output;
     }
-    
+
     return self::addFilter($tag, $function_to_add, $priority, $accepted_args);
   }
 
@@ -394,7 +394,7 @@ class Hooks{
    * @return null Will return null if $tag does not exist in $filter array
    */
   public static function doActionRefArray($tag, $args) {
-    
+
     if ( ! isset(self::$actions) )
       self::$actions = array();
 
@@ -478,7 +478,7 @@ class Hooks{
   function currentAction() {
     return self::$currentFilter();
   }
-  
+
   /**
    * Retrieve the name of a filter currently being processed.
    *
@@ -501,10 +501,10 @@ class Hooks{
   function doingFilter( $filter = null ) {
     if ( null === $filter ) {
       return ! empty( self::$currentFilter );
-    } 
+    }
     return in_array( $filter, self::$currentFilter );
   }
-  
+
   /**
    * Retrieve the name of an action currently being processed.
    *
@@ -519,7 +519,7 @@ class Hooks{
   public static function doingAction( $action = null ) {
     return self::$doingFilter( $action );
   }
-  
+
   /**
    * _filterBuildUniqueID Build Unique ID for storage and retrieval.
    * @param string $tag Used in counting how many hooks were applied

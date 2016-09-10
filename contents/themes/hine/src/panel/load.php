@@ -7,7 +7,10 @@ $panelLeftItems = Panel::getPanelItems("left");
 $panelRightItems = Panel::getPanelItems("right");
 ?>
 <nav>
-  <ul class="left">
+  <?php
+  \Hooks::doAction("panel.begin");
+  ?>
+  <ul class="panel-left">
     <?php
     if(isset($panelLeftItems["lobbyAdmin"])){
       echo $this->makePanelTree("lobbyAdmin", $panelLeftItems["lobbyAdmin"]);
@@ -26,7 +29,7 @@ $panelRightItems = Panel::getPanelItems("right");
     echo $html;
     ?>
   </ul>
-  <ul class="right">
+  <ul class="panel-right">
     <?php
     $html = "";
     foreach($panelRightItems as $id => $item){

@@ -31,3 +31,18 @@
 #workspace #appNav{
   margin: -5px 0 10px;
 }
+
+@media screen and (max-width: 600px){
+  #workspace .app{
+    margin: 0;
+  }
+  #workspace .app .app-inner{
+    padding: 0;
+  }
+  #workspace .app .rpane .chip{
+    display: none;
+  }
+  #workspace .app .bpane{
+    display: none;
+  }
+}

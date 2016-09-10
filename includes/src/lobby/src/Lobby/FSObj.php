@@ -8,13 +8,13 @@ use Lobby\FS;
  */
 
 class FSObj {
-  
+
   private $base = null;
-  
+
   public function __construct($base = null){
     $this->base = FS::rel($base);
   }
-  
+
   /**
    * Map static functions into object methods
    */

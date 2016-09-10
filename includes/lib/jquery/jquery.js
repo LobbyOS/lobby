@@ -9765,7 +9765,7 @@ jQuery.fn.extend( {
 	unbind: function( types, fn ) {
 		return this.off( types, null, fn );
 	},
-  
+
   /**
    * Lobby - Add back .live() & .die() function
    * http://subinsb.com/how-to-add-back-jquery-live-die-function

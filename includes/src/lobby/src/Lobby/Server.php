@@ -11,11 +11,11 @@ use Lobby\UI\Panel;
 class Server {
 
   public static $apiURL = null;
-  
+
   public static function __constructStatic(){
     self::$apiURL = L_SERVER . "/api";
   }
-  
+
   /**
    * Append Lobby Info to POST data
    */
@@ -27,7 +27,7 @@ class Server {
       )
     ), $data);
   }
-  
+
   /**
    * Lobby Store
    */
@@ -42,12 +42,12 @@ class Server {
       echo ser("HTTP Request Failed", $error);
       return false;
     }
-    
+
     if($response === "false"){
       return false;
     }else{
       $arr = json_decode($response, true);
-      
+
       /**
        * Make sure the response was valid.
        */
@@ -59,7 +59,7 @@ class Server {
       }
     }
   }
-  
+
   /**
    * Download Zip files
    */
@@ -72,8 +72,8 @@ class Server {
     }
     return $url;
   }
-  
-  
+
+
   /**
    * Get updates
    */
@@ -88,14 +88,14 @@ class Server {
       \Lobby::log("Checkup with server failed ($url) : $error");
       $response = false;
     }
-    
+
     if($response){
       $response = json_decode($response, true);
       if(is_array($response)){
         DB::saveOption("lobby_latest_version", $response['version']);
         DB::saveOption("lobby_latest_version_release", $response['released']);
         DB::saveOption("lobby_latest_version_release_notes", $response['release_notes']);
-    
+
         if(isset($response['apps']) && count($response['apps']) != 0){
           $AppUpdates = array();
           foreach($response['apps'] as $appID => $version){
@@ -106,7 +106,7 @@ class Server {
           }
           DB::saveOption("app_updates", json_encode($AppUpdates));
         }
-        
+
         if(isset($response["notify"])){
           foreach($response["notify"]["items"] as $itemID => $item){
             if(isset($item["href"])){
@@ -114,7 +114,7 @@ class Server {
             }
             Panel::addNotifyItem("lobby_server_msg_" . $itemID, $item);
           }
-          
+
           foreach($response["notify"]["remove_items"] as $itemID){
             Panel::removeNotifyItem("lobby_server_msg_" . $itemID);
           }
@@ -122,5 +122,5 @@ class Server {
       }
     }
   }
-  
+
 }

@@ -1,5 +1,9 @@
 lobby.load(function(){
-  $(document).tooltip();
-  
+  $('[title]').tooltip({
+    content: function(){
+      return $(this).attr('title');
+    }
+  });
+
   $("#workspace ul:not([class])").addClass("collection").find("li").addClass("collection-item");
 });

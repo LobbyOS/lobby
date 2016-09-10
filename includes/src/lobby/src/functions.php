@@ -3,7 +3,7 @@
  * A Functions file that are simple aliases of class methods
  * Example :
  * \Lobby::getOption() can be used with just getOption()
- * 
+ *
  * Also contains Non Class functions
  */
 

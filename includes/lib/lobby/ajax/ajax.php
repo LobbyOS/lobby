@@ -7,7 +7,7 @@ $appID = \Request::postParam('s7c8csw91', '');
 if($file != "" && CSRF::check()){
   if($appID !== ""){
     $App = new \Lobby\Apps($appID);
-     
+
     if($App->exists && $App->enabled){
       $AppObj = $App->getInstance();
       echo $AppObj->getAJAXResponse($file);

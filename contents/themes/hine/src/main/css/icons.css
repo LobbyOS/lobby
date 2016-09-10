@@ -19,3 +19,7 @@ i#open-in-new{
   background: url(<?THEME_URL?>/src/main/image/icons/open-in-new.svg);
   background-size: contain;
 }
+i#delete{
+  background: url(<?THEME_URL?>/src/main/image/icons/delete.svg);
+  background-size: contain;
+}

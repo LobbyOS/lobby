@@ -16,44 +16,44 @@ class Lobby {
    * Version & Release date
    */
   public static $version, $versionName, $versionReleased;
-  
+
   /**
    * Debugging Mode
    */
   public static $debug = false;
-  
+
   /**
    * Base URL
    */
   protected static $url = null;
-  
+
   /**
    * Host
    * 127.0.0.1:8000, localhost:9000
    */
   protected static $host;
-  
+
   /**
    * hostname = Host without port
    * 127.0.0.1, localhost
    */
   protected static $hostname;
-  
+
   /**
    * The Lobby Public ID
    */
   protected static $lid;
-  
+
   /**
    * Whether Lobby is installed
    */
   public static $installed = false;
-  
+
   /**
    * Information about system Lobby is installed in
    */
   protected static $sysInfo = array();
-  
+
   /**
    * Default Config
    */
@@ -64,22 +64,22 @@ class Lobby {
     "debug" => false,
     "server_check" => true
   );
-  
+
   /**
    * Array that hold the functions to determine state of Lobby
    */
   public static $statuses = array();
-  
+
   /**
    * Store the current state of Lobby
    */
   private static $status = null;
-  
+
   /**
    * Whether Lobby is in CLI (Command Line Interface) mode
    */
   public static $cli = false;
- 
+
   /**
    * Set up
    */
@@ -90,11 +90,11 @@ class Lobby {
     register_shutdown_function(function(){
       return \Lobby::fatalErrorHandler();
     });
-    
+
     set_error_handler(function(){
       return \Lobby::fatalErrorHandler();
     });
-    
+
     if(!isset($_SERVER["SERVER_NAME"])){
       /**
        * Lobby is not loaded by browser request, but by a script
@@ -105,10 +105,10 @@ class Lobby {
     }else{
       session_start();
     }
-    
+
     self::sysInfo();
     self::config();
-    
+
     $lobbyInfo = FS::get("/lobby.json");
     if($lobbyInfo !== false){
       $lobbyInfo = json_decode($lobbyInfo);
@@ -116,7 +116,7 @@ class Lobby {
       self::$versionName = $lobbyInfo->codename;
       self::$versionReleased = $lobbyInfo->released;
     }
-    
+
     \Assets::config(array(
       "basePath" => L_DIR,
       "baseURL" => self::getURL(),
@@ -124,7 +124,7 @@ class Lobby {
       "debug" => self::getConfig("debug")
     ));
   }
-  
+
   /**
    * Reads configuration & set Lobby according to it
    * @param bool $db Whether database config should only be returned
@@ -132,7 +132,7 @@ class Lobby {
   public static function config($db = false){
     if(file_exists(L_DIR . "/config.php")){
       $config = include(L_DIR . "/config.php");
-      
+
       if(is_array($config) && count($config) != 0){
         self::$config = array_replace_recursive(self::$config, $config);
 
@@ -148,12 +148,12 @@ class Lobby {
       }else{
         return false;
       }
-      
+
     }else{
       return false;
     }
   }
-  
+
   /**
    * Get the config value of a key
    * @param string $key The config key
@@ -170,7 +170,7 @@ class Lobby {
       return false;
     }
   }
-  
+
   /**
    * Return the version string of Lobby
    * @param bool $codename Whether release name (Berly) should also be included
@@ -179,7 +179,7 @@ class Lobby {
   public static function getVersion($codename = false){
     return self::$version . ($codename ? " " . self::$versionName : "");
   }
-  
+
   /**
    * Log messages to a log file
    * @param string $msg The message to log
@@ -199,24 +199,24 @@ class Lobby {
       $logMSG = ucfirst($type) . " Error - " . $msg[1];
     }else if(self::$debug === false)
       return false;
-    
+
     if($msg != null){
       $logMSG = !is_string($msg) ? serialize($msg) : $msg;
     }
-    
+
     /**
      * Write to Log File
      */
     if($msg != null){
       $logFile = "/contents/extra/logs/{$file}";
-      
+
       /**
-       * Format the log message 
+       * Format the log message
        */
       $logMSG = "[" . date("Y-m-d H:i:s") . "] $logMSG";
       \Lobby\FS::write($logFile, $logMSG, "a");
     }
-    
+
     /**
      * If error is Fatal, Lobby can't work
      * So register error in class
@@ -225,17 +225,17 @@ class Lobby {
       Response::showError(ucfirst($msg[0]) . " Error", $msg[1]);
     }
   }
-  
+
   /**
    * Get/Make the Lobby base URL
    */
-  public static function getURL(){    
+  public static function getURL(){
     if(self::$url !== null)
       return self::$url;
-    
+
     if(self::$cli)
       return null;
-    
+
     if(isset(self::$config['lobby_url'])){
       $url_parts = parse_url(self::$config['lobby_url']);
       self::$hostname = $url_parts['host'];
@@ -245,14 +245,14 @@ class Lobby {
       $subdir = str_replace($docDir, '', L_DIR);
       $urladdr = $_SERVER['HTTP_HOST'] . $subdir;
       $urladdr = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://" . $urladdr;
-      
+
       self::$url = rtrim($urladdr, "/");
       self::$host = $_SERVER['SERVER_NAME'] . (isset($_SERVER["SERVER_PORT"]) && $_SERVER["SERVER_PORT"] != "80" ? ":{$_SERVER['SERVER_PORT']}" : "");
       self::$hostname = $_SERVER['SERVER_NAME'];
     }
     return self::$url;
   }
-  
+
   /**
    * Get the host with the port (127.0.0.1:2020, localhost).
    * If the port is '80', it won't be included in the return value
@@ -261,7 +261,7 @@ class Lobby {
   public static function getHost(){
     return self::$host;
   }
-  
+
   /**
    * Get the hostname (without the port)
    * @return string Hostname
@@ -269,7 +269,7 @@ class Lobby {
   public static function getHostname(){
     return self::$hostname;
   }
-  
+
   /**
    * A handler for Fatal Errors occured in PHP
    */
@@ -281,15 +281,15 @@ class Lobby {
       $errFile = $error["file"];
       $errLine = $error["line"];
       $errStr = $error["message"];
-      
+
       $error = "$errType caused by $errFile on line $errLine : $errStr";
       self::log($error);
-      
+
       if(!self::$cli)
         Response::showError("Fatal Error", $error);
     }
   }
-  
+
   /**
    * Load System Info into self::$sysInfo
    */
@@ -307,7 +307,7 @@ class Lobby {
     }
     self::$sysInfo = $info;
   }
-  
+
   /**
    * Get info about the system Lobby is running in
    * @param string $key
@@ -316,12 +316,12 @@ class Lobby {
   public static function getSysInfo($key = null){
     return self::$sysInfo[$key];
   }
-  
+
   /**
    * Check the status of Lobby
-   * 
+   *
    * @param string $val The status to match against
-   * 
+   *
    * @return bool Whether $val matches the current Lobby status
    */
   public static function status($val){
@@ -358,11 +358,11 @@ class Lobby {
 
   /**
    * Make a hyperlink
-   * 
+   *
    * @param string $url   The URL
    * @param string $text  Inner content of hyperlink
    * @param string $extra Extra code to be inserted before <a is closed
-   * 
+   *
    * @return string The hyperlink code
    */
   public static function l($url = null, $text = null, $extra = null) {
@@ -372,35 +372,35 @@ class Lobby {
 
   /**
    * Make a Lobby URL from relative path
-   * 
+   *
    * @param string $path The relative path
-   * @param string $relative 
-   * 
+   * @param string $relative
+   *
    * @return Type Description
    */
   public static function u($path = null, $relative = false){
     if(self::$cli)
       return null;
-    
+
     /**
      * The $path var is changed during the process
      * So, original path is stored separately
      */
     $origPath = $path;
-    
+
     /**
      * The return URL
      */
     $url = $path;
-    
+
     /**
      * Prettyify $path
      */
     if($path !== null){
       $path = ltrim($path, "/");
-      
+
       $parts = parse_url($path);
-      
+
       /**
        * Make host along with port:
        * 127.0.0.1:9000
@@ -411,7 +411,7 @@ class Lobby {
         $urlHost = null;
       }
     }
-    
+
     /**
      * If no path, give the current page URL
      */
@@ -432,36 +432,36 @@ class Lobby {
     }
     return $url;
   }
-  
+
   /**
    * Get the path of current URL.
    * To get the last part only ("install" in "/folder/subfolder/admin/install), pass TRUE to $page
-   * 
+   *
    * @param bool $page Whether only the last pagename of URL should be returned.
    * @param bool $full Whether query part of URL should be included
    * @return string Pathname
    */
   public static function curPage($page = false, $full = false){
     $parts = parse_url($_SERVER["REQUEST_URI"]);
-    
+
     if($page){
       $pathParts = explode("/", $parts['path']);
       /**
        * Get the string after last "/"
        */
       $last = $pathParts[ count($pathParts) - 1 ];
-      
+
       return $full === false ? $last : $last . (isset($parts['query']) ? $parts['query'] : "");
     }else{
       return $full === false ? $parts['path'] : $_SERVER["REQUEST_URI"];
     }
   }
-  
+
   /**
    * Get the public Lobby ID
    */
   public static function getLID(){
     return self::$lid;
   }
-  
+
 }

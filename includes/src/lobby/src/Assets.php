@@ -13,7 +13,7 @@ class Assets {
    * The CSS & JS assets
    */
   protected static $css = array(), $js = array();
-  
+
   /**
    * The configuration
    */
@@ -22,23 +22,23 @@ class Assets {
      * Base Directory (path) of application
      */
     "basePath" => "",
-    
+
     /**
      * The base URL of all packages
      */
     "baseURL" => "",
-    
+
     /**
      * The path to file where assets are printed
      */
     "serveFile" => "",
-    
+
     /**
      * Enable/Disable Debugging
      */
     "debug" => false
   );
-  
+
   /**
    * Callback before asset contents are served
    */
@@ -52,7 +52,7 @@ class Assets {
     self::$config = array_replace_recursive(self::$config, $config);
     self::$config["basePath"] = realpath(self::$config["basePath"]);
   }
-  
+
   /**
    * Make URL from path
    * @param string $path Relative path
@@ -64,7 +64,7 @@ class Assets {
       return self::$config['baseURL'] . "/" . $path;
     }
   }
-  
+
   /**
    * Make Absolute Path from relative path
    * @param string $path Get absolute location to a file. Returns false if path is outside the base directory
@@ -76,7 +76,7 @@ class Assets {
     }
     return false;
   }
-  
+
   /**
    * Whether a string starts with a particular string
    * @param string $string The string where the check should be done
@@ -86,7 +86,7 @@ class Assets {
     $length = strlen($needle);
     return (substr($string, 0, $length) === $needle);
   }
-  
+
   /**
    * Add a CSS asset or return the <link> tag
    * @param string $name Asset's name. If this is null, <link href='... tag is returned
@@ -99,7 +99,7 @@ class Assets {
       self::$css[$name] = $url;
     }
   }
-  
+
   /**
    * Add a JS asset or return the <script> tag
    * @param string $name Asset's name. If this is null, <script src='... tag is returned
@@ -112,7 +112,7 @@ class Assets {
       self::$js[$name] = $url;
     }
   }
-  
+
   /**
    * Remove a CSS asset
    * @param string $name The name of asset to remove
@@ -127,7 +127,7 @@ class Assets {
     }
     return true;
   }
-  
+
   /**
    * Remove a JS asset
    * @param string $name The name of asset to remove
@@ -142,7 +142,7 @@ class Assets {
     }
     return true;
   }
-  
+
   /**
    * Get the <link href> tag of all assets
    */
@@ -153,7 +153,7 @@ class Assets {
     }
     return $html;
   }
-  
+
   /**
    * Get the <script src> tag of all assets
    */
@@ -164,7 +164,21 @@ class Assets {
     }
     return $html;
   }
-  
+
+  /**
+   * @param array $params Extra GET parameters in URL
+   * @return array Assets with url to serve assets file
+   */
+  public static function getServeScriptURL($params = array()){
+    $assets = array();
+
+    foreach (self::$js as $asset => $null) {
+      $assets[$asset] = self::getServeURL("js", $params, array($asset));
+    }
+
+    return $assets;
+  }
+
   /**
    * Get the <link src> tag of combined CSS files
    * @param array $params Extra GET data to include in URL
@@ -172,7 +186,7 @@ class Assets {
   public static function getServeLinkTag($params = array()){
     return "<link rel='stylesheet' href='". self::getServeURL("css", $params) ."' async='async' defer='defer' />";
   }
-  
+
   /**
    * Get the <script src> tag of combined JS files
    * @param array $params Extra GET data to include in URL
@@ -180,7 +194,7 @@ class Assets {
   public static function getServeScriptTag($params = array()){
     return "<script src='". self::getServeURL("js", $params) ."'></script>";
   }
-  
+
   /**
    * Get the URL to the file that serves the assets
    * @param $type string - Either "js" or "css"
@@ -189,32 +203,32 @@ class Assets {
    */
   public static function getServeURL($type, $params = array(), $customAssets = array()){
     $url = self::getURL(self::$config["serveFile"]);
-    
+
     if($type === "css"){
       $assets = self::$css;
     }else{
       $assets = self::$js;
     }
-    
+
     if(!empty($customAssets)){
       foreach($assets as $asset => $assetLocation){
         if(!in_array($asset, $customAssets))
           unset($assets[$asset]);
       }
     }
-    
+
     if($type === "css"){
       $url .= "?assets=" . implode(",", $assets) . "&type=css";
     }else{
       $url .= "?assets=" . implode(",", $assets) . "&type=js";
     }
-    
+
     if(count($params) !== 0){
       $url .= "&" . http_build_query($params);
     }
     return $url;
   }
-  
+
   /**
    * Pre process the code inside asset
    * @param string $data Code inside asset
@@ -227,28 +241,28 @@ class Assets {
       return call_user_func_array(self::$preProcess, array($data, $type));
     }
   }
-  
+
   /**
    * Handle the request to serve assets and respond with assets
    */
   public static function serve(){
     $assets = isset($_GET['assets']) ? $_GET['assets'] : null;
     $type = isset($_GET['type']) ? $_GET['type'] : null;
-    
+
     if($type === "css" || $type === "js"){
-      
+
       if($type === "css"){
         header("Content-type: text/css");
       }else{
         header("Content-type: application/x-javascript");
       }
       header("Cache-Control: public");
-            
+
       /**
        * Separate the Assets and remove null items
        */
       $assets = array_filter(explode(",", $assets));
-      
+
       /**
        * Calculate ETag before echoing out the assets
        */
@@ -259,22 +273,22 @@ class Assets {
           $etag .= filemtime($assetLocation);
         }
       }
-      
+
       $etag = hash("md5", $etag);
       header("ETag: $etag");
-      
+
       /**
        * Was it already cached before by the browser ? The old etag will be sent by
        * the browsers as HTTP_IF_NONE_MATCH. '501' is a random value
        */
       $browserTag = isset($_SERVER["HTTP_IF_NONE_MATCH"]) ? $_SERVER["HTTP_IF_NONE_MATCH"] : null;
-      
+
       if($browserTag === $etag){
         header("HTTP/1.1 304 Not Modified");
       }else{
         foreach($assets as $assetRelLocation){
           $assetLocation = self::getPath($assetRelLocation);
-          
+
           if($assetLocation === false){
             /**
              * If file doesn't exist or is not under base directory
@@ -284,7 +298,7 @@ class Assets {
             }
           }else{
             $data = self::preProcess(file_get_contents($assetLocation), $type);
-            
+
             if($data !== null){
               if(self::$config["debug"] === true)
                 echo "\n/** Asset - $assetRelLocation */\n";
@@ -297,7 +311,7 @@ class Assets {
       echo "incompatible_type";
     }
   }
-  
+
   /**
    * Whether a JS asset is added
    * @param string $asset Name of asset to check
@@ -305,7 +319,7 @@ class Assets {
   public static function issetJS($asset){
     return isset(self::$js[$asset]);
   }
-  
+
   /**
    * Whether a CSS asset is added
    * @param string $asset Name of asset to check
@@ -314,19 +328,19 @@ class Assets {
   public static function issetCSS($asset){
     return isset(self::$css[$asset]);
   }
-  
+
   /**
    * Get the path to a JS asset or return all JS assets
-   * @param string $asset Name of asset to check. 
+   * @param string $asset Name of asset to check.
    * @return string|array Path to asset if $asset is mentioned or all JS assets
    */
   public static function getJS($asset = null){
     return $asset === null ? self::$js : self::$js[$asset];
   }
-  
+
   /**
    * Get the path to a CSS asset or return all CSS assets
-   * @param string $asset Name of asset to check. 
+   * @param string $asset Name of asset to check.
    * @return string|array Path to asset if $asset is mentioned or all CSS assets
    */
   public static function getCSS($asset = null){

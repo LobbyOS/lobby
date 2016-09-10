@@ -9,7 +9,7 @@
     "/admin/settings.php" => "Settings",
   );
   $links = Hooks::applyFilters("admin.view.sidebar", $links);
-  
+
   $curPage = \Lobby::curPage();
   foreach($links as $link => $text){
     if(substr($curPage, 0, strlen($link)) === $link || ($curPage == "/admin/update.php" && $text == "Settings") || ($curPage == "/admin/install-app.php" && $text == "Apps")){

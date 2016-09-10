@@ -18,10 +18,10 @@ use \Lobby\Update;
 
 if($argv[1] === \Lobby::getLID() && isset($argv[3])){
   $appID = $argv[3];
-  
+
   function sendStatusToLobby($statusID, $status){
     global $appID;
-    
+
     Lobby\DB::saveJSONOption("lobby_app_downloads", array(
       $appID => array(
         "statusID" => $statusID,
@@ -30,13 +30,13 @@ if($argv[1] === \Lobby::getLID() && isset($argv[3])){
       )
     ));
   }
-  
+
   /**
    * Record the last percentage of data downloaded
    * This to know whether download has progressed from previous state
    */
   $lastPercentage = 0;
-  
+
   \Lobby\Update::$progress = function($resource, $download_size, $downloaded, $upload_size, $uploaded = "") use($appID, $lastPercentage){
     /**
      * On new versions of cURL, $resource parameter is not passed
@@ -48,16 +48,16 @@ if($argv[1] === \Lobby::getLID() && isset($argv[3])){
       $downloaded = $download_size;
       $download_size = $resource;
     }
-    
+
     if($download_size > 1000 && $downloaded > 0){
       $percent = round($downloaded / $download_size  * 100, 0);
     }else{
       $percent = 1;
     }
-    
+
     if($lastPercentage !== $percent || isset($GLOBALS['non_percent'])){
       $lastPercentage = $percent;
-      
+
       if($download_size > 0){
         $readable_size = FS::normalizeSize($download_size);
         sendStatusToLobby("download_status", "Downloaded $percent% of $readable_size");
@@ -66,11 +66,11 @@ if($argv[1] === \Lobby::getLID() && isset($argv[3])){
          * We couldn't find the percentage
          */
         $GLOBALS['non_percent'] = 1;
-        
+
         $downloaded = FS::normalizeSize($downloaded);
         sendStatusToLobby("download_status", "Downloaded $downloaded");
       }
-      
+
       /**
        * Show Install message when download is completed
        */
@@ -84,7 +84,7 @@ if($argv[1] === \Lobby::getLID() && isset($argv[3])){
       }
     }
   };
-  
+
   try{
     /**
      * Update::app() will only return TRUE if download is completed
@@ -92,7 +92,7 @@ if($argv[1] === \Lobby::getLID() && isset($argv[3])){
     if(Update::app($appID)){
       $App = new Apps($appID);
       $App->enableApp();
-      
+
       sendStatusToLobby("install_finished", "Installed <b>$appID</b>.<cl/><a href='". $App->info["url"] ."' class='btn green'>Open App</a>");
     }
   }catch(\Exception $e){

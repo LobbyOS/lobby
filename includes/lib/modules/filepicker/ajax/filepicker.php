@@ -48,48 +48,48 @@ if(isset($_GET['img'])){
    * Description: This program will let you browse server-side folders and files
    * 				like a Windows Explorer, and you can pick several files that you
    * 				want to process in somewhere.
-   * 
+   *
    * Copyright (c) 2008-2009 Hpyer (coolhpy[at]163.com)
    * Dual licensed under the MIT (MIT-LICENSE.txt)
    * and GPL (GPL-LICENSE.txt) licenses.
    */
-  
+
   // -------------------- Configration begin -------------------------
-  
+
   // Language [Default: en]
   define('FP_LANGUAGE', 'en');
-  
+
   // Date format [Default: Y-m-d]
   define('FP_DATE', 'Y-m-d');
-  
+
   // Time format [Default: H:i:s]
   define('FP_TIME', 'H:i:s');
-  
+
   // Separator thousand [Default: ,]
   define('FP_THOUSAND', ',');
-  
+
   // Decimal point [Default: .]
   define('FP_DECIMAL', '.');
-  
+
   // Number of decimals to display [Default: 2]
   define('FP_DECIMAL_NUM', 2);
-  
+
   // How many level of FP_ROOT_PATH that user can visit, 0 means root only [Default: 1]
   // 0 means root only, -1 means unlimited
   // @since: 1.1.1
   // (Not ready for 1.1 - Nov. 10, 2009)
   // define('FP_DIR_LEVEL', 1);
-  
+
   // --------------------- Configration end --------------------------
-  
-  
+
+
   header('Content-Type: text/html; charset=UTF-8');
-  
+
   define('FP_SCRIPT_ROOT', dirname(__DIR__));
   define('FP_CLASS_ROOT', FP_SCRIPT_ROOT . '/inc');
-  
+
   require_once(FP_CLASS_ROOT . '/FilePicker.php');
-  
+
   $fp = new FilePicker(function($e){
     if($e === "permission_denied"){
       echo $e;
@@ -97,7 +97,7 @@ if(isset($_GET['img'])){
     exit;
   });
   $action = \Request::get('action');
-  
+
   switch ($action){
     case 'list':
       $dir = base64_encode(makeOSPath(\Request::postParam("dir", "/")));
@@ -120,7 +120,7 @@ if(isset($_GET['img'])){
       $filter = \Request::get('filter');
       $filters = '';
       $filters = $fp->get_filters($filter);
-      
+
       $dir = makeOSPath(\Request::postParam("dir", "/"));
       $dir_b64 = base64_encode($dir);
       ob_start();

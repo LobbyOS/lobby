@@ -7,28 +7,28 @@ use Lobby\DB;
 use Lobby\FS;
 
 class Themes {
-  
+
   /**
    * Cache results
    */
   protected static $cache = array();
-  
+
   /**
    * Path & URL to `themes` folder
    */
   protected static $themesDir;
   protected static $themesURL;
-  
+
   /**
    * Active theme's Info
    */
   private static $themeID = null, $dir, $url;
-  
+
   /**
    * Active theme's \Lobby\UI\Theme object
    */
   private static $theme;
-  
+
   /**
    * Initialization
    * @param array $themeVARS Contains directory and URL to `themes` folder
@@ -36,9 +36,9 @@ class Themes {
   public static function __constructStatic($themesVARS){
     self::$themesDir = $themesVARS[0];
     self::$themesURL = Lobby::u($themesVARS[1]);
-    
+
     self::$themeID = DB::getOption("active_theme");
-    
+
     /**
      * Default theme is `hine`
      */
@@ -47,16 +47,16 @@ class Themes {
     }else if(self::validTheme(self::$themeID) === false){
       self::$themeID = "hine";
     }
-    
+
     self::$url = self::$themesURL . "/" . self::$themeID;
     self::$dir = self::$themesDir . "/" . self::$themeID;
-    
+
     if(!\Lobby::status("lobby.assets-serve")){
       self::loadDefaults();
       self::loadTheme();
     }
   }
-  
+
   /**
    * Get themes installed
    */
@@ -64,7 +64,7 @@ class Themes {
     if(!isset(self::$cache["themes"])){
       self::$cache['themes'] = array();
       $theme_folders = array_diff(scandir(THEMESE_DIR), array('..', '.'));
-    
+
       foreach($theme_folders as $theme_folder_name){
         if(self::valid($theme_folder_name)){
           self::$cache['themes'][$theme_folder_name] = 1;
@@ -73,19 +73,19 @@ class Themes {
     }
     return self::$cache['themes'];
   }
-  
+
   public static function getThemeID(){
     return self::$themeID;
   }
-  
+
   public static function getThemeDir(){
     return self::$dir;
   }
-  
+
   public static function getThemeURL(){
     return self::$url;
   }
-  
+
   /**
    * Load Default CSS & JS
    */
@@ -96,27 +96,27 @@ class Themes {
     \Assets::js("jquery", "/includes/lib/jquery/jquery.js");
     \Assets::js("jqueryui", "/includes/lib/jquery/jquery-ui.js"); // jQuery UI
     \Assets::js("main", "/includes/lib/lobby/js/main.js");
-    
+
     if(\Lobby::$installed){
       \Assets::js("notify", "/includes/lib/lobby/js/notify.js");
     }
   }
-  
+
   /**
    * Load a theme
    */
   public static function loadTheme(){
-    
+
     require_once self::$dir . "/Theme.php";
-    
+
     $className = "\Lobby\UI\Themes\\" . self::$themeID;
     self::$theme = new $className(self::$themeID, self::$dir);
-    
+
     self::$theme->init();
-    
+
     self::$theme->addStyle("/src/main/css/style.css");
     self::$theme->addStyle("/src/main/css/icons.css");
-    
+
     /**
      * Load Panel
      */
@@ -136,9 +136,9 @@ class Themes {
         echo self::$theme->inc("/src/panel/load.php");
       });
     }
-    
+
   }
-  
+
   /**
    * Load Dashboard
    */
@@ -149,14 +149,14 @@ class Themes {
       echo self::$theme->inc("/src/dashboard/load.php");
     }
   }
-  
+
   /**
    * Check if a theme is valid
    */
   public static function validTheme($theme){
     $valid = false;
     $loc = self::$themesDir . "/$theme";
-    
+
     /**
      * Does the "Theme.php" file in theme directory exist ?
      */
@@ -165,5 +165,5 @@ class Themes {
     }
     return $valid;
   }
-  
+
 }

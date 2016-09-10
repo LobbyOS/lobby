@@ -19,5 +19,5 @@ class Helper {
     }
     return $str;
   }
-  
+
 }

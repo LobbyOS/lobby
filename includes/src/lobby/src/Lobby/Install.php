@@ -17,12 +17,12 @@ class Install extends \Lobby {
    * Database config
    */
   private static $database = array();
-  
+
   /**
    * PDO object
    */
   private static $dbh;
-  
+
   /**
    * When an error is encountered, the error message is stored here
    */
@@ -43,7 +43,7 @@ class Install extends \Lobby {
       return true;
     }
   }
-  
+
   /**
    * Establish a connection with the DB
    * @return bool Whether connection can be established
@@ -56,7 +56,7 @@ class Install extends \Lobby {
       self::$dbh = $db;
       self::$dbh->exec("CREATE DATABASE IF NOT EXISTS `" . self::$database['dbname'] . "`");
       self::$dbh->query("USE `" . self::$database['dbname'] . "`");
-      
+
       $notable = false;
       $tables = array("options", "data"); // The Tables of Lobby
       foreach($tables as $tableName){
@@ -66,7 +66,7 @@ class Install extends \Lobby {
           $notable = true;
         }
       }
-        
+
       if(!$notable){
         /**
          * Database tables exist
@@ -80,20 +80,20 @@ class Install extends \Lobby {
       return false;
     }
   }
-  
+
   /**
    * Make the config.php file
    * @param string $db_type Database type.
    *        - mysql
    *        - sqlite
-   * @return string 
+   * @return string
    */
   public static function makeConfigFile($db_type = "mysql"){
     $lobbyID = \Helper::randStr(10) . \Helper::randStr(15) . \Helper::randStr(20); // Lobby Global ID
     $lobbySID   = hash("sha512", \Helper::randStr(15) . \Helper::randStr(30)); // Lobby Secure ID
     $configFileLoc = L_DIR . "/config.php";
     $cfg = self::$database;
-    
+
     /**
      * Make the configuration file
      */
@@ -106,7 +106,7 @@ class Install extends \Lobby {
       $config_file = preg_replace("/password'(.*?)''/", "password'$1'{$cfg['password']}'", $config_file);
       $config_file = preg_replace("/dbname'(.*?)''/", "dbname'$1'{$cfg['dbname']}'", $config_file);
       $config_file = preg_replace("/prefix'(.*?)'(.*?)'/", "prefix'$1'{$cfg['prefix']}'", $config_file);
-    }else{      
+    }else{
       $config_file = preg_replace("/type'(.*?)'(.*?)'/", "type'$1'sqlite'", $config_file);
       $config_file = preg_replace("/port'(.*?)'(.*?)',/", "path'$1'{$cfg['path']}',", $config_file);
       $config_file = preg_replace("/[[:blank:]]+(.*?)'host'(.*?)'(.*?)',\n/", "", $config_file);
@@ -117,7 +117,7 @@ class Install extends \Lobby {
     }
     $config_file = preg_replace("/lobbyID'(.*?)''/", "lobbyID'$1'{$lobbyID}'", $config_file);
     $config_file = preg_replace("/secureID'(.*?)''/", "secureID'$1'{$lobbySID}'", $config_file);
-    
+
     /**
      * Create the config.php file
      */
@@ -127,7 +127,7 @@ class Install extends \Lobby {
       chmod(L_DIR . "/config.php", 0550);
     }
   }
-  
+
   /**
    * Create tables in the DB
    * @param string $prefix The prefix of table names
@@ -210,7 +210,7 @@ class Install extends \Lobby {
   public static function dbConfig($array){
     self::$database = $array;
   }
-  
+
   /**
    * After installation, check if Lobby installation directory is safe
    * @return mixed Status of safeness
@@ -225,7 +225,7 @@ class Install extends \Lobby {
       return true;
     }
   }
-  
+
   /**
    * Make the SQLite DB
    * @param string $loc Path to SQLite DB
@@ -243,6 +243,6 @@ class Install extends \Lobby {
       return false;
     }
   }
-  
+
 }
 

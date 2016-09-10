@@ -5,7 +5,7 @@
  * Description: This program will let you browse server-side folders and files
  * 				like a Windows Explorer, and you can pick several files that you
  * 				want to process in somewhere.
- * 
+ *
  * Copyright (c) 2008-2009 Hpyer (coolhpy[at]163.com)
  * Dual licensed under the MIT (MIT-LICENSE.txt)
  * and GPL (GPL-LICENSE.txt) licenses.
@@ -47,7 +47,7 @@ class FilePicker {
 	 * @type	object
 	 */
 	private $json = true;
-  
+
   /**
    * A callback to receive errors
    */
@@ -61,7 +61,7 @@ class FilePicker {
 	 */
 	public function __construct($cb = ""){
     $this->callback = $cb === "" ? function($e){} : $cb;
-    
+
     $this->filters = array(
 			__('All files'),
 			__('Images'),
@@ -122,44 +122,44 @@ class FilePicker {
 		if (file_exists($filename)){
 			$info = array();
 			$info[] = array(
-				'key' => 'name', 
-				'trans' => __('Name'), 
+				'key' => 'name',
+				'trans' => __('Name'),
 				'value' => $file
 			);
 			if (is_dir($filename)){
 				$this->read_dir($filename);
 				$info[] = array(
-					'key' => 'folders', 
-					'trans' => __('Folder(s)'), 
+					'key' => 'folders',
+					'trans' => __('Folder(s)'),
 					'value' => count($this->folders)
 				);
 				$info[] = array(
-					'key' => 'files', 
-					'trans' => __('File(s)'), 
+					'key' => 'files',
+					'trans' => __('File(s)'),
 					'value' => count($this->files)
 				);
 			} elseif (is_file($filename)){
 				if (in_array($this->get_extension($filename), $this->filters_exts[1])){
 					$info[] = array(
-						'key' => 'preview', 
-						'trans' => __('Preview'), 
+						'key' => 'preview',
+						'trans' => __('Preview'),
 						'value' => $file
 					);
 				}
 				$info[] = array(
-					'key' => 'size', 
-					'trans' => __('File Size'), 
+					'key' => 'size',
+					'trans' => __('File Size'),
 					'value' => $this->format_size(filesize($filename), FP_DECIMAL_NUM, FP_DECIMAL, FP_THOUSAND)
 				);
 				$info[] = array(
-					'key' => 'modify', 
-					'trans' => __('Last Modified'), 
+					'key' => 'modify',
+					'trans' => __('Last Modified'),
 					'value' => date(FP_DATE . ' ' . FP_TIME, filemtime($filename))
 				);
 			}
 			$info[] = array(
-				'key' => 'permission', 
-				'trans' => __('Permission'), 
+				'key' => 'permission',
+				'trans' => __('Permission'),
 				'value' => $this->get_permission($filename)
 			);
 			return $this->do_json_encode($info);

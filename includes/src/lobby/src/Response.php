@@ -16,12 +16,12 @@ class Response {
    * The Symfony Response object
    */
   private static $response = null;
-  
+
   /**
    * Page's content
    */
   private static $pageContent = null;
-  
+
   /**
    * The <title> tag's content
    */
@@ -37,7 +37,7 @@ class Response {
     self::$response = new SymResponse();
     self::$response->setCharset("UTF-8");
   }
-  
+
   /**
    * Set the status code of response
    * @param int $status The status code
@@ -45,7 +45,7 @@ class Response {
   public static function setStatusCode($status){
     self::$response->setStatusCode($status);
   }
-  
+
   /**
    * Set the response body
    * @param string $content The response body to set
@@ -55,18 +55,18 @@ class Response {
       self::$pageContent = null;
     self::$response->setContent($content);
   }
-  
+
   /**
    * Set the page content.
-   * 
+   *
    * Pass the contents that should be inserted in #workspace tag inside <body>.
-   * 
+   *
    * @param string $content The page's HTML
    */
   public static function setPage($content){
     self::$pageContent = $content;
   }
-  
+
   /**
    * Run a (PHP) file and get the response of it.
    * @param string $location Path to file
@@ -79,7 +79,7 @@ class Response {
       require FS::loc($location);
     return ob_get_clean();
   }
-  
+
   /**
    * Set the page content by loading a file
    * @param string $location Path to file
@@ -87,7 +87,7 @@ class Response {
   public static function loadPage($location){
     self::setPage(self::getFile($location));
   }
-  
+
   /**
    * Get the response body
    * @return string|null The response body
@@ -95,15 +95,15 @@ class Response {
   public static function getContent(){
     return self::$response->getContent();
   }
-  
+
   /**
    * Get the page response
-   * @return string|null The page's HTML 
+   * @return string|null The page's HTML
    */
   public static function getPageContent(){
     return self::$pageContent;
   }
-  
+
   /**
    * Whether response body is set
    * @return bool
@@ -111,14 +111,14 @@ class Response {
   public static function hasContent(){
     return (self::$pageContent != null || self::$response->getContent() != null);
   }
-  
+
   /**
    * Display a plain error page.
-   * 
+   *
    * If $title and $content is not null, status code will be 500, else 404
-   * 
+   *
    * The respons will be sent and script execution will be stopped if this function is called.
-   * 
+   *
    * @param string $title Error name
    * @param string $description Error description
    */
@@ -130,16 +130,16 @@ class Response {
     }else{
       self::setStatusCode(500);
     }
-    
+
     self::setContent(self::getFile("includes/lib/lobby/inc/view.error.php", array(
       "title" => $title,
       "description" => $description
     )));
-    
+
     self::send();
     exit;
   }
-  
+
   /**
    * Send response
    */
@@ -150,11 +150,11 @@ class Response {
       $html = ob_get_clean();
       self::setContent($html);
     }
-    
+
     self::$response->prepare(Request::getRequestObject());
     self::$response->send();
   }
-  
+
   /**
    * Make and print the <head> tag
    * @param string $title The content of <title> tag
@@ -164,7 +164,30 @@ class Response {
     if($title != ""){
       self::setTitle($title);
     }
-    
+
+    /* Title */
+    echo "<title>" . self::$title . "</title>";
+
+    /**
+     * Mobile view
+     */
+    echo "<meta name='viewport' content='width=device-width, initial-scale=1' />";
+
+    $cssServeParams = array(
+      "THEME_URL" => THEME_URL
+    );
+
+    /**
+     * CSS Files
+     */
+    if(Apps::isAppRunning()){
+      $cssServeParams["APP_URL"] = urlencode(Apps::getInfo("url"));
+      $cssServeParams["APP_SRC"] = urlencode(Apps::getInfo("srcURL"));
+    }
+    echo Assets::getServeLinkTag($cssServeParams);
+
+    echo "<link href='". L_URL ."/favicon.ico' sizes='16x16 32x32 64x64' rel='shortcut icon' />";
+
     if(Assets::issetJS('jquery')){
       /**
        * Load jQuery, jQuery UI, Lobby Main, App separately without async
@@ -176,53 +199,30 @@ class Response {
         Assets::issetJS('app') ? Assets::getJS('app') : ""
       ));
       echo "<script src='{$url}'></script>";
-      
+
       Assets::removeJS("jquery");
       Assets::removeJS("jqueryui");
       Assets::removeJS("main");
     }
-    
+
     $jsURLParams = array(
       "THEME_URL" => Themes::getThemeURL()
     );
-    
+
     if(Apps::isAppRunning()){
       $jsURLParams["APP_URL"] = urlencode(Apps::getInfo("url"));
       $jsURLParams["APP_SRC"] = urlencode(Apps::getInfo("srcURL"));
     }
-    
+
     $jsURL = Assets::getServeURL("js", $jsURLParams);
-    
+
     echo "<script>lobby.load_script_url = '". $jsURL ."';</script>";
-    
-    $cssServeParams = array(
-      "THEME_URL" => THEME_URL
-    );
-    
-    /**
-     * CSS Files
-     */
-    if(Apps::isAppRunning()){
-      $cssServeParams["APP_URL"] = urlencode(Apps::getInfo("url"));
-      $cssServeParams["APP_SRC"] = urlencode(Apps::getInfo("srcURL"));
-    }
-    echo Assets::getServeLinkTag($cssServeParams);
-    
-    echo "<link href='". L_URL ."/favicon.ico' sizes='16x16 32x32 64x64' rel='shortcut icon' />";
-    
-    /* Title */
-    echo "<title>" . self::$title . "</title>";
-    
-    /**
-     * Mobile view
-     */
-    echo "<meta name='viewport' content='width=device-width, initial-scale=1' />";
   }
- 
+
   /**
    * Set the content of <title> tag
-   * @param string $title 
-   * @return string 
+   * @param string $title
+   * @return string
    */
   public static function setTitle($title = ""){
     if($title != ""){
@@ -234,7 +234,7 @@ class Response {
       }
     }
   }
-  
+
   /**
    * Do a redirect
    * @param string $url URL to redirect to. Can be relative to Lobby

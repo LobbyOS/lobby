@@ -30,7 +30,7 @@
           }
           echo "</ul><p>To disable a <b>custom module</b>, create a 'disabled.txt' file in the module directory</p>";
         }
-        
+
         echo "<h3>App Modules</h3>";
         echo "<p>The modules loaded by Apps</p>";
         if(count($app_modules) == 0){
@@ -42,7 +42,7 @@
           }
           echo "</ul>";
         }
-        
+
         echo "<h3>Core Modules</h3>";
         echo "<p>These modules can't be removed and is part of the Lobby Core.</p>";
         echo "<ul>";

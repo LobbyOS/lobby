@@ -21,7 +21,7 @@ ini_set('zlib.output_compression', false);
 //Flush (send) the output buffer and turn off output buffering
 //ob_end_flush();
 while (@ob_end_flush());
-         
+
 // Implicitly flush the buffer(s)
 ini_set('implicit_flush', true);
 ob_implicit_flush(true);
@@ -35,7 +35,7 @@ if($type == "app"){
     "get" => "app",
     "id" => $appID
   ));
-          
+
   if($app == "false"){
     echo "Error - App '<b>{$appID}</b>' does not exist in Lobby.";
     exit;
@@ -95,14 +95,14 @@ $GLOBALS['last'] = 0;
 if($type === "app" && \Lobby\Update::app($appID)){
   $App = new Apps($appID);
   $App->enableApp();
-  
+
   if($isUpdate){
     $appUpdates = Lobby\DB::getJSONOption("app_updates");
     if(isset($appUpdates[$appID]))
       unset($appUpdates[$appID]);
     Lobby\DB::saveOption("app_updates", json_encode($appUpdates));
   }
-  
+
   echo "Installed - The app has been " . ($isUpdate ? "updated." : "installed. <a target='_parent' href='". $App->info["url"] ."'>Open App</a>");
 }else if($type === "lobby" && $redirect = \Lobby\Update::software()){
   echo "<a target='_parent' href='$redirect'>Updated Lobby</a>";

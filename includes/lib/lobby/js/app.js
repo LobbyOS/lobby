@@ -19,7 +19,7 @@ lobby.app.save = function(key, value, callback){
   /* If the callback given is a function, use it otherwise make a simple function that is of no use */
   var callback = typeof callback == "function" ? callback : function(){};
   var requestURL = lobby.url + "/includes/lib/lobby/ajax/saveData.php";
-  
+
   if(key == "" || value == ""){
      callback("bad");
   }else{

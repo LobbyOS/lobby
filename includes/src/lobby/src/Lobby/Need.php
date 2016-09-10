@@ -47,9 +47,9 @@ class Need {
         $v = phpversion($dependency);
         return $v ? $v : 0;
     }
-    
+
   }
-  
+
   /**
    * Check requirements
    * @param array $requires The array containing the requirements
@@ -58,13 +58,13 @@ class Need {
    */
   public static function checkRequirements($requires, $boolean = false, $multi = false){
     $result = $requires;
-    
+
     /**
      * $requiredVersion will look like ">=5.0"
      */
     foreach($requires as $dependency => $requiredVersion){
       $currentVersion = self::getDependencyVersion($dependency);
-      
+
       /**
        * Compare the current version and required version
        */
@@ -74,7 +74,7 @@ class Need {
       }else{
         $result[$dependency] = false;
       }
-      
+
       /**
        * If dependency is an app
        */
@@ -82,7 +82,7 @@ class Need {
         list($mainDependency, $subDependency) = explode("/", $dependency);
         if($mainDependency === "app"){
           $App = new Apps($subDependency);
-          
+
           if(!$App->exists){
             $result[$dependency] = false;
           }else if($multi){
@@ -95,7 +95,7 @@ class Need {
         }
       }
     }
-    
+
     if($multi){
       foreach($result as $dependency => $satisfy){
         if(!is_array($satisfy)){

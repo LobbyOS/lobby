@@ -1,3 +1,10 @@
+## 0.9.3
+
+* Fixed bugs
+* UI changed
+  * Mobile UI
+  * Icons instead of actions
+
 ## 0.9.2
 
 `Berly`

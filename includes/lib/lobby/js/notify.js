@@ -1,6 +1,6 @@
 lobby.notify = {
   box: null,
-  
+
   checkInterval: null,
   nfs: [],
 
@@ -12,13 +12,13 @@ lobby.notify = {
       lobby.notify.update();
     }, 10000);
   },
-  
+
   /**
    * The theme should define these
    */
   push: function(){},
   onNewItems: function(){},
-  
+
   update: function(){
     lobby.ajax("includes/lib/lobby/ajax/notify.php", {}, function(response){
       nfs = JSON.parse(response); // Short for notifications
@@ -30,7 +30,7 @@ lobby.notify = {
           lobby.notify.nfs.push(id);
           lobby.notify.push(notification);
         });
-        
+
         /**
          * Check if notify items have been removed
          */
@@ -44,16 +44,16 @@ lobby.notify = {
             }
           });
         }
-        
+
         lobby.notify.onNewItems();
       }
     });
   },
-  
+
   events: function(){
-    
+
   }
-  
+
 };
 
 /**

@@ -110,3 +110,9 @@ label{
   font-size: 0.9rem;
   color: #383838;
 }
+
+@media screen and (max-width: 700px){
+  #workspace .contents{
+    width: 100%;
+  }
+}

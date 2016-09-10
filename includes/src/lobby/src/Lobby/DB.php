@@ -7,27 +7,27 @@ namespace Lobby;
  */
 
 class DB extends \Lobby {
-  
+
   protected static $prefix = "", $dbh;
-  
+
   /**
    * The DBMS begin used - MySQL or SQLite
    */
   protected static $type;
- 
+
   public static function __constructStatic(){
     /**
      * Get DB config
      */
     $config = \Lobby::config(true);
-    
+
     if(is_array($config)){
       /**
        * Make DB credentials variables from the config.php file
        */
       self::$prefix = $config['prefix'];
       self::$type = $config['type'];
-     
+
       $options = array(
         \PDO::ATTR_PERSISTENT => true,
         \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
@@ -35,7 +35,7 @@ class DB extends \Lobby {
       try{
         if($config['type'] === 'mysql'){
           self::$dbh = new \PDO("mysql:dbname={$config['dbname']};host={$config['host']};port={$config['port']};charset=utf8;", $config['username'], $config['password'], $options);
-          
+
           /**
            * Check if Lobby tables exist
            */
@@ -50,12 +50,12 @@ class DB extends \Lobby {
           }
         }else if($config['type'] === 'sqlite'){
           self::$dbh = new \PDO("sqlite:" . \Lobby\FS::loc($config['path']), "", "", $options);
-          
+
           /**
            * Enable Multithreading Read/Write
            */
           self::$dbh->exec("PRAGMA journal_mode=WAL;");
-          
+
           /**
            * Check if Lobby tables exist
            */
@@ -84,7 +84,7 @@ class DB extends \Lobby {
       self::$installed = false;
     }
   }
-  
+
   /**
    * A HTML Filter function
    */
@@ -94,7 +94,7 @@ class DB extends \Lobby {
     }
     return $value;
   }
-  
+
   /**
    * Get option value
    */
@@ -113,7 +113,7 @@ class DB extends \Lobby {
       return $return;
     }
   }
-  
+
   /**
    * Save option
    */
@@ -132,7 +132,7 @@ class DB extends \Lobby {
       return false;
     }
   }
-  
+
   /**
    * Retrieve JSON Value stored as option as Array
    */
@@ -141,13 +141,13 @@ class DB extends \Lobby {
     $json = json_decode($json, true);
     return is_array($json) ? $json : array();
   }
-  
+
   /**
    * Save JSON Data in options
    */
   public static function saveJSONOption($key, $values){
     $old = self::getJSONOption($key);
-    
+
     $new = array_replace_recursive($old, $values);
     foreach($values as $k => $v){
       if($v === false){
@@ -158,7 +158,7 @@ class DB extends \Lobby {
     self::saveOption($key, $new);
     return true;
   }
-  
+
   /**
    * Get App Data
    */
@@ -215,7 +215,7 @@ class DB extends \Lobby {
       return is_array($return) && count($return) == 0 ? null : $return;
     }
   }
-  
+
   /**
    * Save App Data
    */
@@ -223,7 +223,7 @@ class DB extends \Lobby {
     if(self::$installed && \Lobby\Apps::exists($appID) && $key != ""){
       $sql = self::$dbh->prepare("SELECT COUNT(`name`) FROM `". self::$prefix ."data` WHERE `name` = ? AND `app`=?");
       $sql->execute(array($key, $appID));
-     
+
       if($sql->fetchColumn() != 0){
         $sql = self::$dbh->prepare("UPDATE `". self::$prefix ."data` SET `value` = ?, `updated` = CURRENT_TIMESTAMP WHERE `name` = ? AND `app` = ?");
         $sql->execute(array($value, $key, $appID));
@@ -236,7 +236,7 @@ class DB extends \Lobby {
       return false;
     }
   }
-  
+
   /**
    * Remove App Data
    */
@@ -249,23 +249,23 @@ class DB extends \Lobby {
      }
     }
   }
-  
+
   /**
    * Get database handler
    */
   public static function getDBH(){
     return self::$dbh;
   }
-  
+
   /**
    * DBMS used
    */
   public static function getType(){
     return self::$type;
   }
-  
+
   public static function getPrefix(){
     return self::$prefix;
   }
-  
+
 }
