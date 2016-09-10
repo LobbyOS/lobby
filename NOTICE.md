@@ -1,8 +1,8 @@
 # Developers Behind This Project
 
-* [Subin Siby](http://subinsb.com)
-* [Suriyaa Kudo](http://j.mp/ItsSuriyaa)
-* [Anandu B Ajith](http://anandu.net/)
+* [Subin Siby](https://subinsb.com)
+* [Suriyaa Kudo](https://j.mp/ToSuriyaa)
+* [Anandu B Ajith](https://anandu.net/)
 * [Sri Harsha Chilakapati](https://github.com/sriharshachilakapati)
 
 ## LICENSES
@@ -120,13 +120,13 @@ http://jquery.org/license
 
 ### Composer
 
-See includes/src/vendor/composer/LICENSE
+See `includes/src/vendor/composer/LICENSE`
 
 ### The Francium Project
 
 Copyright Subin Siby
 
-Released Under Apache License - LICENSE.md
+Released Under Apache License - `LICENSE.md`
 
 ### Requests
 
