@@ -1,5 +1,7 @@
+html, body{
+  background: url(<?THEME_URL?>/src/dashboard/image/bg.png) repeat;
+}
 #workspace{
-  background: #fff;
   overflow: hidden;
   top: 50px;
   padding-top: 12px;
@@ -30,7 +32,6 @@
   bottom: 0px;
   right: 3px;
   color: black;
-  background: #fff;
 }
 #workspace .tiles .tile.tile-placeholder .inner{
   z-index: -1;
@@ -73,6 +74,7 @@
 }
 #bx-pager{
   height: 12px;
+  background: transparent;
 }
 #bx-pager .indicator{
   display: none;
