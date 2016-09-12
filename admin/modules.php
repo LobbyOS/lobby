@@ -13,16 +13,16 @@
     <div id="workspace">
       <div class="contents">
         <h1>Modules</h1>
-        <p>Modules extend the functionality of Lobby. This page shows the modules that are installed in Lobby. <a target="_blank" href="<?php echo L_SERVER;?>/mods">Read more about Modules</a></p>
+        <p>Modules extend the functionality of Lobby. This page shows the modules that are active. <a target="_blank" href="<?php echo L_SERVER;?>/mods">Read more about Modules</a></p>
         <?php
         $core_modules = \Lobby\Modules::get("core");
         $custom_modules = \Lobby\Modules::get("custom");
         $app_modules = \Lobby\Modules::get("app");
 
         echo "<h3>Custom Modules</h3>";
-        echo "Manually installed modules are 'custom modules'";
+        echo "Manually installed modules.";
         if(count($custom_modules) == 0){
-          echo ser("No Custom Modules", "No custom modules are enabled or installed", false);
+          echo sme("No Custom Modules", "No custom modules are enabled or installed", false);
         }else{
           echo "<ul>";
           foreach($custom_modules as $module){

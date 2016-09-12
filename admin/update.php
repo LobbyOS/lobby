@@ -52,7 +52,7 @@ use Lobby\Update;
             echo '</div>';
           }else{
             echo "<h2>Lobby</h2>";
-            echo sss("Latest Version", "You are using the latest version of Lobby. There are no new releases yet.");
+            echo sss("Latest Version", "You are using the latest version of Lobby : <blockquote><b>". Lobby::getVersion(true) . "</b> released on <b>" . Lobby::$versionReleased ."</b></blockquote>There are no new releases yet.");
           }
         }
         if($step !== null && CSRF::check()){
