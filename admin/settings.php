@@ -17,10 +17,16 @@
           echo sss("Updated", "Lobby was successfully updated to Version <b>". \Lobby::$version ."</b> from the old ". htmlspecialchars($_GET['oldver']) ." version.");
         }
         if(isset($_POST['update_settings']) && \CSRF::check()){
+          $time_zone = Request::postParam("timezone");
+          $name = Request::postParam("profile-name");
+
+          if($name !== null){
+            Lobby\DB::saveOption("profile-name", $name);
+          }
+
           /**
            * Sadly, PHP supports GMT+ and not UTC+
            */
-          $time_zone = $_POST['timezone'];
           if($time_zone === ""){
             Lobby\DB::saveOption("lobby_timezone", "UTC");
             \Lobby\Time::loadConfig();
@@ -32,12 +38,12 @@
           }
         }
         ?>
-        <h2>Settings</h2>
+        <h1>Settings</h1>
         <form action="<?php echo \Lobby::u();?>" method="POST">
           <input type="hidden" name="update_settings" value="" />
           <?php echo CSRF::getInput();?>
           <label>
-            <span>Timezone</span>
+            <span title="Time now : <?php echo \Lobby\Time::now();?>">Timezone</span>
             <select id="timezone_string" name="timezone">
               <optgroup label="System">
                 <option selected="selected" value="">System Default</option>
@@ -67,41 +73,13 @@
               }
               ?>
             </select>
-            <p>Timestamp Now : <?php echo \Lobby\Time::now();?></p>
+          </label>
+          <label>
+            <span>Name</span>
+            <input type="text" name="profile-name" placeholder="Your name" value="<?php echo Lobby\DB::getOption("profile-name");?>" />
           </label>
           <button clear class="btn green">Save Settings</button>
         </form>
-        <h2>About</h2>
-        <table>
-          <col width="100">
-          <col width="120">
-          <tbody>
-            <tr>
-              <td>Version</td>
-              <td><?php echo \Lobby::$version;?></td>
-            </tr>
-            <tr>
-              <td>Release Date</td>
-              <td><?php echo \Lobby::$versionReleased;?></td>
-            </tr>
-          </tbody>
-        </table>
-        <h4 style="margin: 0;"><?php echo \Lobby::l("/admin/update.php", "Updates", "");?></h4>
-        <table>
-          <col width="100">
-          <col width="120">
-          <tbody>
-            <tr>
-              <td>Latest Version</td>
-              <td><?php echo Lobby\DB::getOption("lobby_latest_version");?></td>
-            </tr>
-            <tr>
-              <td>Latest Version Release Date</td>
-              <td><?php echo Lobby\DB::getOption("lobby_latest_version_release");?></td>
-            </tr>
-          </tbody>
-        </table>
-        <cl/>
         <?php
         /**
          * Check if the current version is not the latest version

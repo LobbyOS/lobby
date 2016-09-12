@@ -7,12 +7,13 @@
     "/admin/lobby-store.php" => "Lobby Store",
     "/admin/modules.php" => "Modules",
     "/admin/settings.php" => "Settings",
+    "/admin/update.php" => "Updates"
   );
   $links = Hooks::applyFilters("admin.view.sidebar", $links);
 
   $curPage = \Lobby::curPage();
   foreach($links as $link => $text){
-    if(substr($curPage, 0, strlen($link)) === $link || ($curPage == "/admin/update.php" && $text == "Settings") || ($curPage == "/admin/install-app.php" && $text == "Apps")){
+    if(substr($curPage, 0, strlen($link)) === $link || ($curPage == "/admin/install-app.php" && $text == "Apps")){
       echo \Lobby::l($link, $text, "class='link active'");
     }else{
       echo \Lobby::l($link, $text, "class='link'");
