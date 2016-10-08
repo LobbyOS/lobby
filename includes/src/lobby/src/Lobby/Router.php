@@ -7,7 +7,9 @@
 namespace Lobby;
 
 use Klein\Klein;
+use Request;
 use Response;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 /**
  * The Router class for Routing paths coming to Lobby accordingly
@@ -51,8 +53,8 @@ class Router {
     if(Response::hasContent()){
       Response::send();
       return true;
-    }else if(self::pathExists()){
-      return false;
+    }else if(self::serveFile()){
+      return true;
     }else{
       Response::showError();
       return true;
@@ -93,18 +95,18 @@ class Router {
             "app_admin" => array(
               "text" => "Admin",
               "href" => "/admin/apps.php?app=$AppID"
-            ),
+              ),
             "app_disable" => array(
               "text" => "Disable",
               "href" => "/admin/apps.php?action=disable&app=$AppID" . \CSRF::getParam()
-            ),
+              ),
             "app_remove" => array(
               "text" => "Remove",
               "href" => "/admin/apps.php?action=remove&app=$AppID" . \CSRF::getParam()
-            )
-          ),
+              )
+            ),
           "position" => "left"
-        ));
+          ));
         $pageContent = $class->getPageContent($page);
         if($pageContent !== null)
           Response::setPage($pageContent);
@@ -125,21 +127,65 @@ class Router {
   }
 
   /**
-   * This is useful when Lobby is run using PHP Built In Server
-   * When no routes are matched, by default a 404 is inited,
-   * even when the file exists in Lobby as .php file. To prevent
-   * this, we check if the file exist and return false to the PHP
-   * Built in Server to make it serve the file normally
-   * http://php.net/manual/en/features.commandline.webserver.php#example-430
-   *
-   * @return bool Whether the request points to a file
+   * Make HTTP requested path to absolute location
+   * @param string $path Requested file path
+   * @return bool Whether the request points to a valid file
    */
-  public static function pathExists(){
-    if(\Lobby\FS::rel($_SERVER['PHP_SELF']) !== "index.php"){
-      /**
-       * The path should point to a file and not directory index
-       */
-      return file_exists(L_DIR . $_SERVER['PHP_SELF']) && !is_dir(L_DIR . $_SERVER['PHP_SELF']);
+  private static function getServeFileAbsolutePath($path){
+    $path = realpath(L_DIR . $path);
+
+    if(file_exists($path)){
+      // Folder index
+      if(is_dir($path)){
+        $path .= "/index.php";
+      }
+
+      if(file_exists($path) && substr($path, 0, strlen(L_DIR)) === L_DIR){
+        return $path;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Process & serve files
+   * @return bool Whether a file was served
+   */
+  public static function serveFile(){
+    $path = self::getServeFileAbsolutePath(parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH));
+
+    if($path){
+      $finfo = finfo_open(FILEINFO_MIME_TYPE);
+      $type = finfo_file($finfo, $path);
+      finfo_close($finfo);
+
+      header("Cache-Control: public");
+
+      if($type === "text/x-php"){
+        $content = Response::getFile($path);
+
+        Response::setContent($content);
+        Response::setCache(array(
+          "etag" => md5($content),
+          "public" => true
+        ));
+        Response::send();
+
+        return true;
+      }else{
+        $request = Request::getRequestObject();
+        $response = new BinaryFileResponse($path, 200, array(), true, null, true);
+
+        if($response->isNotModified($request)){
+          $response->setStatusCode(304);
+          $response->prepare($request);
+          $response->send();
+        }else{
+          $response->prepare($request);
+          $response->send();
+        }
+        return true;
+      }
     }
     return false;
   }

@@ -47,6 +47,22 @@ class Response {
   }
 
   /**
+   * Modify header
+   * @return ResponseHeaderBag Symfony object
+   */
+  public static function header(){
+    return self::$response->headers;
+  }
+
+  /**
+   * Set cache headers
+   * @param array $options Cache options
+   */
+  public static function setCache($options){
+    self::$response->setCache($options);
+  }
+
+  /**
    * Set the response body
    * @param string $content The response body to set
    */
@@ -151,8 +167,15 @@ class Response {
       self::setContent($html);
     }
 
-    self::$response->prepare(Request::getRequestObject());
-    self::$response->send();
+    $request = Request::getRequestObject();
+    if(self::$response->isNotModified($request)){
+      self::setStatusCode(304);
+      self::$response->prepare($request);
+      self::$response->send();
+    }else{
+      self::$response->prepare($request);
+      self::$response->send();
+    }
   }
 
   /**

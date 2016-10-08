@@ -252,11 +252,10 @@ class Assets {
     if($type === "css" || $type === "js"){
 
       if($type === "css"){
-        header("Content-type: text/css");
+        Response::header()->set("Content-Type", "text/css");
       }else{
-        header("Content-type: application/x-javascript");
+        Response::header()->set("Content-Type", "application/x-javascript");
       }
-      header("Cache-Control: public");
 
       /**
        * Separate the Assets and remove null items
@@ -274,8 +273,12 @@ class Assets {
         }
       }
 
-      $etag = hash("md5", $etag);
-      header("ETag: $etag");
+      $etag = md5($etag);
+      Response::setCache(array(
+        "etag" => $etag,
+        "private" => false,
+        "public" => true
+      ));
 
       /**
        * Was it already cached before by the browser ? The old etag will be sent by
@@ -284,7 +287,7 @@ class Assets {
       $browserTag = isset($_SERVER["HTTP_IF_NONE_MATCH"]) ? $_SERVER["HTTP_IF_NONE_MATCH"] : null;
 
       if($browserTag === $etag){
-        header("HTTP/1.1 304 Not Modified");
+        Response::setStatusCode(304);
       }else{
         foreach($assets as $assetRelLocation){
           $assetLocation = self::getPath($assetRelLocation);

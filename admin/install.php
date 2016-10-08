@@ -1,6 +1,4 @@
 <?php
-require "../load.php";
-
 $install_step = Request::get('step');
 ?>
 <!DOCTYPE html>

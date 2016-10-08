@@ -1,5 +1,4 @@
 <?php
-require "../load.php";
 if(\Lobby::$installed){
   $backupFile = \Lobby::getConfig('db', 'dbname'). "-" .date("Y-m-d H:i:s") . '.gz';
   $backupFileLoc = L_DIR . "/contents/extra/" . $backupFile;

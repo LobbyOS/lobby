@@ -1,6 +1,4 @@
 <?php
-require "../../../../load.php";
-
 $file = \Request::postParam('cx74e9c6a45', '');
 $appID = \Request::postParam('s7c8csw91', '');
 

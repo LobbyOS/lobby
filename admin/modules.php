@@ -1,4 +1,3 @@
-<?php require "../load.php";?>
 <html>
   <head>
     <?php

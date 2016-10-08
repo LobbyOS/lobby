@@ -1,6 +1,4 @@
 <?php
-require "../load.php";
-
 use Lobby\Apps;
 use Lobby\Need;
 use Lobby\Time;
