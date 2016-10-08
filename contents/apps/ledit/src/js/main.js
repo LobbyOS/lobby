@@ -28,7 +28,7 @@ lobby.load(function(){
           if(data == "bad"){
             alert("Failed Saving Data");
           }else{
-            lobby.app.ajax("saves.php", {}, function(data){
+            lobby.app.ajax("saves", {}, function(data){
                $(app + " #saves").html(data);
             });
             $(app).animate({backgroundColor: "rgb(101, 196, 53)"}, 1000, function(){

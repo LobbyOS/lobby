@@ -1,5 +1,4 @@
 <?php
-require "../load.php";
 use Lobby\Update;
 ?>
 <!DOCTYPE html>

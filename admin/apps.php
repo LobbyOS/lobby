@@ -1,5 +1,4 @@
 <?php
-require "../load.php";
 use \Lobby\Apps;
 use \Lobby\FS;
 use \Lobby\Need;

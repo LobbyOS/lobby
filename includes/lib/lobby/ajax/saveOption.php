@@ -1,5 +1,4 @@
 <?php
-require "../../../../load.php";
 if(isset($_POST['key']) && isset($_POST['value']) && CSRF::check()){
    $key = urldecode($_POST['key']);
    $val = urldecode($_POST['value']);

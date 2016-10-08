@@ -13,7 +13,7 @@
         "vierbergenlars/php-semver": "=2.1",
         "francium/process": ">=0.3.0",
         "vladimmi/construct-static": "dev-master@dev",
-        "symfony/http-foundation": "^3.0",
+        "symfony/http-foundation": ">=3.1.5",
         "symfony/console": "^3.1"
     },
     "secure-http": "false"

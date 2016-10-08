@@ -1,6 +1,4 @@
 <?php
-require "../load.php";
-
 /**
  * Backup Lobby DIR as .zip folder
  * http://stackoverflow.com/a/19451938/1372424

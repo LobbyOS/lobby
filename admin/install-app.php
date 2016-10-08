@@ -1,6 +1,3 @@
-<?php
-require "../load.php";
-?>
 <!DOCTYPE html>
 <html>
   <head>

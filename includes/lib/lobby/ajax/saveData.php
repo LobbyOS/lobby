@@ -1,6 +1,4 @@
 <?php
-require "../../../../load.php";
-
 $app = Request::postParam('appID');
 $key = Request::postParam('key');
 $val = Request::postParam('value');

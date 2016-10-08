@@ -1,6 +1,4 @@
 <?php
-require_once __DIR__ . "/../load.php";
-
 use \Lobby\FS;
 use \Lobby\Apps;
 
