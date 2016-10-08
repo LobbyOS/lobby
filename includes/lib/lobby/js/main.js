@@ -82,9 +82,9 @@ $(document).mouseup(function (e){
 });
 
 /**
- * Make an AJAX Request
+ * Make an Asynchornous Request
  */
-lobby.ajax = function(fileName, options, callback, appID){
+lobby.ar = function(fileName, options, callback, appID){
   /**
    * If the callback given is a function, use it
    * otherwise make a simple function that is of no use
@@ -104,7 +104,7 @@ lobby.ajax = function(fileName, options, callback, appID){
   }
   var options = $.param({"cx74e9c6a45": fileName, "csrfToken": lobby.csrfToken}) + "&" + options;
 
-  var requestURL = lobby.url + "/includes/lib/lobby/ajax/ajax.php";
+  var requestURL = lobby.url + "/includes/lib/lobby/ar/ajax.php";
   $.post(requestURL, options, function(data){
     /**
      * On success, do callback function with the response data
