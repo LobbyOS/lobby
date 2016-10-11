@@ -356,7 +356,7 @@ window.FilePicker = {
 
     $('<img />').attr('id', 'loading_img').attr('src', $('#loading_img')
       .attr('src')).appendTo('#info_box');
-    lobby.ajax(this.params.access, {
+    lobby.ar(this.params.access, {
       action: 'info',
       dir: dir,
       file: file
@@ -404,7 +404,7 @@ window.FilePicker = {
 		$('#loading_img').show();
 		$('#list').empty();
 		$('#filename_box').val('');
-		lobby.ajax(this.params.access, {
+		lobby.ar(this.params.access, {
 				action: 'list',
 				dir: $('#target_dir').val(),
 				filter: $('#filter_box').val()
@@ -506,7 +506,7 @@ lobby.mod.filepicker = {
     cb = typeof cb !== "function" ? function(){} : cb;
     access_url = this.u + "/filepicker.php";
 
-    lobby.ajax(access_url, {}, function(r){
+    lobby.ar(access_url, {}, function(r){
       o = JSON.parse(r);
       $("<div></div>").attr("class", "Lobby-FS-filepicker").html(o.html).appendTo("#workspace");
       $("#workspace .Lobby-FS-filepicker").dialog({

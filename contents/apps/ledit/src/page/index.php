@@ -68,6 +68,6 @@ $this->addScript("main.js");
     <div id="error"></div>
   </div>
   <div id="saves">
-    <?php include($this->dir . "/src/ajax/saves.php");?>
+    <?php include($this->dir . "/src/ar/saves.php");?>
   </div>
 </div>

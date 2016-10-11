@@ -10,7 +10,7 @@ lobby.notify = {
     this.events();
     this.checkInterval = setInterval(function(){
       lobby.notify.update();
-    }, 10000);
+    }, 30000);
   },
 
   /**
@@ -20,7 +20,7 @@ lobby.notify = {
   onNewItems: function(){},
 
   update: function(){
-    lobby.ajax("includes/lib/lobby/ajax/notify.php", {}, function(response){
+    lobby.ar("includes/lib/lobby/ar/notify.php", {}, function(response){
       nfs = JSON.parse(response); // Short for notifications
       if(nfs.length === 0){
         lobby.notify.box.html("<center><h4>No Notifications</h4></center>");

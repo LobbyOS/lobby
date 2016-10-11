@@ -41,7 +41,7 @@ class Notify extends Command {
        * Suppress the JSON data printing
        */
       ob_start();
-        require FS::loc("includes/lib/lobby/ajax/notify.php");
+        require FS::loc("includes/lib/lobby/ar/notify.php");
       ob_end_clean();
 
       $output->writeln(count($notifications));

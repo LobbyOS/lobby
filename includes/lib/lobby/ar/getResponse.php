@@ -8,7 +8,7 @@ if($file != "" && CSRF::check()){
 
     if($App->exists && $App->enabled){
       $AppObj = $App->getInstance();
-      echo $AppObj->getAJAXResponse($file);
+      echo $AppObj->getARResponse($file);
     }
   }else{
     if(\Lobby\FS::exists($file)){

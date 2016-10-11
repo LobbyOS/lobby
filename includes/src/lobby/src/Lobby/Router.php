@@ -161,7 +161,7 @@ class Router {
 
       header("Cache-Control: public");
 
-      if($type === "text/x-php"){
+      if($type === "text/x-php" || $type === "text/html"){
         $content = Response::getFile($path);
 
         Response::setContent($content);
