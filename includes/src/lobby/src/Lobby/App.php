@@ -5,6 +5,7 @@ use Response;
 use Lobby\AppRouter;
 use Lobby\DB;
 use Lobby\FS;
+use Lobby\UI\Panel;
 
 class App {
 
@@ -73,20 +74,21 @@ class App {
   }
 
   /**
-   * @param string $handler Name of the AJAX handler
+   * Get response of Asynchronous Request
+   * @param string $handler Name of the AR handler
    */
-  public function getAJAXResponse($handler){
-    $ajaxResponse = $this->ajax($handler);
-    if($ajaxResponse === "auto"){
+  public function getARResponse($handler){
+    $arResponse = $this->ar($handler);
+    if($arResponse === "auto"){
       /**
        * Directory index
        */
-      if(is_dir($this->fs->loc("src/ajax/$handler")))
+      if(is_dir($this->fs->loc("src/ar/$handler")))
         $handler = "$handler/index";
 
-      $ajaxResponse = $this->inc("src/ajax/$handler.php");
+      $arResponse = $this->inc("src/ar/$handler.php");
     }
-    return $ajaxResponse;
+    return $arResponse;
   }
 
   public function addStyle($fileName){
@@ -155,14 +157,23 @@ class App {
     if(!isset($info["href"])){
       $info["href"] = $this->url;
     }
-    return \Lobby\UI\Panel::addNotifyItem("app_{$this->id}_$id" , $info);
+    return Panel::addNotifyItem("app_{$this->id}_$id" , $info);
   }
 
   /**
    * Remove a notify item
    */
   public function removeNotifyItem($id){
-    return \Lobby\UI\Panel::removeNotifyItem("app_{$this->id}_$id");
+    return Panel::removeNotifyItem("app_{$this->id}_$id");
+  }
+
+  /**
+   * Add Panel Item
+   * @param [type] $id      [description]
+   * @param [type] $options [description]
+   */
+  public function addPanelItem($id, $options){
+    Panel::addTopItem($this->id . "_" . $id, $options);
   }
 
   public function u($path = null, $src = false){
@@ -221,7 +232,12 @@ class App {
     return "auto";
   }
 
-  public function ajax($ajax){
+  /**
+   * Handle Asynchronous Requests
+   * @param  string $handler Handler file path
+   * @return string          Response
+   */
+  public function ar($handler){
     return "auto";
   }
 

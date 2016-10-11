@@ -417,7 +417,7 @@ $install_step = Request::get('step');
                 var offset = new Date().getTimezoneOffset(), o = Math.abs(offset);
                 return (offset < 0 ? "+" : "-") + ("00" + Math.floor(o / 60)).slice(-2) + ":" + ("00" + (o % 60)).slice(-2);
             }
-            lobby.ajax("admin/ajax/set-timezone.php", {offset: getTimeZone()});
+            lobby.ar("admin/ajax/set-timezone.php", {offset: getTimeZone()});
           });
           </script>
         <?php
