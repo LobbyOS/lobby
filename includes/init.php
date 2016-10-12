@@ -51,18 +51,30 @@ if(\Lobby::status("lobby.admin")){
   \Assets::js("admin", "/admin/js/admin.js");
 
   /**
-   * Add sidebar
+   * Add Left Panel items
    */
-  Hooks::addAction("admin.body.begin", function(){
-    require L_DIR . "/admin/inc/sidebar.php";
-  });
+  \Lobby\UI\Panel::addLeftItem("lobby-link", array(
+    "html" => "<a target='_blank' href='http://lobby.subinsb.com'>Lobby ". \Lobby::getVersion(true) ."</a>"
+  ));
 
-  /**
-   * Add sidebar handler in panel
-   */
-  \Hooks::addAction("panel.begin", function(){
-    echo '<a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>';
-  });
+  $links = array(
+    "/admin/index.php" => "Dashboard",
+    "/admin/apps.php" => "Apps",
+    "/admin/lobby-store.php" => "Lobby Store",
+    "/admin/modules.php" => "Modules",
+    "/admin/settings.php" => "Settings",
+    "/admin/update.php" => "Updates"
+  );
+  $links = Hooks::applyFilters("admin.view.sidebar", $links);
+
+  $curPage = \Lobby::curPage();
+  foreach($links as $link => $text){
+    \Lobby\UI\Panel::addLeftItem("admin-nav-" . strtolower($text), array(
+      "text" => $text,
+      "href" => $link,
+      "class" => (substr($curPage, 0, strlen($link)) === $link || ($curPage == "/admin/install-app.php" && $text == "Apps")) ? "active" : null
+    ));
+  }
 
   /**
    * Check For New Versions (Apps & Core)

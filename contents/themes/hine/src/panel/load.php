@@ -1,23 +1,34 @@
 <?php
-use \Lobby\UI\Panel;
 /**
- * Panel UI
+ * Render all panels
  */
-$panelLeftItems = Panel::getPanelItems("left");
-$panelRightItems = Panel::getPanelItems("right");
+
+use \Lobby\UI\Panel;
+
+$topPanelLeftItems = Panel::getTopItems("left");
+$topPanelRightItems = Panel::getTopItems("right");
+
+$leftPanelTopItems = Panel::getLeftItems("top");
+$leftPanelBottomItems = Panel::getLeftItems("bottom");
 ?>
-<nav>
+<nav id="panel-top">
   <?php
-  \Hooks::doAction("panel.begin");
+  \Hooks::doAction("panel.top.begin");
+
+  if(!empty($leftPanelTopItems) || !empty($leftPanelBottomItems)){
   ?>
-  <ul class="panel-left">
+    <a href="#" data-activates="panel-left" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+  <?php
+  }
+  ?>
+  <ul id="panel-top-left">
     <?php
-    if(isset($panelLeftItems["lobbyAdmin"])){
-      echo $this->makePanelTree("lobbyAdmin", $panelLeftItems["lobbyAdmin"]);
-      unset($panelLeftItems["lobbyAdmin"]);
+    if(isset($topPanelLeftItems["lobbyAdmin"])){
+      echo $this->makePanelTree("lobbyAdmin", $topPanelLeftItems["lobbyAdmin"]);
+      unset($topPanelLeftItems["lobbyAdmin"]);
     }
     $html = "";
-    foreach($panelLeftItems as $id => $item){
+    foreach($topPanelLeftItems as $id => $item){
       if(count($item['subItems']) !== 0){
         $html .= $this->makePanelTree($id, $item);
       }else if($item['html'] != null){
@@ -29,10 +40,10 @@ $panelRightItems = Panel::getPanelItems("right");
     echo $html;
     ?>
   </ul>
-  <ul class="panel-right">
+  <ul id="panel-right-left">
     <?php
     $html = "";
-    foreach($panelRightItems as $id => $item){
+    foreach($topPanelRightItems as $id => $item){
       if(count($item['subItems']) !== 0){
         $html .= $this->makePanelTree($id, $item);
       }else if($item['html'] != null){
@@ -46,6 +57,32 @@ $panelRightItems = Panel::getPanelItems("right");
     ?>
   </ul>
   <?php
-  \Hooks::doAction("panel.end");
+  \Hooks::doAction("panel.top.end");
   ?>
 </nav>
+<?php
+/**
+ * Left Panel aka sidebar
+ */
+if(!empty($leftPanelTopItems) || !empty($leftPanelBottomItems)){
+?>
+  <div class="side-nav fixed" id="panel-left">
+    <ul id="panel-left-top">
+      <?php
+      $html = "";
+      foreach($leftPanelTopItems as $id => $item){
+        if(count($item["subItems"]) !== 0){
+          $html .= $this->makePanelTree($id, $item);
+        }else if($item["html"] != null){
+          $html .= $this->makePanelItem($item["html"], "htmlContent", $id, "parent");
+        }else{
+          $html .= $this->makePanelItem($item["text"], $item["href"], $id, "parent");
+        }
+      }
+      echo $html;
+      ?>
+    </ul>
+  </div>
+<?php
+}
+?>
