@@ -2,7 +2,7 @@ lobby.load(function(){
   /**
    * Panel
    */
-  $('nav .panel-left, nav .panel-right').superfish({
+  $('nav #panel-top-left, nav #panel-top-right').superfish({
     delay: 100
   });
 

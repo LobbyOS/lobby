@@ -4,19 +4,19 @@
   overflow: auto;
   background: #fbfbfc;
 }
-.side-nav{
+#panel-left{
   top: 50px;
   width: 200px;
 }
-.side-nav a{
+#panel-left a{
   color: black;
   position: relative;
 }
-.side-nav a.link:hover, .side-nav a.active{
+#panel-left a.link:hover, #panel-left a.active{
   color: white;
   background: #888;
 }
-.side-nav a.active:after{
+#panel-left a.active:after{
   right: 0;
   border: solid 8px transparent;
   content: " ";
@@ -28,11 +28,12 @@
   top: 50%;
   margin-top: -8px;
 }
-.side-nav a.lobby-link{
+#panel-left #lobby-link{
   background: #8A2BE2;
-  color: #fff;
   text-align: center;
-  padding: 0;
+}
+#panel-left #lobby-link a{
+  color: #fff;
 }
 @media screen and (max-width: 992px){
   #workspace .contents {
