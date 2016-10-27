@@ -20,7 +20,7 @@ $this->addScript("main.js");
     <?php
     if(isset($_GET['id'])){
       $id = urldecode(htmlspecialchars_decode($_GET['id']));
-      $appData = $this->getData($id, true);
+      $appData = $this->data->getValue($id, true);
       $content = $appData['value'];
       $created = $appData['created'];
       $updated = $appData['updated'];
