@@ -17,15 +17,15 @@ nav li img{
   height: 40px;
   width: 40px;
 }
-nav #panel-top-left, nav #panel-top-right{
+#panel-top-left, #panel-top-right{
   display: inline-block;
   list-style: none;
 }
-nav #panel-top-left{
+#panel-top-left{
   margin: 0 0 0 60px;
   padding: 0;
 }
-nav #panel-top-left li.parent, nav #panel-top-right li.parent{
+#panel-top-left li.parent, #panel-top-right li.parent{
   position: relative;
   cursor: pointer;
   margin-right: 15px;
@@ -33,7 +33,7 @@ nav #panel-top-left li.parent, nav #panel-top-right li.parent{
   min-height: 40px;
   max-height: 40px;
 }
-nav #panel-top-left ul, nav #panel-top-right ul{
+#panel-top-left ul, #panel-top-right ul{
   display:none;
   position:absolute;
   top: 46px;
@@ -50,40 +50,40 @@ nav .parent ul .item a{
   padding: 5px 10px;
   min-width:120px;
 }
-nav #panel-top-right{
+#panel-top-right{
   margin: 0 60px 0 0;
   float: right;
 }
-nav #panel-top-right ul{
+#panel-top-right ul{
   text-align: right;
   right: 0;
 }
 /**
  * Icons
  */
-nav #panel-top-left #lobby a.parent{
+#panel-top-left #lobby a.parent{
   font-size: 30px;
 }
-nav #panel-top-left #home a{
+#panel-top-left #home a{
   display: block;
   height: 40px;
   width: 40px;
   background: url(<?THEME_URL?>/src/panel/image/home.svg);
   background-size: contain;
 }
-nav #panel-top-right .item span{
+#panel-top-right .item span{
   height:22px;
   width:17px;
   display: inline-block;
 }
-nav #panel-top-right #notifyToggle{
+#panel-top-right #notifyToggle{
   background: url(<?THEME_URL?>/src/panel/image/notify.svg) 0px -1px no-repeat;
   background-size: 45px;
   width: 50px;
   display: block;
   height: 40px;
 }
-nav #panel-top-right #notifyToggle.active{
+#panel-top-right #notifyToggle.active{
   background: url(<?THEME_URL?>/src/panel/image/notify-active.svg) 0 -1px no-repeat;
     background-size: 45px;
 }
@@ -104,6 +104,9 @@ nav a.button-collapse i{
 /**
  * Left Panel
  */
+#panel-left{
+  top: 50px;
+}
 #panel-left ul{
   margin: 0;
 }
@@ -166,16 +169,16 @@ nav a.button-collapse i{
   height: 30px;
 }
 @media screen and (max-width: 600px){
-  nav #panel-top-left{
+  #panel-top-left{
     margin-left: 0;
   }
-  nav #panel-top-right{
+  #panel-top-right{
     margin-right: 0;
   }
   nav ul a{
     padding: 0 5px;
   }
-  nav #panel-top-left li.parent, nav #panel-top-right li.parent{
+  #panel-top-left li.parent, #panel-top-right li.parent{
     margin-right: 5px;
   }
 }
