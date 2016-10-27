@@ -1,12 +1,15 @@
 <?php
-namespace Lobby;
+namespace Lobby\Apps;
 
 use Klein\Klein;
 use Klein\Request;
 use Lobby\App;
 use Response;
 
-class AppRouter {
+/**
+ * Routing in app
+ */
+class Router {
 
   private $app;
   private $router;

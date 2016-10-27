@@ -1,37 +1,48 @@
 <?php
 namespace Lobby;
 
-use Response;
-use Lobby\AppRouter;
+use Lobby\Apps\Data;
+use Lobby\Apps\Panel;
+use Lobby\Apps\Router;
 use Lobby\DB;
 use Lobby\FS;
-use Lobby\UI\Panel;
+use Response;
 
 class App {
 
   /**
-   * Lobby\FS Object with App Dir as base
+   * @var FS Filesystem object with app's folder as base path
    */
-  public $fs = null;
+  public $fs;
 
   /**
-   * Klein router object
+   * @var Router App's router object
    */
-  public $router = null;
+  public $router;
 
-  public function __construct(){
-    $this->router = new AppRouter($this);
-  }
+  /**
+   * @var array App's manifest values
+   */
+  public $manifest = array();
 
   /**
    * @param array $appInfo Array containing object properties to be set
    */
-  public function setAppInfo(array $appInfo){
+  public function __construct(array $appInfo = array()){
+    if(empty($appInfo))
+      return null;
+
+    $this->manifest = $appInfo;
+
     foreach($appInfo as $key => $value){
       $this->{$key} = $value;
     }
-    $this->manifest = $appInfo;
+
     $this->fs = new FSObj($this->dir);
+    $this->data = new Data($this);
+    $this->router = new Router($this);
+    $this->panel = new Panel($this);
+
     $this->init();
   }
 
@@ -103,77 +114,6 @@ class App {
 
   public function setTitle($title){
     Response::setTitle("$title | {$this->name}");
-  }
-
-  /**
-   * Get Data
-   */
-  public function getData($key = "", $extra = false){
-    return DB::getData($this->id, $key, $extra);
-  }
-
-  /**
-   * Save data
-   */
-  public function saveData($key, $value){
-    return DB::saveData($this->id, $key, $value);
-  }
-
-  /**
-   * Get JSON decoded array from a value of App's Data Storage
-   */
-  public function getJSONData($key = ""){
-    $data = $this->getData($key, false);
-    $data = json_decode($data, true);
-    return is_array($data) ? $data : array();
-  }
-
-  /**
-   * Save JSON as a value of App's Data Storage
-   * To remove an item, set the value of it to (bool) FALSE
-   */
-  public function saveJSONData($key, $values){
-    $data = $this->getJSONData($key);
-
-    $new = array_replace_recursive($data, $values);
-    foreach($values as $k => $v){
-      if($v === false){
-        unset($new[$k]);
-      }
-    }
-    $new = json_encode($new);
-    $this->saveData($key, $new);
-    return true;
-  }
-
-  public function removeData($key){
-    return DB::removeData($this->id, $key);
-  }
-
-  /**
-   * Push a notify item
-   */
-  public function addNotifyItem($id, $info){
-    if(!isset($info["href"])){
-      $info["href"] = $this->url;
-    }
-    return Panel::addNotifyItem("app_{$this->id}_$id" , $info);
-  }
-
-  /**
-   * Remove a notify item
-   */
-  public function removeNotifyItem($id){
-    return Panel::removeNotifyItem("app_{$this->id}_$id");
-  }
-
-  /**
-   * Add Panel Item
-   * @param [type] $id      [description]
-   * @param [type] $options [description]
-   */
-  public function addPanelItem($id, $options){
-    Panel::addTopItem($this->id . "_" . $id, $options);
   }
 
   public function u($path = null, $src = false){

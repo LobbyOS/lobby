@@ -408,12 +408,7 @@ class Apps {
       /**
        * Create the \Lobby\App Object
        */
-      $class = new $className;
-
-      /**
-       * Send app details to the App Object
-       */
-      $class->setAppInfo($this->info);
+      $class = new $className($this->info);
 
       return $class;
     }

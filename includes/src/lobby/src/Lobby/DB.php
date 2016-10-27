@@ -160,98 +160,8 @@ class DB extends \Lobby {
   }
 
   /**
-   * Get App Data
-   */
-  public static function getData($id, $name = "", $extra = false, $safe = true){
-    if(self::$installed){
-      $return = array();
-      $prefix = self::$prefix;
-      if($id != "" && $name == ""){
-        $sql = self::$dbh->prepare("SELECT * FROM `{$prefix}data` WHERE `app` = ?");
-        $sql->execute(array($id));
-        $return = $sql->fetchAll();
-        foreach($return as &$v){
-          $v["created"] = \Lobby\Time::date($v["created"]);
-          $v["updated"] = \Lobby\Time::date($v["updated"]);
-        }
-      }else{
-        $sql = self::$dbh->prepare("SELECT * FROM `{$prefix}data` WHERE `name` = ? AND `app` = ?");
-        $sql->execute(array($name, $id));
-        $r = $sql->fetchAll(\PDO::FETCH_ASSOC);
-        $count = count($r);
-
-        if($count > 1){
-          /**
-           * Multiple Results; so give a multidimensional array of results
-           */
-          $return = $r;
-          foreach($return as &$v){
-            $v["created"] = \Lobby\Time::date($v["created"]);
-            $v["updated"] = \Lobby\Time::date($v["updated"]);
-          }
-        }else if($count === 1){
-          /**
-           * A single result is present, so give a single array only if $extra is TRUE
-           */
-          $return = $r[0];
-          if($extra === false){
-            $return = $return['value'];
-          }else{
-            /**
-             * Cconvert time to the timezone chosen by user
-             */
-            $return["created"] = \Lobby\Time::date($return["created"]);
-            $return["updated"] = \Lobby\Time::date($return["updated"]);
-          }
-        }else{
-          $return = array();
-        }
-      }
-      if(is_array($return) && $safe === true){
-        array_walk_recursive($return, function(&$value){
-          $value = \Lobby\DB::filt($value);
-        });
-      }
-      return is_array($return) && count($return) == 0 ? null : $return;
-    }
-  }
-
-  /**
-   * Save App Data
-   */
-  public static function saveData($appID, $key, $value = ""){
-    if(self::$installed && \Lobby\Apps::exists($appID) && $key != ""){
-      $sql = self::$dbh->prepare("SELECT COUNT(`name`) FROM `". self::$prefix ."data` WHERE `name` = ? AND `app`=?");
-      $sql->execute(array($key, $appID));
-
-      if($sql->fetchColumn() != 0){
-        $sql = self::$dbh->prepare("UPDATE `". self::$prefix ."data` SET `value` = ?, `updated` = CURRENT_TIMESTAMP WHERE `name` = ? AND `app` = ?");
-        $sql->execute(array($value, $key, $appID));
-        return true;
-      }else{
-        $sql = self::$dbh->prepare("INSERT INTO `". self::$prefix ."data` (`app`, `name`, `value`, `created`, `updated`) VALUES (?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
-        return $sql->execute(array($appID, $key, $value));
-      }
-    }else{
-      return false;
-    }
-  }
-
-  /**
-   * Remove App Data
-   */
-  public static function removeData($appID = "", $keyName){
-    if(self::$installed){
-     if($keyName != "" && $appID != ""){
-       $sql = self::$dbh->prepare("DELETE FROM `". self::$prefix ."data` WHERE `name`=? AND `app`=?");
-       $sql->execute(array($keyName, $appID));
-       return true;
-     }
-    }
-  }
-
-  /**
    * Get database handler
+   * @return \PDO DBH
    */
   public static function getDBH(){
     return self::$dbh;
@@ -259,11 +169,16 @@ class DB extends \Lobby {
 
   /**
    * DBMS used
+   * @return string mysql or sqlite
    */
   public static function getType(){
     return self::$type;
   }
 
+  /**
+   * Get prefix of table names
+   * @return string Prefix
+   */
   public static function getPrefix(){
     return self::$prefix;
   }
