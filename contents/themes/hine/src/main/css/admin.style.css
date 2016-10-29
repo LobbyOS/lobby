@@ -5,28 +5,29 @@
   background: #fbfbfc;
 }
 #panel-left{
-  top: 50px;
   width: 200px;
 }
 #panel-left a{
   color: black;
   position: relative;
 }
-#panel-left a.link:hover, #panel-left a.active{
-  color: white;
+#panel-left .item:hover, #panel-left .item.active{
   background: #888;
 }
-#panel-left a.active:after{
+#panel-left .item:hover a, #panel-left .item.active a{
+  color: white;
+}
+#panel-left .item.active a:after{
   right: 0;
-  border: solid 8px transparent;
+  border: solid 10px transparent;
   content: " ";
   height: 0;
   width: 0;
   position: absolute;
   pointer-events: none;
-  border-right-color: #F1F1F1;
+  border-right-color: #F8F8F8;
   top: 50%;
-  margin-top: -8px;
+  margin: -8px -15px 0;
 }
 #panel-left #lobby-link{
   background: #8A2BE2;

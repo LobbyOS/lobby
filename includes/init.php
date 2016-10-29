@@ -61,8 +61,8 @@ if(\Lobby::status("lobby.admin")){
     "/admin/index.php" => "Dashboard",
     "/admin/apps.php" => "Apps",
     "/admin/lobby-store.php" => "Lobby Store",
-    "/admin/modules.php" => "Modules",
     "/admin/settings.php" => "Settings",
+    "/admin/modules.php" => "Modules",
     "/admin/update.php" => "Updates"
   );
   $links = Hooks::applyFilters("admin.view.sidebar", $links);

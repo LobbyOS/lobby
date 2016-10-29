@@ -22,6 +22,20 @@ if($appID != null){
   if(!$App->exists)
     Response::showError("Error", "I checked all over, but the app does not exist");
   $appIDEscaped = htmlspecialchars($appID);
+
+  if(!$show && $action !== null && CSRF::check()){
+    if($action === "disable"){
+      if($App->disableApp())
+        Response::redirect("/admin/apps.php?app=$appID&action=disable&show" . CSRF::getParam());
+      else
+        Response::redirect("/admin/apps.php?app=$appID&action=disable-fail&show" . CSRF::getParam());
+    }else if($action === "enable"){
+      if($App->enableApp())
+        Response::redirect("/admin/apps.php?app=$appID&action=enable&show" . CSRF::getParam());
+      else
+        Response::redirect("/admin/apps.php?app=$appID&action=enable-fail&show" . CSRF::getParam());
+    }
+  }
 }
 ?>
 <html>

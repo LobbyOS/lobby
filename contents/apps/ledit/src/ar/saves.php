@@ -1,5 +1,5 @@
 <?php
-$saves = $this->getData("", "ledit");
+$saves = $this->data->getValue("", "ledit");
 if( !$saves ){
   echo '<div class="saveItem">You haven\'t saved anything.</div>';
 }else{

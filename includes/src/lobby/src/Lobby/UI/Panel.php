@@ -58,10 +58,10 @@ class Panel {
 
   /**
    * Add an item to the Top Panel
-   * @param string $name  Item ID
+   * @param string $id   Item ID
    * @param array  $info Item information
    */
-  public static function addTopItem($name, $info){
+  public static function addTopItem($id, $info){
     $info = array_replace_recursive(self::$panelTopItemFormat, $info);
     $loc = $info["position"];
 
@@ -74,13 +74,13 @@ class Panel {
      * If the item is already registered, then
      * replace it. Else, register new one
      */
-    if(isset(self::$topItems[$loc][$name])){
-      $merged = array_merge(self::$topItems[$loc][$name], $info);
-      self::$topItems[$loc][$name] = $merged;
+    if(isset(self::$topItems[$loc][$id])){
+      $merged = array_merge(self::$topItems[$loc][$id], $info);
+      self::$topItems[$loc][$id] = $merged;
     }else{
       $originalArr = isset(self::$topItems[$loc]) ? self::$topItems[$loc] : array();
       $merged = array_merge($originalArr, array(
-        $name => $info
+        $id => $info
       ));
       self::$topItems[$loc] = $merged;
     }
@@ -88,13 +88,13 @@ class Panel {
 
   /**
    * Remove an item from Top Panel
-   * @param  string $name     ID of item to be removed
+   * @param  string $id       ID of item to be removed
    * @param  string $position Position of item in Top Panel. Either "left" or "right"
    * @return boolean          Whether item was removed
    */
-  public static function removeTopItem($name, $position){
-    if(isset(self::$topItems[$position][$name])){
-      unset(self::$topItems[$position][$name]);
+  public static function removeTopItem($id, $position){
+    if(isset(self::$topItems[$position][$id])){
+      unset(self::$topItems[$position][$id]);
       return true;
     }
     return false;
@@ -116,10 +116,10 @@ class Panel {
 
   /**
    * Add an item to the Left Panel
-   * @param string $name  Item ID
+   * @param string $id   Item ID
    * @param array  $info Item information
    */
-  public static function addLeftItem($name, $info){
+  public static function addLeftItem($id, $info){
     $info = array_replace_recursive(self::$panelLeftItemFormat, $info);
     $loc = $info["position"];
 
@@ -132,13 +132,13 @@ class Panel {
      * If the item is already registered, then
      * replace it. Else, register new one
      */
-    if(isset(self::$leftItems[$loc][$name])){
-      $merged = array_merge(self::$leftItems[$loc][$name], $info);
-      self::$leftItems[$loc][$name] = $merged;
+    if(isset(self::$leftItems[$loc][$id])){
+      $merged = array_merge(self::$leftItems[$loc][$id], $info);
+      self::$leftItems[$loc][$id] = $merged;
     }else{
       $originalArr = isset(self::$leftItems[$loc]) ? self::$leftItems[$loc] : array();
       $merged = array_merge($originalArr, array(
-        $name => $info
+        $id => $info
       ));
       self::$leftItems[$loc] = $merged;
     }
@@ -146,13 +146,13 @@ class Panel {
 
   /**
    * Remove an item from Left Panel
-   * @param  string $name     ID of item to be removed
+   * @param  string $id       ID of item to be removed
    * @param  string $position Position of item in Left Panel. Either "top" or "bottom"
    * @return boolean          Whether item was removed
    */
-  public static function removeLeftItem($name, $position){
-    if(isset(self::$leftItems[$position][$name])){
-      unset(self::$leftItems[$position][$name]);
+  public static function removeLeftItem($id, $position){
+    if(isset(self::$leftItems[$position][$id])){
+      unset(self::$leftItems[$position][$id]);
       return true;
     }
     return false;
