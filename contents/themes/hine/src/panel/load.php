@@ -29,12 +29,14 @@ $leftPanelBottomItems = Panel::getLeftItems("bottom");
     }
     $html = "";
     foreach($topPanelLeftItems as $id => $item){
+      $class = "parent " . $item["class"];
+
       if(count($item['subItems']) !== 0){
         $html .= $this->makePanelTree($id, $item);
       }else if($item['html'] != null){
-        $html .= $this->makePanelItem($item['html'], "htmlContent", $id, "parent");
+        $html .= $this->makePanelItem($item['html'], "htmlContent", $id, $class);
       }else{
-        $html .= $this->makePanelItem($item['text'], $item['href'], $id, "parent");
+        $html .= $this->makePanelItem($item['text'], $item['href'], $id, $class);
       }
     }
     echo $html;
@@ -71,12 +73,14 @@ if(!empty($leftPanelTopItems) || !empty($leftPanelBottomItems)){
       <?php
       $html = "";
       foreach($leftPanelTopItems as $id => $item){
-        if(count($item["subItems"]) !== 0){
+        $class = "parent " . $item["class"];
+
+        if(count($item['subItems']) !== 0){
           $html .= $this->makePanelTree($id, $item);
-        }else if($item["html"] != null){
-          $html .= $this->makePanelItem($item["html"], "htmlContent", $id, "parent");
+        }else if($item['html'] != null){
+          $html .= $this->makePanelItem($item['html'], "htmlContent", $id, $class);
         }else{
-          $html .= $this->makePanelItem($item["text"], $item["href"], $id, "parent");
+          $html .= $this->makePanelItem($item['text'], $item['href'], $id, $class);
         }
       }
       echo $html;
