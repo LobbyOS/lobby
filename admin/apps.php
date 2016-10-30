@@ -220,7 +220,7 @@ if($appID != null){
             foreach($apps as $app){
               $App = new Apps($app);
             ?>
-              <div class="app col s12 m4 l3">
+              <div class="app col s12 m4 l3 <?php if($App->hasUpdate()) echo "red"; ?>">
                 <div class="app-inner card row">
                   <div class="lpane col s5 m5 l5">
                     <a href="<?php echo \Lobby::u("/admin/apps.php?app=$app");?>">
@@ -231,8 +231,6 @@ if($appID != null){
                     <a href="<?php echo \Lobby::u("/admin/apps.php?app=$app");?>" class="name truncate" title="<?php echo $App->info["name"];?>"><?php echo $App->info["name"];?></a>
                     <div class="actions">
                       <?php
-                      if($App->hasUpdate())
-                        echo "<cl/>" . \Lobby::l("/admin/update.php", "Update", "class='btn orange'");
                       echo "<div class='switch col s6 m12 l6'>";
                         if($App->enabled){
                           echo "<a href='". Lobby::u("/admin/apps.php?app=$app&action=disable" . CSRF::getParam()) ."'>";
