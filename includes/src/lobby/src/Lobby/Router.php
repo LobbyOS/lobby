@@ -159,6 +159,8 @@ class Router {
       $type = finfo_file($finfo, $path);
       finfo_close($finfo);
 
+      $extension = pathinfo($path, PATHINFO_EXTENSION);
+
       header("Cache-Control: public");
 
       if($type === "text/x-php" || $type === "text/html"){
@@ -175,6 +177,13 @@ class Router {
       }else{
         $request = Request::getRequestObject();
         $response = new BinaryFileResponse($path, 200, array(), true, null, true);
+
+        /**
+         * For SVG images, we check the extension
+         */
+        if($extension === "svg"){
+          $response->headers->set("Content-type", "image/svg+xml");
+        }
 
         if($response->isNotModified($request)){
           $response->setStatusCode(304);

@@ -96,15 +96,20 @@ class Server {
         DB::saveOption("lobby_latest_version_release", $response['released']);
         DB::saveOption("lobby_latest_version_release_notes", $response['release_notes']);
 
-        if(isset($response['apps']) && count($response['apps']) != 0){
-          $AppUpdates = array();
-          foreach($response['apps'] as $appID => $version){
+        /**
+         * Response will have latest info about installed apps
+         */
+        if(isset($response['apps']) && !empty($response['apps'])){
+          $appUpdates = array();
+
+          foreach($response['apps'] as $appID => $appInfo){
             $App = new \Lobby\Apps($appID);
-            if($App->hasUpdate($version)){
-              $AppUpdates[$appID] = $version;
+
+            if($App->hasUpdate($appInfo["version"])){
+              $appUpdates[$appID] = $appInfo;
             }
           }
-          DB::saveOption("app_updates", json_encode($AppUpdates));
+          DB::saveJSONOption("app_updates", $appUpdates);
         }
 
         if(isset($response["notify"])){
