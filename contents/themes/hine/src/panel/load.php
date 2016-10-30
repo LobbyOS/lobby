@@ -42,7 +42,7 @@ $leftPanelBottomItems = Panel::getLeftItems("bottom");
     echo $html;
     ?>
   </ul>
-  <ul id="panel-right-left">
+  <ul id="panel-top-right">
     <?php
     $html = "";
     foreach($topPanelRightItems as $id => $item){
