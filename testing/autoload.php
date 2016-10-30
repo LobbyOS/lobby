@@ -4,7 +4,7 @@ require_once __DIR__ . "/vendor/autoload.php";
 if(file_exists(sys_get_temp_dir() . "/lobby-tmp-loc.txt")){
   define("WEB_SERVER_DOCROOT", file_get_contents(sys_get_temp_dir() . "/lobby-tmp-loc.txt"));
 }else{
-  die("Move Lobby to a temporary directory first by running test-setup.php");
+  die("Move Lobby to a temporary directory first by running setup-tests.php\n");
 }
 
 echo "Lobby installed at " . WEB_SERVER_DOCROOT . PHP_EOL;
@@ -13,7 +13,7 @@ echo "Lobby installed at " . WEB_SERVER_DOCROOT . PHP_EOL;
  * Start Server
  */
 $command = sprintf(
-    'php -S %s:%d -t %s >/dev/null 2>&1 & echo $!',
+    'cd '. WEB_SERVER_DOCROOT .';php -S %s:%d -t %s "index.php" >/dev/null 2>&1 & echo $!',
     WEB_SERVER_HOST,
     WEB_SERVER_PORT,
     WEB_SERVER_DOCROOT
@@ -31,6 +31,8 @@ echo sprintf(
     WEB_SERVER_PORT,
     $pid
 ) . PHP_EOL;
+
+echo "Command used to start server : " . $command . PHP_EOL;
 
 // Kill the web server when the process ends
 register_shutdown_function(function() use ($pid) {

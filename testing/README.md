@@ -11,7 +11,11 @@ For this, run `setup-tests.php` before running `phpunit`. When it is ran :
 
 If code changes are made, then this lobby directory is un
 
-## Requirements
+## Prerequisite
+
+* Composer
+* PHPUnit
+* Selenium Server
 
 Execute this in `testing` directory :
 
@@ -19,8 +23,15 @@ Execute this in `testing` directory :
 composer update
 ```
 
-Then run `phpunit` :
+## Process
 
+* Start Selenium Server.
+* If testing for the first time in this session, then run :
+  ```
+  php setup-tests.php
+  ```
+
+* Run `phpunit`
 ```bash
 vendor/bin/phpunit -c ./
 ```

@@ -6,7 +6,7 @@ use Neutron\TemporaryFilesystem\TemporaryFilesystem;
 $FS = TemporaryFilesystem::create();
 define("WEB_SERVER_DOCROOT", $FS->createTemporaryDirectory($mode = 0755));
 
-echo "Making the lobby web server docroot";
+echo "Making the lobby web server docroot \n";
 
 exec("cp -R '". realpath(__DIR__ . "/../") . "/.' '". WEB_SERVER_DOCROOT ."'");
 unlink(WEB_SERVER_DOCROOT . "/config.php");
