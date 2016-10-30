@@ -267,7 +267,7 @@ class Apps {
           self::$appsURL . "/{$this->app}/src/image/logo.png"
         ) : Themes::getThemeURL() . "/src/main/image/app-logo.png";
 
-      $details["latestVersion"] = isset(self::$appUpdates[$this->app]) ? self::$appUpdates[$this->app] : null;
+      $details["latestVersion"] = isset(self::$appUpdates[$this->app]) ? self::$appUpdates[$this->app]["version"] : null;
 
       $details = \Hooks::applyFilters("app.manifest", $details);
 

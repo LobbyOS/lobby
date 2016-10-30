@@ -1,4 +1,5 @@
 <?php
+use Lobby\Need;
 use Lobby\Update;
 ?>
 <!DOCTYPE html>
@@ -51,7 +52,7 @@ use Lobby\Update;
             echo '</div>';
           }else{
             echo "<h2>Lobby</h2>";
-            echo sss("Latest Version", "You are using the latest version of Lobby : <blockquote><b>". Lobby::getVersion(true) . "</b> released on <b>" . Lobby::$versionReleased ."</b></blockquote>There are no new releases yet.");
+            echo sme("No Updates", "You are using the latest version of Lobby : <blockquote><b>". Lobby::getVersion(true) . "</b> released on <b>" . Lobby::$versionReleased ."</b></blockquote>");
           }
         }
         if($step !== null && CSRF::check()){
@@ -85,12 +86,14 @@ use Lobby\Update;
             echo '<iframe src="'. L_URL . "/admin/download.php?type=app&app={$appID}&isUpdate=1". CSRF::getParam() .'" style="border: 0;width: 100%;height: 200px;"></iframe>';
           }
         }
+
         if($step === null){
           echo "<h2>Apps</h2>";
         }
         $appUpdates = Update::getApps();
+
         if($step === null && empty($appUpdates)){
-          echo "<p>All apps are up to date.</p>";
+          echo sme("No Updates", "All apps installed are up to date");
         }else if($step === null && isset($appUpdates) && count($appUpdates)){
         ?>
           <p>New versions of apps are available. Choose which apps to update from the following :</p>
@@ -99,28 +102,55 @@ use Lobby\Update;
             <table>
               <thead>
                 <tr>
-                  <td style='width: 2%;'>Update ?</td>
+                  <td style='width: 5%;'>Update ?</td>
                   <td style='width: 20%;'>App</td>
-                  <td style='width: 5%;'>Current Version</td>
-                  <td style='width: 20%;'>Latest Version</td>
+                  <td style='width: 5%;'>Version</td>
+                  <td style='width: 10%;'>Latest Version</td>
+                  <td style='width: 40%;'>Requires</td>
                 </tr>
               </thead>
-              <?php
-              echo "<tbody>";
-              foreach($appUpdates as $appID => $latest_version){
-                $App = new \Lobby\Apps($appID);
-                $AppInfo = $App->info;
-                echo '<tr>';
-                  echo '<td><label><input style="vertical-align:top;display:inline-block;" checked="checked" type="checkbox" name="updateApp[]" value="'. $appID .'" /><span></span></label></td>';
-                  echo '<td><span style="vertical-align:middle;display:inline-block;margin-left:5px;">'. $AppInfo['name'] .'</span></td>';
-                  echo '<td>'. $AppInfo['version'] .'</td>';
-                  echo '<td>'. $latest_version .'</td>';
-                echo '</tr>';
-              }
-              ?>
-            </tbody></table>
+              <tbody>
+                <?php
+                $appUpdatesCount = count($appUpdates);
+
+                foreach($appUpdates as $appID => $latestAppInfo){
+                  $App = new \Lobby\Apps($appID);
+
+                  if(Need::checkRequirements($latestAppInfo["require"], true)){
+                    echo "<tr>";
+                      echo '<td><label><input style="vertical-align:top;display:inline-block;" checked="checked" type="checkbox" name="updateApp[]" value="'. $appID .'" /><span></span></label></td>';
+                  }else{
+                    $appUpdatesCount--;
+
+                    echo "<tr title='Cannot update app because requirements are not satisfied'>";
+                      echo '<td><label><input style="vertical-align:top;display:inline-block;" disabled="disabled" type="checkbox" name="updateApp[]" value="'. $appID .'" /><span></span></label></td>';
+                  }
+
+                    echo '<td><span style="vertical-align:middle;display:inline-block;margin-left:5px;">'. $App->info["name"] .'</span></td>';
+                    echo '<td>'. $App->info["version"] .'</td>';
+                    echo '<td>'. $latestAppInfo["version"] .'</td>';
+                    echo '<td>';
+                      if(!empty($latestAppInfo["require"])){
+                        $requirements = Need::checkRequirements($latestAppInfo["require"], false, true);
+
+                        echo "<ul>";
+                        foreach($requirements as $dependency => $depInfo){
+                          if($depInfo["satisfy"]){
+                            echo "<li class='collection-item'>$dependency {$depInfo['require']}</li>";
+                          }else{
+                            echo "<li class='collection-item red'>$dependency {$depInfo['require']}</li>";
+                          }
+                        }
+                        echo "</ul>";
+                      }
+                    echo '</td>';
+                  echo '</tr>';
+                }
+                ?>
+              </tbody>
+            </table>
             <input type="hidden" name="action" value="updateApps" />
-            <button class="btn red" clear>Update Selected Apps</button>
+            <button class="btn red" <?php if($appUpdatesCount === 0) echo "disabled='disabled'"; ?> clear>Update Selected Apps</button>
           </form>
         <?php
         }

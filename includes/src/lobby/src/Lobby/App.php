@@ -3,7 +3,7 @@ namespace Lobby;
 
 use Lobby\Apps\Data;
 use Lobby\Apps\Panel;
-use Lobby\Apps\Router;
+use Lobby\Apps\Router as AppRouter;
 use Lobby\DB;
 use Lobby\FS;
 use Response;
@@ -16,7 +16,7 @@ class App {
   public $fs;
 
   /**
-   * @var Router App's router object
+   * @var AppRouter App's router object
    */
   public $router;
 
@@ -40,7 +40,7 @@ class App {
 
     $this->fs = new FSObj($this->dir);
     $this->data = new Data($this);
-    $this->router = new Router($this);
+    $this->router = new AppRouter($this);
     $this->panel = new Panel($this);
 
     $this->init();
