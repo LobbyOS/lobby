@@ -42,6 +42,10 @@
           <input type="hidden" name="update_settings" value="" />
           <?php echo CSRF::getInput();?>
           <label>
+            <span>Name</span>
+            <input type="text" name="profile-name" placeholder="Your name" value="<?php echo Lobby\DB::getOption("profile-name");?>" />
+          </label>
+          <label>
             <span title="Time now : <?php echo \Lobby\Time::now();?>">Timezone</span>
             <select id="timezone_string" name="timezone">
               <optgroup label="System">
@@ -72,10 +76,6 @@
               }
               ?>
             </select>
-          </label>
-          <label>
-            <span>Name</span>
-            <input type="text" name="profile-name" placeholder="Your name" value="<?php echo Lobby\DB::getOption("profile-name");?>" />
           </label>
           <button clear class="btn green">Save Settings</button>
         </form>

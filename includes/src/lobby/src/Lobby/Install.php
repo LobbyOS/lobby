@@ -6,6 +6,7 @@
 
 namespace Lobby;
 
+use Lobby\Apps;
 use Lobby\FS;
 
 /**
@@ -241,6 +242,27 @@ class Install extends \Lobby {
       self::$error = $e->getMessage();
       self::log("Unable to make SQLite database : ". self::$error);
       return false;
+    }
+  }
+
+  /**
+   * Do stuff after installation
+   * @param $enableApps Enable pre-installed apps
+   */
+  public static function afterInstall($enableApps = true){
+    \Lobby::$installed = true;
+    \Lobby\DB::__constructStatic();
+
+    Apps::__constructStatic(array(
+      APPS_DIR, null
+    ));
+
+    /**
+     * Enable all apps pre-installed
+     */
+    foreach(Apps::getApps() as $appID){
+      $App = new Apps($appID);
+      $App->enableApp();
     }
   }
 

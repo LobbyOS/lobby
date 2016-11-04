@@ -42,7 +42,7 @@ class Install extends Command {
     /**
      * General options
      */
-    $this->addOption("enable-ledit", null, InputOption::VALUE_OPTIONAL, "Should lEdit be enabled when Lobby is installed", true);
+    $this->addOption("enable-apps", null, InputOption::VALUE_OPTIONAL, "Should apps pre-installed be enabled when Lobby is installed", true);
     $this->addOption("status", null, InputOption::VALUE_NONE, "Whether Lobby is installed or not");
   }
 
@@ -91,16 +91,7 @@ class Install extends Command {
 
       chgrp(FS::loc("/config.php"), "www-data");
 
-      Lobby::$installed = true;
-      Lobby\DB::__constructStatic();
-
-      if($input->getOption("enable-ledit")){
-        /**
-         * Enable app lEdit
-         */
-        $App = new Lobby\Apps("ledit");
-        $App->enableApp();
-      }
+      Lobby\Install::afterInstall($input->getOption("enable-apps"));
 
       $output->writeln(array(
         "<comment>Installation summary</comment>",

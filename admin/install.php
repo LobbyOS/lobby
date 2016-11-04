@@ -264,14 +264,7 @@ $install_step = Request::get('step');
                        */
                       \Lobby\Install::makeConfigFile();
 
-                      \Lobby::$installed = true;
-                      \Lobby\DB::__constructStatic();
-
-                      /**
-                       * Enable app lEdit
-                       */
-                      $App = new \Lobby\Apps("ledit");
-                      $App->enableApp();
+                      \Lobby\Install::afterInstall();
 
                       echo sss("Success", "Database Tables and <b>config.php</b> file was successfully created.");
                       echo '<cl/><a href="?step=4'. CSRF::getParam() .'" class="btn">Proceed</a>';
@@ -304,14 +297,7 @@ $install_step = Request::get('step');
                    */
                   \Lobby\Install::makeConfigFile("sqlite");
 
-                  /**
-                   * Enable app lEdit
-                   */
-                  \Lobby::$installed = true;
-                  \Lobby\DB::__constructStatic();
-
-                  $App = new \Lobby\Apps("ledit");
-                  $App->enableApp();
+                  \Lobby\Install::afterInstall();
 
                   echo sss("Success", "Database and <b>config.php</b> file was successfully created.");
                   echo '<cl/><a href="?step=4'. CSRF::getParam() .'" class="btn">Proceed</a>';

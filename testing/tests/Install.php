@@ -21,7 +21,7 @@ class Install extends PHPUnit_Framework_TestCase {
     $this->assertContains("#workspace", $this->driver->getPageSource());
   }
 
-	public function testSteps(){
+	public function testInstallSetup(){
     /**
      * Install intro
      */
@@ -49,6 +49,16 @@ class Install extends PHPUnit_Framework_TestCase {
     $this->driver->findElement(WebDriverBy::cssSelector("button[name=submit]"))->click();
 
     $this->assertContains("Success", $this->driver->getPageSource());
+  }
+
+  public function testAppEnabled(){
+    // Get apps installed
+    $apps = explode("\n", system("php " . WEB_SERVER_DOCROOT . "/lobby.php --apps"));
+
+    $this->driver->get("http://" . WEB_SERVER_HOST . ":" . WEB_SERVER_PORT . "/");
+
+    foreach($apps as $app)
+      $this->assertContains($app, $this->driver->getPageSource());
   }
 
   public function tearDown(){
