@@ -153,17 +153,23 @@ class Router {
    */
   public static function serveFile(){
     $path = self::getServeFileAbsolutePath(parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH));
+    $pathInfo = pathinfo(FS::rel($path));
 
     if($path){
       $finfo = finfo_open(FILEINFO_MIME_TYPE);
       $type = finfo_file($finfo, $path);
       finfo_close($finfo);
 
-      $extension = pathinfo($path, PATHINFO_EXTENSION);
-
       header("Cache-Control: public");
 
       if($type === "text/x-php" || $type === "text/html"){
+        /**
+         * Do not let access to PHP files inside contents & includes directory
+         * except for "includes/serve-assets.php" file
+         */
+        if(substr($pathInfo["dirname"], 0, 8) === "contents" || (substr($pathInfo["dirname"], 0, 8) === "includes" && $pathInfo["filename"] !== "serve-assets"))
+          return false;
+
         $content = Response::getFile($path);
 
         Response::setContent($content);
@@ -181,7 +187,7 @@ class Router {
         /**
          * For SVG images, we check the extension
          */
-        if($extension === "svg"){
+        if($pathInfo["extension"] === "svg"){
           $response->headers->set("Content-type", "image/svg+xml");
         }
 
