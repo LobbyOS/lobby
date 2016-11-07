@@ -6,7 +6,10 @@
 
 namespace Lobby;
 
+use CSRF;
 use Klein\Klein;
+use Lobby\Apps;
+use Lobby\DB;
 use Request;
 use Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -123,6 +126,59 @@ class Router {
       Response::setTitle("Dashboard");
       \Lobby\UI\Themes::loadDashboard("head");
       Response::loadPage("/includes/lib/lobby/inc/dashboard.php");
+    });
+
+    /**
+     * Handle AR
+     */
+    self::route("/lobby/ar/[*:handler]", function($request){
+      if(!CSRF::check())
+        return false;
+
+      if($request->handler === "notify"){
+        Response::loadContent("/includes/lib/lobby/ar/notify.php");
+      }else if($request->handler === "save/option"){
+        $key = Request::postParam("key");
+        $value = Request::postParam("value");
+
+        if(DB::saveOption($key, $value)){
+          Response::setContent("1");
+        }else{
+          Response::setContent("0");
+        }
+      }
+    });
+
+    /**
+     * Handle AR to apps
+     */
+    self::route("/lobby/ar/app/[s:appID]/[*:handler]", function($request){
+      if(!CSRF::check())
+        return false;
+
+      $App = new Apps($request->appID);
+
+      if($App->exists && $App->enabled){
+        $AppObj = $App->getInstance();
+
+        $key = Request::postParam("key");
+        $value = Request::postParam("value");
+
+        if($request->handler === "data/save"){
+          if($key !== null && $value !== null){
+            if(is_array($value)){
+              $AppObj->data->saveArray($key, $value);
+            }else{
+              $AppObj->data->saveValue($key, $value);
+            }
+            Response::setContent("1");
+          }
+        }else if($request->handler === "/data/remove"){
+          $AppObj->data->remove($key);
+        }else{
+          Response::setContent($AppObj->getARResponse($request->handler));
+        }
+      }
     });
   }
 

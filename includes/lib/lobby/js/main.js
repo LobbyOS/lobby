@@ -83,8 +83,13 @@ $(document).mouseup(function (e){
 
 /**
  * Make an Asynchornous Request
+ * @param  string    handler  ID/Name of the request handler
+ * @param  object    options  Data to be sent
+ * @param  function  callback Callback when response is received
+ * @param  string    appID    If request is to an app, pass app ID here
+ * @return undefined
  */
-lobby.ar = function(fileName, options, callback, appID){
+lobby.ar = function(handler, options, callback, appID){
   /**
    * If the callback given is a function, use it
    * otherwise make a simple function that is of no use
@@ -95,16 +100,14 @@ lobby.ar = function(fileName, options, callback, appID){
     var options = $.param(options);
   }
 
-  /**
-   * We give a s7 etc.. complicated name so that any fields
-   * passed to this function doesn't have a field of same name.
-   */
-  if(appID != false){
-    var options = $.param({"s7c8csw91": appID}) + "&" + options;
-  }
-  var options = $.param({"cx74e9c6a45": fileName, "csrfToken": lobby.csrfToken}) + "&" + options;
+  var requestURL = lobby.url + "/lobby/ar/" + handler;
 
-  var requestURL = lobby.url + "/includes/lib/lobby/ar/getResponse.php";
+  if(typeof appID !== "undefined"){
+    var requestURL = lobby.url + "/lobby/ar/app/" + appID + "/" + handler;
+  }
+
+  var options = $.param({"csrfToken": lobby.csrfToken}) + "&" + options;
+
   $.post(requestURL, options, function(data){
     /**
      * On success, do callback function with the response data
@@ -117,7 +120,7 @@ lobby.ar = function(fileName, options, callback, appID){
 lobby.saveOption = function(key, value, callback){
    /* If the callback given is a function, use it otherwise make a simple function that is of no use */
    var callback = typeof callback == "function" ? callback : function(){};
-   var requestURL = lobby.url + "/includes/lib/lobby/ar/saveOption.php";
+   var requestURL = lobby.url + "/lobby/ar/save/option";
 
    if(key == "" || value == ""){
       callback("bad");

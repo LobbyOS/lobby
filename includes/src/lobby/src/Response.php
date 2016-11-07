@@ -97,6 +97,14 @@ class Response {
   }
 
   /**
+   * Set the content by loading a file
+   * @param string $location Path to file
+   */
+  public static function loadContent($location){
+    self::setContent(self::getFile($location));
+  }
+
+  /**
    * Set the page content by loading a file
    * @param string $location Path to file
    */

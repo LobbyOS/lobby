@@ -497,7 +497,7 @@ window.FilePicker = {
  */
 lobby.mod.filepicker = {
 
-  u: "/includes/lib/modules/filepicker/ajax",
+  u: "/includes/lib/modules/filepicker/ar",
 
   /**
    * Show the dialog

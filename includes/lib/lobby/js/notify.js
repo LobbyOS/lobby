@@ -20,7 +20,7 @@ lobby.notify = {
   onNewItems: function(){},
 
   update: function(){
-    lobby.ar("includes/lib/lobby/ar/notify.php", {}, function(response){
+    lobby.ar("notify", {}, function(response){
       nfs = JSON.parse(response); // Short for notifications
       if(nfs.length === 0){
         lobby.notify.box.html("<center><h4>No Notifications</h4></center>");
