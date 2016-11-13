@@ -188,7 +188,7 @@ class Router {
    * @return bool Whether the request points to a valid file
    */
   private static function getServeFileAbsolutePath($path){
-    $path = realpath(L_DIR . $path);
+    $path = FS::loc(realpath(L_DIR . $path));
 
     if(file_exists($path)){
       // Folder index

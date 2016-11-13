@@ -36,15 +36,15 @@ class FS {
    */
   public static function loc($path){
     /**
-     * If path is absolute, make it relative
-     */
-    $new = str_replace(L_DIR, "", $path);
-
-    /**
      * For Windows
      * Replace backslash with forward slash
      */
-    $new = str_replace("\\", "/", $new);
+    $path = str_replace("\\", "/", $path);
+
+    /**
+     * If path is absolute, make it relative
+     */
+    $new = str_replace(L_DIR, "", $path);
 
     /**
      * Remove slash at the beginning
