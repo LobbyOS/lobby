@@ -1,4 +1,9 @@
 <?php
+/**
+ * Lobby\Apps\Data
+ * @link https://github.com/LobbyOS/lobby/tree/dev/includes/src/lobby/src/Lobby/Apps/Data.php
+ */
+
 namespace Lobby\Apps;
 
 use Lobby\App;
@@ -24,6 +29,10 @@ class Data {
    */
   private $dbPrefix;
 
+  /**
+   * Initialize
+   * @param App $App App object
+   */
   public function __construct(App $App){
     $this->app = $App;
     $this->dbh = DB::getDBH();

@@ -21,6 +21,10 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
  */
 class Router {
 
+  /**
+   * Klein router object
+   * @var Klein
+   */
   public static $router;
 
   /**

@@ -1,4 +1,9 @@
 <?php
+/**
+ * Lobby\Apps\Router
+ * @link https://github.com/LobbyOS/lobby/tree/dev/includes/src/lobby/src/Lobby/Apps/Router.php
+ */
+
 namespace Lobby\Apps;
 
 use Klein\Klein;
@@ -11,14 +16,32 @@ use Response;
  */
 class Router {
 
+  /**
+   * App object
+   * @var App
+   */
   private $app;
+
+  /**
+   * Klein Router object
+   * @var Klein
+   */
   private $router;
 
+  /**
+   * Initialize
+   * @param App $App App object
+   */
   public function __construct(App $App){
     $this->app = $App;
     $this->router = new Klein();
   }
 
+  /**
+   * Route a URI
+   * @param  [type] $route    Route URI
+   * @param  [type] $callback Callback to call when route is matched
+   */
   public function route($route, $callback) {
     $app = $this->app;
     $this->router->respond($route, function($request) use($app, $callback){

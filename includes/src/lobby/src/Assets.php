@@ -166,6 +166,7 @@ class Assets {
   }
 
   /**
+   * Get the URL to assets serving file
    * @param array $params Extra GET parameters in URL
    * @return array Assets with url to serve assets file
    */
