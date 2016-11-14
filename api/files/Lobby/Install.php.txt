@@ -1,0 +1,271 @@
+<?php
+/**
+ * Lobby\Install
+ * @link https://github.com/LobbyOS/lobby/tree/dev/includes/src/lobby/src/Lobby/Install.php
+ */
+
+namespace Lobby;
+
+use Lobby\Apps;
+use Lobby\FS;
+
+/**
+ * Handle Lobby installation process
+ */
+class Install extends \Lobby {
+
+  /**
+   * Database config
+   */
+  private static $database = array();
+
+  /**
+   * PDO object
+   */
+  private static $dbh;
+
+  /**
+   * When an error is encountered, the error message is stored here
+   */
+  public static $error;
+
+  /**
+   * Check if step 1 was completed
+   * @return bool Whether this step was completed
+   */
+  public static function step1(){
+    if(!is_writable(L_DIR)){
+      echo ser("Error", "Lobby Directory is not Writable. Please set <blockquote>" . L_DIR . "</blockquote> directory's permission to writable.<cl/><a href='install.php?step=1' class='btn'>Check Again</a>");
+      return false;
+    }else if(FS::exists("/config.php")){
+      echo ser("config.php File Exists", "A config.php file already exitsts in <blockquote>". L_DIR ."</blockquote> directory. Remove it and try again. <cl/><a href='". self::u("admin/install.php?step=1" . \CSRF::getParam()) ."' class='btn'>Check Again</a>");
+      return false;
+    }else{
+      return true;
+    }
+  }
+
+  /**
+   * Establish a connection with the DB
+   * @return bool Whether connection can be established
+   */
+  public static function checkDatabaseConnection(){
+    try {
+      $db = new \PDO("mysql:host=". self::$database['host'] .";port=". self::$database['port'], self::$database['username'], self::$database['password'], array(
+        \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
+      ));
+      self::$dbh = $db;
+      self::$dbh->exec("CREATE DATABASE IF NOT EXISTS `" . self::$database['dbname'] . "`");
+      self::$dbh->query("USE `" . self::$database['dbname'] . "`");
+
+      $notable = false;
+      $tables = array("options", "data"); // The Tables of Lobby
+      foreach($tables as $tableName){
+        $results = self::$dbh->prepare("SHOW TABLES LIKE ?");
+        $results->execute(array(self::$database['prefix'] . $tableName));
+        if(!$results || $results->rowCount() == 0) {
+          $notable = true;
+        }
+      }
+
+      if(!$notable){
+        /**
+         * Database tables exist
+         */
+        echo ser("Error", "Lobby Tables with prefix <b>". self::$database['prefix'] ."</b> exists. Delete (DROP) those tables and <cl/><a class='btn orange' href='install.php?step=3&db_type=mysql". \CSRF::getParam() ."'>Try Again</a>");
+        return false;
+      }
+    }catch(\PDOException $Exception) {
+      self::log("Database Connection Failed : " . $Exception->getMessage());
+      echo ser("Error", "Unable to connect. Make sure that the settings you entered are correct. <cl/><a class='btn orange' href='install.php?step=3&db_type=mysql". \CSRF::getParam() ."'>Try Again</a>");
+      return false;
+    }
+  }
+
+  /**
+   * Make the config.php file
+   * @param string $db_type Database type.
+   *        - mysql
+   *        - sqlite
+   * @return string
+   */
+  public static function makeConfigFile($db_type = "mysql"){
+    $lobbyID = \Helper::randStr(10) . \Helper::randStr(15) . \Helper::randStr(20); // Lobby Global ID
+    $lobbySID   = hash("sha512", \Helper::randStr(15) . \Helper::randStr(30)); // Lobby Secure ID
+    $configFileLoc = L_DIR . "/config.php";
+    $cfg = self::$database;
+
+    /**
+     * Make the configuration file
+     */
+    $config_sample = FS::get("/includes/lib/lobby/inc/config-sample.php");
+    $config_file   = $config_sample;
+    if($db_type === "mysql"){
+      $config_file = preg_replace("/host'(.*?)'(.*?)'/", "host'$1'{$cfg['host']}'", $config_file);
+      $config_file = preg_replace("/port'(.*?)'(.*?)'/", "port'$1'{$cfg['port']}'", $config_file);
+      $config_file = preg_replace("/username'(.*?)''/", "username'$1'{$cfg['username']}'", $config_file);
+      $config_file = preg_replace("/password'(.*?)''/", "password'$1'{$cfg['password']}'", $config_file);
+      $config_file = preg_replace("/dbname'(.*?)''/", "dbname'$1'{$cfg['dbname']}'", $config_file);
+      $config_file = preg_replace("/prefix'(.*?)'(.*?)'/", "prefix'$1'{$cfg['prefix']}'", $config_file);
+    }else{
+      $config_file = preg_replace("/type'(.*?)'(.*?)'/", "type'$1'sqlite'", $config_file);
+      $config_file = preg_replace("/port'(.*?)'(.*?)',/", "path'$1'{$cfg['path']}',", $config_file);
+      $config_file = preg_replace("/[[:blank:]]+(.*?)'host'(.*?)'(.*?)',\n/", "", $config_file);
+      $config_file = preg_replace("/[[:blank:]]+(.*?)'username'(.*?)'',\n/", "", $config_file);
+      $config_file = preg_replace("/[[:blank:]]+(.*?)'password'(.*?)'',\n/", "", $config_file);
+      $config_file = preg_replace("/[[:blank:]]+(.*?)'dbname'(.*?)'',\n/", "", $config_file);
+      $config_file = preg_replace("/prefix'(.*?)'(.*?)'/", "prefix'$1'{$cfg['prefix']}'", $config_file);
+    }
+    $config_file = preg_replace("/lobbyID'(.*?)''/", "lobbyID'$1'{$lobbyID}'", $config_file);
+    $config_file = preg_replace("/secureID'(.*?)''/", "secureID'$1'{$lobbySID}'", $config_file);
+
+    /**
+     * Create the config.php file
+     */
+    if(FS::write($configFileLoc, $config_file) === false){
+      echo ser("Failed Creating Config File", "Something happened while creating the file. Perhaps it was something that you did ?");
+    }else{
+      chmod(L_DIR . "/config.php", 0550);
+    }
+  }
+
+  /**
+   * Create tables in the DB
+   * @param string $prefix The prefix of table names
+   * @param string $db_type Database type.
+   *        - mysql
+   *        - sqlite
+   * @return bool Whether tables have been created
+   */
+  public static function makeDatabase($prefix, $db_type = "mysql"){
+    try {
+      if($db_type === "mysql"){
+        $sql_code = "
+        CREATE TABLE IF NOT EXISTS `{$prefix}options` (
+          `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+          `name` varchar(64) NOT NULL,
+          `value` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+        ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+        CREATE TABLE IF NOT EXISTS `{$prefix}data` (
+          `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+          `app` varchar(50) NOT NULL,
+          `name` varchar(150) NOT NULL,
+          `value` longblob NOT NULL,
+          `created` datetime NOT NULL,
+          `updated` datetime NOT NULL
+        ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;";
+        /**
+         * Create Tables
+         */
+        $sql = self::$dbh->prepare($sql_code);
+        $sql->execute();
+      }else{
+        /**
+         * SQLite
+         * Multiple commands separated by ';' cannot be done in SQLite
+         * Weird, :P
+         */
+        $sql_code = "
+        CREATE TABLE IF NOT EXISTS `{$prefix}options` (
+          `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+          `name` varchar(64) NOT NULL,
+          `value` text NOT NULL
+        );
+        ";
+        self::$dbh->exec($sql_code);
+        $sql_code = "
+        CREATE TABLE IF NOT EXISTS `{$prefix}data` (
+          `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+          `app` varchar(50) NOT NULL,
+          `name` varchar(150) NOT NULL,
+          `value` blob NOT NULL,
+          `created` datetime NOT NULL,
+          `updated` datetime NOT NULL
+        );";
+        self::$dbh->exec($sql_code);
+      }
+
+      /* Insert The Default Data In To Tables */
+      $lobby_info = FS::get("/lobby.json");
+      $lobby_info = json_decode($lobby_info, true);
+      $sql = self::$dbh->prepare("
+        INSERT INTO `{$prefix}options`
+          (`name`, `value`)
+        VALUES
+          ('lobby_version', ?),
+          ('lobby_version_release', ?);"
+      );
+      $sql->execute(array($lobby_info['version'], $lobby_info['released']));
+      return true;
+    }catch(\PDOException $Exception){
+      self::$error = $Exception->getMessage();
+      self::log("Install error : " . self::$error);
+      return false;
+    }
+  }
+
+  /**
+   * Set the DB config
+   * @param string $array Configuration
+   */
+  public static function dbConfig($array){
+    self::$database = $array;
+  }
+
+  /**
+   * After installation, check if Lobby installation directory is safe
+   * @return mixed Status of safeness
+   *         - bool true It's safe
+   *         - string "configFile" Config file's permission is unsafe
+   */
+  public static function safe(){
+    $configFile = L_DIR . "/config.php";
+    if(is_writable($configFile)){
+      return "configFile";
+    }else{
+      return true;
+    }
+  }
+
+  /**
+   * Make the SQLite DB
+   * @param string $loc Path to SQLite DB
+   * @return bool Whether the operation was successful
+   */
+  public static function createSQLiteDB($loc){
+    try{
+      self::$dbh = new \PDO("sqlite:$loc", "", "", array(
+        \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
+      ));
+      return true;
+    }catch(\PDOException $e){
+      self::$error = $e->getMessage();
+      self::log("Unable to make SQLite database : ". self::$error);
+      return false;
+    }
+  }
+
+  /**
+   * Do stuff after installation
+   * @param $enableApps Enable pre-installed apps
+   */
+  public static function afterInstall($enableApps = true){
+    \Lobby::$installed = true;
+    \Lobby\DB::__constructStatic();
+
+    Apps::__constructStatic(array(
+      APPS_DIR, null
+    ));
+
+    /**
+     * Enable all apps pre-installed
+     */
+    foreach(Apps::getApps() as $appID){
+      $App = new Apps($appID);
+      $App->enableApp();
+    }
+  }
+
+}
+
+
