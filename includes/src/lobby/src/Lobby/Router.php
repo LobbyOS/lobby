@@ -150,6 +150,12 @@ class Router {
         }else{
           Response::setContent("0");
         }
+      }else if($request->handler === "admin/enable-app"){
+        Response::loadContent("/admin/ar/enable-app.php");
+      }else if($request->handler === "admin/install-app"){
+        Response::loadContent("/admin/ar/install-app.php");
+      }else if($request->handler === "admin/set-timezone"){
+        Response::loadContent("/admin/ar/set-timezone.php");
       }
     });
 

@@ -47,7 +47,7 @@ if(!CSRF::check()){
 
       $Process = new Process(Process::getPHPExecutable(), array(
         "arguments" => array(
-          L_DIR . "/admin/ajax/install-app-bg.php",
+          L_DIR . "/admin/ar/install-app-bg.php",
           \Lobby::getLID(),
           base64_encode(serialize($_SERVER)),
           $appID

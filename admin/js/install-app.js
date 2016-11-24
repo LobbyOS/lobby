@@ -20,7 +20,7 @@ lobby.installApp = function(id, area){
   };
 
   var check = function(){
-    lobby.ar("/admin/ajax/install-app.php", {"id": id}, function(r){
+    lobby.ar("/admin/install-app", {"id": id}, function(r){
       r = JSON.parse(r);
 
       if(r.statusID == "error"){
