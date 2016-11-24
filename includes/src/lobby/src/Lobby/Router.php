@@ -179,8 +179,21 @@ class Router {
           }
         }else if($request->handler === "/data/remove"){
           $AppObj->data->remove($key);
+          Response::setContent("1");
         }else{
-          Response::setContent($AppObj->getARResponse($request->handler));
+          $response = $AppObj->getARResponse($request->handler);
+
+          if($response !== false){
+            /**
+             * Response shouldn't be empty
+             */
+            Response::setContent($response == null ? "1" : $response);
+          }else{
+            /**
+             * AR request was invalid
+             */
+            Response::showError();
+          }
         }
       }
     });
