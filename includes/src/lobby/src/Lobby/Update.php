@@ -45,8 +45,8 @@ class Update extends \Lobby {
    */
   public static function zipFile($url, $zipFile){
     if( !extension_loaded('zip') ){
-      self::log("Dependency Missing, Please install PHP Zip Extension");
-      echo ser("PHP Zip Extension", "I can't find the Zip PHP Extension. Please Install It & Try again");
+      self::log("PHP Zip extension is not installed.");
+      throw new \Exception("Unable to install app, because <a href='". L_SERVER ."/docs/quick#section-requirements' target='_blank'>PHP Zip Extension</a> is not installed");
     }
     self::log("Started Downloading Zip File from {$url} to {$zipFile}");
 
@@ -75,7 +75,7 @@ class Update extends \Lobby {
       ));
     }catch(\Requests_Exception $error){
       self::log("HTTP Request Failed ($url) : $error");
-      echo ser("HTTP Request Failed", $error);
+      throw new \Exception("HTTP Request Failed : $error");
       return false;
     }
     self::log("Downloaded Zip File from {$url} to {$zipFile}");
@@ -102,7 +102,7 @@ class Update extends \Lobby {
     $zip = new \ZipArchive;
     if($zip->open($zipFile) != "true"){
       self::log("Unable to open downloaded Zip File.");
-      echo ser("Error", "Unable to open Zip File.  <a href='update.php'>Try again</a>");
+      throw new \Exception("Unable to open downloaded Zip File.");
     }
 
     self::log("Upgrading Lobby Software From {$zipFile}");
@@ -159,7 +159,7 @@ class Update extends \Lobby {
       $sql = \Lobby\DB::prepare($sqlCode);
 
       if(!$sql->execute()){
-        echo ser("Error", "Database Update Couldn't be made. <a href='update.php'>Try again</a>");
+        throw new \Exception("Database update wasn't successful");
       }else{
         FS::remove("/update/sqlExecute.sql");
       }
@@ -176,11 +176,8 @@ class Update extends \Lobby {
    */
   public static function app($id){
     if($id == ""){
-      echo ser("Error", "No App Mentioned to update.");
+      throw new \Exception("No app ID was passed");
     }
-
-    if(!class_exists("ZipArchive"))
-      throw new \Exception("Unable to Install App, because <a href='". L_SERVER ."/docs/quick#section-requirements' target='_blank'>PHP Zip Extension</a> is not installed");
 
     $update = false;
     if(Apps::exists($id)){
@@ -199,13 +196,13 @@ class Update extends \Lobby {
 
     $url = Server::download("app", $id);
     $zipFile = L_DIR . "/contents/update/{$id}.zip";
+
     self::zipFile($url, $zipFile);
-
-
     $zip = new \ZipArchive;
+
     if($zip->open($zipFile) != "true"){
       self::log("Unable to open downloaded app '$id' file : $zipFile");
-      echo ser("Error", "Unable to open downloaded app file.");
+      throw new Exception("Unable to open downloaded app file.");
     }else{
       /**
        * Extract App
