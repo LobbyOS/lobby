@@ -206,12 +206,32 @@ class Router {
   }
 
   /**
+   * Normalize a path string
+   * @param  string $path Path to normalize
+   * @return string       Normalized path
+   */
+  private static function getAbsolutePath($path) {
+    $path = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
+    $parts = array_filter(explode(DIRECTORY_SEPARATOR, $path), 'strlen');
+    $absolutes = array();
+    foreach ($parts as $part) {
+      if ('.' == $part) continue;
+      if ('..' == $part) {
+        array_pop($absolutes);
+      } else {
+        $absolutes[] = $part;
+      }
+    }
+    return implode(DIRECTORY_SEPARATOR, $absolutes);
+  }
+
+  /**
    * Make HTTP requested path to absolute location
    * @param string $path Requested file path
    * @return bool Whether the request points to a valid file
    */
   private static function getServeFileAbsolutePath($path){
-    $path = FS::loc(realpath(L_DIR . $path));
+    $path = FS::loc(self::getAbsolutePath($path));
 
     if(file_exists($path)){
       // Folder index
