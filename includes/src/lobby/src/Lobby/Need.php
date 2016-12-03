@@ -73,6 +73,13 @@ class Need {
         $result[$dependency] = true;
       }else{
         $result[$dependency] = false;
+
+        /**
+         * If boolean value is needed and version
+         * doesn't satisfy, skip later tests
+         */
+        if($boolean)
+          continue;
       }
 
       /**
