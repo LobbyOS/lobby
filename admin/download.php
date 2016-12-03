@@ -90,18 +90,29 @@ $GLOBALS['last'] = 0;
   }
 };
 
-if($type === "app" && \Lobby\Update::app($appID)){
-  $App = new Apps($appID);
-  $App->enableApp();
+try{
+  if($type === "app" && \Lobby\Update::app($appID)){
+    $App = new Apps($appID);
+    $App->enableApp();
 
-  if($isUpdate){
-    $appUpdates = Lobby\DB::getJSONOption("app_updates");
-    if(isset($appUpdates[$appID]))
-      unset($appUpdates[$appID]);
-    Lobby\DB::saveOption("app_updates", json_encode($appUpdates));
+    if($isUpdate){
+      $appUpdates = Lobby\DB::getJSONOption("app_updates");
+      if(isset($appUpdates[$appID]))
+        unset($appUpdates[$appID]);
+      Lobby\DB::saveOption("app_updates", json_encode($appUpdates));
+    }
+
+    echo "Installed - The app has been " . ($isUpdate ? "updated." : "installed. <a target='_parent' href='". $App->info["url"] ."'>Open App</a>");
+  }else if($type === "lobby" && $redirect = \Lobby\Update::software()){
+    echo "<a target='_parent' href='$redirect'>Updated Lobby</a>";
   }
-
-  echo "Installed - The app has been " . ($isUpdate ? "updated." : "installed. <a target='_parent' href='". $App->info["url"] ."'>Open App</a>");
-}else if($type === "lobby" && $redirect = \Lobby\Update::software()){
-  echo "<a target='_parent' href='$redirect'>Updated Lobby</a>";
+}catch(\Exception $e){
+  echo ser("Error", $e->getMessage());
 }
+
+/**
+ * Since output buffering is not active,
+ * FALSE will be returned to Response::setContent()
+ * which will cause a fatal error. Hence we exit
+ */
+exit;
