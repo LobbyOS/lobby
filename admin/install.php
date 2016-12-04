@@ -1,5 +1,9 @@
 <?php
 $install_step = Request::get('step');
+
+$steps = array(
+  "1", "2", "3", "4"
+);
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,16 +17,17 @@ $install_step = Request::get('step');
      */
     \Assets::css("install", "/admin/css/install.css");
     \Assets::js("install", "/admin/js/install.js");
-    \Response::head("Install");
+
+    if(in_array($install_step, $steps))
+      \Response::head("Install | Step $install_step");
+    else
+      \Response::head("Install");
 
     \Hooks::doAction("head.end");
     ?>
   </head>
   <body id="workspace">
      <div class="contents" id="<?php
-      $steps = array(
-        "1", "2", "3", "4"
-      );
       if(in_array($install_step, $steps)){
         echo "step$install_step";
       }
@@ -179,16 +184,6 @@ $install_step = Request::get('step');
               <tbody>
                 <tr>
                   <td width="50%"><?php
-                    $mysql_version = stristr($info, 'Client API version');
-                    preg_match('/[1-9].[0-9].[1-9][0-9]/', $mysql_version, $match);
-                    $mysql_version = $match[0];
-                    if(version_compare($mysql_version, '5.0') >= 0){
-                      echo "<a class='btn green' href='?step=3&db_type=mysql". CSRF::getParam() ."'>MySQL</a>";
-                    }else{
-                      echo "<a class='btn disabled'>MySQL Not Available</a><p>Lobby Requires MySQL version atleast 5.0</p>";
-                    }
-                  ?></td>
-                  <td width="50%"><?php
                     $sqlite_version = stristr($info, 'SQLite Library');
                     preg_match('/[1-9].[0-9].[1-9][0-9]/', $sqlite_version, $match);
                     $sqlite_version = isset($match[0]) ? $match[0] : "";
@@ -210,6 +205,16 @@ $install_step = Request::get('step');
                       }
                     }else{
                       echo "<a class='btn disabled'>SQLite Not Available</a><p>Lobby Requires SQLite version atleast 3.8</p>";
+                    }
+                  ?></td>
+                  <td width="50%"><?php
+                    $mysql_version = stristr($info, 'Client API version');
+                    preg_match('/[1-9].[0-9].[1-9][0-9]/', $mysql_version, $match);
+                    $mysql_version = $match[0];
+                    if(version_compare($mysql_version, '5.0') >= 0){
+                      echo "<a class='btn green' href='?step=3&db_type=mysql". CSRF::getParam() ."'>MySQL</a>";
+                    }else{
+                      echo "<a class='btn disabled'>MySQL Not Available</a><p>Lobby Requires MySQL version atleast 5.0</p>";
                     }
                   ?></td>
                 </tr>
