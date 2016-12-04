@@ -497,21 +497,21 @@ window.FilePicker = {
  */
 lobby.mod.filepicker = {
 
-  u: "/includes/lib/modules/filepicker/ar",
+  u: "filepicker",
 
   /**
    * Show the dialog
    */
   dialog: function(path, cb){
     cb = typeof cb !== "function" ? function(){} : cb;
-    access_url = this.u + "/filepicker.php";
+    access_url = this.u;
 
     lobby.ar(access_url, {}, function(r){
       o = JSON.parse(r);
       $("<div></div>").attr("class", "Lobby-FS-filepicker").html(o.html).appendTo("#workspace");
       $("#workspace .Lobby-FS-filepicker").dialog({
-        width: "875",
-        height: "572",
+        width: "100%",
+        height: "100%",
         close: function(){
           lobby.mod.filepicker.close();
         }

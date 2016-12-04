@@ -156,6 +156,8 @@ class Router {
         Response::loadContent("/admin/ar/install-app.php");
       }else if($request->handler === "admin/set-timezone"){
         Response::loadContent("/admin/ar/set-timezone.php");
+      }else if($request->handler === "filepicker"){
+        Response::loadContent("/includes/lib/modules/filepicker/ar/filepicker.php");
       }
     });
 
