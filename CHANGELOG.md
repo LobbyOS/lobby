@@ -1,3 +1,9 @@
+## 0.9.4
+
+* Fixed Filepicker not working
+* Fixed apps not installing
+* Fixed apps requirements check
+
 ## 0.9.3
 
 * Fixed bugs
