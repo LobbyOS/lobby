@@ -4,7 +4,7 @@ require_once __DIR__ . "/vendor/autoload.php";
 if(file_exists(sys_get_temp_dir() . "/lobby-tmp-loc.txt")){
   define("WEB_SERVER_DOCROOT", file_get_contents(sys_get_temp_dir() . "/lobby-tmp-loc.txt"));
 }else{
-  die("Move Lobby to a temporary directory first by running setup-tests.php\n");
+  die("Run 'setup-tests.php' first before starting tests.\n");
 }
 
 echo "Lobby installed at " . WEB_SERVER_DOCROOT . PHP_EOL;
@@ -13,10 +13,9 @@ echo "Lobby installed at " . WEB_SERVER_DOCROOT . PHP_EOL;
  * Start Server
  */
 $command = sprintf(
-    'cd '. WEB_SERVER_DOCROOT .';php -S %s:%d -t %s "index.php" >/dev/null 2>&1 & echo $!',
+    'php -S %s:%d -t '. WEB_SERVER_DOCROOT .' "'. WEB_SERVER_DOCROOT .'/index.php" >/dev/null 2>&1 & echo $!',
     WEB_SERVER_HOST,
-    WEB_SERVER_PORT,
-    WEB_SERVER_DOCROOT
+    WEB_SERVER_PORT
 );
 
 // Execute the command and store the process ID

@@ -1,5 +1,6 @@
 <?php
 use Facebook\WebDriver\WebDriverBy;
+use Facebook\WebDriver\WebDriverExpectedCondition;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 
@@ -28,25 +29,43 @@ class Install extends PHPUnit_Framework_TestCase {
     $this->driver->get("http://". WEB_SERVER_HOST .":". WEB_SERVER_PORT . "/");
     $this->driver->findElement(WebDriverBy::cssSelector("a.btn"))->click();
 
-    sleep(0.5);
+    $this->driver->wait(2, 500)->until(
+      WebDriverExpectedCondition::titleContains("1")
+    );
+
     /**
      * Step 1
      */
     $this->assertContains("is writable", $this->driver->getPageSource());
     $this->driver->findElement(WebDriverBy::cssSelector("a.btn"))->click();
 
+    $this->driver->wait(2, 500)->until(
+      WebDriverExpectedCondition::titleContains("2")
+    );
+
     /**
      * Step 2
      */
     // Choose MySQL
-    $this->driver->findElement(WebDriverBy::cssSelector("a.green"))->click();
+    $this->driver->findElement(WebDriverBy::cssSelector("a.green")->linkText("MYSQL"))->click();
 
+    $this->driver->wait(2, 500)->until(
+      WebDriverExpectedCondition::titleContains("3")
+    );
+
+    /**
+     * Step 3
+     */
     $this->driver->findElement(WebDriverBy::cssSelector("input[name=dbhost]"))->clear()->sendKeys("localhost");
     $this->driver->findElement(WebDriverBy::cssSelector("input[name=dbname]"))->sendKeys(DB_NAME);
     $this->driver->findElement(WebDriverBy::cssSelector("input[name=dbusername]"))->sendKeys(DB_USERNAME);
     $this->driver->findElement(WebDriverBy::cssSelector("input[name=dbpassword]"))->sendKeys(DB_PASSWORD);
     $this->driver->findElement(WebDriverBy::cssSelector("input[name=prefix]"))->clear()->sendKeys("lobby". rand(0,2000) ."_");
     $this->driver->findElement(WebDriverBy::cssSelector("button[name=submit]"))->click();
+
+    $this->driver->wait(2, 500)->until(
+      WebDriverExpectedCondition::titleContains("3")
+    );
 
     $this->assertContains("Success", $this->driver->getPageSource());
   }
