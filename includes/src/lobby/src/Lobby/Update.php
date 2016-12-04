@@ -71,7 +71,7 @@ class Update extends \Lobby {
         'hooks' => $hooks,
         'follow_redirects' => true,
         'connect_timeout' => '20',
-        'timeout' => '0'
+        'timeout' => 20000
       ));
     }catch(\Requests_Exception $error){
       self::log("HTTP Request Failed ($url) : $error");
