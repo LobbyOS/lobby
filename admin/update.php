@@ -133,7 +133,7 @@ use Lobby\Update;
                       if(!empty($latestAppInfo["require"])){
                         $requirements = Need::checkRequirements($latestAppInfo["require"], false, true);
 
-                        echo "<ul>";
+                        echo "<ul class='collection'>";
                         foreach($requirements as $dependency => $depInfo){
                           if($depInfo["satisfy"]){
                             echo "<li class='collection-item'>$dependency {$depInfo['require']}</li>";
