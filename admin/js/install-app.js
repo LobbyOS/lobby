@@ -19,12 +19,17 @@ lobby.installApp = function(id, area){
     }
   };
 
-  var check = function(){
-    lobby.ar("/admin/install-app", {"id": id}, function(r){
+  var check = function(force){
+    var requestData = {"id": id};
+    
+    if(typeof force !== "undefined")
+      requestData["force-install"] = 1;
+
+    lobby.ar("admin/install-app", requestData, function(r){
       r = JSON.parse(r);
 
       if(r.statusID == "error"){
-        html = "<li class='collection-item' style='color: red;' data-status-id='error'>"+ r.status +"<br/>Will try again in <span id='retryInstallCountdown'>20</span> seconds.<cl/><a id='#retryInstallNow' class='btn green'>Try Again Now</a><a href='"+ lobby.url +"/admin/lobby-store.php?app="+ id +"' class='btn red'>Cancel</a></li>";
+        html = "<li class='collection-item' style='color: red;' data-status-id='error'>"+ r.status +"<br/>Will try again in <span id='retryInstallCountdown'>20</span> seconds.<cl/><a id='retryInstallNow' class='btn green'>Try Again Now</a><a href='"+ lobby.url +"/admin/lobby-store.php?app="+ id +"' class='btn red'>Cancel</a></li>";
         startRetryCountdown();
       }else{
         html = "<li class='collection-item' data-status-id='"+ r.statusID +"'>"+ r.status +"</li>";
@@ -42,6 +47,7 @@ lobby.installApp = function(id, area){
   check();
 
   $("#retryInstallNow").live("click", function(){
-    check();
+    area.html("");
+    check(true);
   });
 };

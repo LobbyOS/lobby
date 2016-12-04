@@ -23,7 +23,7 @@ if(!CSRF::check()){
    * If the $appID is in the queue, then give the download status of it
    * If the updated value is less than 20 seconds ago, then restart the download
    */
-  if(isset($appInstallQueue[$appID]) && $appInstallQueue[$appID]["updated"] > strtotime("-35 seconds")){
+  if(isset($appInstallQueue[$appID]) && !isset($_POST["force-install"]) && $appInstallQueue[$appID]["updated"] > strtotime("-35 seconds")){
     echo json_encode(array(
       "statusID" => $appInstallQueue[$appID]["statusID"],
       "status" => $appInstallQueue[$appID]["status"]
