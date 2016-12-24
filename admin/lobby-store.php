@@ -173,7 +173,7 @@ if($appID !== null){
         ?>
           <h1>
             <a href="<?php echo Lobby::u("/admin/lobby-store.php");?>">Lobby Store</a>
-            <a href="<?php echo L_SERVER . "/apps?lobby_url=" . urlencode(L_URL);?>'" target="_blank"><i id="open-in-new" class="small"></i></a>
+            <a href="<?php echo L_SERVER . "/apps?lobby_url=" . urlencode(L_URL);?>" target="_blank"><i id="open-in-new" class="small"></i></a>
           </h1>
           <div id="storeNav" class="card">
             <form method="GET" action="<?php echo \Lobby::u("/admin/lobby-store.php");?>">
