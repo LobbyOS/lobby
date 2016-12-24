@@ -26,20 +26,23 @@
   display: table;
   margin: 80px auto;
 }
-.Lobby-FS-filepicker #viewbox{
-  float: left;
-  width: 75%;
+.Lobby-FS-filepicker-picker-body{
   height: 75%;
+  margin: 0;
+}
+.Lobby-FS-filepicker #viewbox{
+  width: 75%;
+  height: 100%;
   border: 1px solid #333;
   padding: 3px 0 0 0;
   overflow: auto;
   padding: 10px 0;
 }
-#viewbox ul{
+.Lobby-FS-filepicker #viewbox ul{
   padding: 0;
   margin: 0;
 }
-#viewbox li{
+.Lobby-FS-filepicker #viewbox li{
   width: 24%;
   height: 32px;
   line-height: 35px;
@@ -52,44 +55,66 @@
   background:url(<?L_URL?>/includes/lib/modules/filepicker/image/list/unknown.svg) no-repeat;
   background-position: 2px 0;
 }
-#viewbox li.selected{
+.Lobby-FS-filepicker #viewbox li.selected{
   color: #fff;
   background-color: #4CAF50;
 }
-#viewbox .folder{
+.Lobby-FS-filepicker #viewbox .folder{
   background: url(<?L_URL?>/includes/lib/modules/filepicker/image/list/folder.svg) no-repeat;
 }
-#viewbox .gif, #viewbox .jpg, #viewbox .bmp, #viewbox .png{
+.Lobby-FS-filepicker #viewbox .gif, #viewbox .jpg, #viewbox .bmp, #viewbox .png{
   background:url(<?L_URL?>/includes/lib/modules/filepicker/image/list/image.gif) no-repeat;
 }
-#viewbox .txt{
+.Lobby-FS-filepicker #viewbox .txt{
   background:url(<?L_URL?>/includes/lib/modules/filepicker/image/list/document.svg) no-repeat;
 }
-#viewbox .wmv, #viewbox .rm, #viewbox .rmvb, #viewbox .mp4, #viewbox .avi, #viewbox .flv, #viewbox .3gp{
+.Lobby-FS-filepicker #viewbox .wmv,
+  .Lobby-FS-filepicker #viewbox .rm,
+  .Lobby-FS-filepicker #viewbox .rmvb,
+  .Lobby-FS-filepicker #viewbox .mp4,
+  .Lobby-FS-filepicker #viewbox .avi,
+  .Lobby-FS-filepicker #viewbox .flv,
+  .Lobby-FS-filepicker #viewbox .3gp{
   background:url(<?L_URL?>/includes/lib/modules/filepicker/image/list/movie.gif) no-repeat;
 }
-#viewbox .zip, #viewbox .rar, #viewbox .tar, #viewbox .gz, #viewbox .7z{
+.Lobby-FS-filepicker #viewbox .zip,
+  .Lobby-FS-filepicker #viewbox .rar,
+  .Lobby-FS-filepicker #viewbox .tar,
+  .Lobby-FS-filepicker #viewbox .gz,
+  .Lobby-FS-filepicker #viewbox .7z{
   background:url(<?L_URL?>/includes/lib/modules/filepicker/image/list/zip.gif) no-repeat;
 }
-#viewbox .swf, #viewbox .fla{
+.Lobby-FS-filepicker #viewbox .swf,
+  .Lobby-FS-filepicker #viewbox .fla{
   background:url(<?L_URL?>/includes/lib/modules/filepicker/image/list/flash.gif) no-repeat;
 }
-#viewbox .mp3, #viewbox .wav, #viewbox .wma, #viewbox .mid, #viewbox .aac, #viewbox .ape{
+.Lobby-FS-filepicker #viewbox .mp3,
+  .Lobby-FS-filepicker #viewbox .wav,
+  .Lobby-FS-filepicker #viewbox .wma,
+  .Lobby-FS-filepicker #viewbox .mid,
+  .Lobby-FS-filepicker #viewbox .aac,
+  .Lobby-FS-filepicker #viewbox .ape{
   background:url(<?L_URL?>/includes/lib/modules/filepicker/image/list/music.gif) no-repeat;
 }
-#viewbox .htm, #viewbox .html, #viewbox .php, #viewbox .asp, #viewbox .jsp, #viewbox .aspx, #viewbox .cfm{
+.Lobby-FS-filepicker #viewbox .htm,
+  .Lobby-FS-filepicker #viewbox .html,
+  .Lobby-FS-filepicker #viewbox .php,
+  .Lobby-FS-filepicker #viewbox .asp,
+  .Lobby-FS-filepicker #viewbox .jsp,
+  .Lobby-FS-filepicker #viewbox .aspx,
+  .Lobby-FS-filepicker #viewbox .cfm{
   background:url(<?L_URL?>/includes/lib/modules/filepicker/image/list/web.svg) no-repeat;
 }
-#viewbox .doc{
+.Lobby-FS-filepicker #viewbox .doc{
   background:url(<?L_URL?>/includes/lib/modules/filepicker/image/list/word.gif) no-repeat;
 }
-#viewbox .pdf{
+.Lobby-FS-filepicker #viewbox .pdf{
   background:url(<?L_URL?>/includes/lib/modules/filepicker/image/list/pdf.gif) no-repeat;
 }
-#viewbox .xml{
+.Lobby-FS-filepicker #viewbox .xml{
   background:url(<?L_URL?>/includes/lib/modules/filepicker/image/list/xml.gif) no-repeat;
 }
-#viewbox .xls{
+.Lobby-FS-filepicker #viewbox .xls{
   background:url(<?L_URL?>/includes/lib/modules/filepicker/image/list/excel.gif) no-repeat;
 }
 .Lobby-FS-filepicker #btn_close{
@@ -110,6 +135,7 @@
   margin: 5px 0 0 0;
   background: none;
   border: none;
+  margin: 0;
 }
 .Lobby-FS-filepicker table tr{
   background: none;
@@ -144,22 +170,37 @@
   -moz-user-select: none;      /* Firefox */
   -ms-user-select: none;       /* IE/Edge */
   user-select: none;
-}
-.ui-dialog{
-  overflow: visible;
+  padding-bottom: 0;
 }
 .ui-autocomplete{
   max-height: 300px;
   overflow-y: auto;
 }
 .Lobby-FS-filepicker #info_box{
-	height: 75%;
+	height: 100%;
   width: 25%;
-  margin-left: 75%;
   border:1px solid #333;
   padding:3px;
   background:#fff;
   cursor:default;
   word-break:break-all;
   overflow: auto;
+}
+
+@media screen and (max-width: 600px){
+  .Lobby-FS-filepicker.ui-dialog-content{
+    padding: 0;
+  }
+  .Lobby-FS-filepicker #viewbox{
+    width: 100%;
+    padding: 0 10px;
+  }
+  .Lobby-FS-filepicker #viewbox li{
+    float: none;
+    width: 100%;
+    margin: 10px 0;
+  }
+  .Lobby-FS-filepicker #info_box{
+    display: none;
+  }
 }

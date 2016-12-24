@@ -19,8 +19,13 @@ function makeOSPath($path){
   }
   return $path;
 }
+
+$homeFolder = \Lobby::getSysInfo("home_folder");
 // Folder path
-define('FP_ROOT_PATH', makeOSPath('/'));
+if($homeFolder === "/home/www-data")
+  define('FP_ROOT_PATH', makeOSPath("/"));
+else
+  define('FP_ROOT_PATH', makeOSPath($homeFolder));
 
 if(\Lobby\Modules::exists("indi")){
   /**
@@ -130,7 +135,7 @@ if(isset($_GET['img'])){
           <td class="label"><label><?php _e('Folder'); ?></label></td>
           <td>
             <input type="text" id="target_dir_path" value="<?php echo $dir_b64;?>" />
-            <input type="hidden" id="target_dir" value="Lw==" />
+            <input type="hidden" id="target_dir" value="<?php echo $dir_b64;?>" />
           </td>
           <td>
             <li><img id="btn_refresh" src="<?php echo L_URL;?>/includes/lib/modules/filepicker/image/refresh.svg" alt="<?php _e('Refresh'); ?>" /></li>
@@ -138,12 +143,12 @@ if(isset($_GET['img'])){
           </td>
         </tr></table>
       </div>
-      <div class="Lobby-FS-filepicker-picker-body">
-        <div id="viewbox">
+      <div class="Lobby-FS-filepicker-picker-body row">
+        <div id="viewbox" class="col l8">
           <img id="loading_img" src="<?php echo L_URL;?>/includes/lib/modules/filepicker/image/loading.gif" alt="<?php _e('Loading...'); ?>" />
           <ul id="list"></ul>
         </div>
-        <div id="info_box"></div>
+        <div id="info_box" class="col l8"></div>
       </div>
       <div class="Lobby-FS-filepicker-picker-footer">
         <table cellspacing="0" cellpadding="0">

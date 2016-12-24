@@ -292,19 +292,33 @@ class Lobby {
 
   /**
    * Load System Info into self::$sysInfo
+   * @return void
    */
   private static function sysInfo(){
     $info = array();
 
     /* Get the OS */
     $os = strtolower(substr(php_uname('s'), 0, 3));
-    if ($os == 'lin') {
-      $info['os'] = "linux";
-    }else if ($os == 'win') {
-      $info['os'] = "windows";
-    }else if ($os == 'mac') {
-      $info['os'] = "mac";
+
+    if ($os === "lin") {
+      $info["os"] = "linux";
+      $processUser = posix_getpwuid(posix_geteuid());
+      $info["username"] = $processUser["name"];
+
+      $info["home_folder"] = "/home/" . $info["username"];
+    }else if ($os === "win") {
+      $info["os"] = "windows";
+      $info["username"] = getenv("username");
+
+      $info["home_folder"] = getenv("HOMEDRIVE") . getenv("HOMEPATH");
+    }else if ($os === "mac") {
+      $info["os"] = "mac";
+      $processUser = posix_getpwuid(posix_geteuid());
+      $info["username"] = $processUser["name"];
+
+      $info["home_folder"] = "/home/" . $info["username"];
     }
+
     self::$sysInfo = $info;
   }
 

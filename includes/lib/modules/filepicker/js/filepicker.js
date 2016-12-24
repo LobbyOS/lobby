@@ -132,10 +132,7 @@ window.FilePicker = {
 	 */
 	do_close: function(obj) {
     if(typeof obj === "undefined"){
-      var obj = {
-        dir: '',
-        files: []
-		  };
+      var obj = false;
     }
     this.params.callback(obj);
 	},
@@ -506,12 +503,20 @@ lobby.mod.filepicker = {
     cb = typeof cb !== "function" ? function(){} : cb;
     access_url = this.u;
 
-    lobby.ar(access_url, {}, function(r){
+    var width = $(window).width();
+    var height = $(window).height();
+
+    if(width > 600){
+      width -= 100;
+      height -= 10;
+    }
+
+    lobby.ar(access_url, {dir: $.base64.encode(path)}, function(r){
       o = JSON.parse(r);
       $("<div></div>").attr("class", "Lobby-FS-filepicker").html(o.html).appendTo("#workspace");
       $("#workspace .Lobby-FS-filepicker").dialog({
-        width: "100%",
-        height: "100%",
+        width: width,
+        height: height,
         close: function(){
           lobby.mod.filepicker.close();
         }
