@@ -97,6 +97,9 @@ table tr td, table tr th{
 .ui-selecting {
   background: #FECA40;
 }
+.ui-dialog{
+  z-index: 1000;
+}
 .ui-tooltip{
   word-wrap: break-word;
 }
