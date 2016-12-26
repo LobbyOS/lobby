@@ -191,7 +191,6 @@ window.FilePicker = {
 		$('li.selected').removeClass('selected');
 		$('#filename_box').val('');
 		FilePicker.do_hide_info();
-		$('#filename_box').focus();
 	},
 
 	/**
@@ -259,7 +258,6 @@ window.FilePicker = {
 		var self = FilePicker;
 		var elmt = $(this);
 		self.do_hide_info();
-		$('#filename_box').focus();
 		if (!self.params.multi){
 			self.do_unselect();
 		}
@@ -503,6 +501,9 @@ lobby.mod.filepicker = {
     cb = typeof cb !== "function" ? function(){} : cb;
     access_url = this.u;
 
+    if(path != null)
+      path = $.base64.encode(path)
+
     var width = $(window).width();
     var height = $(window).height();
 
@@ -511,7 +512,7 @@ lobby.mod.filepicker = {
       height -= 10;
     }
 
-    lobby.ar(access_url, {dir: $.base64.encode(path)}, function(r){
+    lobby.ar(access_url, {dir: path}, function(r){
       o = JSON.parse(r);
       $("<div></div>").attr("class", "Lobby-FS-filepicker").html(o.html).appendTo("#workspace");
       $("#workspace .Lobby-FS-filepicker").dialog({
