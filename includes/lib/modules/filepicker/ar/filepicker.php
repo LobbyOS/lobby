@@ -22,7 +22,7 @@ function makeOSPath($path){
 
 $homeFolder = \Lobby::getSysInfo("home_folder");
 // Folder path
-if($homeFolder === "/home/www-data")
+if(!file_exists($homeFolder))
   define('FP_ROOT_PATH', makeOSPath("/"));
 else
   define('FP_ROOT_PATH', makeOSPath($homeFolder));
