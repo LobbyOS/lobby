@@ -106,7 +106,6 @@ class Lobby {
       session_start();
     }
 
-    self::sysInfo();
     self::config();
 
     $lobbyInfo = FS::get("/lobby.json");
@@ -291,43 +290,44 @@ class Lobby {
   }
 
   /**
-   * Load System Info into self::$sysInfo
-   * @return void
-   */
-  private static function sysInfo(){
-    $info = array();
-
-    /* Get the OS */
-    $os = strtolower(substr(php_uname('s'), 0, 3));
-
-    if ($os === "lin") {
-      $info["os"] = "linux";
-      $processUser = posix_getpwuid(posix_geteuid());
-      $info["username"] = $processUser["name"];
-
-      $info["home_folder"] = "/home/" . $info["username"];
-    }else if ($os === "win") {
-      $info["os"] = "windows";
-      $info["username"] = getenv("username");
-
-      $info["home_folder"] = getenv("HOMEDRIVE") . getenv("HOMEPATH");
-    }else if ($os === "mac") {
-      $info["os"] = "mac";
-      $processUser = posix_getpwuid(posix_geteuid());
-      $info["username"] = $processUser["name"];
-
-      $info["home_folder"] = "/home/" . $info["username"];
-    }
-
-    self::$sysInfo = $info;
-  }
-
-  /**
    * Get info about the system Lobby is running in
    * @param string $key
    * @return string The config value
    */
   public static function getSysInfo($key = null){
+    if(!isset(self::$sysInfo[$key])){
+      if($key === "os"){
+        /**
+         * Get operating syste,
+         */
+        $os = strtolower(substr(php_uname('s'), 0, 3));
+
+        if ($os === "lin") {
+          self::$sysInfo[$key] = "linux";
+        }else if ($os === "win") {
+          self::$sysInfo[$key] = "windows";
+        }else if ($os === "mac") {
+          self::$sysInfo[$key] = "mac";
+        }
+      }else if($key === "username"){
+        $os = self::getSysInfo("os");
+
+        if($os === "linux" || $os === "mac"){
+          self::$sysInfo[$key] = exec("whoami");
+        }else{
+          self::$sysInfo[$key] = getenv("username");
+        }
+      }else if($key === "home_folder"){
+        $os = self::getSysInfo("os");
+
+        if($os === "windows"){
+          $info["home_folder"] = getenv("HOMEDRIVE") . getenv("HOMEPATH");
+        }else{
+          $info["home_folder"] = "/home/" . $info["username"];
+        }
+      }
+    }
+
     return self::$sysInfo[$key];
   }
 
