@@ -1,3 +1,10 @@
+## 1.0
+
+`Cobra`
+
+* Fixed bugs
+* Made Filepicker responsive
+
 ## 0.9.4
 
 * Fixed Filepicker not working
