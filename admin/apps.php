@@ -140,7 +140,7 @@ if($appID != null){
                   <?php
                   if(!empty($App->info["require"])){
                     $requirements = Need::checkRequirements($App->info["require"], false, true);
-                    echo "<div class='chip'>Requirements :</div><ul>";
+                    echo "<div class='chip'>Requirements :</div><ul class='collection'>";
                     foreach($requirements as $dependency => $depInfo){
                       if($depInfo["satisfy"]){
                         echo "<li class='collection-item'>$dependency {$depInfo['require']}</li>";
