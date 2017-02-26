@@ -13,6 +13,8 @@ The default branch is `dev` which means, most stuff are in development mode and 
 
 [Documentation](https://lobby.subinsb.com/docs)
 
+[API Documentation](https://lobbyos.github.io/lobby/api/)
+
 ## Branches
 
 ### master
